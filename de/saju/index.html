@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vier Saeulen des Schicksals (BaZi) - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0a0a, #2a1515); border-bottom: 1px solid #3a2020; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #d4a853; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #d4a853; margin-bottom: 6px; }
+        .optional-tag { font-size: 11px; color: #666; font-weight: 400; }
+        .input-row { display: flex; gap: 10px; }
+        .input-row select { flex: 1; padding: 12px 14px; background: #0a0a1a; border: 1px solid #3a2a15; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23d4a853' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+        select:focus { border-color: #d4a853; }
+
+        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #b8942a, #d4a853); color: #1a1008; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+        .calc-btn:hover { transform: translateY(-1px); }
+
+        .result-section { display: none; }
+        .section-title { font-size: 18px; color: #d4a853; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a15; }
+
+        .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+        .pillar { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 2px solid #3a2a15; border-radius: 16px; padding: 16px 8px; text-align: center; }
+        .pillar.day-pillar { border-color: #d4a853; background: linear-gradient(135deg, #2a1a10, #1a1008); }
+        .pillar-label { font-size: 11px; color: #888; margin-bottom: 8px; letter-spacing: 1px; }
+        .pillar-stem { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+        .pillar-branch { font-size: 32px; font-weight: 700; }
+        .pillar-element { font-size: 11px; color: #999; margin-top: 6px; }
+        .pillar-animal { font-size: 20px; margin-top: 4px; }
+
+        .el-wood { color: #27ae60; }
+        .el-fire { color: #e74c3c; }
+        .el-earth { color: #d4a853; }
+        .el-metal { color: #bdc3c7; }
+        .el-water { color: #3498db; }
+
+        .daymaster-card { background: linear-gradient(135deg, #2a1a10, #1a1008); border: 2px solid #d4a853; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+        .daymaster-glyph { font-size: 60px; margin-bottom: 10px; display: block; }
+        .daymaster-name { font-size: 28px; color: #d4a853; font-weight: 700; margin-bottom: 4px; }
+        .daymaster-sub { font-size: 14px; color: #b8942a; }
+
+        .five-el-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin: 12px 0; }
+        .five-el-bar div { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; min-width: 30px; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .pillars-grid { gap: 6px; } .pillar-stem, .pillar-branch { font-size: 24px; } }
+        .info-item { background: #1a1008; border: 1px solid #3a2a15; border-radius: 12px; padding: 16px; }
+        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
+        .info-value { font-size: 16px; color: #d4a853; font-weight: 600; }
+        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
+
+        .interp-card { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .interp-title { font-size: 14px; color: #d4a853; font-weight: 600; margin-bottom: 8px; }
+        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#b8942a">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>☯️ Vier Saeulen des Schicksals (四柱八字)</h2>
+        <p>Praezise BaZi-Analyse auf Basis des ewigen Kalenders — die vier Saeulen Ihres Schicksals</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>Geburtsdatum (Gregorianisch)</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Geburtszeit <span class="optional-tag">(falls unbekannt, "Unbekannt" waehlen)</span></label>
+            <div class="input-row">
+                <select id="birthHour"></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Zeit eingeben</option><option value="unknown">Unbekannt</option></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Geschlecht</label>
+            <div class="input-row">
+                <select id="gender">
+                    <option value="m">Maennlich</option>
+                    <option value="f">Weiblich</option>
+                </select>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">☯️ BaZi analysieren</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <h3 class="section-title">🏛️ Vier Saeulen des Schicksals (BaZi)</h3>
+        <div class="pillars-grid" id="pillarsGrid"></div>
+
+        <h3 class="section-title">⭐ Tagesmeister (Mein Wesen)</h3>
+        <div id="daymasterWrap"></div>
+
+        <h3 class="section-title">🔥 Fuenf-Elemente-Verteilung</h3>
+        <div id="fiveElWrap"></div>
+
+        <div class="info-grid" id="infoGrid"></div>
+
+        <h3 class="section-title">📖 Charakter &amp; Lebensdeutung</h3>
+        <div id="interpWrap"></div>
+
+        <h3 class="section-title">💕 Partner &amp; Liebe</h3>
+        <div id="spouseWrap"></div>
+
+        <h3 class="section-title">💰 Reichtum &amp; Beruf</h3>
+        <div id="wealthWrap"></div>
+
+        <h3 class="section-title">🏥 Gesundheitshinweise</h3>
+        <div id="healthWrap"></div>
+
+        <h3 class="section-title">⏳ Grosse Gluecksphasen (10-Jahres-Zyklus)</h3>
+        <div id="dashaWrap"></div>
+    </div>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// ═══════════════════════════════════════
+// BaZi-Berechnungsmotor (Ewiger Kalender)
+// ═══════════════════════════════════════
+const STEMS = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
+const BRANCHES = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+const ELEMENTS = ['Holz','Holz','Feuer','Feuer','Erde','Erde','Metall','Metall','Wasser','Wasser'];
+const BR_ELEMENTS = ['Wasser','Erde','Holz','Holz','Erde','Feuer','Feuer','Erde','Metall','Metall','Erde','Wasser'];
+const ANIMALS = ['🐀','🐂','🐅','🐇','🐉','🐍','🐴','🐑','🐵','🐔','🐶','🐷'];
+const ANIMAL_NAMES = ['Ratte','Ochse','Tiger','Hase','Drache','Schlange','Pferd','Ziege','Affe','Hahn','Hund','Schwein'];
+const EL_NAMES = ['Holz','Feuer','Erde','Metall','Wasser'];
+const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
+const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
+
+// Solartermin-Monatsgrenzen (Solarkalender-Naeherungswerte)
+const MONTH_BOUNDARIES = [
+    [2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,5]
+];
+
+function getSolarMonth(month, day) {
+    for (let i = 0; i < 12; i++) {
+        const [m, d] = MONTH_BOUNDARIES[i];
+        const [nm, nd] = MONTH_BOUNDARIES[(i+1) % 12];
+        if (i < 11) {
+            if ((month === m && day >= d) || (month === nm && day < nd)) return i + 1;
+        } else {
+            if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+            if (month === 12 && day >= 7) return 11; // handled in loop
+        }
+    }
+    // fallback by approximate mapping
+    if (month === 1 && day < 5) return 12;
+    if (month === 1 && day >= 5) return 12;
+    if (month === 2 && day < 4) return 12;
+    for (let i = 0; i < 12; i++) {
+        const [m, d] = MONTH_BOUNDARIES[i];
+        if (month === m && day >= d) return i + 1;
+        if (month === m && day < d) return i === 0 ? 12 : i;
+    }
+    return 1;
+}
+
+function getAdjustedYear(year, month, day) {
+    // Jahreswechsel basierend auf Lichun (~4. Feb.)
+    if (month < 2 || (month === 2 && day < 4)) return year - 1;
+    return year;
+}
+
+function getYearPillar(year, month, day) {
+    const y = getAdjustedYear(year, month, day);
+    return { stem: ((y - 4) % 10 + 10) % 10, branch: ((y - 4) % 12 + 12) % 12 };
+}
+
+function getMonthPillar(year, month, day) {
+    const y = getAdjustedYear(year, month, day);
+    const yearStem = ((y - 4) % 10 + 10) % 10;
+    const solarM = getSolarMonth(month, day);
+    const monthBranch = (solarM + 1) % 12;
+    // Wuhu-Dun-Methode: Monatsstaemme basierend auf Jahresstamm
+    const baseStems = [2,4,6,8,0];
+    const monthStem = (baseStems[yearStem % 5] + (solarM - 1)) % 10;
+    return { stem: monthStem, branch: monthBranch };
+}
+
+function getDayPillar(year, month, day) {
+    // Referenzpunkt: 4. Januar 2023 = Jiazi-Tag (Stamm 0, Zweig 0)
+    const target = new Date(Date.UTC(year, month - 1, day));
+    const ref = new Date(Date.UTC(2023, 0, 4));
+    const daysDiff = Math.round((target - ref) / 86400000);
+    const stem = ((daysDiff % 10) + 10) % 10;
+    const branch = ((daysDiff % 12) + 12) % 12;
+    return { stem, branch };
+}
+
+function getHourPillar(dayStem, hourIdx) {
+    // Wushu-Dun-Methode: Stundenstaemme basierend auf Tagesstamm
+    const baseStems = [0,2,4,6,8];
+    const hourStem = (baseStems[dayStem % 5] + hourIdx) % 10;
+    return { stem: hourStem, branch: hourIdx };
+}
+
+// Fuenf-Elemente-Index (0=Holz, 1=Feuer, 2=Erde, 3=Metall, 4=Wasser)
+function getElIdx(el) {
+    return ['Holz','Feuer','Erde','Metall','Wasser'].indexOf(el);
+}
+
+// Zehn-Goetter-Berechnung
+function getTenGod(dayStem, targetStem) {
+    const dayEl = getElIdx(ELEMENTS[dayStem]);
+    const tarEl = getElIdx(ELEMENTS[targetStem]);
+    const dayYin = dayStem % 2; // 0=Yang, 1=Yin
+    const tarYin = targetStem % 2;
+    const sameYY = dayYin === tarYin;
+
+    // Gleiche Element-Gruppe
+    if (dayEl === tarEl) return sameYY ? 'Begleiter' : 'Geraubter Reichtum';
+    // Ich erzeuге (Holz→Feuer, Feuer→Erde, Erde→Metall, Metall→Wasser, Wasser→Holz)
+    if ((dayEl + 1) % 5 === tarEl) return sameYY ? 'Essgott' : 'Verletzender Offizier';
+    // Mich erzeugend
+    if ((tarEl + 1) % 5 === dayEl) return sameYY ? 'Indirektes Siegel' : 'Direktes Siegel';
+    // Ich kontrolliere (Holz→Erde, Feuer→Metall, Erde→Wasser, Metall→Holz, Wasser→Feuer)
+    if ((dayEl + 2) % 5 === tarEl) return sameYY ? 'Indirekter Reichtum' : 'Direkter Reichtum';
+    // Mich kontrollierend
+    if ((tarEl + 2) % 5 === dayEl) return sameYY ? 'Sieben Toetungen' : 'Direkter Offizier';
+    return '';
+}
+
+// ═══════════════════════════════════════
+// Detaillierte Deutung nach Tagesmeister
+// ═══════════════════════════════════════
+const DAY_MASTERS = {
+    'Jia': { glyph: '🌲', nature: 'Grosser Baum', element: 'Holz (Yang)',
+        personality: 'Jia-Holz ist ein grosser Baum, der gerade zum Himmel waechst. Er besitzt starke Fuehrungsqualitaeten, einen ausgepraeгten Gerechtigkeitssinn und geht unbeirrbar seinen eigenen Weg. Der Stolz ist gross, und eine einmal gefasste Entscheidung wird kaum wieder aufgegeben. Mit grossen Zielen vor Augen verliert er sich nicht in Kleinigkeiten, wird aber bisweilen als wenig flexibel wahrgenommen. Dank seiner angeborenen Anhaenglichkeit folgen ihm Menschen von Natur aus — schon in der Kindheit uebernimmt er unter Gleichaltrigen die Fuehrerrolle.',
+        love: 'Er liebt offen und bestaendig. Der Instinkt, den Partner zu schuetzen, ist stark, und wenn er einmal jemanden mag, bleibt er bis zum Ende dabei. Der ideale Partner ist jemand, der sanft und doch in seiner eigenen Welt verwurzelt ist. Der starke Eigensinn kann in der Beziehung zu haeufigen Meinungsverschiedenheiten fuehren — wer das Nachgeben lernt, wird eine viel harmonischere Verbindung erleben.',
+        career: 'Geeignet fuer Manager, Politiker, Paedagogen, Architekten und Unternehmer. Er glaenzt als Fuehrungskraft einer Organisation und ist hervorragend darin, grosse Projekte zu leiten. Statt unter anderen zu arbeiten, passt ein eigenes Unternehmen besser.',
+        wealth: 'Er ist ein Selbstversorger-Typ. Mit grossen Visionen verdient er grosses Geld, investiert jedoch eher in die Expansion seines Unternehmens als in detailliertes Finanzmanagement. Ab dem 40. Lebensjahr stabilisiert sich der Wohlstand.',
+        health: 'Achten Sie auf Leber und Gallenblase. Die Angewohnheit, Stress nach innen zu schlucken, kann zu Muskelverspannungen und Kopfschmerzen fuehren. Ein Spaziergang im Wald ist die beste Heilmethode.',
+        advice: 'Auch ein grosser Baum kann im Wind brechen. Lernen Sie Flexibilitaet. Schwingen Sie wie eine Weide im Wind, aber halten Sie die Wurzeln fest. Ihre Staerke erreicht wahre Groesse, wenn sie auf Sanftheit trifft.' },
+    'Yi': { glyph: '🌿', nature: 'Gras und Blumen', element: 'Holz (Yin)',
+        personality: 'Yi-Holz ist das Gras und die Blume, die im Wind schwingen. Flexibel und anpassungsfaehig, ueberleben sie in jeder Umgebung. Hinter dem weichen Aeusseren verbirgt sich eine zaeie Lebenskraft. Gesellig und feinfuehlig, lesen sie die Herzen anderer leicht. Obwohl sie nach aussen hin sanft wirken, haben sie die Ausdauer, das zu bekommen, was sie wollen.',
+        love: 'Sie lieben sanft und feinfuehlig. Sie lesen die Gefuehle des Partners gut und passen sich an, zeigen aber ihre eigenen Gedanken selten offen. Der ideale Partner ist ein verlasslicher, stabiler Mensch. Obwohl sie abhaengig wirken koennen, fuehren sie die Beziehung oft tatsaechlich an.',
+        career: 'Geeignet fuer Designer, Berater, Diplomaten, Schriftsteller und Floristen. Sie glaenzen in Berufen, die mit Menschen zu tun haben, und sind hervorragende Vermittler bei Konflikten. Freiberufliche oder spezialisierte Berufe passen besser als Grossunternehmen.',
+        wealth: 'Der Wohlstand fliesst stetig. Sie bevorzugen ein stabiles Einkommen gegenueber grossen Investitionen und haben einen starken Lebenssinn. Ab Ende dreissig stabilisiert sich die finanzielle Lage.',
+        health: 'Achten Sie auf Leber und Nervensystem. Da sie Stress nicht nach aussen zeigen, sind sie anfaellig fuer vegetative Dystonien. Yoga oder Pilates sind sehr empfehlenswert.',
+        advice: 'Gras waechst selbst in Betonritzen. Ihre Anpassungsfaehigkeit ist Ihre groesste Waffe. Aber manchmal brauchen Sie auch den Mut, "Nein" zu sagen. Wer sich immer anpasst, kann sich selbst verlieren.' },
+    'Bing': { glyph: '☀️', nature: 'Sonne', element: 'Feuer (Yang)',
+        personality: 'Bing-Feuer ist die Sonne, die alle Dinge erleuchtet. Hell und lebhaft, erhellt es jeden Raum, in den es tritt. Leidenschaftlich, gerecht und allen gegenueber warm. Optimistisch und voller Energie, zieht es stets Menschen an. Allerdings ist es mit seinen Gefuehlen ehrlich — wenn es wuetend ist, zeigt es das sofort, und wenn es gluecklich ist, gibt es alles — ein extremes Wesen.',
+        love: 'Es liebt heiss und leidenschaftlich! Wenn es jemanden mag, gibt es das der ganzen Welt bekannt und geht aktiv auf ihn zu. Der ideale Partner ist jemand mit einer klaren eigenen Welt und Waerme. Auch nach der Ehe bemuehen sie sich, die Liebesgefuehle aufrechtzuerhalten, und moegen Ueberraschungen.',
+        career: 'Geeignet fuer Broadcaster, Professoren, Marketer, Verkaeufer und Buehnenkuenstler. Sie glaenzen in Berufen, bei denen man vor Menschen steht, und strahlen auf der Buehne noch mehr. Ein COO koennte besser passen als ein CEO.',
+        wealth: 'Sie verdienen gut und geben gut aus. Die Ausgaben fuer gesellschaftliche Aktivitaeten sind gross, aber Netzwerke sind ihr Kapital. Ab 35 steigt das Einkommen deutlich.',
+        health: 'Achten Sie auf Herz, Augen und Blutdruck. Wenn zu viel Energie verbraucht wird, kann es zu plotzlicher Erschoepfung kommen. Sport im Sonnenlicht ist am besten.',
+        advice: 'Die Sonne verbrennt sich selbst, um die Welt zu erleuchten. Aber manchmal braucht auch sie Zeit fuer sich. Wenn Sie gesund sind, ist die Welt hell.' },
+    'Ding': { glyph: '🕯️', nature: 'Kerzenflamme', element: 'Feuer (Yin)',
+        personality: 'Ding-Feuer ist die Kerzenflamme, die die Dunkelheit erhellt. Feinfuehlig und konzentriert, vertieft es sich in eine Sache. Kuenstlerische Sensibilitaet ist ausgepraegt, und die innere Leidenschaft ist gluehend, obwohl es nach aussen ruhig wirkt. Es beobachtet Menschen aufmerksam und hat eine scharfe Intuition. Die perfektionistische Tendenz setzt hohe Masstaebe bei der eigenen Arbeit.',
+        love: 'Es liebt tief und intensiv. Es verliebt sich tief in eine Person und ist hingebungsvoll. Der ideale Partner ist jemand, der intellektuell und emotional reich ist. Die Eifersucht kann stark sein, daher ist eine auf Vertrauen basierende Beziehung wichtig.',
+        career: 'Geeignet fuer Forscher, Kuenstler, Programmierer, Psychologen und Koeche. Es glaenzt als Experte, der stark auf Details achtet und ein Fachgebiet tiefgehend erschliesst.',
+        wealth: 'Die Vermoegenssteigerung ist stabil, aber langsam. Es verdient durch Fachkenntnisse Geld und konkurriert mit Koennen statt mit Investitionen. Ab dem 40. Lebensjahr glaenzt die Expertise und das Einkommen steigt stark.',
+        health: 'Achten Sie auf Herz und Dunndarм. Es ist anfaellig fuer Schlaflosigkeit und Nervenschwaeche. Kerzenmeditation oder Aromatherapie helfen.',
+        advice: 'Eine Kerze ist klein, kann aber die gesamte Dunkelheit erhellen. Unterschaetzen Sie sich nicht. Ihre Feinfuehligkeit und Konzentration sind Schaetze, die andere nicht besitzen.' },
+    'Wu': { glyph: '⛰️', nature: 'Berg und Erde', element: 'Erde (Yang)',
+        personality: 'Wu-Erde ist der Berg und die Erde, die alles umfasst. Stabil, verlasslich und vertrauenswuerdig. Sie sucht Stabilitaet statt Veraenderung, und wenn sie einmal Fuss gefasst hat, bewegt sie sich nicht. Die Toleranz ist gross, und sie ist jemand, auf den sich die Menschen stuetzen. Allerdings kann der Eigensinn stark und die Anpassung an Veraenderungen langsam sein. Mit ihrer gewichtigen Praesenz ist sie ueberall eine solide Stuetze.',
+        love: 'Sie liebt stabil und verlasslich. Sie gibt dem Partner ein Gefuehl von Sicherheit und kuemmert sich auch materiell ohne Mangel. Der ideale Partner ist jemand Aktives, das Veraenderungen geniessen, da sie sich gegenseitig ergaenzen. Aufgrund ungeschickter Ausdruecke kann es zu Missverstaendnissen kommen — zeigen Sie Gefuehle bewusst.',
+        career: 'Geeignet fuer Immobilien, Bauwesen, Landwirtschaft, Beamte und Bankangestellte. Sie erzielen in stabilen Organisationen stetig Ergebnisse und arbeiten haeufig bis zur Rente an einem Ort.',
+        wealth: 'Immobiliengluck ist stark! Vorteilhaft bei Investitionen in Grundstuecke und Gebaeude, und Vermoegenswerte werden stabil angehauft. Im fuenften Lebensjahrzehnt wird betraechtliches Vermoegen gebildet.',
+        health: 'Achten Sie auf Milz und Magen. Uebermassiges Essen und Bewegungsmangel sind die groessten Feinde. Wandern oder Aktivitaeten mit Erdkontakt foerdern die Gesundheit.',
+        advice: 'Der Berg bewegt sich nicht, aber die Welt veraendert sich. Fuerchten Sie keine Veraenderungen und lesen Sie die Stroemungen. Wenn die Wurzeln fest sind, kann man Aste ausbreiten, ohne umzufallen.' },
+    'Ji': { glyph: '🌾', nature: 'Felder und Wiesen', element: 'Erde (Yin)',
+        personality: 'Ji-Erde ist das Feld, das alles gedeihen laesst. Sanftmuetig und praktisch, mit dem Talent, Menschen zu fuersорgen. Hinter dem weichen und bescheidenen Aeusseren steckt eine starke innere Kraft. Es hoert den Geschichten anderer gut zu und hat eine hervorragende Einfuehlsamkeit. Eine hingebungsvolle Natur, die andere vor sich selbst stellt.',
+        love: 'Es liebt warm und hingebungsvoll. Es kuemmert sich sorgfaeltig um den Alltag des Partners und ist familienorientiert. Der ideale Partner ist jemand, der ehrgeizig ist und gleichzeitig die Familie schaetzt. Wenn die Selbstaufopferung zu weit geht, kann die Beziehung unausgewogen werden — drуecken Sie auch Ihre eigenen Beduerfnisse aus.',
+        career: 'Geeignet fuer Lehrer, Krankenpfleger, Koeche, Sozialarbeiter und Personalverantwortliche. Es empfindet Erfullung beim Fuersоrgen und Entwickeln von Menschen. Ein Typ, der in stabilen Organisationen glaenzt.',
+        wealth: 'Es spart stetig und stabil. Es vergroessert das Vermoegen ohne Prunk, ist stark im Sparen und bei Versicherungen. Ab dem spaeten vierten Lebensjahrzehnt wird finanzielle Stabilitaet erreicht.',
+        health: 'Achten Sie auf das Verdauungssystem und die Haut. Da die Tendenz besteht, Stress anderer aufzunehmen, ist das Verdauungssystem anfaellig. Gartenarbeit ist die beste Heilmethode.',
+        advice: 'Das Feld nimmt alles auf, braucht aber auch selbst Naehrstoffe. Fuellen Sie sich erst selbst auf, bevor Sie andere versorgen. Mit einem leeren Glas koennen Sie niemandem Wasser geben.' },
+    'Geng': { glyph: '⚔️', nature: 'Eisen und Schwert', element: 'Metall (Yang)',
+        personality: 'Geng-Metall ist Stahl und ein scharfes Schwert. Entschlossen, von Gerechtigkeitssinn durchdrungen und mit einem klingengleichen Urteilsvermоegen ausgestattet. Es legt Wert auf Loyalitaet und haelt Versprechen unbedingt ein. Obwohl es kalt wirkt, ist es innerlich warm, und wenn es einmal eine Verbindung eingeht, haelt es sie bis zum Ende. Bei Ungerechtigkeit kann es nicht schweigen und spricht direkt.',
+        love: 'Es liebt gewichtig und loyal. Die Ausdruecke sind ungeschickt, aber es beweist Liebe durch Taten. Der ideale Partner ist jemand Sanftes und Gefuehlvolles, da sie sich gegenseitig ergaenzen. Die klingengleiche Sprache kann verletzen — ueben Sie sanftere Ausdruecke.',
+        career: 'Geeignet fuer Militaer, Polizei, Chirurgen, Juristen und Ingenieure. Es glaenzt in Berufen, die praezise und entschlossene Urteile erfordern. Es entfaltet als Nummer zwei einer Organisation seine beste Ausfuehrungsstaerke.',
+        wealth: 'Es verdient Geld durch Koennen. Fachliche Fertigkeiten sind sein Kapital, und Investitionen werden vorsichtig getaetigt. Ab 35 wachsen die Vermoegenswerte stetig.',
+        health: 'Achten Sie auf Lunge, Dickdarm und Haut. Seien Sie bei metallbezogenen Unfaellen vorsichtig und vermeiden Sie trockene Umgebungen. Kampfkuenste oder Kendo foerdern die Gesundheit.',
+        advice: 'Ein Schwert wird mit der Zeit schaerfer, aber zu scharf schneidet es sich selbst. Schliessen Sie Sanftheit in Ihre Staerke ein. Das wahre Meisterschwert leuchtet am meisten, wenn es in der Scheide ist.' },
+    'Xin': { glyph: '💎', nature: 'Edelstein', element: 'Metall (Yin)',
+        personality: 'Xin-Metall ist ein fein geschliffener Edelstein. Empfindsam und perfektionistisch, strebt nach Schoenheit. Es besitzt eine feine Sensibilitaet und einen scharfen aesthetischen Sinn mit klaren eigenen Masstaeben. Obwohl es nach aussen glaenzend und raffiniert aussieht, ist es innerlich empfindlich und leicht verletzbar. Der Stolz ist gross, und es kennt seinen eigenen Wert.',
+        love: 'Es liebt schoen und raffiniert. Es wuenscht sich eine elegante Romanze und legt Wert auf Aussehen und Feingefuehl. Der ideale Partner ist jemand Gepflegtes mit wirtschaftlicher Staerke. Da es vollkommene Beziehungen anstrebt, kann es in der Realitaet enttaeuscht werden — lernen Sie, so zu lieben, wie die Dinge sind.',
+        career: 'Geeignet fuer Edelsteinschaetzer, Designer, Musiker, Programmierer und Zahnaerzte. Es glaenzt in praezisionsintensiven Berufen und hat ein ausgezeichnetes kuenstlerisches Gespuer.',
+        wealth: 'Stabil, aber mit grossem Ausgabeumfang. Die Sehnsucht nach Gutem fuehrt zu vielen Ausgaben, aber auch die Einnahmen sind gut. Wenn Sie eine eigene Marke aufbauen, erzielen Sie im vierten Lebensjahrzehnt grosse Einnahmen.',
+        health: 'Achten Sie auf Lunge, Haut und Zaehne. Die empfindliche Natur manifestiert sich in Allergien oder Hauterkrankungen. Musik hoeren foerdert die geistige Gesundheit.',
+        advice: 'Ein Edelstein leuchtet nicht als Rohstein, sondern nachdem er geschliffen wurde. Meiden Sie keine Pruefungen. Jede Erfahrung, die Sie schleift, laesst Sie noch mehr leuchten.' },
+    'Ren': { glyph: '🌊', nature: 'Meer und grosses Wasser', element: 'Wasser (Yang)',
+        personality: 'Ren-Wasser ist das endlos weite Meer. Frei, weise und alles umfassend. Hochbegabt und in der Lagesein, die Situation schnell einzuschaetzen, glaenzt es in Krisen. Wie Wasser, das sich in jeden Behaelter fuegt, passt es sich jeder Umgebung an, aber hinter der ruhig wirkenden Oberflaeche wogt innerlich eine tiefe Welle. Es legt extremen Wert auf Freiheit und kann keine Fesseln ertragen.',
+        love: 'Es liebt frei und weit. Es geniessen verschiedene Begegnungen, und es dauert eine Weile, bis es sich bei einer Person niederlasst. Der ideale Partner ist jemand, der die Freiheit respektiert und dennoch wie ein solider Hafen ist. Es kann als leichtsinnig missverstanden werden — staerken Sie das Vertrauensverhaltnis.',
+        career: 'Geeignet fuer Handel, Logistik, Schifffahrt, Reisebranche und Strategieberatung. Es zeigt Staerken in grenzueberschreitenden Geschaeften und hat Talent fuer Fremdsprachen.',
+        wealth: 'Grosses Wasser zieht grosses Geld an. Bei Auslandsinvestitionen oder globalem Business koennen grosse Gewinne erzielt werden. Ab Mitte dreissig steigt das Finanzgluck rapide.',
+        health: 'Achten Sie auf Nieren, Blase und Fortpflanzungsorgane. Trinken Sie ausreichend Wasser und hueten Sie sich vor Kaelte. Schwimmen ist die beste Sportart.',
+        advice: 'Das Meer kann ueberall hinfliessen, aber ein Fluss hat eine Richtung. Freiheit ist gut, aber setzen Sie eine Richtung im Leben. Wasser, das fliesst und ein Ziel hat, veraendert die Welt.' },
+    'Gui': { glyph: '🌧️', nature: 'Regen und Tau', element: 'Wasser (Yin)',
+        personality: 'Gui-Wasser ist der Regen und Tau, der alle Dinge befeuchtet. Intuitionsstark und gefuehlreich, mit spiritueller Tiefe. Es denkt zwar still, aber tiefgruendig und durchschaut das Wesen des Menschen. Obwohl es nach aussen ruhig wirkt, entfaltet sich innerlich eine reiche emotionale Welt. Es legt Wert auf Zeit allein und hat eine starke spirituelle Neigung, die zur Meditation oder zum Gebet zieht.',
+        love: 'Es liebt tief und spirituell. Es sucht Seelenverwandte und kann seichte Beziehungen nicht befriedigen. Der ideale Partner ist jemand mit geistiger Tiefe. Die hohen Ideale koennen zu Enttauschungen beim realen Partner fuehren — sehen Sie Aufrichtigkeit statt Perfektion.',
+        career: 'Geeignet fuer Psychologen, Geistliche, Schriftsteller, Wahrsager und Forscher. Es glaenzt in Berufen, die die unsichtbare Welt erforschen, und loest Probleme durch Intuition.',
+        wealth: 'Reichtum kommt, wenn er gebraucht wird. Da die Gier nach Geld gering ist, faellt es schwer, reich zu werden, aber seltsamerweise leidet es nicht an Armut. Einnahmen entstehen in spirituellen oder beratenden Bereichen.',
+        health: 'Achten Sie auf Nieren und Harnwege. Da die Gefuehle sehr tief empfunden werden, ist es anfaellig fuer Depressionen. Ein Spaziergang an einem Regentag oder ein Thermalbadbad wirken heilend.',
+        advice: 'Der Regen faellt leise und befeuchtet die Erde. Ihr Einfluss ist unsichtbar, aber tief. Sie muessen nicht in die Welt hinaustreten. Allein durch Ihre Existenz wird jemandes ausgetrocknetes Herz befeuchtet.' }
+};
+
+// Partneraussehen (basierend auf Tageszweig)
+const SPOUSE_APPEARANCE = {
+    'Zi': 'Intellektuelles und ruhiges Aeusseres. Tiefe, geheimnisvolle Augen. Helle, klare Haut — ein Typ, der nachts noch attraktiver wirkt.',
+    'Chou': 'Stabiler und verlasslicher Eindruck. Etwas fuelliger oder kraeftiger Koerperbau. Vertrauenswuerdiges Aeusseres — je naeher man kommt, desto attraktiver.',
+    'Yin': 'Selbstbewusstes und lebhaftes Aeusseres. Gute Figur, grosse Augen, strotzend vor Selbstvertrauen. Aktiver Typ, dem sportliche Kleidung gut steht.',
+    'Mao': 'Sanftes und elegantes Aeusseres. Huebsche Gesichtszuege und schoene Haende. Raffiniertes Modegespuer und katzenartige Anziehungskraft.',
+    'Chen': 'Starker, charismatischer Eindruck. Grosser Koerperbau und selbstbewusste Haltung. Wuerdevoll, aber mit unvermuteter Anziehungskraft beim Laecheln.',
+    'Si': 'Verführerisches und raffiniertes Aeusseres. Langer, schlanker Koerperbau mit markanten Gesichtszuegen. Tiefe, geheimnisvolle Augen. Ausgezeichnetes Modegespuer.',
+    'Wu': 'Helles, strahlend attraktives Aeusseres. Grosse Augen und ein mitreissendes Laecheln. Lebhafter, energiegeladener Eindruck. Rot-Toene stehen besonders gut.',
+    'Wei': 'Mildes und behagliches Aeusseres. Rundes Gesicht mit herzlichem Laecheln. Kuschelig und warm — bevorzugt Komfort statt Mode. Wirkt juenger als das Alter.',
+    'Shen': 'Ordentliches und gepflegtes Aeusseres. Scharfe Gesichtszuege und raffinierter Stil. Helle Haut und leuchtende Augen. Eleganter Typ mit Vorliebe fuer Marken.',
+    'You': 'Huebsches und feines Aeusseres. Schoene Lippen oder anziehende Stimme. Kann Alkohol moegen und hat ein geselliges Auftreten. Anspruchsvoller Geschmack.',
+    'Xu': 'Stabiler und treuer Eindruck. Wirkt pflichtbewusst und etwas unnahbar, hat aber eine tiefe Seele. Liebt Sport und hat eine gesunde Figur. Typ, der mit der Zeit ans Herz waechst.',
+    'Hai': 'Pummeliges und sueusses Aeusseres. Kleine Augen, haufiges Laecheln und freundlicher Eindruck. Isst gerne und verbreitet eine entspannte Atmosphaere. Wirkt gluecklich und gesegnet.'
+};
+
+function toggleTime() {
+    const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
+    document.getElementById('birthHour').disabled = disabled;
+    document.getElementById('birthHour').style.opacity = disabled ? '0.4' : '1';
+}
+
+function calculate() {
+    const year = parseInt(document.getElementById('birthYear').value);
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? -1 : parseInt(document.getElementById('birthHour').value);
+    const gender = document.getElementById('gender').value;
+
+    const yp = getYearPillar(year, month, day);
+    const mp = getMonthPillar(year, month, day);
+    const dp = getDayPillar(year, month, day);
+    const hp = hourIdx >= 0 ? getHourPillar(dp.stem, hourIdx) : null;
+
+    const dayStem = dp.stem;
+    const dayMaster = STEMS[dayStem];
+    const dm = DAY_MASTERS[dayMaster];
+
+    // Vier Saeulen anzeigen
+    const pillars = [
+        { label: 'Stunden-Saeule', data: hp },
+        { label: 'Tages-Saeule', data: dp, isDay: true },
+        { label: 'Monats-Saeule', data: mp },
+        { label: 'Jahres-Saeule', data: yp }
+    ];
+
+    let pillarsHTML = '';
+    pillars.forEach(p => {
+        if (!p.data) {
+            pillarsHTML += `<div class="pillar"><div class="pillar-label">${p.label}</div><div class="pillar-stem" style="color:#666">?</div><div class="pillar-branch" style="color:#666">?</div><div class="pillar-element">Zeit nicht eingegeben</div></div>`;
+            return;
+        }
+        const sEl = ELEMENTS[p.data.stem];
+        const bEl = BR_ELEMENTS[p.data.branch];
+        const sClass = EL_CLASSES[getElIdx(sEl)];
+        const bClass = EL_CLASSES[getElIdx(bEl)];
+        const tenGod = p.isDay ? 'Tagesmeister' : getTenGod(dayStem, p.data.stem);
+        pillarsHTML += `<div class="pillar${p.isDay ? ' day-pillar' : ''}">
+            <div class="pillar-label">${p.label}</div>
+            <div class="pillar-stem ${sClass}">${STEMS[p.data.stem]}</div>
+            <div class="pillar-branch ${bClass}">${BRANCHES[p.data.branch]}</div>
+            <div class="pillar-element">${sEl}/${bEl}</div>
+            <div class="pillar-animal">${ANIMALS[p.data.branch]}</div>
+            <div style="font-size:10px;color:#888;margin-top:4px;">${tenGod}</div>
+        </div>`;
+    });
+    document.getElementById('pillarsGrid').innerHTML = pillarsHTML;
+
+    // Tagesmeister-Karte
+    document.getElementById('daymasterWrap').innerHTML = `
+        <div class="daymaster-card">
+            <span class="daymaster-glyph">${dm.glyph}</span>
+            <div class="daymaster-name">${dayMaster} Tagesmeister — ${dm.nature}</div>
+            <div class="daymaster-sub">${dm.element} | Jahr des ${ANIMAL_NAMES[yp.branch]}</div>
+        </div>`;
+
+    // Fuenf-Elemente-Verteilung
+    const elCount = [0,0,0,0,0];
+    [yp, mp, dp].forEach(p => {
+        elCount[getElIdx(ELEMENTS[p.stem])]++;
+        elCount[getElIdx(BR_ELEMENTS[p.branch])]++;
+    });
+    if (hp) {
+        elCount[getElIdx(ELEMENTS[hp.stem])]++;
+        elCount[getElIdx(BR_ELEMENTS[hp.branch])]++;
+    }
+    const total = elCount.reduce((a,b) => a+b, 0);
+    let barHTML = '<div class="five-el-bar">';
+    EL_NAMES.forEach((name, i) => {
+        if (elCount[i] > 0) {
+            const pct = (elCount[i] / total * 100).toFixed(0);
+            barHTML += `<div style="width:${pct}%;background:${EL_COLORS[i]}">${name} ${elCount[i]}</div>`;
+        }
+    });
+    barHTML += '</div>';
+
+    const weakEl = EL_NAMES[elCount.indexOf(Math.min(...elCount))];
+    const strongEl = EL_NAMES[elCount.indexOf(Math.max(...elCount))];
+    document.getElementById('fiveElWrap').innerHTML = barHTML + `
+        <div style="font-size:12px;color:#999;margin-top:8px;">
+            <strong style="color:#d4a853;">Staerkstes Element:</strong> ${strongEl} (${Math.max(...elCount)}) &nbsp;|&nbsp;
+            <strong style="color:#d4a853;">Schwaechstes Element:</strong> ${weakEl} (${Math.min(...elCount)})
+        </div>`;
+
+    // Info-Gitter
+    document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item"><div class="info-label">Tagesmeister</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
+        <div class="info-item"><div class="info-label">Tierkreiszeichen</div><div class="info-value">${ANIMALS[yp.branch]} Jahr des ${ANIMAL_NAMES[yp.branch]} (${STEMS[yp.stem]}${BRANCHES[yp.branch]})</div></div>
+        <div class="info-item"><div class="info-label">Tages-Saeule</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}</div></div>
+        <div class="info-item"><div class="info-label">Geschlecht/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Maennlich (Yang)' : 'Weiblich (Yin)'}</div></div>
+    `;
+
+    // Charakterdeutung
+    document.getElementById('interpWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">${dm.glyph} ${dayMaster} Tagesmeister — "${dm.nature}"</div>
+            <div class="interp-text">${dm.personality}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💡 Lebensratschlag</div>
+            <div class="interp-text">${dm.advice}</div>
+        </div>`;
+
+    // Partner
+    const spouseBranch = BRANCHES[dp.branch];
+    const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+    document.getElementById('spouseWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💕 Partnerpalast (Tageszweig: ${spouseBranch})</div>
+            <div class="interp-text">
+                <strong>📐 Partneraussehen &amp; Ersteindruck:</strong><br>${spouseApp}<br><br>
+                <strong>💑 Liebe &amp; Ehe:</strong><br>${dm.love}
+            </div>
+        </div>`;
+
+    // Reichtum & Beruf
+    document.getElementById('wealthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💼 Berufliche Eignung</div>
+            <div class="interp-text">${dm.career}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💰 Reichtumsgluck</div>
+            <div class="interp-text">${dm.wealth}</div>
+        </div>`;
+
+    // Gesundheit
+    document.getElementById('healthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">🏥 Gesundheit des ${dayMaster}-Tagesmeistrs</div>
+            <div class="interp-text">${dm.health}</div>
+        </div>`;
+
+    // Grosse Gluecksphasen
+    const yearStem = yp.stem;
+    const yearBranch = yp.branch;
+    const isYangMale = (yearStem % 2 === 0 && gender === 'm') || (yearStem % 2 === 1 && gender === 'f');
+    const mpStem = mp.stem;
+    const mpBranch = mp.branch;
+
+    let dashaHtml = '<div style="background:#0d0a05;border:1px solid #3a2a15;border-radius:12px;overflow:hidden;">';
+    const now = new Date();
+    const currentAge = now.getFullYear() - year;
+
+    for (let i = 0; i < 8; i++) {
+        const startAge = 2 + i * 10;
+        const endAge = 11 + i * 10;
+        let dStem, dBranch;
+        if (isYangMale) {
+            dStem = (mpStem + i + 1) % 10;
+            dBranch = (mpBranch + i + 1) % 12;
+        } else {
+            dStem = ((mpStem - i - 1) % 10 + 10) % 10;
+            dBranch = ((mpBranch - i - 1) % 12 + 12) % 12;
+        }
+        const isCurrent = currentAge >= startAge && currentAge <= endAge;
+        const tenGod = getTenGod(dayStem, dStem);
+        const sClass = EL_CLASSES[getElIdx(ELEMENTS[dStem])];
+        const bClass = EL_CLASSES[getElIdx(BR_ELEMENTS[dBranch])];
+
+        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a1008;font-size:13px;${isCurrent ? 'background:#1a1510;border-left:3px solid #d4a853;' : ''}">
+            <span style="min-width:65px;font-weight:700;color:#d4a853;">${startAge}~${endAge} J.</span>
+            <span class="${sClass}" style="font-weight:700;margin-right:2px;">${STEMS[dStem]}</span><span class="${bClass}" style="font-weight:700;">${BRANCHES[dBranch]}</span>
+            <span style="flex:1;color:#888;margin-left:8px;font-size:11px;">${tenGod} · ${ELEMENTS[dStem]}/${BR_ELEMENTS[dBranch]}</span>
+            ${isCurrent ? '<span style="font-size:10px;background:#d4a853;color:#1a1008;padding:2px 8px;border-radius:10px;font-weight:700;">Aktuell</span>' : ''}
+        </div>`;
+    }
+    dashaHtml += '</div>';
+    document.getElementById('dashaWrap').innerHTML = dashaHtml;
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function initForm() {
+    const y = document.getElementById('birthYear');
+    const m = document.getElementById('birthMonth');
+    const d = document.getElementById('birthDay');
+    const h = document.getElementById('birthHour');
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 15) o.selected = true; d.appendChild(o); }
+    const hourLabels = ['Zi (23-1)','Chou (1-3)','Yin (3-5)','Mao (5-7)','Chen (7-9)','Si (9-11)','Wu (11-13)','Wei (13-15)','Shen (15-17)','You (17-19)','Xu (19-21)','Hai (21-23)'];
+    for (let i = 0; i < 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = hourLabels[i]; if (i === 5) o.selected = true; h.appendChild(o); }
+}
+
+initForm();
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
+</html>

@@ -59,7 +59,7 @@
 <body>
 
 <header>
-    <a href="/en/">MOGU <span>Moon</span></a>
+    <a href="../index.html">MOGU <span>Moon</span></a>
 </header>
 
 <div class="container">
@@ -94,7 +94,7 @@
                 </select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">💜 Generate Zi Wei Dou Shu Chart</button>
+        <button class="calc-btn" onclick="calculate()">💜 Generate Zi Wei Chart</button>
     </div>
 
     <div class="result-section" id="resultSection">
@@ -235,17 +235,28 @@ const MAIN_STARS = {
 
 const STAR_NAMES = ['Zi Wei','Tian Ji','Tai Yang','Wu Qu','Tian Tong','Lian Zhen','Tian Fu','Tai Yin','Tan Lang','Ju Men','Tian Xiang','Tian Liang','Qi Sha','Po Jun'];
 
+// Korean star name map for internal calculation keys
+const KR_TO_EN = {
+    '자미': 'Zi Wei', '천기': 'Tian Ji', '태양': 'Tai Yang', '무곡': 'Wu Qu',
+    '천동': 'Tian Tong', '염정': 'Lian Zhen', '천부': 'Tian Fu', '태음': 'Tai Yin',
+    '탐랑': 'Tan Lang', '거문': 'Ju Men', '천상': 'Tian Xiang', '천량': 'Tian Liang',
+    '칠살': 'Qi Sha', '파군': 'Po Jun'
+};
+
 // 12 Palaces
-const PALACES = ['Life Palace','Siblings','Spouse','Children','Wealth','Health','Travel','Friends','Career','Property','Fortune','Parents'];
+const PALACES = ['Life','Siblings','Spouse','Children','Wealth','Health','Travel','Friends','Career','Property','Fortune','Parents'];
 const PALACE_DESC = ['Self','Brothers & Sisters','Partner','Children','Finances','Well-being','Travel/Abroad','Friends/Network','Profession/Fame','Real Estate/Home','Blessings & Virtue','Parents/Elders'];
 
-// South Indian style grid mapping
+// Grid mapping
 const GRID_MAP = [
     [11,0,1,2],
     [10,-1,-1,3],
     [9,-1,-1,4],
     [8,7,6,5]
 ];
+
+// Earthly Branches (romanized)
+const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
 
 function initForm() {
     const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
@@ -267,54 +278,187 @@ function toggleTime() {
     });
 }
 
-// Simplified Zi Wei Dou Shu calculation (Life Palace main star placement)
+// ═══════════════════════════════════════
+// Solar → Lunar Calendar Conversion (1940~2025)
+// ═══════════════════════════════════════
+const LUNAR_INFO = [
+    0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,// 1900-1909
+    0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,// 1910-1919
+    0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,// 1920-1929
+    0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,// 1930-1939
+    0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,// 1940-1949
+    0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,// 1950-1959
+    0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,// 1960-1969
+    0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,// 1970-1979
+    0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,// 1980-1989
+    0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x05ac0,0x0ab60,0x096d5,0x092e0,// 1990-1999
+    0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5,// 2000-2009
+    0x0a950,0x0b4a0,0x0baa4,0x0ad50,0x055d9,0x04ba0,0x0a5b0,0x15176,0x052b0,0x0a930,// 2010-2019
+    0x07954,0x06aa0,0x0ad50,0x05b52,0x04b60,0x0a6e6                                   // 2020-2025
+];
+const LUNAR_START_YEAR = 1900;
+const LUNAR_BASE = new Date(1900, 0, 31); // Jan 31 1900 = Lunar 1900/1/1
+
+function lunarMonthDays(y, m) {
+    return (LUNAR_INFO[y - LUNAR_START_YEAR] & (0x10000 >> m)) ? 30 : 29;
+}
+function lunarLeapMonth(y) {
+    return LUNAR_INFO[y - LUNAR_START_YEAR] & 0xf;
+}
+function lunarLeapDays(y) {
+    if (lunarLeapMonth(y)) return (LUNAR_INFO[y - LUNAR_START_YEAR] & 0x10000) ? 30 : 29;
+    return 0;
+}
+function lunarYearDays(y) {
+    let sum = 348;
+    for (let i = 0x8000; i > 0x8; i >>= 1) sum += (LUNAR_INFO[y - LUNAR_START_YEAR] & i) ? 1 : 0;
+    return sum + lunarLeapDays(y);
+}
+
+function solarToLunar(sY, sM, sD) {
+    const target = new Date(sY, sM - 1, sD);
+    let offset = Math.round((target - LUNAR_BASE) / 86400000);
+
+    if (offset < 0) return { year: sY, month: sM, day: sD, leap: false };
+
+    let lunarY = LUNAR_START_YEAR, lunarM = 1, lunarD = 1;
+    let isLeap = false;
+
+    for (let i = LUNAR_START_YEAR; i <= 2025 && offset > 0; i++) {
+        const yDays = lunarYearDays(i);
+        if (offset < yDays) { lunarY = i; break; }
+        offset -= yDays;
+        lunarY = i + 1;
+    }
+
+    const leapM = lunarLeapMonth(lunarY);
+    for (let i = 1; i <= 12; i++) {
+        const mDays = lunarMonthDays(lunarY, i);
+        if (offset < mDays) { lunarM = i; lunarD = offset + 1; break; }
+        offset -= mDays;
+        if (i === leapM) {
+            const lDays = lunarLeapDays(lunarY);
+            if (offset < lDays) { lunarM = i; lunarD = offset + 1; isLeap = true; break; }
+            offset -= lDays;
+        }
+    }
+
+    return { year: lunarY, month: lunarM, day: lunarD, leap: isLeap };
+}
+
+// ═══════════════════════════════════════
+// Zi Wei Dou Shu Calculation (Lunar-based)
+// ═══════════════════════════════════════
 function calculate() {
-    const year = parseInt(document.getElementById('birthYear').value);
-    const month = parseInt(document.getElementById('birthMonth').value);
-    const day = parseInt(document.getElementById('birthDay').value);
+    const solarYear = parseInt(document.getElementById('birthYear').value);
+    const solarMonth = parseInt(document.getElementById('birthMonth').value);
+    const solarDay = parseInt(document.getElementById('birthDay').value);
     const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? 6 : parseInt(document.getElementById('birthHour').value);
     const gender = document.getElementById('gender').value;
 
-    // Life Palace position calculation (simplified)
-    const mingIdx = (14 - month + hourIdx) % 12;
+    // Solar → Lunar conversion
+    const lunar = solarToLunar(solarYear, solarMonth, solarDay);
+    const year = lunar.year;
+    const month = lunar.month;
+    const day = lunar.day;
 
-    // Main star placement (simplified — based on Zi Wei star position)
-    const ziWeiPos = (day + 2) % 12; // simplified Zi Wei star position
+    // 1. Life Palace position (lunar month + hour branch)
+    //    Formula: start from Yin (2), advance by month, retreat by hour
+    const mingIdx = ((2 + month - 1) - hourIdx + 24) % 12;
 
-    // Place stars in each palace
+    // 2. Spirit Palace (opposite of Life Palace)
+    const shenIdx = ((2 + month - 1) + hourIdx) % 12;
+
+    // 3. Five Elements Bureau (Heavenly Stem + Life Palace Branch)
+    const TIANGAN_EN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
+    const tiangan = TIANGAN_EN[(year - 4) % 10];
+    const tianganIdx = (year - 4) % 10;
+    const mingDizhiIdx = mingIdx;
+
+    // Five Elements Bureau lookup (stem-pair × branch-pair → bureau number)
+    // 2=Water 2, 3=Wood 3, 4=Metal 4, 5=Earth 5, 6=Fire 6
+    const WUXING_JU_TABLE = [
+        // Jia/Yi  Bing/Ding  Wu/Ji  Geng/Xin  Ren/Gui
+        [2, 6, 3, 5, 4], // Zi/Chou  (0,1)
+        [6, 2, 5, 3, 4], // Yin/Mao  (2,3)
+        [3, 5, 4, 2, 6], // Chen/Si  (4,5)
+        [5, 3, 2, 6, 4], // Wu/Wei   (6,7)
+        [4, 2, 6, 4, 5], // Shen/You (8,9)
+        [2, 4, 5, 6, 3], // Xu/Hai   (10,11)
+    ];
+    const tgPair = Math.floor(tianganIdx / 2);
+    const dzPair = Math.floor(mingDizhiIdx / 2);
+    const wuxingJu = WUXING_JU_TABLE[dzPair] ? WUXING_JU_TABLE[dzPair][tgPair] || 3 : 3;
+
+    const WUXING_NAMES = { 2: 'Water 2', 3: 'Wood 3', 4: 'Metal 4', 5: 'Earth 5', 6: 'Fire 6' };
+    const wuxing = WUXING_NAMES[wuxingJu] || 'Wood 3';
+
+    // 4. Zi Wei star position (lunar day + Five Elements Bureau)
+    function getZiWeiPos(day, ju) {
+        const table = {
+            2: [1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3,3,4],
+            3: [2,3,1,4,2,5,3,6,4,7,5,8,6,9,7,10,8,11,9,0,10,1,11,2,0,3,1,4,2,5],
+            4: [3,4,2,1,5,4,3,2,6,5,4,3,7,6,5,4,8,7,6,5,9,8,7,6,10,9,8,7,11,10],
+            5: [4,5,3,2,1,6,5,4,3,2,7,6,5,4,3,8,7,6,5,4,9,8,7,6,5,10,9,8,7,6],
+            6: [5,6,4,3,2,1,0,7,6,5,4,3,2,1,8,7,6,5,4,3,2,9,8,7,6,5,4,3,10,9]
+        };
+        if (table[ju] && day >= 1 && day <= 30) return table[ju][day - 1];
+        return (day + ju) % 12;
+    }
+
+    const ziWeiPos = getZiWeiPos(day, wuxingJu);
+
+    // 5. Tian Fu position (symmetric to Zi Wei from Yin)
+    const tianFuPos = (12 - ziWeiPos + 4) % 12;
+
+    // 6. Zi Wei group placement (fixed offsets from Zi Wei)
+    //    Zi Wei → Tian Ji → (empty) → Tai Yang → Wu Qu → Tian Tong → (empty) → Lian Zhen
+    const ziWeiGroup = {
+        'Zi Wei':   ziWeiPos,
+        'Tian Ji':  (ziWeiPos - 1 + 12) % 12,
+        'Tai Yang': (ziWeiPos - 3 + 12) % 12,
+        'Wu Qu':    (ziWeiPos - 4 + 12) % 12,
+        'Tian Tong':(ziWeiPos - 5 + 12) % 12,
+        'Lian Zhen':(ziWeiPos - 7 + 12) % 12
+    };
+
+    // 7. Tian Fu group placement (fixed offsets from Tian Fu)
+    //    Tian Fu → Tai Yin → Tan Lang → Ju Men → Tian Xiang → Tian Liang → Qi Sha → Po Jun
+    const tianFuGroup = {
+        'Tian Fu':   tianFuPos,
+        'Tai Yin':   (tianFuPos + 1) % 12,
+        'Tan Lang':  (tianFuPos + 2) % 12,
+        'Ju Men':    (tianFuPos + 3) % 12,
+        'Tian Xiang':(tianFuPos + 4) % 12,
+        'Tian Liang':(tianFuPos + 5) % 12,
+        'Qi Sha':    (tianFuPos + 6) % 12,
+        'Po Jun':    (tianFuPos + 10) % 12
+    };
+
+    // 8. Place stars in palaces
     const palaceStars = [];
     for (let i = 0; i < 12; i++) palaceStars.push([]);
 
-    // 14 main star placement (simplified)
-    const starPositions = [];
-    STAR_NAMES.forEach((name, idx) => {
-        const pos = (ziWeiPos + idx * 2 + Math.floor(idx / 3)) % 12;
-        starPositions.push({ name, pos });
-        palaceStars[pos].push(name);
+    const allStarPositions = { ...ziWeiGroup, ...tianFuGroup };
+    STAR_NAMES.forEach(name => {
+        const pos = allStarPositions[name];
+        if (pos !== undefined) {
+            palaceStars[pos].push(name);
+        }
     });
 
-    // Find main star(s) in Life Palace
+    // 9. Find main star of Life Palace
     const mingStars = palaceStars[mingIdx];
     const mainStar = mingStars.length > 0 ? mingStars[0] : STAR_NAMES[(mingIdx + day) % 14];
     const starData = MAIN_STARS[mainStar];
 
-    // Five Elements
-    const WUXING = ['Metal','Water','Wood','Fire','Earth'];
-    const wuxing = WUXING[(year + month) % 5];
-
-    // Heavenly Stem of Life Palace
-    const TIANGAN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
-    const tiangan = TIANGAN[(year - 4) % 10];
-
-    // Earthly Branch of Life Palace
-    const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
     const mingDizhi = DIZHI[mingIdx];
 
     // Main Star Card
     document.getElementById('mainStarWrap').innerHTML = `
         <div class="main-star-card">
             <span class="main-star-glyph">${starData.glyph}</span>
-            <div class="main-star-name">${mainStar} Star (${starData.rank})</div>
+            <div class="main-star-name">${mainStar} (${starData.rank})</div>
             <div class="main-star-sub">Element: ${starData.element} | Life Palace: ${DIZHI[mingIdx]}</div>
         </div>
     `;
@@ -328,7 +472,7 @@ function calculate() {
             const pIdx = GRID_MAP[row][col];
             if (pIdx === -1) {
                 cell.className = 'palace-cell empty';
-                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">Zi Wei<br>Dou Shu</div>' : '';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">紫微<br>斗數</div>' : '';
             } else {
                 cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '');
                 cell.innerHTML = `<div class="palace-name">${PALACES[pIdx]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[pIdx]}</div>`;
@@ -340,84 +484,86 @@ function calculate() {
         }
     }
 
-    // Info Grid
+    // Info Grid — show both solar and lunar dates
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item"><div class="info-label">Life Palace Main Star</div><div class="info-value">${starData.glyph} ${mainStar} Star</div><div class="info-desc">${starData.rank}</div></div>
-        <div class="info-item"><div class="info-label">Life Palace Position</div><div class="info-value">${DIZHI[mingIdx]} Palace (${tiangan}${mingDizhi})</div></div>
-        <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing} Destiny</div></div>
+        <div class="info-item"><div class="info-label">Solar Date</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
+        <div class="info-item"><div class="info-label">Lunar Date (Calculation Basis)</div><div class="info-value">${lunar.year}/${lunar.leap ? 'Leap ' : ''}${lunar.month}/${lunar.day}</div></div>
+        <div class="info-item"><div class="info-label">Life Palace Main Star</div><div class="info-value">${starData.glyph} ${mainStar}</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">Life Palace Position</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
+        <div class="info-item"><div class="info-label">Five Elements Bureau</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei position: ${DIZHI[ziWeiPos]}</div></div>
         <div class="info-item"><div class="info-label">Gender / Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Male (Yang)' : 'Female (Yin)'}</div></div>
     `;
 
     // Main Interpretation
     document.getElementById('mainInterpWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">${starData.glyph} ${mainStar} Star — "${starData.rank}"</div>
+            <div class="interp-title">${starData.glyph} ${mainStar} — "${starData.rank}"</div>
             <div class="interp-text">${starData.personality}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💡 Life Advice for ${mainStar} Star</div>
+            <div class="interp-title">💡 Life Advice for ${mainStar}</div>
             <div class="interp-text">${starData.advice}</div>
         </div>
     `;
 
-    // Spouse (Spouse Palace = Life Palace + 2)
+    // Spouse Palace (Life Palace + 2)
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
     const spouseAppearanceZW = {
-        'Zi Wei': 'Elegant and refined appearance. Confident posture with a dignified impression. Looks great in formal wear and stands out anywhere. Good skin and an overall polished style.',
-        'Tian Ji': 'Intellectual and delicate appearance. Tends to be slim; glasses suit them well. Sharp, intelligent eyes with a bookish aura. Neat and tidy style.',
-        'Tai Yang': 'Bright and vibrant appearance. Large, lively eyes with a warm smile. Healthy skin tone and an athletic build. Looks great in vivid colors.',
-        'Wu Qu': 'Strong and solid impression. Angular face with sharp eyes. Well-built, muscular or toned physique. Simple and practical fashion sense.',
-        'Tian Tong': 'Youthful and cute appearance. Soft or slightly rounded build. Charming smile with an approachable impression. Casual and comfortable style.',
-        'Lian Zhen': 'Sexy and captivating appearance. Distinct features with intense eyes. Fashion-forward and trendy style. The type who leaves a strong first impression.',
-        'Tian Fu': 'Stable and warm impression. Round face with a comfortable smile. Slightly plump with a cozy aura. Neat and conservative fashion.',
-        'Tai Yin': 'Soft and feminine appearance (regardless of gender). Fair, smooth skin with large eyes. A subtle, moon-like charm. Pastel tones suit them well with an elegant aura.',
-        'Tan Lang': 'Attractive and glamorous appearance. Great proportions with excellent fashion sense. Sparkling eyes and irresistible when smiling. A trendsetter type who draws attention from the opposite sex.',
-        'Ju Men': 'Intellectual and sharp impression. Broad forehead with piercing eyes. Notable mouth or distinctive lips. Most attractive when speaking.',
+        'Zi Wei':     'Elegant and refined appearance. Confident posture with a dignified impression. Looks great in formal wear and stands out anywhere. Good skin and an overall polished style.',
+        'Tian Ji':    'Intellectual and delicate appearance. Tends to be slim; glasses suit them well. Sharp, intelligent eyes with a bookish aura. Neat and tidy style.',
+        'Tai Yang':   'Bright and vibrant appearance. Large, lively eyes with a warm smile. Healthy skin tone and an athletic build. Looks great in vivid colors.',
+        'Wu Qu':      'Strong and solid impression. Angular face with sharp eyes. Well-built, muscular or toned physique. Simple and practical fashion sense.',
+        'Tian Tong':  'Youthful and cute appearance. Soft or slightly rounded build. Charming smile with an approachable impression. Casual and comfortable style.',
+        'Lian Zhen':  'Sexy and captivating appearance. Distinct features with intense eyes. Fashion-forward and trendy style. The type who leaves a strong first impression.',
+        'Tian Fu':    'Stable and warm impression. Round face with a comfortable smile. Slightly plump with a cozy aura. Neat and conservative fashion.',
+        'Tai Yin':    'Soft and feminine appearance (regardless of gender). Fair, smooth skin with large eyes. A subtle, moon-like charm. Pastel tones suit them well with an elegant aura.',
+        'Tan Lang':   'Attractive and glamorous appearance. Great proportions with excellent fashion sense. Sparkling eyes and irresistible when smiling. A trendsetter type who draws attention from the opposite sex.',
+        'Ju Men':     'Intellectual and sharp impression. Broad forehead with piercing eyes. Notable mouth or distinctive lips. Most attractive when speaking.',
         'Tian Xiang': 'Clean and well-groomed appearance. Dresses well and always looks put-together. Takes good care of skin and physique. A brand-conscious stylist.',
         'Tian Liang': 'Mature and dependable appearance. Looks older than their age with a trustworthy impression. Classic style. The type who becomes more attractive with age.',
-        'Qi Sha': 'Intense and charismatic appearance. Sharp eyes with a strong jawline. Athletic build; enjoys working out. Suits leather jackets and bold styles.',
-        'Po Jun': 'Unique and distinctive appearance. Unconventional hairstyles or fashion. A style ahead of its time. Polarizing charm that is anything but ordinary.'
+        'Qi Sha':     'Intense and charismatic appearance. Sharp eyes with a strong jawline. Athletic build; enjoys working out. Suits leather jackets and bold styles.',
+        'Po Jun':     'Unique and distinctive appearance. Unconventional hairstyles or fashion. A style ahead of its time. Polarizing charm that is anything but ordinary.'
     };
     const defaultSpouseApp = 'Ordinary and approachable appearance. Not particularly eye-catching but gives a comfortable impression. Clean and neat style. The type whose charm grows on you over time — more attractive the more you get to know them rather than love at first sight.';
-    const spouseAppText = '<strong>📐 Spouse Appearance & First Impression:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+    const spouseAppText = '<strong>📐 Spouse Appearance &amp; First Impression:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
 
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Spouse Palace: ${DIZHI[spouseIdx]} Palace ${spouseStar ? '— ' + spouseStar + ' Star' : ''}</div>
-            <div class="interp-text">${spouseAppText}<strong>📋 Spouse Personality:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar} Star\'s view on marriage:</strong> ${starData.love}</div>
+            <div class="interp-title">💕 Spouse Palace: ${DIZHI[spouseIdx]}${spouseStar ? ' — ' + spouseStar : ''}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Spouse Personality:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar}'s view on marriage:</strong> ${starData.love}</div>
         </div>
     `;
 
-    // Wealth (Wealth Palace = Life Palace + 4)
+    // Wealth Palace (Life Palace + 4)
     const wealthIdx = (mingIdx + 4) % 12;
     const wealthStars = palaceStars[wealthIdx];
     const wealthStar = wealthStars.length > 0 ? wealthStars[0] : null;
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💰 Wealth Palace: ${DIZHI[wealthIdx]} Palace ${wealthStar ? '— ' + wealthStar + ' Star' : ''}</div>
-            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : 'No main star in the Wealth Palace — finances are stable but steady without notable fluctuations.'}<br><br><strong>${mainStar} Star\'s view on wealth:</strong> ${starData.wealth}</div>
+            <div class="interp-title">💰 Wealth Palace: ${DIZHI[wealthIdx]}${wealthStar ? ' — ' + wealthStar : ''}</div>
+            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : 'No main star in the Wealth Palace — finances are stable but steady without notable fluctuations.'}<br><br><strong>${mainStar}'s view on wealth:</strong> ${starData.wealth}</div>
         </div>
     `;
 
-    // Career (Career Palace = Life Palace + 8)
+    // Career Palace (Life Palace + 8)
     const careerIdx = (mingIdx + 8) % 12;
     const careerStars = palaceStars[careerIdx];
     const careerStar = careerStars.length > 0 ? careerStars[0] : null;
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💼 Career Palace: ${DIZHI[careerIdx]} Palace ${careerStar ? '— ' + careerStar + ' Star' : ''}</div>
-            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : 'No main star in the Career Palace — your career is stable and conventional. Steady growth within an organization.'}<br><br><strong>${mainStar} Star\'s view on career:</strong> ${starData.career}</div>
+            <div class="interp-title">💼 Career Palace: ${DIZHI[careerIdx]}${careerStar ? ' — ' + careerStar : ''}</div>
+            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : 'No main star in the Career Palace — your career is stable and conventional. Steady growth within an organization.'}<br><br><strong>${mainStar}'s view on career:</strong> ${starData.career}</div>
         </div>
     `;
 
-    // Health (Health Palace = Life Palace + 5)
+    // Health Palace (Life Palace + 5)
     const healthIdx = (mingIdx + 5) % 12;
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">🏥 Health Palace: ${DIZHI[healthIdx]} Palace</div>
-            <div class="interp-text"><strong>${mainStar} Star\'s health profile:</strong> ${starData.health}</div>
+            <div class="interp-title">🏥 Health Palace: ${DIZHI[healthIdx]}</div>
+            <div class="interp-text"><strong>${mainStar}'s health profile:</strong> ${starData.health}</div>
         </div>
     `;
 
@@ -434,7 +580,7 @@ function calculate() {
 
         dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
             <span style="min-width:80px;font-weight:700;color:#e84393;">Age ${startAge}~${endAge}</span>
-            <span style="flex:1;color:#999;">${DIZHI[palIdx]} Palace ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            <span style="flex:1;color:#999;">${DIZHI[palIdx]}${stars.length > 0 ? ' — ' + stars.join(', ') : ''}</span>
             ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Current</span>' : ''}
         </div>`;
     }

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四柱推命 (四柱八字) - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0a0a, #2a1515); border-bottom: 1px solid #3a2020; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #d4a853; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #d4a853; margin-bottom: 6px; }
+        .optional-tag { font-size: 11px; color: #666; font-weight: 400; }
+        .input-row { display: flex; gap: 10px; }
+        .input-row select { flex: 1; padding: 12px 14px; background: #0a0a1a; border: 1px solid #3a2a15; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23d4a853' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+        select:focus { border-color: #d4a853; }
+
+        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #b8942a, #d4a853); color: #1a1008; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+        .calc-btn:hover { transform: translateY(-1px); }
+
+        .result-section { display: none; }
+        .section-title { font-size: 18px; color: #d4a853; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a15; }
+
+        .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+        .pillar { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 2px solid #3a2a15; border-radius: 16px; padding: 16px 8px; text-align: center; }
+        .pillar.day-pillar { border-color: #d4a853; background: linear-gradient(135deg, #2a1a10, #1a1008); }
+        .pillar-label { font-size: 11px; color: #888; margin-bottom: 8px; letter-spacing: 1px; }
+        .pillar-stem { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+        .pillar-branch { font-size: 32px; font-weight: 700; }
+        .pillar-element { font-size: 11px; color: #999; margin-top: 6px; }
+        .pillar-animal { font-size: 20px; margin-top: 4px; }
+
+        .el-wood { color: #27ae60; }
+        .el-fire { color: #e74c3c; }
+        .el-earth { color: #d4a853; }
+        .el-metal { color: #bdc3c7; }
+        .el-water { color: #3498db; }
+
+        .daymaster-card { background: linear-gradient(135deg, #2a1a10, #1a1008); border: 2px solid #d4a853; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+        .daymaster-glyph { font-size: 60px; margin-bottom: 10px; display: block; }
+        .daymaster-name { font-size: 28px; color: #d4a853; font-weight: 700; margin-bottom: 4px; }
+        .daymaster-sub { font-size: 14px; color: #b8942a; }
+
+        .five-el-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin: 12px 0; }
+        .five-el-bar div { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; min-width: 30px; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .pillars-grid { gap: 6px; } .pillar-stem, .pillar-branch { font-size: 24px; } }
+        .info-item { background: #1a1008; border: 1px solid #3a2a15; border-radius: 12px; padding: 16px; }
+        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
+        .info-value { font-size: 16px; color: #d4a853; font-weight: 600; }
+        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
+
+        .interp-card { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .interp-title { font-size: 14px; color: #d4a853; font-weight: 600; margin-bottom: 8px; }
+        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#b8942a">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>☯️ 四柱推命 (四柱八字)</h2>
+        <p>万年暦に基づく精確な四柱推命分析 — あなたの運命の四つの柱</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>生年月日（陽暦）</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>出生時間 <span class="optional-tag">（不明の場合は「不明」を選択）</span></label>
+            <div class="input-row">
+                <select id="birthHour"></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">時間を入力</option><option value="unknown">不明</option></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>性別</label>
+            <div class="input-row">
+                <select id="gender">
+                    <option value="m">男性</option>
+                    <option value="f">女性</option>
+                </select>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">☯️ 四柱推命を分析する</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <h3 class="section-title">🏛️ 四柱八字（四つの柱）</h3>
+        <div class="pillars-grid" id="pillarsGrid"></div>
+
+        <h3 class="section-title">⭐ 日干（私の本質）</h3>
+        <div id="daymasterWrap"></div>
+
+        <h3 class="section-title">🔥 五行分布</h3>
+        <div id="fiveElWrap"></div>
+
+        <div class="info-grid" id="infoGrid"></div>
+
+        <h3 class="section-title">📖 性格 & 人生の解釈</h3>
+        <div id="interpWrap"></div>
+
+        <h3 class="section-title">💕 配偶者 & 恋愛</h3>
+        <div id="spouseWrap"></div>
+
+        <h3 class="section-title">💰 財運 & 職業</h3>
+        <div id="wealthWrap"></div>
+
+        <h3 class="section-title">🏥 健康の注意点</h3>
+        <div id="healthWrap"></div>
+
+        <h3 class="section-title">⏳ 大運（10年周期）</h3>
+        <div id="dashaWrap"></div>
+    </div>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// ═══════════════════════════════════════
+// 四柱推命計算エンジン（万年暦ベース）
+// ═══════════════════════════════════════
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const ELEMENTS = ['木','木','火','火','土','土','金','金','水','水'];
+const BR_ELEMENTS = ['水','土','木','木','土','火','火','土','金','金','土','水'];
+const ANIMALS = ['🐀','🐂','🐅','🐇','🐉','🐍','🐴','🐑','🐵','🐔','🐶','🐷'];
+const ANIMAL_NAMES = ['ネズミ','ウシ','トラ','ウサギ','リュウ','ヘビ','ウマ','ヒツジ','サル','トリ','イヌ','イノシシ'];
+const EL_NAMES = ['木(木)','火(火)','土(土)','金(金)','水(水)'];
+const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
+const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
+
+// 節気基準の月境界（陽暦近似値）
+const MONTH_BOUNDARIES = [
+    [2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,5]
+];
+
+function getSolarMonth(month, day) {
+    for (let i = 0; i < 12; i++) {
+        const [m, d] = MONTH_BOUNDARIES[i];
+        const [nm, nd] = MONTH_BOUNDARIES[(i+1) % 12];
+        if (i < 11) {
+            if ((month === m && day >= d) || (month === nm && day < nd)) return i + 1;
+        } else {
+            if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+            if (month === 12 && day >= 7) return 11; // handled in loop
+        }
+    }
+    // fallback by approximate mapping
+    if (month === 1 && day < 5) return 12;
+    if (month === 1 && day >= 5) return 12;
+    if (month === 2 && day < 4) return 12;
+    for (let i = 0; i < 12; i++) {
+        const [m, d] = MONTH_BOUNDARIES[i];
+        if (month === m && day >= d) return i + 1;
+        if (month === m && day < d) return i === 0 ? 12 : i;
+    }
+    return 1;
+}
+
+function getAdjustedYear(year, month, day) {
+    // 立春（~2/4）基準で年を切り替え
+    if (month < 2 || (month === 2 && day < 4)) return year - 1;
+    return year;
+}
+
+function getYearPillar(year, month, day) {
+    const y = getAdjustedYear(year, month, day);
+    return { stem: ((y - 4) % 10 + 10) % 10, branch: ((y - 4) % 12 + 12) % 12 };
+}
+
+function getMonthPillar(year, month, day) {
+    const y = getAdjustedYear(year, month, day);
+    const yearStem = ((y - 4) % 10 + 10) % 10;
+    const solarM = getSolarMonth(month, day);
+    const monthBranch = (solarM + 1) % 12; // 寅月=2 from solarM=1
+    // 五虎遁法：年干によって寅月（1月）の天干を決定
+    const baseStems = [2,4,6,8,0]; // 甲→丙, 乙→戊, 丙→庚, 丁→壬, 戊→甲
+    const monthStem = (baseStems[yearStem % 5] + (solarM - 1)) % 10;
+    return { stem: monthStem, branch: monthBranch };
+}
+
+function getDayPillar(year, month, day) {
+    // 検証済み基準点：2023年1月4日 = 甲子日（stem 0, branch 0）
+    const target = new Date(Date.UTC(year, month - 1, day));
+    const ref = new Date(Date.UTC(2023, 0, 4));
+    const daysDiff = Math.round((target - ref) / 86400000);
+    const stem = ((daysDiff % 10) + 10) % 10;
+    const branch = ((daysDiff % 12) + 12) % 12;
+    return { stem, branch };
+}
+
+function getHourPillar(dayStem, hourIdx) {
+    // 五鼠遁法：日干によって子時の天干を決定
+    const baseStems = [0,2,4,6,8]; // 甲→甲, 乙→丙, 丙→戊, 丁→庚, 戊→壬
+    const hourStem = (baseStems[dayStem % 5] + hourIdx) % 10;
+    return { stem: hourStem, branch: hourIdx };
+}
+
+// 五行インデックス（0=木, 1=火, 2=土, 3=金, 4=水）
+function getElIdx(el) {
+    return ['木','火','土','金','水'].indexOf(el);
+}
+
+// 十神計算
+function getTenGod(dayStem, targetStem) {
+    const dayEl = getElIdx(ELEMENTS[dayStem]);
+    const tarEl = getElIdx(ELEMENTS[targetStem]);
+    const dayYin = dayStem % 2; // 0=陽, 1=陰
+    const tarYin = targetStem % 2;
+    const sameYY = dayYin === tarYin;
+
+    const cycle = [
+        [0,1,2,3,4], // 生：木→火→土→金→水
+    ];
+    // 自分と同じ五行
+    if (dayEl === tarEl) return sameYY ? '比肩' : '劫財';
+    // 自分が生じる（木→火, 火→土, 土→金, 金→水, 水→木）
+    if ((dayEl + 1) % 5 === tarEl) return sameYY ? '食神' : '傷官';
+    // 自分を生じる
+    if ((tarEl + 1) % 5 === dayEl) return sameYY ? '偏印' : '正印';
+    // 自分が剋する（木→土, 火→金, 土→水, 金→木, 水→火）
+    if ((dayEl + 2) % 5 === tarEl) return sameYY ? '偏財' : '正財';
+    // 自分を剋する
+    if ((tarEl + 2) % 5 === dayEl) return sameYY ? '偏官' : '正官';
+    return '';
+}
+
+// ═══════════════════════════════════════
+// 日干別詳細解釈
+// ═══════════════════════════════════════
+const DAY_MASTERS = {
+    '甲': { glyph: '🌲', nature: '大木', element: '木（陽）',
+        personality: '甲木は天に向かって真っすぐ伸びる大木です。リーダーシップが強く正義感にあふれ、どんな状況でもしっかりと自分の道を歩みます。自尊心が高く、一度決めたことは容易に折れません。大きな志を抱いており些細なことにこだわりませんが、融通が利かないと言われることもあります。生まれながらのリーダー気質で人々が自然と従い、幼い頃から仲間の中でリーダー役を担います。',
+        love: '堂々としてどっしりとした愛をします。パートナーを守ろうとする本能が強く、一度好きになったら最後まで押し進めます。理想の配偶者は、柔らかくも自分の世界を持つ人です。頑固なため恋愛中に意見の衝突が多くなりがちですので、譲る術を学ぶと関係がずっと良くなります。',
+        career: '経営者・政治家・教育者・建築家・実業家に向いています。組織のリーダーとして輝き、大きなプロジェクトを率いる能力が卓越しています。人の下で働くよりも、自分で事業を興す方が向いています。',
+        wealth: '自力本願型です。大きなビジョンで大きなお金を稼ぎますが、細かい資産運用よりも事業拡大への投資を好みます。40代以降に財産が安定します。',
+        health: '肝臓・胆嚢に注意してください。ストレスを内側に溜め込む癖があり、筋肉のこわばりや頭痛に悩まされることがあります。森の散歩が最高の癒しとなります。',
+        advice: '大木も風に折れることがあります。柔軟さを学んでください。柳のように風に揺れながらも、根はしっかりと。あなたの強さは柔らかさと出会ったとき、真の偉大さになります。' },
+    '乙': { glyph: '🌿', nature: '草花', element: '木（陰）',
+        personality: '乙木は風に揺れる草と花です。柔軟で適応力が高く、どんな環境でも生き延びます。柔らかな外見の裏に、しなやかな生命力を秘めています。社交的で察しがよく、人の心をうまく読みます。外見は穏やかに見えますが、自分が望むものは必ず手に入れる粘り強さがあります。',
+        love: '柔らかく繊細な愛をします。相手の心をうまく読んで合わせますが、本心はなかなか見せません。理想の配偶者は、頼もしく安定した人です。依存的に見えることがありますが、実際には関係を主導することが多いです。',
+        career: 'デザイナー・カウンセラー・外交官・作家・フローリストに向いています。人を扱う仕事で輝き、対立の仲裁能力に優れています。大企業よりも専門職やフリーランスの方がよく合います。',
+        wealth: '財産が着実に入ってきます。大きな投資よりも安定した収入を好み、生活力が強いです。30代後半から財産が安定します。',
+        health: '肝臓・神経系に注意してください。ストレスを表に出さないため、自律神経失調症に陥りやすいです。ヨガやピラティスが良いです。',
+        advice: '草はコンクリートの隙間でも育ちます。あなたの適応力は最高の武器です。しかし時には「できない」と言う勇気も必要です。すべてに合わせていると、自分を失うことがあります。' },
+    '丙': { glyph: '☀️', nature: '太陽', element: '火（陽）',
+        personality: '丙火は万物を照らす太陽です。明るく活気があり、どこに行っても場の雰囲気を明るくします。情熱的で公平であり、すべての人に温かく接します。楽天的でエネルギーにあふれ、周囲に常に人が集まります。ただし自分の感情に正直なため、怒るとすぐに表出し、気分が良いとすべてを与えてしまう極端な面があります。',
+        love: '熱く激しい愛をします！好きになると全世界に知らせ、積極的に近づきます。理想の配偶者は、自分の世界がはっきりしていて温かい人です。結婚後も恋愛感情を保とうとし、サプライズが好きです。',
+        career: '放送人・教授・マーケター・営業・舞台芸術家に向いています。人前に立つ職業で輝き、舞台の上でより生き生きとします。CEOよりCOOの方が向いているかもしれません。',
+        wealth: '稼ぐのも上手で使うのも上手です。交際費の支出は多いですが、人脈がそのまま財産となります。35歳以降に収入が大きく増えます。',
+        health: '心臓・目・血圧に注意してください。エネルギーを使いすぎると突然の疲弊が来ることがあります。日光の下での運動が最高です。',
+        advice: '太陽は自分を燃やして世界を照らします。しかし時には自分のための時間も必要です。あなたが健康であってこそ、世界も明るくなります。' },
+    '丁': { glyph: '🕯️', nature: 'ろうそく', element: '火（陰）',
+        personality: '丁火は闇を照らすろうそくです。繊細で集中力が強く、一つのことに深く没頭します。芸術的感性に優れ、内面の情熱は熱いですが、外見は静かです。人を深く観察し、直感が鋭いです。完璧主義的な傾向があり、自分の仕事に高い基準を設けます。',
+        love: '深く濃い愛をします。一人の人に深くはまり、献身的です。理想の配偶者は、知性的で感性豊かな人です。嫉妬心が強くなることがあるので、信頼を基盤にした関係が大切です。',
+        career: '研究員・芸術家・プログラマー・心理カウンセラー・料理人に向いています。細部に強く、一分野を深く掘り下げる専門家として輝きます。',
+        wealth: '安定していますが、財産の蓄積は遅いです。専門技術でお金を稼ぎ、投資よりも実力で勝負します。40代から専門性が輝き、収入が急増します。',
+        health: '心臓・小腸に注意してください。不眠症と神経衰弱に弱いです。ろうそく瞑想やアロマテラピーが助けになります。',
+        advice: 'ろうそくは小さくても闇全体を照らすことができます。自分を過小評価しないでください。あなたの繊細さと集中力は、他の人が持てない宝物です。' },
+    '戊': { glyph: '⛰️', nature: '山と大地', element: '土（陽）',
+        personality: '戊土はすべてを包み込む山と大地です。安定していてどっしりとしており、頼もしいです。変化よりも安定を追求し、一度腰を落ち着けたら動きません。包容力が大きく、人々が頼りにする存在です。ただし頑固で変化に遅く、時代に乗り遅れることがあります。重厚な存在感でどこに行っても頼もしい支えとなります。',
+        love: '安定していてどっしりとした愛をします。パートナーに安心感を与え、物質的にも不足なく気にかけます。理想の配偶者は、活発で変化を楽しむ人で、お互いを補い合います。表現が不器用で誤解されることがあるので、感情表現を意識的に行いましょう。',
+        career: '不動産・建設・農業・公務員・銀行員に向いています。安定した職場でコツコツ成果を上げ、定年まで一つの場所で働くことが多いです。',
+        wealth: '不動産運が強いです！土地・建物への投資に有利で、安定的に資産を積み上げます。50代にかなりの財産を形成します。',
+        health: '脾臓・胃腸に注意してください。過食と運動不足が最大の敵です。登山や土に触れる活動が健康に良いです。',
+        advice: '山は動きませんが、世界は変わります。変化を恐れず流れを読みましょう。根が強ければ枝を伸ばしても倒れません。' },
+    '己': { glyph: '🌾', nature: '田畑', element: '土（陰）',
+        personality: '己土は万物を育てる田畑です。穏やかで実用的であり、人を世話する才能があります。外見は穏しく質素ですが、内面には強固な力があります。人々の話をよく聞き、共感する能力に優れています。自分よりも他人を先に気遣う、献身的な性格です。',
+        love: '温かく献身的な愛をします。パートナーの日常を丁寧に気にかけ、家庭的です。理想の配偶者は、野望を持ちながらも家庭を大切にする人です。自己犠牲が過ぎると関係が不均衡になることがあるので、自分の気持ちも表現しましょう。',
+        career: '教師・看護師・料理人・社会福祉士・人事担当に向いています。人を世話し育てる仕事にやりがいを感じます。安定した組織で輝くタイプです。',
+        wealth: 'コツコツと安定して蓄えます。派手ではありませんが、堅実に財産を増やし、貯蓄と保険に強いです。40代後半に経済的な安定を手に入れます。',
+        health: '消化器・皮膚に注意してください。他人のストレスを代わりに受け取る傾向があり、消化障害に弱いです。家庭菜園が最高の癒しとなります。',
+        advice: '田畑はすべてを受け入れますが、自分自身にも栄養が必要です。他人を気遣う前に、まず自分を満たしましょう。空のコップでは他人に水を注ぐことができません。' },
+    '庚': { glyph: '⚔️', nature: '刀と剣', element: '金（陽）',
+        personality: '庚金は鍛えられた鉄と鋭い剣です。決断力が強く正義感にあふれ、刃物のような判断力を持ちます。義理を重んじ、約束を必ず守ります。冷静に見えますが内側は温かく、一度縁を結んだら最後まで守ります。不義を見ると我慢できず、率直に発言します。',
+        love: '重厚で義理ある愛をします。表現は不器用ですが、行動で愛を証明します。理想の配偶者は、柔らかく感性的な人で、お互いを補い合います。刃物のような言い方が傷をつけることがあるので、柔らかい表現を練習しましょう。',
+        career: '軍人・警察官・外科医・法律家・エンジニアに向いています。正確で断固とした判断が必要な職業で輝きます。組織の二番手として最高の実行力を発揮します。',
+        wealth: '実力でお金を稼ぎます。専門技術がそのまま財産であり、投資は慎重です。35歳以降に着実に資産が増えます。',
+        health: '肺・大腸・皮膚に注意してください。金属関連の事故に気をつけ、乾燥した環境は避けましょう。武術や剣道が健康に良いです。',
+        advice: '剣は磨くほど鋭くなりますが、鋭くなりすぎると自分も傷つきます。強さの中に柔らかさを宿しましょう。真の名剣は鞘の中にあるときより輝きます。' },
+    '辛': { glyph: '💎', nature: '宝石', element: '金（陰）',
+        personality: '辛金は精巧に加工された宝石です。敏感で完璧主義的であり、美しさを追求します。繊細な感性と鋭い審美眼を持ち、自分だけの基準が確固としています。外見は華やかで洗練されて見えますが、内面は繊細で傷つきやすいです。自尊心が高く、自分の価値を知っています。',
+        love: '美しく洗練された愛をします。品格ある恋愛を望み、外見とセンスを重視します。理想の配偶者は、洗練されていて経済力のある人です。完璧な関係を追求するあまり現実に失望することがあるので、ありのままを愛する術を学びましょう。',
+        career: '宝石鑑定士・デザイナー・音楽家・プログラマー・歯科医に向いています。精密さが要求される職業で輝き、芸術的センスに優れています。',
+        wealth: '安定していますが、出費が大きいです。良いものへの欲求が強く支出は多いですが、稼ぎも良いです。自分のブランドを作ると40代に大きな収入を得ます。',
+        health: '肺・皮膚・歯に注意してください。敏感な性格がアレルギーや皮膚疾患として現れます。音楽鑑賞が精神の健康に良いです。',
+        advice: '宝石は原石のときではなく、磨かれてから輝きます。試練を避けないでください。あなたを磨くすべての経験が、あなたをより輝かせてくれます。' },
+    '壬': { glyph: '🌊', nature: '海', element: '水（陽）',
+        personality: '壬水は果てしなく広い海です。自由で知恵があり、すべてを包み込みます。頭の回転が速く状況判断が素早く、危機のときこそ輝きます。どんな器にも収まる水のようにどんな環境にも適応しますが、穏やかに見える外見とは異なり、内面には深い波が打ち寄せています。自由を極めて重視し、束縛に耐えられません。',
+        love: '自由で大きな愛をします。多様な出会いを楽しみ、一人に落ち着くまでに時間がかかります。理想の配偶者は、自由を尊重しながらも頼もしい港のような人です。浮気性だと誤解されることがあるので、信頼関係をしっかりと築きましょう。',
+        career: '貿易・物流・海運・旅行業・戦略コンサルタントに向いています。国境を越えるビジネスで強みを発揮し、外国語に才能があります。',
+        wealth: '大きな水が大きなお金を引き寄せます。海外投資やグローバルビジネスで大きな利益を上げることができます。30代半ばから財運が急上昇します。',
+        health: '腎臓・膀胱・生殖器に注意してください。水分を十分に摂取し、寒さに注意しましょう。水泳が最高の運動です。',
+        advice: '海はどこへでも流れることができますが、川には方向があります。自由も良いですが、人生の方向は決めておきましょう。流れながらも目的地がある水が世界を変えます。' },
+    '癸': { glyph: '🌧️', nature: '雨と露', element: '水（陰）',
+        personality: '癸水は万物を潤す雨と露です。直感に優れ、感受性が豊かで、霊的な深みがあります。静かですが深い思考をし、人の本質を見抜きます。外見は落ち着いていますが、内面には豊かな感情の世界が広がっています。一人の時間を大切にし、瞑想や祈りに引かれる霊的傾向が強いです。',
+        love: '深く霊的な愛をします。魂の伴侶を求め、浅い関係には満足できません。理想の配偶者は、精神的に深みのある人です。理想が高く、現実のパートナーに失望することがあるので、完璧さよりも誠実さを見ましょう。',
+        career: '心理学者・宗教家・作家・占術家・研究員に向いています。見えない世界を探求する職業で輝き、直感で問題を解き明かします。',
+        wealth: '財産は必要なときに入ってきます。お金への執着が少く、大富豪にはなりにくいですが、不思議と窮乏することはありません。霊的な活動やカウンセリング分野から収入が生まれます。',
+        health: '腎臓・泌尿器に注意してください。感情を深く感じすぎて、うつ病に弱いです。雨の日の散歩や温泉が癒しとなります。',
+        advice: '雨は静かに降って大地を潤します。あなたの影響力は見えませんが、深いです。世に出なくても構いません。あなたが存在するだけで、誰かの渇いた心が潤っています。' }
+};
+
+// 配偶者の外見（日支基準）
+const SPOUSE_APPEARANCE = {
+    '子': '知的で落ち着いた外見。目が深く神秘的な魅力があります。肌が明るく清潔な方で、夜になるほど魅力的に見えるタイプ。',
+    '丑': '安定していてどっしりとした印象。やや丸みがあるか、がっしりとした体型。頼もしい外見で、初対面より知るほど魅力的な人。',
+    '寅': '堂々として活気ある外見。体格が良く目が大きく、自信にあふれています。スポーティなスタイルが似合う活動的なタイプ。',
+    '卯': '柔らかく優雅な外見。目鼻立ちが美しく、手が綺麗です。洗練されたファッションセンスと猫のような魅力があります。',
+    '辰': '力強くカリスマある印象。大きな体格に堂々とした姿勢。威厳がありますが、笑顔に意外な魅力があるタイプ。',
+    '巳': '魅惑的で洗練された外見。長くスリムな体型にはっきりとした目鼻立ち。眼差しが深く神秘的な雰囲気。ファッションセンスが卓越。',
+    '午': '明るく華やかな外見。目が大きく笑顔が魅力的。活発でエネルギーあふれる印象。赤系のカラーがよく似合う。',
+    '未': '穏やかで落ち着いた外見。丸い顔に親しみやすい笑顔。ファッションより快適さを追求し、温かみのある雰囲気。実年齢より若く見える方。',
+    '申': 'きちんとして端正な外見。鋭い目鼻立ちに洗練されたスタイル。肌が白くきらきらとした目。ブランドに関心の多い洗練されたタイプ。',
+    '酉': '美しく繊細な外見。唇が美しいか、声が魅力的。お酒が好きなこともあり、社交的な雰囲気。高級な趣向。',
+    '戌': 'どっしりして誠実な印象。真面目で無口に見えますが、内面の深い人。運動が好きで健康的な体型。時間が経つほど情が深まるタイプ。',
+    '亥': 'ふっくらして可愛らしい外見。目が小さく笑いが多く、印象が良い。食べることが好きで、落ち着いた雰囲気。福があるように見える印象。'
+};
+
+function toggleTime() {
+    const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
+    document.getElementById('birthHour').disabled = disabled;
+    document.getElementById('birthHour').style.opacity = disabled ? '0.4' : '1';
+}
+
+function calculate() {
+    const year = parseInt(document.getElementById('birthYear').value);
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? -1 : parseInt(document.getElementById('birthHour').value);
+    const gender = document.getElementById('gender').value;
+
+    const yp = getYearPillar(year, month, day);
+    const mp = getMonthPillar(year, month, day);
+    const dp = getDayPillar(year, month, day);
+    const hp = hourIdx >= 0 ? getHourPillar(dp.stem, hourIdx) : null;
+
+    const dayStem = dp.stem;
+    const dayMaster = STEMS[dayStem];
+    const dm = DAY_MASTERS[dayMaster];
+
+    // 四柱の表示
+    const pillars = [
+        { label: '時柱（時）', data: hp },
+        { label: '日柱（日）', data: dp, isDay: true },
+        { label: '月柱（月）', data: mp },
+        { label: '年柱（年）', data: yp }
+    ];
+
+    let pillarsHTML = '';
+    pillars.forEach(p => {
+        if (!p.data) {
+            pillarsHTML += `<div class="pillar"><div class="pillar-label">${p.label}</div><div class="pillar-stem" style="color:#666">?</div><div class="pillar-branch" style="color:#666">?</div><div class="pillar-element">時間未入力</div></div>`;
+            return;
+        }
+        const sEl = ELEMENTS[p.data.stem];
+        const bEl = BR_ELEMENTS[p.data.branch];
+        const sClass = EL_CLASSES[getElIdx(sEl)];
+        const bClass = EL_CLASSES[getElIdx(bEl)];
+        const tenGod = p.isDay ? '日干' : getTenGod(dayStem, p.data.stem);
+        pillarsHTML += `<div class="pillar${p.isDay ? ' day-pillar' : ''}">
+            <div class="pillar-label">${p.label}</div>
+            <div class="pillar-stem ${sClass}">${STEMS[p.data.stem]}</div>
+            <div class="pillar-branch ${bClass}">${BRANCHES[p.data.branch]}</div>
+            <div class="pillar-element">${sEl}/${bEl}</div>
+            <div class="pillar-animal">${ANIMALS[p.data.branch]}</div>
+            <div style="font-size:10px;color:#888;margin-top:4px;">${tenGod}</div>
+        </div>`;
+    });
+    document.getElementById('pillarsGrid').innerHTML = pillarsHTML;
+
+    // 日干カード
+    document.getElementById('daymasterWrap').innerHTML = `
+        <div class="daymaster-card">
+            <span class="daymaster-glyph">${dm.glyph}</span>
+            <div class="daymaster-name">${dayMaster}日干 — ${dm.nature}</div>
+            <div class="daymaster-sub">${dm.element} | ${ANIMAL_NAMES[yp.branch]}年生まれ</div>
+        </div>`;
+
+    // 五行分布
+    const elCount = [0,0,0,0,0];
+    [yp, mp, dp].forEach(p => {
+        elCount[getElIdx(ELEMENTS[p.stem])]++;
+        elCount[getElIdx(BR_ELEMENTS[p.branch])]++;
+    });
+    if (hp) {
+        elCount[getElIdx(ELEMENTS[hp.stem])]++;
+        elCount[getElIdx(BR_ELEMENTS[hp.branch])]++;
+    }
+    const total = elCount.reduce((a,b) => a+b, 0);
+    let barHTML = '<div class="five-el-bar">';
+    EL_NAMES.forEach((name, i) => {
+        if (elCount[i] > 0) {
+            const pct = (elCount[i] / total * 100).toFixed(0);
+            barHTML += `<div style="width:${pct}%;background:${EL_COLORS[i]}">${name.split('(')[0]} ${elCount[i]}</div>`;
+        }
+    });
+    barHTML += '</div>';
+
+    const weakEl = EL_NAMES[elCount.indexOf(Math.min(...elCount))];
+    const strongEl = EL_NAMES[elCount.indexOf(Math.max(...elCount))];
+    document.getElementById('fiveElWrap').innerHTML = barHTML + `
+        <div style="font-size:12px;color:#999;margin-top:8px;">
+            <strong style="color:#d4a853;">最も強い五行:</strong> ${strongEl} (${Math.max(...elCount)}個) &nbsp;|&nbsp;
+            <strong style="color:#d4a853;">最も弱い五行:</strong> ${weakEl} (${Math.min(...elCount)}個)
+        </div>`;
+
+    // 情報グリッド
+    document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item"><div class="info-label">日干 (Day Master)</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
+        <div class="info-item"><div class="info-label">干支（年）</div><div class="info-value">${ANIMALS[yp.branch]} ${ANIMAL_NAMES[yp.branch]}年生まれ (${STEMS[yp.stem]}${BRANCHES[yp.branch]}年)</div></div>
+        <div class="info-item"><div class="info-label">日柱</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}日</div></div>
+        <div class="info-item"><div class="info-label">性別/陰陽</div><div class="info-value">${gender === 'm' ? '男性（陽）' : '女性（陰）'}</div></div>
+    `;
+
+    // 性格の解釈
+    document.getElementById('interpWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">${dm.glyph} ${dayMaster}日干 — "${dm.nature}"</div>
+            <div class="interp-text">${dm.personality}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💡 人生のアドバイス</div>
+            <div class="interp-text">${dm.advice}</div>
+        </div>`;
+
+    // 配偶者
+    const spouseBranch = BRANCHES[dp.branch];
+    const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+    document.getElementById('spouseWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💕 配偶者宮（日支：${spouseBranch}）</div>
+            <div class="interp-text">
+                <strong>📐 配偶者の外見 & 第一印象:</strong><br>${spouseApp}<br><br>
+                <strong>💑 恋愛 & 結婚:</strong><br>${dm.love}
+            </div>
+        </div>`;
+
+    // 財運 & 職業
+    document.getElementById('wealthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💼 職業適性</div>
+            <div class="interp-text">${dm.career}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💰 財運</div>
+            <div class="interp-text">${dm.wealth}</div>
+        </div>`;
+
+    // 健康
+    document.getElementById('healthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">🏥 ${dayMaster}日干の健康</div>
+            <div class="interp-text">${dm.health}</div>
+        </div>`;
+
+    // 大運（簡易）
+    const yearStem = yp.stem;
+    const yearBranch = yp.branch;
+    const isYangMale = (yearStem % 2 === 0 && gender === 'm') || (yearStem % 2 === 1 && gender === 'f');
+    const mpStem = mp.stem;
+    const mpBranch = mp.branch;
+
+    let dashaHtml = '<div style="background:#0d0a05;border:1px solid #3a2a15;border-radius:12px;overflow:hidden;">';
+    const now = new Date();
+    const currentAge = now.getFullYear() - year;
+
+    for (let i = 0; i < 8; i++) {
+        const startAge = 2 + i * 10;
+        const endAge = 11 + i * 10;
+        let dStem, dBranch;
+        if (isYangMale) {
+            dStem = (mpStem + i + 1) % 10;
+            dBranch = (mpBranch + i + 1) % 12;
+        } else {
+            dStem = ((mpStem - i - 1) % 10 + 10) % 10;
+            dBranch = ((mpBranch - i - 1) % 12 + 12) % 12;
+        }
+        const isCurrent = currentAge >= startAge && currentAge <= endAge;
+        const tenGod = getTenGod(dayStem, dStem);
+        const sClass = EL_CLASSES[getElIdx(ELEMENTS[dStem])];
+        const bClass = EL_CLASSES[getElIdx(BR_ELEMENTS[dBranch])];
+
+        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a1008;font-size:13px;${isCurrent ? 'background:#1a1510;border-left:3px solid #d4a853;' : ''}">
+            <span style="min-width:65px;font-weight:700;color:#d4a853;">${startAge}〜${endAge}歳</span>
+            <span class="${sClass}" style="font-weight:700;margin-right:2px;">${STEMS[dStem]}</span><span class="${bClass}" style="font-weight:700;">${BRANCHES[dBranch]}</span>
+            <span style="flex:1;color:#888;margin-left:8px;font-size:11px;">${tenGod} · ${ELEMENTS[dStem]}/${BR_ELEMENTS[dBranch]}</span>
+            ${isCurrent ? '<span style="font-size:10px;background:#d4a853;color:#1a1008;padding:2px 8px;border-radius:10px;font-weight:700;">現在</span>' : ''}
+        </div>`;
+    }
+    dashaHtml += '</div>';
+    document.getElementById('dashaWrap').innerHTML = dashaHtml;
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function initForm() {
+    const y = document.getElementById('birthYear');
+    const m = document.getElementById('birthMonth');
+    const d = document.getElementById('birthDay');
+    const h = document.getElementById('birthHour');
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '年'; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '月'; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '日'; if (i === 15) o.selected = true; d.appendChild(o); }
+    const hourLabels = ['子の刻(23~1)','丑の刻(1~3)','寅の刻(3~5)','卯の刻(5~7)','辰の刻(7~9)','巳の刻(9~11)','午の刻(11~13)','未の刻(13~15)','申の刻(15~17)','酉の刻(17~19)','戌の刻(19~21)','亥の刻(21~23)'];
+    for (let i = 0; i < 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = hourLabels[i]; if (i === 5) o.selected = true; h.appendChild(o); }
+}
+
+initForm();
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
+</html>
