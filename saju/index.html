@@ -190,21 +190,17 @@ const SOLAR_TERMS = [
 ];
 
 function getSolarMonth(month, day) {
-    // 날짜를 연내 일수로 변환하여 비교 (1월=100, 2월=200 ...)
-    const dateVal = month * 100 + day;
-    // 각 절기를 순회하며 해당 구간 찾기
-    for (let i = 11; i >= 0; i--) {
+    // 절기 시작일 기준으로 해당 월 결정
+    // 1월 1~4일: 소한(1/5) 전 → 자월(11)
+    if (month === 1 && day < 5) return 11;
+    // 1월 5일~2월 3일: 축월(12)
+    if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+    // 나머지: 순방향으로 절기 매칭
+    for (let i = 10; i >= 0; i--) {
         const t = SOLAR_TERMS[i];
-        const tVal = t.month * 100 + t.day;
-        if (dateVal >= tVal) {
-            // 축월(12)은 1월에 시작 — 특별 처리
-            if (i === 11 && t.month === 1) return 12;
-            return i + 1;
-        }
+        if (month > t.month || (month === t.month && day >= t.day)) return i + 1;
     }
-    // 1월 초 (소한 전) = 전년 자월(11)? 아니, 축월(12) 전 = 자월(11)
-    // 소한(1/5) 전이면 전년 대설(12/7) 이후이므로 자월(11)
-    return 11; // 1/1~1/4 = 소한(1/5) 전 = 자월(11)
+    return 1;
 }
 
 // 진태양시 보정
