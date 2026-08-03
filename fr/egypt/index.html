@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancient Egyptian Decans - MOGU Moon</title>
+    <title>Décans de l'Égypte Ancienne - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -57,43 +57,43 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>Ancient Egyptian Decans</h2>
-        <p>The oldest star system, dividing the sky into 36 sectors</p>
+        <h2>Décans de l'Égypte Ancienne</h2>
+        <p>Le plus ancien système stellaire, divisant le ciel en 36 secteurs</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Date de naissance</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
                 <select id="birthDay"></select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">Check Your Decan</button>
+        <button class="calc-btn" onclick="calculate()">Découvrir votre Décan</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">Your Egyptian Decan</h3>
+        <h3 class="section-title">Votre Décan Égyptien</h3>
         <div id="decanCard"></div>
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">Personality & Destiny</h3>
+        <h3 class="section-title">Personnalité et Destin</h3>
         <div id="personalityWrap"></div>
 
-        <h3 class="section-title">Love & Relationships</h3>
+        <h3 class="section-title">Amour et Relations</h3>
         <div id="loveWrap"></div>
 
-        <h3 class="section-title">Career & Wealth</h3>
+        <h3 class="section-title">Carrière et Richesse</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">Health</h3>
+        <h3 class="section-title">Santé</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">Compatibility</h3>
+        <h3 class="section-title">Compatibilité</h3>
         <div id="compatWrap"></div>
 
-        <h3 class="section-title">Lucky Info</h3>
+        <h3 class="section-title">Infos porte-bonheur</h3>
         <div id="luckyWrap"></div>
     </div>
 </div>
@@ -103,7 +103,7 @@
 <script>
 // 36 Egyptian Decans (10-day periods)
 const DECANS = [
-    { name: 'Spirit of the Nile', deity: 'Hapi', glyph: '🌊', element: 'Water', dates: '1/1~1/10',
+    { name: 'Spirit of the Nile', deity: 'Hapi', glyph: '🌊', element: 'Eau', dates: '1/1~1/10',
       startM:1, startD:1, endM:1, endD:10,
       personality: 'Abundant and generous like the Nile River. You carry a life-nurturing energy and bring prosperity to those around you. Deeply emotional and intuitive, with a water-like fluidity and flexibility. You have a remarkable ability to adapt to any environment.',
       love: 'You desire deep emotional connections. A devoted love that enriches your partner. You may have jealousy, but once you love, it flows endlessly like the Nile.',
@@ -112,7 +112,7 @@ const DECANS = [
       lucky: { color: 'Blue, Turquoise', stone: 'Aquamarine', number: '3, 7', animal: 'Crocodile' },
       compat: [3,7,11,17,23,29] },
 
-    { name: 'Son of Amun', deity: 'Amun-Ra', glyph: '☀️', element: 'Fire', dates: '1/11~1/20',
+    { name: 'Son of Amun', deity: 'Amun-Ra', glyph: '☀️', element: 'Feu', dates: '1/11~1/20',
       startM:1, startD:11, endM:1, endD:20,
       personality: 'A powerful leader with the energy of the sun god. Full of charisma and a presence that brightens everything around you. Ambitious with strong pride, you value justice. Creative and optimistic, you find light even in darkness.',
       love: 'Passionate and dramatic love. You treat your partner like royalty. You have a strong desire to be respected, and feel deeply hurt when ignored.',
@@ -121,7 +121,7 @@ const DECANS = [
       lucky: { color: 'Gold, Orange', stone: 'Amber', number: '1, 9', animal: 'Falcon' },
       compat: [4,8,13,19,25,31] },
 
-    { name: 'Daughter of Mut', deity: 'Mut', glyph: '🦅', element: 'Wind', dates: '1/21~1/31',
+    { name: 'Daughter of Mut', deity: 'Mut', glyph: '🦅', element: 'Vent', dates: '1/21~1/31',
       startM:1, startD:21, endM:1, endD:31,
       personality: 'The protective energy of the mother goddess Mut. Strong nurturing and protective instincts. Deep patience and practicality, prioritizing family and community above all. The insight of an eagle that sees far into the distance.',
       love: 'Protective and devoted love. Values creating a home. Wraps your partner in maternal love, though it can sometimes become overprotective.',
@@ -130,7 +130,7 @@ const DECANS = [
       lucky: { color: 'White, Silver', stone: 'Pearl', number: '2, 6', animal: 'Vulture' },
       compat: [5,9,14,20,26,32] },
 
-    { name: 'Land of Geb', deity: 'Geb', glyph: '🌍', element: 'Earth', dates: '2/1~2/10',
+    { name: 'Land of Geb', deity: 'Geb', glyph: '🌍', element: 'Terre', dates: '2/1~2/10',
       startM:2, startD:1, endM:2, endD:10,
       personality: 'The stable energy of the earth god Geb. A realist with feet firmly planted on the ground. Reliable and highly responsible, you always keep your promises. You feel a deep connection with nature.',
       love: 'Stable and faithful love. You provide material stability and build lasting relationships. You dislike change and expect consistency from your partner.',
@@ -139,7 +139,7 @@ const DECANS = [
       lucky: { color: 'Brown, Green', stone: 'Jasper', number: '4, 8', animal: 'Goose' },
       compat: [0,6,10,18,24,30] },
 
-    { name: 'Judgment of Osiris', deity: 'Osiris', glyph: '⚖️', element: 'Water', dates: '2/11~2/20',
+    { name: 'Judgment of Osiris', deity: 'Osiris', glyph: '⚖️', element: 'Eau', dates: '2/11~2/20',
       startM:2, startD:11, endM:2, endD:20,
       personality: 'The transformative energy of Osiris, god of death and resurrection. A deep soul who understands the cycles of life. Strong sense of justice and pursuit of truth, with the power to turn any trial into resurrection.',
       love: 'Deep and transformative love. You seek a soulmate. Forgiveness of betrayal is difficult, but before true love you accept new beginnings.',
@@ -148,7 +148,7 @@ const DECANS = [
       lucky: { color: 'Black, Green', stone: 'Obsidian', number: '5, 13', animal: 'Jackal' },
       compat: [1,7,11,19,25,31] },
 
-    { name: 'Magic of Isis', deity: 'Isis', glyph: '✨', element: 'Wind', dates: '2/21~3/1',
+    { name: 'Magic of Isis', deity: 'Isis', glyph: '✨', element: 'Vent', dates: '2/21~3/1',
       startM:2, startD:21, endM:3, endD:1,
       personality: 'The mystical energy of the goddess of magic, Isis. Extremely strong intuition and healing abilities. Wise and versatile, you find solutions to any problem. A romantic soul who believes in the power of love.',
       love: 'You dream of magical love. Devotion that would go to the ends of the earth for your partner. Just as Isis resurrected Osiris, you create miracles of love.',
@@ -157,7 +157,7 @@ const DECANS = [
       lucky: { color: 'Purple, Indigo', stone: 'Lapis Lazuli', number: '7, 11', animal: 'Cow' },
       compat: [2,8,12,16,26,32] },
 
-    { name: 'Wisdom of Thoth', deity: 'Thoth', glyph: '📚', element: 'Wind', dates: '3/2~3/11',
+    { name: 'Wisdom of Thoth', deity: 'Thoth', glyph: '📚', element: 'Vent', dates: '3/2~3/11',
       startM:3, startD:2, endM:3, endD:11,
       personality: 'The intellectual energy of Thoth, god of knowledge and the moon. Outstanding talent in learning and communication. Natural aptitude for writing, calculation, and science. Born with the mission to record and convey truth.',
       love: 'Intellectual connection is paramount. If conversation doesn\'t flow, the relationship is hard to maintain. You want a partner with whom you can share books and knowledge.',
@@ -166,7 +166,7 @@ const DECANS = [
       lucky: { color: 'Silver, Purple', stone: 'Moonstone', number: '3, 9', animal: 'Ibis' },
       compat: [0,3,9,15,21,27] },
 
-    { name: 'Eye of Horus', deity: 'Horus', glyph: '👁️', element: 'Fire', dates: '3/12~3/21',
+    { name: 'Eye of Horus', deity: 'Horus', glyph: '👁️', element: 'Feu', dates: '3/12~3/21',
       startM:3, startD:12, endM:3, endD:21,
       personality: 'The warrior energy of Horus, the falcon god. Sharp vision and courage. You fight for justice and are a guardian who defeats evil. Laser-like focus that flies straight toward the target.',
       love: 'Protective and passionate love. You would do anything to protect your partner. Jealousy is strong, but love is equally deep.',
@@ -175,7 +175,7 @@ const DECANS = [
       lucky: { color: 'Red, Gold', stone: 'Carnelian', number: '1, 5', animal: 'Falcon' },
       compat: [1,4,10,16,22,28] },
 
-    { name: 'Guide of Anubis', deity: 'Anubis', glyph: '🐺', element: 'Earth', dates: '3/22~3/31',
+    { name: 'Guide of Anubis', deity: 'Anubis', glyph: '🐺', element: 'Terre', dates: '3/22~3/31',
       startM:3, startD:22, endM:3, endD:31,
       personality: 'The mysterious energy of Anubis, guide of the underworld. A deep soul who understands the boundary between life and death. Loyal and protective, you keep secrets well. Strong intuition that sees through people\'s true nature.',
       love: 'Loyal and deep love. Once you love, you would follow them to the underworld. Betrayal is absolutely unforgivable.',
@@ -184,7 +184,7 @@ const DECANS = [
       lucky: { color: 'Black, Gold', stone: 'Obsidian', number: '8, 13', animal: 'Jackal' },
       compat: [2,5,11,17,23,29] },
 
-    { name: 'Storm of Set', deity: 'Set', glyph: '⛈️', element: 'Fire', dates: '4/1~4/10',
+    { name: 'Storm of Set', deity: 'Set', glyph: '⛈️', element: 'Feu', dates: '4/1~4/10',
       startM:4, startD:1, endM:4, endD:10,
       personality: 'The destructive yet powerful energy of Set, god of chaos and storms. A rebel and innovator who breaks rules. Fearless and grows stronger in extreme situations. Easily misunderstood but brings necessary change.',
       love: 'Intense, storm-like love. Cannot tolerate boring relationships. Craves constant stimulation and adventure; loves like going to war.',
@@ -193,7 +193,7 @@ const DECANS = [
       lucky: { color: 'Red, Black', stone: 'Ruby', number: '9, 13', animal: 'Hippopotamus' },
       compat: [1,7,13,19,25,31] },
 
-    { name: 'Cat of Bastet', deity: 'Bastet', glyph: '🐈', element: 'Water', dates: '4/11~4/20',
+    { name: 'Cat of Bastet', deity: 'Bastet', glyph: '🐈', element: 'Eau', dates: '4/11~4/20',
       startM:4, startD:11, endM:4, endD:20,
       personality: 'The elegant and mysterious energy of the cat goddess Bastet. Independent yet sociable. You love art and beauty and are a guardian of the home. Behind a soft exterior, sharp claws are hidden.',
       love: 'Independent yet affectionate love. Like a cat, you want freedom but also want to be near the one you love. Sensual and passionate.',
@@ -202,7 +202,7 @@ const DECANS = [
       lucky: { color: 'Gold, Pink', stone: 'Rose Quartz', number: '2, 6', animal: 'Cat' },
       compat: [0,6,12,18,24,30] },
 
-    { name: 'Fire of Sekhmet', deity: 'Sekhmet', glyph: '🦁', element: 'Fire', dates: '4/21~4/30',
+    { name: 'Fire of Sekhmet', deity: 'Sekhmet', glyph: '🦁', element: 'Feu', dates: '4/21~4/30',
       startM:4, startD:21, endM:4, endD:30,
       personality: 'The powerful warrior energy of the lion goddess Sekhmet. Possessing both justice and healing. A force that can destroy or heal. Unyielding willpower once a decision is made.',
       love: 'Passionate and protective love. Defends family like a lion, and would leap into fire for the one you love. Betrayal unleashes the fury of Sekhmet.',
@@ -211,7 +211,7 @@ const DECANS = [
       lucky: { color: 'Red, Gold', stone: 'Carnelian', number: '1, 9', animal: 'Lion' },
       compat: [1,7,13,19,25,31] },
 
-    { name: 'Love of Hathor', deity: 'Hathor', glyph: '💃', element: 'Earth', dates: '5/1~5/10',
+    { name: 'Love of Hathor', deity: 'Hathor', glyph: '💃', element: 'Terre', dates: '5/1~5/10',
       startM:5, startD:1, endM:5, endD:10,
       personality: 'The abundant energy of Hathor, goddess of love and festivals. You love beauty, music, and dance. Sociable and charming, you bring joy to everyone around you. A gourmand who pursues sensual pleasures.',
       love: 'The embodiment of love itself! Romantic and sensual, showering your partner with abundant love. You express love through music and dance. You enjoy beautiful dates.',
@@ -220,7 +220,7 @@ const DECANS = [
       lucky: { color: 'Pink, Gold', stone: 'Emerald', number: '6, 2', animal: 'Cow' },
       compat: [0,4,10,16,22,28] },
 
-    { name: 'River of Sobek', deity: 'Sobek', glyph: '🐊', element: 'Water', dates: '5/11~5/20',
+    { name: 'River of Sobek', deity: 'Sobek', glyph: '🐊', element: 'Eau', dates: '5/11~5/20',
       startM:5, startD:11, endM:5, endD:20,
       personality: 'The powerful and primal energy of the crocodile god Sobek. Instinctive with quick decisiveness. A strategist who waits in the water and seizes opportunities in an instant. A symbol of fertility and abundance.',
       love: 'Instinctive and passionate love. Once you set your mind, you never let go. Strong possessiveness but equally protective.',
@@ -229,7 +229,7 @@ const DECANS = [
       lucky: { color: 'Green, Silver', stone: 'Turquoise', number: '5, 8', animal: 'Crocodile' },
       compat: [3,9,15,21,27,33] },
 
-    { name: 'Creation of Ptah', deity: 'Ptah', glyph: '🔨', element: 'Earth', dates: '5/21~5/31',
+    { name: 'Creation of Ptah', deity: 'Ptah', glyph: '🔨', element: 'Terre', dates: '5/21~5/31',
       startM:5, startD:21, endM:5, endD:31,
       personality: 'The artisan energy of Ptah, the creator god. Creativity to make something from nothing. Meticulous and technical, excelling at everything done by hand. A pragmatist who shows rather than tells.',
       love: 'You express love through actions. Making gifts by hand, fixing the house, or creating something to show your love. Few words but deep sincerity.',
@@ -238,7 +238,7 @@ const DECANS = [
       lucky: { color: 'Blue, Brown', stone: 'Sapphire', number: '4, 7', animal: 'Bull' },
       compat: [2,6,12,18,24,30] },
 
-    { name: 'Glory of Ra', deity: 'Ra', glyph: '🌅', element: 'Fire', dates: '6/1~6/10',
+    { name: 'Glory of Ra', deity: 'Ra', glyph: '🌅', element: 'Feu', dates: '6/1~6/10',
       startM:6, startD:1, endM:6, endD:10,
       personality: 'The absolute energy of the sun god Ra. The highest authority among all Egyptian gods. Leadership and creativity at their peak. Life blooms wherever you shine your light; your very existence carries authority.',
       love: 'You love like a king. You treat your partner as the finest, and expect respect in equal measure. Warm like the sun, but get too close and you may get burned.',
@@ -247,7 +247,7 @@ const DECANS = [
       lucky: { color: 'Gold, Red', stone: 'Sunstone', number: '1, 10', animal: 'Scarab' },
       compat: [1,7,11,19,25,31] },
 
-    { name: 'Justice of Maat', deity: 'Maat', glyph: '⚖️', element: 'Wind', dates: '6/11~6/20',
+    { name: 'Justice of Maat', deity: 'Maat', glyph: '⚖️', element: 'Vent', dates: '6/11~6/20',
       startM:6, startD:11, endM:6, endD:20,
       personality: 'The balanced energy of Maat, goddess of truth and justice. You seek fairness in everything. Unable to tolerate falsehood, you strive to set the world\'s order right. A pure soul pursuing a heart as light as a feather.',
       love: 'Fair and balanced love. You value equality in relationships and refuse one-sided sacrifice. Honest communication is the foundation of love.',
@@ -256,97 +256,97 @@ const DECANS = [
       lucky: { color: 'White, Blue', stone: 'Lapis Lazuli', number: '7, 11', animal: 'Ostrich (feather)' },
       compat: [0,5,9,17,23,29] },
 
-    { name: 'Arrow of Neith', deity: 'Neith', glyph: '🏹', element: 'Water', dates: '6/21~6/30', startM:6, startD:21, endM:6, endD:30,
+    { name: 'Arrow of Neith', deity: 'Neith', glyph: '🏹', element: 'Eau', dates: '6/21~6/30', startM:6, startD:21, endM:6, endD:30,
       personality: 'Born with the fierce warrior energy of Neith, goddess of war and weaving. Like the weaving goddess who spins the threads of fate, you are independent, designing and building your own life. You charge straight toward goals like an arrow, never backing down before obstacles. In ancient Egypt, Neith was a primordial goddess who existed before creation, and people of this decan possess similarly primal and instinctive power. A noble warrior who maintains dignity even on the battlefield.',
       love: 'Your love is independent yet passionate. You have no interest in weak partners, drawn instead to strong equals who can match you. Just as Neith ruled both the battlefield and the loom, you show both strength and delicacy in love. Once you choose a partner, you offer a warrior\'s loyalty.',
       career: 'You shine in independent and strategic fields such as military, fashion design, entrepreneurship, and strategic consulting. Like the weaving goddess, you can also achieve great success in textile, fashion, and design industries. You build wealth independently through your own business.',
       health: 'Pay attention to shoulders, arms, and wrists. Focused sports like archery help with healing. Your warrior nature makes overexertion easy, so make sure to get adequate rest.', lucky: { color: 'Red, Green', stone: 'Jasper', number: '3, 9', animal: 'Beetle' }, compat: [1,8,14,20,26,32] },
-    { name: 'Transformation of Khepri', deity: 'Khepri', glyph: '🪲', element: 'Earth', dates: '7/1~7/10', startM:7, startD:1, endM:7, endD:10,
+    { name: 'Transformation of Khepri', deity: 'Khepri', glyph: '🪲', element: 'Terre', dates: '7/1~7/10', startM:7, startD:1, endM:7, endD:10,
       personality: 'You possess the transformative energy of the scarab god Khepri, who rolls the dawn sun across the sky. Like a god who makes the sun rise anew each morning, you are a master of reinvention who constantly renews yourself. You don\'t fear failure or setbacks, finding new beginnings in any situation. You have a flexibility that embraces change naturally and cannot tolerate a stagnant life. Evolution and growth are your life\'s core keywords.',
       love: 'You grow constantly within relationships, discovering new love each day. You seek dynamic relationships where you and your partner evolve together. Stagnant relationships are unbearable; you pursue love that makes each other better people. Like a scarab rolling the sun, you pour energy into your relationship.',
       career: 'You excel in all fields related to transformation: innovation, startups, self-development, consulting, and technological revolution. Rather than staying in one field, you grow through multiple career changes. You discover wealth in new ventures, and your fearless spirit of challenge drives success.',
       health: 'Pay special attention to the digestive system and skin health. Manage the stress that comes from a life full of changes. Rising early to soak in sunlight is the best way to recharge Khepri\'s energy.', lucky: { color: 'Gold, Green', stone: 'Amber', number: '1, 7', animal: 'Scarab' }, compat: [3,9,15,21,27,33] },
-    { name: 'Night of Nephthys', deity: 'Nephthys', glyph: '🌙', element: 'Water', dates: '7/11~7/20', startM:7, startD:11, endM:7, endD:20,
+    { name: 'Night of Nephthys', deity: 'Nephthys', glyph: '🌙', element: 'Eau', dates: '7/11~7/20', startM:7, startD:11, endM:7, endD:20,
       personality: 'You possess the deep and mysterious energy of Nephthys, goddess of night and mourning. You have a remarkable intuition that senses the invisible world, with outstanding empathy that deeply understands and heals others\' sorrow and suffering. Like Nephthys, sister and shadow of Isis, you are a wise soul who knows the meaning of darkness behind the light. Quiet on the surface but with endless depth within. You see what others cannot.',
       love: 'Your love is one of deep empathy and healing. You have the ability to recognize and embrace wounded souls. You seek connections at the deepest level of the soul rather than surface-level relationships. Like the goddess of night, you find the light of love even in darkness, healing your partner\'s hidden pain.',
       career: 'Suited for work done in unseen places: counselor, psychotherapist, hospice worker, funeral director, night-shift specialist. Just as Nephthys cared for the dead, you find great fulfillment in work that eases others\' suffering. Wealth accumulates quietly but steadily.',
       health: 'Pay special attention to sleep quality and the immune system. Since your energy peaks at night, sleep patterns easily become irregular. Meditation or walks under moonlight greatly help emotional stability and health recovery.', lucky: { color: 'Indigo, Silver', stone: 'Moonstone', number: '2, 11', animal: 'Owl' }, compat: [4,8,12,22,28,34] },
-    { name: 'Wheel of Khnum', deity: 'Khnum', glyph: '🏺', element: 'Earth', dates: '7/21~7/31', startM:7, startD:21, endM:7, endD:31,
+    { name: 'Wheel of Khnum', deity: 'Khnum', glyph: '🏺', element: 'Terre', dates: '7/21~7/31', startM:7, startD:21, endM:7, endD:31,
       personality: 'You possess the artisan energy of the ram god Khnum, who shaped human bodies on his potter\'s wheel. Like the god who governed the rapids of the upper Nile, you have the ability to transform rough raw materials into beautiful works. You craft relationships and projects with meticulous care, never rushing. Your patience runs deep, you value quality of completion, and you take great pride in what your hands create. An excellent mentor who draws out others\' potential.',
       love: 'You build relationships with the care of shaping clay on a wheel. Your love is patient and unhurried, taking time to deeply understand your partner. Just as Khnum crafted each human as unique, you respect and love your partner\'s uniqueness. You find happiness in stable, lasting relationships and cherish the home.',
       career: 'Natural talent for jobs that create and nurture: potter, sculptor, architect, teacher, mentor, coach. Just as Khnum governed the Nile floods, you can also succeed in water resource management or environmental engineering. Reputation built through craftsmanship leads to stable wealth.',
       health: 'Pay special attention to lower back and kidney health. Since you tend to sit for long work sessions, stretching and posture correction are important. Drink plenty of water, and as befitting a Nile god, water-related activities benefit your health.', lucky: { color: 'Brown, Gold', stone: 'Tiger Eye', number: '4, 8', animal: 'Ram' }, compat: [0,6,14,20,26,32] },
-    { name: 'Star of Seshat', deity: 'Seshat', glyph: '⭐', element: 'Wind', dates: '8/1~8/10', startM:8, startD:1, endM:8, endD:10,
+    { name: 'Star of Seshat', deity: 'Seshat', glyph: '⭐', element: 'Vent', dates: '8/1~8/10', startM:8, startD:1, endM:8, endD:10,
       personality: 'You possess the precise intellectual energy of Seshat, goddess of records and measurement. Like the goddess who drew the blueprints for the pyramids, you show natural talent for architecture and mathematics. Your accurate and analytical intellect organizes and records everything systematically. You have a strong sense of mission to preserve history and knowledge, and like Seshat who recorded the pharaoh\'s reign, you are a perfectionist who never misses details. Quiet, but your depth of knowledge could fill a library.',
       love: 'Intellectual connection is a prerequisite for love. You remember every moment of the relationship as if recording it, never forgetting anniversaries or what your partner said. Like Seshat who measured the stars, you deeply observe and understand your partner. You may be awkward with emotional expression, but you prove your love through actions and thoughtful consideration.',
       career: 'You shine in fields requiring precision and record-keeping: architect, mathematician, historian, librarian, records manager, data scientist. Just as Seshat presided over the ceremony of laying temple foundations, you excel at designing the foundations and structures of things. Trust earned through meticulousness and accuracy leads to stable wealth.',
       health: 'Watch for eye strain and wrist health. Detailed work can worsen posture, so regular breaks and stretching are important. Spending time gazing at the night sky, as if observing the stars, is helpful for mental healing.', lucky: { color: 'Silver, White', stone: 'Crystal', number: '3, 7', animal: 'Leopard' }, compat: [5,11,15,21,27,33] },
-    { name: 'Earth of Sokar', deity: 'Sokar', glyph: '🪶', element: 'Earth', dates: '8/11~8/20', startM:8, startD:11, endM:8, endD:20,
+    { name: 'Earth of Sokar', deity: 'Sokar', glyph: '🪶', element: 'Terre', dates: '8/11~8/20', startM:8, startD:11, endM:8, endD:20,
       personality: 'You possess the deep, weighty energy of Sokar, god of the earth and death of Memphis. You have an outstanding ability to find treasures hidden underground, discovering value where others cannot see it. Patient and strategic, you act at exactly the right moment. Just as Sokar ruled the necropolis of Memphis, you have the wisdom of regeneration -- extracting new value from what is finished. Taciturn, but deep insight lies within that silence.',
       love: 'Your love is slow but endlessly deep. The sincerity hidden beneath the surface is as rich as an underground vein of ore. You don\'t open your heart easily, but once you do, your love is unwavering. You are someone who recognizes your partner\'s hidden value and helps reveal it to the world.',
       career: 'Success in fields that unearth hidden value: mining, archaeology, investment, real estate, antique appraisal, treasure hunting. Just as the Sokar Festival was one of Egypt\'s most important events, you can also display talent in event planning or cultural enterprises. Patience leads to great wealth through long-term investment.',
       health: 'Pay special attention to bone and joint health. Since you spend much time underground or indoors, vitamin D supplementation and sun exposure are important. Recharge your energy through contact with the earth.', lucky: { color: 'Black, Brown', stone: 'Obsidian', number: '8, 4', animal: 'Falcon' }, compat: [2,8,14,20,26,32] },
-    { name: 'Sky of Nut', deity: 'Nut', glyph: '🌌', element: 'Wind', dates: '8/21~8/31', startM:8, startD:21, endM:8, endD:31,
+    { name: 'Sky of Nut', deity: 'Nut', glyph: '🌌', element: 'Vent', dates: '8/21~8/31', startM:8, startD:21, endM:8, endD:31,
       personality: 'You possess the infinite and vast energy of Nut, goddess of the sky. Like the goddess who swallows the stars each night and births them again at dawn, you carry the power of endless cycles and regeneration. You have an enormous capacity for embracing everything and a cosmic perspective, unbothered by small things. Your dreams are as vast as the sky, and you accept no limitations -- a free soul. Just as Nut forms the arch of the sky, you are an umbrella-like presence that protects others.',
       love: 'Your love is infinite and free. Just as Nut\'s love with Geb (the earth) gave birth to Osiris, Isis, Set, and Nephthys, you create greatness from love. You place no restrictions on your partner, embracing them with a heart as wide as the sky. However, try to possess them and they may drift away like stars.',
       career: 'You shine in fields requiring broad vision: astronomer, airline pilot, aerospace engineer, artist, philosopher. Just as Nut governed the entire sky, you display outstanding ability in planning and strategy that require seeing the big picture. Free imagination leads to innovative wealth creation.',
       health: 'Watch your spine and respiratory health. Open-space breathing exercises and stretching greatly benefit the sky goddess. Stargazing meditation at night is the ultimate mental health therapy.', lucky: { color: 'Indigo, Star pattern', stone: 'Star Sapphire', number: '5, 12', animal: 'Cow' }, compat: [1,7,13,19,25,31] },
-    { name: 'Fertility of Min', deity: 'Min', glyph: '🌿', element: 'Earth', dates: '9/1~9/10', startM:9, startD:1, endM:9, endD:10,
+    { name: 'Fertility of Min', deity: 'Min', glyph: '🌿', element: 'Terre', dates: '9/1~9/10', startM:9, startD:1, endM:9, endD:10,
       personality: 'You possess the overflowing life energy of Min, god of fertility and abundance. Like the god who presided over ancient Egypt\'s harvest festivals, you are brimming with vitality and sexual magnetism. You grow continuously like a plant, bringing abundance and vigor to those around you. Physically energetic, you deeply enjoy life\'s sensual pleasures. Just as Min protected desert travelers, you never lose your survival instinct and vitality even in difficult situations.',
       love: 'Your love is passionate and sensual. As the god of fertility, you pour out abundant emotion and treat your partner generously in material ways too. You value physical intimacy and express love with your whole body. Like Min\'s festival, your love is full of joy and celebration.',
       career: 'Success in fields related to growth and abundance: agriculture, food industry, health industry, fitness trainer, biotechnology, horticulture. Just as Min was the god of the lettuce field, you have a talent for producing great harvests from small seeds. You reap abundant wealth through steady effort.',
       health: 'Watch reproductive organs and hormonal balance. If you don\'t properly distribute your vigorous energy, you can burn out. Activity in nature and consumption of fresh foods are the keys to health.', lucky: { color: 'Green, Gold', stone: 'Emerald', number: '2, 9', animal: 'Bull' }, compat: [0,6,12,18,24,30] },
-    { name: 'War of Montu', deity: 'Montu', glyph: '⚔️', element: 'Fire', dates: '9/11~9/20', startM:9, startD:11, endM:9, endD:20,
+    { name: 'War of Montu', deity: 'Montu', glyph: '⚔️', element: 'Feu', dates: '9/11~9/20', startM:9, startD:11, endM:9, endD:20,
       personality: 'You possess the intense warrior energy of Montu, god of war. As Thebes\' patron god whom pharaohs invoked on the battlefield, your courage and combat instincts are extremely strong. You thrive on challenge and shine in competition -- a born warrior. Just as Montu took the form of a bull, once you charge, nothing stops you. You know no fear and grow stronger in crisis.',
       love: 'You love as if conquering, drawn to challenging partners. Easy love holds no interest; you want a strong equal who can spar with you. In love, you charge ahead like a warrior. When your mind is set, nothing holds you back. Your protective instinct is fierce -- you would fight any enemy for the one you love.',
       career: 'You stand out in military, professional sports, martial arts, and fiercely competitive business. Fields that require charging toward goals fast, like Montu\'s war chariot. You amass great wealth through rewards from winning competitions.',
       health: 'Watch for headaches and traumatic injuries. Your combative nature makes overexertion easy, so adequate recovery time is essential. Channel energy healthily through martial arts or high-intensity exercise.', lucky: { color: 'Red, Black', stone: 'Ruby', number: '1, 9', animal: 'Bull' }, compat: [1,7,11,19,25,31] },
-    { name: 'Venom of Wadjet', deity: 'Wadjet', glyph: '🐍', element: 'Water', dates: '9/21~9/30', startM:9, startD:21, endM:9, endD:30,
+    { name: 'Venom of Wadjet', deity: 'Wadjet', glyph: '🐍', element: 'Eau', dates: '9/21~9/30', startM:9, startD:21, endM:9, endD:30,
       personality: 'You possess the lethal and mysterious energy of the cobra goddess Wadjet. Like the goddess of the uraeus (cobra crown) adorning the pharaoh\'s brow, you have a regal protective instinct. You have a remarkable ability to sense danger, patiently waiting and then acting decisively at the precise moment. As the patron goddess of Lower Egypt, you make absolutely no compromises in defending your loved ones and territory. Calm on the surface, but intense passion like cobra venom burns within.',
       love: 'Your love is protective and intuitive. You sense and block dangers approaching your partner before they arrive. Just as Wadjet protected the young Horus, you guard the one you love with all your strength. Betrayal meets with a cobra\'s lethal response, so maintaining trust is crucial.',
       career: 'Success in fields requiring keen judgment: security specialist, doctor, pharmacist, toxicologist, jewel appraiser, diplomat. With eyes like Wadjet that detect danger and opportunity simultaneously, you achieve results in investments too. You especially shine in careers handling confidential information.',
       health: 'Watch for toxin buildup and allergic reactions. Detox diets and purification therapies are important for health maintenance. Warm water baths help purify Wadjet\'s energy.', lucky: { color: 'Green, Gold', stone: 'Serpentine', number: '5, 8', animal: 'Cobra' }, compat: [3,9,15,21,27,33] },
-    { name: 'Wind of Shu', deity: 'Shu', glyph: '💨', element: 'Wind', dates: '10/1~10/10', startM:10, startD:1, endM:10, endD:10,
+    { name: 'Wind of Shu', deity: 'Shu', glyph: '💨', element: 'Vent', dates: '10/1~10/10', startM:10, startD:1, endM:10, endD:10,
       personality: 'You possess the free and dynamic energy of Shu, god of wind and air. Like the god who separated the sky (Nut) from the earth (Geb) to create space for life, you have outstanding ability as a mediator who creates order from chaos. Free and independent, you cannot endure any kind of constraint. Like the wind, you can go anywhere and are bound to nothing. Just as Shu symbolizes light and air, you have clear thinking and transparent communication abilities.',
       love: 'You pursue free love and want a relationship that respects your partner\'s space and independence. Like Shu standing between Nut and Geb, you sustain the relationship while maintaining appropriate distance. You flee like the wind from possessive love, but endlessly return to a partner who gives you freedom. You feel happiest in relationships with good communication.',
       career: 'Aviation-related careers, environmental activist, mediator, counselor, wind energy, communication specialist -- you shine in fields related to communication and space. Just as Shu supported the space between sky and earth, you create great value in mediating between conflicting parties. As a free spirit, you build wealth as a freelancer.',
       health: 'Lung and respiratory health are paramount. Breathing exercises and aerobic activity in fresh air are essential. Energy drops sharply in enclosed spaces for long periods, so ventilate often and engage in outdoor activities.', lucky: { color: 'Sky blue, White', stone: 'Aquamarine', number: '3, 7', animal: 'Lion' }, compat: [2,5,11,17,23,29] },
-    { name: 'Rain of Tefnut', deity: 'Tefnut', glyph: '🌧️', element: 'Water', dates: '10/11~10/20', startM:10, startD:11, endM:10, endD:20,
+    { name: 'Rain of Tefnut', deity: 'Tefnut', glyph: '🌧️', element: 'Eau', dates: '10/11~10/20', startM:10, startD:11, endM:10, endD:20,
       personality: 'You possess the emotional and purifying energy of Tefnut, goddess of moisture and rain. Like the goddess in mythology who left Egypt and returned to bring life to the land, the cyclical energy of departure and return runs through your entire life. Deeply emotional and changeable, with sudden downpours of emotional outbursts. Just as Tefnut took the form of a lion, behind the gentle rain hides a wild ferocity. You have the ability to purify and regenerate, washing away stagnant energy around you.',
       love: 'Your love is emotional and changeable. Like Tefnut who left Egypt and returned, patterns of leaving and returning may appear in your relationships. When the emotional rain pours, it\'s an intense love that drenches everything. Just as all Egypt rejoiced when Tefnut returned, receiving this person\'s love feels like the world is filled with blessings.',
       career: 'Success in water resource management, environmental science, psychotherapy, purification industries, spas, and wellness. Just as Tefnut brought rain to the land to deliver life, you shine in roles that breathe vitality into stagnant situations. Productive use of emotional energy leads to abundant wealth.',
       health: 'Pay special attention to tear ducts and water metabolism. When emotional fluctuations are severe, the body is also affected, so emotion management is key to health. Hot springs or swimming -- water-related activities are the best healing.', lucky: { color: 'Blue, Silver', stone: 'Moonstone', number: '2, 11', animal: 'Lion' }, compat: [0,6,10,18,24,30] },
-    { name: 'Disk of Aten', deity: 'Aten', glyph: '☀️', element: 'Fire', dates: '10/21~10/31', startM:10, startD:21, endM:10, endD:31,
+    { name: 'Disk of Aten', deity: 'Aten', glyph: '☀️', element: 'Feu', dates: '10/21~10/31', startM:10, startD:21, endM:10, endD:31,
       personality: 'You possess the pure and revolutionary light energy of the solar disk Aten. Just as Pharaoh Akhenaten abandoned all gods to worship only Aten, you are a progressive thinker who boldly breaks existing customs and traditions. As the god that became the root of monotheism, you have an unshakeable conviction toward a single truth. A visionary ahead of your time, you walk your own path even when others don\'t understand. Like pure light, you cannot endure lies or hypocrisy.',
       love: 'Your love is pure and revolutionary. You are not bound by traditional relationship formats, creating your own way of loving. Like the love between Akhenaten and Nefertiti, you dream of a relationship that builds a new world together with your partner. You seek a true connection of souls, unswayed by appearances or conditions.',
       career: 'You shine in fields that create new paradigms: innovative entrepreneur, scientific researcher, technology developer, religious reformer, social activist. Just as Aten completely transformed Egyptian religion, you have a natural talent for innovating existing systems. Great wealth through innovative ideas.',
       health: 'Watch skin health and vitamin D levels. Directly receiving the sun\'s energy is important, but avoid excessive UV exposure. Meditation and light therapy (phototherapy) greatly benefit both mental and physical health.', lucky: { color: 'Gold, White', stone: 'Citrine', number: '1, 10', animal: 'Beetle' }, compat: [1,7,13,19,25,31] },
-    { name: 'Life of the Ankh', deity: 'Ankh', glyph: '☥', element: 'Wind', dates: '11/1~11/10', startM:11, startD:1, endM:11, endD:10,
+    { name: 'Life of the Ankh', deity: 'Ankh', glyph: '☥', element: 'Vent', dates: '11/1~11/10', startM:11, startD:1, endM:11, endD:10,
       personality: 'You possess the sacred energy of the Ankh, symbol of eternal life. Like the key of life held in the hands of the gods of ancient Egypt, you pursue both the joy of living and eternity. Your healing and regenerative energy is extremely strong, and you understand the value of things that continue beyond death. Spiritually deep yet never losing your grip on real-world vitality -- a balanced being. Just as the Ankh has the shape of a key, you are a problem-solver who opens closed doors.',
       love: 'You pursue eternal love, believing in bonds that span past and future lives. Just as the Ankh connects this world and the next, you value both physical union and spiritual union in love. You believe that once connected, a bond cannot be severed even by death, and your love is accordingly deep and serious. You have no interest in light or temporary relationships.',
       career: 'Success in fields related to life and eternity: doctor, spiritual healer, philosopher, jeweler, biotech researcher. Just as the Ankh was carved in every temple, you shine in careers dealing with universal, fundamental values. You gain both wealth and fulfillment from work that saves and heals people.',
       health: 'Pay special attention to the circulatory and immune systems. Activities that recharge life force are important for maintaining Ankh\'s energy. Nature walks, meditation, and volunteer service helping others are the keys to health.', lucky: { color: 'Gold, Turquoise', stone: 'Turquoise', number: '7, 13', animal: 'Eagle' }, compat: [4,8,14,20,26,32] },
-    { name: 'Riddle of the Sphinx', deity: 'Sphinx', glyph: '🦁', element: 'Earth', dates: '11/11~11/20', startM:11, startD:11, endM:11, endD:20,
+    { name: 'Riddle of the Sphinx', deity: 'Sphinx', glyph: '🦁', element: 'Terre', dates: '11/11~11/20', startM:11, startD:11, endM:11, endD:20,
       personality: 'You possess the mysterious and complex energy of the Sphinx. A being with human wisdom, a lion\'s strength, and an eagle\'s vision simultaneously -- a guardian who protects truth. With the insight to see through life\'s essence, like the riddle "What walks on four legs in the morning, two at noon, and three in the evening?" Your ability to keep secrets is outstanding, and you don\'t reveal your inner thoughts easily. Like the Great Sphinx of Giza, you possess the patience and dignity to endure for millennia.',
       love: 'Your love is like a riddle. You tend to test and verify your partner\'s sincerity, not opening your heart easily. Just as one must solve the Sphinx\'s riddle to pass, winning this person\'s love requires genuineness and wisdom. But once the riddle is solved, a love deeper than imagination awaits behind it.',
       career: 'You shine in fields dealing with secrets and knowledge: professor, researcher, psychologist, security specialist, cryptanalyst, archaeologist. Just as the Sphinx guarded the temple entrance, you display outstanding ability in roles protecting important information and resources. You build wealth through intellectual ability and insight.',
       health: 'Pay special attention to mental stress and headaches. The habit of maintaining constant vigilance causes tension and fatigue. The key to health is occasionally setting aside the riddle and seeking simple pleasures.', lucky: { color: 'Sand, Gold', stone: 'Tiger Eye', number: '3, 11', animal: 'Sphinx' }, compat: [2,5,11,17,23,29] },
-    { name: 'Peak of the Pyramid', deity: 'Benben', glyph: '🔺', element: 'Fire', dates: '11/21~11/30', startM:11, startD:21, endM:11, endD:30,
+    { name: 'Peak of the Pyramid', deity: 'Benben', glyph: '🔺', element: 'Feu', dates: '11/21~11/30', startM:11, startD:21, endM:11, endD:30,
       personality: 'You possess the ascending and eternal energy of the Benben stone, the pyramidion. Like the Benben stone, considered in ancient Egypt to be the first land and the starting point of creation, you pursue relentless ambition toward the summit and a legacy that will last forever. Systematic and goal-oriented, an architect who builds life\'s pyramid layer by layer. Just as the pyramid has endured millennia, what you build once never crumbles. You believe reaching the top is your destiny, and that belief creates reality.',
       love: 'You want an ambitious partner who can walk toward the summit together. Like two sides of a pyramid meeting at the peak, you dream of a relationship where each walks their own path yet ultimately meets at a single apex. You value dignity and grandeur in love, lifting both yourself and your partner to great heights. You aspire to build an eternal monument to love.',
       career: 'Success in all summit-oriented fields: CEO, architect, political leader, historian, project manager. Just as the Benben stone received the sun\'s first light, you are suited for the role of being the first person to open a new era. You build pyramid-solid wealth through systematic planning and execution.',
       health: 'Pay special attention to back and spine health. The constant upward-reaching posture can strain the lower back. Like the pyramid\'s balance, posture correction and core strengthening are key to health.', lucky: { color: 'Gold, White', stone: 'Diamond', number: '1, 4', animal: 'Falcon' }, compat: [1,7,13,19,25,31] },
-    { name: 'Birth of the Scarab', deity: 'Khepera', glyph: '🌅', element: 'Earth', dates: '12/1~12/10', startM:12, startD:1, endM:12, endD:10,
+    { name: 'Birth of the Scarab', deity: 'Khepera', glyph: '🌅', element: 'Terre', dates: '12/1~12/10', startM:12, startD:1, endM:12, endD:10,
       personality: 'You possess the rebirth energy of Khepera, another form of the scarab that rolls the dawn sun. Sharing the same origin as Khepri but positioned as a year-end decan, you have a special ability to find new beginnings at the end of the year. The energy of rebirth -- daily remaking yourself -- never ceases, and you don\'t fear failure or endings. Just as the scarab creates life from dung, you create the highest value from the lowest place. You possess the wisdom of accepting cycles and change as natural law.',
       love: 'Your love is endlessly renewed. You surprise your partner with a different version of yourself every day, keeping the relationship from ever growing stale. Just as the scarab rolls a new sun each morning, you breathe new energy into love every day. A positive alchemist of love who turns relationship crises into opportunities for rebirth.',
       career: 'You shine in fields related to rebirth and innovation: startup founder, innovation consultant, rehabilitation therapist, self-development coach, recycling industry. Just as Khepera renewed the sun daily, you create innovative wealth through the ability to make old things new. The type who achieves great success after overcoming multiple failures.',
       health: 'Pay attention to the digestive system and overall energy management. The constant energy of change and rebirth can drain your stamina, so adequate nutrition is important. Watching the sunrise each morning is the way to maximize Khepera\'s energy.', lucky: { color: 'Gold, Green', stone: 'Peridot', number: '1, 8', animal: 'Scarab' }, compat: [3,9,15,21,27,33] },
-    { name: 'Scepter of Waset', deity: 'Waset', glyph: '👑', element: 'Wind', dates: '12/11~12/20', startM:12, startD:11, endM:12, endD:20,
+    { name: 'Scepter of Waset', deity: 'Waset', glyph: '👑', element: 'Vent', dates: '12/11~12/20', startM:12, startD:11, endM:12, endD:20,
       personality: 'You possess the authority and governance energy of the Was scepter, Waset, named after Thebes (modern Luxor). Named after the capital of the Egyptian New Kingdom and city of Amun-Ra, this decan carries natural leadership qualities from birth. You naturally command those around you, with a conservative yet dignified disposition that values tradition and order. Just as the pharaoh ruled holding the Was scepter, you carry both authority and responsibility. You have deep respect for history and tradition.',
       love: 'You pursue dignified love befitting royalty. You value dignity and respect in relationships, treating your partner as befits nobility. You dream of love as grand and beautiful as the temples of Thebes, preferring serious, formal relationships over casual dating. Your loyalty to a chosen partner is as weighty as a pharaoh\'s oath.',
       career: 'You shine in fields where authority and tradition matter: politician, diplomat, senior administrator, lawyer, cultural heritage management, museum director. Just as Waset was Egypt\'s religious capital, you can achieve great success in culture and religion-related fields. Authority and prestige naturally attract wealth.',
       health: 'Watch for headaches and neck health. Like wearing a heavy crown, the weight of responsibility affects the body. Massage and meditation to relieve neck and shoulder tension are important for health maintenance.', lucky: { color: 'Purple, Gold', stone: 'Amethyst', number: '5, 9', animal: 'Falcon' }, compat: [1,4,10,16,22,28] },
-    { name: 'End of the Nile', deity: 'Hapi (End)', glyph: '🌊', element: 'Water', dates: '12/21~12/31', startM:12, startD:21, endM:12, endD:31,
+    { name: 'End of the Nile', deity: 'Hapi (End)', glyph: '🌊', element: 'Eau', dates: '12/21~12/31', startM:12, startD:21, endM:12, endD:31,
       personality: 'Born at the point where the Nile\'s cycle is completed -- carrying the energy of where endings meet beginnings. The same deity as the first decan\'s Hapi, but here representing the mature phase where the flood has ended and the next cycle is being prepared. You possess deep spiritual insight and the wisdom of cycles, knowing that everything eventually comes around. Befitting a birth period at year\'s end, your ability to organize and complete is outstanding. Like the Nile flowing into the sea, you integrate all experiences into greater wisdom.',
       love: 'Your love follows the wheel of reincarnation. A mature love that knows endings are new beginnings, finding gratitude even in farewells. You understand that even when love ends, like the Nile\'s flood, fertile soil remains in its place. You intuitively recognize past-life connections and pursue relationships that foster the soul\'s growth.',
       career: 'You shine in fields related to cycles and completion: philosopher, spiritual leader, historian, environmental scientist, retirement planning advisor. Just as the Nile nurtured all of Egyptian civilization, you are suited for roles that understand and manage the cycles of great systems. You build stable, abundant wealth through wisdom and experience.',
@@ -369,8 +369,8 @@ function initForm() {
     const m = document.getElementById('birthMonth');
     const d = document.getElementById('birthDay');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Mois ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Jour ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
 }
 
 function calculate() {
@@ -384,7 +384,7 @@ function calculate() {
         <div class="decan-card">
             <span class="decan-glyph">${decan.glyph}</span>
             <div class="decan-name">${decan.name}</div>
-            <div class="decan-deity">Guardian Deity: ${decan.deity}</div>
+            <div class="decan-deity">Divinité gardienne : ${decan.deity}</div>
             <div class="decan-dates">${decan.dates}</div>
         </div>
     `;
@@ -392,19 +392,19 @@ function calculate() {
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item">
-            <div class="info-label">Guardian Deity</div>
+            <div class="info-label">Divinité gardienne</div>
             <div class="info-value">${decan.glyph} ${decan.deity}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Element</div>
+            <div class="info-label">Élément</div>
             <div class="info-value">${decan.element}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Decan Number</div>
+            <div class="info-label">Numéro du décan</div>
             <div class="info-value">${idx + 1} / 36</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Period</div>
+            <div class="info-label">Période</div>
             <div class="info-value">${decan.dates}</div>
         </div>
     `;
@@ -420,7 +420,7 @@ function calculate() {
     // Love
     document.getElementById('loveWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Love Style of ${decan.deity}</div>
+            <div class="interp-title">Style amoureux de ${decan.deity}</div>
             <div class="interp-text">${decan.love}</div>
         </div>
     `;
@@ -428,7 +428,7 @@ function calculate() {
     // Career
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Career & Wealth</div>
+            <div class="interp-title">Carrière et richesse</div>
             <div class="interp-text">${decan.career}</div>
         </div>
     `;
@@ -436,13 +436,13 @@ function calculate() {
     // Health
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Health Precautions</div>
+            <div class="interp-title">Précautions de santé</div>
             <div class="interp-text">${decan.health}</div>
         </div>
     `;
 
     // Compatibility
-    let compatHtml = '<div class="interp-card"><div class="interp-title">Compatible Deities</div><div class="interp-text">';
+    let compatHtml = '<div class="interp-card"><div class="interp-title">Divinités compatibles</div><div class="interp-text">';
     decan.compat.forEach(ci => {
         if (ci < DECANS.length) {
             const c = DECANS[ci];
@@ -456,10 +456,10 @@ function calculate() {
     document.getElementById('luckyWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-text">
-                <strong>Lucky Color:</strong> ${decan.lucky.color}<br>
-                <strong>Lucky Gemstone:</strong> ${decan.lucky.stone}<br>
-                <strong>Lucky Number:</strong> ${decan.lucky.number}<br>
-                <strong>Guardian Animal:</strong> ${decan.lucky.animal}
+                <strong>Couleur porte-bonheur :</strong> ${decan.lucky.color}<br>
+                <strong>Pierre précieuse :</strong> ${decan.lucky.stone}<br>
+                <strong>Nombre porte-bonheur :</strong> ${decan.lucky.number}<br>
+                <strong>Animal gardien :</strong> ${decan.lucky.animal}
             </div>
         </div>
     `;

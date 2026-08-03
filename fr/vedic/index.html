@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedic Astrology Chart - MOGU Moon</title>
+    <title>Thème Astrologique Védique - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -363,18 +363,18 @@
 <body>
 
 <header>
-    <h1>🔮 Ancient <span>Astrology</span></h1>
+    <h1>🔮 Astrologie <span>Ancienne</span></h1>
 </header>
 
 <div class="container">
     <div class="page-title">
-        <h2>Vedic Astrology (Jyotish)</h2>
-        <p>Read your destiny through the ancient astronomical astrology passed down from the Vedic era of India</p>
+        <h2>Astrologie Védique (Jyotish)</h2>
+        <p>Lisez votre destin à travers l'astrologie astronomique ancienne transmise depuis l'ère védique de l'Inde</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Date de naissance</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -383,7 +383,7 @@
         </div>
 
         <div class="input-group">
-            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <label>Heure de naissance <span class="optional-tag">(Sélectionnez 'Inconnu' si incertain)</span></label>
             <div class="input-row">
                 <select id="birthAmpm">
                     <option value="am">AM</option>
@@ -392,14 +392,14 @@
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
                 <select id="birthTimeUnknown" onchange="toggleTimeUnknown()">
-                    <option value="known">Enter Time</option>
-                    <option value="unknown">Unknown</option>
+                    <option value="known">Saisir l'heure</option>
+                    <option value="unknown">Inconnu</option>
                 </select>
             </div>
         </div>
 
         <div class="input-group">
-            <label>Birth Place</label>
+            <label>Lieu de naissance</label>
             <select id="birthCity" onchange="onCityChange()">
                 <optgroup label="🇰🇷 South Korea">
                     <option value="37.57,126.98" selected>Seoul</option>
@@ -444,97 +444,97 @@
                     <option value="-33.87,151.21">Sydney</option>
                     <option value="-23.55,-46.63">Sao Paulo</option>
                 </optgroup>
-                <optgroup label="✏️ Manual Entry">
-                    <option value="custom">Enter Latitude/Longitude manually</option>
+                <optgroup label="✏️ Saisie manuelle">
+                    <option value="custom">Saisir latitude/longitude manuellement</option>
                 </optgroup>
             </select>
             <div id="customLatLng" style="display:none; margin-top:8px;">
                 <div class="input-row">
-                    <input type="number" id="birthLat" placeholder="Latitude (e.g. 37.57)" step="0.01">
-                    <input type="number" id="birthLng" placeholder="Longitude (e.g. 126.98)" step="0.01">
+                    <input type="number" id="birthLat" placeholder="Latitude (ex. 37.57)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="Longitude (ex. 126.98)" step="0.01">
                 </div>
             </div>
         </div>
 
-        <button class="calc-btn" onclick="calculateChart()">🔮 Generate Chart</button>
+        <button class="calc-btn" onclick="calculateChart()">🔮 Générer le thème</button>
     </div>
 
     <!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">📚 Vedic Astrology Beginner's Guide</h3>
+        <h3 class="section-title">📚 Guide du débutant en astrologie védique</h3>
         <div class="interp-card" style="border-left:3px solid #c9a84c;">
             <div class="interp-text" style="line-height:2;">
-                <strong style="color:#c9a84c;font-size:15px;">🌟 Key Terms for First-Time Readers</strong><br><br>
+                <strong style="color:#c9a84c;font-size:15px;">🌟 Termes clés pour les nouveaux lecteurs</strong><br><br>
 
-                <strong>🪐 9 Planets (Graha)</strong> — Nine forces that determine your personality and destiny<br>
-                ☉ <strong>Sun</strong> = Self, father, authority, confidence (Who you are)<br>
-                ☽ <strong>Moon</strong> = Emotions, mother, mind, daily life (How you feel)<br>
-                ♂ <strong>Mars</strong> = Energy, courage, action, anger (How you fight)<br>
-                ☿ <strong>Mercury</strong> = Intelligence, communication, learning, business (How you think)<br>
-                ♃ <strong>Jupiter</strong> = Luck, wisdom, wealth, teacher (What blessings you have) — <em>The most auspicious planet</em><br>
-                ♀ <strong>Venus</strong> = Love, charm, art, marriage (How you love)<br>
-                ♄ <strong>Saturn</strong> = Trials, patience, responsibility, karma (What is your life's lesson) — <em>Slow but the most powerful</em><br>
-                ☊ <strong>Rahu</strong> = Desire, obsession, innovation, foreign lands (Unfulfilled desires from past lives) — <em>A shadow planet with no physical form</em><br>
-                ☋ <strong>Ketu</strong> = Liberation, spirituality, detachment, past (What was already achieved in past lives) — <em>The opposite shadow of Rahu</em><br><br>
+                <strong>🪐 9 Planètes (Graha)</strong> — Neuf forces qui déterminent votre personnalité et votre destin<br>
+                ☉ <strong>Soleil</strong> = Soi, père, autorité, confiance (Qui vous êtes)<br>
+                ☽ <strong>Lune</strong> = Émotions, mère, esprit, vie quotidienne (Ce que vous ressentez)<br>
+                ♂ <strong>Mars</strong> = Énergie, courage, action, colère (Comment vous combattez)<br>
+                ☿ <strong>Mercure</strong> = Intelligence, communication, apprentissage, affaires (Comment vous pensez)<br>
+                ♃ <strong>Jupiter</strong> = Chance, sagesse, richesse, enseignant (Quelles bénédictions vous avez) — <em>La planète la plus favorable</em><br>
+                ♀ <strong>Vénus</strong> = Amour, charme, art, mariage (Comment vous aimez)<br>
+                ♄ <strong>Saturne</strong> = Épreuves, patience, responsabilité, karma (Quelle est la leçon de votre vie) — <em>Lente mais la plus puissante</em><br>
+                ☊ <strong>Rahu</strong> = Désir, obsession, innovation, pays étrangers (Désirs inassouvis des vies passées) — <em>Une planète fantôme sans forme physique</em><br>
+                ☋ <strong>Ketu</strong> = Libération, spiritualité, détachement, passé (Ce qui a déjà été accompli dans les vies passées) — <em>L'ombre opposée de Rahu</em><br><br>
 
-                <strong>🏛️ 12 Houses</strong> — Twelve areas of life. Which house a planet occupies determines which area of your life it influences.<br>
-                1st=Self · 2nd=Money/Family · 3rd=Communication/Siblings · 4th=Home/Mother · 5th=Children/Romance/Creativity · 6th=Health/Enemies · 7th=Spouse/Partner · 8th=Transformation/Death/Inheritance · 9th=Luck/Foreign/Father · 10th=Career/Fame · 11th=Income/Wishes · 12th=Foreign/Loss/Spirituality<br><br>
+                <strong>🏛️ 12 Maisons</strong> — Douze domaines de la vie. La maison qu'une planète occupe détermine quel domaine de votre vie elle influence.<br>
+                1ère=Soi · 2ème=Argent/Famille · 3ème=Communication/Fratrie · 4ème=Foyer/Mère · 5ème=Enfants/Romance/Créativité · 6ème=Santé/Ennemis · 7ème=Conjoint/Partenaire · 8ème=Transformation/Mort/Héritage · 9ème=Chance/Étranger/Père · 10ème=Carrière/Renommée · 11ème=Revenus/Souhaits · 12ème=Étranger/Perte/Spiritualité<br><br>
 
-                <strong>⬆ Lagna (Ascendant)</strong> — The zodiac sign rising on the eastern horizon at the moment of your birth. It determines how others see your personality and appearance. <em>In Vedic astrology, the Lagna is more important than the Sun sign used in Western astrology!</em><br><br>
+                <strong>⬆ Lagna (Ascendant)</strong> — Le signe du zodiaque se levant à l'horizon oriental au moment de votre naissance. Il détermine comment les autres perçoivent votre personnalité et votre apparence. <em>En astrologie védique, le Lagna est plus important que le signe solaire utilisé en astrologie occidentale !</em><br><br>
 
-                <strong>🌙 Nakshatra</strong> — One of 27 lunar mansion divisions where the Moon is positioned. It analyzes personality more precisely than the 12 Western zodiac signs. It represents your deepest nature.<br><br>
+                <strong>🌙 Nakshatra</strong> — L'une des 27 divisions des mansions lunaires où la Lune est positionnée. Elle analyse la personnalité plus précisément que les 12 signes du zodiaque occidental. Elle représente votre nature la plus profonde.<br><br>
 
-                <strong>⏳ Dasha (Planetary Period)</strong> — Life period fortune by phase. The energy of whichever planet rules that period becomes stronger. The full cycle spans 120 years with 9 planets taking turns.<br><br>
+                <strong>⏳ Dasha (Période planétaire)</strong> — Fortune de la période de vie par phase. L'énergie de la planète qui gouverne cette période devient plus forte. Le cycle complet couvre 120 ans avec 9 planètes qui se relaient.<br><br>
 
-                <strong>🔮 Yoga</strong> — Special planetary combinations. When two or more planets form specific relationships, they create special destinies. (e.g., Gajakesari Yoga = Moon + Jupiter → Wisdom and fame)
+                <strong>🔮 Yoga</strong> — Combinaisons planétaires spéciales. Lorsque deux planètes ou plus forment des relations spécifiques, elles créent des destinées spéciales. (ex. Gajakesari Yoga = Lune + Jupiter → Sagesse et renommée)
             </div>
         </div>
 
-        <h3 class="section-title">🪐 Planetary Positions</h3>
+        <h3 class="section-title">🪐 Positions planétaires</h3>
         <div id="planetTableWrap"></div>
 
-        <h3 class="section-title">🏛️ Birth Chart (Your Sky Map)</h3>
+        <h3 class="section-title">🏛️ Thème natal (Votre carte du ciel)</h3>
         <div class="chart-container">
-            <div class="chart-label">South Indian Style Chart — 12 cells = 12 signs, planet symbols show where each planet was at birth</div>
+            <div class="chart-label">Thème style Sud-Indien — 12 cases = 12 signes, les symboles planétaires montrent où chaque planète se trouvait à la naissance</div>
             <div class="chart-grid" id="d1Chart"></div>
         </div>
 
-        <h3 class="section-title">🌙 Nakshatra (Your Star — Your Deepest Nature)</h3>
+        <h3 class="section-title">🌙 Nakshatra (Votre étoile — Votre nature la plus profonde)</h3>
         <div id="nakshatraWrap"></div>
 
-        <h3 class="section-title">⏳ Dasha (Life Period Fortune)</h3>
+        <h3 class="section-title">⏳ Dasha (Fortune par période de vie)</h3>
         <div id="dashaWrap"></div>
 
-        <h3 class="section-title">📖 Comprehensive Interpretation</h3>
+        <h3 class="section-title">📖 Interprétation complète</h3>
         <div id="interpWrap"></div>
 
-        <h3 class="section-title">🪐 Planet-by-Planet Detailed Interpretation (How each planet influences your life areas)</h3>
+        <h3 class="section-title">🪐 Interprétation détaillée planète par planète (Comment chaque planète influence vos domaines de vie)</h3>
         <div id="planetHouseWrap"></div>
 
-        <h3 class="section-title">🎓 Education & Knowledge (4th & 5th Houses)</h3>
+        <h3 class="section-title">🎓 Éducation et Connaissances (4ème et 5ème Maisons)</h3>
         <div id="educationWrap"></div>
 
-        <h3 class="section-title">👶 Children Fortune (5th House)</h3>
+        <h3 class="section-title">👶 Fortune des Enfants (5ème Maison)</h3>
         <div id="childrenWrap"></div>
 
-        <h3 class="section-title">✈️ Foreign Fortune & Migration (9th & 12th Houses)</h3>
+        <h3 class="section-title">✈️ Fortune à l'Étranger et Migration (9ème et 12ème Maisons)</h3>
         <div id="foreignWrap"></div>
 
-        <h3 class="section-title">⚖️ Planetary Dignity (Exaltation · Debilitation · Own Sign)</h3>
+        <h3 class="section-title">⚖️ Dignité Planétaire (Exaltation · Débilité · Domicile)</h3>
         <div id="dignityWrap"></div>
 
-        <h3 class="section-title">🍀 Lucky Information</h3>
+        <h3 class="section-title">🍀 Informations porte-bonheur</h3>
         <div id="luckyWrap"></div>
 
-        <h3 class="section-title">💎 Remedies & Strengthening Methods</h3>
+        <h3 class="section-title">💎 Remèdes et méthodes de renforcement</h3>
         <div id="remedyWrap"></div>
 
     </div>
 </div>
 
 <footer>
-    &copy; 2025 Ancient Astrology
+    &copy; 2025 MOGU Moon
 </footer>
 
 <style>
@@ -568,52 +568,52 @@ function getAyanamsa(jd) {
 }
 
 // Zodiac signs
-const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
-               'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
-const SIGNS_EN = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
-                  'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGNS = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge',
+               'Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
+const SIGNS_EN = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge',
+                  'Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
 const SIGN_SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 
 // Planets
 const PLANETS = [
-    { id: 'Sun', name: 'Sun', symbol: '☉', natural: 'malefic' },
-    { id: 'Moon', name: 'Moon', symbol: '☽', natural: 'benefic' },
-    { id: 'Mars', name: 'Mars', symbol: '♂', natural: 'malefic' },
-    { id: 'Mercury', name: 'Mercury', symbol: '☿', natural: 'neutral' },
-    { id: 'Jupiter', name: 'Jupiter', symbol: '♃', natural: 'benefic' },
-    { id: 'Venus', name: 'Venus', symbol: '♀', natural: 'benefic' },
-    { id: 'Saturn', name: 'Saturn', symbol: '♄', natural: 'malefic' },
+    { id: 'Sun', name: 'Soleil', symbol: '☉', natural: 'maléfique' },
+    { id: 'Moon', name: 'Lune', symbol: '☽', natural: 'bénéfique' },
+    { id: 'Mars', name: 'Mars', symbol: '♂', natural: 'maléfique' },
+    { id: 'Mercury', name: 'Mercure', symbol: '☿', natural: 'neutre' },
+    { id: 'Jupiter', name: 'Jupiter', symbol: '♃', natural: 'bénéfique' },
+    { id: 'Venus', name: 'Vénus', symbol: '♀', natural: 'bénéfique' },
+    { id: 'Saturn', name: 'Saturne', symbol: '♄', natural: 'maléfique' },
 ];
 
 // Nakshatras (27 lunar mansions)
 const NAKSHATRAS = [
-    { name: 'Ashwini', ko: 'Ashwini', ruler: 'Ketu', meaning: 'Horse Twins', deity: 'Ashwini Kumaras', desc: 'Energy of healing and new beginnings. A person with quick action and healing abilities.' },
-    { name: 'Bharani', ko: 'Bharani', ruler: 'Venus', meaning: 'The Bearer', deity: 'Yama', desc: 'The cycle of life and death. Strong patience and the power to lead change.' },
-    { name: 'Krittika', ko: 'Krittika', ruler: 'Sun', meaning: 'The Cutter', deity: 'Agni', desc: 'The power of fire and purification. Sharp intellect and decisiveness.' },
-    { name: 'Rohini', ko: 'Rohini', ruler: 'Moon', meaning: 'The Red Star', deity: 'Brahma', desc: 'The star of abundance and beauty. A creative and charming personality.' },
-    { name: 'Mrigashira', ko: 'Mrigashira', ruler: 'Mars', meaning: 'Deer\'s Head', deity: 'Soma', desc: 'The star of exploration and curiosity. A tireless traveler seeking truth.' },
-    { name: 'Ardra', ko: 'Ardra', ruler: 'Rahu', meaning: 'Teardrop', deity: 'Rudra', desc: 'Rebirth through storm and destruction. Intense emotions and transformative power.' },
-    { name: 'Punarvasu', ko: 'Punarvasu', ruler: 'Jupiter', meaning: 'Return of Light', deity: 'Aditi', desc: 'The star of recovery and return. An optimistic and wise personality.' },
-    { name: 'Pushya', ko: 'Pushya', ruler: 'Saturn', meaning: 'The Nourisher', deity: 'Brihaspati', desc: 'The most auspicious nakshatra. Energy of nurturing, protection, and prosperity.' },
-    { name: 'Ashlesha', ko: 'Ashlesha', ruler: 'Mercury', meaning: 'The Entwiner', deity: 'Nagas', desc: 'Serpent wisdom and mystery. Insight and deep intuition.' },
-    { name: 'Magha', ko: 'Magha', ruler: 'Ketu', meaning: 'The Great', deity: 'Pitris', desc: 'The star of royalty. Authority, respect, and ancestral blessings.' },
-    { name: 'Purva Phalguni', ko: 'Purva Phalguni', ruler: 'Venus', meaning: 'Former Fruit', deity: 'Bhaga', desc: 'The star of joy and love. Artistic sense and romance.' },
-    { name: 'Uttara Phalguni', ko: 'Uttara Phalguni', ruler: 'Sun', meaning: 'Latter Fruit', deity: 'Aryaman', desc: 'The star of friendship and contracts. Trust and devotion.' },
-    { name: 'Hasta', ko: 'Hasta', ruler: 'Moon', meaning: 'The Hand', deity: 'Savitar', desc: 'The star of craftsmanship and skill. Healing hands, the artist.' },
-    { name: 'Chitra', ko: 'Chitra', ruler: 'Mars', meaning: 'Shining Jewel', deity: 'Vishwakarma', desc: 'The star of beauty and creation. Exceptional aesthetic sense.' },
-    { name: 'Swati', ko: 'Swati', ruler: 'Rahu', meaning: 'The Independent', deity: 'Vayu', desc: 'The freedom of wind. An independent and flexible personality.' },
-    { name: 'Vishakha', ko: 'Vishakha', ruler: 'Jupiter', meaning: 'The Forked', deity: 'Indra-Agni', desc: 'The star of goals and determination. Strong focus and willpower.' },
-    { name: 'Anuradha', ko: 'Anuradha', ruler: 'Saturn', meaning: 'Following Radha', deity: 'Mitra', desc: 'The star of friendship and devotion. Organizational skills and leadership.' },
-    { name: 'Jyeshtha', ko: 'Jyeshtha', ruler: 'Mercury', meaning: 'The Eldest', deity: 'Indra', desc: 'The star of protection and authority. Strong sense of responsibility.' },
-    { name: 'Mula', ko: 'Mula', ruler: 'Ketu', meaning: 'The Root', deity: 'Nirriti', desc: 'The star of destruction and rebuilding. One who seeks the root of truth.' },
-    { name: 'Purva Ashadha', ko: 'Purva Ashadha', ruler: 'Venus', meaning: 'Former Invincible', deity: 'Apas', desc: 'The power of water and purification. Hidden victorious energy.' },
-    { name: 'Uttara Ashadha', ko: 'Uttara Ashadha', ruler: 'Sun', meaning: 'Latter Invincible', deity: 'Vishvedevas', desc: 'The star of ultimate victory. Patience and leadership.' },
-    { name: 'Shravana', ko: 'Shravana', ruler: 'Moon', meaning: 'The Listener', deity: 'Vishnu', desc: 'The star of knowledge and listening. A master of learning and communication.' },
-    { name: 'Dhanishta', ko: 'Dhanishta', ruler: 'Mars', meaning: 'The Wealthiest', deity: 'Vasus', desc: 'The star of abundance and music. Talent and prosperity.' },
-    { name: 'Shatabhisha', ko: 'Shatabhisha', ruler: 'Rahu', meaning: 'Hundred Healers', deity: 'Varuna', desc: 'The star of secrets and healing. Mysterious healing abilities.' },
-    { name: 'Purva Bhadrapada', ko: 'Purva Bhadrapada', ruler: 'Jupiter', meaning: 'Former Lucky Feet', deity: 'Aja Ekapada', desc: 'The star of fire and transformation. Spiritual awakening.' },
-    { name: 'Uttara Bhadrapada', ko: 'Uttara Bhadrapada', ruler: 'Saturn', meaning: 'Latter Lucky Feet', deity: 'Ahir Budhnya', desc: 'Wisdom of the deep ocean. Meditation and spiritual depth.' },
-    { name: 'Revati', ko: 'Revati', ruler: 'Mercury', meaning: 'The Wealthy', deity: 'Pushan', desc: 'The star of travel and protection. The completion of all things.' },
+    { name: 'Ashwini', ko: 'Ashwini', ruler: 'Ketu', meaning: 'Jumeaux-chevaux', deity: 'Ashwini Kumaras', desc: 'Énergie de guérison et de nouveaux commencements. Une personne avec une action rapide et des capacités de guérison.' },
+    { name: 'Bharani', ko: 'Bharani', ruler: 'Venus', meaning: 'Le Porteur', deity: 'Yama', desc: 'Le cycle de la vie et de la mort. Forte patience et pouvoir de mener le changement.' },
+    { name: 'Krittika', ko: 'Krittika', ruler: 'Sun', meaning: 'Le Tranchant', deity: 'Agni', desc: 'Le pouvoir du feu et de la purification. Intellect vif et détermination.' },
+    { name: 'Rohini', ko: 'Rohini', ruler: 'Moon', meaning: 'L\'Étoile Rouge', deity: 'Brahma', desc: 'L\'étoile de l\'abondance et de la beauté. Une personnalité créative et charmante.' },
+    { name: 'Mrigashira', ko: 'Mrigashira', ruler: 'Mars', meaning: 'Tête de Cerf', deity: 'Soma', desc: 'L\'étoile de l\'exploration et de la curiosité. Un voyageur infatigable en quête de vérité.' },
+    { name: 'Ardra', ko: 'Ardra', ruler: 'Rahu', meaning: 'Larme', deity: 'Rudra', desc: 'Renaissance par la tempête et la destruction. Émotions intenses et pouvoir de transformation.' },
+    { name: 'Punarvasu', ko: 'Punarvasu', ruler: 'Jupiter', meaning: 'Retour de la Lumière', deity: 'Aditi', desc: 'L\'étoile de la récupération et du retour. Une personnalité optimiste et sage.' },
+    { name: 'Pushya', ko: 'Pushya', ruler: 'Saturn', meaning: 'Le Nourricier', deity: 'Brihaspati', desc: 'Le nakshatra le plus favorable. Énergie nourricière, protectrice et de prospérité.' },
+    { name: 'Ashlesha', ko: 'Ashlesha', ruler: 'Mercury', meaning: 'L\'Enlaceur', deity: 'Nagas', desc: 'Sagesse et mystère du serpent. Perspicacité et intuition profonde.' },
+    { name: 'Magha', ko: 'Magha', ruler: 'Ketu', meaning: 'Le Grand', deity: 'Pitris', desc: 'L\'étoile de la royauté. Autorité, respect et bénédictions ancestrales.' },
+    { name: 'Purva Phalguni', ko: 'Purva Phalguni', ruler: 'Venus', meaning: 'Fruit Antérieur', deity: 'Bhaga', desc: 'L\'étoile de la joie et de l\'amour. Sens artistique et romance.' },
+    { name: 'Uttara Phalguni', ko: 'Uttara Phalguni', ruler: 'Sun', meaning: 'Fruit Postérieur', deity: 'Aryaman', desc: 'L\'étoile de l\'amitié et des contrats. Confiance et dévouement.' },
+    { name: 'Hasta', ko: 'Hasta', ruler: 'Moon', meaning: 'La Main', deity: 'Savitar', desc: 'L\'étoile de l\'artisanat et de l\'habileté. Les mains guérisseuses, l\'artiste.' },
+    { name: 'Chitra', ko: 'Chitra', ruler: 'Mars', meaning: 'Joyau Brillant', deity: 'Vishwakarma', desc: 'L\'étoile de la beauté et de la création. Sens esthétique exceptionnel.' },
+    { name: 'Swati', ko: 'Swati', ruler: 'Rahu', meaning: 'L\'Indépendant', deity: 'Vayu', desc: 'La liberté du vent. Une personnalité indépendante et flexible.' },
+    { name: 'Vishakha', ko: 'Vishakha', ruler: 'Jupiter', meaning: 'Le Fourchu', deity: 'Indra-Agni', desc: 'L\'étoile des objectifs et de la détermination. Forte concentration et volonté.' },
+    { name: 'Anuradha', ko: 'Anuradha', ruler: 'Saturn', meaning: 'Suivant Radha', deity: 'Mitra', desc: 'L\'étoile de l\'amitié et du dévouement. Compétences organisationnelles et leadership.' },
+    { name: 'Jyeshtha', ko: 'Jyeshtha', ruler: 'Mercury', meaning: 'L\'Aîné', deity: 'Indra', desc: 'L\'étoile de la protection et de l\'autorité. Fort sens des responsabilités.' },
+    { name: 'Mula', ko: 'Mula', ruler: 'Ketu', meaning: 'La Racine', deity: 'Nirriti', desc: 'L\'étoile de la destruction et de la reconstruction. Celui qui cherche la racine de la vérité.' },
+    { name: 'Purva Ashadha', ko: 'Purva Ashadha', ruler: 'Venus', meaning: 'Ancien Invincible', deity: 'Apas', desc: 'Le pouvoir de l\'eau et de la purification. Énergie victorieuse cachée.' },
+    { name: 'Uttara Ashadha', ko: 'Uttara Ashadha', ruler: 'Sun', meaning: 'Dernier Invincible', deity: 'Vishvedevas', desc: 'L\'étoile de la victoire ultime. Patience et leadership.' },
+    { name: 'Shravana', ko: 'Shravana', ruler: 'Moon', meaning: 'L\'Auditeur', deity: 'Vishnu', desc: 'L\'étoile du savoir et de l\'écoute. Un maître de l\'apprentissage et de la communication.' },
+    { name: 'Dhanishta', ko: 'Dhanishta', ruler: 'Mars', meaning: 'Le Plus Riche', deity: 'Vasus', desc: 'L\'étoile de l\'abondance et de la musique. Talent et prospérité.' },
+    { name: 'Shatabhisha', ko: 'Shatabhisha', ruler: 'Rahu', meaning: 'Cent Guérisseurs', deity: 'Varuna', desc: 'L\'étoile des secrets et de la guérison. Capacités de guérison mystérieuses.' },
+    { name: 'Purva Bhadrapada', ko: 'Purva Bhadrapada', ruler: 'Jupiter', meaning: 'Anciens Pieds Chanceux', deity: 'Aja Ekapada', desc: 'L\'étoile du feu et de la transformation. Éveil spirituel.' },
+    { name: 'Uttara Bhadrapada', ko: 'Uttara Bhadrapada', ruler: 'Saturn', meaning: 'Derniers Pieds Chanceux', deity: 'Ahir Budhnya', desc: 'La sagesse de l\'océan profond. Méditation et profondeur spirituelle.' },
+    { name: 'Revati', ko: 'Revati', ruler: 'Mercury', meaning: 'Le Riche', deity: 'Pushan', desc: 'L\'étoile du voyage et de la protection. L\'achèvement de toutes choses.' },
 ];
 
 // Dasha periods (years)
@@ -623,8 +623,8 @@ const DASHA_YEARS = {
 };
 const DASHA_ORDER = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
 const DASHA_KO = {
-    'Ketu': 'Ketu', 'Venus': 'Venus', 'Sun': 'Sun', 'Moon': 'Moon', 'Mars': 'Mars',
-    'Rahu': 'Rahu', 'Jupiter': 'Jupiter', 'Saturn': 'Saturn', 'Mercury': 'Mercury'
+    'Ketu': 'Ketu', 'Venus': 'Vénus', 'Sun': 'Soleil', 'Moon': 'Lune', 'Mars': 'Mars',
+    'Rahu': 'Rahu', 'Jupiter': 'Jupiter', 'Saturn': 'Saturne', 'Mercury': 'Mercure'
 };
 
 // South Indian chart house layout (fixed signs)
@@ -652,7 +652,7 @@ function initForm() {
         yearSel.appendChild(opt);
     }
     // Month: 1~12
-    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthNames = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
     for (let m = 1; m <= 12; m++) {
         const opt = document.createElement('option');
         opt.value = m; opt.textContent = monthNames[m-1];
@@ -849,7 +849,7 @@ function calculateChart() {
 
 function renderPlanetTable(positions, lagnaSign) {
     let html = '<table class="planet-table"><thead><tr>';
-    html += '<th>Planet</th><th>Sign</th><th>Degree</th><th>Nakshatra</th><th>House</th>';
+    html += '<th>Planète</th><th>Signe</th><th>Degré</th><th>Nakshatra</th><th>Maison</th>';
     html += '</tr></thead><tbody>';
 
     // Add Lagna first

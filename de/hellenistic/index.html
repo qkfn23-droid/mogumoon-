@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hellenistic Astrology - MOGU Moon</title>
+    <title>Hellenistische Astrologie - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -63,13 +63,13 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🏛️ Hellenistic Astrology</h2>
-        <p>Ancient Greece — The origin of Western astrology. Your destiny read through the Lot of Fortune and Sect</p>
+        <h2>🏛️ Hellenistische Astrologie</h2>
+        <p>Antikes Griechenland — Der Ursprung der westlichen Astrologie. Ihr Schicksal gelesen durch das Los des Glücks und die Sekte</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Geburtsdatum</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -77,16 +77,16 @@
             </div>
         </div>
         <div class="input-group">
-            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <label>Geburtszeit <span class="optional-tag">(Wählen Sie 'Unbekannt' wenn unsicher)</span></label>
             <div class="input-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
-                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Enter Time</option><option value="unknown">Unknown</option></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Zeit eingeben</option><option value="unknown">Unbekannt</option></select>
             </div>
         </div>
         <div class="input-group">
-            <label>Birth Place</label>
+            <label>Geburtsort</label>
             <select id="birthCity">
                 <optgroup label="🇰🇷 South Korea"><option value="37.57,126.98" selected>Seoul</option><option value="35.18,129.08">Busan</option><option value="35.87,128.60">Daegu</option></optgroup>
                 <optgroup label="🌏 Asia"><option value="35.68,139.69">Tokyo</option><option value="39.90,116.40">Beijing</option><option value="28.61,77.23">New Delhi</option></optgroup>
@@ -94,35 +94,35 @@
                 <optgroup label="🇪🇺 Europe"><option value="37.97,23.72">Athens</option><option value="51.51,-0.13">London</option><option value="48.86,2.35">Paris</option><option value="41.90,12.50">Rome</option></optgroup>
             </select>
         </div>
-        <button class="calc-btn" onclick="calculate()">🏛️ Generate Hellenistic Chart</button>
+        <button class="calc-btn" onclick="calculate()">🏛️ Hellenistisches Horoskop generieren</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">☀️ Sect (Day / Night Chart)</h3>
+        <h3 class="section-title">☀️ Sekte (Tag-/Nacht-Horoskop)</h3>
         <div id="sectWrap"></div>
 
-        <h3 class="section-title">🪐 Planetary Positions (Whole Sign Houses)</h3>
+        <h3 class="section-title">🪐 Planetenpositionen (Ganze-Zeichen-Häuser)</h3>
         <div id="planetWrap"></div>
 
-        <h3 class="section-title">🎯 Lot of Fortune</h3>
+        <h3 class="section-title">🎯 Los des Glücks</h3>
         <div id="lotWrap"></div>
 
-        <h3 class="section-title">📖 Sun Sign Interpretation</h3>
+        <h3 class="section-title">📖 Sonnenzeichen-Deutung</h3>
         <div id="sunWrap"></div>
 
-        <h3 class="section-title">🌙 Moon Sign Interpretation</h3>
+        <h3 class="section-title">🌙 Mondzeichen-Deutung</h3>
         <div id="moonWrap"></div>
 
-        <h3 class="section-title">💕 Love & Relationships (Venus)</h3>
+        <h3 class="section-title">💕 Liebe & Beziehungen (Venus)</h3>
         <div id="venusWrap"></div>
 
-        <h3 class="section-title">💼 Career & Ambition (Saturn & Mars)</h3>
+        <h3 class="section-title">💼 Karriere & Ehrgeiz (Saturn & Mars)</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">🍀 Planet of Fortune (Jupiter)</h3>
+        <h3 class="section-title">🍀 Glücksplanet (Jupiter)</h3>
         <div id="jupiterWrap"></div>
 
-        <h3 class="section-title">⚖️ Chart Ruler (Master of the Chart)</h3>
+        <h3 class="section-title">⚖️ Horoskopherrscher (Meister des Horoskops)</h3>
         <div id="rulerWrap"></div>
     </div>
 </div>
@@ -131,18 +131,18 @@
 
 <script src="../../astronomy.browser.min.js"></script>
 <script>
-const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
-const SIGNS_EN = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGNS = ['Widder','Stier','Zwillinge','Krebs','Löwe','Jungfrau','Waage','Skorpion','Schütze','Steinbock','Wassermann','Fische'];
+const SIGNS_EN = ['Widder','Stier','Zwillinge','Krebs','Löwe','Jungfrau','Waage','Skorpion','Schütze','Steinbock','Wassermann','Fische'];
 const SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 const RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
-const ELEMENTS = ['Fire','Earth','Air','Water','Fire','Earth','Air','Water','Fire','Earth','Air','Water'];
-const MODES = ['Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable'];
+const ELEMENTS = ['Feuer','Erde','Luft','Wasser','Feuer','Erde','Luft','Wasser','Feuer','Erde','Luft','Wasser'];
+const MODES = ['Kardinal','Fix','Veränderlich','Kardinal','Fix','Veränderlich','Kardinal','Fix','Veränderlich','Kardinal','Fix','Veränderlich'];
 
 const PLANETS = [
-    { id: 'Sun', name: 'Sun', symbol: '☉' },
-    { id: 'Moon', name: 'Moon', symbol: '☽' },
+    { id: 'Sun', name: 'Sonne', symbol: '☉' },
+    { id: 'Moon', name: 'Mond', symbol: '☽' },
     { id: 'Mars', name: 'Mars', symbol: '♂' },
-    { id: 'Mercury', name: 'Mercury', symbol: '☿' },
+    { id: 'Mercury', name: 'Merkur', symbol: '☿' },
     { id: 'Jupiter', name: 'Jupiter', symbol: '♃' },
     { id: 'Venus', name: 'Venus', symbol: '♀' },
     { id: 'Saturn', name: 'Saturn', symbol: '♄' }
@@ -205,8 +205,8 @@ function initForm() {
     const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
     const h = document.getElementById('birthHour'), min = document.getElementById('birthMinute');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Monat ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Tag ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
     [12,1,2,3,4,5,6,7,8,9,10,11].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v + ':00'; if (v === 10) o.selected = true; h.appendChild(o); });
     for (let i = 0; i < 60; i += 5) { const o = document.createElement('option'); o.value = i; o.textContent = ':' + String(i).padStart(2,'0'); if (i === 30) o.selected = true; min.appendChild(o); }
 }
@@ -266,20 +266,20 @@ function calculate() {
     document.getElementById('sectWrap').innerHTML = `
         <div class="interp-card" style="border-left:3px solid #3498db;">
             <div class="interp-text">
-                <strong>What is Sect?</strong> A core concept in Hellenistic astrology. The roles of the planets change depending on whether you were born during the day or at night.<br><br>
-                You have a <strong style="color:#3498db;">${isDaytime ? '☀️ Day Chart (Diurnal)' : '🌙 Night Chart (Nocturnal)'}</strong>.<br><br>
-                <strong>Chart Leader:</strong> ${sectLeader} — The core energy guiding your life<br>
-                <strong>Benefic Planet:</strong> ${sectBenefic} — The star that brings luck and opportunity<br>
-                <strong>Malefic Planet:</strong> ${sectMalefic} — The star that brings challenge and growth<br><br>
-                ${isDaytime ? 'A day chart is conscious, rational, and values social achievement. Under the Sun\'s light, you advance clearly toward your goals.' :
-                  'A night chart is intuitive, emotional, and values inner growth. Under the Moon\'s light, you explore deep emotions and the spiritual world.'}
+                <strong>Was ist Sekte?</strong> Ein Kernkonzept der hellenistischen Astrologie. Die Rollen der Planeten ändern sich je nachdem, ob Sie tagsüber oder nachts geboren wurden.<br><br>
+                Sie haben ein <strong style="color:#3498db;">${isDaytime ? '☀️ Tageshoroskop (Diurnal)' : '🌙 Nachthoroskop (Nocturnal)'}</strong>.<br><br>
+                <strong>Horoskopführer:</strong> ${sectLeader} — Die Kernenergie, die Ihr Leben leitet<br>
+                <strong>Wohltätiger Planet:</strong> ${sectBenefic} — Der Stern, der Glück und Gelegenheiten bringt<br>
+                <strong>Übeltätiger Planet:</strong> ${sectMalefic} — Der Stern, der Herausforderung und Wachstum bringt<br><br>
+                ${isDaytime ? 'Ein Tageshoroskop ist bewusst, rational und schätzt soziale Leistung. Unter dem Licht der Sonne schreiten Sie klar auf Ihre Ziele zu.' :
+                  'Ein Nachthoroskop ist intuitiv, emotional und schätzt inneres Wachstum. Unter dem Licht des Mondes erforschen Sie tiefe Emotionen und die spirituelle Welt.'}
             </div>
         </div>
     `;
 
     // ═══ PLANET TABLE ═══
-    let tableHtml = '<table class="planet-table"><thead><tr><th>Planet</th><th>Sign</th><th>Degree</th><th>Element</th><th>Mode</th></tr></thead><tbody>';
-    tableHtml += `<tr><td>⬆ Ascendant</td><td>${SYMBOLS[ascSign]} ${SIGNS[ascSign]}</td><td>-</td><td>${ELEMENTS[ascSign]}</td><td>${MODES[ascSign]}</td></tr>`;
+    let tableHtml = '<table class="planet-table"><thead><tr><th>Planet</th><th>Zeichen</th><th>Grad</th><th>Element</th><th>Modus</th></tr></thead><tbody>';
+    tableHtml += `<tr><td>⬆ Aszendent</td><td>${SYMBOLS[ascSign]} ${SIGNS[ascSign]}</td><td>-</td><td>${ELEMENTS[ascSign]}</td><td>${MODES[ascSign]}</td></tr>`;
     positions.forEach(p => {
         tableHtml += `<tr><td>${p.symbol} ${p.name}</td><td>${SYMBOLS[p.sign]} ${SIGNS[p.sign]}</td><td>${p.degree.toFixed(1)}°</td><td>${ELEMENTS[p.sign]}</td><td>${MODES[p.sign]}</td></tr>`;
     });
@@ -314,12 +314,12 @@ function calculate() {
     document.getElementById('lotWrap').innerHTML = `
         <div class="sign-card">
             <span class="sign-glyph">${SYMBOLS[lotSign]}</span>
-            <div class="sign-name">Lot of Fortune</div>
+            <div class="sign-name">Los des Glücks</div>
             <div class="sign-sub">${SIGNS[lotSign]} ${lotDeg.toFixed(1)}°</div>
         </div>
         <div class="interp-card">
             <div class="interp-text">
-                <strong>What is the Lot of Fortune?</strong> The most important point in Hellenistic astrology. It is calculated from the relationship between the Sun, Moon, and Ascendant. It reveals where your luck comes from.<br><br>
+                <strong>Was ist das Los des Glücks?</strong> Der wichtigste Punkt in der hellenistischen Astrologie. Es wird aus der Beziehung zwischen Sonne, Mond und Aszendent berechnet. Es offenbart, woher Ihr Glück kommt.<br><br>
                 ${lotInterp[lotSign]}
             </div>
         </div>
@@ -344,11 +344,11 @@ function calculate() {
     // ═══ SUN ═══
     document.getElementById('sunWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">⬆ Ascendant: ${SYMBOLS[ascSign]} ${SIGNS[ascSign]}</div>
+            <div class="interp-title">⬆ Aszendent: ${SYMBOLS[ascSign]} ${SIGNS[ascSign]}</div>
             <div class="interp-text">${ASC_INTERP[ascSign]}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">${SYMBOLS[sunSign]} Sun: ${SIGNS[sunSign]}</div>
+            <div class="interp-title">${SYMBOLS[sunSign]} Sonne: ${SIGNS[sunSign]}</div>
             <div class="interp-text">${SUN_INTERP[sunSign]}</div>
         </div>
     `;
@@ -384,11 +384,11 @@ function calculate() {
             <div class="interp-text">${VENUS_DETAIL[venusSign]}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💕 Key Love Keywords</div>
+            <div class="interp-title">💕 Wichtige Liebes-Schlüsselwörter</div>
             <div class="interp-text">
-                <strong>Love Style:</strong> ${VENUS_INTERP[venusSign]}<br><br>
-                <strong>Ideal Partner:</strong> ${['An independent and challenging partner','A sensual and stable partner','An intellectual partner with great conversation','An emotional and domestic partner','A charismatic and attention-grabbing partner','A practical and devoted partner','A refined and balanced partner','An intense and profound partner','A free-spirited and adventurous partner','An ambitious and responsible partner','A unique and innovative partner','A spiritual and artistic partner'][venusSign]}<br>
-                <strong>Love Pitfall:</strong> ${['Passion that cools quickly','Possessiveness and stubbornness','Flightiness and distraction','Excessive emotional dependence','Self-centered love','Criticism and perfectionism','Indecisiveness and dependency','Jealousy and obsession','Refusal of commitment and wanderlust','Emotional suppression and coldness','Emotional distance','Gap between reality and ideals'][venusSign]}
+                <strong>Liebesstil:</strong> ${VENUS_INTERP[venusSign]}<br><br>
+                <strong>Idealer Partner:</strong> ${['An independent and challenging partner','A sensual and stable partner','An intellectual partner with great conversation','An emotional and domestic partner','A charismatic and attention-grabbing partner','A practical and devoted partner','A refined and balanced partner','An intense and profound partner','A free-spirited and adventurous partner','An ambitious and responsible partner','A unique and innovative partner','A spiritual and artistic partner'][venusSign]}<br>
+                <strong>Liebesfalle:</strong> ${['Passion that cools quickly','Possessiveness and stubbornness','Flightiness and distraction','Excessive emotional dependence','Self-centered love','Criticism and perfectionism','Indecisiveness and dependency','Jealousy and obsession','Refusal of commitment and wanderlust','Emotional suppression and coldness','Emotional distance','Gap between reality and ideals'][venusSign]}
             </div>
         </div>
     `;
@@ -429,14 +429,14 @@ function calculate() {
 
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">♂ Mars: ${SIGNS[marsSign]} ${SYMBOLS[marsSign]} — Action, Energy, Drive</div>
+            <div class="interp-title">♂ Mars: ${SIGNS[marsSign]} ${SYMBOLS[marsSign]} — Aktion, Energie, Antrieb</div>
             <div class="interp-text">${MARS_DETAIL[marsSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Mars is the malefic planet but manageable. You can channel anger constructively.' : 'In a night chart, Mars is on your side! You wield powerful action and courage. Energy overflows.'}</div>
+            <strong>Sekten-Einfluss:</strong> ${isDaytime ? 'In a day chart, Mars is the malefic planet but manageable. You can channel anger constructively.' : 'In a night chart, Mars is on your side! You wield powerful action and courage. Energy overflows.'}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">♄ Saturn: ${SIGNS[saturnSign]} ${SYMBOLS[saturnSign]} — Trials, Patience, Karma</div>
+            <div class="interp-title">♄ Saturn: ${SIGNS[saturnSign]} ${SYMBOLS[saturnSign]} — Prüfungen, Geduld, Karma</div>
             <div class="interp-text">${SATURN_DETAIL[saturnSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Saturn is on your side! Discipline and patience come naturally. Even trials are manageable.' : 'In a night chart, Saturn is the malefic planet. Greater challenges come, but overcoming them makes you stronger than anyone.'}</div>
+            <strong>Sekten-Einfluss:</strong> ${isDaytime ? 'In a day chart, Saturn is on your side! Discipline and patience come naturally. Even trials are manageable.' : 'In a night chart, Saturn is the malefic planet. Greater challenges come, but overcoming them makes you stronger than anyone.'}</div>
         </div>
     `;
 
@@ -459,9 +459,9 @@ function calculate() {
 
     document.getElementById('jupiterWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">♃ Jupiter: ${SIGNS[jupiterSign]} ${SYMBOLS[jupiterSign]} — Fortune, Expansion, Blessing</div>
+            <div class="interp-title">♃ Jupiter: ${SIGNS[jupiterSign]} ${SYMBOLS[jupiterSign]} — Glück, Expansion, Segen</div>
             <div class="interp-text">${JUPITER_DETAIL[jupiterSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Jupiter is the greatest benefic! Fortune manifests visibly and socially.' : 'In a night chart, Jupiter brings inner fortune. Luck comes through wisdom and spiritual growth.'}</div>
+            <strong>Sekten-Einfluss:</strong> ${isDaytime ? 'In a day chart, Jupiter is the greatest benefic! Fortune manifests visibly and socially.' : 'In a night chart, Jupiter brings inner fortune. Luck comes through wisdom and spiritual growth.'}</div>
         </div>
     `;
 
@@ -482,11 +482,11 @@ function calculate() {
 
     document.getElementById('rulerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">👑 Chart Ruler: ${chartRuler} → ${SIGNS[rulerSign]} ${SYMBOLS[rulerSign]}</div>
+            <div class="interp-title">👑 Horoskopherrscher: ${chartRuler} → ${SIGNS[rulerSign]} ${SYMBOLS[rulerSign]}</div>
             <div class="interp-text">
-                Since your Ascendant is <strong>${SIGNS[ascSign]}</strong>, the ruler of your chart is <strong>${chartRuler}</strong>.<br><br>
+                Da Ihr Aszendent <strong>${SIGNS[ascSign]}</strong> ist, ist der Herrscher Ihres Horoskops <strong>${chartRuler}</strong>.<br><br>
                 ${RULER_DETAIL[chartRuler] || ''}<br><br>
-                ${chartRuler} is currently in <strong>${SIGNS[rulerSign]}</strong>, so the direction of your life is influenced by the ${ELEMENTS[rulerSign]} element. As a ${MODES[rulerSign]} sign, ${MODES[rulerSign] === 'Cardinal' ? 'you actively pioneer your life path.' : MODES[rulerSign] === 'Fixed' ? 'you build your life steadily and stably.' : 'you live flexibly, adapting to change.'}
+                ${chartRuler} befindet sich derzeit in <strong>${SIGNS[rulerSign]}</strong>, sodass die Richtung Ihres Lebens vom ${ELEMENTS[rulerSign]}-Element beeinflusst wird. Als ${MODES[rulerSign]}-Zeichen ${MODES[rulerSign] === 'Kardinal' ? 'bahnen Sie aktiv Ihren Lebensweg.' : MODES[rulerSign] === 'Fix' ? 'bauen Sie Ihr Leben stetig und stabil auf.' : 'leben Sie flexibel und passen sich dem Wandel an.'}
             </div>
         </div>
     `;

@@ -4,7 +4,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zi Wei Dou Shu (Purple Star Astrology) - MOGU Moon</title>
+    <title>Zi Wei Dou Shu (Astrologia da Estrela Purpura) - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -64,13 +64,13 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>💜 Zi Wei Dou Shu (Purple Star Astrology)</h2>
-        <p>Chinese imperial astrology centered on the Purple Star (Polaris)</p>
+        <h2>💜 Zi Wei Dou Shu (Astrologia da Estrela Purpura)</h2>
+        <p>Astrologia imperial chinesa centrada na Estrela Purpura (Polaris)</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth (Solar Calendar)</label>
+            <label>Data de nascimento (Calendario Solar)</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -78,50 +78,50 @@
             </div>
         </div>
         <div class="input-group">
-            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <label>Hora de nascimento <span class="optional-tag">(Selecione 'Desconhecido' se nao tiver certeza)</span></label>
             <div class="input-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
-                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Enter Time</option><option value="unknown">Unknown</option></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Inserir Horario</option><option value="unknown">Desconhecido</option></select>
             </div>
         </div>
         <div class="input-group">
-            <label>Gender</label>
+            <label>Genero</label>
             <div class="input-row">
                 <select id="gender">
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
                 </select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">💜 Generate Zi Wei Dou Shu Chart</button>
+        <button class="calc-btn" onclick="calculate()">💜 Gerar Mapa Zi Wei Dou Shu</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">⭐ Main Star of the Life Palace (Your Core Star)</h3>
+        <h3 class="section-title">⭐ Estrela Principal do Palacio da Vida (Sua Estrela Central)</h3>
         <div id="mainStarWrap"></div>
 
-        <h3 class="section-title">🏛️ 12 Palace Layout</h3>
+        <h3 class="section-title">🏛️ Layout dos 12 Palacios</h3>
         <div class="palace-grid" id="palaceGrid"></div>
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">📖 Detailed Interpretation of the Life Palace Main Star</h3>
+        <h3 class="section-title">📖 Interpretacao Detalhada da Estrela Principal do Palacio da Vida</h3>
         <div id="mainInterpWrap"></div>
 
-        <h3 class="section-title">💕 Spouse Palace (Marriage)</h3>
+        <h3 class="section-title">💕 Palacio do Conjuge (Casamento)</h3>
         <div id="spouseWrap"></div>
 
-        <h3 class="section-title">💰 Wealth Palace (Finances)</h3>
+        <h3 class="section-title">💰 Palacio da Riqueza (Financas)</h3>
         <div id="wealthWrap"></div>
 
-        <h3 class="section-title">💼 Career Palace (Profession)</h3>
+        <h3 class="section-title">💼 Palacio da Carreira (Profissao)</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">🏥 Health Palace (Well-being)</h3>
+        <h3 class="section-title">🏥 Palacio da Saude (Bem-estar)</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">⏳ Major Luck Periods (10-Year Cycles)</h3>
+        <h3 class="section-title">⏳ Periodos de Grande Sorte (Ciclos de 10 Anos)</h3>
         <div id="dashaWrap"></div>
     </div>
 </div>
@@ -236,8 +236,8 @@ const MAIN_STARS = {
 const STAR_NAMES = ['Zi Wei','Tian Ji','Tai Yang','Wu Qu','Tian Tong','Lian Zhen','Tian Fu','Tai Yin','Tan Lang','Ju Men','Tian Xiang','Tian Liang','Qi Sha','Po Jun'];
 
 // 12 Palaces
-const PALACES = ['Life Palace','Siblings','Spouse','Children','Wealth','Health','Travel','Friends','Career','Property','Fortune','Parents'];
-const PALACE_DESC = ['Self','Brothers & Sisters','Partner','Children','Finances','Well-being','Travel/Abroad','Friends/Network','Profession/Fame','Real Estate/Home','Blessings & Virtue','Parents/Elders'];
+const PALACES = ['Palacio da Vida','Irmaos','Conjuge','Filhos','Riqueza','Saude','Viagem','Amigos','Carreira','Propriedade','Fortuna','Pais'];
+const PALACE_DESC = ['Eu','Irmaos e Irmas','Parceiro','Filhos','Financas','Bem-estar','Viagem/Exterior','Amigos/Rede','Profissao/Fama','Imoveis/Lar','Bencaos e Virtude','Pais/Ancioes'];
 
 // South Indian style grid mapping
 const GRID_MAP = [
@@ -251,8 +251,8 @@ function initForm() {
     const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
     const h = document.getElementById('birthHour');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Mes ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Dia ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
     for (let i = 0; i < 12; i++) {
         const labels = ['Zi (23-1)','Chou (1-3)','Yin (3-5)','Mao (5-7)','Chen (7-9)','Si (9-11)','Wu (11-13)','Wei (13-15)','Shen (15-17)','You (17-19)','Xu (19-21)','Hai (21-23)'];
         const o = document.createElement('option'); o.value = i; o.textContent = labels[i]; if (i === 5) o.selected = true; h.appendChild(o);
@@ -314,8 +314,8 @@ function calculate() {
     document.getElementById('mainStarWrap').innerHTML = `
         <div class="main-star-card">
             <span class="main-star-glyph">${starData.glyph}</span>
-            <div class="main-star-name">${mainStar} Star (${starData.rank})</div>
-            <div class="main-star-sub">Element: ${starData.element} | Life Palace: ${DIZHI[mingIdx]}</div>
+            <div class="main-star-name">Estrela ${mainStar} (${starData.rank})</div>
+            <div class="main-star-sub">Elemento: ${starData.element} | Palacio da Vida: ${DIZHI[mingIdx]}</div>
         </div>
     `;
 
@@ -342,20 +342,20 @@ function calculate() {
 
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item"><div class="info-label">Life Palace Main Star</div><div class="info-value">${starData.glyph} ${mainStar} Star</div><div class="info-desc">${starData.rank}</div></div>
-        <div class="info-item"><div class="info-label">Life Palace Position</div><div class="info-value">${DIZHI[mingIdx]} Palace (${tiangan}${mingDizhi})</div></div>
-        <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing} Destiny</div></div>
-        <div class="info-item"><div class="info-label">Gender / Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Male (Yang)' : 'Female (Yin)'}</div></div>
+        <div class="info-item"><div class="info-label">Estrela Principal do Palacio da Vida</div><div class="info-value">${starData.glyph} Estrela ${mainStar}</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">Posicao do Palacio da Vida</div><div class="info-value">Palacio ${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
+        <div class="info-item"><div class="info-label">Cinco Elementos</div><div class="info-value">Destino ${wuxing}</div></div>
+        <div class="info-item"><div class="info-label">Genero / Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Masculino (Yang)' : 'Feminino (Yin)'}</div></div>
     `;
 
     // Main Interpretation
     document.getElementById('mainInterpWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">${starData.glyph} ${mainStar} Star — "${starData.rank}"</div>
+            <div class="interp-title">${starData.glyph} Estrela ${mainStar} — "${starData.rank}"</div>
             <div class="interp-text">${starData.personality}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💡 Life Advice for ${mainStar} Star</div>
+            <div class="interp-title">💡 Conselho de Vida para a Estrela ${mainStar}</div>
             <div class="interp-text">${starData.advice}</div>
         </div>
     `;
@@ -366,8 +366,8 @@ function calculate() {
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Spouse Palace: ${DIZHI[spouseIdx]} Palace ${spouseStar ? '— ' + spouseStar + ' Star' : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar} Star\'s view on marriage:</strong> ${starData.love}</div>
+            <div class="interp-title">💕 Palacio do Conjuge: Palacio ${DIZHI[spouseIdx]} ${spouseStar ? '— Estrela ' + spouseStar : ''}</div>
+            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Nenhuma estrela principal no Palacio do Conjuge — seu conjuge tera uma personalidade calma e estavel. Uma vida conjugal tranquila sem grandes turbulencias.'}<br><br><strong>Visao da Estrela ${mainStar} sobre o casamento:</strong> ${starData.love}</div>
         </div>
     `;
 
@@ -377,8 +377,8 @@ function calculate() {
     const wealthStar = wealthStars.length > 0 ? wealthStars[0] : null;
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💰 Wealth Palace: ${DIZHI[wealthIdx]} Palace ${wealthStar ? '— ' + wealthStar + ' Star' : ''}</div>
-            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : 'No main star in the Wealth Palace — finances are stable but steady without notable fluctuations.'}<br><br><strong>${mainStar} Star\'s view on wealth:</strong> ${starData.wealth}</div>
+            <div class="interp-title">💰 Palacio da Riqueza: Palacio ${DIZHI[wealthIdx]} ${wealthStar ? '— Estrela ' + wealthStar : ''}</div>
+            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : 'Nenhuma estrela principal no Palacio da Riqueza — as financas sao estaveis e constantes sem flutuacoes notaveis.'}<br><br><strong>Visao da Estrela ${mainStar} sobre riqueza:</strong> ${starData.wealth}</div>
         </div>
     `;
 
@@ -388,8 +388,8 @@ function calculate() {
     const careerStar = careerStars.length > 0 ? careerStars[0] : null;
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💼 Career Palace: ${DIZHI[careerIdx]} Palace ${careerStar ? '— ' + careerStar + ' Star' : ''}</div>
-            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : 'No main star in the Career Palace — your career is stable and conventional. Steady growth within an organization.'}<br><br><strong>${mainStar} Star\'s view on career:</strong> ${starData.career}</div>
+            <div class="interp-title">💼 Palacio da Carreira: Palacio ${DIZHI[careerIdx]} ${careerStar ? '— Estrela ' + careerStar : ''}</div>
+            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : 'Nenhuma estrela principal no Palacio da Carreira — sua carreira e estavel e convencional. Crescimento constante dentro de uma organizacao.'}<br><br><strong>Visao da Estrela ${mainStar} sobre carreira:</strong> ${starData.career}</div>
         </div>
     `;
 
@@ -397,8 +397,8 @@ function calculate() {
     const healthIdx = (mingIdx + 5) % 12;
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">🏥 Health Palace: ${DIZHI[healthIdx]} Palace</div>
-            <div class="interp-text"><strong>${mainStar} Star\'s health profile:</strong> ${starData.health}</div>
+            <div class="interp-title">🏥 Palacio da Saude: Palacio ${DIZHI[healthIdx]}</div>
+            <div class="interp-text"><strong>Perfil de saude da Estrela ${mainStar}:</strong> ${starData.health}</div>
         </div>
     `;
 
@@ -414,9 +414,9 @@ function calculate() {
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
 
         dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
-            <span style="min-width:80px;font-weight:700;color:#e84393;">Age ${startAge}~${endAge}</span>
-            <span style="flex:1;color:#999;">${DIZHI[palIdx]} Palace ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
-            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Current</span>' : ''}
+            <span style="min-width:80px;font-weight:700;color:#e84393;">Idade ${startAge}~${endAge}</span>
+            <span style="flex:1;color:#999;">Palacio ${DIZHI[palIdx]} ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Atual</span>' : ''}
         </div>`;
     }
     dashaHtml += '</div>';

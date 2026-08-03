@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hellenistic Astrology - MOGU Moon</title>
+    <title>Astrologie Hellénistique - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -64,12 +64,12 @@
 <div class="container">
     <div class="page-title">
         <h2>🏛️ Hellenistic Astrology</h2>
-        <p>Ancient Greece — The origin of Western astrology. Your destiny read through the Lot of Fortune and Sect</p>
+        <p>Grèce Antique — L'origine de l'astrologie occidentale. Votre destin lu à travers la Part de Fortune et la Secte</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Date de naissance</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -77,16 +77,16 @@
             </div>
         </div>
         <div class="input-group">
-            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <label>Heure de naissance <span class="optional-tag">(Sélectionnez 'Inconnu' si incertain)</span></label>
             <div class="input-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
-                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Enter Time</option><option value="unknown">Unknown</option></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Saisir l'heure</option><option value="unknown">Inconnu</option></select>
             </div>
         </div>
         <div class="input-group">
-            <label>Birth Place</label>
+            <label>Lieu de naissance</label>
             <select id="birthCity">
                 <optgroup label="🇰🇷 South Korea"><option value="37.57,126.98" selected>Seoul</option><option value="35.18,129.08">Busan</option><option value="35.87,128.60">Daegu</option></optgroup>
                 <optgroup label="🌏 Asia"><option value="35.68,139.69">Tokyo</option><option value="39.90,116.40">Beijing</option><option value="28.61,77.23">New Delhi</option></optgroup>
@@ -94,35 +94,35 @@
                 <optgroup label="🇪🇺 Europe"><option value="37.97,23.72">Athens</option><option value="51.51,-0.13">London</option><option value="48.86,2.35">Paris</option><option value="41.90,12.50">Rome</option></optgroup>
             </select>
         </div>
-        <button class="calc-btn" onclick="calculate()">🏛️ Generate Hellenistic Chart</button>
+        <button class="calc-btn" onclick="calculate()">🏛️ Générer le thème hellénistique</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">☀️ Sect (Day / Night Chart)</h3>
+        <h3 class="section-title">☀️ Secte (Thème Diurne / Nocturne)</h3>
         <div id="sectWrap"></div>
 
-        <h3 class="section-title">🪐 Planetary Positions (Whole Sign Houses)</h3>
+        <h3 class="section-title">🪐 Positions Planétaires (Maisons en Signe Entier)</h3>
         <div id="planetWrap"></div>
 
-        <h3 class="section-title">🎯 Lot of Fortune</h3>
+        <h3 class="section-title">🎯 Part de Fortune</h3>
         <div id="lotWrap"></div>
 
-        <h3 class="section-title">📖 Sun Sign Interpretation</h3>
+        <h3 class="section-title">📖 Interprétation du Signe Solaire</h3>
         <div id="sunWrap"></div>
 
-        <h3 class="section-title">🌙 Moon Sign Interpretation</h3>
+        <h3 class="section-title">🌙 Interprétation du Signe Lunaire</h3>
         <div id="moonWrap"></div>
 
-        <h3 class="section-title">💕 Love & Relationships (Venus)</h3>
+        <h3 class="section-title">💕 Amour et Relations (Vénus)</h3>
         <div id="venusWrap"></div>
 
-        <h3 class="section-title">💼 Career & Ambition (Saturn & Mars)</h3>
+        <h3 class="section-title">💼 Carrière et Ambition (Saturne et Mars)</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">🍀 Planet of Fortune (Jupiter)</h3>
+        <h3 class="section-title">🍀 Planète de Fortune (Jupiter)</h3>
         <div id="jupiterWrap"></div>
 
-        <h3 class="section-title">⚖️ Chart Ruler (Master of the Chart)</h3>
+        <h3 class="section-title">⚖️ Maître du Thème</h3>
         <div id="rulerWrap"></div>
     </div>
 </div>
@@ -131,66 +131,66 @@
 
 <script src="../../astronomy.browser.min.js"></script>
 <script>
-const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
-const SIGNS_EN = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGNS = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge','Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
+const SIGNS_EN = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge','Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
 const SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 const RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
-const ELEMENTS = ['Fire','Earth','Air','Water','Fire','Earth','Air','Water','Fire','Earth','Air','Water'];
-const MODES = ['Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable','Cardinal','Fixed','Mutable'];
+const ELEMENTS = ['Feu','Terre','Air','Eau','Feu','Terre','Air','Eau','Feu','Terre','Air','Eau'];
+const MODES = ['Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable'];
 
 const PLANETS = [
-    { id: 'Sun', name: 'Sun', symbol: '☉' },
-    { id: 'Moon', name: 'Moon', symbol: '☽' },
+    { id: 'Sun', name: 'Soleil', symbol: '☉' },
+    { id: 'Moon', name: 'Lune', symbol: '☽' },
     { id: 'Mars', name: 'Mars', symbol: '♂' },
-    { id: 'Mercury', name: 'Mercury', symbol: '☿' },
+    { id: 'Mercury', name: 'Mercure', symbol: '☿' },
     { id: 'Jupiter', name: 'Jupiter', symbol: '♃' },
-    { id: 'Venus', name: 'Venus', symbol: '♀' },
-    { id: 'Saturn', name: 'Saturn', symbol: '♄' }
+    { id: 'Venus', name: 'Vénus', symbol: '♀' },
+    { id: 'Saturn', name: 'Saturne', symbol: '♄' }
 ];
 
 const SUN_INTERP = [
-    'Aries Sun: A warrior\'s soul. You forge new paths with courage and a pioneering spirit. Like the ancient Greek hero Achilles, you advance fearlessly. Your sense of self is strong, independent, and you shine in competition.',
-    'Taurus Sun: Earthly abundance. Like Aphrodite\'s garden, you love beauty and pleasure. Slow but sure in reaching your goals, once you decide on something, nothing can shake your resolve.',
-    'Gemini Sun: Hermes\' wit. Quick and intellectual like the winged messenger. Versatile, pursuing two or more interests at once. A master of communication.',
-    'Cancer Sun: Moon\'s protection. Like Artemis, you are a guardian who protects home and loved ones. Extremely sensitive with strong intuition. You cherish the past and memories.',
-    'Leo Sun: Apollo\'s light. Like the Sun god, you illuminate everything around you. Overflowing with charisma, creativity, and generosity. You shine on stage and lead others.',
-    'Virgo Sun: Demeter\'s wisdom. Meticulous and practical like the goddess of harvest. Outstanding analytical ability, devoted to service and healing. A craftsman\'s spirit that pursues perfection.',
-    'Libra Sun: Themis\' balance. You pursue fairness and beauty like the goddess of justice. You shine in relationships and partnerships, with an exceptional sense of art and aesthetics.',
-    'Scorpio Sun: Hades\' depth. Like the lord of the underworld, you explore invisible worlds. Sharp intuition and transformative power. Once decided, you pursue to the very end with unwavering tenacity.',
-    'Sagittarius Sun: Zeus\' arrow. Like the supreme god, you possess wide vision and grand ambition. You love philosophy, travel, and adventure, seeking truth. Optimistic and generous.',
-    'Capricorn Sun: Kronos\' patience. Like the god of time, you climb to the top slowly but surely. Great ambition, systematic approach, valuing social achievement. You grow younger with age.',
-    'Aquarius Sun: Prometheus\' innovation. Revolutionary and original like the Titan who brought fire to humanity. You have a vision of the future and act for all of humankind.',
-    'Pisces Sun: Poseidon\'s ocean. Boundlessly wide and deep like the god of the sea. Extraordinarily intuitive and spiritually sensitive, drawn to art and mystery. Infinite capacity for empathy.'
+    'Soleil en Bélier : Une âme de guerrier. Vous forgez de nouveaux chemins avec courage et esprit pionnier. Comme le héros grec Achille, vous avancez sans crainte. Votre sens de soi est fort, indépendant, et vous brillez dans la compétition.',
+    'Soleil en Taureau : Abondance terrestre. Comme le jardin d\'Aphrodite, vous aimez la beauté et le plaisir. Lent mais sûr dans l\'atteinte de vos objectifs, une fois décidé, rien ne peut ébranler votre résolution.',
+    'Soleil en Gémeaux : L\'esprit d\'Hermès. Rapide et intellectuel comme le messager ailé. Polyvalent, poursuivant deux ou plusieurs intérêts à la fois. Un maître de la communication.',
+    'Soleil en Cancer : La protection de la Lune. Comme Artémis, vous êtes un gardien qui protège le foyer et les êtres chers. Extrêmement sensible avec une forte intuition. Vous chérissez le passé et les souvenirs.',
+    'Soleil en Lion : La lumière d\'Apollon. Comme le dieu du Soleil, vous illuminez tout autour de vous. Débordant de charisme, de créativité et de générosité. Vous brillez sur scène et menez les autres.',
+    'Soleil en Vierge : La sagesse de Déméter. Méticuleux et pratique comme la déesse de la moisson. Capacité analytique remarquable, dévoué au service et à la guérison. Un esprit d\'artisan qui poursuit la perfection.',
+    'Soleil en Balance : L\'équilibre de Thémis. Vous poursuivez l\'équité et la beauté comme la déesse de la justice. Vous brillez dans les relations et les partenariats, avec un sens exceptionnel de l\'art et de l\'esthétique.',
+    'Soleil en Scorpion : La profondeur d\'Hadès. Comme le seigneur des enfers, vous explorez les mondes invisibles. Intuition aiguisée et pouvoir de transformation. Une fois décidé, vous poursuivez jusqu\'au bout avec une ténacité inébranlable.',
+    'Soleil en Sagittaire : La flèche de Zeus. Comme le dieu suprême, vous possédez une large vision et une grande ambition. Vous aimez la philosophie, le voyage et l\'aventure, cherchant la vérité. Optimiste et généreux.',
+    'Soleil en Capricorne : La patience de Kronos. Comme le dieu du temps, vous grimpez au sommet lentement mais sûrement. Grande ambition, approche systématique, valorisant la réussite sociale. Vous rajeunissez avec l\'âge.',
+    'Soleil en Verseau : L\'innovation de Prométhée. Révolutionnaire et original comme le Titan qui apporta le feu à l\'humanité. Vous avez une vision du futur et agissez pour toute l\'humanité.',
+    'Soleil en Poissons : L\'océan de Poséidon. Infiniment large et profond comme le dieu de la mer. Extraordinairement intuitif et spirituellement sensible, attiré par l\'art et le mystère. Capacité infinie d\'empathie.'
 ];
 
 const MOON_INTERP = [
-    'Aries Moon: Your emotions blaze like fire, quick to ignite. Anger comes fast but fades just as quickly. You express feelings through action, and challenges bring emotional stability.',
-    'Taurus Moon: The most stable Moon placement. You seek emotional comfort and material security simultaneously. Good food, nature, and music are your healing sources.',
-    'Gemini Moon: Conversation and communication are your emotional lifeline. Diverse interests stabilize your emotions, and you feel anxious without intellectual stimulation.',
-    'Cancer Moon: The Moon\'s home sign. Sensitivity is amplified — you feel everything deeply. The bond with home and mother is very strong.',
-    'Leo Moon: You feel emotionally stable when loved and recognized. Creative expression is your emotional outlet, and being ignored wounds you deeply.',
-    'Virgo Moon: A tendency to analyze and organize emotions. Helping others gives you emotional satisfaction. You worry a lot but solve things practically.',
-    'Libra Moon: You find emotional balance within relationships. You deeply dislike conflict, and beautiful surroundings bring peace of mind.',
-    'Scorpio Moon: The depths of emotion. You feel everything to an extreme degree and never forget betrayal. Your intuition is nearly supernatural.',
-    'Sagittarius Moon: Freedom and adventure are the oxygen of your emotions. You feel suffocated by restriction — travel and learning are the best remedies.',
-    'Capricorn Moon: A tendency to control and suppress emotions. Responsibility takes priority over feelings, and you become emotionally freer with age.',
-    'Aquarius Moon: Unique emotional patterns. You love in unconventional ways, with a universal empathy for all of humanity.',
-    'Pisces Moon: An emotional sponge. You absorb all the feelings around you without boundaries. Dreams may be vivid and prophetic.'
+    'Lune en Bélier : Vos émotions brûlent comme le feu, rapides à s\'enflammer. La colère arrive vite mais s\'apaise tout aussi rapidement. Vous exprimez vos sentiments par l\'action, et les défis apportent la stabilité émotionnelle.',
+    'Lune en Taureau : Le placement lunaire le plus stable. Vous cherchez le confort émotionnel et la sécurité matérielle simultanément. La bonne nourriture, la nature et la musique sont vos sources de guérison.',
+    'Lune en Gémeaux : La conversation et la communication sont votre ligne de vie émotionnelle. Des intérêts divers stabilisent vos émotions, et vous vous sentez anxieux sans stimulation intellectuelle.',
+    'Lune en Cancer : Le domicile de la Lune. La sensibilité est amplifiée — vous ressentez tout profondément. Le lien avec le foyer et la mère est très fort.',
+    'Lune en Lion : Vous vous sentez émotionnellement stable quand vous êtes aimé et reconnu. L\'expression créative est votre exutoire émotionnel, et être ignoré vous blesse profondément.',
+    'Lune en Vierge : Tendance à analyser et organiser les émotions. Aider les autres vous donne satisfaction émotionnelle. Vous vous inquiétez beaucoup mais résolvez les choses de manière pratique.',
+    'Lune en Balance : Vous trouvez l\'équilibre émotionnel dans les relations. Vous n\'aimez pas du tout les conflits, et un bel environnement apporte la paix de l\'esprit.',
+    'Lune en Scorpion : Les profondeurs de l\'émotion. Vous ressentez tout à un degré extrême et n\'oubliez jamais la trahison. Votre intuition est presque surnaturelle.',
+    'Lune en Sagittaire : La liberté et l\'aventure sont l\'oxygène de vos émotions. Vous vous sentez étouffé par les restrictions — le voyage et l\'apprentissage sont les meilleurs remèdes.',
+    'Lune en Capricorne : Tendance à contrôler et réprimer les émotions. La responsabilité prime sur les sentiments, et vous devenez émotionnellement plus libre avec l\'âge.',
+    'Lune en Verseau : Schémas émotionnels uniques. Vous aimez de manière non conventionnelle, avec une empathie universelle pour toute l\'humanité.',
+    'Lune en Poissons : Une éponge émotionnelle. Vous absorbez tous les sentiments autour de vous sans frontières. Les rêves peuvent être vivides et prophétiques.'
 ];
 
 const VENUS_INTERP = [
-    'Aries Venus: Conquering love. You enjoy the chase and fall passionately. You want an independent partner.',
-    'Taurus Venus: Venus in its home sign! Sensual and faithful love. You build lasting relationships and give beautiful gifts.',
-    'Gemini Venus: Witty love. Conversation and intellectual connection are key. You want to experience various relationships.',
-    'Cancer Venus: Nurturing love. Domestic and wrapping your partner in care like a mother. Emotional safety comes first.',
-    'Leo Venus: Dramatic love! Romantic and generous, you treat your partner like royalty. Love in the spotlight.',
-    'Virgo Venus: Practical love. You show love through small acts, caring for your partner\'s health and daily life.',
-    'Libra Venus: Venus in its home sign! You pursue perfect partnership — charming and refined in love.',
-    'Scorpio Venus: Possessive and intense love. All or nothing. You seek deep spiritual connection.',
-    'Sagittarius Venus: Adventurous love. You want a relationship where you travel and grow together. Freedom is key.',
-    'Capricorn Venus: Serious and responsible love. Marriage may come late, but relationships last.',
-    'Aquarius Venus: Unique and unconventional love. Relationships that start as friendships. You respect independence.',
-    'Pisces Venus: Venus exalted! Unconditional and spiritual love. You dream of a soulmate and are deeply devoted.'
+    'Vénus en Bélier : L\'amour conquérant. Vous aimez la poursuite et tombez passionnément. Vous voulez un partenaire indépendant.',
+    'Vénus en Taureau : Vénus dans son domicile ! Amour sensuel et fidèle. Vous construisez des relations durables et offrez de beaux cadeaux.',
+    'Vénus en Gémeaux : L\'amour spirituel. La conversation et la connexion intellectuelle sont essentielles. Vous voulez vivre diverses relations.',
+    'Vénus en Cancer : L\'amour nourricier. Domestique et enveloppant votre partenaire de soins comme une mère. La sécurité émotionnelle d\'abord.',
+    'Vénus en Lion : L\'amour dramatique ! Romantique et généreux, vous traitez votre partenaire comme de la royauté. L\'amour sous les projecteurs.',
+    'Vénus en Vierge : L\'amour pratique. Vous montrez l\'amour par de petits actes, prenant soin de la santé et du quotidien de votre partenaire.',
+    'Vénus en Balance : Vénus dans son domicile ! Vous poursuivez le partenariat parfait — charmant et raffiné en amour.',
+    'Vénus en Scorpion : Amour possessif et intense. Tout ou rien. Vous cherchez une connexion spirituelle profonde.',
+    'Vénus en Sagittaire : L\'amour aventureux. Vous voulez une relation où vous voyagez et grandissez ensemble. La liberté est la clé.',
+    'Vénus en Capricorne : Amour sérieux et responsable. Le mariage peut venir tard, mais les relations durent.',
+    'Vénus en Verseau : Amour unique et non conventionnel. Relations qui commencent par l\'amitié. Vous respectez l\'indépendance.',
+    'Vénus en Poissons : Vénus en exaltation ! Amour inconditionnel et spirituel. Vous rêvez d\'une âme sœur et êtes profondément dévoué.'
 ];
 
 function getPlanetLon(id, astroDate) {
@@ -205,8 +205,8 @@ function initForm() {
     const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
     const h = document.getElementById('birthHour'), min = document.getElementById('birthMinute');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Mois ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Jour ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
     [12,1,2,3,4,5,6,7,8,9,10,11].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v + ':00'; if (v === 10) o.selected = true; h.appendChild(o); });
     for (let i = 0; i < 60; i += 5) { const o = document.createElement('option'); o.value = i; o.textContent = ':' + String(i).padStart(2,'0'); if (i === 30) o.selected = true; min.appendChild(o); }
 }
@@ -259,26 +259,26 @@ function calculate() {
 
     // ═══ SECT (Day/Night Chart) ═══
     const isDaytime = hour >= 6 && hour < 18;
-    const sectLeader = isDaytime ? 'Sun ☉' : 'Moon ☽';
-    const sectBenefic = isDaytime ? 'Jupiter ♃' : 'Venus ♀';
-    const sectMalefic = isDaytime ? 'Saturn ♄' : 'Mars ♂';
+    const sectLeader = isDaytime ? 'Soleil ☉' : 'Lune ☽';
+    const sectBenefic = isDaytime ? 'Jupiter ♃' : 'Vénus ♀';
+    const sectMalefic = isDaytime ? 'Saturne ♄' : 'Mars ♂';
 
     document.getElementById('sectWrap').innerHTML = `
         <div class="interp-card" style="border-left:3px solid #3498db;">
             <div class="interp-text">
-                <strong>What is Sect?</strong> A core concept in Hellenistic astrology. The roles of the planets change depending on whether you were born during the day or at night.<br><br>
-                You have a <strong style="color:#3498db;">${isDaytime ? '☀️ Day Chart (Diurnal)' : '🌙 Night Chart (Nocturnal)'}</strong>.<br><br>
-                <strong>Chart Leader:</strong> ${sectLeader} — The core energy guiding your life<br>
-                <strong>Benefic Planet:</strong> ${sectBenefic} — The star that brings luck and opportunity<br>
-                <strong>Malefic Planet:</strong> ${sectMalefic} — The star that brings challenge and growth<br><br>
-                ${isDaytime ? 'A day chart is conscious, rational, and values social achievement. Under the Sun\'s light, you advance clearly toward your goals.' :
-                  'A night chart is intuitive, emotional, and values inner growth. Under the Moon\'s light, you explore deep emotions and the spiritual world.'}
+                <strong>Qu'est-ce que la Secte ?</strong> Un concept fondamental en astrologie hellénistique. Les rôles des planètes changent selon que vous êtes né de jour ou de nuit.<br><br>
+                Vous avez un <strong style="color:#3498db;">${isDaytime ? '☀️ Thème Diurne' : '🌙 Thème Nocturne'}</strong>.<br><br>
+                <strong>Chef du thème :</strong> ${sectLeader} — L'énergie centrale guidant votre vie<br>
+                <strong>Planète bénéfique :</strong> ${sectBenefic} — L'astre qui apporte chance et opportunité<br>
+                <strong>Planète maléfique :</strong> ${sectMalefic} — L'astre qui apporte défi et croissance<br><br>
+                ${isDaytime ? 'Un thème diurne est conscient, rationnel, et valorise la réussite sociale. Sous la lumière du Soleil, vous avancez clairement vers vos objectifs.' :
+                  'Un thème nocturne est intuitif, émotionnel, et valorise la croissance intérieure. Sous la lumière de la Lune, vous explorez les émotions profondes et le monde spirituel.'}
             </div>
         </div>
     `;
 
     // ═══ PLANET TABLE ═══
-    let tableHtml = '<table class="planet-table"><thead><tr><th>Planet</th><th>Sign</th><th>Degree</th><th>Element</th><th>Mode</th></tr></thead><tbody>';
+    let tableHtml = '<table class="planet-table"><thead><tr><th>Planète</th><th>Signe</th><th>Degré</th><th>Élément</th><th>Mode</th></tr></thead><tbody>';
     tableHtml += `<tr><td>⬆ Ascendant</td><td>${SYMBOLS[ascSign]} ${SIGNS[ascSign]}</td><td>-</td><td>${ELEMENTS[ascSign]}</td><td>${MODES[ascSign]}</td></tr>`;
     positions.forEach(p => {
         tableHtml += `<tr><td>${p.symbol} ${p.name}</td><td>${SYMBOLS[p.sign]} ${SIGNS[p.sign]}</td><td>${p.degree.toFixed(1)}°</td><td>${ELEMENTS[p.sign]}</td><td>${MODES[p.sign]}</td></tr>`;
@@ -297,29 +297,29 @@ function calculate() {
     const lotDeg = lotLon % 30;
 
     const lotInterp = [
-        'Fortune in Aries: Luck comes from courage and action. Those who move first seize fortune. New beginnings and challenges are the key to luck.',
-        'Fortune in Taurus: Luck comes from material stability. Steady effort and patience bring abundance. Fortune lies in nature and art.',
-        'Fortune in Gemini: Luck comes from communication and knowledge. Connections with people create opportunities. Writing and learning are the keys to fortune.',
-        'Fortune in Cancer: Luck comes from home and emotion. Family bonds bring fortune. Trust your intuition and luck will follow.',
-        'Fortune in Leo: Luck comes from creativity and self-expression. Fortune arrives when you take the stage and exercise leadership.',
-        'Fortune in Virgo: Luck comes from service and attention to detail. Fortune returns when you help others. Health management is the key to luck.',
-        'Fortune in Libra: Luck comes from partnership. Meeting the right partner changes your life. Balance and fairness are your fortune.',
-        'Fortune in Scorpio: Luck comes from transformation. The ability to turn crisis into opportunity is your fortune. Luck in inheritance, insurance, and investment.',
-        'Fortune in Sagittarius: Luck comes from education and travel. Connections abroad bring great fortune. Learning itself is luck.',
-        'Fortune in Capricorn: Luck comes from social achievement. Set high goals and the universe will help. Patience is your fortune.',
-        'Fortune in Aquarius: Luck comes from innovation. Fortune follows when you take a different path from others. Community and networks are your fortune.',
-        'Fortune in Pisces: Luck comes from the spiritual world. Follow your intuition and miracles happen. Art and charity are the keys to fortune.'
+        'Fortune en Bélier : La chance vient du courage et de l\'action. Ceux qui bougent en premier saisissent la fortune. Les nouveaux commencements et défis sont la clé de la chance.',
+        'Fortune en Taureau : La chance vient de la stabilité matérielle. L\'effort régulier et la patience apportent l\'abondance. La fortune réside dans la nature et l\'art.',
+        'Fortune en Gémeaux : La chance vient de la communication et du savoir. Les connexions avec les gens créent des opportunités. L\'écriture et l\'apprentissage sont les clés de la fortune.',
+        'Fortune en Cancer : La chance vient du foyer et de l\'émotion. Les liens familiaux apportent la fortune. Faites confiance à votre intuition et la chance suivra.',
+        'Fortune en Lion : La chance vient de la créativité et de l\'expression de soi. La fortune arrive quand vous montez sur scène et exercez le leadership.',
+        'Fortune en Vierge : La chance vient du service et de l\'attention aux détails. La fortune revient quand vous aidez les autres. La gestion de la santé est la clé de la chance.',
+        'Fortune en Balance : La chance vient du partenariat. Rencontrer le bon partenaire change votre vie. L\'équilibre et l\'équité sont votre fortune.',
+        'Fortune en Scorpion : La chance vient de la transformation. La capacité de transformer la crise en opportunité est votre fortune. Chance dans les héritages, assurances et investissements.',
+        'Fortune en Sagittaire : La chance vient de l\'éducation et du voyage. Les connexions à l\'étranger apportent grande fortune. L\'apprentissage lui-même est chance.',
+        'Fortune en Capricorne : La chance vient de la réussite sociale. Fixez des objectifs élevés et l\'univers vous aidera. La patience est votre fortune.',
+        'Fortune en Verseau : La chance vient de l\'innovation. La fortune suit quand vous prenez un chemin différent des autres. La communauté et les réseaux sont votre fortune.',
+        'Fortune en Poissons : La chance vient du monde spirituel. Suivez votre intuition et les miracles arrivent. L\'art et la charité sont les clés de la fortune.'
     ];
 
     document.getElementById('lotWrap').innerHTML = `
         <div class="sign-card">
             <span class="sign-glyph">${SYMBOLS[lotSign]}</span>
-            <div class="sign-name">Lot of Fortune</div>
+            <div class="sign-name">Part de Fortune</div>
             <div class="sign-sub">${SIGNS[lotSign]} ${lotDeg.toFixed(1)}°</div>
         </div>
         <div class="interp-card">
             <div class="interp-text">
-                <strong>What is the Lot of Fortune?</strong> The most important point in Hellenistic astrology. It is calculated from the relationship between the Sun, Moon, and Ascendant. It reveals where your luck comes from.<br><br>
+                <strong>Qu'est-ce que la Part de Fortune ?</strong> Le point le plus important en astrologie hellénistique. Elle est calculée à partir de la relation entre le Soleil, la Lune et l'Ascendant. Elle révèle d'où vient votre chance.<br><br>
                 ${lotInterp[lotSign]}
             </div>
         </div>
@@ -384,11 +384,11 @@ function calculate() {
             <div class="interp-text">${VENUS_DETAIL[venusSign]}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💕 Key Love Keywords</div>
+            <div class="interp-title">💕 Mots-clés amoureux</div>
             <div class="interp-text">
-                <strong>Love Style:</strong> ${VENUS_INTERP[venusSign]}<br><br>
-                <strong>Ideal Partner:</strong> ${['An independent and challenging partner','A sensual and stable partner','An intellectual partner with great conversation','An emotional and domestic partner','A charismatic and attention-grabbing partner','A practical and devoted partner','A refined and balanced partner','An intense and profound partner','A free-spirited and adventurous partner','An ambitious and responsible partner','A unique and innovative partner','A spiritual and artistic partner'][venusSign]}<br>
-                <strong>Love Pitfall:</strong> ${['Passion that cools quickly','Possessiveness and stubbornness','Flightiness and distraction','Excessive emotional dependence','Self-centered love','Criticism and perfectionism','Indecisiveness and dependency','Jealousy and obsession','Refusal of commitment and wanderlust','Emotional suppression and coldness','Emotional distance','Gap between reality and ideals'][venusSign]}
+                <strong>Style amoureux :</strong> ${VENUS_INTERP[venusSign]}<br><br>
+                <strong>Partenaire idéal :</strong> ${['Un partenaire indépendant et stimulant','Un partenaire sensuel et stable','Un partenaire intellectuel avec une bonne conversation','Un partenaire émotionnel et domestique','Un partenaire charismatique qui attire l\'attention','Un partenaire pratique et dévoué','Un partenaire raffiné et équilibré','Un partenaire intense et profond','Un partenaire libre et aventurier','Un partenaire ambitieux et responsable','Un partenaire unique et innovant','Un partenaire spirituel et artistique'][venusSign]}<br>
+                <strong>Piège amoureux :</strong> ${['Passion qui refroidit vite','Possessivité et obstination','Légèreté et distraction','Dépendance émotionnelle excessive','Amour égocentrique','Critique et perfectionnisme','Indécision et dépendance','Jalousie et obsession','Refus d\'engagement et vagabondage','Répression émotionnelle et froideur','Distance émotionnelle','Écart entre réalité et idéaux'][venusSign]}
             </div>
         </div>
     `;
@@ -429,14 +429,14 @@ function calculate() {
 
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">♂ Mars: ${SIGNS[marsSign]} ${SYMBOLS[marsSign]} — Action, Energy, Drive</div>
+            <div class="interp-title">♂ Mars : ${SIGNS[marsSign]} ${SYMBOLS[marsSign]} — Action, Énergie, Motivation</div>
             <div class="interp-text">${MARS_DETAIL[marsSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Mars is the malefic planet but manageable. You can channel anger constructively.' : 'In a night chart, Mars is on your side! You wield powerful action and courage. Energy overflows.'}</div>
+            <strong>Influence de la secte :</strong> ${isDaytime ? 'Dans un thème diurne, Mars est la planète maléfique mais gérable. Vous pouvez canaliser la colère de manière constructive.' : 'Dans un thème nocturne, Mars est de votre côté ! Vous maniez une action puissante et du courage. L\'énergie déborde.'}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">♄ Saturn: ${SIGNS[saturnSign]} ${SYMBOLS[saturnSign]} — Trials, Patience, Karma</div>
+            <div class="interp-title">♄ Saturne : ${SIGNS[saturnSign]} ${SYMBOLS[saturnSign]} — Épreuves, Patience, Karma</div>
             <div class="interp-text">${SATURN_DETAIL[saturnSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Saturn is on your side! Discipline and patience come naturally. Even trials are manageable.' : 'In a night chart, Saturn is the malefic planet. Greater challenges come, but overcoming them makes you stronger than anyone.'}</div>
+            <strong>Influence de la secte :</strong> ${isDaytime ? 'Dans un thème diurne, Saturne est de votre côté ! La discipline et la patience viennent naturellement. Même les épreuves sont gérables.' : 'Dans un thème nocturne, Saturne est la planète maléfique. De plus grands défis arrivent, mais les surmonter vous rend plus fort que quiconque.'}</div>
         </div>
     `;
 
@@ -459,9 +459,9 @@ function calculate() {
 
     document.getElementById('jupiterWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">♃ Jupiter: ${SIGNS[jupiterSign]} ${SYMBOLS[jupiterSign]} — Fortune, Expansion, Blessing</div>
+            <div class="interp-title">♃ Jupiter : ${SIGNS[jupiterSign]} ${SYMBOLS[jupiterSign]} — Fortune, Expansion, Bénédiction</div>
             <div class="interp-text">${JUPITER_DETAIL[jupiterSign]}<br><br>
-            <strong>Sect Influence:</strong> ${isDaytime ? 'In a day chart, Jupiter is the greatest benefic! Fortune manifests visibly and socially.' : 'In a night chart, Jupiter brings inner fortune. Luck comes through wisdom and spiritual growth.'}</div>
+            <strong>Influence de la secte :</strong> ${isDaytime ? 'Dans un thème diurne, Jupiter est le plus grand bénéfique ! La fortune se manifeste visiblement et socialement.' : 'Dans un thème nocturne, Jupiter apporte la fortune intérieure. La chance vient par la sagesse et la croissance spirituelle.'}</div>
         </div>
     `;
 
@@ -482,11 +482,11 @@ function calculate() {
 
     document.getElementById('rulerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">👑 Chart Ruler: ${chartRuler} → ${SIGNS[rulerSign]} ${SYMBOLS[rulerSign]}</div>
+            <div class="interp-title">👑 Maître du thème : ${chartRuler} → ${SIGNS[rulerSign]} ${SYMBOLS[rulerSign]}</div>
             <div class="interp-text">
-                Since your Ascendant is <strong>${SIGNS[ascSign]}</strong>, the ruler of your chart is <strong>${chartRuler}</strong>.<br><br>
+                Puisque votre Ascendant est <strong>${SIGNS[ascSign]}</strong>, le maître de votre thème est <strong>${chartRuler}</strong>.<br><br>
                 ${RULER_DETAIL[chartRuler] || ''}<br><br>
-                ${chartRuler} is currently in <strong>${SIGNS[rulerSign]}</strong>, so the direction of your life is influenced by the ${ELEMENTS[rulerSign]} element. As a ${MODES[rulerSign]} sign, ${MODES[rulerSign] === 'Cardinal' ? 'you actively pioneer your life path.' : MODES[rulerSign] === 'Fixed' ? 'you build your life steadily and stably.' : 'you live flexibly, adapting to change.'}
+                ${chartRuler} est actuellement en <strong>${SIGNS[rulerSign]}</strong>, donc la direction de votre vie est influencée par l'élément ${ELEMENTS[rulerSign]}. En tant que signe ${MODES[rulerSign]}, ${MODES[rulerSign] === 'Cardinal' ? 'vous êtes un pionnier actif de votre chemin de vie.' : MODES[rulerSign] === 'Fixe' ? 'vous construisez votre vie de manière stable et régulière.' : 'vous vivez de manière flexible, vous adaptant au changement.'}
             </div>
         </div>
     `;

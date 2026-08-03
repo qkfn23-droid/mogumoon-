@@ -484,13 +484,13 @@ function calculate() {
 
     document.getElementById('toneInterpWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Tone ${tzolkin.num}: ${tone.name}</div>
+            <div class="interp-title">Ton ${tzolkin.num}: ${tone.name}</div>
             <div class="interp-text">
                 ${tone.meaning}
             </div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">Tone ${tzolkin.num} "${tone.name}" + ${sign.glyph} ${sign.en} Combination</div>
+            <div class="interp-title">Ton ${tzolkin.num} "${tone.name}" + ${sign.glyph} ${sign.en} Kombination</div>
             <div class="interp-text">
                 ${toneComboTexts[tzolkin.num]}
             </div>
@@ -521,7 +521,7 @@ function calculate() {
 
     document.getElementById('fortuneWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">${sign.name} + Tone ${tzolkin.num} Fortune Energy</div>
+            <div class="interp-title">${sign.name} + Ton ${tzolkin.num} Glücksenergie</div>
             <div class="interp-text">
                 ${fortuneTexts[fortuneIdx]}<br><br>
                 <strong>Glücksfarbe:</strong> ${sign.color}<br>
@@ -544,17 +544,17 @@ function calculate() {
     };
     const bestMatch = COMPAT_BEST[tzolkin.sign] || [];
     let compatHtml = `<div class="interp-card">
-        <div class="interp-title">${sign.glyph} ${sign.en} Compatibility</div>
+        <div class="interp-title">${sign.glyph} ${sign.en} Kompatibilität</div>
         <div class="interp-text">
-            <strong>Best Compatibility (same element "${sign.element}" / direction "${sign.direction}"):</strong><br><br>`;
+            <strong>Beste Kompatibilität (gleiches Element "${sign.element}" / Richtung "${sign.direction}"):</strong><br><br>`;
     bestMatch.forEach(idx => {
         const s = DAY_SIGNS[idx];
         compatHtml += `${s.glyph} <strong>${s.en}</strong> (${s.name}) — ${s.meaning}<br>`;
     });
     const challengeIdx = (tzolkin.sign + 10) % 20;
     const challengeSign = DAY_SIGNS[challengeIdx];
-    compatHtml += `<br><strong>Challenging Compatibility (Growth Relationship):</strong><br>
-        ${challengeSign.glyph} <strong>${challengeSign.en}</strong> (${challengeSign.name}) — A relationship with much to learn from each other due to differences, but also potential for conflict.`;
+    compatHtml += `<br><strong>Herausfordernde Kompatibilität (Wachstumsbeziehung):</strong><br>
+        ${challengeSign.glyph} <strong>${challengeSign.en}</strong> (${challengeSign.name}) — Eine Beziehung, in der man viel voneinander lernen kann aufgrund der Unterschiede, aber auch Potenzial für Konflikte besteht.`;
     compatHtml += `</div></div>`;
     document.getElementById('compatWrap').innerHTML = compatHtml;
 
@@ -569,12 +569,12 @@ function calculate() {
 
     document.getElementById('todayWrap').innerHTML = `
         <div class="interp-card" ${isSameSign ? 'style="border:2px solid #e8a020;"' : ''}>
-            <div class="interp-title">${todaySign.glyph} Today: ${todayTz.num} ${todaySign.en} (${todaySign.name})</div>
+            <div class="interp-title">${todaySign.glyph} Heute: ${todayTz.num} ${todaySign.en} (${todaySign.name})</div>
             <div class="interp-text">
-                Today's Energy: <strong>Tone ${todayTz.num} "${todayTone.name}"</strong> + <strong>${todaySign.en} "${todaySign.meaning}"</strong><br><br>
-                ${isSameSign ? '<strong>Today is the same sign as yours!</strong> A special day when your energy is maximized. Good for important decisions or new beginnings.' :
-                  bestMatch.includes(todayTz.sign) ? "Today's energy harmonizes with your sign. A day of good flow." :
-                  "Embrace today's energy and pay attention to the teachings of " + todaySign.en + "."}
+                Heutige Energie: <strong>Ton ${todayTz.num} "${todayTone.name}"</strong> + <strong>${todaySign.en} "${todaySign.meaning}"</strong><br><br>
+                ${isSameSign ? '<strong>Heute ist das gleiche Zeichen wie Ihres!</strong> Ein besonderer Tag, an dem Ihre Energie maximiert ist. Gut für wichtige Entscheidungen oder Neuanfänge.' :
+                  bestMatch.includes(todayTz.sign) ? "Die heutige Energie harmoniert mit Ihrem Zeichen. Ein Tag des guten Flusses." :
+                  "Nehmen Sie die heutige Energie an und achten Sie auf die Lehren von " + todaySign.en + "."}
             </div>
         </div>
     `;

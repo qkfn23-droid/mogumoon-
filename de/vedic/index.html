@@ -363,7 +363,7 @@
 <body>
 
 <header>
-    <h1>🔮 Ancient <span>Astrology</span></h1>
+    <h1>🔮 Antike <span>Astrologie</span></h1>
 </header>
 
 <div class="container">
@@ -1023,7 +1023,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 Inner Self & Emotions — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-title">🌙 Inneres Selbst & Emotionen — Mond: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
             <div class="interp-text">${moonInterp[moonPos.sign]}</div>
         </div>`;
     }
@@ -1075,7 +1075,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 Wealth Fortune</div>
+        <div class="interp-title">💰 Reichtums-Schicksal</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1142,7 +1142,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 Spouse & Marriage Fortune — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">💕 Ehepartner & Ehe-Schicksal — 7. Haus: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1186,7 +1186,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 Career & Social Achievement — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">💼 Karriere & Sozialer Erfolg — 10. Haus: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1212,7 +1212,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 Health — Vulnerable Areas</div>
+        <div class="interp-title">🏥 Gesundheit — Gefährdete Bereiche</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
     </div>`;
 
@@ -1260,7 +1260,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                     'Venus': 'A period of love and abundance! Romance, marriage, and artistic activities become active. You enjoy material prosperity and indulge in luxury. You may acquire a new car, new home, or jewelry. Aesthetic sense develops and social activities flourish. The longest cycle at 20 years.'
                 };
                 html += `<div class="interp-card">
-                    <div class="interp-title">⏳ Current Dasha: ${DASHA_KO[currentDasha]} Dasha</div>
+                    <div class="interp-title">⏳ Aktuelles Dasha: ${DASHA_KO[currentDasha]} Dasha</div>
                     <div class="interp-text">${dashaInterp[currentDasha]}</div>
                 </div>`;
             }
@@ -1307,7 +1307,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 Special Yogas (Planetary Combinations)</div>
+            <div class="interp-title">🔮 Besondere Yogas (Planetenkombinationen)</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -1550,29 +1550,29 @@ function renderForeign(positions, lagnaSign) {
 // ═══════════════════════════════════════════════════
 function renderDignity(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
-    const houseArea = {1:'Self',2:'Money/Family',3:'Communication/Siblings',4:'Home/Mother',5:'Children/Romance',6:'Health/Enemies',7:'Spouse',8:'Transformation/Inheritance',9:'Luck/Foreign',10:'Career/Fame',11:'Income/Wishes',12:'Foreign/Spirituality'};
+    const houseArea = {1:'Selbst',2:'Geld/Familie',3:'Kommunikation/Geschwister',4:'Zuhause/Mutter',5:'Kinder/Romantik',6:'Gesundheit/Feinde',7:'Ehepartner',8:'Transformation/Erbschaft',9:'Glück/Ausland',10:'Karriere/Ruhm',11:'Einkommen/Wünsche',12:'Ausland/Spiritualität'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
     const OWN = { Sun: [4], Moon: [3], Mars: [0,7], Mercury: [2,5], Jupiter: [8,11], Venus: [1,6], Saturn: [9,10] };
 
     // Easy explanation
     const planetRole = {
-        Sun: 'Self/Confidence/Father/Authority',
-        Moon: 'Emotions/Mind/Mother/Daily life',
-        Mars: 'Energy/Courage/Action/Competition',
-        Mercury: 'Intelligence/Communication/Learning/Business',
-        Jupiter: 'Luck/Wisdom/Wealth/Marriage',
-        Venus: 'Love/Charm/Art/Pleasure',
-        Saturn: 'Patience/Trials/Responsibility/Effort'
+        Sun: 'Selbst/Vertrauen/Vater/Autorität',
+        Moon: 'Emotionen/Geist/Mutter/Alltag',
+        Mars: 'Energie/Mut/Aktion/Wettbewerb',
+        Mercury: 'Intelligenz/Kommunikation/Lernen/Geschäft',
+        Jupiter: 'Glück/Weisheit/Reichtum/Ehe',
+        Venus: 'Liebe/Charme/Kunst/Vergnügen',
+        Saturn: 'Geduld/Prüfungen/Verantwortung/Anstrengung'
     };
 
     let html = `<div class="interp-card" style="margin-bottom:16px;">
         <div class="interp-text">
-            <strong>💡 Easy to understand:</strong> A planet's "dignity" refers to how well it can exert its power.<br><br>
-            🟢 <strong>Exalted</strong> = Peak condition! Great fortune and results in the life area this planet governs.<br>
-            🟡 <strong>Own Sign</strong> = Comfortable as if at home. Stable and good results.<br>
-            ⚪ <strong>Neutral</strong> = Average. Neither particularly strong nor weak.<br>
-            🔴 <strong>Debilitated</strong> = Weakened state. Difficulties in this area, but can be overcome with effort.
+            <strong>💡 Leicht verständlich:</strong> Die "Würde" eines Planeten bezieht sich darauf, wie gut er seine Kraft ausüben kann.<br><br>
+            🟢 <strong>Erhöht</strong> = Bestform! Großes Glück und Ergebnisse im Lebensbereich, den dieser Planet regiert.<br>
+            🟡 <strong>Eigenes Zeichen</strong> = Bequem wie zu Hause. Stabile und gute Ergebnisse.<br>
+            ⚪ <strong>Neutral</strong> = Durchschnittlich. Weder besonders stark noch schwach.<br>
+            🔴 <strong>Geschwächt</strong> = Geschwächter Zustand. Schwierigkeiten in diesem Bereich, aber mit Anstrengung überwindbar.
         </div>
     </div>`;
 
@@ -1586,31 +1586,31 @@ function renderDignity(positions, lagnaSign) {
         const area = houseArea[house] || '';
 
         if (p.sign === EXALT[p.id]) {
-            dignity = 'Exalted';
+            dignity = 'Erhöht';
             emoji = '🟢';
             color = '#5cb85c';
-            simpleDesc = `<strong>${p.name} is at maximum power!</strong> The "${role}" energy is maximized in the <strong>${house}${hSuffix} house (${area})</strong> area, bringing great blessings. Innate talents shine and good results come naturally.`;
+            simpleDesc = `<strong>${p.name} ist auf maximaler Kraft!</strong> Die "${role}"-Energie ist im Bereich des <strong>${house}. Hauses (${area})</strong> maximiert und bringt großen Segen. Angeborene Talente leuchten und gute Ergebnisse kommen natürlich.`;
         } else if (p.sign === DEBI[p.id]) {
-            dignity = 'Debilitated';
+            dignity = 'Geschwächt';
             emoji = '🔴';
             color = '#d9534f';
-            simpleDesc = `<strong>${p.name} is in a weakened state.</strong> The "${role}" energy is weakened in the <strong>${house}${hSuffix} house (${area})</strong> area. You may experience difficulties in this field, but conscious effort to overcome them can become a great opportunity for growth. See the remedies below.`;
+            simpleDesc = `<strong>${p.name} ist in geschwächtem Zustand.</strong> Die "${role}"-Energie ist im Bereich des <strong>${house}. Hauses (${area})</strong> geschwächt. Sie können in diesem Bereich Schwierigkeiten erleben, aber bewusste Anstrengung kann zu einer großen Wachstumschance werden. Siehe die Heilmittel unten.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
-            dignity = 'Own Sign';
+            dignity = 'Eigenes Zeichen';
             emoji = '🟡';
             color = '#c9a84c';
-            simpleDesc = `<strong>${p.name} is at home!</strong> The "${role}" energy stably exerts its power in the <strong>${house}${hSuffix} house (${area})</strong> area. Good results come naturally.`;
+            simpleDesc = `<strong>${p.name} ist zu Hause!</strong> Die "${role}"-Energie übt im Bereich des <strong>${house}. Hauses (${area})</strong> stabil ihre Kraft aus. Gute Ergebnisse kommen natürlich.`;
         } else {
             dignity = 'Neutral';
             emoji = '⚪';
             color = '#999';
-            simpleDesc = `${p.name}'s "${role}" energy exerts average influence in the <strong>${house}${hSuffix} house (${area})</strong> area. Results vary depending on relationships with other planets.`;
+            simpleDesc = `Die "${role}"-Energie von ${p.name} übt durchschnittlichen Einfluss im Bereich des <strong>${house}. Hauses (${area})</strong> aus. Ergebnisse variieren je nach Beziehungen zu anderen Planeten.`;
         }
 
         html += `<div class="interp-card">
             <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
+                <span style="color:#666;font-size:12px;">Regiert: ${role} │ Position: ${house}. Haus = ${area}</span><br><br>
                 ${simpleDesc}
             </div>
         </div>`;
@@ -1642,12 +1642,12 @@ function renderLucky(lagnaSign, moonPos) {
     const lagnaRulers = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const html = `<div class="interp-card">
         <div class="interp-text">
-            <strong>🎨 Lucky Color:</strong> ${d.color}<br>
-            <strong>🔢 Lucky Number:</strong> ${d.number}<br>
-            <strong>📅 Lucky Day:</strong> ${d.day}<br>
-            <strong>💎 Lucky Gemstone:</strong> ${d.gem}<br>
-            <strong>🧭 Lucky Direction:</strong> ${d.dir}<br>
-            <strong>🪐 Lagna Ruling Planet:</strong> ${lagnaRulers[lagnaSign]}
+            <strong>🎨 Glücksfarbe:</strong> ${d.color}<br>
+            <strong>🔢 Glückszahl:</strong> ${d.number}<br>
+            <strong>📅 Glückstag:</strong> ${d.day}<br>
+            <strong>💎 Glücksstein:</strong> ${d.gem}<br>
+            <strong>🧭 Glücksrichtung:</strong> ${d.dir}<br>
+            <strong>🪐 Lagna-Herrscherplanet:</strong> ${lagnaRulers[lagnaSign]}
         </div>
     </div>`;
     document.getElementById('luckyWrap').innerHTML = html;
@@ -1680,20 +1680,20 @@ function renderRemedy(positions, lagnaSign) {
 
         if (isWeak) {
             html += `<div class="interp-card">
-                <div class="interp-title">${p.symbol} ${p.name} Strengthening Methods ${isDebi ? '(Debilitated — Especially Important!)' : '(Weak Position)'}</div>
+                <div class="interp-title">${p.symbol} ${p.name} Stärkungsmethoden ${isDebi ? '(Geschwächt — Besonders wichtig!)' : '(Schwache Position)'}</div>
                 <div class="interp-text">
-                    <strong>💎 Gemstone:</strong> ${r.gem} (Recommended to wear on ring finger)<br>
-                    <strong>🙏 Mantra:</strong> "${r.mantra}" (Chant 108 times daily)<br>
-                    <strong>🎨 Color:</strong> ${r.color}<br>
-                    <strong>🍽️ Food:</strong> ${r.food}<br>
-                    <strong>🤝 Charity:</strong> ${r.charity}
+                    <strong>💎 Edelstein:</strong> ${r.gem} (Empfohlen am Ringfinger zu tragen)<br>
+                    <strong>🙏 Mantra:</strong> "${r.mantra}" (108 Mal täglich rezitieren)<br>
+                    <strong>🎨 Farbe:</strong> ${r.color}<br>
+                    <strong>🍽️ Nahrung:</strong> ${r.food}<br>
+                    <strong>🤝 Spende:</strong> ${r.charity}
                 </div>
             </div>`;
         }
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">All planets are in favorable positions! No special remedies are needed. For your lucky gemstone, wearing the gemstone of your Lagna ruling planet is recommended.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">Alle Planeten befinden sich in günstigen Positionen! Keine besonderen Heilmittel sind nötig. Als Glücksstein wird empfohlen, den Edelstein Ihres Lagna-Herrscherplaneten zu tragen.</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;

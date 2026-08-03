@@ -29,7 +29,6 @@
         .result-section { display: none; }
         .section-title { font-size: 18px; color: #e8a020; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a2a; }
 
-        /* Tzolkin Card */
         .tzolkin-card { background: linear-gradient(135deg, #2a1a18, #1a1210); border: 2px solid #e8a020; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; }
         .tzolkin-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(232,160,32,0.05) 0%, transparent 60%); }
         .tzolkin-glyph { font-size: 80px; margin-bottom: 10px; display: block; }
@@ -63,9 +62,8 @@
 <div class="container">
     <div class="page-title">
         <h2>Astrologia Maia (Tzolkin)</h2>
-        <p>Descubra sua identidade cósmica através do ciclo sagrado do calendário de 260 dias</p>
+        <p>Descubra sua identidade cosmica atraves do ciclo sagrado do calendario de 260 dias</p>
     </div>
-
 
     <div class="form-box">
         <div class="input-group">
@@ -80,22 +78,20 @@
     </div>
 
     <div class="result-section" id="resultSection">
-
         <h3 class="section-title">Contagem Longa Maia</h3>
         <div class="long-count" id="longCount">13.0.0.0.0</div>
 
         <h3 class="section-title">Seu Signo Tzolkin</h3>
         <div class="tzolkin-card" id="tzolkinCard"></div>
-
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">Interpretação do Signo do Dia</h3>
+        <h3 class="section-title">Interpretacao do Signo do Dia</h3>
         <div id="signInterpWrap"></div>
 
-        <h3 class="section-title">Interpretação do Tom</h3>
+        <h3 class="section-title">Interpretacao do Tom</h3>
         <div id="toneInterpWrap"></div>
 
-        <h3 class="section-title">Calendário Haab (Solar)</h3>
+        <h3 class="section-title">Calendario Haab (Solar)</h3>
         <div id="haabWrap"></div>
 
         <h3 class="section-title">Compatibilidade</h3>
@@ -104,7 +100,7 @@
         <h3 class="section-title">Energia Tzolkin de Hoje</h3>
         <div id="todayWrap"></div>
 
-        <h3 class="section-title">Dias de Sorte e Informações</h3>
+        <h3 class="section-title">Dias de Sorte e Informacoes</h3>
         <div id="fortuneWrap"></div>
     </div>
 </div>
@@ -112,217 +108,208 @@
 <footer>&copy; 2025 MOGU Moon</footer>
 
 <script>
-// ═══════════════════════════════════════
-// 20 DAY SIGNS (Nawal)
-// ═══════════════════════════════════════
 const DAY_SIGNS = [
-    { name: 'Imix', en: 'Crocodilo', glyph: '🐊', meaning: 'Crocodilo / Origem do Mundo', element: 'Água', direction: 'Leste', color: 'Vermelho',
-      personality: 'Energia criativa e iniciadora. Você possui uma força primordial que traz coisas novas à existência. Nascido com rica imaginação e sensibilidade artística, você é emocionalmente profundo, intuitivo e tem um forte instinto maternal. Desde a infância, você tende a se perder em mundos imaginários e encontra grande alegria em atividades criativas solitárias. Você naturalmente assume um papel de cuidador dentro da família, e seu relacionamento com sua mãe influencia profundamente toda a sua vida. O desafio da sua vida é aprender a expressar suas ricas emoções produtivamente no mundo real, e o crescimento espiritual começa quando você abraça plenamente seu poder criativo primordial interior sem medo.',
-      strength: 'Criatividade, Intuição, Instinto de cuidado, Sensibilidade artística',
-      challenge: 'Hipersensibilidade, Oscilações de humor, Linha tênue entre realidade e fantasia',
+    { name: 'Imix', en: 'Crocodilo', glyph: '🐊', meaning: 'Crocodilo / Origem do Mundo', element: 'Agua', direction: 'Leste', color: 'Vermelho',
+      personality: 'Energia criativa e iniciadora. Voce possui uma forca primordial que traz coisas novas a existencia. Nascido com rica imaginacao e sensibilidade artistica, voce e emocionalmente profundo, intuitivo e tem um forte instinto maternal. Desde a infancia, voce tende a se perder em mundos imaginarios e encontra grande alegria em atividades criativas solitarias. O desafio da sua vida e aprender a expressar suas ricas emocoes produtivamente no mundo real, e o crescimento espiritual comeca quando voce abraca plenamente seu poder criativo primordial interior sem medo.',
+      strength: 'Criatividade, Intuicao, Instinto de cuidado, Sensibilidade artistica',
+      challenge: 'Hipersensibilidade, Oscilacoes de humor, Linha tenue entre realidade e fantasia',
       career: 'Artista, Curandeiro, Conselheiro, Chef, Educador',
-      love: 'Você deseja conexões emocionais profundas e tende a cuidar do seu parceiro. O parceiro ideal é alguém emocionalmente estável que também possa entender a profunda sensibilidade de Imix. Você expressa amor através de atos de cuidado como cozinhar, dar presentes e criar espaços confortáveis. O desafio nos relacionamentos é gerenciar ciúmes e possessividade, e aprender a dar espaço ao seu parceiro.',
-      spiritual: 'Sua missão espiritual é dar à luz coisas novas no mundo. Assim como o crocodilo criou o mundo a partir das águas primordiais, você possui a habilidade espiritual de criar algo do nada. Não tema a dor da criação -- esse é seu caminho sagrado. Ao meditar, sente-se perto da água e conecte-se com a energia primordial.',
-      health: 'Preste atenção ao sistema digestivo e à saúde uterina/reprodutiva. Você tem uma constituição onde as emoções se refletem diretamente no corpo, então o estresse se manifesta facilmente como problemas estomacais. A cura relacionada à água (natação, fontes termais, terapia com água do mar) é eficaz.',
-      wealth: 'A riqueza flui através de atividades criativas. Você pode esperar renda estável em campos que combinam cuidado e criação, como arte, culinária e educação. Cuidado com gastos impulsivos, e reconhecer padrões de gastos emocionais é a chave para a estabilidade financeira.' },
-    { name: 'Ik', en: 'Wind', glyph: '💨', meaning: 'Wind / Spirit', element: 'Wind', direction: 'North', color: 'White',
-      personality: 'A free spirit with the energy of communication and change. You have a natural talent for words and writing, serving as a spiritual messenger who spreads new ideas. From childhood, you are talkative and curious, wanting to experience diverse environments and cultures. You serve as a bridge of communication within the family, but your difficulty settling in one place may cause conflict with parents. The core challenge of life is finding balance between freedom and responsibility, and spiritual growth occurs when you focus your wind-like scattered energy in one direction.',
-      strength: 'Communication skills, Flexibility, Spiritual sensitivity, Intellect',
-      challenge: 'Indecisiveness, Directionless change, Instability',
-      career: 'Writer, Speaker, Teacher, Counselor, Media, Travel guide',
-      love: 'You love freedom and dislike constraints. The ideal partner is someone independent yet capable of deep intellectual connection. You express love through words, letters, and songs, and the relationship cools without conversation. The challenge in relationships is putting down deep roots with one person, as your craving for novelty can be mistaken for unfaithfulness.',
-      spiritual: 'Your spiritual mission is to deliver messages from the invisible world. Just as wind is unseen yet exists everywhere, you have the ability to translate spiritual truths into everyday language. Breathwork meditation and incense rituals are the keys to opening your spiritual channels. Your intuition peaks when you listen to the sound of wind in nature.',
-      health: 'Pay attention to the respiratory system (lungs, bronchi) and nervous system health. Due to your constantly moving nature, overwork and sleep deprivation tend to accumulate. Be especially mindful of neck and shoulder tension. Breathing exercises and yoga are very effective.',
-      wealth: 'You earn money through communication and ideas. Income comes from media, speaking, writing, translation, and other language-related fields. However, your low interest in money can lead to sloppy financial management, so setting up an automatic savings system is recommended.' },
-    { name: 'Akbal', en: 'Night', glyph: '🌑', meaning: 'Night / Darkness / Home', element: 'Earth', direction: 'West', color: 'Black',
-      personality: 'A thinker who explores deep inner realms, strongly connected to the world of dreams and the unconscious. You value home and safety and have very strong intuition. In childhood, you are simultaneously afraid of and fascinated by the night, and your dreams are more vivid and symbolic than those of other children. You have a quiet but deep presence within the family and instinctively sense family secrets. The challenge of life is finding light within darkness, and the greatest spiritual leap occurs when you face your own shadow. Though you have strong reclusive tendencies, that very depth is the greatest gift you can offer the world.',
-      strength: 'Intuition, Dream interpretation, Deep thinking, Security abilities',
-      challenge: 'Fear, Isolation, Excessive secrecy, Depressive tendencies',
-      career: 'Psychologist, Researcher, Security specialist, Artist, Architect',
-      love: 'You need deep trust. You open your heart slowly, but once opened, you are very loyal. The ideal partner is a patient person who understands Akbal\'s silence and respects your inner world. You express love by creating safe spaces and conveying love through your very presence rather than words. The challenge in relationships is having the courage to let down walls and show vulnerability.',
-      spiritual: 'Your spiritual mission is to unearth truths hidden in darkness. Just as new consciousness is conceived within the womb of night, you possess the ability to draw universal wisdom from the depths of the unconscious. Keep a dream journal and practice lucid dreaming. Meditation around midnight brings the most powerful insights.',
-      health: 'Pay attention to sleep disorders and depressive tendencies. Vitamin D deficiency from lack of sunlight is common, and bone and joint health also need care. Morning walks in sunlight and maintaining a regular sleep rhythm are essential.',
-      wealth: 'You have stable wealth potential in research, analysis, and security fields. You have good intuition for real estate (home) investments, and long-term conservative financial strategies suit you best. Safe savings and real estate grow your wealth better than risky investments.' },
-    { name: 'Kan', en: 'Seed', glyph: '🌽', meaning: 'Corn / Seed / Lizard', element: 'Fire', direction: 'South', color: 'Yellow',
-      personality: 'Born with the energy of growth and prosperity. You hold the potential to go from seed to abundant harvest, pursuing abundance and material stability. From childhood, you are interested in collecting and growing things, finding joy in gardening or raising animals. You take it upon yourself to provide material abundance within the family, and your parents\' financial situation deeply affects your childhood psyche. The life challenge is finding balance between material prosperity and spiritual growth, and true prosperity begins when you let go of attachment.',
-      strength: 'Growth ability, Networking, Material abundance, Patience',
-      challenge: 'Greed, Excessive material attachment, Vulnerability to temptation',
-      career: 'Entrepreneur, Agriculture, Finance, Real estate, Network marketing',
-      love: 'You seek stable and abundant relationships. The ideal partner is someone realistic yet ambitious who can grow and prosper together. You express love through material care -- gifts, delicious food, comfortable environments. The challenge in relationships is the tendency to substitute love with material things, and you must learn that emotional intimacy cannot be bought with money.',
-      spiritual: 'Your spiritual mission is to plant spiritual seeds and reap abundant harvests. Just as corn was the life of Mayan civilization, you hold a sacred role in bringing abundance to the community. True awakening occurs when you realize that material and spiritual are not separate. The ritual of actually planting and growing seeds becomes your spiritual practice.',
-      health: 'Pay attention to metabolism and blood sugar regulation. Loving abundance as you do, you are prone to overeating and overdrinking, so preventing diabetes and obesity is important. Dietary control and consistent physical activity are health essentials, and a diet centered on natural foods and grains suits you well.',
-      wealth: 'You have the strongest wealth potential among all 20 signs. Whether investing, business, or agriculture, whatever you plant grows. However, if you fall into greed, you can lose everything, so always share a portion of what you earn. Sharing invites greater abundance.' },
-    { name: 'Chicchan', en: 'Serpent', glyph: '🐍', meaning: 'Serpent / Sky Serpent', element: 'Water', direction: 'East', color: 'Red',
-      personality: 'You possess powerful life force and transformative energy, directly connected to kundalini (spiritual energy). You have strong charisma and a magnetic charm that draws people in. From childhood, you radiate an intense presence and instinctively sense the emotions of those around you. In family relationships, you are sensitive to power dynamics, and extreme patterns of dominating or being dominated may emerge. The core life challenge is using the powerful inner fire as a tool of transformation rather than destruction, and spiritual growth comes through repeatedly shedding old selves like a snake sheds its skin.',
-      strength: 'Charisma, Transformative ability, Healing power, Intuition',
-      challenge: 'Obsession, Jealousy, Emotional extremes, Anger management',
-      career: 'Healer, Doctor, Psychologist, Tantric practitioner, Crisis management',
-      love: 'You love with intense passion. The ideal partner is someone internally strong who can accept Chicchan\'s intensity without fear. You express love by investing your entire being, creating deep connections through eye contact and physical touch. The challenge in relationships is healthily managing jealousy and possessiveness, recognizing and releasing the impulse to dominate your partner.',
-      spiritual: 'Your spiritual mission is to awaken and transform humanity\'s most primal energies. The serpent\'s kundalini energy rises up the spine to awaken consciousness. You can become a healer who unblocks others\' stuck energy. Tantra, qigong, and kundalini yoga are the most suitable spiritual practices for you.',
-      health: 'Pay special attention to reproductive health and the spine/nervous system. When energy is blocked, it manifests as lower back pain and lower abdomen issues, and repressed emotions may emerge as skin conditions. Regular stretching, spinal care, and healthy emotional expression habits are important.',
-      wealth: 'You have a unique wealth pattern of making money in crisis situations. Large income is possible in transformation, healing, and crisis management fields, and your instinctive intuition for investments is excellent. However, be careful of "all or nothing" extreme financial patterns, and build a stable foundation first.' },
-    { name: 'Cimi', en: 'Death', glyph: '💀', meaning: 'Death / Transformation', element: 'Wind', direction: 'North', color: 'White',
-      personality: 'A deep soul with the energy of transformation and rebirth. Death signifies not an end but a new beginning. You have a deep connection with ancestors and draw wisdom from the past. You often experience death or loss early in childhood, which deepens your outlook on life. You have strong bonds with family, especially grandparents, and serve as the keeper of family traditions and stories. With a humble and service-oriented nature, you are trusted by those around you. The life challenge is not clinging to the past and not fearing change. Spiritual growth occurs through repeated small deaths and rebirths in every moment.',
-      strength: 'Transformative ability, Ancestral wisdom, Humility, Service spirit',
-      challenge: 'Fear of change, Clinging to the past, Melancholy',
-      career: 'Counselor, Funeral director, Healer, Historian, Social worker',
-      love: 'You love deeply and spiritually. The ideal partner is a mature person who understands the depth of life and can walk the spiritual journey together. You are drawn to relationships that feel like past-life connections, with a strong sense of "I\'ve seen you somewhere before" upon meeting. You express love through devotion and loyalty. The challenge in relationships is letting go of dead relationships and having the courage to accept new love.',
-      spiritual: 'Your spiritual mission is to serve as a bridge between the boundaries of life and death. You are a spiritual mediator who delivers ancestral wisdom to the present and conveys messages from the departed to the living. Ancestor ceremonies, family history research, and meditation on the afterlife are your spiritual practices. True freedom comes when you no longer fear death.',
-      health: 'Pay attention to the immune system and lymphatic circulation. Melancholic tendencies can lead to chronic fatigue and depression, so get plenty of sunlight and exercise. Past emotional wounds accumulate as physical ailments, so regular emotional cleansing and detoxification are important.',
-      wealth: 'You have stable income in service and healing fields. Wealth potential is especially strong with inheritances, insurance, and related matters, and abundance comes from jobs that help others through transitions. Paradoxically, a non-attached attitude toward material things attracts what you need.' },
-    { name: 'Manik', en: 'Deer', glyph: '🦌', meaning: 'Deer / Healing Hand', element: 'Earth', direction: 'West', color: 'Blue',
-      personality: 'A gentle soul with the energy of healing and peace. You have the ability to heal with your hands, love nature and animals, and create harmonious environments. From childhood, you find great joy in caring for injured animals or making things with your hands. You serve as a peacemaker within the family, instinctively seeking harmony in conflict situations. You are skilled with tools and techniques, born with the qualities of an artisan. The life challenge is not losing yourself while caring for others, and you become a true healer when you realize that self-healing must come first.',
-      strength: 'Healing power, Manual dexterity, Nature affinity, Peacefulness',
-      challenge: 'Excessive perfectionism, Over-control, Self-sacrifice',
-      career: 'Doctor, Veterinarian, Physical therapist, Artisan, Artist, Environmentalist',
-      love: 'You are a warm and caring partner. The ideal match is a calm person who respects Manik\'s gentleness and shares a love of nature. You express love by giving handmade gifts, healing ailments, or cooking delicious meals. The challenge in relationships is expressing your own needs and setting boundaries so you don\'t burn out from always being the giver.',
-      spiritual: 'Your spiritual mission is to transmit healing energy to everything you touch. Like a deer -- gentle yet strong -- your hands hold sacred healing power. Reiki, laying on of hands, and herbalism are the keys to awakening your spiritual gifts. Forest walks and communion with animals are your deepest meditation.',
-      health: 'Pay special attention to hand, wrist, and joint health. You have a constitution that easily absorbs others\' energy, so make energy protection and cleansing a habit. Time spent in nature is the best healing, and herbal teas and natural remedies suit you better than pharmaceuticals.',
-      wealth: 'You earn income through manual skills and healing power. You have stable wealth potential in handicrafts, medicine, alternative medicine, and animal-related businesses. Rather than accumulating great wealth, your pattern is one where enough flows in as needed, and nature-related businesses are the best income source.' },
-    { name: 'Lamat', en: 'Star', glyph: '⭐', meaning: 'Star / Rabbit / Venus', element: 'Fire', direction: 'South', color: 'Yellow',
-      personality: 'A star of abundance and beauty, directly connected to Venus energy -- charming and artistic. You symbolize fertility and abundance and naturally attract good fortune. From childhood, you are sociable and popular, instinctively drawn to beautiful things. You serve as the mood-maker in the family, enjoying festivals and gatherings. Though multi-talented, you may find it difficult to focus on one thing, and obsessing over appearances may cause you to miss inner depth. The life challenge is discovering inner radiance beyond surface beauty, realizing that true abundance comes from spiritual fullness, not material wealth.',
-      strength: 'Charm, Abundance, Artistic sense, Good fortune',
-      challenge: 'Vanity, Showiness, Excessive pleasure-seeking, Laziness',
-      career: 'Artist, Musician, Fashion, Entertainment, Finance',
-      love: 'You are an attractive and romantic lover. The ideal partner can enjoy Lamat\'s radiant energy while also engaging in deep conversation. You prefer expressing love through grand gestures -- surprises, flowers, romantic dates. The challenge in relationships is creating deep intimacy and learning to focus on one person rather than spreading attention among many.',
-      spiritual: 'Your spiritual mission is to manifest the beauty of the universe on earth. Like the light of Venus, you shine even in darkness, awakening people\'s souls through art and beauty. The pursuit of beauty itself is your spiritual practice, and moments of marveling at nature\'s beauty are like meditation. Meditate while gazing at Venus at dawn.',
-      health: 'Pay attention to skin, kidney, and reproductive health. Your pleasure-seeking tendency makes you prone to overeating, drinking, and sleep deprivation. Be careful that obsession with beauty doesn\'t become a source of stress. A balanced diet and sufficient sleep are the best beauty regimen.',
-      wealth: 'You have strong wealth potential in art, entertainment, and the beauty industry. Called the lucky star, unexpected windfalls or opportunities may find you. However, you tend to spend as much as you earn, so establishing a habit of saving a fixed percentage of income is necessary.' },
-    { name: 'Muluc', en: 'Moon', glyph: '💧', meaning: 'Water / Moon / Rain', element: 'Water', direction: 'East', color: 'Red',
-      personality: 'A soul with deep emotional waves, connected to lunar energy with very strong intuition. Rich in sensitivity with many spiritual experiences, you are born with the power of purification and healing. From childhood, your emotions are keen -- you read others\' moods instantly and cry and laugh freely. Your energy fluctuates with the moon\'s cycle, with emotions especially heightened during the full moon. You serve as the emotional barometer within the family, greatly influencing the household atmosphere. The life challenge is maintaining your center while riding the waves of emotion, and the key to spiritual growth is learning to let emotions flow like water purifying itself.',
-      strength: 'Intuition, Sensitivity, Purification ability, Spiritual depth',
-      challenge: 'Emotional storms, Instability, Self-destructive tendencies',
-      career: 'Artist, Spiritual leader, Healer, Marine-related, Psychologist',
-      love: 'Your love is deeply emotional and intense. The ideal partner has the emotional courage and stability to ride the waves of emotion together. You express love through tears, poetry, music -- pure emotion itself -- becoming completely transparent before the one you love. The challenge in relationships is that mood swings can exhaust your partner, and it\'s important not to project responsibility for your own emotions onto others.',
-      spiritual: 'Your spiritual mission is to connect with the universe through the sacred water of emotion. Just as the moon moves the ocean\'s tides, your emotions are an antenna responding to invisible cosmic forces. Rituals by water, moonlight meditation, and purification baths are your spiritual practices. Perform conscious ceremonies during the full moon and new moon.',
-      health: 'Pay attention to kidney, bladder, and lymphatic circulation. Water metabolism is important, so drink enough water, though you have a constitution prone to swelling. Your condition fluctuates with the lunar cycle, and menstrual cycles often synchronize with the moon. Swimming and aquatic exercise are the best health management.',
-      wealth: 'Financial decisions based on intuition bring surprisingly good results. Income comes from art, healing, and marine-related fields, and your wealth fortune rises and falls like the lunar cycle. Watch out for emotional spending and be wary of the habit of shopping when feeling down.' },
-    { name: 'Oc', en: 'Dog', glyph: '🐕', meaning: 'Dog / Loyalty / Guide', element: 'Wind', direction: 'North', color: 'White',
-      personality: 'A warm guardian with the energy of loyalty and guidance. You lead and protect the community, with a strong sense of justice and emphasis on teamwork. From childhood, you have many friends and stand at the center of the group, with an instinct to protect the weak. Your love for family runs so deep that you\'d do anything for parents and siblings. Born with the role of spiritual guide, you show direction to those who are lost. The life challenge is distinguishing between blind loyalty and wise loyalty, establishing healthy boundaries so you don\'t betray yourself for the sake of loyalty to others.',
-      strength: 'Loyalty, Leadership, Sense of justice, Community consciousness',
-      challenge: 'Harm from excessive loyalty, Stubbornness, Emotional dependency',
-      career: 'Police officer, Lawyer, Social activist, Team leader, Counselor',
-      love: 'You are a very loyal partner. The ideal match is someone who genuinely appreciates Oc\'s loyalty and can reciprocate with the same depth. You express love by spending time together, protecting, and attending to small daily things. The challenge in relationships is not confusing dependency with love, and since you are very vulnerable to a partner\'s infidelity or betrayal, having the discernment to choose a trustworthy person is crucial.',
-      spiritual: 'Your spiritual mission is to guide lost souls to find their way. Just as the dog was a guide to the underworld, you are a spiritual lighthouse shining light for those who have lost direction. Service to the community is your deepest spiritual practice, and your energy is maximized when praying and meditating together. Communal spiritual activities suit you better than solitary ones.',
-      health: 'Pay attention to heart and circulatory health. You tend to burn out from expending excessive energy for others, and loyalty often prevents you from escaping stressful situations. Regular walks and companionship with pets are very effective for physical and mental stability.',
-      wealth: 'Wealth comes through teamwork and community. Income is more stable in partnerships and group activities than solo ventures, and you can expect stable finances in justice- and protection-related careers. Since loyalty may lead you to lend money that never comes back, financial boundaries are also needed.' },
-    { name: 'Chuen', en: 'Monkey', glyph: '🐒', meaning: 'Monkey / Artist', element: 'Earth', direction: 'West', color: 'Blue',
-      personality: 'A genius born with the energy of art and playfulness. As the weaver of the Maya calendar who weaves the threads of time, you have outstanding humor and creativity. In childhood, you are mischievous and find it hard to follow rules, but hidden within is remarkable creativity. You brighten the atmosphere in the family as the clown, never losing humor even in serious situations. Though multi-talented and a quick learner, you may lack the patience to delve deeply into one thing. The life challenge is finding the balance between play and depth, realizing that true art is born from sincerity beyond mere play.',
-      strength: 'Creativity, Humor, Versatility, Artistic genius',
-      challenge: 'Scattered attention, Excessive pranks, Lack of seriousness, Cunning',
-      career: 'Artist, Comedian, Designer, Writer, Engineer',
-      love: 'You are a fun and delightful partner. The ideal match can enjoy Chuen\'s playfulness while balancing it with deep conversation. You express love through humor, surprise gifts, and spontaneous adventures that catch your partner off guard. The challenge in relationships is the habit of hiding serious emotions behind jokes, and learning that showing vulnerability creates true intimacy.',
-      spiritual: 'Your spiritual mission is to weave the fabric of the universe through sacred play. The monkey god was the creator of time and art. Your creative activity itself is spiritual practice, and you can reach the deepest truths through play. Laughter is your prayer, and art is your meditation. Do not get trapped in seriousness -- maintain sacred humor.',
-      health: 'Pay attention to the nervous system and hand/finger health. Excessive stimulation and activity can exhaust the nerves, and you may have ADHD tendencies. If playfulness isn\'t channeled in healthy directions, there is a risk of addiction (gaming, social media, substances), so be cautious.',
-      wealth: 'You can create diverse income streams through creativity and versatility. You earn money through talent in art, design, entertainment, and IT, and doing multiple things simultaneously actually works in your favor. However, when playfulness kicks in with money management, impulse buying worsens, so gamify your financial management to stay motivated.' },
-    { name: 'Eb', en: 'Road', glyph: '🌿', meaning: 'Grass / Road / Human', element: 'Fire', direction: 'South', color: 'Yellow',
-      personality: 'Born with the energy of service to humanity. You are humble and warm, a soul who deeply empathizes with others\' suffering. From childhood, you have a big heart for helping the weak and caring for animals, unable to stand by when witnessing injustice. Within the family, you tend to carry everyone else\'s burdens, feeling your parents\' pain as your own. You are a seeker who climbs the spiritual staircase step by step and a pillar of the community. The life challenge is not trying to shoulder all the world\'s suffering alone, and embodying the truth that you must fill yourself first before giving to others.',
-      strength: 'Empathy, Service spirit, Humility, Spiritual growth',
-      challenge: 'Excessive self-sacrifice, Energy depletion, Lack of boundaries',
-      career: 'Social worker, Healthcare professional, NGO, Religious leader, Counselor',
-      love: 'You love warmly and devotedly. The ideal partner respects Eb\'s service spirit while being able to say "you need rest too." You express love by supporting your partner\'s growth, being there when they\'re sick, and quietly standing behind them. The challenge in relationships is getting used to receiving, recognizing that always giving disrupts relationship balance.',
-      spiritual: 'Your spiritual mission is to understand human suffering and find meaning within it, opening a path forward. Just as grass rises again after being trampled, your resilience becomes hope for others. Walking meditation, pilgrimages, and volunteering are your spiritual practices, and growing while serving is your path. Pray while walking nature trails.',
-      health: 'Pay attention to back, shoulder, and knee health. The tendency to carry others\' burdens manifests as actual physical strain, and you are especially vulnerable to chronic fatigue and burnout. Always make time for regular rest and self-care, and practice saying "no" to others.',
-      wealth: 'You can expect stable income in service and education fields. Rather than accumulating great wealth, your pattern is one where enough flows in as needed. Stable salaries from NGOs, healthcare, and educational institutions suit you. Setting boundaries to avoid giving too much financially to others is important.' },
-    { name: 'Ben', en: 'Reed', glyph: '🎋', meaning: 'Reed / Sky Pillar', element: 'Water', direction: 'East', color: 'Red',
-      personality: 'A pillar connecting heaven and earth, born with the energy of authority and leadership. You naturally assume the role of pillar for family and community, with strong willpower and sense of purpose. From childhood, you are highly responsible and mature, often in positions leading younger siblings or peers. You value family honor and tradition, with a strong will to meet parental expectations. Like a reed -- flexible yet never breaking -- you possess inner fortitude. The life challenge is using authority as service rather than force, and you become a true leader when you let go of control and trust.',
-      strength: 'Leadership, Decisiveness, Family devotion, Goal achievement',
-      challenge: 'Excessive strictness, Authoritarian tendencies, Stubbornness',
-      career: 'Politician, CEO, Military, Architect, Family leader',
-      love: 'You are a protective and responsible partner. The ideal match is an independent person who respects Ben\'s authority while maintaining an equal relationship. You express love by building a safe nest, working quietly for the family, and being a reliable pillar in times of crisis. The challenge in relationships is letting go of the desire to control your partner and guarding against becoming a dictator at home.',
-      spiritual: 'Your spiritual mission is to establish heaven\'s will on earth. Just as a reed sways in the wind while its roots remain deeply planted, you are a spiritual pillar maintaining center amid worldly chaos. Connecting with ancestral lineage, keeping traditional ceremonies, and transmitting wisdom to the next generation is your practice. Standing meditation and spinal alignment exercises are suitable for you.',
-      health: 'Pay special attention to spine, bone, and joint health. The tendency to carry everything places real burden on your back and waist, and bone density management is important. Excessive responsibility can manifest as high blood pressure and headaches, so regular time to set down burdens is necessary.',
-      wealth: 'You can earn high income through leadership and authority. You have strong wealth potential in management, politics, architecture, military, and other fields that create structure and order. You also have great ability to manage and grow family assets. However, beware of excessive spending to maintain appearances.' },
-    { name: 'Ix', en: 'Jaguar', glyph: '🐆', meaning: 'Jaguar / Magician', element: 'Wind', direction: 'North', color: 'White',
-      personality: 'A mysterious being with the power of the jaguar and magic energy. You naturally communicate with the invisible world and are born with shamanic qualities that sense Earth\'s energy. In childhood, you prefer playing alone in forests or nature, forming special bonds with animals. Within the family, you are independent and enigmatic, not easily revealing your inner thoughts. You tend to be nocturnal, with energy recharging under moonlight. The life challenge is not hiding in isolation and mystery but using your power for the world. You become a true magician when you use the power of darkness for the light.',
-      strength: 'Magical intuition, Earth energy, Hidden power, Healing ability',
-      challenge: 'Secretiveness, Isolation, Risk of being consumed by darkness',
-      career: 'Spiritual leader, Healer, Environmentalist, Researcher, Explorer',
-      love: 'You seek mysterious, deep connections. The ideal partner is a mature person who doesn\'t fear Ix\'s mysterious side and respects your need for solitary time. You express love through energy and presence rather than words, communicating deep emotions with a single glance. The challenge in relationships is keeping too many secrets, causing your partner to feel excluded. Sharing vulnerability is the courage that deepens relationships.',
-      spiritual: 'Your spiritual mission is to sense and harness the hidden energies of Earth and the cosmos. The jaguar was the spirit animal of Mayan shamans, and you possess the ability to cross between the material world and the spiritual world. Rituals in nature, animal totem meditation, and visiting Earth energy points are your spiritual practices. Nighttime meditation is especially powerful.',
-      health: 'Pay attention to the musculoskeletal and immune systems. When isolation and secrecy intensify, they can manifest as depression or autoimmune conditions. Barefoot walking (earthing) in nature is very effective, and herbs and natural remedies suit your constitution better than conventional medicine.',
-      wealth: 'Wealth flows in from unseen places. Unexpected income arises from research, spiritual activities, and environmental fields, and intuition-based investments yield good results. Though your interest in money is low, it naturally flows in when needed. You experience greater abundance when investing in experiences rather than possessions.' },
-    { name: 'Men', en: 'Eagle', glyph: '🦅', meaning: 'Eagle / Vision', element: 'Earth', direction: 'West', color: 'Blue',
-      personality: 'A visionary who sees the whole picture from an eagle\'s perspective. You have a high vision and broad perspective, seeing the big picture rather than details. From childhood, you are drawn to high places and fascinated by the sky and stars. Your mature perspective may prevent you from fitting in with peers. Within the family, you hold an independent and contemplative position, observing the whole rather than getting emotionally entangled. You love freedom and pursue spiritual flight. The life challenge is keeping your feet on the ground while soaring high. No matter how great the vision, it remains just a dream without execution.',
-      strength: 'Vision, Broad perspective, Freedom, Spiritual insight',
-      challenge: 'Disconnect from reality, Loneliness, Excessive idealism',
-      career: 'Strategist, Visionary, Pilot, Astronomer, Spiritual leader',
-      love: 'You seek free and independent relationships. The ideal partner is an independent soul who respects Men\'s freedom while sharing lofty visions together. You express love by painting big pictures and future visions together, giving your partner wide freedom as well. The challenge in relationships is the habit of avoiding emotional intimacy and flying high to escape. You must learn that being on the ground with the one you love is just as beautiful as flying.',
-      spiritual: 'Your spiritual mission is to convey the truth seen from high above to people on the ground. Just as the eagle connects sky and earth, you serve as a bridge applying cosmic vision to reality. Mountain-top meditation, sky-gazing, and vision quests are your spiritual practices. You gain the deepest insights when looking down upon the world from high places.',
-      health: 'Pay special attention to eye and vision health. Like looking down from high places, head-related issues (headaches, migraines, dizziness) are common. To avoid losing touch with reality from excessive contemplation, practice grounding exercises and barefoot walking.',
-      wealth: 'You have the potential to earn big money through vision and strategy. You have strong wealth potential in long-term investments, strategic consulting, and aviation/aerospace fields, with an excellent ability to spot opportunities others miss. However, vision must be accompanied by practical execution to translate into revenue, and you achieve the greatest financial success when partnering with someone strong in details.' },
-    { name: 'Cib', en: 'Owl', glyph: '🦉', meaning: 'Owl / Wisdom / Forgiveness', element: 'Fire', direction: 'South', color: 'Yellow',
-      personality: 'A deep contemplator with the wisdom of an old soul. You process past-life memories and karma, resolving karmic debt through forgiveness and healing. From childhood, you are far more mature than peers, interested in adult conversations. You often experience great loss or challenges at a young age, which becomes the source of precocious wisdom. Within the family, you understand and heal intergenerational trauma, carrying the mission of clearing family karma. The life challenge is not being crushed by the weight of the past, and the greatest freedom comes when you realize that forgiveness is not for others but for your own liberation.',
-      strength: 'Wisdom, Forgiveness, Karmic resolution, Spiritual authority',
-      challenge: 'Fixation on the past, Heavy energy, Self-criticism',
-      career: 'Psychotherapist, Historian, Judge, Spiritual leader, Writer',
-      love: 'You love maturely and deeply. The ideal partner is a fellow old soul with whom you can heal the past and share spiritual growth. You often reconnect in this life with those you knew in past lives, feeling strong deja vu at first meeting. You express love through deep understanding and unconditional acceptance. The challenge in relationships is being trapped in past wounds and failing to fully enjoy present love.',
-      spiritual: 'Your spiritual mission is to apply the wisdom of the past to the present and break the chains of karma. Just as the owl sees in darkness, you have the ability to detect and resolve hidden karmic patterns. Past-life regression meditation, ancestral healing rituals, and forgiveness practices are your core spiritual tasks. With each act of forgiveness, your soul rises one step higher.',
-      health: 'Pay attention to bone, joint, and dental health. Since you carry much heavy energy, you are prone to chronic fatigue and joint pain, and unresolved emotions from the past can manifest as physical pain. Regular energy cleansing and meditation are essential, and you may experience physical symptom improvement when practicing forgiveness.',
-      wealth: 'You can expect stable income through wisdom and counseling. You have strong wealth potential in psychotherapy, law, historical research, and spiritual guidance. When you recognize and heal karmic patterns around wealth (such as ancestral poverty experiences), abundance naturally flows in.' },
-    { name: 'Caban', en: 'Earth', glyph: '🌍', meaning: 'Earth / Earthquake', element: 'Water', direction: 'East', color: 'Red',
-      personality: 'A practical innovator deeply connected to Earth\'s energy. You experience much synchronicity and are sensitive to the flow of time. From childhood, you are interested in natural science, enjoying touching soil and collecting rocks. Within the family, you serve as the realistic, practical advisor, offering solutions that actually work rather than pie-in-the-sky ideas. You often experience sudden earthquake-like changes, but from them you create new landscapes. The life challenge is not fearing change and moving in rhythm with the Earth. When you learn to read the signals of synchronicity, you dance in perfect timing with the universe.',
-      strength: 'Practicality, Earth connection, Synchronicity, Innovation',
-      challenge: 'Sudden earthquake-like changes, Instability, Stubbornness',
-      career: 'Geologist, Environmentalist, Inventor, Urban planner',
-      love: 'You seek relationships that are both stable and interesting. The ideal partner combines intellectual curiosity with practicality and shares a love of nature. You express love by sharing tangible experiences -- gardening together, traveling, starting new projects. The challenge in relationships is conveying earthquake-like sudden changes of heart or direction to your partner without shock, finding balance between stability and change.',
-      spiritual: 'Your spiritual mission is to restore the connection between Earth and humanity. You are the sign that most deeply understands that Earth itself is a living being, and you serve as an antenna detecting the messages of Gaia (Earth consciousness). Visiting Earth energy points (ley lines, sacred sites) and earthing (barefoot walking) are your core spiritual practices. Just as the earth realigns during earthquakes, upheavals in your life signal spiritual realignment.',
-      health: 'Pay attention to foot, leg, and lower body health, as well as balance. Being sensitive to Earth\'s energy fluctuations, you may experience headaches or dizziness before earthquakes or weather changes. Walking barefoot on soil is the best health practice, and mineral-rich foods suit you well.',
-      wealth: 'You have strong wealth potential in real estate, land, and resource-related fields. Great returns can be expected from Earth-related businesses (agriculture, mining, environmental technology, urban development), and acting on synchronicities leads to unexpected opportunities. Long-term real estate investment is particularly favorable.' },
-    { name: 'Etznab', en: 'Flint', glyph: '🔪', meaning: 'Flint / Mirror / Truth', element: 'Wind', direction: 'North', color: 'White',
-      personality: 'A mirror of truth and possessor of sharp intellect. You see through the essence of everything and absolutely cannot tolerate falsehood. From childhood, you endlessly ask "why?" and immediately see through adults\' lies. Within the family, you play the role of speaking uncomfortable truths, which may cause conflict but ultimately makes you the most trusted. Your analytical ability is outstanding, with the power to cut through complex problems decisively. The life challenge is delivering truth with the clarity of a mirror rather than the sharpness of a blade, and the hardest but most important key to growth is having the courage to turn the mirror on yourself.',
-      strength: 'Truth-seeking, Analytical ability, Sense of justice, Clarity',
-      challenge: 'Excessive bluntness, Criticality, Relationship severance, Coldness',
-      career: 'Judge, Surgeon, Analyst, Journalist, Auditor',
-      love: 'Only honest, transparent relationships are possible. The ideal partner doesn\'t fear truth and can accept Etznab\'s directness as love rather than criticism. You express love through honest feedback and heartfelt conversation, never giving hollow flattery or false compliments. The challenge in relationships is learning to wrap criticism in love, recognizing that not every truth needs to be spoken right now.',
-      spiritual: 'Your spiritual mission is to strip away the veil of illusion and reveal the light of truth. Just as flint sparks fire, your insight ignites flames that illuminate the darkness. Mirror meditation (gazing into your own eyes) is your core spiritual practice, and the deepest transformation occurs when you face your own shadow. Truth sometimes hurts, but that pain is the beginning of healing.',
-      health: 'Pay attention to headaches, eye strain, and nervous system tension. Constant analytical and judgmental mental activity overloads the brain easily, making relaxation difficult. To soften sharp energy, warm baths, aromatherapy, and gentle music are effective.',
-      wealth: 'You can earn high income through analytical ability and sense of justice. You have strong wealth potential in law, medicine, financial auditing, and journalism, and the ability to detect fraud and corruption also helps with financial protection. When investing, analysis-based decisions rather than emotional ones always yield better results.' },
-    { name: 'Cauac', en: 'Storm', glyph: '⛈️', meaning: 'Storm / Rain / Healing', element: 'Earth', direction: 'West', color: 'Blue',
-      personality: 'An intense being with the purifying energy of a storm. You bring powerful transformation and rain healing. Your energy is very strong and greatly impacts those around you. In childhood, your emotions are explosive and unpredictable, bewildering parents, but when properly channeled, you accomplish remarkable things. Within the family, you solve crises -- just as the air clears after a storm passes, problems resolve after Cauac intervenes. The life challenge is distinguishing between destructive storms and healing rain, and you become the greatest healer when you direct your immense energy toward purification and regeneration.',
-      strength: 'Purification, Healing, Strong energy, Transformation',
-      challenge: 'Emotional storms, Unpredictability, Destructive tendencies',
-      career: 'Healer, Revolutionary, Crisis management, Meteorologist, Energy healing',
-      love: 'You love with storm-like passion. The ideal partner is a strong person who doesn\'t fear Cauac\'s storms and can stand together in the rain. You pour everything into expressing love -- you don\'t know how to love halfway. The challenge in relationships is cleaning up the wreckage after the storm passes. Since emotional intensity can exhaust your partner, the wisdom to modulate the storm\'s intensity is needed.',
-      spiritual: 'Your spiritual mission is to purify stagnant energy with storms and rain new life into being. Storms are purification, not destruction, and rain moistens the earth to nurture new life. You are prone to lightning-like intense spiritual experiences, and sudden moments of awakening can change your life. Meditation on rainy days, listening to thunder, and water purification rituals are your spiritual practices.',
-      health: 'Pay attention to the nervous system and adrenal health. Continually releasing storm-like energy can cause adrenal fatigue, and extreme exhaustion follows emotional outbursts. Regular energy release (intense exercise, dance, sound healing) is essential, and developing the habit of discharging before exploding is important.',
-      wealth: 'Big money moves in moments of crisis and transformation. You have strong wealth potential in crisis management, innovation industries, and energy fields, and you are the type who seizes opportunities amid economic storms (crises). Wealth comes and goes suddenly like storms, so make sure to save during abundant times.' },
-    { name: 'Ahau', en: 'Sun', glyph: '☀️', meaning: 'Sun / Flower / Lord', element: 'Fire', direction: 'South', color: 'Yellow',
-      personality: 'The highest sign, bearing the light of the sun and the energy of completion. The last of the 20 signs, symbolizing the completion of all things, you pursue enlightenment and unconditional love. From childhood, you have a radiant presence and an innate sense for art and beauty. Within the family, you are loved by everyone, yet high expectations may create pressure. You have strong perfectionist tendencies, and your high ideals make disappointment with reality easy. The life challenge is accepting the gap between ideals and reality and not losing your light in an imperfect world. You become a true sun when you learn that you can shine even without being perfect.',
-      strength: 'Enlightenment, Art, Unconditional love, Spiritual leadership',
-      challenge: 'Unrealistic expectations, Narcissism, Gap between dreams and reality',
-      career: 'Artist, Spiritual leader, Philosopher, Poet, Musician',
-      love: 'You dream of unconditional, spiritual love. The ideal partner can share Ahau\'s light while helping keep your feet on the ground. You express love through beautiful means -- poetry, music, art -- wanting to make love itself a work of art. The challenge in relationships is fixating on ideal love and failing to accept your real partner as they are. You must learn that imperfect love is still love.',
-      spiritual: 'Your spiritual mission is to shine unconditional light upon the world like the sun. Just as the sun illuminates all beings without discrimination, you can become an embodiment of unconditional love. Positioned at the completion of the 20-sign journey, your life itself is a process of spiritual completion. Sunrise meditation, flower mandala creation, and gratitude practice are your core spiritual exercises.',
-      health: 'Pay attention to heart and eye health. Excessive solar energy can manifest as heat-related ailments (high blood pressure, heat stroke, headaches). Be mindful of mental exhaustion from excessive idealism, and sufficient rest and self-care are essential for maintaining your light.',
-      wealth: 'Abundance comes through art and spiritual activities. Income arises from creation, performance, spiritual guidance, and philosophy. Like the sun, sharing generously brings greater abundance in return. Prioritizing spiritual wealth over material wealth paradoxically brings material stability as well.' }
+      love: 'Voce deseja conexoes emocionais profundas e tende a cuidar do seu parceiro. O parceiro ideal e alguem emocionalmente estavel que tambem possa entender a profunda sensibilidade de Imix. O desafio nos relacionamentos e gerenciar ciumes e possessividade, e aprender a dar espaco ao seu parceiro.',
+      spiritual: 'Sua missao espiritual e dar a luz coisas novas no mundo. Assim como o crocodilo criou o mundo a partir das aguas primordiais, voce possui a habilidade espiritual de criar algo do nada. Nao tema a dor da criacao -- esse e seu caminho sagrado.',
+      health: 'Preste atencao ao sistema digestivo e a saude uterina/reprodutiva. Voce tem uma constituicao onde as emocoes se refletem diretamente no corpo. A cura relacionada a agua (natacao, fontes termais, terapia com agua do mar) e eficaz.',
+      wealth: 'A riqueza flui atraves de atividades criativas. Voce pode esperar renda estavel em campos que combinam cuidado e criacao, como arte, culinaria e educacao. Cuidado com gastos impulsivos.' },
+    { name: 'Ik', en: 'Vento', glyph: '💨', meaning: 'Vento / Espirito', element: 'Vento', direction: 'Norte', color: 'Branco',
+      personality: 'Um espirito livre com a energia da comunicacao e mudanca. Voce tem um talento natural para palavras e escrita, servindo como um mensageiro espiritual que espalha novas ideias. O desafio central da vida e encontrar equilibrio entre liberdade e responsabilidade.',
+      strength: 'Habilidades de comunicacao, Flexibilidade, Sensibilidade espiritual, Intelecto',
+      challenge: 'Indecisao, Mudanca sem direcao, Instabilidade',
+      career: 'Escritor, Palestrante, Professor, Conselheiro, Midia, Guia turistico',
+      love: 'Voce ama a liberdade e nao gosta de restricoes. O parceiro ideal e alguem independente, mas capaz de conexao intelectual profunda. O desafio nos relacionamentos e criar raizes profundas com uma pessoa.',
+      spiritual: 'Sua missao espiritual e entregar mensagens do mundo invisivel. Meditacao com respiracao e rituais com incenso sao as chaves para abrir seus canais espirituais.',
+      health: 'Preste atencao ao sistema respiratorio e a saude do sistema nervoso. Exercicios de respiracao e yoga sao muito eficazes.',
+      wealth: 'Voce ganha dinheiro atraves da comunicacao e ideias. A renda vem de midia, palestras, escrita e traducao.' },
+    { name: 'Akbal', en: 'Noite', glyph: '🌑', meaning: 'Noite / Escuridao / Lar', element: 'Terra', direction: 'Oeste', color: 'Preto',
+      personality: 'Um pensador que explora reinos interiores profundos, fortemente conectado ao mundo dos sonhos e do inconsciente. Voce valoriza o lar e a seguranca e tem uma intuicao muito forte. O desafio da vida e encontrar luz dentro da escuridao.',
+      strength: 'Intuicao, Interpretacao de sonhos, Pensamento profundo, Habilidades de seguranca',
+      challenge: 'Medo, Isolamento, Sigilo excessivo, Tendencias depressivas',
+      career: 'Psicologo, Pesquisador, Especialista em seguranca, Artista, Arquiteto',
+      love: 'Voce precisa de confianca profunda. Voce abre seu coracao lentamente, mas uma vez aberto, e muito leal. O desafio nos relacionamentos e ter a coragem de mostrar vulnerabilidade.',
+      spiritual: 'Sua missao espiritual e desenterrar verdades escondidas na escuridao. Mantenha um diario de sonhos e pratique sonho lucido. Meditacao a meia-noite traz os insights mais poderosos.',
+      health: 'Preste atencao a disturbios do sono e tendencias depressivas. Caminhadas matinais sob a luz do sol sao essenciais.',
+      wealth: 'Voce tem potencial de riqueza estavel em pesquisa, analise e areas de seguranca. Estrategias financeiras conservadoras de longo prazo sao as mais adequadas.' },
+    { name: 'Kan', en: 'Semente', glyph: '🌽', meaning: 'Milho / Semente / Lagarto', element: 'Fogo', direction: 'Sul', color: 'Amarelo',
+      personality: 'Nascido com a energia do crescimento e prosperidade. Voce carrega o potencial de ir da semente a colheita abundante. O desafio da vida e encontrar equilibrio entre prosperidade material e crescimento espiritual.',
+      strength: 'Capacidade de crescimento, Networking, Abundancia material, Paciencia',
+      challenge: 'Ganancia, Apego material excessivo, Vulnerabilidade a tentacao',
+      career: 'Empreendedor, Agricultura, Financas, Imobiliario, Marketing de rede',
+      love: 'Voce busca relacionamentos estaveis e abundantes. O desafio nos relacionamentos e a tendencia de substituir amor por coisas materiais.',
+      spiritual: 'Sua missao espiritual e plantar sementes espirituais e colher colheitas abundantes.',
+      health: 'Preste atencao ao metabolismo e regulacao do acucar no sangue. Prevenir diabetes e obesidade e importante.',
+      wealth: 'Voce tem o maior potencial de riqueza entre todos os 20 signos. Tudo que voce planta cresce. No entanto, se cair na ganancia, pode perder tudo.' },
+    { name: 'Chicchan', en: 'Serpente', glyph: '🐍', meaning: 'Serpente / Serpente Celeste', element: 'Agua', direction: 'Leste', color: 'Vermelho',
+      personality: 'Voce possui poderosa forca vital e energia transformadora, diretamente conectado a kundalini. Voce tem forte carisma e um charme magnetico que atrai as pessoas.',
+      strength: 'Carisma, Capacidade transformadora, Poder de cura, Intuicao',
+      challenge: 'Obsessao, Ciumes, Extremos emocionais, Controle da raiva',
+      career: 'Curandeiro, Medico, Psicologo, Praticante tantrico, Gestao de crises',
+      love: 'Voce ama com paixao intensa. O desafio nos relacionamentos e gerenciar ciumes e possessividade de forma saudavel.',
+      spiritual: 'Sua missao espiritual e despertar e transformar as energias mais primordiais da humanidade. Tantra, qigong e kundalini yoga sao as praticas espirituais mais adequadas.',
+      health: 'Preste atencao especial a saude reprodutiva e a coluna/sistema nervoso.',
+      wealth: 'Voce tem um padrao de riqueza unico de ganhar dinheiro em situacoes de crise.' },
+    { name: 'Cimi', en: 'Morte', glyph: '💀', meaning: 'Morte / Transformacao', element: 'Vento', direction: 'Norte', color: 'Branco',
+      personality: 'Uma alma profunda com a energia da transformacao e renascimento. Morte significa nao um fim, mas um novo comeco. Voce tem uma conexao profunda com os ancestrais.',
+      strength: 'Capacidade transformadora, Sabedoria ancestral, Humildade, Espirito de servico',
+      challenge: 'Medo de mudanca, Apego ao passado, Melancolia',
+      career: 'Conselheiro, Diretor funerario, Curandeiro, Historiador, Assistente social',
+      love: 'Voce ama profunda e espiritualmente. O desafio nos relacionamentos e deixar ir relacionamentos mortos e ter coragem de aceitar novo amor.',
+      spiritual: 'Sua missao espiritual e servir como ponte entre os limites da vida e da morte.',
+      health: 'Preste atencao ao sistema imunologico e a circulacao linfatica.',
+      wealth: 'Voce tem renda estavel em campos de servico e cura. O potencial de riqueza e forte com herancas e seguros.' },
+    { name: 'Manik', en: 'Veado', glyph: '🦌', meaning: 'Veado / Mao Curadora', element: 'Terra', direction: 'Oeste', color: 'Azul',
+      personality: 'Uma alma gentil com a energia da cura e paz. Voce tem a habilidade de curar com suas maos, ama a natureza e os animais. O desafio da vida e nao se perder cuidando dos outros.',
+      strength: 'Poder de cura, Destreza manual, Afinidade com a natureza, Pacificidade',
+      challenge: 'Perfeccionismo excessivo, Controle excessivo, Autossacrificio',
+      career: 'Medico, Veterinario, Fisioterapeuta, Artesao, Artista, Ambientalista',
+      love: 'Voce e um parceiro caloroso e carinhoso. O desafio nos relacionamentos e expressar suas proprias necessidades e estabelecer limites.',
+      spiritual: 'Sua missao espiritual e transmitir energia de cura a tudo que voce toca. Reiki, imposicao de maos e fitoterapia sao as chaves para despertar seus dons espirituais.',
+      health: 'Preste atencao especial a saude das maos, pulsos e articulacoes.',
+      wealth: 'Voce ganha renda atraves de habilidades manuais e poder de cura.' },
+    { name: 'Lamat', en: 'Estrela', glyph: '⭐', meaning: 'Estrela / Coelho / Venus', element: 'Fogo', direction: 'Sul', color: 'Amarelo',
+      personality: 'Uma estrela de abundancia e beleza, diretamente conectada a energia de Venus -- charmosa e artistica. O desafio da vida e descobrir o brilho interior alem da beleza superficial.',
+      strength: 'Charme, Abundancia, Senso artistico, Boa sorte',
+      challenge: 'Vaidade, Ostentacao, Busca excessiva por prazer, Preguica',
+      career: 'Artista, Musico, Moda, Entretenimento, Financas',
+      love: 'Voce e um amante atraente e romantico. O desafio nos relacionamentos e criar intimidade profunda e aprender a focar em uma pessoa.',
+      spiritual: 'Sua missao espiritual e manifestar a beleza do universo na terra.',
+      health: 'Preste atencao a pele, rins e saude reprodutiva.',
+      wealth: 'Voce tem forte potencial de riqueza em arte, entretenimento e na industria da beleza.' },
+    { name: 'Muluc', en: 'Lua', glyph: '💧', meaning: 'Agua / Lua / Chuva', element: 'Agua', direction: 'Leste', color: 'Vermelho',
+      personality: 'Uma alma com profundas ondas emocionais, conectada a energia lunar com intuicao muito forte. Rica em sensibilidade com muitas experiencias espirituais. O desafio da vida e manter seu centro enquanto cavalga as ondas de emocao.',
+      strength: 'Intuicao, Sensibilidade, Capacidade de purificacao, Profundidade espiritual',
+      challenge: 'Tempestades emocionais, Instabilidade, Tendencias autodestrutivas',
+      career: 'Artista, Lider espiritual, Curandeiro, Profissoes maritimas, Psicologo',
+      love: 'Seu amor e profundamente emocional e intenso. O desafio nos relacionamentos e que oscilacoes de humor podem esgotar seu parceiro.',
+      spiritual: 'Sua missao espiritual e conectar-se com o universo atraves da agua sagrada da emocao.',
+      health: 'Preste atencao aos rins, bexiga e circulacao linfatica. Natacao e exercicios aquaticos sao o melhor gerenciamento de saude.',
+      wealth: 'Decisoes financeiras baseadas na intuicao trazem resultados surpreendentemente bons. Cuidado com gastos emocionais.' },
+    { name: 'Oc', en: 'Cao', glyph: '🐕', meaning: 'Cao / Lealdade / Guia', element: 'Vento', direction: 'Norte', color: 'Branco',
+      personality: 'Um guardiao caloroso com a energia da lealdade e orientacao. Voce lidera e protege a comunidade, com forte senso de justica.',
+      strength: 'Lealdade, Lideranca, Senso de justica, Consciencia comunitaria',
+      challenge: 'Danos por lealdade excessiva, Teimosia, Dependencia emocional',
+      career: 'Policial, Advogado, Ativista social, Lider de equipe, Conselheiro',
+      love: 'Voce e um parceiro muito leal. O desafio nos relacionamentos e nao confundir dependencia com amor.',
+      spiritual: 'Sua missao espiritual e guiar almas perdidas a encontrar seu caminho.',
+      health: 'Preste atencao a saude cardiaca e circulatoria.',
+      wealth: 'A riqueza vem atraves do trabalho em equipe e comunidade.' },
+    { name: 'Chuen', en: 'Macaco', glyph: '🐒', meaning: 'Macaco / Artista', element: 'Terra', direction: 'Oeste', color: 'Azul',
+      personality: 'Um genio nascido com a energia da arte e da brincadeira. Humor e criatividade extraordinarios. O desafio da vida e encontrar o equilibrio entre brincadeira e profundidade.',
+      strength: 'Criatividade, Humor, Versatilidade, Genio artistico',
+      challenge: 'Atencao dispersa, Brincadeiras excessivas, Falta de seriedade, Astucia',
+      career: 'Artista, Comediante, Designer, Escritor, Engenheiro',
+      love: 'Voce e um parceiro divertido e encantador. O desafio nos relacionamentos e o habito de esconder emocoes serias atras de piadas.',
+      spiritual: 'Sua missao espiritual e tecer o tecido do universo atraves da brincadeira sagrada.',
+      health: 'Preste atencao ao sistema nervoso e saude das maos/dedos.',
+      wealth: 'Voce pode criar diversas fontes de renda atraves da criatividade e versatilidade.' },
+    { name: 'Eb', en: 'Caminho', glyph: '🌿', meaning: 'Grama / Caminho / Humano', element: 'Fogo', direction: 'Sul', color: 'Amarelo',
+      personality: 'Nascido com a energia do servico a humanidade. Voce e humilde e caloroso, uma alma que empatiza profundamente com o sofrimento dos outros.',
+      strength: 'Empatia, Espirito de servico, Humildade, Crescimento espiritual',
+      challenge: 'Autossacrificio excessivo, Esgotamento energetico, Falta de limites',
+      career: 'Assistente social, Profissional de saude, ONG, Lider religioso, Conselheiro',
+      love: 'Voce ama com calor e devocao. O desafio nos relacionamentos e se acostumar a receber.',
+      spiritual: 'Sua missao espiritual e entender o sofrimento humano e encontrar significado nele.',
+      health: 'Preste atencao a saude das costas, ombros e joelhos.',
+      wealth: 'Voce pode esperar renda estavel em campos de servico e educacao.' },
+    { name: 'Ben', en: 'Junco', glyph: '🎋', meaning: 'Junco / Pilar Celestial', element: 'Agua', direction: 'Leste', color: 'Vermelho',
+      personality: 'Um pilar conectando ceu e terra, nascido com a energia da autoridade e lideranca. Como um junco -- flexivel mas que nunca quebra -- voce possui fortaleza interior.',
+      strength: 'Lideranca, Decisao, Devocao familiar, Alcance de objetivos',
+      challenge: 'Rigidez excessiva, Tendencias autoritarias, Teimosia',
+      career: 'Politico, CEO, Militar, Arquiteto, Lider familiar',
+      love: 'Voce e um parceiro protetor e responsavel. O desafio nos relacionamentos e abandonar o desejo de controlar o parceiro.',
+      spiritual: 'Sua missao espiritual e estabelecer a vontade do ceu na terra.',
+      health: 'Preste atencao especial a coluna, ossos e saude articular.',
+      wealth: 'Voce pode ganhar alta renda atraves de lideranca e autoridade.' },
+    { name: 'Ix', en: 'Jaguar', glyph: '🐆', meaning: 'Jaguar / Mago', element: 'Vento', direction: 'Norte', color: 'Branco',
+      personality: 'Um ser misterioso com o poder do jaguar e energia magica. Voce naturalmente se comunica com o mundo invisivel e nasceu com qualidades xamanicas.',
+      strength: 'Intuicao magica, Energia terrestre, Poder oculto, Capacidade de cura',
+      challenge: 'Secretismo, Isolamento, Risco de ser consumido pela escuridao',
+      career: 'Lider espiritual, Curandeiro, Ambientalista, Pesquisador, Explorador',
+      love: 'Voce busca conexoes misteriosas e profundas. O desafio nos relacionamentos e manter muitos segredos, fazendo seu parceiro se sentir excluido.',
+      spiritual: 'Sua missao espiritual e sentir e aproveitar as energias ocultas da Terra e do cosmos.',
+      health: 'Preste atencao aos sistemas musculoesqueletico e imunologico. Caminhar descalco na natureza e muito eficaz.',
+      wealth: 'A riqueza flui de lugares invisiveis. Investimentos baseados na intuicao rendem bons resultados.' },
+    { name: 'Men', en: 'Aguia', glyph: '🦅', meaning: 'Aguia / Visao', element: 'Terra', direction: 'Oeste', color: 'Azul',
+      personality: 'Um visionario que ve o quadro completo da perspectiva de uma aguia. Voce tem uma visao elevada e perspectiva ampla. O desafio da vida e manter os pes no chao enquanto voa alto.',
+      strength: 'Visao, Perspectiva ampla, Liberdade, Insight espiritual',
+      challenge: 'Desconexao da realidade, Solidao, Idealismo excessivo',
+      career: 'Estrategista, Visionario, Piloto, Astronomo, Lider espiritual',
+      love: 'Voce busca relacionamentos livres e independentes. O desafio nos relacionamentos e o habito de evitar intimidade emocional e voar alto para escapar.',
+      spiritual: 'Sua missao espiritual e transmitir a verdade vista do alto para as pessoas no chao.',
+      health: 'Preste atencao especial a saude dos olhos e visao. Pratique exercicios de aterramento e caminhada descalco.',
+      wealth: 'Voce tem potencial de ganhar muito dinheiro atraves de visao e estrategia.' },
+    { name: 'Cib', en: 'Coruja', glyph: '🦉', meaning: 'Coruja / Sabedoria / Perdao', element: 'Fogo', direction: 'Sul', color: 'Amarelo',
+      personality: 'Um contemplador profundo com a sabedoria de uma alma antiga. Voce processa memorias de vidas passadas e karma. O desafio da vida e nao ser esmagado pelo peso do passado.',
+      strength: 'Sabedoria, Perdao, Resolucao carmica, Autoridade espiritual',
+      challenge: 'Fixacao no passado, Energia pesada, Autocritica',
+      career: 'Psicoterapeuta, Historiador, Juiz, Lider espiritual, Escritor',
+      love: 'Voce ama de forma madura e profunda. Voce frequentemente se reconecta nesta vida com aqueles que conheceu em vidas passadas.',
+      spiritual: 'Sua missao espiritual e aplicar a sabedoria do passado ao presente e quebrar as correntes do karma.',
+      health: 'Preste atencao a saude dos ossos, articulacoes e dentes.',
+      wealth: 'Voce pode esperar renda estavel atraves de sabedoria e aconselhamento.' },
+    { name: 'Caban', en: 'Terra', glyph: '🌍', meaning: 'Terra / Terremoto', element: 'Agua', direction: 'Leste', color: 'Vermelho',
+      personality: 'Um inovador pratico profundamente conectado a energia da Terra. Voce experimenta muita sincronicidade e e sensivel ao fluxo do tempo.',
+      strength: 'Praticidade, Conexao com a terra, Sincronicidade, Inovacao',
+      challenge: 'Mudancas repentinas como terremotos, Instabilidade, Teimosia',
+      career: 'Geologo, Ambientalista, Inventor, Planejador urbano',
+      love: 'Voce busca relacionamentos que sao ao mesmo tempo estaveis e interessantes.',
+      spiritual: 'Sua missao espiritual e restaurar a conexao entre a Terra e a humanidade.',
+      health: 'Preste atencao a saude dos pes, pernas e parte inferior do corpo, bem como ao equilibrio.',
+      wealth: 'Voce tem forte potencial de riqueza em imoveis, terra e campos relacionados a recursos.' },
+    { name: 'Etznab', en: 'Pederneira', glyph: '🔪', meaning: 'Pederneira / Espelho / Verdade', element: 'Vento', direction: 'Norte', color: 'Branco',
+      personality: 'Um espelho da verdade e possuidor de intelecto afiado. Voce ve atraves da essencia de tudo e absolutamente nao tolera falsidade.',
+      strength: 'Busca pela verdade, Capacidade analitica, Senso de justica, Clareza',
+      challenge: 'Franqueza excessiva, Criticidade, Rompimento de relacoes, Frieza',
+      career: 'Juiz, Cirurgiao, Analista, Jornalista, Auditor',
+      love: 'Apenas relacionamentos honestos e transparentes sao possiveis. O desafio nos relacionamentos e aprender a envolver a critica em amor.',
+      spiritual: 'Sua missao espiritual e despir o veu da ilusao e revelar a luz da verdade. Meditacao com espelho e sua pratica espiritual central.',
+      health: 'Preste atencao a dores de cabeca, fadiga ocular e tensao do sistema nervoso.',
+      wealth: 'Voce pode ganhar alta renda atraves de capacidade analitica e senso de justica.' },
+    { name: 'Cauac', en: 'Tempestade', glyph: '⛈️', meaning: 'Tempestade / Chuva / Cura', element: 'Terra', direction: 'Oeste', color: 'Azul',
+      personality: 'Um ser intenso com a energia purificadora de uma tempestade. Voce traz transformacao poderosa e chuva de cura.',
+      strength: 'Purificacao, Cura, Energia forte, Transformacao',
+      challenge: 'Tempestades emocionais, Imprevisibilidade, Tendencias destrutivas',
+      career: 'Curandeiro, Revolucionario, Gestao de crises, Meteorologista, Cura energetica',
+      love: 'Voce ama com paixao de tempestade. O desafio nos relacionamentos e limpar os destrocos depois que a tempestade passa.',
+      spiritual: 'Sua missao espiritual e purificar energia estagnada com tempestades e fazer chover nova vida.',
+      health: 'Preste atencao ao sistema nervoso e saude adrenal.',
+      wealth: 'Muito dinheiro se move em momentos de crise e transformacao.' },
+    { name: 'Ahau', en: 'Sol', glyph: '☀️', meaning: 'Sol / Flor / Senhor', element: 'Fogo', direction: 'Sul', color: 'Amarelo',
+      personality: 'O signo mais elevado, carregando a luz do sol e a energia da completude. O ultimo dos 20 signos, simbolizando a conclusao de todas as coisas, voce busca iluminacao e amor incondicional.',
+      strength: 'Iluminacao, Arte, Amor incondicional, Lideranca espiritual',
+      challenge: 'Expectativas irrealistas, Narcisismo, Lacuna entre sonhos e realidade',
+      career: 'Artista, Lider espiritual, Filosofo, Poeta, Musico',
+      love: 'Voce sonha com amor incondicional e espiritual. O desafio nos relacionamentos e fixar-se no amor ideal e nao aceitar seu parceiro real como ele e.',
+      spiritual: 'Sua missao espiritual e brilhar luz incondicional sobre o mundo como o sol. Meditacao ao nascer do sol e pratica de gratidao sao seus exercicios espirituais centrais.',
+      health: 'Preste atencao a saude do coracao e dos olhos.',
+      wealth: 'A abundancia vem atraves da arte e atividades espirituais. Compartilhar generosamente traz maior abundancia em retorno.' }
 ];
 
-// 13 TONES
 const TONES = [
-    { num: 1, name: 'Unity', meaning: 'Purpose, Beginning, Oneness. Energy that signals the start of a new cycle. Leadership and independence.' },
-    { num: 2, name: 'Duality', meaning: 'Challenge, Balance, Choice. Energy that understands polarity and seeks balance. Partnership.' },
-    { num: 3, name: 'Activation', meaning: 'Action, Movement, Creation. Energy activates and things begin to move.' },
-    { num: 4, name: 'Stability', meaning: 'Form, Structure, Order. Four directions create stability. A time for laying foundations.' },
-    { num: 5, name: 'Empowerment', meaning: 'Center, Power, Determination. Energy of standing at the center of the universe. Authority is granted.' },
-    { num: 6, name: 'Flow', meaning: 'Flow, Balance, Response. Energy flows organically and responds.' },
-    { num: 7, name: 'Resonance', meaning: 'Attunement, Mystery, Inspiration. A channel that resonates with the universe. Intuition is maximized.' },
-    { num: 8, name: 'Harmony', meaning: 'Integration, Harmony, Modeling. Energy that harmoniously integrates all things.' },
-    { num: 9, name: 'Solar', meaning: 'Intention, Pulse, Realization. Brimming with life force, energy that realizes goals.' },
-    { num: 10, name: 'Manifestation', meaning: 'Completion, Production, Materialization. Energy where dreams become reality.' },
-    { num: 11, name: 'Liberation', meaning: 'Change, Dissolution, Freedom. Energy that dissolves the unnecessary and gains freedom.' },
-    { num: 12, name: 'Cooperation', meaning: 'Understanding, Sharing, Collaboration. Energy that understands complexity and shares together.' },
-    { num: 13, name: 'Transcendence', meaning: 'Presence, Endurance, Transcendence. The highest dimensional energy. Cosmic completion.' }
+    { num: 1, name: 'Unidade', meaning: 'Proposito, Inicio, Unicidade. Energia que sinaliza o comeco de um novo ciclo. Lideranca e independencia.' },
+    { num: 2, name: 'Dualidade', meaning: 'Desafio, Equilibrio, Escolha. Energia que entende a polaridade e busca equilibrio. Parceria.' },
+    { num: 3, name: 'Ativacao', meaning: 'Acao, Movimento, Criacao. A energia ativa e as coisas comecam a se mover.' },
+    { num: 4, name: 'Estabilidade', meaning: 'Forma, Estrutura, Ordem. Quatro direcoes criam estabilidade. Um tempo para lancar fundacoes.' },
+    { num: 5, name: 'Empoderamento', meaning: 'Centro, Poder, Determinacao. Energia de estar no centro do universo. A autoridade e concedida.' },
+    { num: 6, name: 'Fluxo', meaning: 'Fluxo, Equilibrio, Resposta. A energia flui organicamente e responde.' },
+    { num: 7, name: 'Ressonancia', meaning: 'Sintonia, Misterio, Inspiracao. Um canal que ressoa com o universo. A intuicao e maximizada.' },
+    { num: 8, name: 'Harmonia', meaning: 'Integracao, Harmonia, Modelagem. Energia que harmoniosamente integra todas as coisas.' },
+    { num: 9, name: 'Solar', meaning: 'Intencao, Pulso, Realizacao. Transbordando de forca vital, energia que realiza objetivos.' },
+    { num: 10, name: 'Manifestacao', meaning: 'Conclusao, Producao, Materializacao. Energia onde sonhos se tornam realidade.' },
+    { num: 11, name: 'Libertacao', meaning: 'Mudanca, Dissolucao, Liberdade. Energia que dissolve o desnecessario e ganha liberdade.' },
+    { num: 12, name: 'Cooperacao', meaning: 'Compreensao, Compartilhamento, Colaboracao. Energia que entende a complexidade e compartilha junto.' },
+    { num: 13, name: 'Transcendencia', meaning: 'Presenca, Resistencia, Transcendencia. A energia de mais alta dimensao. Completude cosmica.' }
 ];
 
-// HAAB months (365-day solar calendar)
 const HAAB_MONTHS = ['Pop','Wo','Sip','Sotz','Sek','Xul','Yaxkin','Mol','Chen','Yax','Sak','Keh','Mak','Kankin','Muwan','Pax','Kayab','Kumku','Wayeb'];
-const HAAB_MONTHS_EN = ['Pop','Wo','Sip','Sotz','Sek','Xul','Yaxkin','Mol','Chen','Yax','Sak','Keh','Mak','Kankin','Muwan','Pax','Kayab','Kumku','Wayeb (5 Unlucky Days)'];
+const HAAB_MONTHS_PT = ['Pop','Wo','Sip','Sotz','Sek','Xul','Yaxkin','Mol','Chen','Yax','Sak','Keh','Mak','Kankin','Muwan','Pax','Kayab','Kumku','Wayeb (5 Dias de Azar)'];
 
-// ═══════════════════════════════════
-// CALCULATION
-// ═══════════════════════════════════
-// GMT correlation constant (Goodman-Martinez-Thompson)
 const GMT_CORRELATION = 584283;
 
 function gregorianToJDN(y, m, d) {
@@ -331,23 +318,19 @@ function gregorianToJDN(y, m, d) {
     const B = 2 - A + Math.floor(A / 4);
     return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524;
 }
-
 function jdnToMayaLongCount(jdn) {
     let d = jdn - GMT_CORRELATION;
     const baktun = Math.floor(d / 144000); d %= 144000;
     const katun = Math.floor(d / 7200); d %= 7200;
     const tun = Math.floor(d / 360); d %= 360;
     const winal = Math.floor(d / 20); d %= 20;
-    const kin = d;
-    return { baktun, katun, tun, winal, kin };
+    return { baktun, katun, tun, winal, kin: d };
 }
-
 function jdnToTzolkin(jdn) {
-    const num = ((jdn - GMT_CORRELATION + 19) % 13 + 13) % 13 + 1; // 1-13
-    const sign = ((jdn - GMT_CORRELATION + 19) % 20 + 20) % 20; // 0-19
+    const num = ((jdn - GMT_CORRELATION + 19) % 13 + 13) % 13 + 1;
+    const sign = ((jdn - GMT_CORRELATION + 19) % 20 + 20) % 20;
     return { num, sign };
 }
-
 function jdnToHaab(jdn) {
     const d = (jdn - GMT_CORRELATION + 348) % 365;
     const month = Math.floor(d / 20);
@@ -359,225 +342,113 @@ function initForm() {
     const y = document.getElementById('birthYear');
     const m = document.getElementById('birthMonth');
     const d = document.getElementById('birthDay');
-    for (let i = 2025; i >= 1940; i--) {
-        const o = document.createElement('option');
-        o.value = i; o.textContent = i;
-        if (i === 1995) o.selected = true;
-        y.appendChild(o);
-    }
-    for (let i = 1; i <= 12; i++) {
-        const o = document.createElement('option');
-        o.value = i; o.textContent = 'Month ' + i;
-        if (i === 3) o.selected = true;
-        m.appendChild(o);
-    }
-    for (let i = 1; i <= 31; i++) {
-        const o = document.createElement('option');
-        o.value = i; o.textContent = 'Day ' + i;
-        if (i === 15) o.selected = true;
-        d.appendChild(o);
-    }
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Mes ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Dia ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
 }
 
 function calculate() {
     const year = parseInt(document.getElementById('birthYear').value);
     const month = parseInt(document.getElementById('birthMonth').value);
     const day = parseInt(document.getElementById('birthDay').value);
-
     const jdn = gregorianToJDN(year, month, day);
     const longCount = jdnToMayaLongCount(jdn);
     const tzolkin = jdnToTzolkin(jdn);
     const haab = jdnToHaab(jdn);
-
     const sign = DAY_SIGNS[tzolkin.sign];
     const tone = TONES[tzolkin.num - 1];
 
-    // Long Count
-    document.getElementById('longCount').textContent =
-        longCount.baktun + '.' + longCount.katun + '.' + longCount.tun + '.' + longCount.winal + '.' + longCount.kin;
+    document.getElementById('longCount').textContent = longCount.baktun + '.' + longCount.katun + '.' + longCount.tun + '.' + longCount.winal + '.' + longCount.kin;
 
-    // Tzolkin Card
     document.getElementById('tzolkinCard').innerHTML = `
         <span class="tzolkin-glyph">${sign.glyph}</span>
         <div class="tzolkin-number">${tzolkin.num}</div>
-        <div class="tzolkin-tone">Tone ${tzolkin.num}: ${tone.name}</div>
+        <div class="tzolkin-tone">Tom ${tzolkin.num}: ${tone.name}</div>
         <div class="tzolkin-name">${sign.name}</div>
-        <div class="tzolkin-name-ko">${sign.en} — "${sign.meaning}"</div>
-    `;
+        <div class="tzolkin-name-ko">${sign.en} — "${sign.meaning}"</div>`;
 
-    // Info Grid
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item">
-            <div class="info-label">Day Sign</div>
-            <div class="info-value">${sign.glyph} ${sign.name} (${sign.en})</div>
-            <div class="info-desc">${sign.meaning}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Tone (Cosmic Purpose)</div>
-            <div class="info-value">${tzolkin.num} — ${tone.name}</div>
-            <div class="info-desc">${tone.meaning}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Element / Direction</div>
-            <div class="info-value">${sign.element} / ${sign.direction}</div>
-            <div class="info-desc">Color: ${sign.color}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Haab (Solar Calendar)</div>
-            <div class="info-value">${haab.day} ${HAAB_MONTHS[haab.month]}</div>
-            <div class="info-desc">${HAAB_MONTHS_EN[haab.month]}</div>
-        </div>
-    `;
+        <div class="info-item"><div class="info-label">Signo do Dia</div><div class="info-value">${sign.glyph} ${sign.name} (${sign.en})</div><div class="info-desc">${sign.meaning}</div></div>
+        <div class="info-item"><div class="info-label">Tom (Proposito Cosmico)</div><div class="info-value">${tzolkin.num} — ${tone.name}</div><div class="info-desc">${tone.meaning}</div></div>
+        <div class="info-item"><div class="info-label">Elemento / Direcao</div><div class="info-value">${sign.element} / ${sign.direction}</div><div class="info-desc">Cor: ${sign.color}</div></div>
+        <div class="info-item"><div class="info-label">Haab (Calendario Solar)</div><div class="info-value">${haab.day} ${HAAB_MONTHS[haab.month]}</div><div class="info-desc">${HAAB_MONTHS_PT[haab.month]}</div></div>`;
 
-    // Sign Interpretation
     document.getElementById('signInterpWrap').innerHTML = `
-        <div class="interp-card">
-            <div class="interp-title">${sign.glyph} ${sign.name} (${sign.en}) — "${sign.meaning}"</div>
-            <div class="interp-text">${sign.personality}</div>
-        </div>
-        <div class="interp-card">
-            <div class="interp-title">Strengths</div>
-            <div class="interp-text">${sign.strength}</div>
-        </div>
-        <div class="interp-card">
-            <div class="interp-title">Challenges</div>
-            <div class="interp-text">${sign.challenge}</div>
-        </div>
-        <div class="interp-card">
-            <div class="interp-title">Suitable Careers</div>
-            <div class="interp-text">${sign.career}</div>
-        </div>
-        <div class="interp-card">
-            <div class="interp-title">Love & Relationships</div>
-            <div class="interp-text">${sign.love}</div>
-        </div>
-        ${sign.spiritual ? `<div class="interp-card">
-            <div class="interp-title">Spiritual Message</div>
-            <div class="interp-text">${sign.spiritual}</div>
-        </div>` : ''}
-        ${sign.wealth ? `<div class="interp-card">
-            <div class="interp-title">Wealth & Finances</div>
-            <div class="interp-text">${sign.wealth}</div>
-        </div>` : ''}
-        ${sign.health ? `<div class="interp-card">
-            <div class="interp-title">Health</div>
-            <div class="interp-text">${sign.health}</div>
-        </div>` : ''}
-    `;
+        <div class="interp-card"><div class="interp-title">${sign.glyph} ${sign.name} (${sign.en}) — "${sign.meaning}"</div><div class="interp-text">${sign.personality}</div></div>
+        <div class="interp-card"><div class="interp-title">Pontos Fortes</div><div class="interp-text">${sign.strength}</div></div>
+        <div class="interp-card"><div class="interp-title">Desafios</div><div class="interp-text">${sign.challenge}</div></div>
+        <div class="interp-card"><div class="interp-title">Carreiras Adequadas</div><div class="interp-text">${sign.career}</div></div>
+        <div class="interp-card"><div class="interp-title">Amor e Relacionamentos</div><div class="interp-text">${sign.love}</div></div>
+        ${sign.spiritual ? `<div class="interp-card"><div class="interp-title">Mensagem Espiritual</div><div class="interp-text">${sign.spiritual}</div></div>` : ''}
+        ${sign.wealth ? `<div class="interp-card"><div class="interp-title">Riqueza e Financas</div><div class="interp-text">${sign.wealth}</div></div>` : ''}
+        ${sign.health ? `<div class="interp-card"><div class="interp-title">Saude</div><div class="interp-text">${sign.health}</div></div>` : ''}`;
 
-    // Tone Interpretation
     const toneComboTexts = {
-        1: `Tone 1 "Unity" grants ${sign.en}'s energy a pure spark of initiation. You experience ${sign.en}'s qualities in their most primal and pure form, a pioneer opening new cycles. You have the power to independently forge your own path, serving the role of presenting ${sign.en}'s energy to the world for the first time. Leadership is strong, but you must learn cooperation.`,
-        2: `Tone 2 "Duality" gives ${sign.en}'s energy the challenge of balance and choice. You strongly experience both the light and shadow sides of ${sign.en}, and finding balance between inner polarities is the central theme of your life. ${sign.en}'s energy is completed through partnership, and your greatest growth happens within relationships.`,
-        3: `Tone 3 "Activation" dynamically sets ${sign.en}'s energy in motion. You are an activist who expresses ${sign.en}'s qualities through action, with outstanding drive to turn ideas into reality. Creative energy overflows as you actively reveal ${sign.en}'s potential to the world. However, practice focusing so as not to scatter your energy.`,
-        4: `Tone 4 "Stability" provides structure and foundation for ${sign.en}'s energy. You manifest ${sign.en}'s qualities in a stable and systematic way, an architect who builds layer by layer on solid ground. Balance in four directions is established, and ${sign.en}'s energy appears in practical, sustainable forms. Cultivate flexibility and don't fear change.`,
-        5: `Tone 5 "Empowerment" grants ${sign.en}'s energy a powerful center and authority. You are positioned to wield ${sign.en}'s qualities most powerfully, a being endowed with cosmic force. Your decisiveness is outstanding, and ${sign.en}'s energy has great influence on those around you. Using that power with humility is your spiritual challenge.`,
-        6: `Tone 6 "Flow" allows ${sign.en}'s energy to flow organically and flexibly. ${sign.en}'s qualities naturally adapt to situations like water, and you are a master of response and flow. You sensitively respond to others' needs, distributing ${sign.en}'s energy harmoniously. It's important not to lose your own sense of direction.`,
-        7: `Tone 7 "Resonance" connects ${sign.en}'s energy to cosmic frequencies. ${sign.en}'s qualities manifest in the most spiritual and intuitive way, and your channel to the invisible world is open. You have many mystical experiences, and ${sign.en}'s energy takes the form of inspiration and prophecy. The challenge is maintaining connection with reality.`,
-        8: `Tone 8 "Harmony" gives the power to harmonize ${sign.en}'s energy with everything. You express ${sign.en}'s qualities in an integrative, balanced way, with the ability to unify disparate elements. ${sign.en}'s energy becomes a model, setting an example for others. Not obsessing over perfect harmony is the key to growth.`,
-        9: `Tone 9 "Solar" breathes vitality and the pulse of realization into ${sign.en}'s energy. You manifest ${sign.en}'s qualities in the most vibrant and energetic way, with a strong will toward goals. Brimming with energy like the sun, you have the power to fully realize ${sign.en}'s potential in reality. Be careful not to burn others with excessive passion.`,
-        10: `Tone 10 "Manifestation" gives the power to turn ${sign.en}'s energy into concrete reality. ${sign.en}'s qualities appear as visible results, and you have outstanding abilities of production and completion. An alchemist who turns dreams into reality, ${sign.en}'s energy takes concrete form in the material world. Remember that inner values are just as important as external achievements.`,
-        11: `Tone 11 "Liberation" frees and releases ${sign.en}'s energy. You have the ability to strip away the unnecessary from ${sign.en}'s qualities and leave only the essence, experiencing freedom through change and dissolution. ${sign.en}'s energy works to break conventions and open new possibilities. Don't forget to rebuild after dissolution.`,
-        12: `Tone 12 "Cooperation" manifests ${sign.en}'s energy through sharing and understanding. You have an outstanding ability to deeply understand ${sign.en}'s qualities and share them with others. You clearly explain complex things and use ${sign.en}'s energy for the community. Maintain balance between giving and receiving.`,
-        13: `Tone 13 "Transcendence" elevates ${sign.en}'s energy to the highest dimension. ${sign.en}'s qualities manifest in the most transcendent and cosmic way, and you stand at the boundary of completing all cycles and beginning new ones. ${sign.en}'s energy is sublimated into cosmic wisdom through endurance and transcendence. You carry the highest energy, and with it comes corresponding responsibility.`
+        1: `Tom 1 "Unidade" concede a energia de ${sign.en} uma faisca pura de iniciacao. Voce experimenta as qualidades de ${sign.en} em sua forma mais primordial e pura, um pioneiro abrindo novos ciclos. A lideranca e forte, mas voce deve aprender cooperacao.`,
+        2: `Tom 2 "Dualidade" da a energia de ${sign.en} o desafio do equilibrio e da escolha. Voce experimenta fortemente os lados de luz e sombra de ${sign.en}. A energia de ${sign.en} se completa atraves da parceria.`,
+        3: `Tom 3 "Ativacao" coloca dinamicamente a energia de ${sign.en} em movimento. Voce e um ativista que expressa as qualidades de ${sign.en} atraves da acao.`,
+        4: `Tom 4 "Estabilidade" fornece estrutura e fundacao para a energia de ${sign.en}. Voce manifesta as qualidades de ${sign.en} de forma estavel e sistematica.`,
+        5: `Tom 5 "Empoderamento" concede a energia de ${sign.en} um centro poderoso e autoridade. Usar esse poder com humildade e seu desafio espiritual.`,
+        6: `Tom 6 "Fluxo" permite que a energia de ${sign.en} flua organica e flexivelmente. E importante nao perder seu proprio senso de direcao.`,
+        7: `Tom 7 "Ressonancia" conecta a energia de ${sign.en} as frequencias cosmicas. Seu canal com o mundo invisivel esta aberto. O desafio e manter conexao com a realidade.`,
+        8: `Tom 8 "Harmonia" da o poder de harmonizar a energia de ${sign.en} com tudo. Nao se obsessar com harmonia perfeita e a chave do crescimento.`,
+        9: `Tom 9 "Solar" sopra vitalidade e o pulso da realizacao na energia de ${sign.en}. Cuidado para nao queimar os outros com paixao excessiva.`,
+        10: `Tom 10 "Manifestacao" da o poder de transformar a energia de ${sign.en} em realidade concreta. Lembre-se que valores internos sao tao importantes quanto conquistas externas.`,
+        11: `Tom 11 "Libertacao" libera e solta a energia de ${sign.en}. Voce tem a habilidade de remover o desnecessario e deixar apenas a essencia. Nao esqueca de reconstruir apos a dissolucao.`,
+        12: `Tom 12 "Cooperacao" manifesta a energia de ${sign.en} atraves do compartilhamento e compreensao. Mantenha o equilibrio entre dar e receber.`,
+        13: `Tom 13 "Transcendencia" eleva a energia de ${sign.en} a mais alta dimensao. Voce carrega a mais alta energia, e com ela vem responsabilidade correspondente.`
     };
 
     document.getElementById('toneInterpWrap').innerHTML = `
-        <div class="interp-card">
-            <div class="interp-title">Tone ${tzolkin.num}: ${tone.name}</div>
-            <div class="interp-text">
-                ${tone.meaning}
-            </div>
-        </div>
-        <div class="interp-card">
-            <div class="interp-title">Tone ${tzolkin.num} "${tone.name}" + ${sign.glyph} ${sign.en} Combination</div>
-            <div class="interp-text">
-                ${toneComboTexts[tzolkin.num]}
-            </div>
-        </div>
-    `;
+        <div class="interp-card"><div class="interp-title">Tom ${tzolkin.num}: ${tone.name}</div><div class="interp-text">${tone.meaning}</div></div>
+        <div class="interp-card"><div class="interp-title">Tom ${tzolkin.num} "${tone.name}" + ${sign.glyph} ${sign.en} Combinacao</div><div class="interp-text">${toneComboTexts[tzolkin.num]}</div></div>`;
 
-    // Haab
     document.getElementById('haabWrap').innerHTML = `
-        <div class="interp-card">
-            <div class="interp-title">Haab Position: ${haab.day} ${HAAB_MONTHS[haab.month]} (${HAAB_MONTHS_EN[haab.month]})</div>
-            <div class="interp-text">
-                Haab is the Mayan <strong>365-day solar calendar</strong>. It consists of 18 months (each 20 days) + 5 days of Wayeb (unlucky days).<br><br>
-                ${haab.month === 18 ? 'You were born during the Wayeb period. The Maya regarded these 5 days as dangerous yet times of powerful spiritual energy. You are interpreted as having been born with a special spiritual mission.' :
-                  `Day ${haab.day} of the month of ${HAAB_MONTHS[haab.month]}. This period carries the energy of ${haab.month < 6 ? 'growth and beginnings' : haab.month < 12 ? 'harvest and fruition' : 'reflection and preparation'} within the natural cycle.`}
-            </div>
-        </div>
-    `;
+        <div class="interp-card"><div class="interp-title">Posicao Haab: ${haab.day} ${HAAB_MONTHS[haab.month]} (${HAAB_MONTHS_PT[haab.month]})</div><div class="interp-text">
+            Haab e o <strong>calendario solar de 365 dias</strong> maia. Consiste em 18 meses (cada um com 20 dias) + 5 dias de Wayeb (dias de azar).<br><br>
+            ${haab.month === 18 ? 'Voce nasceu durante o periodo Wayeb. Os maias consideravam esses 5 dias como perigosos, porem de poderosa energia espiritual. Voce e interpretado como tendo nascido com uma missao espiritual especial.' :
+              `Dia ${haab.day} do mes de ${HAAB_MONTHS[haab.month]}. Este periodo carrega a energia de ${haab.month < 6 ? 'crescimento e novos comecos' : haab.month < 12 ? 'colheita e frutificacao' : 'reflexao e preparacao'} dentro do ciclo natural.`}
+        </div></div>`;
 
-    // Fortune
     const fortuneTexts = [
-        'Creative and initiating energy is strong. A good time to start new projects.',
-        'Energy of communication and relationships. Expand connections and solve problems through dialogue.',
-        'A time for inner reflection. Find answers through meditation and self-examination.',
-        'Energy of material abundance. Financial opportunities may be approaching.',
-        'A time of transformation. Let go of the old and prepare to meet a new version of yourself.'
+        'Energia criativa e iniciadora esta forte. Um bom momento para iniciar novos projetos.',
+        'Energia de comunicacao e relacionamentos. Expanda conexoes e resolva problemas atraves do dialogo.',
+        'Um tempo para reflexao interior. Encontre respostas atraves da meditacao e autoexame.',
+        'Energia de abundancia material. Oportunidades financeiras podem estar se aproximando.',
+        'Um tempo de transformacao. Deixe ir o velho e prepare-se para encontrar uma nova versao de si mesmo.'
     ];
     const fortuneIdx = (tzolkin.num + tzolkin.sign) % 5;
-
     document.getElementById('fortuneWrap').innerHTML = `
-        <div class="interp-card">
-            <div class="interp-title">${sign.name} + Tone ${tzolkin.num} Fortune Energy</div>
-            <div class="interp-text">
-                ${fortuneTexts[fortuneIdx]}<br><br>
-                <strong>Lucky Color:</strong> ${sign.color}<br>
-                <strong>Lucky Direction:</strong> ${sign.direction}<br>
-                <strong>Element:</strong> ${sign.element}<br>
-                <strong>Position in 260-day cycle:</strong> ${((tzolkin.sign * 13 + tzolkin.num - 1) % 260) + 1}/260
-            </div>
-        </div>
-    `;
+        <div class="interp-card"><div class="interp-title">${sign.name} + Tom ${tzolkin.num} Energia da Sorte</div><div class="interp-text">
+            ${fortuneTexts[fortuneIdx]}<br><br>
+            <strong>Cor da Sorte:</strong> ${sign.color}<br>
+            <strong>Direcao da Sorte:</strong> ${sign.direction}<br>
+            <strong>Elemento:</strong> ${sign.element}<br>
+            <strong>Posicao no ciclo de 260 dias:</strong> ${((tzolkin.sign * 13 + tzolkin.num - 1) % 260) + 1}/260
+        </div></div>`;
 
-    // ═══════════════════════════════════
-    // Compatibility
-    // ═══════════════════════════════════
-    const COMPAT_BEST = {
-        0:[4,8,12,16], 1:[5,9,13,17], 2:[6,10,14,18], 3:[7,11,15,19],
-        4:[0,8,12,16], 5:[1,9,13,17], 6:[2,10,14,18], 7:[3,11,15,19],
-        8:[0,4,12,16], 9:[1,5,13,17], 10:[2,6,14,18], 11:[3,7,15,19],
-        12:[0,4,8,16], 13:[1,5,9,17], 14:[2,6,10,18], 15:[3,7,11,19],
-        16:[0,4,8,12], 17:[1,5,9,13], 18:[2,6,10,14], 19:[3,7,11,15]
-    };
+    const COMPAT_BEST = {0:[4,8,12,16],1:[5,9,13,17],2:[6,10,14,18],3:[7,11,15,19],4:[0,8,12,16],5:[1,9,13,17],6:[2,10,14,18],7:[3,11,15,19],8:[0,4,12,16],9:[1,5,13,17],10:[2,6,14,18],11:[3,7,15,19],12:[0,4,8,16],13:[1,5,9,17],14:[2,6,10,18],15:[3,7,11,19],16:[0,4,8,12],17:[1,5,9,13],18:[2,6,10,14],19:[3,7,11,15]};
     const bestMatch = COMPAT_BEST[tzolkin.sign] || [];
-    let compatHtml = `<div class="interp-card">
-        <div class="interp-title">${sign.glyph} ${sign.en} Compatibility</div>
-        <div class="interp-text">
-            <strong>Best Compatibility (same element "${sign.element}" / direction "${sign.direction}"):</strong><br><br>`;
-    bestMatch.forEach(idx => {
-        const s = DAY_SIGNS[idx];
-        compatHtml += `${s.glyph} <strong>${s.en}</strong> (${s.name}) — ${s.meaning}<br>`;
-    });
+    let compatHtml = `<div class="interp-card"><div class="interp-title">${sign.glyph} Compatibilidade de ${sign.en}</div><div class="interp-text"><strong>Melhor Compatibilidade (mesmo elemento "${sign.element}" / direcao "${sign.direction}"):</strong><br><br>`;
+    bestMatch.forEach(idx => { const s = DAY_SIGNS[idx]; compatHtml += `${s.glyph} <strong>${s.en}</strong> (${s.name}) — ${s.meaning}<br>`; });
     const challengeIdx = (tzolkin.sign + 10) % 20;
     const challengeSign = DAY_SIGNS[challengeIdx];
-    compatHtml += `<br><strong>Challenging Compatibility (Growth Relationship):</strong><br>
-        ${challengeSign.glyph} <strong>${challengeSign.en}</strong> (${challengeSign.name}) — A relationship with much to learn from each other due to differences, but also potential for conflict.`;
-    compatHtml += `</div></div>`;
+    compatHtml += `<br><strong>Compatibilidade Desafiadora (Relacionamento de Crescimento):</strong><br>${challengeSign.glyph} <strong>${challengeSign.en}</strong> (${challengeSign.name}) — Um relacionamento com muito a aprender um com o outro devido as diferencas, mas tambem potencial para conflito.</div></div>`;
     document.getElementById('compatWrap').innerHTML = compatHtml;
 
-    // ═══════════════════════════════════
-    // Today's Tzolkin Energy
-    // ═══════════════════════════════════
     const todayJDN = gregorianToJDN(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate());
     const todayTz = jdnToTzolkin(todayJDN);
     const todaySign = DAY_SIGNS[todayTz.sign];
     const todayTone = TONES[todayTz.num - 1];
     const isSameSign = todayTz.sign === tzolkin.sign;
-
     document.getElementById('todayWrap').innerHTML = `
         <div class="interp-card" ${isSameSign ? 'style="border:2px solid #e8a020;"' : ''}>
-            <div class="interp-title">${todaySign.glyph} Today: ${todayTz.num} ${todaySign.en} (${todaySign.name})</div>
-            <div class="interp-text">
-                Today's Energy: <strong>Tone ${todayTz.num} "${todayTone.name}"</strong> + <strong>${todaySign.en} "${todaySign.meaning}"</strong><br><br>
-                ${isSameSign ? '<strong>Today is the same sign as yours!</strong> A special day when your energy is maximized. Good for important decisions or new beginnings.' :
-                  bestMatch.includes(todayTz.sign) ? "Today's energy harmonizes with your sign. A day of good flow." :
-                  "Embrace today's energy and pay attention to the teachings of " + todaySign.en + "."}
-            </div>
-        </div>
-    `;
+            <div class="interp-title">${todaySign.glyph} Hoje: ${todayTz.num} ${todaySign.en} (${todaySign.name})</div>
+            <div class="interp-text">Energia de Hoje: <strong>Tom ${todayTz.num} "${todayTone.name}"</strong> + <strong>${todaySign.en} "${todaySign.meaning}"</strong><br><br>
+                ${isSameSign ? '<strong>Hoje e o mesmo signo que o seu!</strong> Um dia especial quando sua energia e maximizada. Bom para decisoes importantes ou novos comecos.' :
+                  bestMatch.includes(todayTz.sign) ? "A energia de hoje harmoniza com seu signo. Um dia de bom fluxo." :
+                  "Abrace a energia de hoje e preste atencao aos ensinamentos de " + todaySign.en + "."}
+            </div></div>`;
 
     document.getElementById('resultSection').style.display = 'block';
     document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
@@ -586,6 +457,5 @@ function calculate() {
 initForm();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
 </script>
-
 </body>
 </html>

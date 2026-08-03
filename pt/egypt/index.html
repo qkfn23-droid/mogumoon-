@@ -4,7 +4,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ancient Egyptian Decans - MOGU Moon</title>
+    <title>Decanos do Egito Antigo - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -57,43 +57,43 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>Ancient Egyptian Decans</h2>
-        <p>The oldest star system, dividing the sky into 36 sectors</p>
+        <h2>Decanos do Egito Antigo</h2>
+        <p>O sistema estelar mais antigo, dividindo o ceu em 36 setores</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Data de nascimento</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
                 <select id="birthDay"></select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">Check Your Decan</button>
+        <button class="calc-btn" onclick="calculate()">Verificar Seu Decano</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">Your Egyptian Decan</h3>
+        <h3 class="section-title">Seu Decano Egipcio</h3>
         <div id="decanCard"></div>
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">Personality & Destiny</h3>
+        <h3 class="section-title">Personalidade e Destino</h3>
         <div id="personalityWrap"></div>
 
-        <h3 class="section-title">Love & Relationships</h3>
+        <h3 class="section-title">Amor e Relacionamentos</h3>
         <div id="loveWrap"></div>
 
-        <h3 class="section-title">Career & Wealth</h3>
+        <h3 class="section-title">Carreira e Riqueza</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">Health</h3>
+        <h3 class="section-title">Saude</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">Compatibility</h3>
+        <h3 class="section-title">Compatibilidade</h3>
         <div id="compatWrap"></div>
 
-        <h3 class="section-title">Lucky Info</h3>
+        <h3 class="section-title">Informacoes de Sorte</h3>
         <div id="luckyWrap"></div>
     </div>
 </div>
@@ -369,8 +369,8 @@ function initForm() {
     const m = document.getElementById('birthMonth');
     const d = document.getElementById('birthDay');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Mes ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Dia ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
 }
 
 function calculate() {
@@ -384,7 +384,7 @@ function calculate() {
         <div class="decan-card">
             <span class="decan-glyph">${decan.glyph}</span>
             <div class="decan-name">${decan.name}</div>
-            <div class="decan-deity">Guardian Deity: ${decan.deity}</div>
+            <div class="decan-deity">Divindade Guardia: ${decan.deity}</div>
             <div class="decan-dates">${decan.dates}</div>
         </div>
     `;
@@ -392,19 +392,19 @@ function calculate() {
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item">
-            <div class="info-label">Guardian Deity</div>
+            <div class="info-label">Divindade Guardia</div>
             <div class="info-value">${decan.glyph} ${decan.deity}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Element</div>
+            <div class="info-label">Elemento</div>
             <div class="info-value">${decan.element}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Decan Number</div>
+            <div class="info-label">Numero do Decano</div>
             <div class="info-value">${idx + 1} / 36</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Period</div>
+            <div class="info-label">Periodo</div>
             <div class="info-value">${decan.dates}</div>
         </div>
     `;
@@ -420,7 +420,7 @@ function calculate() {
     // Love
     document.getElementById('loveWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Love Style of ${decan.deity}</div>
+            <div class="interp-title">Estilo de Amor de ${decan.deity}</div>
             <div class="interp-text">${decan.love}</div>
         </div>
     `;
@@ -428,7 +428,7 @@ function calculate() {
     // Career
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Career & Wealth</div>
+            <div class="interp-title">Carreira e Riqueza</div>
             <div class="interp-text">${decan.career}</div>
         </div>
     `;
@@ -436,13 +436,13 @@ function calculate() {
     // Health
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Health Precautions</div>
+            <div class="interp-title">Precaucoes de Saude</div>
             <div class="interp-text">${decan.health}</div>
         </div>
     `;
 
     // Compatibility
-    let compatHtml = '<div class="interp-card"><div class="interp-title">Compatible Deities</div><div class="interp-text">';
+    let compatHtml = '<div class="interp-card"><div class="interp-title">Divindades Compativeis</div><div class="interp-text">';
     decan.compat.forEach(ci => {
         if (ci < DECANS.length) {
             const c = DECANS[ci];
@@ -456,10 +456,10 @@ function calculate() {
     document.getElementById('luckyWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-text">
-                <strong>Lucky Color:</strong> ${decan.lucky.color}<br>
-                <strong>Lucky Gemstone:</strong> ${decan.lucky.stone}<br>
-                <strong>Lucky Number:</strong> ${decan.lucky.number}<br>
-                <strong>Guardian Animal:</strong> ${decan.lucky.animal}
+                <strong>Cor da Sorte:</strong> ${decan.lucky.color}<br>
+                <strong>Pedra da Sorte:</strong> ${decan.lucky.stone}<br>
+                <strong>Numero da Sorte:</strong> ${decan.lucky.number}<br>
+                <strong>Animal Guardiao:</strong> ${decan.lucky.animal}
             </div>
         </div>
     `;
