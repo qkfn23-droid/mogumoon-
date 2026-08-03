@@ -26,7 +26,7 @@
         .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #b8942a, #d4a853); color: #1a1008; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
         .calc-btn:hover { transform: translateY(-1px); }
 
-        .result-section { display: none; }
+        .result-section { display: none; transition: opacity 0.3s; }
         .section-title { font-size: 18px; color: #d4a853; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a15; }
 
         .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
@@ -91,8 +91,29 @@
             <label>출생시간 <span class="optional-tag">(모르면 '모름' 선택)</span></label>
             <div class="input-row">
                 <select id="birthHour"></select>
+                <select id="birthMin"><option value="0">00분</option><option value="15">15분</option><option value="30" selected>30분</option><option value="45">45분</option></select>
                 <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">시간 입력</option><option value="unknown">모름</option></select>
             </div>
+        </div>
+        <div class="input-group" id="trueSolarGroup">
+            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">진태양시 보정 <span class="optional-tag">(출생지 경도 기반)</span></label>
+            <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+                <select id="birthLocation">
+                    <option value="126.98">서울</option>
+                    <option value="126.71">인천</option>
+                    <option value="127.38">대전</option>
+                    <option value="127.00">세종</option>
+                    <option value="126.85">광주</option>
+                    <option value="128.60">대구</option>
+                    <option value="129.03">부산</option>
+                    <option value="129.31">울산</option>
+                    <option value="126.53">제주</option>
+                    <option value="125.75">평양</option>
+                    <option value="127.73">춘천</option>
+                    <option value="128.73">포항</option>
+                </select>
+            </div>
+            <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
         </div>
         <div class="input-group">
             <label>성별</label>
@@ -151,32 +172,66 @@ const EL_NAMES = ['목(木)','화(火)','토(土)','금(金)','수(水)'];
 const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
 const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
 
-// 절기 기준 월 경계 (양력 근사값)
-const MONTH_BOUNDARIES = [
-    [2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,5]
+// 절기 기준 월 경계 (양력 근사값) — [시작월, 시작일, 절기명]
+// 인월(1): 입춘~경칩, 묘월(2): 경칩~청명, ...
+const SOLAR_TERMS = [
+    { month: 2, day: 4 },   // 1=인월 시작 (입춘)
+    { month: 3, day: 6 },   // 2=묘월 시작 (경칩)
+    { month: 4, day: 5 },   // 3=진월 시작 (청명)
+    { month: 5, day: 6 },   // 4=사월 시작 (입하)
+    { month: 6, day: 6 },   // 5=오월 시작 (망종)
+    { month: 7, day: 7 },   // 6=미월 시작 (소서)
+    { month: 8, day: 8 },   // 7=신월 시작 (입추)
+    { month: 9, day: 8 },   // 8=유월 시작 (백로)
+    { month: 10, day: 8 },  // 9=술월 시작 (한로)
+    { month: 11, day: 7 },  // 10=해월 시작 (입동)
+    { month: 12, day: 7 },  // 11=자월 시작 (대설)
+    { month: 1, day: 5 },   // 12=축월 시작 (소한)
 ];
 
 function getSolarMonth(month, day) {
-    for (let i = 0; i < 12; i++) {
-        const [m, d] = MONTH_BOUNDARIES[i];
-        const [nm, nd] = MONTH_BOUNDARIES[(i+1) % 12];
-        if (i < 11) {
-            if ((month === m && day >= d) || (month === nm && day < nd)) return i + 1;
-        } else {
-            if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
-            if (month === 12 && day >= 7) return 11; // handled in loop
+    // 날짜를 연내 일수로 변환하여 비교 (1월=100, 2월=200 ...)
+    const dateVal = month * 100 + day;
+    // 각 절기를 순회하며 해당 구간 찾기
+    for (let i = 11; i >= 0; i--) {
+        const t = SOLAR_TERMS[i];
+        const tVal = t.month * 100 + t.day;
+        if (dateVal >= tVal) {
+            // 축월(12)은 1월에 시작 — 특별 처리
+            if (i === 11 && t.month === 1) return 12;
+            return i + 1;
         }
     }
-    // fallback by approximate mapping
-    if (month === 1 && day < 5) return 12;
-    if (month === 1 && day >= 5) return 12;
-    if (month === 2 && day < 4) return 12;
-    for (let i = 0; i < 12; i++) {
-        const [m, d] = MONTH_BOUNDARIES[i];
-        if (month === m && day >= d) return i + 1;
-        if (month === m && day < d) return i === 0 ? 12 : i;
-    }
-    return 1;
+    // 1월 초 (소한 전) = 전년 자월(11)? 아니, 축월(12) 전 = 자월(11)
+    // 소한(1/5) 전이면 전년 대설(12/7) 이후이므로 자월(11)
+    return 11; // 1/1~1/4 = 소한(1/5) 전 = 자월(11)
+}
+
+// 진태양시 보정
+function getTrueSolarHour(hour, minute, longitude) {
+    // 한국 표준시 기준 경도 135°E
+    const correction = (longitude - 135) * 4; // 분 단위
+    let totalMin = hour * 60 + minute + correction;
+    if (totalMin < 0) totalMin += 1440;
+    if (totalMin >= 1440) totalMin -= 1440;
+    return { hour: Math.floor(totalMin / 60), minute: totalMin % 60, correctionMin: Math.round(correction) };
+}
+
+function hourToShichen(hour, minute) {
+    // 시진 결정: 자시(23~1), 축시(1~3), ..., 해시(21~23)
+    const totalMin = hour * 60 + minute;
+    if (totalMin >= 23*60 || totalMin < 1*60) return 0;  // 자
+    if (totalMin < 3*60) return 1;   // 축
+    if (totalMin < 5*60) return 2;   // 인
+    if (totalMin < 7*60) return 3;   // 묘
+    if (totalMin < 9*60) return 4;   // 진
+    if (totalMin < 11*60) return 5;  // 사
+    if (totalMin < 13*60) return 6;  // 오
+    if (totalMin < 15*60) return 7;  // 미
+    if (totalMin < 17*60) return 8;  // 신
+    if (totalMin < 19*60) return 9;  // 유
+    if (totalMin < 21*60) return 10; // 술
+    return 11; // 해
 }
 
 function getAdjustedYear(year, month, day) {
@@ -341,16 +396,56 @@ const SPOUSE_APPEARANCE = {
 
 function toggleTime() {
     const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
-    document.getElementById('birthHour').disabled = disabled;
-    document.getElementById('birthHour').style.opacity = disabled ? '0.4' : '1';
+    ['birthHour','birthMin'].forEach(id => {
+        document.getElementById(id).disabled = disabled;
+        document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
+    });
+    if (disabled) {
+        document.getElementById('trueSolar').checked = false;
+        toggleTrueSolar();
+    }
 }
+
+function toggleTrueSolar() {
+    const on = document.getElementById('trueSolar').checked;
+    document.getElementById('locationRow').style.display = on ? 'flex' : 'none';
+    document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
+    if (on) {
+        const lng = parseFloat(document.getElementById('birthLocation').value);
+        const corr = Math.round((lng - 135) * 4);
+        document.getElementById('trueSolarNote').textContent = `보정값: ${corr}분 (경도 ${lng}°E, 기준 135°E)`;
+    }
+}
+
+document.getElementById('birthLocation')?.addEventListener('change', toggleTrueSolar);
 
 function calculate() {
     const year = parseInt(document.getElementById('birthYear').value);
     const month = parseInt(document.getElementById('birthMonth').value);
     const day = parseInt(document.getElementById('birthDay').value);
-    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? -1 : parseInt(document.getElementById('birthHour').value);
+    const timeUnknown = document.getElementById('birthTimeUnknown').value === 'unknown';
     const gender = document.getElementById('gender').value;
+
+    // 시간 계산 (진태양시 보정 포함)
+    let hourIdx = -1;
+    let trueSolarInfo = null;
+    if (!timeUnknown) {
+        const rawHourIdx = parseInt(document.getElementById('birthHour').value);
+        const rawMin = parseInt(document.getElementById('birthMin').value);
+        // 시진 → 실제 시간 변환 (시진 시작시간 + 입력 분)
+        const shichenHours = [23,1,3,5,7,9,11,13,15,17,19,21];
+        const rawHour = shichenHours[rawHourIdx];
+        const rawMinute = rawMin;
+
+        if (document.getElementById('trueSolar').checked) {
+            const lng = parseFloat(document.getElementById('birthLocation').value);
+            const tst = getTrueSolarHour(rawHour, rawMinute, lng);
+            hourIdx = hourToShichen(tst.hour, tst.minute);
+            trueSolarInfo = { rawHour, rawMinute, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
+        } else {
+            hourIdx = rawHourIdx;
+        }
+    }
 
     const yp = getYearPillar(year, month, day);
     const mp = getMonthPillar(year, month, day);
@@ -428,12 +523,16 @@ function calculate() {
         </div>`;
 
     // 정보 그리드
-    document.getElementById('infoGrid').innerHTML = `
+    let infoHTML = `
         <div class="info-item"><div class="info-label">일간 (Day Master)</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
         <div class="info-item"><div class="info-label">띠</div><div class="info-value">${ANIMALS[yp.branch]} ${ANIMAL_NAMES[yp.branch]}띠 (${STEMS[yp.stem]}${BRANCHES[yp.branch]}년)</div></div>
         <div class="info-item"><div class="info-label">일주</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}일</div></div>
-        <div class="info-item"><div class="info-label">성별/음양</div><div class="info-value">${gender === 'm' ? '남성 (양)' : '여성 (음)'}</div></div>
-    `;
+        <div class="info-item"><div class="info-label">성별/음양</div><div class="info-value">${gender === 'm' ? '남성 (양)' : '여성 (음)'}</div></div>`;
+    if (trueSolarInfo) {
+        infoHTML += `<div class="info-item"><div class="info-label">진태양시 보정</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">보정: ${trueSolarInfo.correctionMin}분 → ${BRANCHES[hourIdx]}시</div></div>`;
+    }
+    infoHTML += '';
+    document.getElementById('infoGrid').innerHTML = infoHTML;
 
     // 성격 해석
     document.getElementById('interpWrap').innerHTML = `
@@ -513,8 +612,11 @@ function calculate() {
     dashaHtml += '</div>';
     document.getElementById('dashaWrap').innerHTML = dashaHtml;
 
-    document.getElementById('resultSection').style.display = 'block';
-    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    const rs = document.getElementById('resultSection');
+    rs.style.display = 'block';
+    rs.style.opacity = '0';
+    setTimeout(() => { rs.style.opacity = '1'; }, 50);
+    rs.scrollIntoView({ behavior: 'smooth' });
 }
 
 function initForm() {
