@@ -103,7 +103,7 @@
 <script>
 // 36 Egyptian Decans (10-day periods)
 const DECANS = [
-    { name: 'Spirit of the Nile', deity: 'Hapi', glyph: '🌊', element: 'Eau', dates: '1/1~1/10',
+    { name: 'Esprit du Nil', deity: 'Hapi', glyph: '🌊', element: 'Eau', dates: '1/1~1/10',
       startM:1, startD:1, endM:1, endD:10,
       personality: 'Abundant and generous like the Nile River. You carry a life-nurturing energy and bring prosperity to those around you. Deeply emotional and intuitive, with a water-like fluidity and flexibility. You have a remarkable ability to adapt to any environment.',
       love: 'You desire deep emotional connections. A devoted love that enriches your partner. You may have jealousy, but once you love, it flows endlessly like the Nile.',
@@ -112,7 +112,7 @@ const DECANS = [
       lucky: { color: 'Blue, Turquoise', stone: 'Aquamarine', number: '3, 7', animal: 'Crocodile' },
       compat: [3,7,11,17,23,29] },
 
-    { name: 'Son of Amun', deity: 'Amun-Ra', glyph: '☀️', element: 'Feu', dates: '1/11~1/20',
+    { name: 'Fils d\'Amon', deity: 'Amun-Ra', glyph: '☀️', element: 'Feu', dates: '1/11~1/20',
       startM:1, startD:11, endM:1, endD:20,
       personality: 'A powerful leader with the energy of the sun god. Full of charisma and a presence that brightens everything around you. Ambitious with strong pride, you value justice. Creative and optimistic, you find light even in darkness.',
       love: 'Passionate and dramatic love. You treat your partner like royalty. You have a strong desire to be respected, and feel deeply hurt when ignored.',
@@ -121,7 +121,7 @@ const DECANS = [
       lucky: { color: 'Gold, Orange', stone: 'Amber', number: '1, 9', animal: 'Falcon' },
       compat: [4,8,13,19,25,31] },
 
-    { name: 'Daughter of Mut', deity: 'Mut', glyph: '🦅', element: 'Vent', dates: '1/21~1/31',
+    { name: 'Fille de Mout', deity: 'Mut', glyph: '🦅', element: 'Vent', dates: '1/21~1/31',
       startM:1, startD:21, endM:1, endD:31,
       personality: 'The protective energy of the mother goddess Mut. Strong nurturing and protective instincts. Deep patience and practicality, prioritizing family and community above all. The insight of an eagle that sees far into the distance.',
       love: 'Protective and devoted love. Values creating a home. Wraps your partner in maternal love, though it can sometimes become overprotective.',
@@ -130,7 +130,7 @@ const DECANS = [
       lucky: { color: 'White, Silver', stone: 'Pearl', number: '2, 6', animal: 'Vulture' },
       compat: [5,9,14,20,26,32] },
 
-    { name: 'Land of Geb', deity: 'Geb', glyph: '🌍', element: 'Terre', dates: '2/1~2/10',
+    { name: 'Terre de Geb', deity: 'Geb', glyph: '🌍', element: 'Terre', dates: '2/1~2/10',
       startM:2, startD:1, endM:2, endD:10,
       personality: 'The stable energy of the earth god Geb. A realist with feet firmly planted on the ground. Reliable and highly responsible, you always keep your promises. You feel a deep connection with nature.',
       love: 'Stable and faithful love. You provide material stability and build lasting relationships. You dislike change and expect consistency from your partner.',
@@ -139,7 +139,7 @@ const DECANS = [
       lucky: { color: 'Brown, Green', stone: 'Jasper', number: '4, 8', animal: 'Goose' },
       compat: [0,6,10,18,24,30] },
 
-    { name: 'Judgment of Osiris', deity: 'Osiris', glyph: '⚖️', element: 'Eau', dates: '2/11~2/20',
+    { name: 'Jugement d\'Osiris', deity: 'Osiris', glyph: '⚖️', element: 'Eau', dates: '2/11~2/20',
       startM:2, startD:11, endM:2, endD:20,
       personality: 'The transformative energy of Osiris, god of death and resurrection. A deep soul who understands the cycles of life. Strong sense of justice and pursuit of truth, with the power to turn any trial into resurrection.',
       love: 'Deep and transformative love. You seek a soulmate. Forgiveness of betrayal is difficult, but before true love you accept new beginnings.',
@@ -148,7 +148,7 @@ const DECANS = [
       lucky: { color: 'Black, Green', stone: 'Obsidian', number: '5, 13', animal: 'Jackal' },
       compat: [1,7,11,19,25,31] },
 
-    { name: 'Magic of Isis', deity: 'Isis', glyph: '✨', element: 'Vent', dates: '2/21~3/1',
+    { name: 'Magie d\'Isis', deity: 'Isis', glyph: '✨', element: 'Vent', dates: '2/21~3/1',
       startM:2, startD:21, endM:3, endD:1,
       personality: 'The mystical energy of the goddess of magic, Isis. Extremely strong intuition and healing abilities. Wise and versatile, you find solutions to any problem. A romantic soul who believes in the power of love.',
       love: 'You dream of magical love. Devotion that would go to the ends of the earth for your partner. Just as Isis resurrected Osiris, you create miracles of love.',
@@ -157,7 +157,7 @@ const DECANS = [
       lucky: { color: 'Purple, Indigo', stone: 'Lapis Lazuli', number: '7, 11', animal: 'Cow' },
       compat: [2,8,12,16,26,32] },
 
-    { name: 'Wisdom of Thoth', deity: 'Thoth', glyph: '📚', element: 'Vent', dates: '3/2~3/11',
+    { name: 'Sagesse de Thot', deity: 'Thoth', glyph: '📚', element: 'Vent', dates: '3/2~3/11',
       startM:3, startD:2, endM:3, endD:11,
       personality: 'The intellectual energy of Thoth, god of knowledge and the moon. Outstanding talent in learning and communication. Natural aptitude for writing, calculation, and science. Born with the mission to record and convey truth.',
       love: 'Intellectual connection is paramount. If conversation doesn\'t flow, the relationship is hard to maintain. You want a partner with whom you can share books and knowledge.',
@@ -166,7 +166,7 @@ const DECANS = [
       lucky: { color: 'Silver, Purple', stone: 'Moonstone', number: '3, 9', animal: 'Ibis' },
       compat: [0,3,9,15,21,27] },
 
-    { name: 'Eye of Horus', deity: 'Horus', glyph: '👁️', element: 'Feu', dates: '3/12~3/21',
+    { name: 'Œil d\'Horus', deity: 'Horus', glyph: '👁️', element: 'Feu', dates: '3/12~3/21',
       startM:3, startD:12, endM:3, endD:21,
       personality: 'The warrior energy of Horus, the falcon god. Sharp vision and courage. You fight for justice and are a guardian who defeats evil. Laser-like focus that flies straight toward the target.',
       love: 'Protective and passionate love. You would do anything to protect your partner. Jealousy is strong, but love is equally deep.',
@@ -175,7 +175,7 @@ const DECANS = [
       lucky: { color: 'Red, Gold', stone: 'Carnelian', number: '1, 5', animal: 'Falcon' },
       compat: [1,4,10,16,22,28] },
 
-    { name: 'Guide of Anubis', deity: 'Anubis', glyph: '🐺', element: 'Terre', dates: '3/22~3/31',
+    { name: 'Guide d\'Anubis', deity: 'Anubis', glyph: '🐺', element: 'Terre', dates: '3/22~3/31',
       startM:3, startD:22, endM:3, endD:31,
       personality: 'The mysterious energy of Anubis, guide of the underworld. A deep soul who understands the boundary between life and death. Loyal and protective, you keep secrets well. Strong intuition that sees through people\'s true nature.',
       love: 'Loyal and deep love. Once you love, you would follow them to the underworld. Betrayal is absolutely unforgivable.',
@@ -184,7 +184,7 @@ const DECANS = [
       lucky: { color: 'Black, Gold', stone: 'Obsidian', number: '8, 13', animal: 'Jackal' },
       compat: [2,5,11,17,23,29] },
 
-    { name: 'Storm of Set', deity: 'Set', glyph: '⛈️', element: 'Feu', dates: '4/1~4/10',
+    { name: 'Tempête de Seth', deity: 'Set', glyph: '⛈️', element: 'Feu', dates: '4/1~4/10',
       startM:4, startD:1, endM:4, endD:10,
       personality: 'The destructive yet powerful energy of Set, god of chaos and storms. A rebel and innovator who breaks rules. Fearless and grows stronger in extreme situations. Easily misunderstood but brings necessary change.',
       love: 'Intense, storm-like love. Cannot tolerate boring relationships. Craves constant stimulation and adventure; loves like going to war.',
@@ -193,7 +193,7 @@ const DECANS = [
       lucky: { color: 'Red, Black', stone: 'Ruby', number: '9, 13', animal: 'Hippopotamus' },
       compat: [1,7,13,19,25,31] },
 
-    { name: 'Cat of Bastet', deity: 'Bastet', glyph: '🐈', element: 'Eau', dates: '4/11~4/20',
+    { name: 'Chat de Bastet', deity: 'Bastet', glyph: '🐈', element: 'Eau', dates: '4/11~4/20',
       startM:4, startD:11, endM:4, endD:20,
       personality: 'The elegant and mysterious energy of the cat goddess Bastet. Independent yet sociable. You love art and beauty and are a guardian of the home. Behind a soft exterior, sharp claws are hidden.',
       love: 'Independent yet affectionate love. Like a cat, you want freedom but also want to be near the one you love. Sensual and passionate.',

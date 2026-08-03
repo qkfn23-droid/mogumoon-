@@ -368,13 +368,13 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>Vedic Astrology (Jyotish)</h2>
-        <p>Read your destiny through the ancient astronomical astrology passed down from the Vedic era of India</p>
+        <h2>Astrologia Vedica (Jyotish)</h2>
+        <p>Leia seu destino atraves da antiga astrologia astronomica transmitida desde a era Vedica da India</p>
     </div>
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Data de nascimento</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -383,7 +383,7 @@
         </div>
 
         <div class="input-group">
-            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <label>Hora de nascimento <span class="optional-tag">(Selecione 'Desconhecido' se nao tiver certeza)</span></label>
             <div class="input-row">
                 <select id="birthAmpm">
                     <option value="am">AM</option>
@@ -392,14 +392,14 @@
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
                 <select id="birthTimeUnknown" onchange="toggleTimeUnknown()">
-                    <option value="known">Enter Time</option>
-                    <option value="unknown">Unknown</option>
+                    <option value="known">Inserir Horario</option>
+                    <option value="unknown">Desconhecido</option>
                 </select>
             </div>
         </div>
 
         <div class="input-group">
-            <label>Birth Place</label>
+            <label>Local de nascimento</label>
             <select id="birthCity" onchange="onCityChange()">
                 <optgroup label="🇰🇷 South Korea">
                     <option value="37.57,126.98" selected>Seoul</option>
@@ -444,97 +444,97 @@
                     <option value="-33.87,151.21">Sydney</option>
                     <option value="-23.55,-46.63">Sao Paulo</option>
                 </optgroup>
-                <optgroup label="✏️ Manual Entry">
-                    <option value="custom">Enter Latitude/Longitude manually</option>
+                <optgroup label="✏️ Entrada Manual">
+                    <option value="custom">Inserir Latitude/Longitude manualmente</option>
                 </optgroup>
             </select>
             <div id="customLatLng" style="display:none; margin-top:8px;">
                 <div class="input-row">
-                    <input type="number" id="birthLat" placeholder="Latitude (e.g. 37.57)" step="0.01">
-                    <input type="number" id="birthLng" placeholder="Longitude (e.g. 126.98)" step="0.01">
+                    <input type="number" id="birthLat" placeholder="Latitude (ex. 37.57)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="Longitude (ex. 126.98)" step="0.01">
                 </div>
             </div>
         </div>
 
-        <button class="calc-btn" onclick="calculateChart()">🔮 Generate Chart</button>
+        <button class="calc-btn" onclick="calculateChart()">🔮 Gerar Mapa</button>
     </div>
 
     <!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">📚 Vedic Astrology Beginner's Guide</h3>
+        <h3 class="section-title">📚 Guia para Iniciantes em Astrologia Vedica</h3>
         <div class="interp-card" style="border-left:3px solid #c9a84c;">
             <div class="interp-text" style="line-height:2;">
-                <strong style="color:#c9a84c;font-size:15px;">🌟 Key Terms for First-Time Readers</strong><br><br>
+                <strong style="color:#c9a84c;font-size:15px;">🌟 Termos-Chave para Leitores de Primeira Vez</strong><br><br>
 
-                <strong>🪐 9 Planets (Graha)</strong> — Nine forces that determine your personality and destiny<br>
-                ☉ <strong>Sun</strong> = Self, father, authority, confidence (Who you are)<br>
-                ☽ <strong>Moon</strong> = Emotions, mother, mind, daily life (How you feel)<br>
-                ♂ <strong>Mars</strong> = Energy, courage, action, anger (How you fight)<br>
-                ☿ <strong>Mercury</strong> = Intelligence, communication, learning, business (How you think)<br>
-                ♃ <strong>Jupiter</strong> = Luck, wisdom, wealth, teacher (What blessings you have) — <em>The most auspicious planet</em><br>
-                ♀ <strong>Venus</strong> = Love, charm, art, marriage (How you love)<br>
-                ♄ <strong>Saturn</strong> = Trials, patience, responsibility, karma (What is your life's lesson) — <em>Slow but the most powerful</em><br>
-                ☊ <strong>Rahu</strong> = Desire, obsession, innovation, foreign lands (Unfulfilled desires from past lives) — <em>A shadow planet with no physical form</em><br>
-                ☋ <strong>Ketu</strong> = Liberation, spirituality, detachment, past (What was already achieved in past lives) — <em>The opposite shadow of Rahu</em><br><br>
+                <strong>🪐 9 Planetas (Graha)</strong> — Nove forcas que determinam sua personalidade e destino<br>
+                ☉ <strong>Sol</strong> = Eu, pai, autoridade, confianca (Quem voce e)<br>
+                ☽ <strong>Lua</strong> = Emocoes, mae, mente, vida diaria (Como voce sente)<br>
+                ♂ <strong>Marte</strong> = Energia, coragem, acao, raiva (Como voce luta)<br>
+                ☿ <strong>Mercurio</strong> = Inteligencia, comunicacao, aprendizado, negocios (Como voce pensa)<br>
+                ♃ <strong>Jupiter</strong> = Sorte, sabedoria, riqueza, professor (Quais bencaos voce tem) — <em>O planeta mais auspicioso</em><br>
+                ♀ <strong>Venus</strong> = Amor, charme, arte, casamento (Como voce ama)<br>
+                ♄ <strong>Saturno</strong> = Provas, paciencia, responsabilidade, karma (Qual e a licao da sua vida) — <em>Lento mas o mais poderoso</em><br>
+                ☊ <strong>Rahu</strong> = Desejo, obsessao, inovacao, terras estrangeiras (Desejos nao realizados de vidas passadas) — <em>Um planeta sombra sem forma fisica</em><br>
+                ☋ <strong>Ketu</strong> = Libertacao, espiritualidade, desapego, passado (O que ja foi alcancado em vidas passadas) — <em>A sombra oposta de Rahu</em><br><br>
 
-                <strong>🏛️ 12 Houses</strong> — Twelve areas of life. Which house a planet occupies determines which area of your life it influences.<br>
-                1st=Self · 2nd=Money/Family · 3rd=Communication/Siblings · 4th=Home/Mother · 5th=Children/Romance/Creativity · 6th=Health/Enemies · 7th=Spouse/Partner · 8th=Transformation/Death/Inheritance · 9th=Luck/Foreign/Father · 10th=Career/Fame · 11th=Income/Wishes · 12th=Foreign/Loss/Spirituality<br><br>
+                <strong>🏛️ 12 Casas</strong> — Doze areas da vida. Qual casa um planeta ocupa determina qual area da sua vida ele influencia.<br>
+                1a=Eu · 2a=Dinheiro/Familia · 3a=Comunicacao/Irmaos · 4a=Lar/Mae · 5a=Filhos/Romance/Criatividade · 6a=Saude/Inimigos · 7a=Conjuge/Parceiro · 8a=Transformacao/Morte/Heranca · 9a=Sorte/Estrangeiro/Pai · 10a=Carreira/Fama · 11a=Renda/Desejos · 12a=Estrangeiro/Perda/Espiritualidade<br><br>
 
-                <strong>⬆ Lagna (Ascendant)</strong> — The zodiac sign rising on the eastern horizon at the moment of your birth. It determines how others see your personality and appearance. <em>In Vedic astrology, the Lagna is more important than the Sun sign used in Western astrology!</em><br><br>
+                <strong>⬆ Lagna (Ascendente)</strong> — O signo do zodiaco nascendo no horizonte leste no momento do seu nascimento. Ele determina como os outros veem sua personalidade e aparencia. <em>Na astrologia vedica, o Lagna e mais importante que o signo solar usado na astrologia ocidental!</em><br><br>
 
-                <strong>🌙 Nakshatra</strong> — One of 27 lunar mansion divisions where the Moon is positioned. It analyzes personality more precisely than the 12 Western zodiac signs. It represents your deepest nature.<br><br>
+                <strong>🌙 Nakshatra</strong> — Uma das 27 divisoes de mansoes lunares onde a Lua esta posicionada. Analisa a personalidade com mais precisao que os 12 signos zodiacais ocidentais. Representa sua natureza mais profunda.<br><br>
 
-                <strong>⏳ Dasha (Planetary Period)</strong> — Life period fortune by phase. The energy of whichever planet rules that period becomes stronger. The full cycle spans 120 years with 9 planets taking turns.<br><br>
+                <strong>⏳ Dasha (Periodo Planetario)</strong> — Fortuna do periodo de vida por fase. A energia de qualquer planeta que governa aquele periodo se torna mais forte. O ciclo completo abrange 120 anos com 9 planetas se alternando.<br><br>
 
-                <strong>🔮 Yoga</strong> — Special planetary combinations. When two or more planets form specific relationships, they create special destinies. (e.g., Gajakesari Yoga = Moon + Jupiter → Wisdom and fame)
+                <strong>🔮 Yoga</strong> — Combinacoes planetarias especiais. Quando dois ou mais planetas formam relacoes especificas, criam destinos especiais. (ex., Gajakesari Yoga = Lua + Jupiter → Sabedoria e fama)
             </div>
         </div>
 
-        <h3 class="section-title">🪐 Planetary Positions</h3>
+        <h3 class="section-title">🪐 Posicoes Planetarias</h3>
         <div id="planetTableWrap"></div>
 
-        <h3 class="section-title">🏛️ Birth Chart (Your Sky Map)</h3>
+        <h3 class="section-title">🏛️ Mapa Natal (Seu Mapa do Ceu)</h3>
         <div class="chart-container">
-            <div class="chart-label">South Indian Style Chart — 12 cells = 12 signs, planet symbols show where each planet was at birth</div>
+            <div class="chart-label">Mapa Estilo Sul da India — 12 celulas = 12 signos, simbolos planetarios mostram onde cada planeta estava no nascimento</div>
             <div class="chart-grid" id="d1Chart"></div>
         </div>
 
-        <h3 class="section-title">🌙 Nakshatra (Your Star — Your Deepest Nature)</h3>
+        <h3 class="section-title">🌙 Nakshatra (Sua Estrela — Sua Natureza Mais Profunda)</h3>
         <div id="nakshatraWrap"></div>
 
-        <h3 class="section-title">⏳ Dasha (Life Period Fortune)</h3>
+        <h3 class="section-title">⏳ Dasha (Fortuna por Periodo de Vida)</h3>
         <div id="dashaWrap"></div>
 
-        <h3 class="section-title">📖 Comprehensive Interpretation</h3>
+        <h3 class="section-title">📖 Interpretacao Completa</h3>
         <div id="interpWrap"></div>
 
-        <h3 class="section-title">🪐 Planet-by-Planet Detailed Interpretation (How each planet influences your life areas)</h3>
+        <h3 class="section-title">🪐 Interpretacao Detalhada Planeta por Planeta (Como cada planeta influencia suas areas de vida)</h3>
         <div id="planetHouseWrap"></div>
 
-        <h3 class="section-title">🎓 Education & Knowledge (4th & 5th Houses)</h3>
+        <h3 class="section-title">🎓 Educacao e Conhecimento (Casas 4 e 5)</h3>
         <div id="educationWrap"></div>
 
-        <h3 class="section-title">👶 Children Fortune (5th House)</h3>
+        <h3 class="section-title">👶 Fortuna dos Filhos (Casa 5)</h3>
         <div id="childrenWrap"></div>
 
-        <h3 class="section-title">✈️ Foreign Fortune & Migration (9th & 12th Houses)</h3>
+        <h3 class="section-title">✈️ Fortuna no Exterior e Migracao (Casas 9 e 12)</h3>
         <div id="foreignWrap"></div>
 
-        <h3 class="section-title">⚖️ Planetary Dignity (Exaltation · Debilitation · Own Sign)</h3>
+        <h3 class="section-title">⚖️ Dignidade Planetaria (Exaltacao · Debilitacao · Signo Proprio)</h3>
         <div id="dignityWrap"></div>
 
-        <h3 class="section-title">🍀 Lucky Information</h3>
+        <h3 class="section-title">🍀 Informacoes de Sorte</h3>
         <div id="luckyWrap"></div>
 
-        <h3 class="section-title">💎 Remedies & Strengthening Methods</h3>
+        <h3 class="section-title">💎 Remedios e Metodos de Fortalecimento</h3>
         <div id="remedyWrap"></div>
 
     </div>
 </div>
 
 <footer>
-    &copy; 2025 Ancient Astrology
+    &copy; 2025 MOGU Moon
 </footer>
 
 <style>
@@ -652,7 +652,7 @@ function initForm() {
         yearSel.appendChild(opt);
     }
     // Month: 1~12
-    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthNames = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
     for (let m = 1; m <= 12; m++) {
         const opt = document.createElement('option');
         opt.value = m; opt.textContent = monthNames[m-1];
@@ -849,7 +849,7 @@ function calculateChart() {
 
 function renderPlanetTable(positions, lagnaSign) {
     let html = '<table class="planet-table"><thead><tr>';
-    html += '<th>Planet</th><th>Sign</th><th>Degree</th><th>Nakshatra</th><th>House</th>';
+    html += '<th>Planeta</th><th>Signo</th><th>Grau</th><th>Nakshatra</th><th>Casa</th>';
     html += '</tr></thead><tbody>';
 
     // Add Lagna first

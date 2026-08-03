@@ -134,7 +134,7 @@
 const SIGNS = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge','Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
 const SIGNS_EN = ['Bélier','Taureau','Gémeaux','Cancer','Lion','Vierge','Balance','Scorpion','Sagittaire','Capricorne','Verseau','Poissons'];
 const SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
-const RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+const RULERS = ['Mars','Vénus','Mercure','Lune','Soleil','Mercure','Vénus','Mars','Jupiter','Saturne','Saturne','Jupiter'];
 const ELEMENTS = ['Feu','Terre','Air','Eau','Feu','Terre','Air','Eau','Feu','Terre','Air','Eau'];
 const MODES = ['Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable','Cardinal','Fixe','Mutable'];
 
@@ -471,13 +471,13 @@ function calculate() {
     const rulerSign = rulerPlanet ? rulerPlanet.sign : sunSign;
 
     const RULER_DETAIL = {
-        'Mars': 'With Mars as your chart ruler, you live life as a battlefield. Courage, action, and competitive spirit run through your entire life. If you\'re not fighting, you don\'t feel alive. You overflow with energy and are always seeking new challenges.',
-        'Venus': 'With Venus as your chart ruler, you navigate life through beauty and love. Relationships, art, and pleasure are the driving forces of your life. Charming and sociable, you succeed through harmony and balance.',
-        'Mercury': 'With Mercury as your chart ruler, you conquer the world through intellect and communication. Words, writing, learning, and business are the core tools of your life. With a quick mind and adaptability, you survive any situation.',
-        'Moon': 'With the Moon as your chart ruler, you navigate life through emotion and intuition. Your feelings are your compass, and home and family are the center of your life. Like the lunar cycle, you have emotional tides — but that is your power.',
-        'Sun': 'With the Sun as your chart ruler, you illuminate the world with light and authority. Self-realization and creative expression are your life\'s purpose. Being in the spotlight is your destiny, and you change the world through leadership.',
-        'Jupiter': 'With Jupiter as your chart ruler, you explore life through wisdom and expansion. Fortune follows you, and you grow through education and travel. Generous and optimistic, you lead people with grand vision.',
-        'Saturn': 'With Saturn as your chart ruler, you climb to the top through patience and responsibility. Life may not be easy, but every trial makes you stronger. You shine more with age, and ultimately stand higher than anyone.'
+        'Mars': 'Avec Mars comme maître de votre thème, vous vivez la vie comme un champ de bataille. Le courage, l\'action et l\'esprit compétitif traversent toute votre vie. Si vous ne combattez pas, vous ne vous sentez pas vivant. Vous débordez d\'énergie et cherchez toujours de nouveaux défis.',
+        'Vénus': 'Avec Vénus comme maître de votre thème, vous naviguez dans la vie à travers la beauté et l\'amour. Les relations, l\'art et le plaisir sont les forces motrices de votre vie. Charmant et sociable, vous réussissez par l\'harmonie et l\'équilibre.',
+        'Mercure': 'Avec Mercure comme maître de votre thème, vous conquérez le monde par l\'intellect et la communication. Les mots, l\'écriture, l\'apprentissage et les affaires sont les outils centraux de votre vie. Avec un esprit vif et une adaptabilité, vous survivez à toute situation.',
+        'Lune': 'Avec la Lune comme maître de votre thème, vous naviguez dans la vie à travers l\'émotion et l\'intuition. Vos sentiments sont votre boussole, et le foyer et la famille sont le centre de votre vie. Comme le cycle lunaire, vous avez des marées émotionnelles — mais c\'est votre pouvoir.',
+        'Soleil': 'Avec le Soleil comme maître de votre thème, vous illuminez le monde avec lumière et autorité. La réalisation de soi et l\'expression créative sont le but de votre vie. Être sous les projecteurs est votre destin, et vous changez le monde par le leadership.',
+        'Jupiter': 'Avec Jupiter comme maître de votre thème, vous explorez la vie à travers la sagesse et l\'expansion. La fortune vous suit, et vous grandissez par l\'éducation et le voyage. Généreux et optimiste, vous menez les gens avec une grande vision.',
+        'Saturne': 'Avec Saturne comme maître de votre thème, vous grimpez au sommet par la patience et la responsabilité. La vie n\'est peut-être pas facile, mais chaque épreuve vous rend plus fort. Vous brillez davantage avec l\'âge, et finalement vous vous tenez plus haut que quiconque.'
     };
 
     document.getElementById('rulerWrap').innerHTML = `
