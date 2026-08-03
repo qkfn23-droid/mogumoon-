@@ -98,19 +98,21 @@
         <div class="input-group" id="trueSolarGroup">
             <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">진태양시 보정 <span class="optional-tag">(출생지 경도 기반)</span></label>
             <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+                <select id="birthTimezone" onchange="updateCities()">
+                    <option value="135" selected>UTC+9 (한국/일본)</option>
+                    <option value="120">UTC+8 (중국/대만/홍콩)</option>
+                    <option value="105">UTC+7 (태국/베트남)</option>
+                    <option value="82.5">UTC+5:30 (인도)</option>
+                    <option value="15">UTC+1 (유럽 중부)</option>
+                    <option value="0">UTC+0 (영국/포르투갈)</option>
+                    <option value="-75">UTC-5 (미국 동부)</option>
+                    <option value="-90">UTC-6 (미국 중부)</option>
+                    <option value="-105">UTC-7 (미국 산악)</option>
+                    <option value="-120">UTC-8 (미국 서부)</option>
+                    <option value="-45">UTC-3 (브라질)</option>
+                    <option value="150">UTC+10 (호주 동부)</option>
+                </select>
                 <select id="birthLocation">
-                    <option value="126.98">서울</option>
-                    <option value="126.71">인천</option>
-                    <option value="127.38">대전</option>
-                    <option value="127.00">세종</option>
-                    <option value="126.85">광주</option>
-                    <option value="128.60">대구</option>
-                    <option value="129.03">부산</option>
-                    <option value="129.31">울산</option>
-                    <option value="126.53">제주</option>
-                    <option value="125.75">평양</option>
-                    <option value="127.73">춘천</option>
-                    <option value="128.73">포항</option>
                 </select>
             </div>
             <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
@@ -206,10 +208,74 @@ function getSolarMonth(month, day) {
     return 1;
 }
 
+// 시간대별 도시 데이터
+const CITIES_BY_TZ = {
+    '135': [
+        {v:'126.98',n:'서울'},{v:'126.71',n:'인천'},{v:'127.38',n:'대전'},{v:'128.60',n:'대구'},
+        {v:'129.03',n:'부산'},{v:'129.31',n:'울산'},{v:'126.85',n:'광주'},{v:'126.53',n:'제주'},
+        {v:'127.00',n:'세종'},{v:'125.75',n:'평양'},
+        {v:'139.69',n:'도쿄 (Tokyo)'},{v:'135.50',n:'오사카 (Osaka)'},{v:'136.91',n:'나고야 (Nagoya)'},
+        {v:'130.42',n:'후쿠오카 (Fukuoka)'},{v:'141.35',n:'삿포로 (Sapporo)'},{v:'127.68',n:'나하 (Naha)'}
+    ],
+    '120': [
+        {v:'116.40',n:'베이징 (Beijing)'},{v:'121.47',n:'상하이 (Shanghai)'},{v:'114.17',n:'홍콩 (Hong Kong)'},
+        {v:'121.56',n:'타이베이 (Taipei)'},{v:'106.70',n:'충칭 (Chongqing)'},{v:'113.26',n:'광저우 (Guangzhou)'},
+        {v:'104.07',n:'청두 (Chengdu)'},{v:'103.85',n:'싱가포르 (Singapore)'}
+    ],
+    '105': [
+        {v:'100.50',n:'방콕 (Bangkok)'},{v:'105.85',n:'호치민 (Ho Chi Minh)'},{v:'106.85',n:'자카르타 (Jakarta)'},
+        {v:'104.92',n:'프놈펜 (Phnom Penh)'}
+    ],
+    '82.5': [
+        {v:'77.21',n:'뉴델리 (New Delhi)'},{v:'72.88',n:'뭄바이 (Mumbai)'},{v:'80.27',n:'콜카타 (Kolkata)'},
+        {v:'77.59',n:'벵갈루루 (Bengaluru)'}
+    ],
+    '15': [
+        {v:'13.40',n:'베를린 (Berlin)'},{v:'2.35',n:'파리 (Paris)'},{v:'-3.70',n:'마드리드 (Madrid)'},
+        {v:'12.50',n:'로마 (Roma)'},{v:'16.37',n:'빈 (Wien)'},{v:'14.42',n:'프라하 (Praha)'},
+        {v:'21.01',n:'바르샤바 (Warszawa)'},{v:'18.07',n:'스톡홀름 (Stockholm)'}
+    ],
+    '0': [
+        {v:'-0.12',n:'런던 (London)'},{v:'-9.14',n:'리스본 (Lisboa)'},{v:'-6.26',n:'더블린 (Dublin)'}
+    ],
+    '-75': [
+        {v:'-74.01',n:'뉴욕 (New York)'},{v:'-77.04',n:'워싱턴 (Washington)'},{v:'-71.06',n:'보스턴 (Boston)'},
+        {v:'-80.19',n:'마이애미 (Miami)'},{v:'-79.38',n:'토론토 (Toronto)'}
+    ],
+    '-90': [
+        {v:'-87.63',n:'시카고 (Chicago)'},{v:'-95.37',n:'휴스턴 (Houston)'},{v:'-93.27',n:'미니애폴리스 (Minneapolis)'}
+    ],
+    '-105': [
+        {v:'-104.99',n:'덴버 (Denver)'},{v:'-111.89',n:'솔트레이크시티 (Salt Lake City)'}
+    ],
+    '-120': [
+        {v:'-118.24',n:'로스앤젤레스 (Los Angeles)'},{v:'-122.42',n:'샌프란시스코 (San Francisco)'},
+        {v:'-122.33',n:'시애틀 (Seattle)'},{v:'-123.12',n:'밴쿠버 (Vancouver)'}
+    ],
+    '-45': [
+        {v:'-43.17',n:'리우데자네이루 (Rio de Janeiro)'},{v:'-46.63',n:'상파울루 (São Paulo)'},
+        {v:'-38.51',n:'살바도르 (Salvador)'}
+    ],
+    '150': [
+        {v:'151.21',n:'시드니 (Sydney)'},{v:'144.96',n:'멜버른 (Melbourne)'},{v:'153.03',n:'브리즈번 (Brisbane)'}
+    ]
+};
+
+function updateCities() {
+    const tz = document.getElementById('birthTimezone').value;
+    const sel = document.getElementById('birthLocation');
+    sel.innerHTML = '';
+    (CITIES_BY_TZ[tz] || []).forEach(c => {
+        const o = document.createElement('option');
+        o.value = c.v; o.textContent = c.n; sel.appendChild(o);
+    });
+    toggleTrueSolar();
+}
+
 // 진태양시 보정
 function getTrueSolarHour(hour, minute, longitude) {
-    // 한국 표준시 기준 경도 135°E
-    const correction = (longitude - 135) * 4; // 분 단위
+    const stdMeridian = parseFloat(document.getElementById('birthTimezone').value);
+    const correction = (longitude - stdMeridian) * 4; // 분 단위
     let totalMin = hour * 60 + minute + correction;
     if (totalMin < 0) totalMin += 1440;
     if (totalMin >= 1440) totalMin -= 1440;
@@ -488,8 +554,9 @@ function toggleTrueSolar() {
     document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
     if (on) {
         const lng = parseFloat(document.getElementById('birthLocation').value);
-        const corr = Math.round((lng - 135) * 4);
-        document.getElementById('trueSolarNote').textContent = `보정값: ${corr}분 (경도 ${lng}°E, 기준 135°E)`;
+        const stdMeridian = parseFloat(document.getElementById('birthTimezone').value);
+        const corr = Math.round((lng - stdMeridian) * 4);
+        document.getElementById('trueSolarNote').textContent = `보정값: ${corr}분 (경도 ${lng}°E, 기준 ${stdMeridian}°E)`;
     }
 }
 
@@ -759,6 +826,7 @@ function initForm() {
 }
 
 initForm();
+updateCities();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
 </script>
 
