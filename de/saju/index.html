@@ -26,7 +26,7 @@
         .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #b8942a, #d4a853); color: #1a1008; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
         .calc-btn:hover { transform: translateY(-1px); }
 
-        .result-section { display: none; }
+        .result-section { display: none; transition: opacity 0.3s; }
         .section-title { font-size: 18px; color: #d4a853; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a15; }
 
         .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
@@ -91,8 +91,34 @@
             <label>Geburtszeit <span class="optional-tag">(falls unbekannt, "Unbekannt" waehlen)</span></label>
             <div class="input-row">
                 <select id="birthHour"></select>
+                <select id="birthMin">
+                    <option value="0">00 Min</option>
+                    <option value="15">15 Min</option>
+                    <option value="30" selected>30 Min</option>
+                    <option value="45">45 Min</option>
+                </select>
                 <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Zeit eingeben</option><option value="unknown">Unbekannt</option></select>
             </div>
+        </div>
+        <div class="input-group" id="trueSolarGroup">
+            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">Wahre Sonnenzeit-Korrektur <span class="optional-tag">(basierend auf Geburtsort-Laengengrad)</span></label>
+            <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+                <select id="birthLocation">
+                    <option value="126.98">Seoul</option>
+                    <option value="126.71">Incheon</option>
+                    <option value="127.38">Daejeon</option>
+                    <option value="127.00">Sejong</option>
+                    <option value="126.85">Gwangju</option>
+                    <option value="128.60">Daegu</option>
+                    <option value="129.03">Busan</option>
+                    <option value="129.31">Ulsan</option>
+                    <option value="126.53">Jeju</option>
+                    <option value="125.75">Pyongyang</option>
+                    <option value="127.73">Chuncheon</option>
+                    <option value="128.73">Pohang</option>
+                </select>
+            </div>
+            <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
         </div>
         <div class="input-group">
             <label>Geschlecht</label>
@@ -151,32 +177,59 @@ const EL_NAMES = ['Holz','Feuer','Erde','Metall','Wasser'];
 const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
 const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
 
-// Solartermin-Monatsgrenzen (Solarkalender-Naeherungswerte)
-const MONTH_BOUNDARIES = [
-    [2,4],[3,6],[4,5],[5,6],[6,6],[7,7],[8,8],[9,8],[10,8],[11,7],[12,7],[1,5]
+// Solartermin-Monatsgrenzen — [Monat, Tag]
+const SOLAR_TERMS = [
+    { month: 2, day: 4 },   // 1=Yin-Monat Beginn (Lichun)
+    { month: 3, day: 6 },   // 2=Mao-Monat Beginn (Jingzhe)
+    { month: 4, day: 5 },   // 3=Chen-Monat Beginn (Qingming)
+    { month: 5, day: 6 },   // 4=Si-Monat Beginn (Lixia)
+    { month: 6, day: 6 },   // 5=Wu-Monat Beginn (Mangzhong)
+    { month: 7, day: 7 },   // 6=Wei-Monat Beginn (Xiaoshu)
+    { month: 8, day: 8 },   // 7=Shen-Monat Beginn (Liqiu)
+    { month: 9, day: 8 },   // 8=You-Monat Beginn (Bailu)
+    { month: 10, day: 8 },  // 9=Xu-Monat Beginn (Hanlu)
+    { month: 11, day: 7 },  // 10=Hai-Monat Beginn (Lidong)
+    { month: 12, day: 7 },  // 11=Zi-Monat Beginn (Daxue)
+    { month: 1, day: 5 },   // 12=Chou-Monat Beginn (Xiaohan)
 ];
 
 function getSolarMonth(month, day) {
-    for (let i = 0; i < 12; i++) {
-        const [m, d] = MONTH_BOUNDARIES[i];
-        const [nm, nd] = MONTH_BOUNDARIES[(i+1) % 12];
-        if (i < 11) {
-            if ((month === m && day >= d) || (month === nm && day < nd)) return i + 1;
-        } else {
-            if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
-            if (month === 12 && day >= 7) return 11; // handled in loop
+    const dateVal = month * 100 + day;
+    for (let i = 11; i >= 0; i--) {
+        const t = SOLAR_TERMS[i];
+        const tVal = t.month * 100 + t.day;
+        if (dateVal >= tVal) {
+            if (i === 11 && t.month === 1) return 12;
+            return i + 1;
         }
     }
-    // fallback by approximate mapping
-    if (month === 1 && day < 5) return 12;
-    if (month === 1 && day >= 5) return 12;
-    if (month === 2 && day < 4) return 12;
-    for (let i = 0; i < 12; i++) {
-        const [m, d] = MONTH_BOUNDARIES[i];
-        if (month === m && day >= d) return i + 1;
-        if (month === m && day < d) return i === 0 ? 12 : i;
-    }
-    return 1;
+    return 11; // 1/1~1/4 vor Xiaohan = Zi-Monat (11)
+}
+
+// Wahre Sonnenzeit-Korrektur
+function getTrueSolarHour(hour, minute, longitude) {
+    // Korrektur relativ zu koreanischer Standardzeit (135°E)
+    const correction = (longitude - 135) * 4; // in Minuten
+    let totalMin = hour * 60 + minute + correction;
+    if (totalMin < 0) totalMin += 1440;
+    if (totalMin >= 1440) totalMin -= 1440;
+    return { hour: Math.floor(totalMin / 60), minute: totalMin % 60, correctionMin: Math.round(correction) };
+}
+
+function hourToShichen(hour, minute) {
+    const totalMin = hour * 60 + minute;
+    if (totalMin >= 23*60 || totalMin < 1*60) return 0;  // Zi
+    if (totalMin < 3*60) return 1;   // Chou
+    if (totalMin < 5*60) return 2;   // Yin
+    if (totalMin < 7*60) return 3;   // Mao
+    if (totalMin < 9*60) return 4;   // Chen
+    if (totalMin < 11*60) return 5;  // Si
+    if (totalMin < 13*60) return 6;  // Wu
+    if (totalMin < 15*60) return 7;  // Wei
+    if (totalMin < 17*60) return 8;  // Shen
+    if (totalMin < 19*60) return 9;  // You
+    if (totalMin < 21*60) return 10; // Xu
+    return 11; // Hai
 }
 
 function getAdjustedYear(year, month, day) {
@@ -231,15 +284,10 @@ function getTenGod(dayStem, targetStem) {
     const tarYin = targetStem % 2;
     const sameYY = dayYin === tarYin;
 
-    // Gleiche Element-Gruppe
     if (dayEl === tarEl) return sameYY ? 'Begleiter' : 'Geraubter Reichtum';
-    // Ich erzeuге (Holz→Feuer, Feuer→Erde, Erde→Metall, Metall→Wasser, Wasser→Holz)
     if ((dayEl + 1) % 5 === tarEl) return sameYY ? 'Essgott' : 'Verletzender Offizier';
-    // Mich erzeugend
     if ((tarEl + 1) % 5 === dayEl) return sameYY ? 'Indirektes Siegel' : 'Direktes Siegel';
-    // Ich kontrolliere (Holz→Erde, Feuer→Metall, Erde→Wasser, Metall→Holz, Wasser→Feuer)
     if ((dayEl + 2) % 5 === tarEl) return sameYY ? 'Indirekter Reichtum' : 'Direkter Reichtum';
-    // Mich kontrollierend
     if ((tarEl + 2) % 5 === dayEl) return sameYY ? 'Sieben Toetungen' : 'Direkter Offizier';
     return '';
 }
@@ -338,16 +386,56 @@ const SPOUSE_APPEARANCE = {
 
 function toggleTime() {
     const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
-    document.getElementById('birthHour').disabled = disabled;
-    document.getElementById('birthHour').style.opacity = disabled ? '0.4' : '1';
+    ['birthHour','birthMin'].forEach(id => {
+        document.getElementById(id).disabled = disabled;
+        document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
+    });
+    if (disabled) {
+        document.getElementById('trueSolar').checked = false;
+        toggleTrueSolar();
+    }
 }
+
+function toggleTrueSolar() {
+    const on = document.getElementById('trueSolar').checked;
+    document.getElementById('locationRow').style.display = on ? 'flex' : 'none';
+    document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
+    if (on) {
+        const lng = parseFloat(document.getElementById('birthLocation').value);
+        const corr = Math.round((lng - 135) * 4);
+        document.getElementById('trueSolarNote').textContent = `Korrektur: ${corr} Min (Laengengrad ${lng}°E, Standard 135°E)`;
+    }
+}
+
+document.getElementById('birthLocation')?.addEventListener('change', toggleTrueSolar);
 
 function calculate() {
     const year = parseInt(document.getElementById('birthYear').value);
     const month = parseInt(document.getElementById('birthMonth').value);
     const day = parseInt(document.getElementById('birthDay').value);
-    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? -1 : parseInt(document.getElementById('birthHour').value);
+    const timeUnknown = document.getElementById('birthTimeUnknown').value === 'unknown';
     const gender = document.getElementById('gender').value;
+
+    // Stundenberechnung (mit wahrer Sonnenzeit-Korrektur)
+    let hourIdx = -1;
+    let trueSolarInfo = null;
+    if (!timeUnknown) {
+        const rawHourIdx = parseInt(document.getElementById('birthHour').value);
+        const rawMin = parseInt(document.getElementById('birthMin').value);
+        // Shichen → Realstunde (Startzeit des Shichen + eingegebene Minuten)
+        const shichenHours = [23,1,3,5,7,9,11,13,15,17,19,21];
+        const rawHour = shichenHours[rawHourIdx];
+        const rawMinute = rawMin;
+
+        if (document.getElementById('trueSolar').checked) {
+            const lng = parseFloat(document.getElementById('birthLocation').value);
+            const tst = getTrueSolarHour(rawHour, rawMinute, lng);
+            hourIdx = hourToShichen(tst.hour, tst.minute);
+            trueSolarInfo = { rawHour, rawMinute, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
+        } else {
+            hourIdx = rawHourIdx;
+        }
+    }
 
     const yp = getYearPillar(year, month, day);
     const mp = getMonthPillar(year, month, day);
@@ -425,12 +513,15 @@ function calculate() {
         </div>`;
 
     // Info-Gitter
-    document.getElementById('infoGrid').innerHTML = `
+    let infoHTML = `
         <div class="info-item"><div class="info-label">Tagesmeister</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
         <div class="info-item"><div class="info-label">Tierkreiszeichen</div><div class="info-value">${ANIMALS[yp.branch]} Jahr des ${ANIMAL_NAMES[yp.branch]} (${STEMS[yp.stem]}${BRANCHES[yp.branch]})</div></div>
         <div class="info-item"><div class="info-label">Tages-Saeule</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}</div></div>
-        <div class="info-item"><div class="info-label">Geschlecht/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Maennlich (Yang)' : 'Weiblich (Yin)'}</div></div>
-    `;
+        <div class="info-item"><div class="info-label">Geschlecht/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Maennlich (Yang)' : 'Weiblich (Yin)'}</div></div>`;
+    if (trueSolarInfo) {
+        infoHTML += `<div class="info-item"><div class="info-label">Wahre Sonnenzeit</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">Korrektur: ${trueSolarInfo.correctionMin} Min → ${BRANCHES[hourIdx]}-Stunde</div></div>`;
+    }
+    document.getElementById('infoGrid').innerHTML = infoHTML;
 
     // Charakterdeutung
     document.getElementById('interpWrap').innerHTML = `
@@ -510,8 +601,11 @@ function calculate() {
     dashaHtml += '</div>';
     document.getElementById('dashaWrap').innerHTML = dashaHtml;
 
-    document.getElementById('resultSection').style.display = 'block';
-    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    const rs = document.getElementById('resultSection');
+    rs.style.display = 'block';
+    rs.style.opacity = '0';
+    setTimeout(() => { rs.style.opacity = '1'; }, 50);
+    rs.scrollIntoView({ behavior: 'smooth' });
 }
 
 function initForm() {
