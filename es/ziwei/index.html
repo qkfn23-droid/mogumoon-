@@ -344,10 +344,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        'Zi Wei': 'Apariencia elegante y refinada. Postura segura con una impresion digna. Luce genial en ropa formal y destaca en cualquier lugar. Buena piel y un estilo general pulido.',
+        'Tian Ji': 'Apariencia intelectual y delicada. Tiende a ser delgado; las gafas le quedan bien. Ojos agudos e inteligentes con un aura estudiosa. Estilo limpio y ordenado.',
+        'Tai Yang': 'Apariencia brillante y vibrante. Ojos grandes y vivos con una sonrisa calida. Tono de piel saludable y complexion atletica. Le quedan genial los colores vivos.',
+        'Wu Qu': 'Impresion fuerte y solida. Rostro angular con ojos penetrantes. Bien proporcionado, musculoso o tonificado. Moda simple y practica.',
+        'Tian Tong': 'Apariencia juvenil y linda. Complexion suave o ligeramente redondeada. Sonrisa encantadora con una impresion accesible. Estilo casual y comodo.',
+        'Lian Zhen': 'Apariencia sexy y cautivadora. Rasgos distintos con mirada intensa. Apasionado por la moda y estilo moderno. El tipo que deja una fuerte primera impresion.',
+        'Tian Fu': 'Impresion estable y calida. Rostro redondo con una sonrisa comoda. Ligeramente rellenito con un aura acogedora. Moda limpia y conservadora.',
+        'Tai Yin': 'Apariencia suave y femenina (sin importar el genero). Piel clara y suave con ojos grandes. Un encanto sutil, similar a la luna. Los tonos pastel le quedan bien con un aura elegante.',
+        'Tan Lang': 'Apariencia atractiva y glamorosa. Excelentes proporciones con gran sentido de la moda. Ojos brillantes e irresistible al sonreir. Tipo trendsetter que atrae miradas del sexo opuesto.',
+        'Ju Men': 'Impresion intelectual y aguda. Frente amplia con mirada penetrante. Boca notable o labios distintivos. Mas atractivo cuando habla.',
+        'Tian Xiang': 'Apariencia limpia y bien cuidada. Viste bien y siempre luce impecable. Cuida bien su piel y su figura. Un estilista amante de las marcas.',
+        'Tian Liang': 'Apariencia madura y confiable. Aparenta mas edad con una impresion de confianza. Estilo clasico. El tipo que se vuelve mas atractivo con los anos.',
+        'Qi Sha': 'Apariencia intensa y carismatica. Ojos penetrantes con mandibula fuerte. Complexion atletica; le gusta hacer ejercicio. Las chaquetas de cuero y estilos llamativos le quedan bien.',
+        'Po Jun': 'Apariencia unica y diferente. Peinados o moda no convencionales. Un estilo adelantado a su tiempo. Encanto polarizante que es todo menos comun.'
+    };
+    const defaultSpouseApp = 'Apariencia comun y accesible. No particularmente llamativo pero transmite una impresion comoda. Estilo limpio y ordenado. El tipo cuyo encanto crece con el tiempo — mas atractivo cuanto mas lo conoces, en lugar de amor a primera vista.';
+    const spouseAppText = '<strong>📐 Apariencia y primera impresion del conyuge:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Palacio del Conyuge: Palacio ${DIZHI[spouseIdx]} ${spouseStar ? '— Estrella ' + spouseStar : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Sin estrella principal en el Palacio del Conyuge — tu conyuge tendra una personalidad tranquila y estable. Una vida matrimonial apacible sin grandes trastornos.'}<br><br><strong>Vision de la Estrella ${mainStar} sobre el matrimonio:</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Personalidad del conyuge:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Sin estrella principal en el Palacio del Conyuge — tu conyuge tendra una personalidad tranquila y estable. Una vida matrimonial apacible sin grandes trastornos.'}<br><br><strong>Vision de la Estrella ${mainStar} sobre el matrimonio:</strong> ${starData.love}</div>
         </div>
     `;
 
