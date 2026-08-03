@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        '자미': '품격 있고 고급스러운 외모. 당당한 자세와 위엄 있는 인상. 정장이 잘 어울리며 어디서든 눈에 띄는 존재감. 피부가 좋고 전체적으로 깔끔한 스타일.',
+        '천기': '지적이고 섬세한 외모. 마른 편이며 안경이 잘 어울림. 눈이 영리해 보이고 책을 좋아하는 분위기. 깔끔하고 단정한 스타일.',
+        '태양': '밝고 활기찬 외모. 눈이 크고 밝으며 미소가 따뜻함. 건강한 피부 톤에 활동적인 체형. 화사한 색상의 옷이 잘 어울림.',
+        '무곡': '강인하고 단단한 인상. 각진 얼굴형에 날카로운 눈매. 체격이 좋고 근육질이거나 탄탄함. 심플하고 실용적인 패션.',
+        '천동': '동안에 귀여운 외모. 통통하거나 부드러운 체형. 웃는 얼굴이 매력적이며 친근한 인상. 캐주얼하고 편안한 스타일.',
+        '염정': '섹시하고 매혹적인 외모. 또렷한 이목구비에 강렬한 눈빛. 패션에 관심이 많고 트렌디한 스타일. 강한 첫인상을 남기는 타입.',
+        '천부': '안정적이고 따뜻한 인상. 둥근 얼굴에 편안한 미소. 약간 통통한 편이며 포근한 분위기. 깔끔하고 보수적인 패션.',
+        '태음': '부드럽고 여성적인 외모(남녀 불문). 피부가 희고 곱며 눈이 큼. 달처럼 은은한 매력. 파스텔 톤이 잘 어울리며 우아한 분위기.',
+        '탐랑': '매력적이고 화려한 외모. 뛰어난 비율에 패션 감각 최상. 눈이 반짝이고 웃을 때 매력 폭발. 트렌드세터 스타일. 이성의 시선을 끄는 타입.',
+        '거문': '지적이고 날카로운 인상. 이마가 넓고 눈빛이 예리함. 입이 크거나 입술이 특징적. 말할 때 가장 매력적으로 보이는 타입.',
+        '천상': '깔끔하고 단정한 외모. 옷을 잘 입으며 항상 정돈된 인상. 피부 관리를 잘 하고 체형 관리도 철저. 브랜드를 좋아하는 스타일리스트.',
+        '천량': '성숙하고 듬직한 외모. 나이보다 어른스러워 보이며 신뢰감을 주는 인상. 클래식한 스타일. 나이가 들수록 더 매력적으로 변하는 타입.',
+        '칠살': '강렬하고 카리스마 있는 외모. 날카로운 눈매에 강한 턱선. 체격이 좋고 운동을 즐기는 타입. 가죽 재킷이나 강한 스타일이 어울림.',
+        '파군': '독특하고 개성 있는 외모. 파격적인 헤어스타일이나 패션. 시대를 앞서가는 스타일. 평범하지 않은 매력으로 호불호가 갈림.'
+    };
+
+    const spouseAppText = spouseStar && spouseAppearanceZW[spouseStar] ? '<strong>📐 배우자 외모 & 첫인상:</strong><br>' + spouseAppearanceZW[spouseStar] + '<br><br>' : '';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 부처궁: ${DIZHI[spouseIdx]}궁 ${spouseStar ? '— ' + spouseStar + '성' : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '부처궁에 주성이 없어 배우자는 평범하고 안정적인 성격입니다. 큰 파란 없이 조용한 결혼 생활.'}<br><br><strong>명궁 ${mainStar}성의 결혼관:</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 배우자 성격:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '부처궁에 주성이 없어 배우자는 평범하고 안정적인 성격입니다. 큰 파란 없이 조용한 결혼 생활.'}<br><br><strong>명궁 ${mainStar}성의 결혼관:</strong> ${starData.love}</div>
         </div>
     `;
 

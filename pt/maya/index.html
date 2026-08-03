@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayan Astrology (Tzolkin) - MOGU Moon</title>
+    <title>Astrologia Maia (Tzolkin) - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -57,74 +57,74 @@
 <body>
 
 <header>
-    <h1><a href="/en/" style="text-decoration:none;color:#e8a020;">MOGU <span>Moon</span></a></h1>
+    <h1><a href="../index.html" style="text-decoration:none;color:#e8a020;">MOGU <span>Moon</span></a></h1>
 </header>
 
 <div class="container">
     <div class="page-title">
-        <h2>Mayan Astrology (Tzolkin)</h2>
-        <p>Read your cosmic identity through the sacred 260-day calendar cycle</p>
+        <h2>Astrologia Maia (Tzolkin)</h2>
+        <p>Descubra sua identidade cósmica através do ciclo sagrado do calendário de 260 dias</p>
     </div>
 
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Data de nascimento</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
                 <select id="birthDay"></select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">Check Mayan Sign</button>
+        <button class="calc-btn" onclick="calculate()">Verificar Signo Maia</button>
     </div>
 
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">Maya Long Count</h3>
+        <h3 class="section-title">Contagem Longa Maia</h3>
         <div class="long-count" id="longCount">13.0.0.0.0</div>
 
-        <h3 class="section-title">Your Tzolkin Sign</h3>
+        <h3 class="section-title">Seu Signo Tzolkin</h3>
         <div class="tzolkin-card" id="tzolkinCard"></div>
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">Day Sign Interpretation</h3>
+        <h3 class="section-title">Interpretação do Signo do Dia</h3>
         <div id="signInterpWrap"></div>
 
-        <h3 class="section-title">Tone Interpretation</h3>
+        <h3 class="section-title">Interpretação do Tom</h3>
         <div id="toneInterpWrap"></div>
 
-        <h3 class="section-title">Haab Calendar (Solar)</h3>
+        <h3 class="section-title">Calendário Haab (Solar)</h3>
         <div id="haabWrap"></div>
 
-        <h3 class="section-title">Compatibility</h3>
+        <h3 class="section-title">Compatibilidade</h3>
         <div id="compatWrap"></div>
 
-        <h3 class="section-title">Today's Tzolkin Energy</h3>
+        <h3 class="section-title">Energia Tzolkin de Hoje</h3>
         <div id="todayWrap"></div>
 
-        <h3 class="section-title">Lucky Days & Info</h3>
+        <h3 class="section-title">Dias de Sorte e Informações</h3>
         <div id="fortuneWrap"></div>
     </div>
 </div>
 
-<footer>&copy; 2025 Ancient Astrology</footer>
+<footer>&copy; 2025 MOGU Moon</footer>
 
 <script>
 // ═══════════════════════════════════════
 // 20 DAY SIGNS (Nawal)
 // ═══════════════════════════════════════
 const DAY_SIGNS = [
-    { name: 'Imix', en: 'Crocodile', glyph: '🐊', meaning: 'Crocodile / Origin of the World', element: 'Water', direction: 'East', color: 'Red',
-      personality: 'Creative and initiating energy. You possess a primal force that brings new things into being. Born with rich imagination and artistic sensibility, you are emotionally deep, intuitive, and have a strong maternal instinct. From childhood, you tend to get lost in imaginary worlds and find great joy in solitary creative activities. You naturally assume a nurturing role within the family, and your relationship with your mother profoundly influences your entire life. The challenge of your life is learning to express your rich emotions productively in the real world, and spiritual growth begins when you fully embrace your inner primal creative power without fear.',
-      strength: 'Creativity, Intuition, Nurturing instinct, Artistic sensibility',
-      challenge: 'Hypersensitivity, Mood swings, Blurred line between reality and fantasy',
-      career: 'Artist, Healer, Counselor, Chef, Educator',
-      love: 'You desire deep emotional connections and tend to care for your partner. The ideal partner is someone emotionally stable who can also understand Imix\'s deep sensitivity. You express love through nurturing acts like cooking, giving gifts, and creating comfortable spaces. The challenge in relationships is managing jealousy and possessiveness, and learning to give your partner room to breathe.',
-      spiritual: 'Your spiritual mission is to birth new things into the world. Just as the crocodile created the world from primal waters, you possess the spiritual ability to create something from nothing. Do not fear the pain of creation -- that is your sacred path. When meditating, sit by the water and connect with primal energy.',
-      health: 'Pay attention to the digestive system and uterine/reproductive health. You have a constitution where emotions are directly reflected in the body, so stress easily manifests as stomach problems. Water-related healing (swimming, hot springs, seawater therapy) is effective.',
-      wealth: 'Wealth flows in through creative activities. You can expect stable income in fields that combine nurturing and creation, such as art, cooking, and education. Be careful of impulsive spending, and recognizing emotional spending patterns is the key to financial stability.' },
+    { name: 'Imix', en: 'Crocodilo', glyph: '🐊', meaning: 'Crocodilo / Origem do Mundo', element: 'Água', direction: 'Leste', color: 'Vermelho',
+      personality: 'Energia criativa e iniciadora. Você possui uma força primordial que traz coisas novas à existência. Nascido com rica imaginação e sensibilidade artística, você é emocionalmente profundo, intuitivo e tem um forte instinto maternal. Desde a infância, você tende a se perder em mundos imaginários e encontra grande alegria em atividades criativas solitárias. Você naturalmente assume um papel de cuidador dentro da família, e seu relacionamento com sua mãe influencia profundamente toda a sua vida. O desafio da sua vida é aprender a expressar suas ricas emoções produtivamente no mundo real, e o crescimento espiritual começa quando você abraça plenamente seu poder criativo primordial interior sem medo.',
+      strength: 'Criatividade, Intuição, Instinto de cuidado, Sensibilidade artística',
+      challenge: 'Hipersensibilidade, Oscilações de humor, Linha tênue entre realidade e fantasia',
+      career: 'Artista, Curandeiro, Conselheiro, Chef, Educador',
+      love: 'Você deseja conexões emocionais profundas e tende a cuidar do seu parceiro. O parceiro ideal é alguém emocionalmente estável que também possa entender a profunda sensibilidade de Imix. Você expressa amor através de atos de cuidado como cozinhar, dar presentes e criar espaços confortáveis. O desafio nos relacionamentos é gerenciar ciúmes e possessividade, e aprender a dar espaço ao seu parceiro.',
+      spiritual: 'Sua missão espiritual é dar à luz coisas novas no mundo. Assim como o crocodilo criou o mundo a partir das águas primordiais, você possui a habilidade espiritual de criar algo do nada. Não tema a dor da criação -- esse é seu caminho sagrado. Ao meditar, sente-se perto da água e conecte-se com a energia primordial.',
+      health: 'Preste atenção ao sistema digestivo e à saúde uterina/reprodutiva. Você tem uma constituição onde as emoções se refletem diretamente no corpo, então o estresse se manifesta facilmente como problemas estomacais. A cura relacionada à água (natação, fontes termais, terapia com água do mar) é eficaz.',
+      wealth: 'A riqueza flui através de atividades criativas. Você pode esperar renda estável em campos que combinam cuidado e criação, como arte, culinária e educação. Cuidado com gastos impulsivos, e reconhecer padrões de gastos emocionais é a chave para a estabilidade financeira.' },
     { name: 'Ik', en: 'Wind', glyph: '💨', meaning: 'Wind / Spirit', element: 'Wind', direction: 'North', color: 'White',
       personality: 'A free spirit with the energy of communication and change. You have a natural talent for words and writing, serving as a spiritual messenger who spreads new ideas. From childhood, you are talkative and curious, wanting to experience diverse environments and cultures. You serve as a bridge of communication within the family, but your difficulty settling in one place may cause conflict with parents. The core challenge of life is finding balance between freedom and responsibility, and spiritual growth occurs when you focus your wind-like scattered energy in one direction.',
       strength: 'Communication skills, Flexibility, Spiritual sensitivity, Intellect',

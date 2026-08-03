@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayan Astrology (Tzolkin) - MOGU Moon</title>
+    <title>Maya-Astrologie (Tzolkin) - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -57,59 +57,59 @@
 <body>
 
 <header>
-    <h1><a href="/en/" style="text-decoration:none;color:#e8a020;">MOGU <span>Moon</span></a></h1>
+    <h1><a href="../index.html" style="text-decoration:none;color:#e8a020;">MOGU <span>Moon</span></a></h1>
 </header>
 
 <div class="container">
     <div class="page-title">
-        <h2>Mayan Astrology (Tzolkin)</h2>
-        <p>Read your cosmic identity through the sacred 260-day calendar cycle</p>
+        <h2>Maya-Astrologie (Tzolkin)</h2>
+        <p>Lesen Sie Ihre kosmische Identität durch den heiligen 260-Tage-Kalenderzyklus</p>
     </div>
 
 
     <div class="form-box">
         <div class="input-group">
-            <label>Date of Birth</label>
+            <label>Geburtsdatum</label>
             <div class="input-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
                 <select id="birthDay"></select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">Check Mayan Sign</button>
+        <button class="calc-btn" onclick="calculate()">Maya-Zeichen prüfen</button>
     </div>
 
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">Maya Long Count</h3>
+        <h3 class="section-title">Maya Lange Zählung</h3>
         <div class="long-count" id="longCount">13.0.0.0.0</div>
 
-        <h3 class="section-title">Your Tzolkin Sign</h3>
+        <h3 class="section-title">Ihr Tzolkin-Zeichen</h3>
         <div class="tzolkin-card" id="tzolkinCard"></div>
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">Day Sign Interpretation</h3>
+        <h3 class="section-title">Tageszeichen-Deutung</h3>
         <div id="signInterpWrap"></div>
 
-        <h3 class="section-title">Tone Interpretation</h3>
+        <h3 class="section-title">Ton-Deutung</h3>
         <div id="toneInterpWrap"></div>
 
-        <h3 class="section-title">Haab Calendar (Solar)</h3>
+        <h3 class="section-title">Haab-Kalender (Solar)</h3>
         <div id="haabWrap"></div>
 
-        <h3 class="section-title">Compatibility</h3>
+        <h3 class="section-title">Kompatibilität</h3>
         <div id="compatWrap"></div>
 
-        <h3 class="section-title">Today's Tzolkin Energy</h3>
+        <h3 class="section-title">Heutige Tzolkin-Energie</h3>
         <div id="todayWrap"></div>
 
-        <h3 class="section-title">Lucky Days & Info</h3>
+        <h3 class="section-title">Glückstage & Informationen</h3>
         <div id="fortuneWrap"></div>
     </div>
 </div>
 
-<footer>&copy; 2025 Ancient Astrology</footer>
+<footer>&copy; 2025 MOGU Moon</footer>
 
 <script>
 // ═══════════════════════════════════════
@@ -367,13 +367,13 @@ function initForm() {
     }
     for (let i = 1; i <= 12; i++) {
         const o = document.createElement('option');
-        o.value = i; o.textContent = 'Month ' + i;
+        o.value = i; o.textContent = 'Monat ' + i;
         if (i === 3) o.selected = true;
         m.appendChild(o);
     }
     for (let i = 1; i <= 31; i++) {
         const o = document.createElement('option');
-        o.value = i; o.textContent = 'Day ' + i;
+        o.value = i; o.textContent = 'Tag ' + i;
         if (i === 15) o.selected = true;
         d.appendChild(o);
     }
@@ -400,7 +400,7 @@ function calculate() {
     document.getElementById('tzolkinCard').innerHTML = `
         <span class="tzolkin-glyph">${sign.glyph}</span>
         <div class="tzolkin-number">${tzolkin.num}</div>
-        <div class="tzolkin-tone">Tone ${tzolkin.num}: ${tone.name}</div>
+        <div class="tzolkin-tone">Ton ${tzolkin.num}: ${tone.name}</div>
         <div class="tzolkin-name">${sign.name}</div>
         <div class="tzolkin-name-ko">${sign.en} — "${sign.meaning}"</div>
     `;
@@ -408,22 +408,22 @@ function calculate() {
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item">
-            <div class="info-label">Day Sign</div>
+            <div class="info-label">Tageszeichen</div>
             <div class="info-value">${sign.glyph} ${sign.name} (${sign.en})</div>
             <div class="info-desc">${sign.meaning}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Tone (Cosmic Purpose)</div>
+            <div class="info-label">Ton (Kosmischer Zweck)</div>
             <div class="info-value">${tzolkin.num} — ${tone.name}</div>
             <div class="info-desc">${tone.meaning}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Element / Direction</div>
+            <div class="info-label">Element / Richtung</div>
             <div class="info-value">${sign.element} / ${sign.direction}</div>
-            <div class="info-desc">Color: ${sign.color}</div>
+            <div class="info-desc">Farbe: ${sign.color}</div>
         </div>
         <div class="info-item">
-            <div class="info-label">Haab (Solar Calendar)</div>
+            <div class="info-label">Haab (Sonnenkalender)</div>
             <div class="info-value">${haab.day} ${HAAB_MONTHS[haab.month]}</div>
             <div class="info-desc">${HAAB_MONTHS_EN[haab.month]}</div>
         </div>
@@ -436,31 +436,31 @@ function calculate() {
             <div class="interp-text">${sign.personality}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">Strengths</div>
+            <div class="interp-title">Stärken</div>
             <div class="interp-text">${sign.strength}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">Challenges</div>
+            <div class="interp-title">Herausforderungen</div>
             <div class="interp-text">${sign.challenge}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">Suitable Careers</div>
+            <div class="interp-title">Geeignete Berufe</div>
             <div class="interp-text">${sign.career}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">Love & Relationships</div>
+            <div class="interp-title">Liebe & Beziehungen</div>
             <div class="interp-text">${sign.love}</div>
         </div>
         ${sign.spiritual ? `<div class="interp-card">
-            <div class="interp-title">Spiritual Message</div>
+            <div class="interp-title">Spirituelle Botschaft</div>
             <div class="interp-text">${sign.spiritual}</div>
         </div>` : ''}
         ${sign.wealth ? `<div class="interp-card">
-            <div class="interp-title">Wealth & Finances</div>
+            <div class="interp-title">Reichtum & Finanzen</div>
             <div class="interp-text">${sign.wealth}</div>
         </div>` : ''}
         ${sign.health ? `<div class="interp-card">
-            <div class="interp-title">Health</div>
+            <div class="interp-title">Gesundheit</div>
             <div class="interp-text">${sign.health}</div>
         </div>` : ''}
     `;
@@ -500,22 +500,22 @@ function calculate() {
     // Haab
     document.getElementById('haabWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">Haab Position: ${haab.day} ${HAAB_MONTHS[haab.month]} (${HAAB_MONTHS_EN[haab.month]})</div>
+            <div class="interp-title">Haab-Position: ${haab.day} ${HAAB_MONTHS[haab.month]} (${HAAB_MONTHS_EN[haab.month]})</div>
             <div class="interp-text">
-                Haab is the Mayan <strong>365-day solar calendar</strong>. It consists of 18 months (each 20 days) + 5 days of Wayeb (unlucky days).<br><br>
-                ${haab.month === 18 ? 'You were born during the Wayeb period. The Maya regarded these 5 days as dangerous yet times of powerful spiritual energy. You are interpreted as having been born with a special spiritual mission.' :
-                  `Day ${haab.day} of the month of ${HAAB_MONTHS[haab.month]}. This period carries the energy of ${haab.month < 6 ? 'growth and beginnings' : haab.month < 12 ? 'harvest and fruition' : 'reflection and preparation'} within the natural cycle.`}
+                Haab ist der Maya-<strong>365-Tage-Sonnenkalender</strong>. Er besteht aus 18 Monaten (je 20 Tage) + 5 Tagen Wayeb (Unglückstage).<br><br>
+                ${haab.month === 18 ? 'Sie wurden während der Wayeb-Periode geboren. Die Maya betrachteten diese 5 Tage als gefährlich, aber auch als Zeiten mächtiger spiritueller Energie. Sie gelten als mit einer besonderen spirituellen Mission geboren.' :
+                  `Tag ${haab.day} des Monats ${HAAB_MONTHS[haab.month]}. Diese Periode trägt die Energie von ${haab.month < 6 ? 'Wachstum und Neuanfängen' : haab.month < 12 ? 'Ernte und Erfüllung' : 'Reflexion und Vorbereitung'} im natürlichen Zyklus.`}
             </div>
         </div>
     `;
 
     // Fortune
     const fortuneTexts = [
-        'Creative and initiating energy is strong. A good time to start new projects.',
-        'Energy of communication and relationships. Expand connections and solve problems through dialogue.',
-        'A time for inner reflection. Find answers through meditation and self-examination.',
-        'Energy of material abundance. Financial opportunities may be approaching.',
-        'A time of transformation. Let go of the old and prepare to meet a new version of yourself.'
+        'Kreative und initiierende Energie ist stark. Eine gute Zeit, um neue Projekte zu starten.',
+        'Energie der Kommunikation und Beziehungen. Erweitern Sie Verbindungen und lösen Sie Probleme durch Dialog.',
+        'Eine Zeit der inneren Reflexion. Finden Sie Antworten durch Meditation und Selbstprüfung.',
+        'Energie des materiellen Überflusses. Finanzielle Möglichkeiten könnten sich nähern.',
+        'Eine Zeit der Transformation. Lassen Sie das Alte los und bereiten Sie sich darauf vor, eine neue Version Ihrer selbst zu treffen.'
     ];
     const fortuneIdx = (tzolkin.num + tzolkin.sign) % 5;
 
@@ -524,10 +524,10 @@ function calculate() {
             <div class="interp-title">${sign.name} + Tone ${tzolkin.num} Fortune Energy</div>
             <div class="interp-text">
                 ${fortuneTexts[fortuneIdx]}<br><br>
-                <strong>Lucky Color:</strong> ${sign.color}<br>
-                <strong>Lucky Direction:</strong> ${sign.direction}<br>
+                <strong>Glücksfarbe:</strong> ${sign.color}<br>
+                <strong>Glücksrichtung:</strong> ${sign.direction}<br>
                 <strong>Element:</strong> ${sign.element}<br>
-                <strong>Position in 260-day cycle:</strong> ${((tzolkin.sign * 13 + tzolkin.num - 1) % 260) + 1}/260
+                <strong>Position im 260-Tage-Zyklus:</strong> ${((tzolkin.sign * 13 + tzolkin.num - 1) % 260) + 1}/260
             </div>
         </div>
     `;
