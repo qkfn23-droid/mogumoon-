@@ -98,19 +98,21 @@
         <div class="input-group" id="trueSolarGroup">
             <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">真太陽時補正 <span class="optional-tag">（出生地の経度に基づく）</span></label>
             <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+                <select id="birthTimezone" onchange="updateCities()">
+                    <option value="135" selected>UTC+9（韓国・日本）</option>
+                    <option value="120">UTC+8（中国・台湾・香港）</option>
+                    <option value="105">UTC+7（タイ・ベトナム）</option>
+                    <option value="82.5">UTC+5:30（インド）</option>
+                    <option value="15">UTC+1（中央ヨーロッパ）</option>
+                    <option value="0">UTC+0（英国・ポルトガル）</option>
+                    <option value="-75">UTC-5（米国東部）</option>
+                    <option value="-90">UTC-6（米国中部）</option>
+                    <option value="-105">UTC-7（米国山岳部）</option>
+                    <option value="-120">UTC-8（米国太平洋）</option>
+                    <option value="-45">UTC-3（ブラジル）</option>
+                    <option value="150">UTC+10（オーストラリア東部）</option>
+                </select>
                 <select id="birthLocation">
-                    <option value="126.98">Seoul</option>
-                    <option value="126.71">Incheon</option>
-                    <option value="127.38">Daejeon</option>
-                    <option value="127.00">Sejong</option>
-                    <option value="126.85">Gwangju</option>
-                    <option value="128.60">Daegu</option>
-                    <option value="129.03">Busan</option>
-                    <option value="129.31">Ulsan</option>
-                    <option value="126.53">Jeju</option>
-                    <option value="125.75">Pyongyang</option>
-                    <option value="127.73">Chuncheon</option>
-                    <option value="128.73">Pohang</option>
                 </select>
             </div>
             <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
@@ -206,10 +208,66 @@ function getSolarMonth(month, day) {
     return 1;
 }
 
+const CITIES_BY_TZ = {
+    '135': [
+        {v:'126.98',n:'Seoul'},{v:'126.71',n:'Incheon'},{v:'127.38',n:'Daejeon'},{v:'128.60',n:'Daegu'},
+        {v:'129.03',n:'Busan'},{v:'129.31',n:'Ulsan'},{v:'126.85',n:'Gwangju'},{v:'126.53',n:'Jeju'},
+        {v:'139.69',n:'Tokyo'},{v:'135.50',n:'Osaka'},{v:'136.91',n:'Nagoya'},
+        {v:'130.42',n:'Fukuoka'},{v:'141.35',n:'Sapporo'},{v:'127.68',n:'Naha'}
+    ],
+    '120': [
+        {v:'116.40',n:'Beijing'},{v:'121.47',n:'Shanghai'},{v:'114.17',n:'Hong Kong'},
+        {v:'121.56',n:'Taipei'},{v:'113.26',n:'Guangzhou'},{v:'103.85',n:'Singapore'}
+    ],
+    '105': [
+        {v:'100.50',n:'Bangkok'},{v:'105.85',n:'Ho Chi Minh'},{v:'106.85',n:'Jakarta'}
+    ],
+    '82.5': [
+        {v:'77.21',n:'New Delhi'},{v:'72.88',n:'Mumbai'},{v:'80.27',n:'Kolkata'}
+    ],
+    '15': [
+        {v:'13.40',n:'Berlin'},{v:'2.35',n:'Paris'},{v:'-3.70',n:'Madrid'},
+        {v:'12.50',n:'Roma'},{v:'16.37',n:'Wien'},{v:'21.01',n:'Warszawa'},{v:'18.07',n:'Stockholm'}
+    ],
+    '0': [
+        {v:'-0.12',n:'London'},{v:'-9.14',n:'Lisboa'},{v:'-6.26',n:'Dublin'}
+    ],
+    '-75': [
+        {v:'-74.01',n:'New York'},{v:'-77.04',n:'Washington'},{v:'-71.06',n:'Boston'},
+        {v:'-80.19',n:'Miami'},{v:'-79.38',n:'Toronto'}
+    ],
+    '-90': [
+        {v:'-87.63',n:'Chicago'},{v:'-95.37',n:'Houston'}
+    ],
+    '-105': [
+        {v:'-104.99',n:'Denver'},{v:'-111.89',n:'Salt Lake City'}
+    ],
+    '-120': [
+        {v:'-118.24',n:'Los Angeles'},{v:'-122.42',n:'San Francisco'},
+        {v:'-122.33',n:'Seattle'},{v:'-123.12',n:'Vancouver'}
+    ],
+    '-45': [
+        {v:'-43.17',n:'Rio de Janeiro'},{v:'-46.63',n:'São Paulo'}
+    ],
+    '150': [
+        {v:'151.21',n:'Sydney'},{v:'144.96',n:'Melbourne'},{v:'153.03',n:'Brisbane'}
+    ]
+};
+
+function updateCities() {
+    const tz = document.getElementById('birthTimezone').value;
+    const sel = document.getElementById('birthLocation');
+    sel.innerHTML = '';
+    (CITIES_BY_TZ[tz] || []).forEach(c => {
+        const o = document.createElement('option');
+        o.value = c.v; o.textContent = c.n; sel.appendChild(o);
+    });
+    toggleTrueSolar();
+}
+
 // 真太陽時補正
 function getTrueSolarHour(hour, minute, longitude) {
-    // 韓国標準時基準経度 135°E
-    const correction = (longitude - 135) * 4; // 分単位
+    const stdMeridian = parseFloat(document.getElementById('birthTimezone').value); const correction = (longitude - stdMeridian) * 4; // 分単位
     let totalMin = hour * 60 + minute + correction;
     if (totalMin < 0) totalMin += 1440;
     if (totalMin >= 1440) totalMin -= 1440;
@@ -485,8 +543,8 @@ function toggleTrueSolar() {
     document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
     if (on) {
         const lng = parseFloat(document.getElementById('birthLocation').value);
-        const corr = Math.round((lng - 135) * 4);
-        document.getElementById('trueSolarNote').textContent = `補正値: ${corr}分 (経度 ${lng}°E、基準 135°E)`;
+        const stdMeridian = parseFloat(document.getElementById('birthTimezone').value); const corr = Math.round((lng - stdMeridian) * 4);
+        document.getElementById('trueSolarNote').textContent = `補正値: ${corr}分 (経度 ${lng}°E、基準 ${stdMeridian}°E)`;
     }
 }
 
@@ -755,6 +813,7 @@ function initForm() {
 }
 
 initForm();
+updateCities();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
 </script>
 
