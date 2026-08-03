@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="input-group" id="trueSolarGroup">
-            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">真太陽時補正 <span class="optional-tag">(出生地の経度に基づく)</span></label>
+            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">真太陽時補正 <span class="optional-tag">（出生地の経度に基づく）</span></label>
             <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
                 <select id="birthLocation">
                     <option value="126.98">Seoul</option>
@@ -139,13 +139,16 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">📖 性格 & 人生の解釈</h3>
+        <h3 class="section-title">🕐 四柱・柱別解釈</h3>
+        <div id="pillarInterpWrap"></div>
+
+        <h3 class="section-title">📖 性格 &amp; 人生の解釈</h3>
         <div id="interpWrap"></div>
 
-        <h3 class="section-title">💕 配偶者 & 恋愛</h3>
+        <h3 class="section-title">💕 配偶者 &amp; 恋愛</h3>
         <div id="spouseWrap"></div>
 
-        <h3 class="section-title">💰 財運 & 職業</h3>
+        <h3 class="section-title">💰 財運 &amp; 職業</h3>
         <div id="wealthWrap"></div>
 
         <h3 class="section-title">🏥 健康の注意点</h3>
@@ -172,7 +175,8 @@ const EL_NAMES = ['木(木)','火(火)','土(土)','金(金)','水(水)'];
 const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
 const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
 
-// 節気基準の月境界 — [開始月, 開始日]
+// 節気基準の月境界（陽暦近似値）— [開始月, 開始日]
+// 寅月(1): 立春～啓蟄, 卯月(2): 啓蟄～清明, ...
 const SOLAR_TERMS = [
     { month: 2, day: 4 },   // 1=寅月 開始 (立春)
     { month: 3, day: 6 },   // 2=卯月 開始 (啓蟄)
@@ -189,16 +193,17 @@ const SOLAR_TERMS = [
 ];
 
 function getSolarMonth(month, day) {
-    const dateVal = month * 100 + day;
-    for (let i = 11; i >= 0; i--) {
+    // 節気開始日基準で該当月を決定
+    // 1月1~4日: 小寒(1/5)前 → 子月(11)
+    if (month === 1 && day < 5) return 11;
+    // 1月5日~2月3日: 丑月(12)
+    if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+    // その他: 順方向で節気マッチング
+    for (let i = 10; i >= 0; i--) {
         const t = SOLAR_TERMS[i];
-        const tVal = t.month * 100 + t.day;
-        if (dateVal >= tVal) {
-            if (i === 11 && t.month === 1) return 12;
-            return i + 1;
-        }
+        if (month > t.month || (month === t.month && day >= t.day)) return i + 1;
     }
-    return 11; // 1/1~1/4 = 小寒(1/5)前 = 子月(11)
+    return 1;
 }
 
 // 真太陽時補正
@@ -280,9 +285,6 @@ function getTenGod(dayStem, targetStem) {
     const tarYin = targetStem % 2;
     const sameYY = dayYin === tarYin;
 
-    const cycle = [
-        [0,1,2,3,4], // 生：木→火→土→金→水
-    ];
     // 自分と同じ五行
     if (dayEl === tarEl) return sameYY ? '比肩' : '劫財';
     // 自分が生じる（木→火, 火→土, 土→金, 金→水, 水→木）
@@ -295,6 +297,83 @@ function getTenGod(dayStem, targetStem) {
     if ((tarEl + 2) % 5 === dayEl) return sameYY ? '偏官' : '正官';
     return '';
 }
+
+// 十神の解釈
+const TEN_GOD_DESC = {
+    '比肩': { icon: '👥', meaning: '自分と同じ気', desc: '独立心・競争心・兄弟姉妹との縁。比肩が多いと自己主張が強く独立的ですが、協力も必要です。' },
+    '劫財': { icon: '⚡', meaning: '自分の財を奪う気', desc: '勝負強さ・挑戦精神・時に衝動的。劫財があると大胆ですが、財の管理に注意が必要です。' },
+    '食神': { icon: '🍽️', meaning: '自分が生み出す気', desc: '衣食住の福・表現力・創作能力。食神があると食運があり、芸術的才能が豊かです。' },
+    '傷官': { icon: '🎭', meaning: '自分が剋する官星', desc: '反抗心・創造力・話術。傷官があると才能は抜群ですが、組織生活が辛くなることがあります。' },
+    '偏財': { icon: '💸', meaning: '自分が剋する財（流動）', desc: '横財・事業運・父親との縁。偏財があると大金を得るチャンスが来ますが、変動が大きいです。' },
+    '正財': { icon: '💰', meaning: '自分が剋する財（固定）', desc: '安定収入・貯蓄能力・堅実な資産運用。正財があると着実に財が積み上がります。' },
+    '偏官': { icon: '⚔️', meaning: '自分を剋する気（陽）', desc: '権威・カリスマ・危険と機会。偏官があると強い推進力がありますが、ストレスも大きいです。' },
+    '正官': { icon: '👔', meaning: '自分を剋する気（陰）', desc: '名誉・職場運・規律。正官があると社会的成功が伴い、組織で認められます。' },
+    '偏印': { icon: '📚', meaning: '自分を生じる気（陽）', desc: '学問・霊性・非正統的知識。偏印があると特異な才能があり、直感が強いです。' },
+    '正印': { icon: '🎓', meaning: '自分を生じる気（陰）', desc: '学歴・資格・母親との縁。正印があると学業運が良く、貴人の助けを受けます。' },
+    '日干': { icon: '⭐', meaning: '自分自身', desc: '' }
+};
+
+// 時柱・十神別解釈（時間帯によって変わる内容）
+const HOUR_PILLAR_INTERP = {
+    '比肩': {
+        children: '子供が独立的で自己主張が強いです。兄弟のように付き合い、競争的な関係になることがあります。子供が2人以上いる可能性があります。',
+        lateLife: '晩年も活発に活動します。引退よりも自分の事業を好み、独立的な老後。友人・同僚と交わりながら活気ある晩年。',
+        career_add: '共同経営やフランチャイズで拡大の可能性あり。競争の中で成長するタイプ。',
+    },
+    '劫財': {
+        children: '子供と財関連の葛藤があることがあります。子供が果敢で挑戦的ですが支出が多い。財の教育が大切。',
+        lateLife: '晩年に財の変動に注意。投資損失や詐欺に気をつけましょう。しかし挑戦精神が新たなチャンスを生むこともあります。',
+        career_add: '事業パートナーの選択に慎重に。裏切りや資金流出に注意。',
+    },
+    '食神': {
+        children: '子供運が豊かです！子供が芸術的だったり食を好んだりして、親孝行します。子供とグルメを楽しむ関係。',
+        lateLife: '最も良い晩年運！食福・遊福があり、健康で余裕ある老後。趣味を楽しみながら幸せな引退生活。',
+        career_add: '飲食業・コンテンツ制作・講義など、表現する分野で副業が可能。',
+    },
+    '傷官': {
+        children: '子供が才能抜群ですが反抗的なこともあります。芸術・技術分野で頭角を現し、独特な人生を歩みます。',
+        lateLife: '晩年は自由で束縛を嫌います。権威に挑戦する気質が続き、創作活動に没頭する老後。',
+        career_add: 'フリーランス・YouTuber・作家など、自由な職業が副業として適しています。',
+    },
+    '偏財': {
+        children: '子供が商才があり、お金を稼ぐ才能があります。父親と子供の縁が複雑になることも。',
+        lateLife: '晩年に思いがけない財が入ってきます！不動産や投資収益で豊かな老後。ただしギャンブルは絶対に禁物。',
+        career_add: '副業・ダブルワーク・サイドビジネスで収益が可能。不動産投資に有利。',
+    },
+    '正財': {
+        children: '子供が真面目で安定しています。経済観念がしっかりした子供で、親に経済的な助けをしてくれます。',
+        lateLife: '安定して穏やかな晩年。貯蓄と年金がしっかり準備され、心配のない老後。質素ですが不足のない生活。',
+        career_add: '安定した副業（家賃収入・配当投資）がおすすめ。大きな冒険よりも安全な選択。',
+    },
+    '偏官': {
+        children: '子供が強くカリスマがありますが、扱いにくいことがあります。軍人・警察・スポーツ選手の気質。厳しい躾が効果的。',
+        lateLife: '晩年は健康とストレスに注意。権力関係に巻き込まれることがありますが、うまく乗り越えれば尊敬される大人になります。',
+        career_add: '危機管理・コンサルティング・セキュリティ分野でキャリアを活かせます。',
+    },
+    '正官': {
+        children: '子供が模範的で社会的に成功します。公務員・大企業・専門職への進出可能性が高い。孝行な子供。',
+        lateLife: '名誉ある尊敬される晩年。社会的地位が保たれ、後輩たちの尊敬を受けます。安定した年金生活。',
+        career_add: '公共機関・大企業・教育分野と縁あり。昇進や名誉職が可能。',
+    },
+    '偏印': {
+        children: '子供が独特で霊的な傾向あり。一般的なキャリアよりも特殊な分野（芸術・宗教・IT）で輝きます。理解しにくいことも。',
+        lateLife: '晩年は学問や霊的活動に没頭。宗教・瞑想・研究に入り込むことがあり、独特な老後。',
+        career_add: '占術・カウンセリング・代替医療・特殊技術分野で第二の人生。',
+    },
+    '正印': {
+        children: '子供が学業成績が良く孝行します。高学歴で親を尊敬し従います。教育投資が大きな効果を生みます。',
+        lateLife: '最も穏やかな晩年の一つ！子供の孝行を受けながら健康に過ごします。読書と学習を楽しむ老後。',
+        career_add: '教育・講義・メンタリングにやりがいを感じます。資格取得が有利。',
+    }
+};
+
+// 柱の位置別意味
+const PILLAR_MEANING = {
+    '年柱': '祖先宮 — 祖父母・家柄・幼少期(0~15歳)・社会的背景',
+    '月柱': '親宮 — 両親・兄弟姉妹・青年期(15~30歳)・職場/社会生活',
+    '日柱': '配偶者宮 — 自分自身(天干)と配偶者(地支)・中年期(30~45歳)',
+    '時柱': '子女宮 — 子供・弟子・晩年(45歳~)・老後と結果'
+};
 
 // ═══════════════════════════════════════
 // 日干別詳細解釈
@@ -367,7 +446,7 @@ const DAY_MASTERS = {
         personality: '癸水は万物を潤す雨と露です。直感に優れ、感受性が豊かで、霊的な深みがあります。静かですが深い思考をし、人の本質を見抜きます。外見は落ち着いていますが、内面には豊かな感情の世界が広がっています。一人の時間を大切にし、瞑想や祈りに引かれる霊的傾向が強いです。',
         love: '深く霊的な愛をします。魂の伴侶を求め、浅い関係には満足できません。理想の配偶者は、精神的に深みのある人です。理想が高く、現実のパートナーに失望することがあるので、完璧さよりも誠実さを見ましょう。',
         career: '心理学者・宗教家・作家・占術家・研究員に向いています。見えない世界を探求する職業で輝き、直感で問題を解き明かします。',
-        wealth: '財産は必要なときに入ってきます。お金への執着が少く、大富豪にはなりにくいですが、不思議と窮乏することはありません。霊的な活動やカウンセリング分野から収入が生まれます。',
+        wealth: '財産は必要なときに入ってきます。お金への執着が少なく、大富豪にはなりにくいですが、不思議と窮乏することはありません。霊的な活動やカウンセリング分野から収入が生まれます。',
         health: '腎臓・泌尿器に注意してください。感情を深く感じすぎて、うつ病に弱いです。雨の日の散歩や温泉が癒しとなります。',
         advice: '雨は静かに降って大地を潤します。あなたの影響力は見えませんが、深いです。世に出なくても構いません。あなたが存在するだけで、誰かの渇いた心が潤っています。' }
 };
@@ -527,6 +606,31 @@ function calculate() {
     }
     document.getElementById('infoGrid').innerHTML = infoHTML;
 
+    // 柱別解釈
+    const pillarData = [
+        { name: '年柱', data: yp },
+        { name: '月柱', data: mp },
+        { name: '日柱', data: dp },
+        { name: '時柱', data: hp }
+    ];
+    let pillarInterpHTML = '';
+    pillarData.forEach(p => {
+        if (!p.data) return;
+        const stemGod = p.name === '日柱' ? '日干' : getTenGod(dayStem, p.data.stem);
+        const godInfo = TEN_GOD_DESC[stemGod] || { icon: '•', meaning: '', desc: '' };
+        const pillarMeaning = PILLAR_MEANING[p.name];
+        pillarInterpHTML += `
+            <div class="interp-card">
+                <div class="interp-title">${godInfo.icon} ${p.name}: ${STEMS[p.data.stem]}${BRANCHES[p.data.branch]} — ${stemGod}</div>
+                <div class="interp-text">
+                    <strong>📍 位置:</strong> ${pillarMeaning}<br><br>
+                    <strong>🔮 ${stemGod}:</strong> ${godInfo.meaning}<br>
+                    ${godInfo.desc}
+                </div>
+            </div>`;
+    });
+    document.getElementById('pillarInterpWrap').innerHTML = pillarInterpHTML;
+
     // 性格の解釈
     document.getElementById('interpWrap').innerHTML = `
         <div class="interp-card">
@@ -538,15 +642,41 @@ function calculate() {
             <div class="interp-text">${dm.advice}</div>
         </div>`;
 
+    // 時柱・十神解釈
+    const hourGod = hp ? getTenGod(dayStem, hp.stem) : null;
+    const hourInterp = hourGod ? HOUR_PILLAR_INTERP[hourGod] : null;
+
+    // 四柱全体で配偶者関連の十神を探す
+    const allPillars = [yp, mp, dp, hp].filter(Boolean);
+    const allTenGods = allPillars.map(p => getTenGod(dayStem, p.stem));
+    const spouseGodMale = ['正財','偏財'];   // 男性の配偶者星
+    const spouseGodFemale = ['正官','偏官']; // 女性の配偶者星
+    const spouseGods = gender === 'm' ? spouseGodMale : spouseGodFemale;
+    const hasSpouseGod = allTenGods.some(g => spouseGods.includes(g));
+    const spouseGodFound = allTenGods.filter(g => spouseGods.includes(g));
+
+    let genderSpouseText = '';
+    if (gender === 'm') {
+        if (spouseGodFound.includes('正財')) genderSpouseText += '<strong>💍 正財が四柱にあります:</strong> 妻運があります。安定的で献身的な配偶者に出会える可能性が高いです。結婚生活が順調な方。<br>';
+        if (spouseGodFound.includes('偏財')) genderSpouseText += '<strong>💫 偏財が四柱にあります:</strong> 異性に人気があり、複数の縁があることがあります。浮気に注意。ビジネスの出会いが恋愛に発展することも。<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>配偶者星（財星）が四柱にありません:</strong> 結婚が遅れるか、配偶者との縁が弱いことがあります。積極的に出会いを求める必要があります。<br>';
+    } else {
+        if (spouseGodFound.includes('正官')) genderSpouseText += '<strong>💍 正官が四柱にあります:</strong> 夫運があります。社会的に安定した配偶者に出会える可能性が高いです。名誉ある結婚生活。<br>';
+        if (spouseGodFound.includes('偏官')) genderSpouseText += '<strong>💫 偏官（七殺）が四柱にあります:</strong> カリスマある男性に惹かれます。強烈な恋愛をしますが、関係が不安定になることがあります。<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>配偶者星（官星）が四柱にありません:</strong> 結婚が遅れるか、配偶者との縁が弱いことがあります。積極的に出会いを求める必要があります。<br>';
+    }
+
     // 配偶者
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 配偶者宮（日支：${spouseBranch}）</div>
+            <div class="interp-title">💕 配偶者宮（日支：${spouseBranch}）— ${gender === 'm' ? '男性' : '女性'}基準</div>
             <div class="interp-text">
-                <strong>📐 配偶者の外見 & 第一印象:</strong><br>${spouseApp}<br><br>
-                <strong>💑 恋愛 & 結婚:</strong><br>${dm.love}
+                <strong>📐 配偶者の外見 &amp; 第一印象:</strong><br>${spouseApp}<br><br>
+                ${genderSpouseText}<br>
+                <strong>💑 恋愛 &amp; 結婚:</strong><br>${dm.love}
+                ${hourInterp ? '<br><br><strong>👶 子供運（時柱: ' + hourGod + '）:</strong><br>' + hourInterp.children : ''}
             </div>
         </div>`;
 
@@ -554,7 +684,7 @@ function calculate() {
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💼 職業適性</div>
-            <div class="interp-text">${dm.career}</div>
+            <div class="interp-text">${dm.career}${hourInterp ? '<br><br><strong>🔄 時柱の影響（' + hourGod + '）:</strong> ' + hourInterp.career_add : ''}</div>
         </div>
         <div class="interp-card">
             <div class="interp-title">💰 財運</div>
@@ -565,7 +695,7 @@ function calculate() {
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">🏥 ${dayMaster}日干の健康</div>
-            <div class="interp-text">${dm.health}</div>
+            <div class="interp-text">${dm.health}${hourInterp ? '<br><br><strong>🌅 晩年運（時柱: ' + hourGod + '）:</strong><br>' + hourInterp.lateLife : ''}</div>
         </div>`;
 
     // 大運（簡易）

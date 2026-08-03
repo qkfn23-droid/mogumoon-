@@ -144,6 +144,9 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
+        <h3 class="section-title">🕐 Deutung der vier Saeulen</h3>
+        <div id="pillarInterpWrap"></div>
+
         <h3 class="section-title">📖 Charakter &amp; Lebensdeutung</h3>
         <div id="interpWrap"></div>
 
@@ -194,16 +197,14 @@ const SOLAR_TERMS = [
 ];
 
 function getSolarMonth(month, day) {
-    const dateVal = month * 100 + day;
-    for (let i = 11; i >= 0; i--) {
+    // Monatsbestimmung nach Solartermin-Beginn
+    if (month === 1 && day < 5) return 11;
+    if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+    for (let i = 10; i >= 0; i--) {
         const t = SOLAR_TERMS[i];
-        const tVal = t.month * 100 + t.day;
-        if (dateVal >= tVal) {
-            if (i === 11 && t.month === 1) return 12;
-            return i + 1;
-        }
+        if (month > t.month || (month === t.month && day >= t.day)) return i + 1;
     }
-    return 11; // 1/1~1/4 vor Xiaohan = Zi-Monat (11)
+    return 1;
 }
 
 // Wahre Sonnenzeit-Korrektur
@@ -292,6 +293,83 @@ function getTenGod(dayStem, targetStem) {
     return '';
 }
 
+// Zehn-Goetter-Deutung
+const TEN_GOD_DESC = {
+    'Begleiter': { icon: '👥', meaning: 'Gleiche Energie wie ich', desc: 'Unabhaengigkeit, Wettbewerbsgeist, Geschwisterverbindung. Wer viele Begleiter hat, ist eigenwillig und unabhaengig, benoetigt aber Kooperation.' },
+    'Geraubter Reichtum': { icon: '⚡', meaning: 'Energie, die meinen Reichtum raubt', desc: 'Ehrgeiz, Herausforderungsgeist, manchmal impulsiv. Geraubter Reichtum macht kuehn, erfordert aber sorgfaeltige Vermoegensverwaltung.' },
+    'Essgott': { icon: '🍽️', meaning: 'Energie, die ich erzeuge', desc: 'Glueck in Lebensunterhalt, Ausdrucksvermögen, schöpferische Faehigkeit. Der Essgott bringt Genussglueck und reiche kuenstlerische Begabung.' },
+    'Verletzender Offizier': { icon: '🎭', meaning: 'Die Offiziersstarre, die ich breche', desc: 'Auflehnung, Kreativitaet, Redegewandtheit. Der Verletzende Offizier schenkt herausragende Begabung, macht aber das Organisationsleben schwierig.' },
+    'Indirekter Reichtum': { icon: '💸', meaning: 'Reichtum, den ich beherrsche (beweglich)', desc: 'Unverhoffter Gewinn, Unternehmergeist, Verbindung zum Vater. Indirekter Reichtum bringt Chancen auf grosses Geld, aber mit starken Schwankungen.' },
+    'Direkter Reichtum': { icon: '💰', meaning: 'Reichtum, den ich beherrsche (fest)', desc: 'Stabiles Einkommen, Sparfaehigkeit, solides Finanzmanagement. Direkter Reichtum laesst Vermoegen stetig wachsen.' },
+    'Sieben Toetungen': { icon: '⚔️', meaning: 'Energie, die mich beherrscht (Yang)', desc: 'Autoritaet, Charisma, Gefahr und Chance. Sieben Toetungen verleihen starke Durchsetzungskraft, erzeugen aber auch grossen Stress.' },
+    'Direkter Offizier': { icon: '👔', meaning: 'Energie, die mich beherrscht (Yin)', desc: 'Ehre, Karriereglueck, Disziplin. Direkter Offizier foerdert gesellschaftlichen Erfolg und Anerkennung in Organisationen.' },
+    'Indirektes Siegel': { icon: '📚', meaning: 'Energie, die mich erzeugt (Yang)', desc: 'Gelehrsamkeit, Spiritualitaet, unkonventionelles Wissen. Indirektes Siegel bringt besondere Talente und starke Intuition.' },
+    'Direktes Siegel': { icon: '🎓', meaning: 'Energie, die mich erzeugt (Yin)', desc: 'Bildung, Qualifikationen, Verbindung zur Mutter. Direktes Siegel foerdert akademisches Glueck und die Hilfe von Goenner.' },
+    'Tagesmeister': { icon: '⭐', meaning: 'Ich selbst', desc: '' }
+};
+
+// Stunden-Saeule: Deutung nach Zehn-Goettern
+const HOUR_PILLAR_INTERP = {
+    'Begleiter': {
+        children: 'Die Kinder sind unabhaengig und eigenwillig. Sie kommen miteinander wie Geschwister aus, koennen aber auch wettbewerbsorientiert sein. Die Wahrscheinlichkeit von zwei oder mehr Kindern ist gross.',
+        lateLife: 'Im Alter bleibt man aktiv. Statt Rente bevorzugt man das eigene Unternehmen — ein unabhaengiger Lebensabend. Man verbringt ihn lebhaft mit Freunden und Gleichgesinnten.',
+        career_add: 'Moeglichkeit zur Erweiterung durch Partnerschaften oder Franchising. Ein Typ, der im Wettbewerb waechst.',
+    },
+    'Geraubter Reichtum': {
+        children: 'Es kann zu vermoegensbezogenen Konflikten mit den Kindern kommen. Die Kinder sind kuehn und herausfordernd, geben aber auch viel aus. Finanzielle Erziehung ist wichtig.',
+        lateLife: 'Im Alter auf Vermoegensschwankungen achten. Vor Investitionsverlusten oder Betrug vorsichtig sein. Aber der Herausforderungsgeist kann auch neue Chancen eroeffnen.',
+        career_add: 'Bei der Wahl von Geschaeftspartnern vorsichtig sein. Verrat oder Kapitalabfluss beachten.',
+    },
+    'Essgott': {
+        children: 'Grosses Kinderglueck! Die Kinder sind kuenstlerisch oder essensbegeistert und respektieren die Eltern. Eine Beziehung, in der man gemeinsam gute Restaurants erkundet.',
+        lateLife: 'Die beste Altersprognose! Man hat Glueck beim Essen und Geniessen — ein gesunder und entspannter Lebensabend. Man geniessen Hobbys und geht gluecklich in Rente.',
+        career_add: 'Nebenberuf in Gastgewerbe, Content-Erstellung, Unterricht oder anderen Ausdrucksbereichen moeglich.',
+    },
+    'Verletzender Offizier': {
+        children: 'Die Kinder sind hochbegabt, koennen aber aufsaessig sein. Sie glaenzen in Kunst oder Technik und fuehren ein einzigartiges Leben.',
+        lateLife: 'Im Alter liebt man Freiheit und hasst Einschraenkungen. Die Neigung, Autoritaet herauszufordern, bleibt bestehen — man widmet sich im Alter kreativen Taetigkeiten.',
+        career_add: 'Freiberufliche Taetigkeiten, Videoerstellung, Schreiben und andere freie Berufe eignen sich als Nebenerwerb.',
+    },
+    'Indirekter Reichtum': {
+        children: 'Die Kinder haben geschaeftliches Geschick und Talent zum Geldverdienen. Die Beziehung zwischen Vater und Kind kann komplex sein.',
+        lateLife: 'Im Alter kommt unverhoffter Reichtum! Ein wohlhabender Lebensabend durch Immobilien- oder Kapitalertraege. Aber: Gluecksspiel ist absolut tabu.',
+        career_add: 'Neben- und Zusatzeinkommen aus Nebengeschaeften moeglich. Immobilieninvestitionen guenstig.',
+    },
+    'Direkter Reichtum': {
+        children: 'Die Kinder sind fleissig und stabil. Sie haben einen klaren Sinn fuer Wirtschaft und helfen den Eltern finanziell.',
+        lateLife: 'Ein stabiler und ruhiger Lebensabend. Ersparnisse und Rente sind gut vorbereitet — ein sorgenfreies Alter. Bescheiden, aber ohne Mangel.',
+        career_add: 'Stabiler Nebenerwerb (Mieteinnahmen, Dividendeninvestitionen) empfohlen. Sichere Entscheidungen statt grosser Risiken.',
+    },
+    'Sieben Toetungen': {
+        children: 'Die Kinder sind stark und charismatisch, aber schwer zu fuehren. Militaer-, Polizei- oder Sportlerqualitaeten. Strenge Erziehung ist wirksam.',
+        lateLife: 'Im Alter auf Gesundheit und Stress achten. Man kann in Machtkonflikte geraten, aber wer sie uebersteht, wird ein respektierter aelterer Mensch.',
+        career_add: 'Berufserfahrung in Krisenmanagement, Beratung oder Sicherheitsbereich verwertbar.',
+    },
+    'Direkter Offizier': {
+        children: 'Die Kinder sind vorbildlich und gesellschaftlich erfolgreich. Hohes Potenzial fuer Beamtenlaufbahn, Grossunternehmen oder freie Berufe. Respektvolle Kinder.',
+        lateLife: 'Ein ehrenhafter und respektierter Lebensabend. Gesellschaftlicher Status bleibt erhalten, und man wird von Juengeren geschaetzt. Stabiles Rentendasein.',
+        career_add: 'Verbindungen zu oeffentlichen Einrichtungen, Grossunternehmen und dem Bildungsbereich. Befoerderung oder Ehrenamt moeglich.',
+    },
+    'Indirektes Siegel': {
+        children: 'Die Kinder haben eine einzigartige, spirituelle Veranlagung. Sie glaenzen nicht in gewoehnlichen Laufbahnen, sondern in speziellen Bereichen (Kunst/Religion/IT). Sie koennen schwer zu verstehen sein.',
+        lateLife: 'Im Alter widmet man sich Gelehrsamkeit oder spirituellen Taetigkeiten. Man kann in Religion, Meditation oder Forschung versinken — ein einzigartiger Lebensabend.',
+        career_add: 'Ein zweites Leben in Wahrsagerei, Beratung, Alternativmedizin oder Spezialgebieten.',
+    },
+    'Direktes Siegel': {
+        children: 'Die Kinder haben gute Schulleistungen und sind respektvoll. Hochgebildet, respektieren und folgen sie den Eltern. Investitionen in Bildung zahlen sich stark aus.',
+        lateLife: 'Einer der angenehmsten Lebensabende! Man erhaelt die Zuneigung der Kinder und bleibt gesund. Man geniessen Lesen und Lernen im Alter.',
+        career_add: 'Erfuellung im Unterrichten, Vortragshalten und Mentoring. Erwerb von Qualifikationen guenstig.',
+    }
+};
+
+// Bedeutung der Saeulenpositionen
+const PILLAR_MEANING = {
+    'Jahres-Saeule': 'Ahnenpalast — Grosseltern, Familiengeschlecht, Kindheit (0–15 J.), gesellschaftlicher Hintergrund',
+    'Monats-Saeule': 'Elternpalast — Eltern, Geschwister, Jugendjahre (15–30 J.), Beruf und Gesellschaftsleben',
+    'Tages-Saeule': 'Partnerpalast — ich selbst (Himmelsstamm) und der Partner (Erdzweig), mittlere Jahre (30–45 J.)',
+    'Stunden-Saeule': 'Kinderpalast — Kinder, Schueler, spaetere Lebensjahre (ab 45 J.), Alter und Ergebnis'
+};
+
 // ═══════════════════════════════════════
 // Detaillierte Deutung nach Tagesmeister
 // ═══════════════════════════════════════
@@ -322,7 +400,7 @@ const DAY_MASTERS = {
         love: 'Es liebt tief und intensiv. Es verliebt sich tief in eine Person und ist hingebungsvoll. Der ideale Partner ist jemand, der intellektuell und emotional reich ist. Die Eifersucht kann stark sein, daher ist eine auf Vertrauen basierende Beziehung wichtig.',
         career: 'Geeignet fuer Forscher, Kuenstler, Programmierer, Psychologen und Koeche. Es glaenzt als Experte, der stark auf Details achtet und ein Fachgebiet tiefgehend erschliesst.',
         wealth: 'Die Vermoegenssteigerung ist stabil, aber langsam. Es verdient durch Fachkenntnisse Geld und konkurriert mit Koennen statt mit Investitionen. Ab dem 40. Lebensjahr glaenzt die Expertise und das Einkommen steigt stark.',
-        health: 'Achten Sie auf Herz und Dunndarм. Es ist anfaellig fuer Schlaflosigkeit und Nervenschwaeche. Kerzenmeditation oder Aromatherapie helfen.',
+        health: 'Achten Sie auf Herz und Duenndarm. Es ist anfaellig fuer Schlaflosigkeit und Nervenschwaeche. Kerzenmeditation oder Aromatherapie helfen.',
         advice: 'Eine Kerze ist klein, kann aber die gesamte Dunkelheit erhellen. Unterschaetzen Sie sich nicht. Ihre Feinfuehligkeit und Konzentration sind Schaetze, die andere nicht besitzen.' },
     'Wu': { glyph: '⛰️', nature: 'Berg und Erde', element: 'Erde (Yang)',
         personality: 'Wu-Erde ist der Berg und die Erde, die alles umfasst. Stabil, verlasslich und vertrauenswuerdig. Sie sucht Stabilitaet statt Veraenderung, und wenn sie einmal Fuss gefasst hat, bewegt sie sich nicht. Die Toleranz ist gross, und sie ist jemand, auf den sich die Menschen stuetzen. Allerdings kann der Eigensinn stark und die Anpassung an Veraenderungen langsam sein. Mit ihrer gewichtigen Praesenz ist sie ueberall eine solide Stuetze.',
@@ -332,14 +410,14 @@ const DAY_MASTERS = {
         health: 'Achten Sie auf Milz und Magen. Uebermassiges Essen und Bewegungsmangel sind die groessten Feinde. Wandern oder Aktivitaeten mit Erdkontakt foerdern die Gesundheit.',
         advice: 'Der Berg bewegt sich nicht, aber die Welt veraendert sich. Fuerchten Sie keine Veraenderungen und lesen Sie die Stroemungen. Wenn die Wurzeln fest sind, kann man Aste ausbreiten, ohne umzufallen.' },
     'Ji': { glyph: '🌾', nature: 'Felder und Wiesen', element: 'Erde (Yin)',
-        personality: 'Ji-Erde ist das Feld, das alles gedeihen laesst. Sanftmuetig und praktisch, mit dem Talent, Menschen zu fuersорgen. Hinter dem weichen und bescheidenen Aeusseren steckt eine starke innere Kraft. Es hoert den Geschichten anderer gut zu und hat eine hervorragende Einfuehlsamkeit. Eine hingebungsvolle Natur, die andere vor sich selbst stellt.',
-        love: 'Es liebt warm und hingebungsvoll. Es kuemmert sich sorgfaeltig um den Alltag des Partners und ist familienorientiert. Der ideale Partner ist jemand, der ehrgeizig ist und gleichzeitig die Familie schaetzt. Wenn die Selbstaufopferung zu weit geht, kann die Beziehung unausgewogen werden — drуecken Sie auch Ihre eigenen Beduerfnisse aus.',
-        career: 'Geeignet fuer Lehrer, Krankenpfleger, Koeche, Sozialarbeiter und Personalverantwortliche. Es empfindet Erfullung beim Fuersоrgen und Entwickeln von Menschen. Ein Typ, der in stabilen Organisationen glaenzt.',
+        personality: 'Ji-Erde ist das Feld, das alles gedeihen laesst. Sanftmuetig und praktisch, mit dem Talent, Menschen zu fuersоrgen. Hinter dem weichen und bescheidenen Aeusseren steckt eine starke innere Kraft. Es hoert den Geschichten anderer gut zu und hat eine hervorragende Einfuehlsamkeit. Eine hingebungsvolle Natur, die andere vor sich selbst stellt.',
+        love: 'Es liebt warm und hingebungsvoll. Es kuemmert sich sorgfaeltig um den Alltag des Partners und ist familienorientiert. Der ideale Partner ist jemand, der ehrgeizig ist und gleichzeitig die Familie schaetzt. Wenn die Selbstaufopferung zu weit geht, kann die Beziehung unausgewogen werden — druecken Sie auch Ihre eigenen Beduerfnisse aus.',
+        career: 'Geeignet fuer Lehrer, Krankenpfleger, Koeche, Sozialarbeiter und Personalverantwortliche. Es empfindet Erfuellung beim Fuersоrgen und Entwickeln von Menschen. Ein Typ, der in stabilen Organisationen glaenzt.',
         wealth: 'Es spart stetig und stabil. Es vergroessert das Vermoegen ohne Prunk, ist stark im Sparen und bei Versicherungen. Ab dem spaeten vierten Lebensjahrzehnt wird finanzielle Stabilitaet erreicht.',
         health: 'Achten Sie auf das Verdauungssystem und die Haut. Da die Tendenz besteht, Stress anderer aufzunehmen, ist das Verdauungssystem anfaellig. Gartenarbeit ist die beste Heilmethode.',
         advice: 'Das Feld nimmt alles auf, braucht aber auch selbst Naehrstoffe. Fuellen Sie sich erst selbst auf, bevor Sie andere versorgen. Mit einem leeren Glas koennen Sie niemandem Wasser geben.' },
     'Geng': { glyph: '⚔️', nature: 'Eisen und Schwert', element: 'Metall (Yang)',
-        personality: 'Geng-Metall ist Stahl und ein scharfes Schwert. Entschlossen, von Gerechtigkeitssinn durchdrungen und mit einem klingengleichen Urteilsvermоegen ausgestattet. Es legt Wert auf Loyalitaet und haelt Versprechen unbedingt ein. Obwohl es kalt wirkt, ist es innerlich warm, und wenn es einmal eine Verbindung eingeht, haelt es sie bis zum Ende. Bei Ungerechtigkeit kann es nicht schweigen und spricht direkt.',
+        personality: 'Geng-Metall ist Stahl und ein scharfes Schwert. Entschlossen, von Gerechtigkeitssinn durchdrungen und mit einem klingengleichen Urteilsvermoegen ausgestattet. Es legt Wert auf Loyalitaet und haelt Versprechen unbedingt ein. Obwohl es kalt wirkt, ist es innerlich warm, und wenn es einmal eine Verbindung eingeht, haelt es sie bis zum Ende. Bei Ungerechtigkeit kann es nicht schweigen und spricht direkt.',
         love: 'Es liebt gewichtig und loyal. Die Ausdruecke sind ungeschickt, aber es beweist Liebe durch Taten. Der ideale Partner ist jemand Sanftes und Gefuehlvolles, da sie sich gegenseitig ergaenzen. Die klingengleiche Sprache kann verletzen — ueben Sie sanftere Ausdruecke.',
         career: 'Geeignet fuer Militaer, Polizei, Chirurgen, Juristen und Ingenieure. Es glaenzt in Berufen, die praezise und entschlossene Urteile erfordern. Es entfaltet als Nummer zwei einer Organisation seine beste Ausfuehrungsstaerke.',
         wealth: 'Es verdient Geld durch Koennen. Fachliche Fertigkeiten sind sein Kapital, und Investitionen werden vorsichtig getaetigt. Ab 35 wachsen die Vermoegenswerte stetig.',
@@ -353,18 +431,18 @@ const DAY_MASTERS = {
         health: 'Achten Sie auf Lunge, Haut und Zaehne. Die empfindliche Natur manifestiert sich in Allergien oder Hauterkrankungen. Musik hoeren foerdert die geistige Gesundheit.',
         advice: 'Ein Edelstein leuchtet nicht als Rohstein, sondern nachdem er geschliffen wurde. Meiden Sie keine Pruefungen. Jede Erfahrung, die Sie schleift, laesst Sie noch mehr leuchten.' },
     'Ren': { glyph: '🌊', nature: 'Meer und grosses Wasser', element: 'Wasser (Yang)',
-        personality: 'Ren-Wasser ist das endlos weite Meer. Frei, weise und alles umfassend. Hochbegabt und in der Lagesein, die Situation schnell einzuschaetzen, glaenzt es in Krisen. Wie Wasser, das sich in jeden Behaelter fuegt, passt es sich jeder Umgebung an, aber hinter der ruhig wirkenden Oberflaeche wogt innerlich eine tiefe Welle. Es legt extremen Wert auf Freiheit und kann keine Fesseln ertragen.',
-        love: 'Es liebt frei und weit. Es geniessen verschiedene Begegnungen, und es dauert eine Weile, bis es sich bei einer Person niederlasst. Der ideale Partner ist jemand, der die Freiheit respektiert und dennoch wie ein solider Hafen ist. Es kann als leichtsinnig missverstanden werden — staerken Sie das Vertrauensverhaltnis.',
+        personality: 'Ren-Wasser ist das endlos weite Meer. Frei, weise und alles umfassend. Hochbegabt und in der Lage, die Situation schnell einzuschaetzen, glaenzt es in Krisen. Wie Wasser, das sich in jeden Behaelter fuegt, passt es sich jeder Umgebung an, aber hinter der ruhig wirkenden Oberflaeche wogt innerlich eine tiefe Welle. Es legt extremen Wert auf Freiheit und kann keine Fesseln ertragen.',
+        love: 'Es liebt frei und weit. Es geniesst verschiedene Begegnungen, und es dauert eine Weile, bis es sich bei einer Person niederlasst. Der ideale Partner ist jemand, der die Freiheit respektiert und dennoch wie ein solider Hafen ist. Es kann als leichtsinnig missverstanden werden — staerken Sie das Vertrauensverhaeltnis.',
         career: 'Geeignet fuer Handel, Logistik, Schifffahrt, Reisebranche und Strategieberatung. Es zeigt Staerken in grenzueberschreitenden Geschaeften und hat Talent fuer Fremdsprachen.',
-        wealth: 'Grosses Wasser zieht grosses Geld an. Bei Auslandsinvestitionen oder globalem Business koennen grosse Gewinne erzielt werden. Ab Mitte dreissig steigt das Finanzgluck rapide.',
+        wealth: 'Grosses Wasser zieht grosses Geld an. Bei Auslandsinvestitionen oder globalem Business koennen grosse Gewinne erzielt werden. Ab Mitte dreissig steigt das Finanzglueck rapide.',
         health: 'Achten Sie auf Nieren, Blase und Fortpflanzungsorgane. Trinken Sie ausreichend Wasser und hueten Sie sich vor Kaelte. Schwimmen ist die beste Sportart.',
         advice: 'Das Meer kann ueberall hinfliessen, aber ein Fluss hat eine Richtung. Freiheit ist gut, aber setzen Sie eine Richtung im Leben. Wasser, das fliesst und ein Ziel hat, veraendert die Welt.' },
     'Gui': { glyph: '🌧️', nature: 'Regen und Tau', element: 'Wasser (Yin)',
         personality: 'Gui-Wasser ist der Regen und Tau, der alle Dinge befeuchtet. Intuitionsstark und gefuehlreich, mit spiritueller Tiefe. Es denkt zwar still, aber tiefgruendig und durchschaut das Wesen des Menschen. Obwohl es nach aussen ruhig wirkt, entfaltet sich innerlich eine reiche emotionale Welt. Es legt Wert auf Zeit allein und hat eine starke spirituelle Neigung, die zur Meditation oder zum Gebet zieht.',
-        love: 'Es liebt tief und spirituell. Es sucht Seelenverwandte und kann seichte Beziehungen nicht befriedigen. Der ideale Partner ist jemand mit geistiger Tiefe. Die hohen Ideale koennen zu Enttauschungen beim realen Partner fuehren — sehen Sie Aufrichtigkeit statt Perfektion.',
+        love: 'Es liebt tief und spirituell. Es sucht Seelenverwandte und kann seichte Beziehungen nicht befriedigen. Der ideale Partner ist jemand mit geistiger Tiefe. Die hohen Ideale koennen zu Enttaeuschungen beim realen Partner fuehren — sehen Sie Aufrichtigkeit statt Perfektion.',
         career: 'Geeignet fuer Psychologen, Geistliche, Schriftsteller, Wahrsager und Forscher. Es glaenzt in Berufen, die die unsichtbare Welt erforschen, und loest Probleme durch Intuition.',
         wealth: 'Reichtum kommt, wenn er gebraucht wird. Da die Gier nach Geld gering ist, faellt es schwer, reich zu werden, aber seltsamerweise leidet es nicht an Armut. Einnahmen entstehen in spirituellen oder beratenden Bereichen.',
-        health: 'Achten Sie auf Nieren und Harnwege. Da die Gefuehle sehr tief empfunden werden, ist es anfaellig fuer Depressionen. Ein Spaziergang an einem Regentag oder ein Thermalbadbad wirken heilend.',
+        health: 'Achten Sie auf Nieren und Harnwege. Da die Gefuehle sehr tief empfunden werden, ist es anfaellig fuer Depressionen. Ein Spaziergang an einem Regentag oder ein Thermalbad wirken heilend.',
         advice: 'Der Regen faellt leise und befeuchtet die Erde. Ihr Einfluss ist unsichtbar, aber tief. Sie muessen nicht in die Welt hinaustreten. Allein durch Ihre Existenz wird jemandes ausgetrocknetes Herz befeuchtet.' }
 };
 
@@ -375,13 +453,13 @@ const SPOUSE_APPEARANCE = {
     'Yin': 'Selbstbewusstes und lebhaftes Aeusseres. Gute Figur, grosse Augen, strotzend vor Selbstvertrauen. Aktiver Typ, dem sportliche Kleidung gut steht.',
     'Mao': 'Sanftes und elegantes Aeusseres. Huebsche Gesichtszuege und schoene Haende. Raffiniertes Modegespuer und katzenartige Anziehungskraft.',
     'Chen': 'Starker, charismatischer Eindruck. Grosser Koerperbau und selbstbewusste Haltung. Wuerdevoll, aber mit unvermuteter Anziehungskraft beim Laecheln.',
-    'Si': 'Verführerisches und raffiniertes Aeusseres. Langer, schlanker Koerperbau mit markanten Gesichtszuegen. Tiefe, geheimnisvolle Augen. Ausgezeichnetes Modegespuer.',
+    'Si': 'Verfuehrerisches und raffiniertes Aeusseres. Langer, schlanker Koerperbau mit markanten Gesichtszuegen. Tiefe, geheimnisvolle Augen. Ausgezeichnetes Modegespuer.',
     'Wu': 'Helles, strahlend attraktives Aeusseres. Grosse Augen und ein mitreissendes Laecheln. Lebhafter, energiegeladener Eindruck. Rot-Toene stehen besonders gut.',
     'Wei': 'Mildes und behagliches Aeusseres. Rundes Gesicht mit herzlichem Laecheln. Kuschelig und warm — bevorzugt Komfort statt Mode. Wirkt juenger als das Alter.',
     'Shen': 'Ordentliches und gepflegtes Aeusseres. Scharfe Gesichtszuege und raffinierter Stil. Helle Haut und leuchtende Augen. Eleganter Typ mit Vorliebe fuer Marken.',
     'You': 'Huebsches und feines Aeusseres. Schoene Lippen oder anziehende Stimme. Kann Alkohol moegen und hat ein geselliges Auftreten. Anspruchsvoller Geschmack.',
     'Xu': 'Stabiler und treuer Eindruck. Wirkt pflichtbewusst und etwas unnahbar, hat aber eine tiefe Seele. Liebt Sport und hat eine gesunde Figur. Typ, der mit der Zeit ans Herz waechst.',
-    'Hai': 'Pummeliges und sueusses Aeusseres. Kleine Augen, haufiges Laecheln und freundlicher Eindruck. Isst gerne und verbreitet eine entspannte Atmosphaere. Wirkt gluecklich und gesegnet.'
+    'Hai': 'Pummeliges und suesses Aeusseres. Kleine Augen, haeufiges Laecheln und freundlicher Eindruck. Isst gerne und verbreitet eine entspannte Atmosphaere. Wirkt gluecklich und gesegnet.'
 };
 
 function toggleTime() {
@@ -422,7 +500,7 @@ function calculate() {
     if (!timeUnknown) {
         const rawHourIdx = parseInt(document.getElementById('birthHour').value);
         const rawMin = parseInt(document.getElementById('birthMin').value);
-        // Shichen → Realstunde (Startzeit des Shichen + eingegebene Minuten)
+        // Shichen -> Realstunde (Startzeit des Shichen + eingegebene Minuten)
         const shichenHours = [23,1,3,5,7,9,11,13,15,17,19,21];
         const rawHour = shichenHours[rawHourIdx];
         const rawMinute = rawMin;
@@ -519,9 +597,34 @@ function calculate() {
         <div class="info-item"><div class="info-label">Tages-Saeule</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}</div></div>
         <div class="info-item"><div class="info-label">Geschlecht/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Maennlich (Yang)' : 'Weiblich (Yin)'}</div></div>`;
     if (trueSolarInfo) {
-        infoHTML += `<div class="info-item"><div class="info-label">Wahre Sonnenzeit</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">Korrektur: ${trueSolarInfo.correctionMin} Min → ${BRANCHES[hourIdx]}-Stunde</div></div>`;
+        infoHTML += `<div class="info-item"><div class="info-label">Wahre Sonnenzeit-Korrektur</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">Korrektur: ${trueSolarInfo.correctionMin} Min → ${BRANCHES[hourIdx]}-Stunde</div></div>`;
     }
     document.getElementById('infoGrid').innerHTML = infoHTML;
+
+    // Saeulendeutung
+    const pillarData = [
+        { name: 'Jahres-Saeule', data: yp },
+        { name: 'Monats-Saeule', data: mp },
+        { name: 'Tages-Saeule', data: dp },
+        { name: 'Stunden-Saeule', data: hp }
+    ];
+    let pillarInterpHTML = '';
+    pillarData.forEach(p => {
+        if (!p.data) return;
+        const stemGod = p.name === 'Tages-Saeule' ? 'Tagesmeister' : getTenGod(dayStem, p.data.stem);
+        const godInfo = TEN_GOD_DESC[stemGod] || { icon: '•', meaning: '', desc: '' };
+        const pillarMeaning = PILLAR_MEANING[p.name];
+        pillarInterpHTML += `
+            <div class="interp-card">
+                <div class="interp-title">${godInfo.icon} ${p.name}: ${STEMS[p.data.stem]}${BRANCHES[p.data.branch]} — ${stemGod}</div>
+                <div class="interp-text">
+                    <strong>📍 Position:</strong> ${pillarMeaning}<br><br>
+                    <strong>🔮 ${stemGod}:</strong> ${godInfo.meaning}<br>
+                    ${godInfo.desc}
+                </div>
+            </div>`;
+    });
+    document.getElementById('pillarInterpWrap').innerHTML = pillarInterpHTML;
 
     // Charakterdeutung
     document.getElementById('interpWrap').innerHTML = `
@@ -534,15 +637,41 @@ function calculate() {
             <div class="interp-text">${dm.advice}</div>
         </div>`;
 
+    // Stunden-Saeule Zehn-Gott-Deutung
+    const hourGod = hp ? getTenGod(dayStem, hp.stem) : null;
+    const hourInterp = hourGod ? HOUR_PILLAR_INTERP[hourGod] : null;
+
+    // Geschlechtsspezifische Partneranalyse
+    const allPillars = [yp, mp, dp, hp].filter(Boolean);
+    const allTenGods = allPillars.map(p => getTenGod(dayStem, p.stem));
+    const spouseGodMale = ['Direkter Reichtum','Indirekter Reichtum'];
+    const spouseGodFemale = ['Direkter Offizier','Sieben Toetungen'];
+    const spouseGods = gender === 'm' ? spouseGodMale : spouseGodFemale;
+    const hasSpouseGod = allTenGods.some(g => spouseGods.includes(g));
+    const spouseGodFound = allTenGods.filter(g => spouseGods.includes(g));
+
+    let genderSpouseText = '';
+    if (gender === 'm') {
+        if (spouseGodFound.includes('Direkter Reichtum')) genderSpouseText += '<strong>💍 Direkter Reichtum ist in Ihrem BaZi vorhanden:</strong> Sie haben Glueck mit der Ehefrau. Die Wahrscheinlichkeit, eine stabile und hingebungsvolle Partnerin zu finden, ist hoch. Das Eheleben verlaeuft reibungslos.<br>';
+        if (spouseGodFound.includes('Indirekter Reichtum')) genderSpouseText += '<strong>💫 Indirekter Reichtum ist in Ihrem BaZi vorhanden:</strong> Sie sind bei Frauen beliebt und koennen mehrere romantische Begegnungen haben. Vorsicht vor Leichtsinnigkeit. Geschaeftliche Begegnungen koennen sich zu Liebesbeziehungen entwickeln.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>Kein Partnergoett (Reichtumsstern) im BaZi:</strong> Die Heirat kann sich verzoegern oder die Verbindung zum Partner ist moeglicherweise schwach. Sie muessen aktiv Begegnungen suchen.<br>';
+    } else {
+        if (spouseGodFound.includes('Direkter Offizier')) genderSpouseText += '<strong>💍 Direkter Offizier ist in Ihrem BaZi vorhanden:</strong> Sie haben Glueck mit dem Ehemann. Die Wahrscheinlichkeit, einen gesellschaftlich stabilen Partner zu finden, ist hoch. Eine ehrenvolle Ehe.<br>';
+        if (spouseGodFound.includes('Sieben Toetungen')) genderSpouseText += '<strong>💫 Sieben Toetungen sind in Ihrem BaZi vorhanden:</strong> Sie werden von charismatischen Maennern angezogen. Intensive Liebesbeziehungen, aber die Verbindung kann instabil sein.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>Kein Partnergoett (Offiziersstern) im BaZi:</strong> Die Heirat kann sich verzoegern oder die Verbindung zum Partner ist moeglicherweise schwach. Sie muessen aktiv Begegnungen suchen.<br>';
+    }
+
     // Partner
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Partnerpalast (Tageszweig: ${spouseBranch})</div>
+            <div class="interp-title">💕 Partnerpalast (Tageszweig: ${spouseBranch}) — ${gender === 'm' ? 'Maennlich' : 'Weiblich'}</div>
             <div class="interp-text">
                 <strong>📐 Partneraussehen &amp; Ersteindruck:</strong><br>${spouseApp}<br><br>
+                ${genderSpouseText}<br>
                 <strong>💑 Liebe &amp; Ehe:</strong><br>${dm.love}
+                ${hourInterp ? '<br><br><strong>👶 Kinderglueck (Stunden-Saeule: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}
             </div>
         </div>`;
 
@@ -550,7 +679,7 @@ function calculate() {
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💼 Berufliche Eignung</div>
-            <div class="interp-text">${dm.career}</div>
+            <div class="interp-text">${dm.career}${hourInterp ? '<br><br><strong>🔄 Einfluss der Stunden-Saeule (' + hourGod + '):</strong> ' + hourInterp.career_add : ''}</div>
         </div>
         <div class="interp-card">
             <div class="interp-title">💰 Reichtumsgluck</div>
@@ -561,7 +690,7 @@ function calculate() {
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">🏥 Gesundheit des ${dayMaster}-Tagesmeistrs</div>
-            <div class="interp-text">${dm.health}</div>
+            <div class="interp-text">${dm.health}${hourInterp ? '<br><br><strong>🌅 Altersprognose (Stunden-Saeule: ' + hourGod + '):</strong><br>' + hourInterp.lateLife : ''}</div>
         </div>`;
 
     // Grosse Gluecksphasen

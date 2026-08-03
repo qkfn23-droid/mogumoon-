@@ -139,6 +139,9 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
+        <h3 class="section-title">🕐 Pillar-by-Pillar Reading</h3>
+        <div id="pillarInterpWrap"></div>
+
         <h3 class="section-title">📖 Personality &amp; Life Reading</h3>
         <div id="interpWrap"></div>
 
@@ -298,6 +301,83 @@ function getTenGod(dayStem, targetStem) {
     return '';
 }
 
+// Ten God descriptions
+const TEN_GOD_DESC = {
+    'Companion':      { icon: '👥', meaning: 'Same energy as the Day Master', desc: 'Independence, competitiveness, sibling bonds. Many Companions in the chart indicate a strong sense of self and a preference for independence, though cooperation will be needed.' },
+    'Rob Wealth':     { icon: '⚡', meaning: 'Energy that takes your wealth', desc: 'Fighting spirit, boldness, sometimes impulsiveness. Rob Wealth brings audacity and drive, but calls for careful wealth management.' },
+    'Eating God':     { icon: '🍽️', meaning: 'Energy you produce', desc: 'Food luck, expressive ability, creative talent. The Eating God brings enjoyment of life\'s pleasures and rich artistic gifts.' },
+    'Hurting Officer':{ icon: '🎭', meaning: 'The authority you overcome', desc: 'Rebelliousness, creativity, eloquence. Hurting Officer brings outstanding talent but can make institutional life difficult.' },
+    'Indirect Wealth':{ icon: '💸', meaning: 'Wealth you control (fluid)', desc: 'Windfall luck, entrepreneurial fortune, father connection. Indirect Wealth brings big money opportunities, but with significant fluctuation.' },
+    'Direct Wealth':  { icon: '💰', meaning: 'Wealth you control (fixed)', desc: 'Stable income, saving ability, diligent financial management. Direct Wealth means wealth accumulates steadily over time.' },
+    'Seven Killings': { icon: '⚔️', meaning: 'Energy that controls you (Yang)', desc: 'Authority, charisma, danger and opportunity. Seven Killings brings powerful drive and momentum, but also significant stress.' },
+    'Direct Officer': { icon: '👔', meaning: 'Energy that controls you (Yin)', desc: 'Honor, career fortune, discipline. Direct Officer brings social success and recognition within organizations.' },
+    'Indirect Seal':  { icon: '📚', meaning: 'Energy that produces you (Yang)', desc: 'Scholarship, spirituality, unconventional knowledge. Indirect Seal brings unusual talents and strong intuition.' },
+    'Direct Seal':    { icon: '🎓', meaning: 'Energy that produces you (Yin)', desc: 'Academic achievement, credentials, mother connection. Direct Seal brings good fortune in studies and support from benefactors.' },
+    'Day Master':     { icon: '⭐', meaning: 'You yourself', desc: '' }
+};
+
+// Hour Pillar Ten God interpretations (content that varies by Hour Pillar)
+const HOUR_PILLAR_INTERP = {
+    'Companion': {
+        children: 'Your children are independent and strong-willed. You relate to them like siblings, and a competitive dynamic can develop. There is a likelihood of having two or more children.',
+        lateLife: 'You remain active and energetic in your later years. Rather than retiring, you prefer running your own business, enjoying an independent old age with friends and colleagues.',
+        career_add: 'Potential for expansion through partnerships or franchises. You are the type who grows through competition.',
+    },
+    'Rob Wealth': {
+        children: 'There may be wealth-related conflicts with children. Your children are bold and daring but tend to spend freely. Financial education is important.',
+        lateLife: 'Watch for wealth fluctuations in later life. Be on guard against investment losses or fraud — though your fighting spirit can also create new opportunities.',
+        career_add: 'Be discerning when choosing business partners. Guard against betrayal or financial leakage.',
+    },
+    'Eating God': {
+        children: 'Great child fortune! Your children have artistic inclinations or a love of food and are devoted to you. You enjoy exploring restaurants and food culture together.',
+        lateLife: 'One of the best late-life fortunes — blessed with food, leisure, and good health. You enjoy hobbies and retire happily.',
+        career_add: 'Possible side income in the food industry, content creation, or teaching — any expressive field.',
+    },
+    'Hurting Officer': {
+        children: 'Your children are brilliantly talented but may be rebellious. They stand out in the arts or technology and lead a unique life.',
+        lateLife: 'In later life you dislike constraints and crave freedom. Your tendency to challenge authority persists, and you immerse yourself in creative pursuits.',
+        career_add: 'Freelance, content creation, or writing are suitable side vocations — anything free and unconstrained.',
+    },
+    'Indirect Wealth': {
+        children: 'Your children have excellent business acumen and a talent for making money. The father-child relationship may be complex.',
+        lateLife: 'Unexpected wealth arrives in your later years! Real estate or investment returns bring a prosperous retirement — though gambling must be strictly avoided.',
+        career_add: 'Side income and secondary businesses are promising. Real estate investment is favorable.',
+    },
+    'Direct Wealth': {
+        children: 'Your children are diligent and stable. They have a firm grasp of finances and provide material support to their parents.',
+        lateLife: 'A stable and comfortable old age. Savings and pension are well prepared, with no worries. A frugal but sufficient life.',
+        career_add: 'Steady side income recommended — rental income, dividend investing. Safety over big risks.',
+    },
+    'Seven Killings': {
+        children: 'Your children are strong and charismatic but can be difficult to handle. They have the temperament of soldiers, police, or athletes. Firm discipline is effective.',
+        lateLife: 'Watch your health and stress levels in later life. You may be caught up in power struggles — but if you weather them well, you become a respected elder.',
+        career_add: 'Your experience is valuable in crisis management, consulting, or security-related fields.',
+    },
+    'Direct Officer': {
+        children: 'Your children are exemplary and achieve social success. High likelihood of careers in public service, large corporations, or the professions. Devoted and filial.',
+        lateLife: 'An honorable and respected old age. Your social standing is maintained and younger generations look up to you. A stable pension life.',
+        career_add: 'Affinity with public institutions, large companies, and education. Promotion or honorary positions are possible.',
+    },
+    'Indirect Seal': {
+        children: 'Your children have a unique and spiritual nature. They shine in unusual fields — arts, religion, IT — rather than conventional career paths. They may be hard to understand.',
+        lateLife: 'In later life you devote yourself to scholarship or spiritual pursuits — religion, meditation, or research — leading an unconventional retirement.',
+        career_add: 'A second life in divination, counseling, alternative medicine, or specialized technical fields.',
+    },
+    'Direct Seal': {
+        children: 'Your children excel academically and are devoted to you. They are highly educated, respectful, and follow your guidance. Educational investment yields great rewards.',
+        lateLife: 'One of the most comfortable late-life fortunes! You are cared for by devoted children and remain healthy. You enjoy reading and lifelong learning in retirement.',
+        career_add: 'You find deep fulfillment in education, lecturing, and mentoring. Obtaining certifications is advantageous.',
+    }
+};
+
+// Pillar position meanings
+const PILLAR_MEANING = {
+    'Year':  'Ancestor Palace — grandparents, family lineage, early childhood (ages 0–15), social background',
+    'Month': 'Parent Palace — parents, siblings, young adulthood (ages 15–30), career and social life',
+    'Day':   'Spouse Palace — your own essence (Heavenly Stem) and your spouse (Earthly Branch), middle age (ages 30–45)',
+    'Hour':  'Children Palace — children, students, later years (age 45+), old age and outcomes'
+};
+
 // ═══════════════════════════════════════
 // Day Master detailed interpretations
 // ═══════════════════════════════════════
@@ -376,18 +456,18 @@ const DAY_MASTERS = {
 
 // Spouse appearance (based on Day Branch)
 const SPOUSE_APPEARANCE = {
-    'Zi': 'An intellectual and composed appearance. Deep, mysterious eyes full of quiet allure. Bright, clear complexion — the type who looks most captivating at night.',
+    'Zi':   'An intellectual and composed appearance. Deep, mysterious eyes full of quiet allure. Bright, clear complexion — the type who looks most captivating at night.',
     'Chou': 'A stable and dependable impression. Somewhat stocky or solidly built. A trustworthy appearance — someone who grows more attractive the better you know them, beyond first impressions.',
-    'Yin': 'A confident and energetic appearance. Good physique, large eyes, and an air of self-assurance. An active type who suits a sporty style.',
-    'Mao': 'A soft and graceful appearance. Delicate, pretty features and beautiful hands. Refined fashion sense with a cat-like allure.',
+    'Yin':  'A confident and energetic appearance. Good physique, large eyes, and an air of self-assurance. An active type who suits a sporty style.',
+    'Mao':  'A soft and graceful appearance. Delicate, pretty features and beautiful hands. Refined fashion sense with a cat-like allure.',
     'Chen': 'A strong and charismatic impression. Large frame with a commanding posture. Dignified, yet with a surprising reverse-charm that emerges when smiling.',
-    'Si': 'An alluring and sophisticated appearance. A long, slender physique with sharp, defined features. Deep, mysterious eyes. Exceptional sense of style.',
-    'Wu': 'A bright and radiant appearance. Large eyes and a captivating smile. A lively, energetic impression. Red-toned colors suit them particularly well.',
-    'Wei': 'A gentle and comfortable appearance. A round face with a warm, approachable smile. Drawn to comfort over fashion, with a cozy, soothing quality. Tends to look younger than their age.',
+    'Si':   'An alluring and sophisticated appearance. A long, slender physique with sharp, defined features. Deep, mysterious eyes. Exceptional sense of style.',
+    'Wu':   'A bright and radiant appearance. Large eyes and a captivating smile. A lively, energetic impression. Red-toned colors suit them particularly well.',
+    'Wei':  'A gentle and comfortable appearance. A round face with a warm, approachable smile. Drawn to comfort over fashion, with a cozy, soothing quality. Tends to look younger than their age.',
     'Shen': 'A clean-cut and polished appearance. Sharp, well-defined features with a refined style. Fair skin and sparkling eyes. A sophisticated type with strong interest in brand names.',
-    'You': 'A pretty and delicate appearance. Notably attractive lips or a charming voice. May enjoy drinking and has a sociable, convivial aura. Refined and luxurious taste.',
-    'Xu': 'A solid and loyal impression. Hardworking and seemingly blunt, but with great depth of character. Enjoys physical activity and has a healthy, fit physique. The type you grow fonder of as time passes.',
-    'Hai': 'A plump and adorable appearance. Small eyes, a ready smile, and a friendly, welcoming expression. Loves food and has an easygoing, comfortable presence. Gives the impression of someone naturally blessed.'
+    'You':  'A pretty and delicate appearance. Notably attractive lips or a charming voice. May enjoy drinking and has a sociable, convivial aura. Refined and luxurious taste.',
+    'Xu':   'A solid and loyal impression. Hardworking and seemingly blunt, but with great depth of character. Enjoys physical activity and has a healthy, fit physique. The type you grow fonder of as time passes.',
+    'Hai':  'A plump and adorable appearance. Small eyes, a ready smile, and a friendly, welcoming expression. Loves food and has an easygoing, comfortable presence. Gives the impression of someone naturally blessed.'
 };
 
 function toggleTime() {
@@ -529,6 +609,31 @@ function calculate() {
     }
     document.getElementById('infoGrid').innerHTML = infoHTML;
 
+    // Pillar-by-Pillar reading
+    const pillarData = [
+        { name: 'Year',  data: yp },
+        { name: 'Month', data: mp },
+        { name: 'Day',   data: dp },
+        { name: 'Hour',  data: hp }
+    ];
+    let pillarInterpHTML = '';
+    pillarData.forEach(p => {
+        if (!p.data) return;
+        const stemGod = p.name === 'Day' ? 'Day Master' : getTenGod(dayStem, p.data.stem);
+        const godInfo = TEN_GOD_DESC[stemGod] || { icon: '•', meaning: '', desc: '' };
+        const pillarMeaning = PILLAR_MEANING[p.name];
+        pillarInterpHTML += `
+            <div class="interp-card">
+                <div class="interp-title">${godInfo.icon} ${p.name} Pillar: ${STEMS[p.data.stem]}${BRANCHES[p.data.branch]} — ${stemGod}</div>
+                <div class="interp-text">
+                    <strong>📍 Position:</strong> ${pillarMeaning}<br><br>
+                    <strong>🔮 ${stemGod}:</strong> ${godInfo.meaning}<br>
+                    ${godInfo.desc}
+                </div>
+            </div>`;
+    });
+    document.getElementById('pillarInterpWrap').innerHTML = pillarInterpHTML;
+
     // Personality reading
     document.getElementById('interpWrap').innerHTML = `
         <div class="interp-card">
@@ -540,15 +645,41 @@ function calculate() {
             <div class="interp-text">${dm.advice}</div>
         </div>`;
 
-    // Spouse
+    // Hour Pillar Ten God
+    const hourGod = hp ? getTenGod(dayStem, hp.stem) : null;
+    const hourInterp = hourGod ? HOUR_PILLAR_INTERP[hourGod] : null;
+
+    // Spouse God analysis across all pillars
+    const allPillars = [yp, mp, dp, hp].filter(Boolean);
+    const allTenGods = allPillars.map(p => getTenGod(dayStem, p.stem));
+    const spouseGodMale = ['Direct Wealth', 'Indirect Wealth'];   // male spouse stars
+    const spouseGodFemale = ['Direct Officer', 'Seven Killings']; // female spouse stars
+    const spouseGods = gender === 'm' ? spouseGodMale : spouseGodFemale;
+    const hasSpouseGod = allTenGods.some(g => spouseGods.includes(g));
+    const spouseGodFound = allTenGods.filter(g => spouseGods.includes(g));
+
+    let genderSpouseText = '';
+    if (gender === 'm') {
+        if (spouseGodFound.includes('Direct Wealth'))   genderSpouseText += '<strong>💍 Direct Wealth is present in your chart:</strong> You have good fortune in marriage. You are likely to meet a stable, devoted spouse. Married life tends to go smoothly.<br>';
+        if (spouseGodFound.includes('Indirect Wealth')) genderSpouseText += '<strong>💫 Indirect Wealth is present in your chart:</strong> You are popular with the opposite sex and may have multiple romantic connections. Be mindful of wandering tendencies. Romantic bonds can also arise from business encounters.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>No spouse star (Wealth star) in your chart:</strong> Marriage may come late, or the bond with a spouse may be weak. You need to actively seek out connections.<br>';
+    } else {
+        if (spouseGodFound.includes('Direct Officer'))  genderSpouseText += '<strong>💍 Direct Officer is present in your chart:</strong> You have good fortune in marriage. You are likely to meet a socially stable spouse. An honorable married life.<br>';
+        if (spouseGodFound.includes('Seven Killings'))  genderSpouseText += '<strong>💫 Seven Killings is present in your chart:</strong> You are drawn to charismatic, commanding men. Romances are intense but the relationship may be unstable.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>No spouse star (Officer star) in your chart:</strong> Marriage may come late, or the bond with a spouse may be weak. You need to actively seek out connections.<br>';
+    }
+
+    // Spouse section
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Spouse Palace (Day Branch: ${spouseBranch})</div>
+            <div class="interp-title">💕 Spouse Palace (Day Branch: ${spouseBranch}) — ${gender === 'm' ? 'Male' : 'Female'} perspective</div>
             <div class="interp-text">
                 <strong>📐 Spouse Appearance &amp; First Impression:</strong><br>${spouseApp}<br><br>
+                ${genderSpouseText}<br>
                 <strong>💑 Romance &amp; Marriage:</strong><br>${dm.love}
+                ${hourInterp ? '<br><br><strong>👶 Children Fortune (Hour Pillar: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}
             </div>
         </div>`;
 
@@ -556,7 +687,7 @@ function calculate() {
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💼 Career Aptitude</div>
-            <div class="interp-text">${dm.career}</div>
+            <div class="interp-text">${dm.career}${hourInterp ? '<br><br><strong>🔄 Hour Pillar Influence (' + hourGod + '):</strong> ' + hourInterp.career_add : ''}</div>
         </div>
         <div class="interp-card">
             <div class="interp-title">💰 Wealth Fortune</div>
@@ -567,7 +698,7 @@ function calculate() {
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">🏥 Health for ${dayMaster} Day Master</div>
-            <div class="interp-text">${dm.health}</div>
+            <div class="interp-text">${dm.health}${hourInterp ? '<br><br><strong>🌅 Later Life (Hour Pillar: ' + hourGod + '):</strong><br>' + hourInterp.lateLife : ''}</div>
         </div>`;
 
     // Major Cycles (simplified)

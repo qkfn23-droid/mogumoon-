@@ -4,7 +4,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quatre Piliers du Destin (BaZi) - MOGU Moon</title>
+    <title>Saju Palja (四柱八字) - MOGU Moon</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -74,8 +74,8 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>☯️ Quatre Piliers du Destin (四柱八字)</h2>
-        <p>Analyse BaZi précise basée sur le calendrier traditionnel — les quatre piliers de votre destin</p>
+        <h2>☯️ Saju Palja (四柱八字)</h2>
+        <p>Analyse astrologique précise basée sur le calendrier perpétuel — Les quatre piliers de votre destin</p>
     </div>
 
     <div class="form-box">
@@ -96,21 +96,21 @@
             </div>
         </div>
         <div class="input-group" id="trueSolarGroup">
-            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">Correction Heure Solaire Vraie <span class="optional-tag">(basee sur la longitude de naissance)</span></label>
+            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">Correction Heure Solaire Vraie <span class="optional-tag">(basée sur la longitude du lieu de naissance)</span></label>
             <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
                 <select id="birthLocation">
-                    <option value="126.98">Seoul</option>
-                    <option value="126.71">Incheon</option>
-                    <option value="127.38">Daejeon</option>
-                    <option value="127.00">Sejong</option>
-                    <option value="126.85">Gwangju</option>
-                    <option value="128.60">Daegu</option>
-                    <option value="129.03">Busan</option>
-                    <option value="129.31">Ulsan</option>
-                    <option value="126.53">Jeju</option>
-                    <option value="125.75">Pyongyang</option>
-                    <option value="127.73">Chuncheon</option>
-                    <option value="128.73">Pohang</option>
+                    <option value="2.35">Paris</option>
+                    <option value="3.87">Lyon</option>
+                    <option value="5.37">Marseille</option>
+                    <option value="-1.55">Nantes</option>
+                    <option value="-0.58">Bordeaux</option>
+                    <option value="1.44">Toulouse</option>
+                    <option value="7.75">Strasbourg</option>
+                    <option value="5.72">Nice</option>
+                    <option value="3.06">Montpellier</option>
+                    <option value="-1.68">Rennes</option>
+                    <option value="3.06">Lille</option>
+                    <option value="2.32">Versailles</option>
                 </select>
             </div>
             <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
@@ -119,16 +119,16 @@
             <label>Genre</label>
             <div class="input-row">
                 <select id="gender">
-                    <option value="m">Masculin</option>
-                    <option value="f">Feminin</option>
+                    <option value="m">Homme</option>
+                    <option value="f">Femme</option>
                 </select>
             </div>
         </div>
-        <button class="calc-btn" onclick="calculate()">☯️ Analyser le BaZi</button>
+        <button class="calc-btn" onclick="calculate()">☯️ Analyser mon Saju</button>
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">🏛️ Quatre Piliers du Destin</h3>
+        <h3 class="section-title">🏛️ Saju Palja (Les Quatre Piliers)</h3>
         <div class="pillars-grid" id="pillarsGrid"></div>
 
         <h3 class="section-title">⭐ Maître du Jour (Mon Essence)</h3>
@@ -139,19 +139,22 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">📖 Personnalité & Interprétation de Vie</h3>
+        <h3 class="section-title">🕐 Interprétation par Pilier</h3>
+        <div id="pillarInterpWrap"></div>
+
+        <h3 class="section-title">📖 Personnalité &amp; Interprétation de Vie</h3>
         <div id="interpWrap"></div>
 
-        <h3 class="section-title">💕 Conjoint & Amour</h3>
+        <h3 class="section-title">💕 Partenaire &amp; Amour</h3>
         <div id="spouseWrap"></div>
 
-        <h3 class="section-title">💰 Richesse & Carrière</h3>
+        <h3 class="section-title">💰 Fortune &amp; Carrière</h3>
         <div id="wealthWrap"></div>
 
         <h3 class="section-title">🏥 Points de Vigilance Santé</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">⏳ Grandes Périodes (cycle de 10 ans)</h3>
+        <h3 class="section-title">⏳ Grande Période (cycle de 10 ans)</h3>
         <div id="dashaWrap"></div>
     </div>
 </div>
@@ -160,52 +163,48 @@
 
 <script>
 // ═══════════════════════════════════════
-// Moteur de calcul BaZi (basé sur le calendrier traditionnel)
+// Moteur de calcul Saju Palja (basé sur le calendrier perpétuel)
 // ═══════════════════════════════════════
 const STEMS = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
 const BRANCHES = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
 const ELEMENTS = ['Bois','Bois','Feu','Feu','Terre','Terre','Metal','Metal','Eau','Eau'];
 const BR_ELEMENTS = ['Eau','Terre','Bois','Bois','Terre','Feu','Feu','Terre','Metal','Metal','Terre','Eau'];
 const ANIMALS = ['🐀','🐂','🐅','🐇','🐉','🐍','🐴','🐑','🐵','🐔','🐶','🐷'];
-const ANIMAL_NAMES = ['Rat','Boeuf','Tigre','Lapin','Dragon','Serpent','Cheval','Chevre','Singe','Coq','Chien','Cochon'];
+const ANIMAL_NAMES = ['Rat','Bœuf','Tigre','Lièvre','Dragon','Serpent','Cheval','Mouton','Singe','Coq','Chien','Cochon'];
 const EL_NAMES = ['Bois','Feu','Terre','Metal','Eau'];
 const EL_COLORS = ['#27ae60','#e74c3c','#d4a853','#bdc3c7','#3498db'];
 const EL_CLASSES = ['el-wood','el-fire','el-earth','el-metal','el-water'];
 
-// Termes solaires — limites des mois lunaires (valeurs approximatives)
-// Yin (1): Lichun, Mao (2): Jingzhe, ...
+// Limites mensuelles selon les termes solaires (valeurs grégoriennes approchées)
 const SOLAR_TERMS = [
-    { month: 2, day: 4 },   // 1=Yin debut (Lichun)
-    { month: 3, day: 6 },   // 2=Mao debut (Jingzhe)
-    { month: 4, day: 5 },   // 3=Chen debut (Qingming)
-    { month: 5, day: 6 },   // 4=Si debut (Lixia)
-    { month: 6, day: 6 },   // 5=Wu debut (Mangzhong)
-    { month: 7, day: 7 },   // 6=Wei debut (Xiaoshu)
-    { month: 8, day: 8 },   // 7=Shen debut (Liqiu)
-    { month: 9, day: 8 },   // 8=You debut (Bailu)
-    { month: 10, day: 8 },  // 9=Xu debut (Hanlu)
-    { month: 11, day: 7 },  // 10=Hai debut (Lidong)
-    { month: 12, day: 7 },  // 11=Zi debut (Daxue)
-    { month: 1, day: 5 },   // 12=Chou debut (Xiaohan)
+    { month: 2, day: 4 },
+    { month: 3, day: 6 },
+    { month: 4, day: 5 },
+    { month: 5, day: 6 },
+    { month: 6, day: 6 },
+    { month: 7, day: 7 },
+    { month: 8, day: 8 },
+    { month: 9, day: 8 },
+    { month: 10, day: 8 },
+    { month: 11, day: 7 },
+    { month: 12, day: 7 },
+    { month: 1, day: 5 },
 ];
 
 function getSolarMonth(month, day) {
-    const dateVal = month * 100 + day;
-    for (let i = 11; i >= 0; i--) {
+    if (month === 1 && day < 5) return 11;
+    if ((month === 1 && day >= 5) || (month === 2 && day < 4)) return 12;
+    for (let i = 10; i >= 0; i--) {
         const t = SOLAR_TERMS[i];
-        const tVal = t.month * 100 + t.day;
-        if (dateVal >= tVal) {
-            if (i === 11 && t.month === 1) return 12;
-            return i + 1;
-        }
+        if (month > t.month || (month === t.month && day >= t.day)) return i + 1;
     }
-    return 11; // 1/1~1/4 avant Xiaohan = Zi (11)
+    return 1;
 }
 
 // Correction Heure Solaire Vraie
 function getTrueSolarHour(hour, minute, longitude) {
-    // Heure standard coréenne: meridien 135°E
-    const correction = (longitude - 135) * 4; // en minutes
+    // Méridien de référence France : UTC+1 = 15°E
+    const correction = (longitude - 15) * 4; // en minutes
     let totalMin = hour * 60 + minute + correction;
     if (totalMin < 0) totalMin += 1440;
     if (totalMin >= 1440) totalMin -= 1440;
@@ -229,7 +228,6 @@ function hourToShichen(hour, minute) {
 }
 
 function getAdjustedYear(year, month, day) {
-    // Transition d'année basée sur Lichun (~4 février)
     if (month < 2 || (month === 2 && day < 4)) return year - 1;
     return year;
 }
@@ -250,7 +248,6 @@ function getMonthPillar(year, month, day) {
 }
 
 function getDayPillar(year, month, day) {
-    // Point de référence vérifié : 4 janvier 2023 = Jiazi (tige 0, branche 0)
     const target = new Date(Date.UTC(year, month - 1, day));
     const ref = new Date(Date.UTC(2023, 0, 4));
     const daysDiff = Math.round((target - ref) / 86400000);
@@ -265,7 +262,7 @@ function getHourPillar(dayStem, hourIdx) {
     return { stem: hourStem, branch: hourIdx };
 }
 
-// Index des cinq éléments (0=Bois, 1=Feu, 2=Terre, 3=Metal, 4=Eau)
+// Index des éléments (0=Bois, 1=Feu, 2=Terre, 3=Metal, 4=Eau)
 function getElIdx(el) {
     return ['Bois','Feu','Terre','Metal','Eau'].indexOf(el);
 }
@@ -286,96 +283,173 @@ function getTenGod(dayStem, targetStem) {
     return '';
 }
 
+// Descriptions des Dix Dieux
+const TEN_GOD_DESC = {
+    'Compagnon': { icon: '👥', meaning: 'Énergie semblable à moi', desc: 'Indépendance, esprit de compétition, liens avec frères et sœurs. Beaucoup de Compagnon signifie une forte affirmation de soi et une nature indépendante, mais la coopération reste nécessaire.' },
+    'Richesse Volee': { icon: '⚡', meaning: 'Énergie qui saisit ma richesse', desc: 'Esprit de compétition, audace, parfois impulsivité. La Richesse Volée apporte du courage mais requiert une gestion rigoureuse des finances.' },
+    'Dieu Nourricier': { icon: '🍽️', meaning: 'Énergie que je produis', desc: 'Prospérité matérielle, expression créative, talents artistiques. Le Dieu Nourricier confère la chance dans la nourriture et une grande richesse artistique.' },
+    'Officier Blesse': { icon: '🎭', meaning: 'Énergie officielle que je contrôle', desc: 'Esprit rebelle, créativité, éloquence. L\'Officier Blessé donne des talents remarquables mais peut rendre difficile la vie en organisation.' },
+    'Richesse Indirecte': { icon: '💸', meaning: 'Richesse mobile que je contrôle', desc: 'Chance inattendue, fortune en affaires, lien avec le père. La Richesse Indirecte offre des opportunités de grands gains mais avec une forte variabilité.' },
+    'Richesse Directe': { icon: '💰', meaning: 'Richesse stable que je contrôle', desc: 'Revenus stables, capacité d\'épargne, gestion financière sérieuse. La Richesse Directe permet une accumulation régulière et constante.' },
+    'Sept Assassins': { icon: '⚔️', meaning: 'Énergie yang qui me contrôle', desc: 'Autorité, charisme, danger et opportunité. Les Sept Assassins donnent une forte capacité d\'impulsion mais génèrent aussi beaucoup de stress.' },
+    'Officier Direct': { icon: '👔', meaning: 'Énergie yin qui me contrôle', desc: 'Honneur, carrière, discipline. L\'Officier Direct favorise le succès social et la reconnaissance au sein des organisations.' },
+    'Sceau Indirect': { icon: '📚', meaning: 'Énergie yang qui me nourrit', desc: 'Savoir, spiritualité, connaissances non conventionnelles. Le Sceau Indirect confère des talents particuliers et une forte intuition.' },
+    'Sceau Direct': { icon: '🎓', meaning: 'Énergie yin qui me nourrit', desc: 'Diplômes, certifications, lien avec la mère. Le Sceau Direct favorise les études et l\'aide de bienfaiteurs.' },
+    'Maitre du Jour': { icon: '⭐', meaning: 'Moi-même', desc: '' }
+};
+
+// Interprétation du Pilier de l'Heure selon le Dieu dominant
+const HOUR_PILLAR_INTERP = {
+    'Compagnon': {
+        children: 'Vos enfants sont indépendants et affirmés. Ils entretiennent une relation de rivalité fraternelle avec vous. Possibilité d\'avoir 2 enfants ou plus.',
+        lateLife: 'Vous restez très actif en fin de vie. Vous préférez votre propre activité à la retraite et aimez une vieillesse indépendante. Une vieillesse animée entourée d\'amis et collègues.',
+        career_add: 'Possibilité d\'expansion par partenariat ou franchise. Vous êtes du type à grandir dans la compétition.',
+    },
+    'Richesse Volee': {
+        children: 'Des conflits financiers avec vos enfants sont possibles. Ils sont audacieux et téméraires mais dépensent beaucoup. L\'éducation financière est importante.',
+        lateLife: 'Attention aux fluctuations financières en fin de vie. Méfiez-vous des pertes d\'investissement ou des arnaques. Mais votre esprit d\'entreprise peut créer de nouvelles opportunités.',
+        career_add: 'Soyez prudent dans le choix de partenaires commerciaux. Attention aux trahisons ou aux fuites de fonds.',
+    },
+    'Dieu Nourricier': {
+        children: 'Grande chance en matière d\'enfants ! Vos enfants ont des talents artistiques ou aiment manger et sont dévoués. Une relation où vous profitez ensemble des bonnes tables.',
+        lateLife: 'La meilleure chance de fin de vie ! Vous avez la chance de manger et de vous amuser, une retraite saine et paisible. Une retraite heureuse à profiter de vos loisirs.',
+        career_add: 'Activités secondaires possibles dans la restauration, la création de contenu, les conférences et autres domaines expressifs.',
+    },
+    'Officier Blesse': {
+        children: 'Vos enfants ont des talents remarquables mais peuvent être rebelles. Ils brillent dans les arts ou la technologie et mènent une vie unique.',
+        lateLife: 'En fin de vie, vous aimez la liberté et détestez les contraintes. Vous maintenez votre penchant à défier l\'autorité et consacrez votre vieillesse à des activités créatives.',
+        career_add: 'Les professions libres comme freelance, créateur de contenu ou écrivain conviennent bien comme activité secondaire.',
+    },
+    'Richesse Indirecte': {
+        children: 'Vos enfants ont le sens des affaires et le talent pour gagner de l\'argent. La relation entre père et enfant peut être complexe.',
+        lateLife: 'Une richesse inattendue arrive en fin de vie ! Une vieillesse confortable grâce aux revenus immobiliers ou d\'investissement. Mais le jeu est absolument interdit.',
+        career_add: 'Des revenus possibles grâce à des activités secondaires et entreprises parallèles. Favorable à l\'investissement immobilier.',
+    },
+    'Richesse Directe': {
+        children: 'Vos enfants sont sérieux et stables. Ce sont des enfants avec un sens économique clair qui aident leurs parents financièrement.',
+        lateLife: 'Une fin de vie stable et confortable. Les économies et la retraite sont bien préparées pour une vieillesse sans soucis. Une vie frugale mais sans manque.',
+        career_add: 'Activités secondaires stables recommandées (revenus locatifs, investissements en dividendes). Choisissez la sécurité plutôt que les grandes aventures.',
+    },
+    'Sept Assassins': {
+        children: 'Vos enfants sont forts et charismatiques mais peuvent être difficiles à gérer. Tempérament de militaire, policier ou sportif. Une discipline stricte est efficace.',
+        lateLife: 'Attention à la santé et au stress en fin de vie. Vous pouvez vous retrouver impliqué dans des rapports de pouvoir, mais si vous traversez bien cette période, vous devenez un ancien respecté.',
+        career_add: 'Possible de mettre à profit votre expérience dans la gestion de crise, le conseil et la sécurité.',
+    },
+    'Officier Direct': {
+        children: 'Vos enfants sont exemplaires et réussissent socialement. Grande probabilité de travailler dans la fonction publique, les grandes entreprises ou les professions libérales. Des enfants dévoués.',
+        lateLife: 'Une fin de vie honorable et respectée. Le statut social se maintient et vous êtes respecté de vos cadets. Une vie de retraite avec une pension stable.',
+        career_add: 'Affinités avec les organismes publics, les grandes entreprises et le secteur éducatif. Possible promotion ou poste honorifique.',
+    },
+    'Sceau Indirect': {
+        children: 'Vos enfants ont une personnalité unique et une tendance spirituelle. Ils brillent dans des domaines spéciaux (art, religion, informatique) plutôt que dans les voies conventionnelles. Peuvent être difficiles à comprendre.',
+        lateLife: 'En fin de vie, vous vous consacrez aux études ou aux activités spirituelles. Vous pouvez vous immerger dans la religion, la méditation, la recherche et avoir une vieillesse singulière.',
+        career_add: 'Un second souffle dans la divination, le conseil, la médecine alternative, les compétences spéciales.',
+    },
+    'Sceau Direct': {
+        children: 'Vos enfants ont de bons résultats scolaires et sont dévoués. Très diplômés, ils respectent et suivent leurs parents. L\'investissement dans l\'éducation a un grand effet.',
+        lateLife: 'L\'une des fins de vie les plus confortables ! Vous bénéficiez du dévouement de vos enfants et vivez en bonne santé. Une vieillesse à profiter de la lecture et de l\'apprentissage.',
+        career_add: 'Épanouissement dans l\'enseignement, les cours, le mentorat. Favorable à l\'obtention de certifications.',
+    }
+};
+
+// Signification par position de pilier
+const PILLAR_MEANING = {
+    'Pilier Annuel': 'Palais des Ancêtres — Grands-parents, lignée familiale, petite enfance (0~15 ans), contexte social',
+    'Pilier Mensuel': 'Palais des Parents — Parents, frères et sœurs, jeunesse (15~30 ans), vie professionnelle et sociale',
+    'Pilier Journalier': 'Palais du Conjoint — Moi-même (tige céleste) et conjoint (branche terrestre), maturité (30~45 ans)',
+    'Pilier Horaire': 'Palais des Enfants — Enfants, disciples, vieillesse (45 ans~), résultats et vieux jours'
+};
+
 // ═══════════════════════════════════════
-// Interprétations détaillées par Maître du Jour
+// Interprétation détaillée par Maître du Jour
 // ═══════════════════════════════════════
 const DAY_MASTERS = {
     'Jia': { glyph: '🌲', nature: 'Grand Arbre', element: 'Bois (Yang)',
-        personality: 'Jia Bois est le grand arbre qui pousse droit vers le ciel. Il possède un fort sens du leadership, un sens aigu de la justice et avance sur son propre chemin quoi qu\'il arrive. Sa fierté est grande et une fois décidé, il ne se plie pas facilement. Il nourrit de grandes ambitions et ne s\'attarde pas sur les petites choses, mais on peut lui reproquer un manque de flexibilité. Avec un tempérament naturel de chef, les gens le suivent spontanément et il joue le rôle de leader dès l\'enfance.',
-        love: 'Il aime de manière assurée et solide. Son instinct de protection envers son partenaire est fort et quand il aime, il va jusqu\'au bout. Son conjoint idéal est quelqu\'un de doux qui possède néanmoins son propre univers. Son entêtement peut provoquer des conflits fréquents en amour, mais apprendre à céder améliorera considérablement la relation.',
-        career: 'Convient aux dirigeants d\'entreprise, politiciens, éducateurs, architectes et entrepreneurs. Il brille en tant que leader d\'organisation et possède une capacité exceptionnelle à diriger de grands projets. Il est plus à sa place à son propre compte que sous les ordres d\'autrui.',
-        wealth: 'Il se fait lui-même. Il gagne beaucoup grâce à une grande vision mais préfère investir dans l\'expansion de ses affaires plutôt que dans une gestion fine de patrimoine. La richesse se stabilise après la quarantaine.',
-        health: 'Faites attention au foie et à la vésicule biliaire. L\'habitude d\'avaler le stress intérieurement peut entraîner des tensions musculaires et des maux de tête. Les promenades en forêt sont le meilleur remède.',
-        advice: 'Le grand arbre peut être brisé par le vent. Apprenez la souplesse. Comme le saule, laissez-vous balancer par le vent mais gardez les racines solides. Votre force atteint sa véritable grandeur lorsqu\'elle rencontre la douceur.' },
-    'Yi': { glyph: '🌿', nature: 'Herbes et Fleurs', element: 'Bois (Yin)',
-        personality: 'Yi Bois est l\'herbe et les fleurs qui se balancent dans le vent. Souple et très adaptable, il survit dans n\'importe quel environnement. Derrière une apparence douce se cache une vitalité tenace. Sociable et perspicace, il sait bien lire les cœurs des gens. En apparence docile, il possède une persévérance qui lui permet d\'obtenir ce qu\'il veut.',
-        love: 'Il aime avec douceur et délicatesse. Il sait lire l\'âme de l\'autre et s\'y adapter, mais montre rarement ses sentiments profonds. Son conjoint idéal est quelqu\'un de fiable et stable. Il peut sembler dépendant mais en réalité il est souvent celui qui mène la relation.',
-        career: 'Convient aux designers, conseillers, diplomates, écrivains et fleuristes. Il excelle dans les métiers relationnels et possède une grande aptitude à la médiation des conflits. Les professions libérales ou en freelance lui conviennent mieux que les grandes entreprises.',
-        wealth: 'La richesse arrive régulièrement. Il préfère un revenu stable aux grands investissements et possède une forte capacité de subsistance. La richesse se stabilise à partir de la fin de la trentaine.',
-        health: 'Faites attention au foie et au système nerveux. Ne montrant pas son stress en surface, il est vulnérable aux dysfonctionnements du système nerveux autonome. Le yoga ou le Pilates lui convient bien.',
-        advice: 'L\'herbe pousse même dans les fissures du béton. Votre adaptabilité est votre meilleure arme. Mais parfois, il faut aussi le courage de dire "non". À trop s\'adapter à tout, on risque de se perdre soi-même.' },
+        personality: 'Jia-Bois est un grand arbre qui pousse droit vers le ciel. Doté d\'un fort leadership et d\'un sens aigu de la justice, il avance sur sa voie quelle que soit la situation. Sa fierté est grande et une fois décidé, il ne se laisse pas facilement fléchir. Portant de grandes ambitions, il ne s\'attarde pas aux petites choses, mais peut être perçu comme manquant de flexibilité. Sa nature de meneur né fait que les gens le suivent naturellement, et dès l\'enfance il joue le rôle de chef parmi ses pairs.',
+        love: 'Il aime avec assurance et solidité. L\'instinct de protection envers le partenaire est fort et une fois qu\'il aime, il persiste jusqu\'au bout. Le partenaire idéal est quelqu\'un de doux mais ayant son propre univers. Son entêtement peut causer des désaccords fréquents en amour, alors apprendre à céder améliorera considérablement la relation.',
+        career: 'Convient pour être dirigeant, homme politique, éducateur, architecte, entrepreneur. Il brille comme leader d\'une organisation et excelle à diriger de grands projets. Il est plus adapté à sa propre entreprise qu\'à travailler sous les ordres de quelqu\'un.',
+        wealth: 'C\'est un self-made man. Il gagne beaucoup d\'argent grâce à sa grande vision, mais préfère investir dans l\'expansion des affaires plutôt que dans des placements détaillés. La fortune se stabilise après 40 ans.',
+        health: 'Faites attention au foie et à la vésicule biliaire. L\'habitude d\'avaler le stress intérieurement peut entraîner des contractures musculaires et des maux de tête. La promenade en forêt est le meilleur remède.',
+        advice: 'Les grands arbres peuvent aussi se casser dans le vent. Apprenez la flexibilité. Comme le saule, laissez-vous balancer par le vent mais gardez des racines solides. Votre force devient une vraie grandeur quand elle rencontre la douceur.' },
+    'Yi': { glyph: '🌿', nature: 'Herbe et Fleurs', element: 'Bois (Yin)',
+        personality: 'Yi-Bois est l\'herbe et les fleurs qui se balancent dans le vent. Flexible et adaptable, il survit dans n\'importe quel environnement. Derrière une apparence douce se cache une vitalité tenace. Sociable et perspicace, il sait bien lire les cœurs des gens. Bien que semblant doux en apparence, il possède une persévérance qui lui permet d\'obtenir immanquablement ce qu\'il désire.',
+        love: 'Il aime avec douceur et délicatesse. Il lit bien le cœur de l\'autre et s\'y adapte, mais ne révèle pas facilement ses pensées profondes. Le partenaire idéal est quelqu\'un de solide et stable. Bien qu\'il puisse paraître dépendant, c\'est souvent lui qui mène la relation.',
+        career: 'Convient pour designer, conseiller, diplomate, écrivain, fleuriste. Il brille dans les métiers liés aux personnes et excelle dans la médiation des conflits. Un emploi spécialisé ou freelance lui convient mieux qu\'une grande entreprise.',
+        wealth: 'La fortune entre régulièrement. Il préfère un revenu stable aux grands investissements et a une forte capacité à subvenir à ses besoins. La fortune se stabilise à partir de la fin de la trentaine.',
+        health: 'Faites attention au foie et au système nerveux. La tendance à ne pas exprimer le stress extérieurement le rend vulnérable à la dysautonomie. Le yoga ou le pilates sont bénéfiques.',
+        advice: 'L\'herbe pousse même dans les fissures du béton. Votre adaptabilité est votre meilleure arme. Mais parfois, il faut aussi le courage de dire "non". À force de s\'adapter à tout, on peut se perdre soi-même.' },
     'Bing': { glyph: '☀️', nature: 'Soleil', element: 'Feu (Yang)',
-        personality: 'Bing Feu est le soleil qui illumine toutes choses. Lumineux et dynamique, il illumine l\'atmosphère où qu\'il aille. Passionné, équitable et chaleureux envers tout le monde. Optimiste et débordant d\'énergie, il attire toujours les gens autour de lui. Cependant, honnête avec ses émotions, il exprime sa colère immédiatement et, quand il est de bonne humeur, donne tout — une tendance extrême.',
-        love: 'Il aime ardemment et passionnément ! Quand il aime, il le proclame au monde entier et prend l\'initiative. Son conjoint idéal est quelqu\'un de chaleureux avec un univers bien défini. Il cherche à maintenir la flamme amoureuse même après le mariage et adore les surprises.',
-        career: 'Convient aux présentateurs, professeurs, marketeurs, commerciaux et artistes de spectacle. Il brille dans les métiers face au public et est encore plus vivant sur scène. Le rôle de COO peut lui convenir mieux que celui de CEO.',
-        wealth: 'Il gagne bien et dépense bien. Les dépenses sociales sont importantes mais le réseau est sa richesse. Les revenus augmentent considérablement après 35 ans.',
-        health: 'Faites attention au cœur, aux yeux et à la tension artérielle. À force de dépenser son énergie excessivement, un épuisement soudain peut survenir. L\'exercice en plein soleil est excellent.',
-        advice: 'Le soleil se consume pour illuminer le monde. Mais parfois, il faut aussi du temps pour soi. Vous devez être en bonne santé pour que le monde reste lumineux.' },
-    'Ding': { glyph: '🕯️', nature: 'Flamme de Bougie', element: 'Feu (Yin)',
-        personality: 'Ding Feu est la bougie qui éclaire les ténèbres. Délicat et très concentré, il creuse profondément dans une seule chose. Doté d\'une grande sensibilité artistique, sa passion intérieure est ardente mais il reste calme en apparence. Il observe les gens en profondeur et son intuition est aiguisée. Sa tendance perfectionniste lui fait établir des normes élevées pour son propre travail.',
-        love: 'Il aime profondément et intensément. Il tombe très amoureux d\'une personne et est dévoué. Son conjoint idéal est quelqu\'un d\'intellectuel et d\'émotionnellement riche. Sa jalousie peut être forte, aussi une relation fondée sur la confiance est essentielle.',
-        career: 'Convient aux chercheurs, artistes, programmeurs, psychologues et cuisiniers. Fort sur les détails, il brille comme expert qui creuse un domaine en profondeur.',
-        wealth: 'Accumulation de richesse stable mais lente. Il gagne grâce à ses compétences spécialisées et mise sur le talent plutôt que sur l\'investissement. L\'expertise brille à partir de la quarantaine et les revenus augmentent rapidement.',
-        health: 'Faites attention au cœur et à l\'intestin grêle. Vulnérable à l\'insomnie et à la neurasthénie. La méditation aux bougies ou l\'aromathérapie peut aider.',
-        advice: 'La bougie est petite mais peut illuminer toutes les ténèbres. Ne vous sous-estimez pas. Votre finesse et votre concentration sont des trésors que les autres ne possèdent pas.' },
+        personality: 'Bing-Feu est le soleil qui illumine toutes choses. Lumineux et dynamique, il illumine l\'atmosphère partout où il va. Passionné, équitable et chaleureux envers tout le monde. Optimiste et débordant d\'énergie, les gens se rassemblent toujours autour de lui. Cependant, honnête avec ses émotions, il exprime immédiatement sa colère et peut tout donner quand il est de bonne humeur, révélant un côté extrême.',
+        love: 'Il aime avec chaleur et passion ! Quand il aime, il le fait savoir au monde entier et s\'approche activement. Le partenaire idéal est quelqu\'un d\'affirmé dans son propre univers tout en étant chaleureux. Il cherche à maintenir les sentiments amoureux même après le mariage et aime les surprises.',
+        career: 'Convient pour animateur, professeur, marketeur, commercial, artiste de scène. Il brille dans les professions qui le mettent devant les gens et est encore plus vivant sur scène. Il peut être plus adapté au rôle de COO que de CEO.',
+        wealth: 'Il gagne bien et dépense bien. Les dépenses sociales sont élevées mais le réseau social est sa vraie richesse. Les revenus augmentent considérablement après 35 ans.',
+        health: 'Faites attention au cœur, aux yeux et à la tension artérielle. L\'utilisation excessive d\'énergie peut entraîner un épuisement soudain. L\'exercice en plein soleil est optimal.',
+        advice: 'Le soleil se brûle pour illuminer le monde. Mais parfois, il faut aussi du temps pour soi. Vous devez être en bonne santé pour que le monde soit lumineux.' },
+    'Ding': { glyph: '🕯️', nature: 'Bougie', element: 'Feu (Yin)',
+        personality: 'Ding-Feu est la bougie qui illumine l\'obscurité. Délicat et doté d\'une forte concentration, il s\'immerge profondément dans une seule chose. Sa sensibilité artistique est remarquable et sa passion intérieure est ardente, mais il est calme en apparence. Il observe les gens en profondeur et son intuition est aiguisée. Son perfectionnisme le pousse à se fixer des normes élevées dans son travail.',
+        love: 'Il aime profondément et intensément. Il s\'immerge profondément dans une seule personne et est dévoué. Le partenaire idéal est quelqu\'un d\'intellectuel et de riche en sensibilité. La jalousie peut être forte, donc une relation basée sur la confiance est importante.',
+        career: 'Convient pour chercheur, artiste, programmeur, psychologue, chef cuisinier. Il brille comme expert en creusant profondément dans un domaine et est fort dans les détails.',
+        wealth: 'Accumulation de fortune stable mais lente. Il gagne de l\'argent grâce à des compétences spécialisées et mise sur le talent plutôt que sur l\'investissement. L\'expertise brille à partir de la quarantaine avec une forte augmentation des revenus.',
+        health: 'Faites attention au cœur et à l\'intestin grêle. Il est vulnérable à l\'insomnie et à la neurasthénie. La méditation à la bougie ou l\'aromathérapie sont utiles.',
+        advice: 'La bougie est petite mais peut illuminer toute l\'obscurité. Ne vous sous-estimez pas. Votre délicatesse et votre concentration sont des trésors que les autres ne possèdent pas.' },
     'Wu': { glyph: '⛰️', nature: 'Montagne et Terre', element: 'Terre (Yang)',
-        personality: 'Wu Terre est la montagne et la terre qui accueillent tout. Stable, solide et digne de confiance. Préférant la stabilité au changement, une fois établi, il ne bouge pas. Sa grande tolérance en fait un être sur lequel les gens s\'appuient. Cependant, son entêtement et sa lenteur au changement peuvent le faire prendre du retard sur son époque. Sa présence imposante en fait un pilier solide où qu\'il aille.',
-        love: 'Il aime de manière stable et solide. Il apporte sécurité à son partenaire et s\'occupe de lui sans manque matériel. Son conjoint idéal est quelqu\'un d\'actif qui aime le changement, se complétant mutuellement. Maladroit dans l\'expression, il peut être mal compris, aussi doit-il exprimer consciemment ses émotions.',
-        career: 'Convient à l\'immobilier, la construction, l\'agriculture, la fonction publique et la banque. Il produit des résultats constants dans un emploi stable et travaille souvent au même endroit jusqu\'à la retraite.',
-        wealth: 'Fort en immobilier ! Favorable aux investissements fonciers et immobiliers, il accumule son patrimoine de manière stable. Il forme une fortune considérable dans la cinquantaine.',
-        health: 'Faites attention à la rate et à l\'estomac. La suralimentation et le manque d\'exercice sont ses pires ennemis. La randonnée ou le jardinage sont bons pour la santé.',
-        advice: 'La montagne ne bouge pas mais le monde change. N\'ayez pas peur du changement, lisez le courant. Si les racines sont solides, on peut étendre les branches sans tomber.' },
+        personality: 'Wu-Terre est la montagne et la terre qui embrasse toutes choses. Stable, solide et digne de confiance. Il recherche la stabilité plutôt que le changement et une fois installé, ne bouge pas. Sa grande capacité d\'accueil en fait un être sur lequel les gens s\'appuient. Cependant, son entêtement et sa lenteur au changement peuvent le faire être en retard sur son époque. Avec une présence lourde, il devient un pilier solide partout où il va.',
+        love: 'Il aime avec stabilité et solidité. Il donne un sentiment de sécurité au partenaire et s\'en occupe sans manque matériel. Le partenaire idéal est quelqu\'un d\'actif et aimant le changement, se complétant mutuellement. Maladroit dans l\'expression des émotions, il peut être mal compris, alors exprimez consciemment vos sentiments.',
+        career: 'Convient pour l\'immobilier, la construction, l\'agriculture, la fonction publique, le secteur bancaire. Il produit régulièrement des résultats dans un emploi stable et travaille souvent au même endroit jusqu\'à la retraite.',
+        wealth: 'Une grande chance immobilière ! Favorable aux investissements fonciers et immobiliers, il accumule des actifs de manière stable. Il constitue un patrimoine considérable à la cinquantaine.',
+        health: 'Faites attention à la rate et à l\'estomac. La suralimentation et le manque d\'exercice sont ses pires ennemis. La randonnée ou les activités en contact avec la terre sont bonnes pour la santé.',
+        advice: 'La montagne ne bouge pas mais le monde change. N\'ayez pas peur du changement et lisez les courants. Si les racines sont solides, les branches peuvent s\'étendre sans tomber.' },
     'Ji': { glyph: '🌾', nature: 'Plaine et Champ', element: 'Terre (Yin)',
-        personality: 'Ji Terre est la plaine qui fait croître toutes choses. Doux, pratique et doué pour prendre soin des autres. Derrière une apparence humble et simple se cache une force intérieure solide. Il écoute bien les gens et possède une grande empathie. Sa personnalité dévouée fait passer les autres avant lui-même.',
-        love: 'Il aime avec chaleur et dévouement. Il s\'occupe attentivement du quotidien de son partenaire et est familial. Son conjoint idéal est quelqu\'un d\'ambitieux qui valorise aussi la famille. Un sacrifice excessif peut déséquilibrer la relation, aussi doit-il exprimer aussi ses propres besoins.',
-        career: 'Convient aux enseignants, infirmiers, cuisiniers, travailleurs sociaux et responsables RH. Il trouve son épanouissement dans les métiers qui consistent à prendre soin et à faire grandir les autres. Il brille dans une organisation stable.',
-        wealth: 'Il accumule régulièrement et de manière stable. Sans éclat mais avec parcimonie, il fait fructifier son patrimoine et excelle en épargne et en assurance. Il atteint la stabilité financière vers la fin de la quarantaine.',
-        health: 'Faites attention au système digestif et à la peau. Sa tendance à absorber le stress des autres le rend vulnérable aux troubles digestifs. Jardiner est le meilleur remède.',
-        advice: 'La plaine accueille tout mais a besoin de nutriments pour elle-même aussi. Remplissez-vous avant de prendre soin des autres. On ne peut pas donner de l\'eau à autrui avec une tasse vide.' },
-    'Geng': { glyph: '⚔️', nature: 'Fer et Épée', element: 'Metal (Yang)',
-        personality: 'Geng Metal est le fer forgé et l\'épée tranchante. Déterminé, épris de justice et doté d\'un jugement précis comme une lame. Il valorise la loyauté et tient toujours ses promesses. Il paraît froid mais son cœur est chaud et une fois qu\'il crée un lien, il le maintient jusqu\'au bout. Face à l\'injustice, il ne peut pas se retenir et parle directement.',
-        love: 'Il aime avec solidité et loyauté. Son expression est maladroite mais il prouve son amour par ses actions. Son conjoint idéal est quelqu\'un de doux et émotionnel, se complétant mutuellement. Son style de parole tranchant peut blesser, aussi doit-il s\'entraîner à des expressions plus douces.',
-        career: 'Convient aux militaires, policiers, chirurgiens, juristes et ingénieurs. Il brille dans les professions nécessitant un jugement précis et ferme. Il manifeste la meilleure force d\'exécution comme numéro deux de l\'organisation.',
-        wealth: 'Il gagne par le mérite. Les compétences spécialisées sont sa richesse et il est prudent dans les investissements. Les actifs augmentent régulièrement après 35 ans.',
-        health: 'Faites attention aux poumons, au gros intestin et à la peau. Soyez prudent avec les accidents liés aux métaux et évitez les environnements secs. Les arts martiaux ou le kendo sont bons pour la santé.',
-        advice: 'L\'épée devient de plus en plus tranchante mais trop tranchante, elle se coupe elle-même. Cultivez la douceur dans la force. La vraie épée d\'excellence brille davantage dans son fourreau.' },
-    'Xin': { glyph: '💎', nature: 'Bijou', element: 'Metal (Yin)',
-        personality: 'Xin Metal est un bijou finement taillé. Sensible, perfectionniste et en quête de beauté. Doté d\'une sensibilité fine et d\'un sens esthétique aiguisé, ses propres critères sont fermes. L\'extérieur est flamboyant et raffiné mais l\'intérieur est sensible et facilement blessé. Sa fierté est grande et il connaît sa propre valeur.',
-        love: 'Il aime avec beauté et raffinement. Il veut une relation amoureuse de qualité et attache de l\'importance à l\'apparence et au sens. Son conjoint idéal est quelqu\'un de raffiné et financièrement à l\'aise. Cherchant la relation parfaite, il peut être déçu par la réalité, aussi doit-il apprendre à aimer les choses telles qu\'elles sont.',
-        career: 'Convient aux gemmologues, designers, musiciens, programmeurs et dentistes. Il brille dans les professions nécessitant de la précision et son sens artistique est remarquable.',
-        wealth: 'Stable mais avec de grandes dépenses. Le désir de bonnes choses entraîne beaucoup de dépenses mais les revenus sont aussi bons. En créant sa propre marque, il peut avoir de grands revenus dans la quarantaine.',
-        health: 'Faites attention aux poumons, à la peau et aux dents. Sa personnalité sensible se manifeste sous forme d\'allergies ou de maladies cutanées. Écouter de la musique est bon pour la santé mentale.',
-        advice: 'Le bijou ne brille pas quand c\'est une pierre brute mais après avoir été taillé. N\'évitez pas les épreuves. Chaque expérience qui vous taille vous rend encore plus brillant.' },
-    'Ren': { glyph: '🌊', nature: 'Océan et Grande Eau', element: 'Eau (Yang)',
-        personality: 'Ren Eau est l\'océan infiniment vaste. Libre, sage et accueillant de tout. Brillant intellect, jugement rapide des situations et plus brillant en crise. Comme l\'eau qui s\'adapte à tout récipient, il s\'adapte à tout environnement, mais contrairement à son calme apparent, des vagues profondes se déchaînent en son for intérieur. Il valorise extrêmement la liberté et ne supporte pas l\'entrave.',
-        love: 'Il aime librement et largement. Il apprécie les rencontres variées et il lui faut du temps avant de se poser avec une seule personne. Son conjoint idéal est quelqu\'un qui respecte sa liberté tout en étant un port d\'attache solide. Il peut être mal compris comme volage, aussi doit-il solidifier la confiance dans la relation.',
-        career: 'Convient au commerce international, logistique, transport maritime, tourisme et conseil stratégique. Il montre ses forces dans les affaires transfrontalières et a du talent pour les langues étrangères.',
-        wealth: 'La grande eau attire le grand argent. Il peut réaliser de grands bénéfices dans les investissements étrangers ou les affaires mondiales. La fortune monte en flèche à partir du milieu de la trentaine.',
-        health: 'Faites attention aux reins, à la vessie et aux organes reproducteurs. Buvez suffisamment d\'eau et faites attention au froid. La natation est le meilleur sport.',
-        advice: 'L\'océan peut couler partout mais le fleuve a une direction. La liberté c\'est bien mais fixez la direction de votre vie. L\'eau qui coule avec une destination change le monde.' },
+        personality: 'Ji-Terre est la plaine qui nourrit toutes choses. Doux, pratique et doué pour prendre soin des gens. En apparence doux et simple, mais avec une force intérieure solide. Il écoute bien les gens et excelle dans l\'empathie. C\'est un caractère dévoué qui prend soin des autres avant lui-même.',
+        love: 'Il aime avec chaleur et dévouement. Il prend soin des petits détails du quotidien du partenaire et est familial. Le partenaire idéal est quelqu\'un d\'ambitieux qui valorise également la famille. Le sacrifice excessif peut déséquilibrer la relation, alors exprimez aussi vos propres besoins.',
+        career: 'Convient pour enseignant, infirmier, cuisinier, travailleur social, responsable des ressources humaines. Il trouve un épanouissement dans les métiers qui consistent à prendre soin et à élever des personnes. Un type qui brille dans une organisation stable.',
+        wealth: 'Il accumule régulièrement et de manière stable. Il n\'est pas flamboyant mais développe son patrimoine de façon économe et est fort en épargne et en assurance. Il atteint la stabilité économique à la fin de la quarantaine.',
+        health: 'Faites attention au système digestif et à la peau. La tendance à absorber le stress des autres le rend vulnérable aux troubles digestifs. Le jardinage est le meilleur remède.',
+        advice: 'La plaine accepte tout mais a aussi besoin de nutriments pour elle-même. Avant de prendre soin des autres, remplissez-vous d\'abord. On ne peut pas donner de l\'eau aux autres avec un verre vide.' },
+    'Geng': { glyph: '⚔️', nature: 'Métal et Épée', element: 'Metal (Yang)',
+        personality: 'Geng-Metal est le fer forgé et l\'épée tranchante. Décidé, plein de justice et doté d\'un jugement affûté comme une lame. Il accorde une grande importance à la loyauté et tient absolument ses promesses. Il peut sembler froid mais a le cœur chaud, et une fois qu\'il a noué une relation, il la maintient jusqu\'au bout. Il ne peut pas tolérer l\'injustice et parle directement.',
+        love: 'Il aime avec profondeur et loyauté. Il est maladroit dans l\'expression mais prouve son amour par les actes. Le partenaire idéal est quelqu\'un de doux et sensible, se complétant mutuellement. Ses paroles tranchantes peuvent blesser, alors pratiquez des expressions plus douces.',
+        career: 'Convient pour militaire, policier, chirurgien, juriste, ingénieur. Il brille dans les professions qui nécessitent un jugement précis et décisif. En tant que numéro deux de l\'organisation, il déploie la meilleure capacité d\'exécution.',
+        wealth: 'Il gagne de l\'argent par la compétence. La spécialisation technique est sa vraie richesse et il est prudent dans les investissements. Les actifs augmentent régulièrement après 35 ans.',
+        health: 'Faites attention aux poumons, au gros intestin et à la peau. Faites attention aux accidents liés aux métaux et évitez les environnements secs. Les arts martiaux ou le kendo sont bons pour la santé.',
+        advice: 'L\'épée s\'affûte davantage avec le temps mais si elle est trop tranchante, elle se coupe elle-même. Cultivez la douceur dans la force. La vraie épée de maître brille encore plus dans son fourreau.' },
+    'Xin': { glyph: '💎', nature: 'Joyau', element: 'Metal (Yin)',
+        personality: 'Xin-Metal est un joyau finement taillé. Sensible, perfectionniste et en quête de beauté. Doué d\'une sensibilité délicate et d\'un sens esthétique aiguisé avec des critères bien établis. Bien qu\'il paraisse brillant et raffiné en surface, il est sensible et facilement blessé intérieurement. Sa fierté est grande et il connaît sa propre valeur.',
+        love: 'Il aime avec beauté et raffinement. Il désire une romance de classe et attache de l\'importance à l\'apparence et au sens. Le partenaire idéal est quelqu\'un de raffiné et économiquement stable. À force de chercher une relation parfaite, il peut être déçu par la réalité, alors apprenez à aimer les choses telles qu\'elles sont.',
+        career: 'Convient pour gemmologiste, designer, musicien, programmeur, dentiste. Il brille dans les professions qui exigent de la précision et son sens artistique est remarquable.',
+        wealth: 'Stable mais avec de grosses dépenses. Son désir de qualité entraîne beaucoup de dépenses mais ses revenus sont aussi bons. En créant sa propre marque, il peut générer de grands revenus dans la quarantaine.',
+        health: 'Faites attention aux poumons, à la peau et aux dents. Sa nature sensible se manifeste par des allergies ou des maladies de peau. L\'écoute de musique est bénéfique pour la santé mentale.',
+        advice: 'Le joyau ne brille pas lorsqu\'il est minerai brut mais après avoir été taillé. N\'évitez pas les épreuves. Chaque expérience qui vous taille vous rend encore plus brillant.' },
+    'Ren': { glyph: '🌊', nature: 'Mer et Grandes Eaux', element: 'Eau (Yang)',
+        personality: 'Ren-Eau est l\'océan infini. Libre, sage et embrasse toutes choses. Son esprit est brillant et son jugement de situation rapide, il brille dans les crises. Comme l\'eau qui se met dans n\'importe quel récipient, il s\'adapte à n\'importe quel environnement, mais contrairement à l\'extérieur calme, de profondes vagues déferlent à l\'intérieur. Il accorde une extrême importance à la liberté et ne peut pas tolérer les contraintes.',
+        love: 'Il aime librement et largement. Il aime les rencontres variées et il lui faut du temps avant de se fixer avec une personne. Le partenaire idéal est quelqu\'un qui respecte la liberté tout en étant comme un port solide. Il peut être mal compris comme étant volage, alors renforcez la confiance dans la relation.',
+        career: 'Convient pour le commerce, la logistique, le transport maritime, le tourisme, le consultant en stratégie. Il montre des forces dans les affaires qui traversent les frontières et a un talent pour les langues étrangères.',
+        wealth: 'Les grandes eaux attirent les grandes fortunes. Il peut réaliser de grands profits dans les investissements étrangers ou les affaires mondiales. La fortune monte en flèche à partir du milieu de la trentaine.',
+        health: 'Faites attention aux reins, à la vessie et aux organes reproducteurs. Hydratez-vous suffisamment et faites attention au froid. La natation est le meilleur sport.',
+        advice: 'La mer peut aller partout mais la rivière a une direction. La liberté est bien mais fixez la direction de votre vie. L\'eau qui coule mais a une destination change le monde.' },
     'Gui': { glyph: '🌧️', nature: 'Pluie et Rosée', element: 'Eau (Yin)',
-        personality: 'Gui Eau est la pluie et la rosée qui humectent toutes choses. Intuition remarquable, sensibilité riche et profondeur spirituelle. Pensée calme mais profonde, il voit à travers l\'essence des êtres. En apparence serein, un monde émotionnel riche se déploie en son for intérieur. Il valorise le temps en solitaire et possède un fort penchant spirituel attiré par la méditation ou la prière.',
-        love: 'Il aime profondément et spirituellement. Il cherche une âme sœur et n\'est pas satisfait par des relations superficielles. Son conjoint idéal est quelqu\'un de spirituellement profond. Ses idéaux élevés peuvent le décevoir avec un partenaire réel, aussi doit-il voir l\'authenticité plutôt que la perfection.',
-        career: 'Convient aux psychologues, religieux, écrivains, astrologues et chercheurs. Il brille dans les métiers qui explorent le monde invisible et résout les problèmes par intuition.',
-        wealth: 'La richesse arrive quand on en a besoin. Peu attaché à l\'argent, il est difficile de devenir riche mais étrangement, il n\'est jamais dans le besoin. Des revenus proviennent des activités spirituelles ou du domaine du conseil.',
-        health: 'Faites attention aux reins et aux voies urinaires. Ressentant les émotions trop profondément, il est vulnérable à la dépression. Une promenade sous la pluie ou des sources thermales sont thérapeutiques.',
-        advice: 'La pluie tombe doucement et humecte la terre. Votre influence est invisible mais profonde. Pas besoin de vous mettre en avant. Votre simple existence humecte le cœur asséché de quelqu\'un.' }
+        personality: 'Gui-Eau est la pluie et la rosée qui arrose toutes choses. Doté d\'une grande intuition, d\'une sensibilité riche et d\'une profondeur spirituelle. Il pense de manière silencieuse mais profonde et voit l\'essence des personnes. Calme en apparence mais un riche monde émotionnel se déploie à l\'intérieur. Il accorde de l\'importance au temps seul et a une forte tendance spirituelle attirée par la méditation ou la prière.',
+        love: 'Il aime profondément et spirituellement. Il cherche une âme sœur et n\'est pas satisfait des relations superficielles. Le partenaire idéal est quelqu\'un de profond spirituellement. Ses idéaux élevés peuvent le décevoir dans la réalité, alors regardez l\'authenticité plutôt que la perfection.',
+        career: 'Convient pour psychologue, religieux, écrivain, devin, chercheur. Il brille dans les professions qui explorent le monde invisible et résout les problèmes par l\'intuition.',
+        wealth: 'La fortune arrive quand on en a besoin. L\'attachement à l\'argent est faible, difficile de devenir riche mais étrangement jamais dans le besoin. Les revenus proviennent d\'activités spirituelles ou du conseil.',
+        health: 'Faites attention aux reins et aux voies urinaires. Ressentir les émotions trop profondément le rend vulnérable à la dépression. La promenade sous la pluie ou les bains thermaux sont thérapeutiques.',
+        advice: 'La pluie tombe doucement et humecte la terre. Votre influence est invisible mais profonde. Vous n\'avez pas besoin de vous mettre en avant. Le simple fait de votre existence humecte le cœur asséché de quelqu\'un.' }
 };
 
-// Apparence du conjoint (basée sur la branche du jour)
+// Apparence du conjoint (selon la branche du Pilier Journalier)
 const SPOUSE_APPEARANCE = {
-    'Zi': 'Apparence intellectuelle et sereine. Des yeux profonds avec un charme mystérieux. Teint clair et net, type qui paraît plus séduisant la nuit.',
-    'Chou': 'Impression stable et solide. Silhouette légèrement potelée ou robuste. Apparence rassurante, plus séduisant à mesure qu\'on le connaît.',
-    'Yin': 'Apparence assurée et dynamique. Bonne carrure, grands yeux débordant de confiance. Type actif à qui le style sportif va bien.',
-    'Mao': 'Apparence douce et élégante. De beaux traits et de belles mains. Sens de la mode raffiné et charme félin.',
-    'Chen': 'Impression forte et charismatique. Grande stature avec une posture assurée. Type imposant mais avec un charme inattendu quand il sourit.',
-    'Si': 'Apparence envoûtante et raffinée. Corps long et mince avec des traits nets. Regard profond et atmosphère mystérieuse. Excellent sens de la mode.',
-    'Wu': 'Apparence lumineuse et flamboyante. Grands yeux et sourire séduisant. Impression vivante et débordante d\'énergie. Le rouge lui va à merveille.',
-    'Wei': 'Apparence douce et confortable. Visage arrondi avec un sourire accueillant. Préfère le confort à la mode et dégage une sensation chaleureuse. Paraît plus jeune que son âge.',
-    'Shen': 'Apparence nette et soignée. Traits acérés avec un style raffiné. Teint clair et yeux brillants. Type élégant très intéressé par les marques.',
-    'You': 'Apparence jolie et délicate. Belle bouche ou voix séduisante. Peut apprécier l\'alcool et est de nature sociable. Goûts luxueux.',
-    'Xu': 'Impression solide et loyale. Semble sérieux et peu expressif mais est profond en son intérieur. Aime le sport et a une silhouette saine. Type attachant avec le temps.',
-    'Hai': 'Apparence potelée et mignonne. Petits yeux, souriant et faisant bonne impression. Aime manger et dégage une atmosphère détendue. Impression de porter chance.'
+    'Zi': 'Apparence intellectuelle et calme. Les yeux sont profonds avec un charme mystérieux. La peau est claire et nette, un type qui semble encore plus attrayant la nuit.',
+    'Chou': 'Impression stable et solide. Légèrement rondelet ou avec une silhouette robuste. Une apparence digne de confiance qui devient plus attrayante à mesure qu\'on le connaît.',
+    'Yin': 'Apparence assurée et dynamique. Bien bâti, grands yeux et débordant de confiance. Un type actif dont le style sportif convient bien.',
+    'Mao': 'Apparence douce et élégante. Jolis traits et belles mains. Un sens de la mode raffiné avec un charme félin.',
+    'Chen': 'Impression forte et charismatique. Grande stature et posture assurée. Imposant mais avec un charme de contraste quand il sourit.',
+    'Si': 'Apparence séduisante et raffinée. Silhouette longue et svelte avec des traits nets. Regard profond et atmosphère mystérieuse. Excellent sens de la mode.',
+    'Wu': 'Apparence lumineuse et éclatante. Grands yeux et sourire attrayant. Impression vive et débordante d\'énergie. Les couleurs rouges lui conviennent bien.',
+    'Wei': 'Apparence douce et apaisante. Visage rond avec un sourire accueillant. Recherche le confort plutôt que la mode, une impression chaleureuse. Paraît plus jeune que son âge.',
+    'Shen': 'Apparence propre et nette. Traits précis et style raffiné. Peau claire et yeux brillants. Un type sophistiqué avec beaucoup d\'intérêt pour les marques.',
+    'You': 'Apparence jolie et délicate. Belles lèvres ou voix attrayante. Peut aimer l\'alcool et a une atmosphère sociable. Goûts luxueux.',
+    'Xu': 'Impression solide et loyale. Semble sérieux et bourru mais profond à l\'intérieur. Aime le sport et a une silhouette saine. Un type pour qui l\'affection grandit avec le temps.',
+    'Hai': 'Apparence rondette et mignonne. Petits yeux, beaucoup de sourires et bonne impression. Aime manger et a une atmosphère détendue. Une impression qui semble porter la chance.'
 };
 
 function toggleTime() {
@@ -396,8 +470,8 @@ function toggleTrueSolar() {
     document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
     if (on) {
         const lng = parseFloat(document.getElementById('birthLocation').value);
-        const corr = Math.round((lng - 135) * 4);
-        document.getElementById('trueSolarNote').textContent = `Correction: ${corr} min (longitude ${lng}°E, standard 135°E)`;
+        const corr = Math.round((lng - 15) * 4);
+        document.getElementById('trueSolarNote').textContent = `Correction: ${corr} min (longitude ${lng}°E, référence 15°E)`;
     }
 }
 
@@ -410,13 +484,11 @@ function calculate() {
     const timeUnknown = document.getElementById('birthTimeUnknown').value === 'unknown';
     const gender = document.getElementById('gender').value;
 
-    // Calcul de l'heure (avec correction heure solaire vraie)
     let hourIdx = -1;
     let trueSolarInfo = null;
     if (!timeUnknown) {
         const rawHourIdx = parseInt(document.getElementById('birthHour').value);
         const rawMin = parseInt(document.getElementById('birthMin').value);
-        // Shichen -> heure réelle (heure de début du shichen + minutes saisies)
         const shichenHours = [23,1,3,5,7,9,11,13,15,17,19,21];
         const rawHour = shichenHours[rawHourIdx];
         const rawMinute = rawMin;
@@ -442,10 +514,10 @@ function calculate() {
 
     // Affichage des piliers
     const pillars = [
-        { label: 'Heure', data: hp },
-        { label: 'Jour', data: dp, isDay: true },
-        { label: 'Mois', data: mp },
-        { label: 'Année', data: yp }
+        { label: 'Pilier Horaire', data: hp },
+        { label: 'Pilier Journalier', data: dp, isDay: true },
+        { label: 'Pilier Mensuel', data: mp },
+        { label: 'Pilier Annuel', data: yp }
     ];
 
     let pillarsHTML = '';
@@ -470,12 +542,12 @@ function calculate() {
     });
     document.getElementById('pillarsGrid').innerHTML = pillarsHTML;
 
-    // Carte Maître du Jour
+    // Carte du Maître du Jour
     document.getElementById('daymasterWrap').innerHTML = `
         <div class="daymaster-card">
             <span class="daymaster-glyph">${dm.glyph}</span>
-            <div class="daymaster-name">${dayMaster} — ${dm.nature}</div>
-            <div class="daymaster-sub">${dm.element} | Signe : ${ANIMAL_NAMES[yp.branch]}</div>
+            <div class="daymaster-name">Maître du Jour ${dayMaster} — ${dm.nature}</div>
+            <div class="daymaster-sub">${dm.element} | Signe ${ANIMAL_NAMES[yp.branch]}</div>
         </div>`;
 
     // Distribution des cinq éléments
@@ -502,25 +574,50 @@ function calculate() {
     const strongEl = EL_NAMES[elCount.indexOf(Math.max(...elCount))];
     document.getElementById('fiveElWrap').innerHTML = barHTML + `
         <div style="font-size:12px;color:#999;margin-top:8px;">
-            <strong style="color:#d4a853;">Élément le plus fort :</strong> ${strongEl} (${Math.max(...elCount)}) &nbsp;|&nbsp;
-            <strong style="color:#d4a853;">Élément le plus faible :</strong> ${weakEl} (${Math.min(...elCount)})
+            <strong style="color:#d4a853;">Élément le plus fort:</strong> ${strongEl} (${Math.max(...elCount)}) &nbsp;|&nbsp;
+            <strong style="color:#d4a853;">Élément le plus faible:</strong> ${weakEl} (${Math.min(...elCount)})
         </div>`;
 
     // Grille d'informations
     let infoHTML = `
-        <div class="info-item"><div class="info-label">Maître du Jour</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
-        <div class="info-item"><div class="info-label">Signe Zodiacal</div><div class="info-value">${ANIMALS[yp.branch]} ${ANIMAL_NAMES[yp.branch]} (${STEMS[yp.stem]}${BRANCHES[yp.branch]})</div></div>
-        <div class="info-item"><div class="info-label">Pilier du Jour</div><div class="info-value">${STEMS[dp.stem]}${BRANCHES[dp.branch]}</div></div>
-        <div class="info-item"><div class="info-label">Genre / Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Masculin (Yang)' : 'Feminin (Yin)'}</div></div>`;
+        <div class="info-item"><div class="info-label">Maître du Jour (Day Master)</div><div class="info-value">${dm.glyph} ${dayMaster} — ${dm.nature}</div></div>
+        <div class="info-item"><div class="info-label">Signe Zodiaque Chinois</div><div class="info-value">${ANIMALS[yp.branch]} ${ANIMAL_NAMES[yp.branch]} (${STEMS[yp.stem]}-${BRANCHES[yp.branch]})</div></div>
+        <div class="info-item"><div class="info-label">Pilier Journalier</div><div class="info-value">${STEMS[dp.stem]}-${BRANCHES[dp.branch]}</div></div>
+        <div class="info-item"><div class="info-label">Genre / Polarité</div><div class="info-value">${gender === 'm' ? 'Homme (Yang)' : 'Femme (Yin)'}</div></div>`;
     if (trueSolarInfo) {
-        infoHTML += `<div class="info-item"><div class="info-label">Heure Solaire Vraie</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">Correction: ${trueSolarInfo.correctionMin} min → ${BRANCHES[hourIdx]}</div></div>`;
+        infoHTML += `<div class="info-item"><div class="info-label">Correction Heure Solaire Vraie</div><div class="info-value">${trueSolarInfo.rawHour}:${String(trueSolarInfo.rawMinute).padStart(2,'0')} → ${trueSolarInfo.corrHour}:${String(Math.round(trueSolarInfo.corrMin)).padStart(2,'0')}</div><div class="info-desc">Correction: ${trueSolarInfo.correctionMin} min → Heure ${BRANCHES[hourIdx]}</div></div>`;
     }
     document.getElementById('infoGrid').innerHTML = infoHTML;
 
-    // Interprétation de personnalité
+    // Interprétation par pilier
+    const pillarData = [
+        { name: 'Pilier Annuel', data: yp },
+        { name: 'Pilier Mensuel', data: mp },
+        { name: 'Pilier Journalier', data: dp },
+        { name: 'Pilier Horaire', data: hp }
+    ];
+    let pillarInterpHTML = '';
+    pillarData.forEach(p => {
+        if (!p.data) return;
+        const stemGod = p.name === 'Pilier Journalier' ? 'Maitre du Jour' : getTenGod(dayStem, p.data.stem);
+        const godInfo = TEN_GOD_DESC[stemGod] || { icon: '•', meaning: '', desc: '' };
+        const pillarMeaning = PILLAR_MEANING[p.name];
+        pillarInterpHTML += `
+            <div class="interp-card">
+                <div class="interp-title">${godInfo.icon} ${p.name}: ${STEMS[p.data.stem]}-${BRANCHES[p.data.branch]} — ${stemGod}</div>
+                <div class="interp-text">
+                    <strong>📍 Position:</strong> ${pillarMeaning}<br><br>
+                    <strong>🔮 ${stemGod}:</strong> ${godInfo.meaning}<br>
+                    ${godInfo.desc}
+                </div>
+            </div>`;
+    });
+    document.getElementById('pillarInterpWrap').innerHTML = pillarInterpHTML;
+
+    // Interprétation de la personnalité
     document.getElementById('interpWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">${dm.glyph} ${dayMaster} — "${dm.nature}"</div>
+            <div class="interp-title">${dm.glyph} Maître du Jour ${dayMaster} — "${dm.nature}"</div>
             <div class="interp-text">${dm.personality}</div>
         </div>
         <div class="interp-card">
@@ -528,39 +625,64 @@ function calculate() {
             <div class="interp-text">${dm.advice}</div>
         </div>`;
 
-    // Conjoint
+    // Interprétation du Pilier de l'Heure
+    const hourGod = hp ? getTenGod(dayStem, hp.stem) : null;
+    const hourInterp = hourGod ? HOUR_PILLAR_INTERP[hourGod] : null;
+
+    // Dieux du Conjoint dans les quatre piliers
+    const allPillars = [yp, mp, dp, hp].filter(Boolean);
+    const allTenGods = allPillars.map(p => getTenGod(dayStem, p.stem));
+    const spouseGodMale = ['Richesse Directe','Richesse Indirecte'];
+    const spouseGodFemale = ['Officier Direct','Sept Assassins'];
+    const spouseGods = gender === 'm' ? spouseGodMale : spouseGodFemale;
+    const hasSpouseGod = allTenGods.some(g => spouseGods.includes(g));
+    const spouseGodFound = allTenGods.filter(g => spouseGods.includes(g));
+
+    let genderSpouseText = '';
+    if (gender === 'm') {
+        if (spouseGodFound.includes('Richesse Directe')) genderSpouseText += '<strong>💍 Richesse Directe présente dans votre Saju:</strong> Vous avez la chance en matière d\'épouse. Grande probabilité de rencontrer une partenaire stable et dévouée. Une vie conjugale harmonieuse.<br>';
+        if (spouseGodFound.includes('Richesse Indirecte')) genderSpouseText += '<strong>💫 Richesse Indirecte présente dans votre Saju:</strong> Vous êtes populaire auprès du sexe opposé et pouvez avoir plusieurs rencontres. Attention à la légèreté. Les rencontres professionnelles peuvent évoluer en romance.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>Le Dieu du Conjoint (élément richesse) est absent de votre Saju:</strong> Le mariage peut être tardif ou le lien avec le partenaire peut être faible. Il faut chercher activement des rencontres.<br>';
+    } else {
+        if (spouseGodFound.includes('Officier Direct')) genderSpouseText += '<strong>💍 Officier Direct présent dans votre Saju:</strong> Vous avez la chance en matière de mari. Grande probabilité de rencontrer un partenaire socialement stable. Une vie conjugale honorable.<br>';
+        if (spouseGodFound.includes('Sept Assassins')) genderSpouseText += '<strong>💫 Sept Assassins présents dans votre Saju:</strong> Vous êtes attirée par les hommes charismatiques. Vous vivez des romances intenses mais la relation peut être instable.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>Le Dieu du Conjoint (élément officiel) est absent de votre Saju:</strong> Le mariage peut être tardif ou le lien avec le partenaire peut être faible. Il faut chercher activement des rencontres.<br>';
+    }
+
+    // Partenaire
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Palais du Conjoint (Branche du Jour : ${spouseBranch})</div>
+            <div class="interp-title">💕 Palais du Conjoint (Branche Journalière: ${spouseBranch}) — Perspective ${gender === 'm' ? 'Masculine' : 'Féminine'}</div>
             <div class="interp-text">
-                <strong>📐 Apparence & Première Impression du Conjoint :</strong><br>${spouseApp}<br><br>
-                <strong>💑 Amour & Mariage :</strong><br>${dm.love}
+                <strong>📐 Apparence &amp; Première Impression du Conjoint:</strong><br>${spouseApp}<br><br>
+                ${genderSpouseText}<br>
+                <strong>💑 Amour &amp; Mariage:</strong><br>${dm.love}
+                ${hourInterp ? '<br><br><strong>👶 Chance en matière d\'enfants (Pilier Horaire: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}
             </div>
         </div>`;
 
-    // Richesse & Carrière
+    // Fortune & Carrière
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💼 Aptitudes Professionnelles</div>
-            <div class="interp-text">${dm.career}</div>
+            <div class="interp-text">${dm.career}${hourInterp ? '<br><br><strong>🔄 Influence du Pilier Horaire (' + hourGod + '):</strong> ' + hourInterp.career_add : ''}</div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💰 Fortune & Richesse</div>
+            <div class="interp-title">💰 Fortune et Richesse</div>
             <div class="interp-text">${dm.wealth}</div>
         </div>`;
 
     // Santé
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">🏥 Santé pour ${dayMaster}</div>
-            <div class="interp-text">${dm.health}</div>
+            <div class="interp-title">🏥 Santé du Maître du Jour ${dayMaster}</div>
+            <div class="interp-text">${dm.health}${hourInterp ? '<br><br><strong>🌅 Chance en fin de vie (Pilier Horaire: ' + hourGod + '):</strong><br>' + hourInterp.lateLife : ''}</div>
         </div>`;
 
-    // Grandes périodes
+    // Grande Période (Daun)
     const yearStem = yp.stem;
-    const yearBranch = yp.branch;
     const isYangMale = (yearStem % 2 === 0 && gender === 'm') || (yearStem % 2 === 1 && gender === 'f');
     const mpStem = mp.stem;
     const mpBranch = mp.branch;
@@ -586,7 +708,7 @@ function calculate() {
         const bClass = EL_CLASSES[getElIdx(BR_ELEMENTS[dBranch])];
 
         dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a1008;font-size:13px;${isCurrent ? 'background:#1a1510;border-left:3px solid #d4a853;' : ''}">
-            <span style="min-width:80px;font-weight:700;color:#d4a853;">${startAge}–${endAge} ans</span>
+            <span style="min-width:75px;font-weight:700;color:#d4a853;">${startAge}~${endAge} ans</span>
             <span class="${sClass}" style="font-weight:700;margin-right:2px;">${STEMS[dStem]}</span><span class="${bClass}" style="font-weight:700;">${BRANCHES[dBranch]}</span>
             <span style="flex:1;color:#888;margin-left:8px;font-size:11px;">${tenGod} · ${ELEMENTS[dStem]}/${BR_ELEMENTS[dBranch]}</span>
             ${isCurrent ? '<span style="font-size:10px;background:#d4a853;color:#1a1008;padding:2px 8px;border-radius:10px;font-weight:700;">Actuel</span>' : ''}
@@ -608,9 +730,13 @@ function initForm() {
     const d = document.getElementById('birthDay');
     const h = document.getElementById('birthHour');
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 3) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 15) o.selected = true; d.appendChild(o); }
-    const hourLabels = ['Zi (23-1)','Chou (1-3)','Yin (3-5)','Mao (5-7)','Chen (7-9)','Si (9-11)','Wu (11-13)','Wei (13-15)','Shen (15-17)','You (17-19)','Xu (19-21)','Hai (21-23)'];
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + (i === 1 ? 'er' : 'e') + ' mois'; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + (i === 1 ? 'er' : 'e') + ' jour'; if (i === 15) o.selected = true; d.appendChild(o); }
+    const hourLabels = [
+        'Zi (23h~1h)','Chou (1h~3h)','Yin (3h~5h)','Mao (5h~7h)',
+        'Chen (7h~9h)','Si (9h~11h)','Wu (11h~13h)','Wei (13h~15h)',
+        'Shen (15h~17h)','You (17h~19h)','Xu (19h~21h)','Hai (21h~23h)'
+    ];
     for (let i = 0; i < 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = hourLabels[i]; if (i === 5) o.selected = true; h.appendChild(o); }
 }
 
