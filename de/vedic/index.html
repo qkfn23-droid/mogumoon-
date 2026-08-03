@@ -762,7 +762,7 @@ function getPlanetPosition(planetId, date) {
             const vec = Astronomy.GeoVector('Sun', date, true);
             return Astronomy.Ecliptic(vec).elon;
         } else {
-            return Astronomy.EclipticLongitude(planetId, date);
+            const vec = Astronomy.GeoVector(planetId, date, true); return Astronomy.Ecliptic(vec).elon;
         }
     } catch (e) {
         console.error('Planet calc error:', planetId, e);

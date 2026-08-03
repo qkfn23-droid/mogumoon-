@@ -198,7 +198,7 @@ function getPlanetLon(id, astroDate) {
     try {
         if (id === 'Moon') return Astronomy.EclipticGeoMoon(astroDate).lon;
         if (id === 'Sun') return Astronomy.Ecliptic(Astronomy.GeoVector('Sun', astroDate, true)).elon;
-        return Astronomy.EclipticLongitude(id, astroDate);
+        const vec = Astronomy.GeoVector(id, astroDate, true); return Astronomy.Ecliptic(vec).elon;
     } catch(e) { return 0; }
 }
 
