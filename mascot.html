@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>점성술 유령</title>
+<style>
+body { background: #0a0a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; gap: 30px; font-family: -apple-system, sans-serif; }
+
+.mascot-container {
+    position: relative;
+    width: 180px;
+    height: 200px;
+    animation: bobble 3s ease-in-out infinite;
+}
+
+/* 은은하게 반짝이는 별 */
+.star {
+    position: absolute;
+    color: #c9a84c;
+    animation: twinkle 3s ease-in-out infinite;
+}
+.star:nth-child(1) { top: 10px; left: -25px; font-size: 14px; animation-delay: 0s; }
+.star:nth-child(2) { top: 0px; right: -15px; font-size: 11px; animation-delay: 1s; }
+.star:nth-child(3) { top: 80px; left: -35px; font-size: 9px; animation-delay: 2s; }
+.star:nth-child(4) { top: 50px; right: -30px; font-size: 13px; animation-delay: 0.5s; }
+.star:nth-child(5) { bottom: 40px; right: -20px; font-size: 8px; animation-delay: 1.5s; }
+.star:nth-child(6) { bottom: 60px; left: -20px; font-size: 10px; animation-delay: 2.5s; }
+
+.speech {
+    background: rgba(20,20,40,0.95);
+    border: 1px solid #c9a84c;
+    border-radius: 16px;
+    padding: 12px 22px;
+    color: #c9a84c;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    text-align: center;
+}
+.speech::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #c9a84c;
+}
+
+@keyframes bobble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.8); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+</style>
+</head>
+<body>
+
+<div class="speech">점성술 세계에 어서와 ✨</div>
+
+<div class="mascot-container">
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">⋆</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">⋆</span>
+
+    <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- 유령 몸통 -->
+        <path d="
+            M90,20
+            C50,20 28,55 28,95
+            L28,150
+            C28,155 33,160 40,155
+            C47,150 50,158 56,160
+            C62,162 66,155 73,158
+            C80,161 83,165 90,165
+            C97,165 100,161 107,158
+            C114,155 118,162 124,160
+            C130,158 133,150 140,155
+            C147,160 152,155 152,150
+            L152,95
+            C152,55 130,20 90,20Z
+        " fill="#f0ece4" stroke="#888" stroke-width="1.5"/>
+
+        <!-- 볼 홍조 -->
+        <ellipse cx="65" cy="103" rx="10" ry="6" fill="rgba(245,180,170,0.35)"/>
+        <ellipse cx="115" cy="103" rx="10" ry="6" fill="rgba(245,180,170,0.35)"/>
+
+        <!-- 쩜눈 -->
+        <circle cx="72" cy="95" r="4" fill="#555"/>
+        <circle cx="108" cy="95" r="4" fill="#555"/>
+
+        <!-- 입 (작은 미소) -->
+        <path d="M85,113 Q90,118 95,113" fill="none" stroke="#999" stroke-width="1.5" stroke-linecap="round"/>
+
+    </svg>
+</div>
+
+</body>
+</html>
