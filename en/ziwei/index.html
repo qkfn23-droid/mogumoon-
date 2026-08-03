@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zi Wei Dou Shu (Purple Star Astrology) - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d1e, #2a1530); border-bottom: 1px solid #3a2540; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
+        header a span { color: #c44389; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a0d1e, #2a1530); border: 1px solid #3a2540; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #e84393; margin-bottom: 6px; }
+        .optional-tag { font-size: 11px; color: #666; font-weight: 400; }
+        .input-row { display: flex; gap: 10px; }
+        .input-row select { flex: 1; padding: 12px 14px; background: #0a0a1a; border: 1px solid #3a2540; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23e84393' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+        select:focus { border-color: #e84393; }
+
+        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #c44389, #e84393); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+        .calc-btn:hover { transform: translateY(-1px); }
+
+        .result-section { display: none; }
+        .section-title { font-size: 18px; color: #e84393; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2540; }
+
+        .main-star-card { background: linear-gradient(135deg, #2a1530, #1a0d1e); border: 2px solid #e84393; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+        .main-star-glyph { font-size: 60px; margin-bottom: 10px; display: block; }
+        .main-star-name { font-size: 28px; color: #e84393; font-weight: 700; margin-bottom: 4px; }
+        .main-star-sub { font-size: 14px; color: #c44389; }
+
+        .palace-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 0; border: 2px solid #e84393; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+        .palace-cell { border: 1px solid #2a1530; padding: 8px; min-height: 70px; background: #0d0515; font-size: 11px; position: relative; }
+        .palace-cell.empty { background: #0a0a12; }
+        .palace-name { color: #e84393; font-weight: 600; font-size: 10px; }
+        .palace-star { color: #c9a84c; font-size: 10px; margin-top: 2px; }
+        .palace-cell.ming { background: #1a0d2a; border: 1px solid #e84393; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 55px; font-size: 9px; } }
+        .info-item { background: #1a0d1e; border: 1px solid #3a2540; border-radius: 12px; padding: 16px; }
+        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
+        .info-value { font-size: 16px; color: #e84393; font-weight: 600; }
+        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
+
+        .interp-card { background: linear-gradient(135deg, #1a0d1e, #2a1530); border: 1px solid #3a2540; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .interp-title { font-size: 14px; color: #e84393; font-weight: 600; margin-bottom: 8px; }
+        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span>Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💜 Zi Wei Dou Shu (Purple Star Astrology)</h2>
+        <p>Chinese imperial astrology centered on the Purple Star (Polaris)</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>Date of Birth (Solar Calendar)</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <div class="input-row">
+                <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
+                <select id="birthHour"></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Enter Time</option><option value="unknown">Unknown</option></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Gender</label>
+            <div class="input-row">
+                <select id="gender">
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                </select>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">💜 Generate Zi Wei Dou Shu Chart</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <h3 class="section-title">⭐ Main Star of the Life Palace (Your Core Star)</h3>
+        <div id="mainStarWrap"></div>
+
+        <h3 class="section-title">🏛️ 12 Palace Layout</h3>
+        <div class="palace-grid" id="palaceGrid"></div>
+
+        <div class="info-grid" id="infoGrid"></div>
+
+        <h3 class="section-title">📖 Detailed Interpretation of the Life Palace Main Star</h3>
+        <div id="mainInterpWrap"></div>
+
+        <h3 class="section-title">💕 Spouse Palace (Marriage)</h3>
+        <div id="spouseWrap"></div>
+
+        <h3 class="section-title">💰 Wealth Palace (Finances)</h3>
+        <div id="wealthWrap"></div>
+
+        <h3 class="section-title">💼 Career Palace (Profession)</h3>
+        <div id="careerWrap"></div>
+
+        <h3 class="section-title">🏥 Health Palace (Well-being)</h3>
+        <div id="healthWrap"></div>
+
+        <h3 class="section-title">⏳ Major Luck Periods (10-Year Cycles)</h3>
+        <div id="dashaWrap"></div>
+    </div>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// ═══════════════════════════════════════
+// Zi Wei Dou Shu — 14 Main Stars
+// ═══════════════════════════════════════
+const MAIN_STARS = {
+    'Zi Wei': { glyph: '💜', element: 'Earth', yin: false, rank: 'Emperor',
+        personality: 'Zi Wei (Purple Star / Polaris) is the Emperor\'s star. Positioned at the center of the heavens, all stars revolve around you. A born leader overflowing with charisma. High self-esteem with a natural exercise of authority. From childhood, you took on the role of leader among peers, with other children naturally following. You value respect in relationships and distance yourself from anyone who treats you lightly. Your life philosophy is "If not the best, then not at all." Outwardly dignified, but inwardly carrying a profound loneliness as heavy as the crown.',
+        love: 'You expect royal treatment from your partner. You love with dignity and cannot be satisfied with an ordinary relationship. The ideal spouse has social status or refinement. Marriage tends to come relatively late, as you need the right conditions to commit. Even during breakups you try to maintain dignity, but if your pride is deeply wounded, you tend to sever the relationship completely.',
+        career: 'Suited for CEO, politician, senior official, royalty, or religious leader. You shine at the top of an organization, performing better as the ultimate decision-maker than as middle management. Even if you start as an advisor in your youth, you eventually rise to a leadership position. Titles like corporate executive, academic chair, or association president suit you well.',
+        wealth: 'Wealth comes through the help of benefactors. Income comes primarily through status and reputation rather than investment. You spend with dignity and do not waste frivolously, but you do spend considerably on maintaining appearances. Wealth stabilizes after your 40s, with a comfortable retirement.',
+        health: 'Watch out for spleen and stomach issues. Vulnerable to stress-related conditions from being in high positions (gastric ulcers, insomnia). Loneliness can lead to chronic fatigue and depression, so it is important to keep close confidants nearby. Meditation or refined hobbies (golf, tea ceremony) help with health management.',
+        advice: 'The crown is heavy, but only you can wear it. Do not fear solitude, but learn to humbly keep people close. A true emperor is not one who rules alone, but one whom people willingly follow.' },
+    'Tian Ji': { glyph: '🧠', element: 'Wood', yin: true, rank: 'Strategist',
+        personality: 'Tian Ji (Heavenly Secret) is the star of wisdom and strategy. Possessing a brilliant mind and analytical power, you calculate and plan everything. Strong interest in religion, philosophy, and academia with a spiritual inclination. Delicate and warm but can be indecisive. From childhood, full of curiosity, endlessly asking "why?" and loving books. You quickly grasp others\' intentions in conversation, but overthinking slows your actions. You have a unique irony of missing the right timing while crafting the perfect plan.',
+        love: 'Intellectual connection is paramount. You want a partner with whom conversation flows, tending to love with reason over emotion. The ideal spouse is someone with intellectual and spiritual depth. Be careful of being too analytical in early courtship, as it may exhaust the other person. After breakups, you spend a long time analyzing the cause, striving not to repeat the same mistakes.',
+        career: 'You shine as a strategist, advisor, religious leader, scholar, IT developer, or consultant. Careers using the mind are your forte — data analyst, AI researcher, philosophy professor are good fits. Starting in support roles initially, you can become the foremost authority in your field as expertise builds. You perform better in stable organizations than as a freelancer.',
+        wealth: 'You earn money with your mind. Stable but tending to pursue intellectual satisfaction over great wealth. You invest only after thorough analysis, extremely risk-averse. Spending focuses on intellectual investments like books, courses, and tech equipment. Income stabilizes from your mid-30s based on expertise.',
+        health: 'Watch out for liver and nervous system issues. Insomnia and nervous exhaustion from excessive thinking are your biggest enemies. Chronic headaches and shoulder tension may develop, so regular stretching and meditation are essential. Hobbies that clear the mind (nature walks, gardening) greatly improve health.',
+        advice: 'Thinking alone won\'t change the world. When you have 70% certainty, act boldly. Your wisdom only shines when put into action. An imperfect execution beats a perfect plan.' },
+    'Tai Yang': { glyph: '☀️', element: 'Fire', yin: false, rank: 'Authority Star',
+        personality: 'Tai Yang (The Sun) is the star of light and honor. Bright, energetic, and illuminating those around you. Strong masculine energy, shining in public activities. The relationship with your father is important. Altruistic and self-sacrificing. From childhood, strong in justice, the child who fought on behalf of weaker friends. You serve as the mood-maker in any group, with a talent for brightening dark atmospheres. Your life philosophy is "to illuminate the world" — a candle-like existence that burns itself to light others.',
+        love: 'Warm and generous love. You make your partner shine, but may prioritize social activities over family. The ideal spouse understands your social activities and steadfastly supports you from behind. Even after marriage, your many outside activities can lead to neglecting the household, so consciously create family time. During breakups, people around you feel more sorry than your partner does.',
+        career: 'Suited for politician, civil servant, professor, broadcaster, social activist, or diplomat. You shine in public-facing careers — NGO director, news anchor, international organization staff are good fits. You tend to gain attention early in your career, already known in your field by your 30s. However, be careful not to miss your own interests through excessive service.',
+        wealth: 'Wealth accumulates primarily through honor and reputation. Salary income is stable, but business may be difficult due to your altruistic nature. Spending on others (donations, gifts, entertaining) is high, making saving difficult. Income tends to come from honorary positions rather than financial investments, with rewards through social contributions following after your 50s.',
+        health: 'Watch out for eyes, heart, and blood pressure. Overwork is your greatest enemy, with a habit of putting your own health on the back burner for others. Don\'t skip regular cardiac and eye check-ups. Morning walks in the sunlight are the best therapy for the Tai Yang star.',
+        advice: 'It\'s good to illuminate the world, but sometimes turn the light back on yourself. If you burn out completely, there will be no one left to illuminate. Your home and your own small universe are also waiting for your light.' },
+    'Wu Qu': { glyph: '💰', element: 'Metal', yin: true, rank: 'Wealth Star',
+        personality: 'Wu Qu (Military Song) is the star of wealth and decisiveness. Outstanding financial sense with strong execution. Also possessing a martial temperament, you make bold decisions. You feel loneliness easily but never show it outwardly. From childhood, saving allowances or running small businesses, you understood the value of money early. You value trust in relationships and immediately cut ties with anyone who breaks promises. Your life philosophy is "Without money, you can\'t protect love or dreams" — an action-oriented person who speaks through results rather than emotions.',
+        love: 'You express love through actions. The type who shows sincerity through bank balance rather than saying "I love you." The ideal spouse has a solid sense of finances and is independent. You strongly tend to marry only after establishing an economic foundation. During breakups, you suppress emotions and throw yourself into work, appearing fine on the surface while hurting deeply inside.',
+        career: 'You succeed in finance, investment, business, military, sports, and real estate development. Fund manager, securities analyst, trading, franchise entrepreneur are good fits. Your financial sense starts shining from your late 20s, reaching a business peak in your 40s. Much more advantageous to go independent with your own business than work under others.',
+        wealth: 'The best wealth fortune among the 14 main stars! With innate financial sense, you can accumulate great wealth. Your investments are bold yet calculated, performing well in both real estate and stocks. Thoroughly frugal where it counts, boldly betting when investing. A period of rapidly growing assets comes from your mid-30s.',
+        health: 'Watch out for lungs and respiratory issues. Be careful of metal-related accidents (traffic accidents, cuts). The habit of suppressing emotions manifests as chronic muscle pain and shoulder tension. Be careful that loneliness doesn\'t lead to excessive drinking, and regularly create outlets for emotional expression (exercise, conversation).',
+        advice: 'Money is your powerful weapon, but there are voids that money alone cannot fill. Expressing emotions is not weakness — it is courage. A single "I love you" holds a person\'s heart more firmly than a million in the bank.' },
+    'Tian Tong': { glyph: '🎭', element: 'Water', yin: false, rank: 'Fortune Star',
+        personality: 'Tian Tong (Heavenly Unity) is the star of blessings and joy. Optimistic, artistic, and you enjoy life. An eternal boy/girl with a child\'s heart — rich in emotion and sociable. From childhood, a bright and adorable child who monopolized the adults\' love. You never lose that purity even as you age. You have a talent for making people laugh and are popular wherever you go. However, you can be lazy or indecisive, with a tendency to avoid difficult decisions. Your life philosophy is "If it\'s not fun, it\'s meaningless."',
+        love: 'You love romantically and emotionally. You enjoy dating and are an eternal romantic who excels at sweet words. The ideal spouse understands your purity and complements the practical side of things. You don\'t rush marriage, slowly developing the relationship until your feelings are certain. After breakups, you grieve but quickly recover by finding new sources of joy.',
+        career: 'You shine as an artist, entertainer, chef, in the service industry, or welfare field. Broadcasting writer, YouTube creator, food columnist, play therapist are good fits. You may drift between jobs early in your career, but once you find what you truly love, you show remarkable focus. Many establish their field in their late 30s.',
+        wealth: 'Blessed with fortune so you never worry about making a living, but accumulating great wealth is difficult. A spending type who spends as soon as you earn — heavy spending on restaurants, travel, and hobbies. Automatic transfers for savings are recommended. Unexpected windfalls (lottery, gifts, inheritance) occasionally bring wealth.',
+        health: 'Watch out for kidneys and bladder. Overeating and excessive drinking are the biggest health risks. Your love of enjoyment leads to irregular eating habits, so watch out for obesity and diabetes. Choosing fun exercises (dance, swimming, yoga) helps you stay consistent.',
+        advice: 'Pursuing joy is your talent, but sometimes you must face uncomfortable things to grow. Laziness and leisure are different things. Enjoy today, but prepare a little so that your future self can enjoy tomorrow too.' },
+    'Lian Zhen': { glyph: '🔥', element: 'Fire', yin: true, rank: 'Punishment Star',
+        personality: 'Lian Zhen (Chastity) is the star of art and passion. Intensely emotional with excellent artistic sense. Charming and sociable but with great emotional highs and lows. Love and hate are extreme — once you fall in, you fall deeply. From childhood, you had a keen sensitivity, opening your eyes to music or art early, feeling emotions more mature than your peers. You leave a strong first impression and form relationships with clear likes and dislikes. Your life philosophy is "If you don\'t live passionately, you\'re not living" — you despise lukewarm existence above all.',
+        love: 'Love like fire! Passionate and intense, you bet everything when you love. The ideal spouse is someone strong enough to receive your passion. You experience several intense romances before marriage, with an irregular marriage timeline. During breakups, you feel extreme pain and tend to throw yourself into another passion to forget. Controlling jealousy and possessiveness is the key to happy relationships.',
+        career: 'Suited for artist, designer, entertainer, lawyer, or criminal investigator. Fashion designer, film director, prosecutor, detective, tattoo artist — careers requiring intensity are where you shine. Once you find a field to pour your passion into, you produce amazing results, but interest loss causes motivation to plummet. You gain recognition for your talents from your 20s, often finding early success in artistic fields.',
+        wealth: 'Financial fluctuation is large depending on emotions. Art may bring great income, but impulse spending is your biggest enemy. Watch out for the pattern of overspending when feeling good and "self-comfort" spending when feeling bad. Wealth stabilizes from your late 30s, and emotional management is financial management.',
+        health: 'Watch out for heart and blood-related conditions. Emotional stress directly affects the body, causing frequent heart palpitations and blood pressure fluctuations. Vulnerable to burns, inflammation, and high fevers. Sublimating emotions into art is the best health practice, and intense exercise (boxing, running) is effective for emotional release.',
+        advice: 'Your passion has the power to change the world, but fire that isn\'t controlled burns the one who wields it. When falling in love, take just one step back to observe. A handful of cool-headedness within the heat will protect your life.' },
+    'Tian Fu': { glyph: '📊', element: 'Earth', yin: true, rank: 'Treasury Star',
+        personality: 'Tian Fu (Heavenly Storehouse) is the star of wealth management and stability. Conservative, stable, and excellent at financial management. Outstanding at collecting and managing like a storehouse keeper. Gentle and diligent but hesitant about adventure. From childhood, good at organizing, careful with belongings, and often called "mature for your age" by parents. A reliable presence in relationships, thoroughly keeping promises and rules. Your life philosophy is "Stability is happiness" — you prefer gradual growth over sudden change.',
+        love: 'Stable and comfortable love. You provide material stability to your partner and are devoted. The ideal spouse is stability-oriented and domestic. Romance starts slowly but once started, lasts long. However, your dislike of change may cause the relationship to stagnate. You rarely initiate breakups, but when you decide, you end things cleanly.',
+        career: 'Suited for accountant, financial manager, banker, real estate management, logistics, or insurance. Tax accountant, auditor, asset manager, logistics center manager are good fits. You steadily build results from early in your career, achieving stable promotion rather than flashy success. You often stay with one company until retirement, preferring internal growth over job-hopping.',
+        wealth: 'You accumulate wealth steadily. You have a talent for stable asset management rather than great riches. You prefer principal-guaranteed investments (savings, bonds, dividend stocks) and almost never make impulse purchases. A habit of meticulously recording expenses means money never leaks. Steady deposits form significant assets by your 50s.',
+        health: 'Watch out for spleen and digestive issues. Limited movement and long hours of seated work make you vulnerable to obesity. Regular lifestyle is key to health — maintain consistent meal and sleep times. Maintaining the same rhythm on weekends is recommended, with light walks or gardening as suitable exercise.',
+        advice: 'Stability is precious, but taken too far, it becomes stagnation. Challenge yourself to something new at least once a year. Small adventures will breathe fresh air into your life. Your strength is being able to manage everything, so try accepting change in a managed way too.' },
+    'Tai Yin': { glyph: '🌙', element: 'Water', yin: true, rank: 'Wealth Star',
+        personality: 'Tai Yin (The Moon) is the star of the Moon. Soft, delicate, and rich in inner depth. Strong feminine energy with excellent intuition. The relationship with your mother is important, and you have a deep connection with real estate. From childhood, you were sensitive to others\' emotions, a quiet child with a profound inner world. A comforting presence to others, often taking on the counselor role. You\'re more active at night — a nocturnal type. Your life philosophy is "Light that shines from unseen places is still light."',
+        love: 'Soft and devoted love. You care for your partner with great attention, rich in emotion and romantic. The ideal spouse provides emotional sensitivity along with practical stability. Marriage requires emotional certainty and is not rushed. During breakups, you don\'t show it outwardly but ache quietly and deeply like moonlight, needing time alone.',
+        career: 'Suited for real estate, hotel, interior design, beauty, art, or psychological counseling. Interior designer, hotelier, aesthetics specialist, real estate agent are good fits. You also show strength in night work or nocturnal professions (bartender, astronomer, night ER). High potential for great success in real estate-related business from mid-career onward.',
+        wealth: 'You can accumulate great wealth through real estate! Investing in land and buildings is favorable, with deep financial connections through mother or women. You prefer long-term, stable investments and have a talent for property auctions and renovation investment. Real estate assets grow significantly from your late 30s, with rental income securing a stable retirement.',
+        health: 'Watch out for kidneys and women\'s health issues (menstrual irregularity, uterine conditions). Sleep health is especially important — irregular sleep is the starting point of all health problems. As a night owl, your sleep rhythm breaks easily, so maintain a consistent bedtime. Moonlit walks or water exercise (swimming, aqua yoga) are the optimal therapy for the Tai Yin star.',
+        advice: 'Your gentleness is a power that heals the world. But just as the moon always illuminates others, don\'t keep yourself in darkness. Your own feelings and needs matter too. Sometimes learn to shine for yourself.' },
+    'Tan Lang': { glyph: '🎰', element: 'Water/Wood', yin: false, rank: 'Romance Star',
+        personality: 'Tan Lang (Greedy Wolf) is the star of desire and charm. A jack of all trades, versatile in many areas. Sociable and charming with talent in art and entertainment. From childhood, full of flair, the star of school performances who never backed down even in front of adults. Strong curiosity for new things, with a pattern of diving deep into one thing then quickly moving to the next. However, you can be greedy and weak to temptation — beware the risk of falling into gambling or extravagance. Your life philosophy is "What I want, I will have."',
+        love: 'Love overflowing with charm! Very popular with the opposite sex, with abundant romantic experience. The ideal spouse is as charming as you and respects your freedom. Marriage timing is irregular, with extremes of both early and late marriage. There may be a wandering eye, making relationship stability a lifelong challenge — watch for patterns of breaking up and getting back together.',
+        career: 'Suited for entertainer, sales, marketing, nightlife industry, art, or diplomacy. Influencer, event planner, wine sommelier, fashion buyer, entertainment manager are good fits. Your versatility lets you cross between fields, and businesses leveraging your network achieve great results. Settling in one field leads to spectacular success in your late 30s.',
+        wealth: 'Good at earning and good at spending. Higher chance of windfalls (investment jackpot, lottery, inheritance) than other stars, but gambling is absolutely forbidden. Heavy spending on socializing and entertainment, with fluctuating income. To break the "spend as much as you earn" pattern, a system of automatically saving 30% of income is essential. Developing financial awareness from your 40s can build significant assets.',
+        health: 'Watch out for liver and reproductive organ issues. Health problems from excessive pleasure-seeking (drinking, overeating, sexual indulgence) are the biggest risk. Get regular liver health check-ups. Moderation is key — channeling hobbies toward healthy directions like exercise or artistic creation improves both health and charm simultaneously.',
+        advice: 'Your charm and talent are unlimited, but you cannot have everything at once. Choose one thing you truly want and dive deep. A life of depth in one field is more attractive than a life of breadth in many.' },
+    'Ju Men': { glyph: '📢', element: 'Water', yin: true, rank: 'Dark Star',
+        personality: 'Ju Men (Giant Gate) is the star of gossip and debate. Outstanding oratory with strong logic, but often entangled in disputes. You pursue truth with powerful critical thinking. From childhood, talkative with endless questions that flustered teachers. You cannot stand injustice and raise your voice, deeply hating lies. In relationships, "a single word" can create enemies or lifelong allies. Your life philosophy is "The truth must come to light" — you choose speaking over silence.',
+        love: 'Words can easily wound, leading to frequent arguments with your partner. The ideal spouse is logical yet has a sense of humor that can turn arguments into conversations. Romantic crises due to gossip may occur before marriage, with marriage timing better after your 30s when your speech softens. During breakups, you have too much to say to end things cleanly.',
+        career: 'Suited for lawyer, professor, critic, broadcaster, counselor, or journalist. Podcast host, legal consultant, debate expert, foreign language interpreter are good fits. You succeed in careers involving words and writing, and your words gain weight as expertise grows. Early career challenges from gossip give way to rapid growth once your abilities are recognized from your mid-30s.',
+        wealth: 'You make a living with your mouth. Income from lectures, education, counseling, and writing. Watch out for financial losses from disputes (lawsuits, settlements). Selling expertise is more stable than investing — increasing the value of each word you speak is your financial strategy. From your 40s, lecture fees and royalties become stable income sources.',
+        health: 'Watch out for throat, bronchial, and oral health. Talking so much makes you vulnerable to vocal nodules and chronic pharyngitis. Stress directly affects digestion, causing frequent stomach disorders. Creating 30 minutes of "silence time" each day improves both throat and mental health.',
+        advice: 'Your words have the power of a blade. Whether you use that power to cut people or to reveal truth to the world is your choice. The habit of speaking one beat later will reduce your enemies and change your life.' },
+    'Tian Xiang': { glyph: '🎀', element: 'Water', yin: true, rank: 'Seal Star',
+        personality: 'Tian Xiang (Heavenly Minister) is the star of appearance and official seals. You pay great attention to looks and value face. Orderly, systematic, with a civil servant temperament. From childhood, you dressed neatly, kept your room tidy, and were the well-mannered model student. You value formality in relationships and place great importance on first impressions. With a dependent tendency, you shine in organizations rather than working alone, performing your best as an excellent aide under a good leader. Your life philosophy is "Form creates content" — you believe that external order leads to inner stability.',
+        love: 'Love that values appearances. Looks and conditions matter, and you want a socially approved relationship. The ideal spouse is well-groomed with stable social standing. You marry after conditions are met, valuing a wedding blessed by others. During breakups, your biggest concern is "How do I explain this to people?"',
+        career: 'Suited for civil service, secretary, fashion industry, brand management, or administration. Executive secretary, protocol officer, stylist, luxury brand manager, airline attendant are good fits. You perform well within rules and systems, feeling great stress in chaotic environments. Career growth is steady, establishing yourself as a trusted presence within the organization.',
+        wealth: 'Stable salary income is the main source. You pursue stable living rather than great riches, with significant spending on appearance maintenance (clothing, beauty, health). Investment is conservative, preferring safe financial products. Spending on brand-name products tends to be high, so setting budgets in advance is recommended. Retirement benefits and pensions secure a stable later life from your 40s.',
+        health: 'Watch out for skin and respiratory issues. Stress easily manifests on skin (hives, eczema, acne), with vulnerability to respiratory conditions each season change. Paying attention to appearance management helps both self-esteem and health simultaneously. Maintain a regular skincare routine and adequate hydration.',
+        advice: 'External beauty matters, but the finest garment is confidence. Don\'t give up what you truly want because of concern for appearances. Satisfaction with yourself creates a more valuable life than concern with others\' gaze.' },
+    'Tian Liang': { glyph: '🛡️', element: 'Earth', yin: false, rank: 'Shadow Star',
+        personality: 'Tian Liang (Heavenly Beam) is the star of hidden protection. A star of longevity and fortune, you receive much help from older benefactors. Conservative and traditional, valuing loyalty. From childhood, mature and reliable, specially beloved by grandparents. You often serve as mediator between people, with an ability to find balance in conflict. You respect tradition over change and prefer proven methods. Your life philosophy is "Not in a hurry, but with certainty" — living a life that is slow but unshakable.',
+        love: 'Stable and loyal love. There is a high chance of happiness in relationships with an age gap (connections with older partners). The ideal spouse is a mature person with traditional values. You decide on marriage carefully, and once married, you create a lasting relationship. Breakups are rare, but when a relationship ends, you calmly accept it as "not meant to be."',
+        career: 'Suited for doctor, pharmacist, civil servant, religious leader, social worker, or insurance planner. Traditional medicine practitioner, nurse, elderly care specialist, cultural heritage manager are good fits. You find fulfillment in protective and caring professions, with expertise and reputation growing with age. Many continue social activities even after retirement.',
+        wealth: 'Characterized by stable but slow wealth accumulation. You grow more prosperous with age, preferring safe asset management like long-term savings, pensions, and insurance over sudden investments. Even if not affluent when young, stable assets form after your 50s. Unexpected financial opportunities come through recommendations from superiors or benefactors.',
+        health: 'A star of longevity! You have good basic stamina and tend to stay healthy even with age. As long as you care for your stomach, you can live a long life without major illness. Traditional health methods (herbal medicine, medicinal cuisine, qigong) suit you well, with regular meals and sufficient sleep as the secrets to longevity.',
+        advice: 'Your sense of stability is a great source of strength for those around you. But don\'t reject new things simply because "that\'s the tradition." When you combine the wisdom of tradition with the flow of a new era, you become an even greater protector.' },
+    'Qi Sha': { glyph: '⚔️', element: 'Metal/Fire', yin: false, rank: 'General Star',
+        personality: 'Qi Sha (Seven Killings) is the General\'s star. Possessing strong will, decisiveness, and the power of destruction and reconstruction. Life has great ups and downs, but you grow stronger in crisis. Independent and rebellious, you challenge authority. From childhood, you showed strong pride and fighting spirit, the child who confronted unfair rules head-on. In relationships, you hold the ironclad rule of "never showing weakness." Endlessly reliable to allies but merciless to enemies. Your life philosophy is "If you fall but get back up, you haven\'t lost" — a person who grows by feeding on adversity.',
+        love: 'Intense and stormy love. Marriage may have many ups and downs, and ordinary relationships feel boring. The ideal spouse is as strong as you yet possesses tenderness. Marriage timing is irregular, with cases of remarriage after divorce. During breakups, you appear calm on the surface but wage war internally, channeling that energy into work or challenges.',
+        career: 'Suited for military, police, surgeon, entrepreneur, revolutionary, or crisis management specialist. Special forces, firefighter, emergency medicine doctor, venture entrepreneur, stunt actor are good fits. You prove your worth in careers with danger and challenge — stable desk jobs eat away at your soul. You experience great failure in your 30s, but that becomes the seed of great success in your 40s.',
+        wealth: 'You experience both great success and great failure. The classic high-risk, high-return type, with no interest in ordinary financial planning. You prefer aggressive investments like business ventures and startup investing — the potential to earn big and lose big in one go. Even after failure, you always bounce back, often ultimately becoming a self-made success.',
+        health: 'Be especially careful of accidents and surgeries. Vulnerable to muscle and vascular conditions (muscle tears, arteriosclerosis). Since your energy is excessive, intense exercise like martial arts, combat sports, or CrossFit is essential for release. Exercise extra caution with knives and metal tools, and always pay attention to traffic safety.',
+        advice: 'Your strength can change the world, but a true general knows when to fight. Don\'t try to win every battle. Sometimes retreating is a strategy for a greater victory. Gentleness is not weakness — it is strength on a higher level.' },
+    'Po Jun': { glyph: '💥', element: 'Water', yin: false, rank: 'Destroyer Star',
+        personality: 'Po Jun (Destructive Army) is the star of destruction and innovation. A revolutionary who breaks existing order and creates anew. Spending is large and life is volatile, but after destruction always comes reconstruction. From childhood, you took pleasure in breaking rules, with "Why do we have to do it this way?" as your catchphrase. You wield strong influence in relationships — meeting you can change someone\'s entire worldview. Free and rebellious, with the courage to voluntarily tear down a stable life and start over. Your life philosophy is "Without breaking the old, the new cannot be born."',
+        love: 'Unpredictable love. You may experience multiple romances or marriages, with a pattern of destruction and reconstruction in relationships. The ideal spouse is someone flexible who doesn\'t fear change and can build a new life together. You may prefer cohabitation over marriage, wanting a relationship free from formality. During breakups, you leave without regret, but over time find deep meaning in the experience.',
+        career: 'Suited for pioneer, explorer, demolition/reconstruction, art, or innovation fields. Startup founder, urban regeneration specialist, demolition contractor, contemporary artist, innovation consultant are good fits. You show genius at overturning existing systems and creating new paradigms — you can\'t last long in stable jobs. After multiple career changes, you ultimately carve out your own unique territory.',
+        wealth: 'Big money in and big money out. More of an investor than a saver, with potential to cycle between bankruptcy and comeback. You enjoy investing in new ventures, sometimes hitting jackpots in areas nobody else notices. You tend to spend heavily, spending without hesitation when you feel it\'s necessary. Since financial flow is irregular, always maintain at least an emergency fund.',
+        health: 'Be especially careful of accidents and injuries. Watch out for kidneys and reproductive organs, and pay attention to safety during adventurous activities (extreme sports, travel). Your energy is explosive, so intense exercise (surfing, rock climbing, marathon) helps channel it healthily. If destructive impulses aren\'t channeled constructively, they may manifest as self-destructive behavior (excessive drinking, reckless challenges).',
+        advice: 'Destruction is your talent, but always remember what you\'re destroying for. Destruction without purpose is violence; destruction with purpose is revolution. After breaking things down, always build something more beautiful. That is your reason for being.' }
+};
+
+const STAR_NAMES = ['Zi Wei','Tian Ji','Tai Yang','Wu Qu','Tian Tong','Lian Zhen','Tian Fu','Tai Yin','Tan Lang','Ju Men','Tian Xiang','Tian Liang','Qi Sha','Po Jun'];
+
+// 12 Palaces
+const PALACES = ['Life Palace','Siblings','Spouse','Children','Wealth','Health','Travel','Friends','Career','Property','Fortune','Parents'];
+const PALACE_DESC = ['Self','Brothers & Sisters','Partner','Children','Finances','Well-being','Travel/Abroad','Friends/Network','Profession/Fame','Real Estate/Home','Blessings & Virtue','Parents/Elders'];
+
+// South Indian style grid mapping
+const GRID_MAP = [
+    [11,0,1,2],
+    [10,-1,-1,3],
+    [9,-1,-1,4],
+    [8,7,6,5]
+];
+
+function initForm() {
+    const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
+    const h = document.getElementById('birthHour');
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1993) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 7) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 25) o.selected = true; d.appendChild(o); }
+    for (let i = 0; i < 12; i++) {
+        const labels = ['Zi (23-1)','Chou (1-3)','Yin (3-5)','Mao (5-7)','Chen (7-9)','Si (9-11)','Wu (11-13)','Wei (13-15)','Shen (15-17)','You (17-19)','Xu (19-21)','Hai (21-23)'];
+        const o = document.createElement('option'); o.value = i; o.textContent = labels[i]; if (i === 5) o.selected = true; h.appendChild(o);
+    }
+}
+
+function toggleTime() {
+    const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
+    ['birthAmpm','birthHour'].forEach(id => {
+        document.getElementById(id).disabled = disabled;
+        document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
+    });
+}
+
+// Simplified Zi Wei Dou Shu calculation (Life Palace main star placement)
+function calculate() {
+    const year = parseInt(document.getElementById('birthYear').value);
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? 6 : parseInt(document.getElementById('birthHour').value);
+    const gender = document.getElementById('gender').value;
+
+    // Life Palace position calculation (simplified)
+    const mingIdx = (14 - month + hourIdx) % 12;
+
+    // Main star placement (simplified — based on Zi Wei star position)
+    const ziWeiPos = (day + 2) % 12; // simplified Zi Wei star position
+
+    // Place stars in each palace
+    const palaceStars = [];
+    for (let i = 0; i < 12; i++) palaceStars.push([]);
+
+    // 14 main star placement (simplified)
+    const starPositions = [];
+    STAR_NAMES.forEach((name, idx) => {
+        const pos = (ziWeiPos + idx * 2 + Math.floor(idx / 3)) % 12;
+        starPositions.push({ name, pos });
+        palaceStars[pos].push(name);
+    });
+
+    // Find main star(s) in Life Palace
+    const mingStars = palaceStars[mingIdx];
+    const mainStar = mingStars.length > 0 ? mingStars[0] : STAR_NAMES[(mingIdx + day) % 14];
+    const starData = MAIN_STARS[mainStar];
+
+    // Five Elements
+    const WUXING = ['Metal','Water','Wood','Fire','Earth'];
+    const wuxing = WUXING[(year + month) % 5];
+
+    // Heavenly Stem of Life Palace
+    const TIANGAN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
+    const tiangan = TIANGAN[(year - 4) % 10];
+
+    // Earthly Branch of Life Palace
+    const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+    const mingDizhi = DIZHI[mingIdx];
+
+    // Main Star Card
+    document.getElementById('mainStarWrap').innerHTML = `
+        <div class="main-star-card">
+            <span class="main-star-glyph">${starData.glyph}</span>
+            <div class="main-star-name">${mainStar} Star (${starData.rank})</div>
+            <div class="main-star-sub">Element: ${starData.element} | Life Palace: ${DIZHI[mingIdx]}</div>
+        </div>
+    `;
+
+    // Palace Grid
+    const grid = document.getElementById('palaceGrid');
+    grid.innerHTML = '';
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const pIdx = GRID_MAP[row][col];
+            if (pIdx === -1) {
+                cell.className = 'palace-cell empty';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">Zi Wei<br>Dou Shu</div>' : '';
+            } else {
+                cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '');
+                cell.innerHTML = `<div class="palace-name">${PALACES[pIdx]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[pIdx]}</div>`;
+                if (palaceStars[pIdx].length > 0) {
+                    cell.innerHTML += `<div class="palace-star">${palaceStars[pIdx].join(' ')}</div>`;
+                }
+            }
+            grid.appendChild(cell);
+        }
+    }
+
+    // Info Grid
+    document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item"><div class="info-label">Life Palace Main Star</div><div class="info-value">${starData.glyph} ${mainStar} Star</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">Life Palace Position</div><div class="info-value">${DIZHI[mingIdx]} Palace (${tiangan}${mingDizhi})</div></div>
+        <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing} Destiny</div></div>
+        <div class="info-item"><div class="info-label">Gender / Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Male (Yang)' : 'Female (Yin)'}</div></div>
+    `;
+
+    // Main Interpretation
+    document.getElementById('mainInterpWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">${starData.glyph} ${mainStar} Star — "${starData.rank}"</div>
+            <div class="interp-text">${starData.personality}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💡 Life Advice for ${mainStar} Star</div>
+            <div class="interp-text">${starData.advice}</div>
+        </div>
+    `;
+
+    // Spouse (Spouse Palace = Life Palace + 2)
+    const spouseIdx = (mingIdx + 2) % 12;
+    const spouseStars = palaceStars[spouseIdx];
+    const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    document.getElementById('spouseWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💕 Spouse Palace: ${DIZHI[spouseIdx]} Palace ${spouseStar ? '— ' + spouseStar + ' Star' : ''}</div>
+            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar} Star\'s view on marriage:</strong> ${starData.love}</div>
+        </div>
+    `;
+
+    // Wealth (Wealth Palace = Life Palace + 4)
+    const wealthIdx = (mingIdx + 4) % 12;
+    const wealthStars = palaceStars[wealthIdx];
+    const wealthStar = wealthStars.length > 0 ? wealthStars[0] : null;
+    document.getElementById('wealthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💰 Wealth Palace: ${DIZHI[wealthIdx]} Palace ${wealthStar ? '— ' + wealthStar + ' Star' : ''}</div>
+            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : 'No main star in the Wealth Palace — finances are stable but steady without notable fluctuations.'}<br><br><strong>${mainStar} Star\'s view on wealth:</strong> ${starData.wealth}</div>
+        </div>
+    `;
+
+    // Career (Career Palace = Life Palace + 8)
+    const careerIdx = (mingIdx + 8) % 12;
+    const careerStars = palaceStars[careerIdx];
+    const careerStar = careerStars.length > 0 ? careerStars[0] : null;
+    document.getElementById('careerWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💼 Career Palace: ${DIZHI[careerIdx]} Palace ${careerStar ? '— ' + careerStar + ' Star' : ''}</div>
+            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : 'No main star in the Career Palace — your career is stable and conventional. Steady growth within an organization.'}<br><br><strong>${mainStar} Star\'s view on career:</strong> ${starData.career}</div>
+        </div>
+    `;
+
+    // Health (Health Palace = Life Palace + 5)
+    const healthIdx = (mingIdx + 5) % 12;
+    document.getElementById('healthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">🏥 Health Palace: ${DIZHI[healthIdx]} Palace</div>
+            <div class="interp-text"><strong>${mainStar} Star\'s health profile:</strong> ${starData.health}</div>
+        </div>
+    `;
+
+    // Major Luck Periods (10-year cycles)
+    let dashaHtml = '<div style="background:#0d0515;border:1px solid #3a2540;border-radius:12px;overflow:hidden;">';
+    const now = new Date();
+    const currentAge = now.getFullYear() - year;
+    for (let i = 0; i < 8; i++) {
+        const startAge = 2 + i * 10;
+        const endAge = 11 + i * 10;
+        const palIdx = (mingIdx + i) % 12;
+        const stars = palaceStars[palIdx];
+        const isCurrent = currentAge >= startAge && currentAge <= endAge;
+
+        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
+            <span style="min-width:80px;font-weight:700;color:#e84393;">Age ${startAge}~${endAge}</span>
+            <span style="flex:1;color:#999;">${DIZHI[palIdx]} Palace ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Current</span>' : ''}
+        </div>`;
+    }
+    dashaHtml += '</div>';
+    document.getElementById('dashaWrap').innerHTML = dashaHtml;
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+initForm();
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
+</html>

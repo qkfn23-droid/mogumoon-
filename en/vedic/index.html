@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Astrology Chart - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            color: #e0d8cc;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d0d2b, #1a1a3e);
+            border-bottom: 1px solid #2a2a5a;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 20px;
+            color: #c9a84c;
+            letter-spacing: 2px;
+        }
+
+        header h1 span { color: #8b7ec8; }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto 40px;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            font-size: 28px;
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #8888aa;
+            font-size: 14px;
+        }
+
+        /* Input Form */
+        .form-box {
+            background: linear-gradient(135deg, #12122a, #1a1a3e);
+            border: 1px solid #2a2a5a;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #c9a84c;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-row input, .input-row select, input[type="text"], input[type="date"], input[type="time"] {
+            flex: 1;
+            padding: 12px 14px;
+            background: #0a0a1a;
+            border: 1px solid #3a3a6a;
+            border-radius: 8px;
+            color: #e0d8cc;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #c9a84c;
+        }
+
+        .optional-tag {
+            font-size: 11px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #c9a84c, #a8872a);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+        }
+
+        .calc-btn:hover {
+            background: linear-gradient(135deg, #dbb85c, #c9a84c);
+            transform: translateY(-1px);
+        }
+
+        /* Results */
+        .result-section {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #c9a84c;
+            margin: 30px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a2a5a;
+        }
+
+        /* Chart Grid (South Indian style) */
+        .chart-container {
+            background: linear-gradient(135deg, #12122a, #1a1a3e);
+            border: 1px solid #2a2a5a;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-label {
+            text-align: center;
+            font-size: 14px;
+            color: #8b7ec8;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 0;
+            aspect-ratio: 1;
+            border: 2px solid #c9a84c;
+        }
+
+        .chart-cell {
+            border: 1px solid #3a3a6a;
+            padding: 6px;
+            font-size: 11px;
+            color: #aaa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .chart-cell.empty {
+            background: #0d0d20;
+        }
+
+        .chart-cell .house-num {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 9px;
+            color: #555;
+        }
+
+        .chart-cell .planet {
+            font-size: 12px;
+            font-weight: 600;
+            color: #c9a84c;
+            margin: 1px 0;
+        }
+
+        .chart-cell .planet.benefic { color: #5cb85c; }
+        .chart-cell .planet.malefic { color: #d9534f; }
+
+        /* Planet Table */
+        .planet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: #12122a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a5a;
+        }
+
+        .planet-table th {
+            background: #1a1a3e;
+            color: #c9a84c;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .planet-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #1a1a3e;
+            color: #ccc;
+        }
+
+        .planet-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .planet-table tr:hover {
+            background: #1a1a30;
+        }
+
+        /* Nakshatra Card */
+        .nakshatra-card {
+            background: linear-gradient(135deg, #1a1a3e, #12122a);
+            border: 1px solid #2a2a5a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .nakshatra-name {
+            font-size: 24px;
+            color: #c9a84c;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .nakshatra-meaning {
+            font-size: 14px;
+            color: #8b7ec8;
+            margin-bottom: 12px;
+        }
+
+        .nakshatra-detail {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* Dasha Timeline */
+        .dasha-timeline {
+            background: #12122a;
+            border: 1px solid #2a2a5a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .dasha-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #1a1a3e;
+            font-size: 13px;
+        }
+
+        .dasha-item:last-child { border-bottom: none; }
+
+        .dasha-item.current {
+            background: #1a2a1a;
+            border-left: 3px solid #c9a84c;
+        }
+
+        .dasha-planet {
+            min-width: 60px;
+            font-weight: 700;
+            color: #c9a84c;
+        }
+
+        .dasha-period {
+            flex: 1;
+            color: #999;
+        }
+
+        .dasha-years {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .dasha-badge {
+            font-size: 10px;
+            background: #c9a84c;
+            color: #0a0a1a;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Interpretation */
+        .interp-card {
+            background: linear-gradient(135deg, #12122a, #1a1a3e);
+            border: 1px solid #2a2a5a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+
+        .interp-title {
+            font-size: 14px;
+            color: #c9a84c;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .interp-text {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #444;
+            font-size: 13px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23c9a84c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        select:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        optgroup {
+            color: #c9a84c;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .chart-cell { min-height: 50px; font-size: 10px; }
+            .chart-cell .planet { font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🔮 Ancient <span>Astrology</span></h1>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>Vedic Astrology (Jyotish)</h2>
+        <p>Read your destiny through the ancient astronomical astrology passed down from the Vedic era of India</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>Date of Birth</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Birth Time <span class="optional-tag">(Select 'Unknown' if unsure)</span></label>
+            <div class="input-row">
+                <select id="birthAmpm">
+                    <option value="am">AM</option>
+                    <option value="pm">PM</option>
+                </select>
+                <select id="birthHour"></select>
+                <select id="birthMinute"></select>
+                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()">
+                    <option value="known">Enter Time</option>
+                    <option value="unknown">Unknown</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Birth Place</label>
+            <select id="birthCity" onchange="onCityChange()">
+                <optgroup label="🇰🇷 South Korea">
+                    <option value="37.57,126.98" selected>Seoul</option>
+                    <option value="35.18,129.08">Busan</option>
+                    <option value="35.87,128.60">Daegu</option>
+                    <option value="37.46,126.71">Incheon</option>
+                    <option value="35.16,126.85">Gwangju</option>
+                    <option value="36.35,127.38">Daejeon</option>
+                    <option value="35.54,129.31">Ulsan</option>
+                    <option value="33.50,126.53">Jeju</option>
+                </optgroup>
+                <optgroup label="🇯🇵 Japan">
+                    <option value="35.68,139.69">Tokyo</option>
+                    <option value="34.69,135.50">Osaka</option>
+                </optgroup>
+                <optgroup label="🇨🇳 China / East Asia">
+                    <option value="39.90,116.40">Beijing</option>
+                    <option value="31.23,121.47">Shanghai</option>
+                    <option value="22.32,114.17">Hong Kong</option>
+                    <option value="25.03,121.57">Taipei</option>
+                    <option value="1.35,103.82">Singapore</option>
+                    <option value="13.76,100.50">Bangkok</option>
+                </optgroup>
+                <optgroup label="🇺🇸 Americas">
+                    <option value="40.71,-74.01">New York</option>
+                    <option value="34.05,-118.24">LA</option>
+                    <option value="41.88,-87.63">Chicago</option>
+                    <option value="37.77,-122.42">San Francisco</option>
+                    <option value="49.28,-123.12">Vancouver</option>
+                    <option value="43.65,-79.38">Toronto</option>
+                </optgroup>
+                <optgroup label="🇪🇺 Europe">
+                    <option value="51.51,-0.13">London</option>
+                    <option value="48.86,2.35">Paris</option>
+                    <option value="52.52,13.41">Berlin</option>
+                    <option value="40.42,-3.70">Madrid</option>
+                    <option value="41.90,12.50">Rome</option>
+                </optgroup>
+                <optgroup label="🌏 Other">
+                    <option value="28.61,77.23">New Delhi</option>
+                    <option value="19.08,72.88">Mumbai</option>
+                    <option value="-33.87,151.21">Sydney</option>
+                    <option value="-23.55,-46.63">Sao Paulo</option>
+                </optgroup>
+                <optgroup label="✏️ Manual Entry">
+                    <option value="custom">Enter Latitude/Longitude manually</option>
+                </optgroup>
+            </select>
+            <div id="customLatLng" style="display:none; margin-top:8px;">
+                <div class="input-row">
+                    <input type="number" id="birthLat" placeholder="Latitude (e.g. 37.57)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="Longitude (e.g. 126.98)" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculateChart()">🔮 Generate Chart</button>
+    </div>
+
+    <!-- Results -->
+    <div class="result-section" id="resultSection">
+
+        <h3 class="section-title">📚 Vedic Astrology Beginner's Guide</h3>
+        <div class="interp-card" style="border-left:3px solid #c9a84c;">
+            <div class="interp-text" style="line-height:2;">
+                <strong style="color:#c9a84c;font-size:15px;">🌟 Key Terms for First-Time Readers</strong><br><br>
+
+                <strong>🪐 9 Planets (Graha)</strong> — Nine forces that determine your personality and destiny<br>
+                ☉ <strong>Sun</strong> = Self, father, authority, confidence (Who you are)<br>
+                ☽ <strong>Moon</strong> = Emotions, mother, mind, daily life (How you feel)<br>
+                ♂ <strong>Mars</strong> = Energy, courage, action, anger (How you fight)<br>
+                ☿ <strong>Mercury</strong> = Intelligence, communication, learning, business (How you think)<br>
+                ♃ <strong>Jupiter</strong> = Luck, wisdom, wealth, teacher (What blessings you have) — <em>The most auspicious planet</em><br>
+                ♀ <strong>Venus</strong> = Love, charm, art, marriage (How you love)<br>
+                ♄ <strong>Saturn</strong> = Trials, patience, responsibility, karma (What is your life's lesson) — <em>Slow but the most powerful</em><br>
+                ☊ <strong>Rahu</strong> = Desire, obsession, innovation, foreign lands (Unfulfilled desires from past lives) — <em>A shadow planet with no physical form</em><br>
+                ☋ <strong>Ketu</strong> = Liberation, spirituality, detachment, past (What was already achieved in past lives) — <em>The opposite shadow of Rahu</em><br><br>
+
+                <strong>🏛️ 12 Houses</strong> — Twelve areas of life. Which house a planet occupies determines which area of your life it influences.<br>
+                1st=Self · 2nd=Money/Family · 3rd=Communication/Siblings · 4th=Home/Mother · 5th=Children/Romance/Creativity · 6th=Health/Enemies · 7th=Spouse/Partner · 8th=Transformation/Death/Inheritance · 9th=Luck/Foreign/Father · 10th=Career/Fame · 11th=Income/Wishes · 12th=Foreign/Loss/Spirituality<br><br>
+
+                <strong>⬆ Lagna (Ascendant)</strong> — The zodiac sign rising on the eastern horizon at the moment of your birth. It determines how others see your personality and appearance. <em>In Vedic astrology, the Lagna is more important than the Sun sign used in Western astrology!</em><br><br>
+
+                <strong>🌙 Nakshatra</strong> — One of 27 lunar mansion divisions where the Moon is positioned. It analyzes personality more precisely than the 12 Western zodiac signs. It represents your deepest nature.<br><br>
+
+                <strong>⏳ Dasha (Planetary Period)</strong> — Life period fortune by phase. The energy of whichever planet rules that period becomes stronger. The full cycle spans 120 years with 9 planets taking turns.<br><br>
+
+                <strong>🔮 Yoga</strong> — Special planetary combinations. When two or more planets form specific relationships, they create special destinies. (e.g., Gajakesari Yoga = Moon + Jupiter → Wisdom and fame)
+            </div>
+        </div>
+
+        <h3 class="section-title">🪐 Planetary Positions</h3>
+        <div id="planetTableWrap"></div>
+
+        <h3 class="section-title">🏛️ Birth Chart (Your Sky Map)</h3>
+        <div class="chart-container">
+            <div class="chart-label">South Indian Style Chart — 12 cells = 12 signs, planet symbols show where each planet was at birth</div>
+            <div class="chart-grid" id="d1Chart"></div>
+        </div>
+
+        <h3 class="section-title">🌙 Nakshatra (Your Star — Your Deepest Nature)</h3>
+        <div id="nakshatraWrap"></div>
+
+        <h3 class="section-title">⏳ Dasha (Life Period Fortune)</h3>
+        <div id="dashaWrap"></div>
+
+        <h3 class="section-title">📖 Comprehensive Interpretation</h3>
+        <div id="interpWrap"></div>
+
+        <h3 class="section-title">🪐 Planet-by-Planet Detailed Interpretation (How each planet influences your life areas)</h3>
+        <div id="planetHouseWrap"></div>
+
+        <h3 class="section-title">🎓 Education & Knowledge (4th & 5th Houses)</h3>
+        <div id="educationWrap"></div>
+
+        <h3 class="section-title">👶 Children Fortune (5th House)</h3>
+        <div id="childrenWrap"></div>
+
+        <h3 class="section-title">✈️ Foreign Fortune & Migration (9th & 12th Houses)</h3>
+        <div id="foreignWrap"></div>
+
+        <h3 class="section-title">⚖️ Planetary Dignity (Exaltation · Debilitation · Own Sign)</h3>
+        <div id="dignityWrap"></div>
+
+        <h3 class="section-title">🍀 Lucky Information</h3>
+        <div id="luckyWrap"></div>
+
+        <h3 class="section-title">💎 Remedies & Strengthening Methods</h3>
+        <div id="remedyWrap"></div>
+
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 Ancient Astrology
+</footer>
+
+<style>
+    .preset-city {
+        padding: 4px 12px;
+        background: #1a1a3e;
+        border: 1px solid #3a3a6a;
+        border-radius: 20px;
+        color: #8b7ec8;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .preset-city:hover {
+        border-color: #c9a84c;
+        color: #c9a84c;
+    }
+</style>
+
+<script src="../astronomy.browser.min.js"></script>
+<script>
+// ============================================================
+// VEDIC ASTROLOGY ENGINE
+// ============================================================
+
+// Ayanamsa (Lahiri) - approximate
+function getAyanamsa(jd) {
+    // Lahiri ayanamsa approximation
+    const T = (jd - 2451545.0) / 36525.0;
+    return 23.85 + 0.0137 * (jd - 2451545.0) / 365.25;
+}
+
+// Zodiac signs
+const SIGNS = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
+               'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGNS_EN = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo',
+                  'Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SIGN_SYMBOLS = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+
+// Planets
+const PLANETS = [
+    { id: 'Sun', name: 'Sun', symbol: '☉', natural: 'malefic' },
+    { id: 'Moon', name: 'Moon', symbol: '☽', natural: 'benefic' },
+    { id: 'Mars', name: 'Mars', symbol: '♂', natural: 'malefic' },
+    { id: 'Mercury', name: 'Mercury', symbol: '☿', natural: 'neutral' },
+    { id: 'Jupiter', name: 'Jupiter', symbol: '♃', natural: 'benefic' },
+    { id: 'Venus', name: 'Venus', symbol: '♀', natural: 'benefic' },
+    { id: 'Saturn', name: 'Saturn', symbol: '♄', natural: 'malefic' },
+];
+
+// Nakshatras (27 lunar mansions)
+const NAKSHATRAS = [
+    { name: 'Ashwini', ko: 'Ashwini', ruler: 'Ketu', meaning: 'Horse Twins', deity: 'Ashwini Kumaras', desc: 'Energy of healing and new beginnings. A person with quick action and healing abilities.' },
+    { name: 'Bharani', ko: 'Bharani', ruler: 'Venus', meaning: 'The Bearer', deity: 'Yama', desc: 'The cycle of life and death. Strong patience and the power to lead change.' },
+    { name: 'Krittika', ko: 'Krittika', ruler: 'Sun', meaning: 'The Cutter', deity: 'Agni', desc: 'The power of fire and purification. Sharp intellect and decisiveness.' },
+    { name: 'Rohini', ko: 'Rohini', ruler: 'Moon', meaning: 'The Red Star', deity: 'Brahma', desc: 'The star of abundance and beauty. A creative and charming personality.' },
+    { name: 'Mrigashira', ko: 'Mrigashira', ruler: 'Mars', meaning: 'Deer\'s Head', deity: 'Soma', desc: 'The star of exploration and curiosity. A tireless traveler seeking truth.' },
+    { name: 'Ardra', ko: 'Ardra', ruler: 'Rahu', meaning: 'Teardrop', deity: 'Rudra', desc: 'Rebirth through storm and destruction. Intense emotions and transformative power.' },
+    { name: 'Punarvasu', ko: 'Punarvasu', ruler: 'Jupiter', meaning: 'Return of Light', deity: 'Aditi', desc: 'The star of recovery and return. An optimistic and wise personality.' },
+    { name: 'Pushya', ko: 'Pushya', ruler: 'Saturn', meaning: 'The Nourisher', deity: 'Brihaspati', desc: 'The most auspicious nakshatra. Energy of nurturing, protection, and prosperity.' },
+    { name: 'Ashlesha', ko: 'Ashlesha', ruler: 'Mercury', meaning: 'The Entwiner', deity: 'Nagas', desc: 'Serpent wisdom and mystery. Insight and deep intuition.' },
+    { name: 'Magha', ko: 'Magha', ruler: 'Ketu', meaning: 'The Great', deity: 'Pitris', desc: 'The star of royalty. Authority, respect, and ancestral blessings.' },
+    { name: 'Purva Phalguni', ko: 'Purva Phalguni', ruler: 'Venus', meaning: 'Former Fruit', deity: 'Bhaga', desc: 'The star of joy and love. Artistic sense and romance.' },
+    { name: 'Uttara Phalguni', ko: 'Uttara Phalguni', ruler: 'Sun', meaning: 'Latter Fruit', deity: 'Aryaman', desc: 'The star of friendship and contracts. Trust and devotion.' },
+    { name: 'Hasta', ko: 'Hasta', ruler: 'Moon', meaning: 'The Hand', deity: 'Savitar', desc: 'The star of craftsmanship and skill. Healing hands, the artist.' },
+    { name: 'Chitra', ko: 'Chitra', ruler: 'Mars', meaning: 'Shining Jewel', deity: 'Vishwakarma', desc: 'The star of beauty and creation. Exceptional aesthetic sense.' },
+    { name: 'Swati', ko: 'Swati', ruler: 'Rahu', meaning: 'The Independent', deity: 'Vayu', desc: 'The freedom of wind. An independent and flexible personality.' },
+    { name: 'Vishakha', ko: 'Vishakha', ruler: 'Jupiter', meaning: 'The Forked', deity: 'Indra-Agni', desc: 'The star of goals and determination. Strong focus and willpower.' },
+    { name: 'Anuradha', ko: 'Anuradha', ruler: 'Saturn', meaning: 'Following Radha', deity: 'Mitra', desc: 'The star of friendship and devotion. Organizational skills and leadership.' },
+    { name: 'Jyeshtha', ko: 'Jyeshtha', ruler: 'Mercury', meaning: 'The Eldest', deity: 'Indra', desc: 'The star of protection and authority. Strong sense of responsibility.' },
+    { name: 'Mula', ko: 'Mula', ruler: 'Ketu', meaning: 'The Root', deity: 'Nirriti', desc: 'The star of destruction and rebuilding. One who seeks the root of truth.' },
+    { name: 'Purva Ashadha', ko: 'Purva Ashadha', ruler: 'Venus', meaning: 'Former Invincible', deity: 'Apas', desc: 'The power of water and purification. Hidden victorious energy.' },
+    { name: 'Uttara Ashadha', ko: 'Uttara Ashadha', ruler: 'Sun', meaning: 'Latter Invincible', deity: 'Vishvedevas', desc: 'The star of ultimate victory. Patience and leadership.' },
+    { name: 'Shravana', ko: 'Shravana', ruler: 'Moon', meaning: 'The Listener', deity: 'Vishnu', desc: 'The star of knowledge and listening. A master of learning and communication.' },
+    { name: 'Dhanishta', ko: 'Dhanishta', ruler: 'Mars', meaning: 'The Wealthiest', deity: 'Vasus', desc: 'The star of abundance and music. Talent and prosperity.' },
+    { name: 'Shatabhisha', ko: 'Shatabhisha', ruler: 'Rahu', meaning: 'Hundred Healers', deity: 'Varuna', desc: 'The star of secrets and healing. Mysterious healing abilities.' },
+    { name: 'Purva Bhadrapada', ko: 'Purva Bhadrapada', ruler: 'Jupiter', meaning: 'Former Lucky Feet', deity: 'Aja Ekapada', desc: 'The star of fire and transformation. Spiritual awakening.' },
+    { name: 'Uttara Bhadrapada', ko: 'Uttara Bhadrapada', ruler: 'Saturn', meaning: 'Latter Lucky Feet', deity: 'Ahir Budhnya', desc: 'Wisdom of the deep ocean. Meditation and spiritual depth.' },
+    { name: 'Revati', ko: 'Revati', ruler: 'Mercury', meaning: 'The Wealthy', deity: 'Pushan', desc: 'The star of travel and protection. The completion of all things.' },
+];
+
+// Dasha periods (years)
+const DASHA_YEARS = {
+    'Ketu': 7, 'Venus': 20, 'Sun': 6, 'Moon': 10, 'Mars': 7,
+    'Rahu': 18, 'Jupiter': 16, 'Saturn': 19, 'Mercury': 17
+};
+const DASHA_ORDER = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+const DASHA_KO = {
+    'Ketu': 'Ketu', 'Venus': 'Venus', 'Sun': 'Sun', 'Moon': 'Moon', 'Mars': 'Mars',
+    'Rahu': 'Rahu', 'Jupiter': 'Jupiter', 'Saturn': 'Saturn', 'Mercury': 'Mercury'
+};
+
+// South Indian chart house layout (fixed signs)
+// Grid positions: [row][col] → sign index
+const SI_LAYOUT = [
+    [11, 0, 1, 2],
+    [10, -1, -1, 3],
+    [9, -1, -1, 4],
+    [8, 7, 6, 5]
+];
+
+// ── Form Initialization ──
+function initForm() {
+    const yearSel = document.getElementById('birthYear');
+    const monthSel = document.getElementById('birthMonth');
+    const daySel = document.getElementById('birthDay');
+    const hourSel = document.getElementById('birthHour');
+    const minSel = document.getElementById('birthMinute');
+
+    // Year: 1940~2025
+    for (let y = 2025; y >= 1940; y--) {
+        const opt = document.createElement('option');
+        opt.value = y; opt.textContent = y;
+        if (y === 1995) opt.selected = true;
+        yearSel.appendChild(opt);
+    }
+    // Month: 1~12
+    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    for (let m = 1; m <= 12; m++) {
+        const opt = document.createElement('option');
+        opt.value = m; opt.textContent = monthNames[m-1];
+        if (m === 3) opt.selected = true;
+        monthSel.appendChild(opt);
+    }
+    // Day: 1~31
+    for (let d = 1; d <= 31; d++) {
+        const opt = document.createElement('option');
+        opt.value = d; opt.textContent = d;
+        if (d === 15) opt.selected = true;
+        daySel.appendChild(opt);
+    }
+    // Hour: 12, 1~11
+    [12,1,2,3,4,5,6,7,8,9,10,11].forEach(h => {
+        const opt = document.createElement('option');
+        opt.value = h; opt.textContent = h + ':00';
+        if (h === 10) opt.selected = true;
+        hourSel.appendChild(opt);
+    });
+    // Minute: 00, 05, 10, ... 55
+    for (let m = 0; m < 60; m += 5) {
+        const opt = document.createElement('option');
+        opt.value = m; opt.textContent = String(m).padStart(2,'0');
+        if (m === 30) opt.selected = true;
+        minSel.appendChild(opt);
+    }
+}
+
+function toggleTimeUnknown() {
+    const sel = document.getElementById('birthTimeUnknown');
+    const disabled = sel.value === 'unknown';
+    document.getElementById('birthAmpm').disabled = disabled;
+    document.getElementById('birthHour').disabled = disabled;
+    document.getElementById('birthMinute').disabled = disabled;
+    if (disabled) {
+        document.getElementById('birthAmpm').style.opacity = '0.4';
+        document.getElementById('birthHour').style.opacity = '0.4';
+        document.getElementById('birthMinute').style.opacity = '0.4';
+    } else {
+        document.getElementById('birthAmpm').style.opacity = '1';
+        document.getElementById('birthHour').style.opacity = '1';
+        document.getElementById('birthMinute').style.opacity = '1';
+    }
+}
+
+function getBirthDateTime() {
+    const year = parseInt(document.getElementById('birthYear').value);
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+
+    let hour, minute;
+    if (document.getElementById('birthTimeUnknown').value === 'unknown') {
+        hour = 12; minute = 0; // Noon default
+    } else {
+        hour = parseInt(document.getElementById('birthHour').value);
+        const ampm = document.getElementById('birthAmpm').value;
+        if (ampm === 'pm' && hour !== 12) hour += 12;
+        if (ampm === 'am' && hour === 12) hour = 0;
+        minute = parseInt(document.getElementById('birthMinute').value);
+    }
+    return { year, month, day, hour, minute };
+}
+
+function onCityChange() {
+    const sel = document.getElementById('birthCity');
+    const customDiv = document.getElementById('customLatLng');
+    if (sel.value === 'custom') {
+        customDiv.style.display = 'block';
+    } else {
+        customDiv.style.display = 'none';
+    }
+}
+
+function getLatLng() {
+    const sel = document.getElementById('birthCity');
+    if (sel.value === 'custom') {
+        return {
+            lat: parseFloat(document.getElementById('birthLat').value) || 37.57,
+            lng: parseFloat(document.getElementById('birthLng').value) || 126.98
+        };
+    }
+    const [lat, lng] = sel.value.split(',').map(Number);
+    return { lat, lng };
+}
+
+// Initialize form on page load
+initForm();
+
+function toJulianDate(date) {
+    const y = date.getUTCFullYear();
+    const m = date.getUTCMonth() + 1;
+    const d = date.getUTCDate() + (date.getUTCHours() + date.getUTCMinutes()/60) / 24;
+
+    let Y = y, M = m;
+    if (M <= 2) { Y -= 1; M += 12; }
+    const A = Math.floor(Y / 100);
+    const B = 2 - A + Math.floor(A / 4);
+    return Math.floor(365.25 * (Y + 4716)) + Math.floor(30.6001 * (M + 1)) + d + B - 1524.5;
+}
+
+function getPlanetPosition(planetId, date) {
+    try {
+        if (planetId === 'Moon') {
+            return Astronomy.EclipticGeoMoon(date).lon;
+        } else if (planetId === 'Sun') {
+            const vec = Astronomy.GeoVector('Sun', date, true);
+            return Astronomy.Ecliptic(vec).elon;
+        } else {
+            return Astronomy.EclipticLongitude(planetId, date);
+        }
+    } catch (e) {
+        console.error('Planet calc error:', planetId, e);
+        return 0;
+    }
+}
+
+function calculateChart() {
+    const { lat, lng } = getLatLng();
+    const birth = getBirthDateTime();
+    const { year, month, day, hour, minute } = birth;
+
+    // Create Astronomy date
+    const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, 0));
+    const astroDate = Astronomy.MakeTime(utcDate);
+    const jd = toJulianDate(utcDate);
+    const ayanamsa = getAyanamsa(jd);
+
+    // Calculate planet positions (sidereal)
+    const positions = [];
+    PLANETS.forEach(planet => {
+        let tropicalLon = getPlanetPosition(planet.id, astroDate);
+        let siderealLon = (tropicalLon - ayanamsa + 360) % 360;
+        let signIdx = Math.floor(siderealLon / 30);
+        let degree = siderealLon % 30;
+        let nakshatraIdx = Math.floor(siderealLon / (360/27));
+
+        positions.push({
+            ...planet,
+            tropical: tropicalLon,
+            sidereal: siderealLon,
+            sign: signIdx,
+            degree: degree,
+            nakshatra: nakshatraIdx,
+            nakshatraPada: Math.floor((siderealLon % (360/27)) / (360/108)) + 1
+        });
+    });
+
+    // Calculate Rahu/Ketu (lunar nodes)
+    try {
+        const moonNode = Astronomy.SearchMoonNode(astroDate);
+        // Approximate Rahu position
+        const rahuTropical = (getPlanetPosition('Moon', astroDate) + 180) % 360; // simplified
+        const rahuSidereal = (rahuTropical - ayanamsa + 360) % 360;
+        positions.push({
+            id: 'Rahu', name: 'Rahu', symbol: '☊', natural: 'malefic',
+            sidereal: rahuSidereal, sign: Math.floor(rahuSidereal / 30),
+            degree: rahuSidereal % 30, nakshatra: Math.floor(rahuSidereal / (360/27))
+        });
+        positions.push({
+            id: 'Ketu', name: 'Ketu', symbol: '☋', natural: 'malefic',
+            sidereal: (rahuSidereal + 180) % 360, sign: Math.floor(((rahuSidereal + 180) % 360) / 30),
+            degree: ((rahuSidereal + 180) % 360) % 30, nakshatra: Math.floor(((rahuSidereal + 180) % 360) / (360/27))
+        });
+    } catch(e) {}
+
+    // Ascendant (Lagna) - simplified
+    const lst = (280.46061837 + 360.98564736629 * (jd - 2451545.0) + lng) % 360;
+    const lagnaTopical = lst;
+    const lagnaSidereal = (lagnaTopical - ayanamsa + 360) % 360;
+    const lagnaSign = Math.floor(lagnaSidereal / 30);
+
+    // Moon's nakshatra for dasha
+    const moonPos = positions.find(p => p.id === 'Moon');
+    const moonNakshatra = moonPos ? moonPos.nakshatra : 0;
+
+    // Render everything
+    renderPlanetTable(positions, lagnaSign);
+    renderD1Chart(positions, lagnaSign);
+    renderNakshatra(moonPos);
+    renderDasha(moonNakshatra, utcDate);
+    renderInterpretation(positions, lagnaSign, moonPos);
+    renderPlanetHouse(positions, lagnaSign);
+    renderEducation(positions, lagnaSign);
+    renderChildren(positions, lagnaSign);
+    renderForeign(positions, lagnaSign);
+    renderDignity(positions, lagnaSign);
+    renderLucky(lagnaSign, moonPos);
+    renderRemedy(positions, lagnaSign);
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderPlanetTable(positions, lagnaSign) {
+    let html = '<table class="planet-table"><thead><tr>';
+    html += '<th>Planet</th><th>Sign</th><th>Degree</th><th>Nakshatra</th><th>House</th>';
+    html += '</tr></thead><tbody>';
+
+    // Add Lagna first
+    const lagnaDeg = positions.length > 0 ? 0 : 0;
+    html += `<tr><td>⬆ Lagna (Ascendant)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>-</td><td>-</td><td>1st</td></tr>`;
+
+    positions.forEach(p => {
+        const house = ((p.sign - lagnaSign + 12) % 12) + 1;
+        const nak = NAKSHATRAS[p.nakshatra] || { ko: '-', name: '-' };
+        const roleMap = { Sun:'Self/Authority', Moon:'Emotions/Mind', Mars:'Energy/Courage', Mercury:'Intelligence/Communication', Jupiter:'Luck/Wisdom', Venus:'Love/Charm', Saturn:'Patience/Responsibility', Rahu:'Desire/Innovation', Ketu:'Spirituality/Liberation' };
+        const houseArea = ['','Self','Money/Family','Communication','Home','Children/Romance','Health','Spouse','Transformation','Luck/Foreign','Career','Income','Foreign/Spirituality'];
+        html += `<tr>
+            <td>${p.symbol} ${p.name}<br><span style="color:#666;font-size:10px;">${roleMap[p.id]||''}</span></td>
+            <td>${SIGN_SYMBOLS[p.sign]} ${SIGNS[p.sign]}</td>
+            <td>${p.degree.toFixed(1)}°</td>
+            <td>${nak.name}</td>
+            <td>${house}${house===1?'st':house===2?'nd':house===3?'rd':'th'}<br><span style="color:#666;font-size:10px;">${houseArea[house]||''}</span></td>
+        </tr>`;
+    });
+
+    html += '</tbody></table>';
+    document.getElementById('planetTableWrap').innerHTML = html;
+}
+
+function renderD1Chart(positions, lagnaSign) {
+    const grid = document.getElementById('d1Chart');
+    grid.innerHTML = '';
+
+    // Place planets in signs
+    const signPlanets = {};
+    for (let i = 0; i < 12; i++) signPlanets[i] = [];
+    positions.forEach(p => {
+        signPlanets[p.sign].push(p);
+    });
+
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const signIdx = SI_LAYOUT[row][col];
+
+            if (signIdx === -1) {
+                cell.className = 'chart-cell empty';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#c9a84c;font-size:10px;">D1<br>Rasi</div>' : '';
+            } else {
+                cell.className = 'chart-cell';
+                const house = ((signIdx - lagnaSign + 12) % 12) + 1;
+                cell.innerHTML = `<span class="house-num">${house}/${SIGN_SYMBOLS[signIdx]}</span>`;
+
+                if (signIdx === lagnaSign) {
+                    cell.innerHTML += '<span style="color:#c9a84c;font-size:10px;">Asc</span>';
+                }
+
+                signPlanets[signIdx].forEach(p => {
+                    const cls = p.natural === 'benefic' ? 'benefic' : (p.natural === 'malefic' ? 'malefic' : '');
+                    cell.innerHTML += `<span class="planet ${cls}">${p.symbol}</span>`;
+                });
+            }
+
+            grid.appendChild(cell);
+        }
+    }
+}
+
+function renderNakshatra(moonPos) {
+    if (!moonPos) return;
+    const nak = NAKSHATRAS[moonPos.nakshatra];
+    if (!nak) return;
+
+    const html = `
+        <div class="nakshatra-card">
+            <div class="nakshatra-name">${nak.name}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}" — Ruling Planet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
+            <div class="nakshatra-detail">
+                Deity: ${nak.deity}<br><br>
+                ${nak.desc}
+            </div>
+        </div>
+    `;
+    document.getElementById('nakshatraWrap').innerHTML = html;
+}
+
+function renderDasha(moonNakshatra, birthDate) {
+    const nak = NAKSHATRAS[moonNakshatra];
+    if (!nak) return;
+
+    // Find starting dasha from nakshatra ruler
+    const startRuler = nak.ruler;
+    let startIdx = DASHA_ORDER.indexOf(startRuler);
+    if (startIdx === -1) startIdx = 0;
+
+    const now = new Date();
+    let currentDate = new Date(birthDate);
+
+    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>What is a Dasha?</strong> Life is divided into periods ruled by 9 planets in succession. During each planet\'s ruling period, that planet\'s energy strongly influences your life. The planet marked <strong style="color:#c9a84c;">Current</strong> below is the one currently governing your life.</div></div>';
+    html += '<div class="dasha-timeline">';
+
+    for (let i = 0; i < 9; i++) {
+        const idx = (startIdx + i) % 9;
+        const planet = DASHA_ORDER[idx];
+        const years = DASHA_YEARS[planet];
+
+        const startD = new Date(currentDate);
+        const endD = new Date(currentDate);
+        endD.setFullYear(endD.getFullYear() + years);
+
+        const isCurrent = now >= startD && now < endD;
+
+        const startStr = startD.getFullYear() + '.' + (startD.getMonth()+1);
+        const endStr = endD.getFullYear() + '.' + (endD.getMonth()+1);
+
+        html += `<div class="dasha-item ${isCurrent ? 'current' : ''}">
+            <span class="dasha-planet">${DASHA_KO[planet]}</span>
+            <span class="dasha-period">${startStr} ~ ${endStr}</span>
+            <span class="dasha-years">${years} yrs</span>
+            ${isCurrent ? '<span class="dasha-badge">Current</span>' : ''}
+        </div>`;
+
+        currentDate = endD;
+    }
+
+    html += '</div>';
+    document.getElementById('dashaWrap').innerHTML = html;
+}
+
+function renderInterpretation(positions, lagnaSign, moonPos) {
+    // Helper: get house number from sign
+    function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
+    function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+
+    let html = '';
+
+    // ═══════════════════════════════════
+    // 1. Personality & Appearance (1st House Lagna)
+    // ═══════════════════════════════════
+    const lagnaInterp = [
+        'Aries Lagna ruled by Mars. Strong willpower and leadership, independent personality. Quick to act with a pioneering spirit. Sharp features with an active impression. Impulsive but courageous, excelling in competition.',
+        'Taurus Lagna ruled by Venus. Seeks stability and abundance, loves sensory beauty. Soft appearance with an attractive voice. Values material security with exceptional artistic sense. Stubborn but reliable.',
+        'Gemini Lagna ruled by Mercury. Intellectually curious with outstanding communication skills. Youthful appearance with an agile build. Versatile but can be scattered, talented in writing and languages.',
+        'Cancer Lagna ruled by the Moon. Rich in sensitivity and highly intuitive. Round face with a soft impression. Devoted to home and family with strong protective instincts. Emotional ups and downs but deeply empathetic.',
+        'Leo Lagna ruled by the Sun. Overflowing with charisma and creative energy. Dignified build with a commanding presence. Natural-born leader who enjoys the spotlight. High self-esteem but generous heart.',
+        'Virgo Lagna ruled by Mercury. Analytical and perfectionist. Neat appearance with an intellectual impression. Excellent attention to detail and practical abilities, with interest in health and hygiene.',
+        'Libra Lagna ruled by Venus. Seeks balance and harmony, diplomatically skilled. Well-proportioned appearance with a refined impression. Excels in relationships and partnerships with superb aesthetic sense.',
+        'Scorpio Lagna ruled by Mars. Intense intuition and transformative power. Sharp eyes with a mysterious impression. Penetrates to the essence with deep insight, keeps secrets well. Experiences dramatic life changes multiple times.',
+        'Sagittarius Lagna ruled by Jupiter. A philosopher seeking freedom and truth. Large build with a bright impression. Optimistic and values moral principles. Deep connections with travel and higher education.',
+        'Capricorn Lagna ruled by Saturn. Strong ambition and patience. Lean build with a serious impression. Systematically works toward goals, the type who grows younger with age. Values social status and achievement.',
+        'Aquarius Lagna ruled by Saturn. Innovative and original. Unique appearance with an intellectual impression. Values humanitarian ideals with unconventional thinking. Talented in technology and science.',
+        'Pisces Lagna ruled by Jupiter. Spiritual and intuitive. Soft appearance with a dreamy impression. Extremely gifted artistic sensitivity with interest in transcendent worlds. Self-sacrificing tendency.'
+    ];
+
+    html += `<div class="interp-card">
+        <div class="interp-title">👤 Personality & Appearance — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
+        <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
+    </div>`;
+
+    // ═══════════════════════════════════
+    // 2. Inner Self & Emotions (Moon Sign)
+    // ═══════════════════════════════════
+    if (moonPos) {
+        const moonInterp = [
+            'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
+            'Emotionally very stable, seeking comfort. Dislikes change and finds security in the familiar. Healed by good food, music, and nature. Once you give your heart, it rarely changes.',
+            'Processes emotions rationally and organizes feelings through conversation. Curious with many simultaneous interests. Seeks variety over emotional depth and cannot tolerate boredom.',
+            'Moon in its own sign (domicile). Extremely rich in sensitivity, absorbing others\' emotions like a sponge. Strong maternal instincts, finding stability at home. Emotions may fluctuate with the Moon\'s cycle.',
+            'Dramatic and passionate emotional expression. Strong need to be recognized and loved; deeply hurt when ignored. Creative activities serve as emotional healing. Romantic and generous heart.',
+            'Tendency to analyze and organize emotions. Worries a lot and is perfectionist but resolves things practically. May have health concerns, finding stability in daily routines.',
+            'Finds emotional balance within relationships. Feels anxious alone and stabilizes when with a partner. Extremely averse to conflict and discord, finding inner peace in art and beauty.',
+            'Emotions are as deep and intense as the ocean. Loves deeply and hates deeply; never forgives betrayal. Very strong intuition, instinctively reading others\' true intentions. Emotional energy of transformation and rebirth.',
+            'Emotionally optimistic and freedom-loving. Dislikes being constrained and seeks new experiences. Sublimating emotions through philosophical thought, with travel as the best remedy.',
+            'Controls emotions well and doesn\'t show them outwardly. Strong sense of responsibility, prioritizing duty over feelings. May have had emotional difficulties in childhood, but grows emotionally mature with age.',
+            'Unique and unpredictable emotional patterns. Independent, loving in unconventional ways. Pursues universal love for humanity and social causes, seeing the bigger picture over personal emotions.',
+            'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
+        ];
+        html += `<div class="interp-card">
+            <div class="interp-title">🌙 Inner Self & Emotions — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-text">${moonInterp[moonPos.sign]}</div>
+        </div>`;
+    }
+
+    // ═══════════════════════════════════
+    // 3. 💰 Wealth Fortune (2nd & 11th House Analysis)
+    // ═══════════════════════════════════
+    const h2planets = planetsInHouse(2);
+    const h11planets = planetsInHouse(11);
+    const h2sign = (lagnaSign + 1) % 12;
+    const h11sign = (lagnaSign + 10) % 12;
+
+    let wealthText = `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
+    if (h2planets.length === 0) {
+        wealthText += 'No planets in the 2nd house — wealth accumulation is steady but stable without major fluctuations. ';
+    } else {
+        h2planets.forEach(p => {
+            const pWealth = {
+                'Sun': 'Income through authority and status. Potential earnings from government or public sectors.',
+                'Moon': 'Fluctuating financial situation. Income possible in public-facing businesses or food & beverage industries.',
+                'Mars': 'Aggressive investment tendencies. Income from real estate, technology, or military-related fields.',
+                'Mercury': 'Earning money through intellectual abilities. Wealth from writing, education, communications, and IT.',
+                'Jupiter': 'Most auspicious placement! Abundant wealth fortune. Great income from education, law, or religious fields.',
+                'Venus': 'Accumulates wealth through luxury goods, art, entertainment, and fashion. Abundant dining life.',
+                'Saturn': 'Slowly and steadily accumulates wealth. Difficulties early on but stabilizes after middle age.',
+                'Rahu': 'Earns money through unconventional methods. Sudden wealth from foreign, technology, or innovation sectors.',
+                'Ketu': 'Indifference to wealth. Values spiritual matters over material ones; watch for sudden losses.'
+            };
+            wealthText += `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
+        });
+    }
+
+    wealthText += `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
+    if (h11planets.length === 0) {
+        wealthText += 'No planets in the 11th house — income is stable but without major fluctuations.';
+    } else {
+        h11planets.forEach(p => {
+            const pIncome = {
+                'Jupiter': 'Large income and abundant profits! Social networks bring wealth.',
+                'Venus': 'Income through art, socializing, and fashion. Female friends are helpful.',
+                'Saturn': 'Steady and stable income but slow growth. Good retirement security.',
+                'Mars': 'Income through competition. Profits from technology, real estate, and sports.',
+                'Mercury': 'Income through intellectual networks. Entrepreneurial aptitude.',
+                'Sun': 'Income through authority. Political connections bring wealth.',
+                'Moon': 'Income through public popularity. Fluctuating but steady flow.'
+            };
+            wealthText += `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
+        });
+    }
+
+    html += `<div class="interp-card">
+        <div class="interp-title">💰 Wealth Fortune</div>
+        <div class="interp-text">${wealthText}</div>
+    </div>`;
+
+    // ═══════════════════════════════════
+    // 4. 💕 Spouse & Marriage Fortune (7th House Analysis)
+    // ═══════════════════════════════════
+    const h7sign = (lagnaSign + 6) % 12;
+    const h7planets = planetsInHouse(7);
+    const venus = positions.find(p => p.id === 'Venus');
+
+    const spouseSign = [
+        'An independent and energetic spouse. Destined for someone with strong willpower and leadership. An active and direct partner.',
+        'A beautiful and artistic spouse. Destined for someone materially stable. A sensual and loyal partner.',
+        'An intelligent spouse with good communication skills. Destined for someone you can converse with well. A humorous and versatile partner.',
+        'An emotional and domestic spouse. Destined for someone nurturing. A partner with motherly warmth.',
+        'A charismatic and dignified spouse. Destined for someone socially prominent. A partner with high self-esteem but generous nature.',
+        'A meticulous and practical spouse. Destined for someone interested in health and wellness. An analytical and service-oriented partner.',
+        'An attractive and refined spouse. Destined for someone diplomatic with good sense of balance. A partner with excellent artistic taste.',
+        'An intense and mysterious spouse. Destined for someone with deep emotions. A transformative and passionate partner. May have many secrets.',
+        'A free-spirited and optimistic spouse. Possible connection with a foreigner or someone from another culture. A philosophical and adventurous partner.',
+        'A serious and ambitious spouse. May have an age difference. A responsible and socially successful partner. Marriage may come late.',
+        'A unique and independent spouse. Unconventional meeting or relationship. An intellectual and innovative partner. A free-form marriage.',
+        'A spiritual and intuitive spouse. Connection with an artist or spiritual practitioner. A dreamy and romantic partner. Watch for idealization.'
+    ];
+
+    let spouseText = spouseSign[h7sign];
+
+    if (h7planets.length > 0) {
+        spouseText += '<br><br><strong>Planets in the 7th House:</strong> ';
+        h7planets.forEach(p => {
+            const pH7 = {
+                'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
+                'Moon': 'An emotional and caring spouse. Marriage life with deep emotional connection.',
+                'Mars': 'Passionate but may have frequent arguments. A strong-willed spouse. Energetic relationship. (Watch for Kuja Dosha)',
+                'Mercury': 'An intellectual spouse with great conversation. A good relationship as business partners too.',
+                'Jupiter': 'Most blessed placement! A wise and moral spouse. Happy married life. Luck through spouse.',
+                'Venus': 'A very attractive and loving spouse. Romantic married life. May enjoy luxury.',
+                'Saturn': 'Late marriage or spouse with significant age difference. Difficult early on but stable, long-lasting marriage.',
+                'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting. Beware of illusions.',
+                'Ketu': 'Detachment toward spouse. Past-life connection. Strong spiritual bond but distance in worldly relationships.'
+            };
+            spouseText += `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
+        });
+    }
+
+    if (venus) {
+        const venusHouse = houseOf(venus.sign);
+        spouseText += `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
+        const venusHouseInterp = {
+            1: 'Attractive appearance. Enjoys romance and falls in love easily.',
+            2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
+            3: 'Artistic communication skills. Pleasant relationships with siblings.',
+            4: 'Happiness at home with a beautiful residence. Strong influence from mother.',
+            5: 'A life rich in romance. Good relationship with children. Joy in creative work.',
+            6: 'Service-oriented attitude in romance. Possibility of workplace romance.',
+            7: 'Very attractive spouse. A strong indicator of happy married life.',
+            8: 'Deep and transformative love. Secret romance. Spouse\'s wealth.',
+            9: 'Romance abroad. Connection with a teacher or mentor. Philosophical love.',
+            10: 'Socially recognized marriage. Meeting through career.',
+            11: 'From friends to lovers. Finding connections through social activities.',
+            12: 'Secret romance. Foreign connections. Spiritual love.'
+        };
+        spouseText += venusHouseInterp[venusHouse] || '';
+    }
+
+    html += `<div class="interp-card">
+        <div class="interp-title">💕 Spouse & Marriage Fortune — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-text">${spouseText}</div>
+    </div>`;
+
+    // ═══════════════════════════════════
+    // 5. 💼 Career & Social Achievement (10th House Analysis)
+    // ═══════════════════════════════════
+    const h10sign = (lagnaSign + 9) % 12;
+    const h10planets = planetsInHouse(10);
+
+    const careerSign = [
+        'Suited for military, police, sports, surgery, corporate management, leadership roles.',
+        'Finance, food industry, agriculture, fashion, real estate, art, banking fields.',
+        'Media, writing, education, communications, IT, marketing, translation fields.',
+        'Medical, nursing, hospitality, maritime, real estate, food & beverage fields.',
+        'Politics, entertainment, management, government agencies, leadership positions, gold-related fields.',
+        'Medical, accounting, analysis, consulting, healthcare, quality control fields.',
+        'Law, diplomacy, fashion, interior design, counseling, event planning fields.',
+        'Research, investigation, insurance, medicine, psychology, taxation, mining fields.',
+        'Education, law, religion, publishing, travel, international trade fields.',
+        'Management, civil service, architecture, civil engineering, politics, large corporations.',
+        'Technology, science, IT, aviation, aerospace, social work, innovation fields.',
+        'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
+    ];
+
+    let careerText = `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
+
+    if (h10planets.length > 0) {
+        careerText += '<br><br><strong>Planets in the 10th House:</strong>';
+        h10planets.forEach(p => {
+            const pCareer = {
+                'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
+                'Moon': ' Public-facing career. Caring, hospitality, food & beverage, emotion-related fields.',
+                'Mars': ' Technology, engineering, military, surgery, sports. Success in competitive fields.',
+                'Mercury': ' Business, communication, IT, education. Success through intellectual abilities.',
+                'Jupiter': ' Education, law, religion, consulting. A respected career. One of the best placements.',
+                'Venus': ' Art, entertainment, fashion, beauty, diplomacy. Success in creative fields.',
+                'Saturn': ' Slow but certain success. Systematic organizations, architecture, civil service. Shines after middle age.'
+            };
+            careerText += `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
+        });
+    }
+
+    html += `<div class="interp-card">
+        <div class="interp-title">💼 Career & Social Achievement — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-text">${careerText}</div>
+    </div>`;
+
+    // ═══════════════════════════════════
+    // 6. 🏥 Health (6th House + Lagna Analysis)
+    // ═══════════════════════════════════
+    const h6sign = (lagnaSign + 5) % 12;
+    const h6planets = planetsInHouse(6);
+
+    const healthByLagna = [
+        'Watch for head, brain, and face-related conditions. Prone to headaches, fevers, and inflammation. Regular exercise is essential.',
+        'Watch for neck, thyroid, and jaw issues. Prone to overeating and diabetes. Take care of vocal cords and throat health.',
+        'Watch for lungs, arms, shoulders, and nervous system. Anxiety and sleep issues possible. Breathing meditation helps.',
+        'Watch for stomach, chest, and breast-related issues. Digestive disorders and water retention. Emotional stress directly affects health.',
+        'Watch for heart, back, and spine issues. Cardiovascular health management is essential. Beware of overwork.',
+        'Watch for digestive system, intestines, and skin. Indigestion and allergies. Diet is important.',
+        'Watch for kidneys, lower back, and skin. Adequate hydration and balanced lifestyle essential.',
+        'Watch for reproductive and excretory systems. Possibility of chronic conditions. Regular checkups are important.',
+        'Watch for liver, thighs, and hips. Tendency toward being overweight. Outdoor activities are good for health.',
+        'Watch for bones, joints, knees, and skin. Rheumatism and arthritis. Calcium intake is important.',
+        'Watch for ankles, calves, and circulatory system. Blood pressure management. Unusual health issues possible.',
+        'Watch for feet, lymphatic system, and immunity. Unexplained conditions possible. Adequate sleep is key.'
+    ];
+
+    html += `<div class="interp-card">
+        <div class="interp-title">🏥 Health — Vulnerable Areas</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
+    </div>`;
+
+    // ═══════════════════════════════════
+    // 7. ⏳ Current Dasha Interpretation
+    // ═══════════════════════════════════
+    if (moonPos) {
+        const nak = NAKSHATRAS[moonPos.nakshatra];
+        if (nak) {
+            const startRuler = nak.ruler;
+            let startIdx = DASHA_ORDER.indexOf(startRuler);
+            if (startIdx === -1) startIdx = 0;
+            const now = new Date();
+            const birthDate = new Date(Date.UTC(
+                parseInt(document.getElementById('birthYear').value),
+                parseInt(document.getElementById('birthMonth').value) - 1,
+                parseInt(document.getElementById('birthDay').value)
+            ));
+            let currentDate = new Date(birthDate);
+            let currentDasha = null;
+
+            for (let i = 0; i < 9; i++) {
+                const idx = (startIdx + i) % 9;
+                const planet = DASHA_ORDER[idx];
+                const years = DASHA_YEARS[planet];
+                const endD = new Date(currentDate);
+                endD.setFullYear(endD.getFullYear() + years);
+                if (now >= currentDate && now < endD) {
+                    currentDasha = planet;
+                    break;
+                }
+                currentDate = endD;
+            }
+
+            if (currentDasha) {
+                const dashaInterp = {
+                    'Sun': 'A period of self-discovery and authority. A time to exercise leadership and receive social recognition. Relationships with government or authority figures become important. Changes may occur in your relationship with your father. Watch your heart and eye health. This period strengthens your self-esteem and identity.',
+                    'Moon': 'A period of emotions and inner life. Home and relationship with mother become important. Real estate matters may arise, and public relations become active. Emotional fluctuations are large but intuition strengthens. Possibility of travel and relocation.',
+                    'Mars': 'A period of action and energy. A great time to courageously start new ventures. Real estate transactions, surgeries, and technology-related activities become active. Changes in sibling relationships. Watch for disputes, accidents, and burns. Good results in exercise and competition.',
+                    'Rahu': 'A period of rapid change and innovation. Unexpected opportunities and challenges come. Foreign-related activities become active, with potential advancement in technology and innovation fields. Material desires intensify — be careful not to get lost in illusions. You will have unique experiences. An 18-year long cycle.',
+                    'Jupiter': 'A period of luck and growth! A time when good things in life — education, marriage, childbirth, promotions — are more likely to happen. Spiritual growth and wisdom deepen. You will meet a teacher or mentor. Activities related to law, education, and religion are favorable.',
+                    'Saturn': 'A period of patience and trials. Growth is slow but certain. Responsibilities grow heavier with experiences of limitation and structure. Watch your health, especially bones and joints. A 19-year long cycle where true abilities are tested. When it ends, you discover a stronger self.',
+                    'Mercury': 'A period of intellectual activity and business. Favorable for learning, communication, writing, and business ventures. A great time to learn new skills. Relationships with siblings and friends become active. Watch nervous system health. You will find yourself juggling multiple things simultaneously.',
+                    'Ketu': 'A period of spiritual awakening and detachment. You become more detached from the material world with deepening spiritual interests. You may experience sudden changes and losses, but these lead to spiritual growth. Intuition becomes very strong — an excellent time for meditation and spiritual practice.',
+                    'Venus': 'A period of love and abundance! Romance, marriage, and artistic activities become active. You enjoy material prosperity and indulge in luxury. You may acquire a new car, new home, or jewelry. Aesthetic sense develops and social activities flourish. The longest cycle at 20 years.'
+                };
+                html += `<div class="interp-card">
+                    <div class="interp-title">⏳ Current Dasha: ${DASHA_KO[currentDasha]} Dasha</div>
+                    <div class="interp-text">${dashaInterp[currentDasha]}</div>
+                </div>`;
+            }
+        }
+    }
+
+    // ═══════════════════════════════════
+    // 8. 🔮 Special Yogas (Planetary Combinations)
+    // ═══════════════════════════════════
+    let yogaText = '';
+    const jupiter = positions.find(p => p.id === 'Jupiter');
+    const mars = positions.find(p => p.id === 'Mars');
+    const saturn = positions.find(p => p.id === 'Saturn');
+
+    // Gajakesari Yoga
+    if (moonPos && jupiter) {
+        const moonH = houseOf(moonPos.sign);
+        const jupH = houseOf(jupiter.sign);
+        const diff = Math.abs(moonH - jupH);
+        if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
+            yogaText += '<strong>🐘 Gajakesari Yoga</strong> — Moon and Jupiter in Kendra relationship! A combination of wisdom, fame, and abundance. Socially respected with exceptional intellectual abilities. Good education and children fortune.<br><br>';
+        }
+    }
+
+    // Budha-Aditya Yoga
+    const sun = positions.find(p => p.id === 'Sun');
+    const mercury = positions.find(p => p.id === 'Mercury');
+    if (sun && mercury && sun.sign === mercury.sign) {
+        yogaText += '<strong>📚 Budha-Aditya Yoga</strong> — Sun and Mercury in the same sign! Outstanding intellect and communication skills. Success in education, writing, and business. An authoritative intellectual leader.<br><br>';
+    }
+
+    // Chandra-Mangala Yoga
+    if (moonPos && mars && moonPos.sign === mars.sign) {
+        yogaText += '<strong>🔥 Chandra-Mangala Yoga</strong> — Moon and Mars in the same sign! Strong willpower and wealth accumulation ability. Succeeds in business and makes bold decisions.<br><br>';
+    }
+
+    // Kuja Dosha (Manglik)
+    if (mars) {
+        const marsH = houseOf(mars.sign);
+        if ([1,2,4,7,8,12].includes(marsH)) {
+            yogaText += `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Mars is positioned in the ${marsH}${marsH===1?'st':marsH===2?'nd':marsH===3?'rd':'th'} house, which may bring challenges in married life. It is advisable to check your partner's chart as well when choosing a spouse. Marriage after age 28 may be more favorable.<br><br>`;
+        }
+    }
+
+    if (yogaText) {
+        html += `<div class="interp-card">
+            <div class="interp-title">🔮 Special Yogas (Planetary Combinations)</div>
+            <div class="interp-text">${yogaText}</div>
+        </div>`;
+    }
+
+    document.getElementById('interpWrap').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════
+// Planet in House Detailed Interpretations
+// ═══════════════════════════════════════════════════
+const PLANET_IN_HOUSE = {
+    Sun: [
+        '1st House: Strong self and leadership. Healthy and vital. High self-esteem and independent. Connection with government/authority.',
+        '2nd House: Values family honor. Income through authority. Inheritance from father. Watch eye health.',
+        '3rd House: Courageous and decisive. Leader among siblings. Authority in writing/communication. Many short trips.',
+        '4th House: Tension in parental relationships. Ownership of real estate/vehicles. Inner restlessness. May leave hometown.',
+        '5th House: Outstanding creative talent. Good relationship with children. Investment/speculation abilities. Romantic love.',
+        '6th House: Power to defeat enemies. Health management abilities. Victory in legal disputes. Suited for service/medical fields.',
+        '7th House: Spouse with high social status. Leading role in partnerships. Social growth after marriage.',
+        '8th House: Watch longevity. Benefits from inheritance/insurance. Secret power. Experience of spiritual transformation.',
+        '9th House: Father is a respected figure. Success in law/religion/higher education. Many overseas trips. Good fortune.',
+        '10th House: The best placement! Social success and fame. Leader in government/public sector. Success like father.',
+        '11th House: Large income and social network. High-status friends. Excellent goal achievement abilities.',
+        '12th House: Success overseas. Spiritual pursuits. Distance from father. Tendency to enjoy solitude. Watch eye health.'
+    ],
+    Moon: [
+        '1st House: Attractive appearance. Emotional and changeable personality. Popular with the public. Health influenced by Moon cycles.',
+        '2nd House: Comfortable family environment. Good diet. Sweet-spoken. Strong family bonds.',
+        '3rd House: Creative communication skills. Loves to travel. Emotional bond with siblings. Artistic hobbies.',
+        '4th House: The best placement! Happy home. Strong bond with mother. Good real estate fortune. Emotional stability.',
+        '5th House: Deep love for children. Romantic personality. Intuitive investment ability. Joy in creative activities.',
+        '6th House: Health issues from emotional stress. Victory over enemies. Service spirit. Watch for digestive disorders.',
+        '7th House: Attractive spouse. Emotionally deep marriage. Tendency to depend on partner. Public relations.',
+        '8th House: Emotional turmoil and transformation. Very strong intuition. Possible inheritance. Long life but emotional crises.',
+        '9th House: Spiritual and philosophical. Mother is religious. Travel/residence abroad. Lucky journeys.',
+        '10th House: Public popularity and social success. Hospitality/food & beverage/caring fields. Success through mother\'s influence.',
+        '11th House: Many friends and sociable. Steady income. Ability to fulfill wishes. Help from female friends.',
+        '12th House: Possible residence abroad. Sleep problems. Spiritual inclinations. Distance from mother. Enjoys solitude.'
+    ],
+    Mars: [
+        '1st House: Strong physique and willpower. Possible scars/wounds. Impulsive but brave. Leadership and competitiveness.',
+        '2nd House: Harsh speech. Dietary issues. Family disputes. But ability to accumulate wealth.',
+        '3rd House: The best placement! Courage and adventurous spirit. Strong bond with siblings. Athletic/sports talent.',
+        '4th House: Domestic conflicts. Real estate disputes. Tension with mother. But profits from real estate investments.',
+        '5th House: Passionate romance. Active children. Speculative investments. Talent in sports/competition.',
+        '6th House: Power to crush enemies! Physical strength to overcome illness. Suited for military/police/medical. Strong immunity.',
+        '7th House: Kuja Dosha — Passion and conflict coexist in marriage. Strong spouse. Marriage after 28 recommended.',
+        '8th House: Watch for accidents/surgery. But the power to survive crises. Insurance/inheritance benefits. Interest in tantra.',
+        '9th House: Conflict with father. Strong opinions about religion. Legal disputes. Foreign activities.',
+        '10th House: Outstanding career performance! Military/engineering/surgery/police. A brave leader in society.',
+        '11th House: Large income! Strong goal achievement. Help from siblings. Real estate profits.',
+        '12th House: High spending overseas. Sleep issues. Strong sexual energy. Secret activities.'
+    ],
+    Jupiter: [
+        '1st House: Blessed placement! Wise and generous personality. Large build and healthy. A respected figure.',
+        '2nd House: Abundant wealth! Large family. Income through education. Eloquent speaker. Good diet.',
+        '3rd House: Successful siblings. Writing related to religion/education. Short pilgrimages.',
+        '4th House: One of the best placements! Spacious home. Academic achievement. Wise mother. Inner peace.',
+        '5th House: Outstanding intellect and creativity! Good children fortune. Wise investments. Spiritual practice. Merit from past lives.',
+        '6th House: Easily defeats enemies. Legal victories. Service spirit. Healthy but watch weight management.',
+        '7th House: A wise and moral spouse! Happy marriage. Successful business partnerships.',
+        '8th House: Longevity! Inheritance. Depth of spiritual knowledge. Interest in astrology/mysticism. Spouse\'s wealth.',
+        '9th House: The most powerful placement! Great fortune. Teacher\'s blessings. Overseas travel. Success in law/religion/philosophy.',
+        '10th House: Social fame and respect! Leader in education/law/religious fields. Moral authority. Best career fortune.',
+        '11th House: Great income and profits! Wish fulfillment. Influential connections. Social success.',
+        '12th House: Fortune overseas. Spiritual liberation. Heavenly pleasures. Donations and charity. Meditation practice.'
+    ],
+    Venus: [
+        '1st House: Very attractive appearance! Artistic talent. Enjoys luxury. Sociable and popular.',
+        '2nd House: Abundant wealth! Fine food and luxury goods. Sweet voice. Family harmony.',
+        '3rd House: Artistic communication. Beautiful writing. Good relationship with sisters/female siblings.',
+        '4th House: Beautiful home and vehicles! Luxurious lifestyle. Mother is beautiful and artistic.',
+        '5th House: Romantic love! Art/entertainment talent. Beautiful children. Joy in creation.',
+        '6th House: Difficulties in romance. Health-related beauty. Victory over enemies through charm.',
+        '7th House: The best placement! Very attractive spouse. Happy marriage. Successful business partnerships.',
+        '8th House: Deep and transformative love. Spouse\'s wealth. Secret romance. Longevity.',
+        '9th House: Romance abroad. Artistic travels. Beautiful relationship with teachers.',
+        '10th House: Success in art/fashion/entertainment! Socially attractive. Help from women.',
+        '11th House: Income through social networks! Help from female friends. Wish fulfillment.',
+        '12th House: Love abroad. Secret romance. Bedroom pleasures. Artistic inspiration.'
+    ],
+    Saturn: [
+        '1st House: Lean build. Serious and responsible. Childhood difficulties. Shines with age. Longevity.',
+        '2nd House: Slow wealth accumulation. Frugal lifestyle. Heavy speech. Distance from family. Stability after middle age.',
+        '3rd House: Excellent placement! Strong will and patience. Responsibility for siblings. Systematic communication.',
+        '4th House: Difficulties with mother. Strict home environment. Old houses/buildings. Inner solitude.',
+        '5th House: Children come late or few. Cautious investments. Academic struggles and overcoming. Spiritual practice.',
+        '6th House: Defeats enemies through patience! Chronic but manageable conditions. Success in service fields. Good placement.',
+        '7th House: Late marriage. Older spouse. Difficult early on but stable marriage. Caution with business partners.',
+        '8th House: Longevity! Watch for chronic conditions. Delays in inheritance matters. Secret research. Interest in tantra/yoga.',
+        '9th House: Difficult relationship with father. Serious approach to religion. Late overseas travel.',
+        '10th House: Great placement! Slow but certain social success. Leader in large corporations/government. Best career fortune.',
+        '11th House: Steady income growth! Older friends. Achieving goals through patience. Organizational profits.',
+        '12th House: Difficulties and growth overseas. Sleep issues. Spiritual practice. Preference for solitary work.'
+    ]
+};
+
+function renderPlanetHouse(positions, lagnaSign) {
+    function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
+    let html = '';
+
+    positions.forEach(p => {
+        if (!PLANET_IN_HOUSE[p.id]) return;
+        const house = houseOf(p.sign);
+        const desc = PLANET_IN_HOUSE[p.id][house - 1];
+        if (!desc) return;
+
+        const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
+        html += `<div class="interp-card">
+            <div class="interp-title">${p.symbol} ${p.name} → ${house}${hSuffix} House (${SIGNS[p.sign]})</div>
+            <div class="interp-text">${desc}</div>
+        </div>`;
+    });
+
+    document.getElementById('planetHouseWrap').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════
+// Education & Knowledge
+// ═══════════════════════════════════════════════════
+function renderEducation(positions, lagnaSign) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+
+    const h4 = planetsInHouse(4);
+    const h5 = planetsInHouse(5);
+    const h4sign = (lagnaSign + 3) % 12;
+    const h5sign = (lagnaSign + 4) % 12;
+
+    let text = `<strong>4th House (Basic Education & Degrees):</strong> ${SIGNS[h4sign]}. `;
+    const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
+    text += 'Suited for ' + eduSign4[h4sign] + '. ';
+    if (h4.length > 0) text += h4.map(p => p.name).join(', ') + ' in the 4th house influences education. ';
+
+    const jupiter = positions.find(p => p.id === 'Jupiter');
+    if (jupiter) {
+        const jH = houseOf(jupiter.sign);
+        const jSuffix = jH===1?'st':jH===2?'nd':jH===3?'rd':'th';
+        if ([1,4,5,9].includes(jH)) text += `<br><br>🎓 <strong>Jupiter in the ${jH}${jSuffix} house indicates high academic achievement!</strong> Potential for graduate school/PhD/study abroad.`;
+    }
+
+    text += `<br><br><strong>5th House (Higher Education & Intellect & Creativity):</strong> ${SIGNS[h5sign]}. `;
+    if (h5.length > 0) {
+        h5.forEach(p => {
+            const h5p = { Sun: 'Excels in leadership/political science', Moon: 'Talent in art/psychology', Mars: 'Talent in engineering/technology/physical education', Mercury: 'Genius in math/languages/business', Jupiter: 'The best placement! Scholar/professor/researcher', Venus: 'Talent in art/design/music', Saturn: 'Late academic start but deep research' };
+            text += `${p.name}: ${h5p[p.id] || 'Influences academics'}. `;
+        });
+    }
+
+    document.getElementById('educationWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// Children Fortune
+// ═══════════════════════════════════════════════════
+function renderChildren(positions, lagnaSign) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+
+    const h5 = planetsInHouse(5);
+    const h5sign = (lagnaSign + 4) % 12;
+    const jupiter = positions.find(p => p.id === 'Jupiter');
+
+    let text = `<strong>5th House (Children & Creativity):</strong> Located in ${SIGNS[h5sign]}.<br><br>`;
+
+    const childSign = [
+        'Active and independent children. Talented in sports/leadership. Gains independence early.',
+        'Calm and artistic children. Talented in music/art. Materially well-off children.',
+        'Smart and quick-speaking children. Excellent academics. Possibility of twins.',
+        'Sensitive and gentle children. Special bond with mother. Domestic children.',
+        'Charismatic and creative children. Leader qualities. Talent in entertainment/art.',
+        'Meticulous and analytical children. Talent in medicine/science. Health care is important.',
+        'Charming and sociable children. Talent in art/diplomacy. Excellent sense of balance.',
+        'Intense and intuitive children. Research/exploration spirit. May have many secrets.',
+        'Free-spirited and adventurous children. Possible study/travel abroad. Philosophical tendencies.',
+        'Serious and ambitious children. Matures early. Achievement-oriented.',
+        'Unique and innovative children. Talented in technology/science. Independent personality.',
+        'Artistic and spiritual children. Rich imagination. Talented in music/painting.'
+    ];
+    text += childSign[h5sign];
+
+    if (h5.length > 0) {
+        text += '<br><br><strong>Planets in the 5th House:</strong><br>';
+        h5.forEach(p => {
+            const ch = { Sun: 'Connection with sons. Children have leader qualities.', Moon: 'Connection with daughters. Strong emotional bond with children.', Mars: 'Active children. May be somewhat difficult to manage.', Mercury: 'Very smart children! Excellent academics.', Jupiter: 'Blessed children! Dutiful and devoted. Fortune through children.', Venus: 'Beautiful and artistic children. Connection with daughters.', Saturn: 'Children may come late or be few. But responsible children.' };
+            text += `${p.symbol} ${p.name}: ${ch[p.id] || ''}<br>`;
+        });
+    }
+
+    if (jupiter) {
+        const jH = houseOf(jupiter.sign);
+        if (jH === 5) text += '<br>🌟 <strong>Jupiter in the 5th house! Best children fortune. Children bring great luck.</strong>';
+    }
+
+    document.getElementById('childrenWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// Foreign Fortune & Migration
+// ═══════════════════════════════════════════════════
+function renderForeign(positions, lagnaSign) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+
+    const h9 = planetsInHouse(9);
+    const h12 = planetsInHouse(12);
+    const rahu = positions.find(p => p.id === 'Rahu');
+
+    let text = '<strong>9th House (Foreign Travel · Fortune · Higher Education):</strong><br>';
+    if (h9.length === 0) {
+        text += 'No planets in the 9th house — foreign travel exists but there is no particularly strong connection.';
+    } else {
+        h9.forEach(p => {
+            const f9 = { Sun: 'Father has foreign connections. Government/official overseas trips.', Moon: 'Emotionally enjoys foreign travel. Popularity abroad.', Mars: 'Adventure/challenges abroad. Military/technology-related foreign activities.', Mercury: 'Study abroad/business success! Multilingual abilities.', Jupiter: 'Great fortune abroad! Successful study/immigration. Meeting a foreign teacher.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Hardship then success abroad. Long-term foreign residence.', Rahu: 'Strong indicator of foreign migration! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connections. Spiritual pilgrimage.' };
+            text += `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
+        });
+    }
+
+    text += '<br><strong>12th House (Foreign Settlement · Immigration · Expenses):</strong><br>';
+    if (h12.length === 0) {
+        text += 'No planets in the 12th house — domestic residence is more natural than foreign settlement.';
+    } else {
+        h12.forEach(p => {
+            const f12 = { Sun: 'Finding identity abroad. Government-related foreign postings.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT activities. Overseas education.', Jupiter: 'Spiritual growth abroad. Charitable activities. Foreign universities.', Venus: 'Luxury and pleasure abroad. Overseas artistic activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Definitive indicator of foreign immigration! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
+            text += `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
+        });
+    }
+
+    if (rahu) {
+        const rH = houseOf(rahu.sign);
+        const rSuffix = rH===1?'st':rH===2?'nd':rH===3?'rd':'th';
+        if ([9, 12, 7].includes(rH)) text += `<br>✈️ <strong>Rahu in the ${rH}${rSuffix} house indicates a very high possibility of foreign migration/long-term residence!</strong>`;
+    }
+
+    document.getElementById('foreignWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// Planetary Dignity
+// ═══════════════════════════════════════════════════
+function renderDignity(positions, lagnaSign) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    const houseArea = {1:'Self',2:'Money/Family',3:'Communication/Siblings',4:'Home/Mother',5:'Children/Romance',6:'Health/Enemies',7:'Spouse',8:'Transformation/Inheritance',9:'Luck/Foreign',10:'Career/Fame',11:'Income/Wishes',12:'Foreign/Spirituality'};
+    const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
+    const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
+    const OWN = { Sun: [4], Moon: [3], Mars: [0,7], Mercury: [2,5], Jupiter: [8,11], Venus: [1,6], Saturn: [9,10] };
+
+    // Easy explanation
+    const planetRole = {
+        Sun: 'Self/Confidence/Father/Authority',
+        Moon: 'Emotions/Mind/Mother/Daily life',
+        Mars: 'Energy/Courage/Action/Competition',
+        Mercury: 'Intelligence/Communication/Learning/Business',
+        Jupiter: 'Luck/Wisdom/Wealth/Marriage',
+        Venus: 'Love/Charm/Art/Pleasure',
+        Saturn: 'Patience/Trials/Responsibility/Effort'
+    };
+
+    let html = `<div class="interp-card" style="margin-bottom:16px;">
+        <div class="interp-text">
+            <strong>💡 Easy to understand:</strong> A planet's "dignity" refers to how well it can exert its power.<br><br>
+            🟢 <strong>Exalted</strong> = Peak condition! Great fortune and results in the life area this planet governs.<br>
+            🟡 <strong>Own Sign</strong> = Comfortable as if at home. Stable and good results.<br>
+            ⚪ <strong>Neutral</strong> = Average. Neither particularly strong nor weak.<br>
+            🔴 <strong>Debilitated</strong> = Weakened state. Difficulties in this area, but can be overcome with effort.
+        </div>
+    </div>`;
+
+    positions.forEach(p => {
+        if (!EXALT.hasOwnProperty(p.id)) return;
+        let dignity, emoji, meaning, color, simpleDesc;
+        const role = planetRole[p.id];
+
+        const house = houseOf(p.sign);
+        const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
+        const area = houseArea[house] || '';
+
+        if (p.sign === EXALT[p.id]) {
+            dignity = 'Exalted';
+            emoji = '🟢';
+            color = '#5cb85c';
+            simpleDesc = `<strong>${p.name} is at maximum power!</strong> The "${role}" energy is maximized in the <strong>${house}${hSuffix} house (${area})</strong> area, bringing great blessings. Innate talents shine and good results come naturally.`;
+        } else if (p.sign === DEBI[p.id]) {
+            dignity = 'Debilitated';
+            emoji = '🔴';
+            color = '#d9534f';
+            simpleDesc = `<strong>${p.name} is in a weakened state.</strong> The "${role}" energy is weakened in the <strong>${house}${hSuffix} house (${area})</strong> area. You may experience difficulties in this field, but conscious effort to overcome them can become a great opportunity for growth. See the remedies below.`;
+        } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
+            dignity = 'Own Sign';
+            emoji = '🟡';
+            color = '#c9a84c';
+            simpleDesc = `<strong>${p.name} is at home!</strong> The "${role}" energy stably exerts its power in the <strong>${house}${hSuffix} house (${area})</strong> area. Good results come naturally.`;
+        } else {
+            dignity = 'Neutral';
+            emoji = '⚪';
+            color = '#999';
+            simpleDesc = `${p.name}'s "${role}" energy exerts average influence in the <strong>${house}${hSuffix} house (${area})</strong> area. Results vary depending on relationships with other planets.`;
+        }
+
+        html += `<div class="interp-card">
+            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-text">
+                <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
+                ${simpleDesc}
+            </div>
+        </div>`;
+    });
+
+    document.getElementById('dignityWrap').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════
+// Lucky Information
+// ═══════════════════════════════════════════════════
+function renderLucky(lagnaSign, moonPos) {
+    const luckyData = [
+        { color: 'Red, Orange', number: '1, 9', day: 'Tuesday', gem: 'Red Coral', dir: 'East' },
+        { color: 'White, Pink', number: '2, 6', day: 'Friday', gem: 'Diamond', dir: 'Southeast' },
+        { color: 'Green', number: '3, 5', day: 'Wednesday', gem: 'Emerald', dir: 'North' },
+        { color: 'White, Silver', number: '2, 7', day: 'Monday', gem: 'Pearl', dir: 'Northwest' },
+        { color: 'Gold, Orange', number: '1, 4', day: 'Sunday', gem: 'Ruby', dir: 'East' },
+        { color: 'Green, Light Green', number: '5, 3', day: 'Wednesday', gem: 'Emerald', dir: 'South' },
+        { color: 'White, Pastel', number: '6, 2', day: 'Friday', gem: 'Diamond', dir: 'West' },
+        { color: 'Red, Crimson', number: '9, 1', day: 'Tuesday', gem: 'Red Coral', dir: 'South' },
+        { color: 'Yellow, Gold', number: '3, 9', day: 'Thursday', gem: 'Yellow Sapphire', dir: 'Northeast' },
+        { color: 'Navy, Black', number: '8, 4', day: 'Saturday', gem: 'Blue Sapphire', dir: 'West' },
+        { color: 'Navy, Purple', number: '4, 8', day: 'Saturday', gem: 'Blue Sapphire', dir: 'West' },
+        { color: 'Yellow, Gold', number: '3, 7', day: 'Thursday', gem: 'Yellow Sapphire', dir: 'Northeast' }
+    ];
+
+    const d = luckyData[lagnaSign];
+    const lagnaRulers = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const html = `<div class="interp-card">
+        <div class="interp-text">
+            <strong>🎨 Lucky Color:</strong> ${d.color}<br>
+            <strong>🔢 Lucky Number:</strong> ${d.number}<br>
+            <strong>📅 Lucky Day:</strong> ${d.day}<br>
+            <strong>💎 Lucky Gemstone:</strong> ${d.gem}<br>
+            <strong>🧭 Lucky Direction:</strong> ${d.dir}<br>
+            <strong>🪐 Lagna Ruling Planet:</strong> ${lagnaRulers[lagnaSign]}
+        </div>
+    </div>`;
+    document.getElementById('luckyWrap').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════
+// Remedies & Strengthening Methods
+// ═══════════════════════════════════════════════════
+function renderRemedy(positions, lagnaSign) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
+
+    const remedies = {
+        Sun: { gem: 'Ruby', mantra: 'Om Suryaya Namaha', color: 'Wear orange/red on Sundays', food: 'Wheat, saffron, sunflower seeds', charity: 'Donate wheat/copper on Sundays' },
+        Moon: { gem: 'Pearl', mantra: 'Om Chandraya Namaha', color: 'Wear white/silver on Mondays', food: 'Milk, rice, coconut', charity: 'Donate rice/milk on Mondays' },
+        Mars: { gem: 'Red Coral', mantra: 'Om Mangalaya Namaha', color: 'Wear red on Tuesdays', food: 'Lentils, red fruits', charity: 'Donate red lentils on Tuesdays' },
+        Mercury: { gem: 'Emerald', mantra: 'Om Budhaya Namaha', color: 'Wear green on Wednesdays', food: 'Mung beans, green vegetables', charity: 'Donate green vegetables on Wednesdays' },
+        Jupiter: { gem: 'Yellow Sapphire', mantra: 'Om Gurave Namaha', color: 'Wear yellow on Thursdays', food: 'Chickpeas, bananas, turmeric', charity: 'Donate yellow food/books on Thursdays' },
+        Venus: { gem: 'Diamond', mantra: 'Om Shukraya Namaha', color: 'Wear white/pastel on Fridays', food: 'Milk, cream, fruits', charity: 'Donate white clothes/rice on Fridays' },
+        Saturn: { gem: 'Blue Sapphire', mantra: 'Om Shanaishcharaya Namaha', color: 'Wear navy/black on Saturdays', food: 'Black beans, sesame seeds', charity: 'Donate black beans/oil on Saturdays' }
+    };
+
+    let html = '';
+    positions.forEach(p => {
+        if (!remedies[p.id]) return;
+        const r = remedies[p.id];
+        const isDebi = DEBI[p.id] === p.sign;
+        const house = houseOf(p.sign);
+        const isWeak = isDebi || [6, 8, 12].includes(house);
+
+        if (isWeak) {
+            html += `<div class="interp-card">
+                <div class="interp-title">${p.symbol} ${p.name} Strengthening Methods ${isDebi ? '(Debilitated — Especially Important!)' : '(Weak Position)'}</div>
+                <div class="interp-text">
+                    <strong>💎 Gemstone:</strong> ${r.gem} (Recommended to wear on ring finger)<br>
+                    <strong>🙏 Mantra:</strong> "${r.mantra}" (Chant 108 times daily)<br>
+                    <strong>🎨 Color:</strong> ${r.color}<br>
+                    <strong>🍽️ Food:</strong> ${r.food}<br>
+                    <strong>🤝 Charity:</strong> ${r.charity}
+                </div>
+            </div>`;
+        }
+    });
+
+    if (!html) {
+        html = '<div class="interp-card"><div class="interp-text">All planets are in favorable positions! No special remedies are needed. For your lucky gemstone, wearing the gemstone of your Lagna ruling planet is recommended.</div></div>';
+    }
+
+    document.getElementById('remedyWrap').innerHTML = html;
+}
+
+// Enter key support
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') calculateChart();
+});
+</script>
+
+</body>
+</html>
