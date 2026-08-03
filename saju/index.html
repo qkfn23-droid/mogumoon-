@@ -139,6 +139,9 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
+        <h3 class="section-title">🕐 사주 기둥별 해석</h3>
+        <div id="pillarInterpWrap"></div>
+
         <h3 class="section-title">📖 성격 & 인생 해석</h3>
         <div id="interpWrap"></div>
 
@@ -297,6 +300,29 @@ function getTenGod(dayStem, targetStem) {
     if ((tarEl + 2) % 5 === dayEl) return sameYY ? '편관' : '정관';
     return '';
 }
+
+// 십신 해석
+const TEN_GOD_DESC = {
+    '비견': { icon: '👥', meaning: '나와 같은 기운', desc: '독립심, 경쟁심, 형제자매와의 인연. 비견이 많으면 자기 주장이 강하고 독립적이나 협력이 필요합니다.' },
+    '겁재': { icon: '⚡', meaning: '내 재물을 빼앗는 기운', desc: '승부욕, 도전정신, 때로 충동적. 겁재가 있으면 대담하지만 재물 관리에 주의가 필요합니다.' },
+    '식신': { icon: '🍽️', meaning: '내가 생산하는 기운', desc: '의식주 복, 표현력, 창작 능력. 식신이 있으면 먹복이 있고 예술적 재능이 풍부합니다.' },
+    '상관': { icon: '🎭', meaning: '내가 극하는 관성', desc: '반항심, 창의력, 언변. 상관이 있으면 재능이 뛰어나지만 조직 생활이 힘들 수 있습니다.' },
+    '편재': { icon: '💸', meaning: '내가 극하는 재물 (유동)', desc: '횡재수, 사업운, 아버지와의 인연. 편재가 있으면 큰돈을 벌 기회가 오지만 변동이 큽니다.' },
+    '정재': { icon: '💰', meaning: '내가 극하는 재물 (고정)', desc: '안정적 수입, 저축 능력, 성실한 재테크. 정재가 있으면 꾸준히 재물이 모입니다.' },
+    '편관': { icon: '⚔️', meaning: '나를 극하는 기운 (양)', desc: '권위, 카리스마, 위험과 기회. 편관이 있으면 강한 추진력이 있지만 스트레스도 큽니다.' },
+    '정관': { icon: '👔', meaning: '나를 극하는 기운 (음)', desc: '명예, 직장운, 규율. 정관이 있으면 사회적 성공이 따르고 조직에서 인정받습니다.' },
+    '편인': { icon: '📚', meaning: '나를 생하는 기운 (양)', desc: '학문, 영성, 비정통적 지식. 편인이 있으면 특이한 재능이 있고 직관이 강합니다.' },
+    '정인': { icon: '🎓', meaning: '나를 생하는 기운 (음)', desc: '학력, 자격증, 어머니와의 인연. 정인이 있으면 학업운이 좋고 귀인의 도움을 받습니다.' },
+    '일간': { icon: '⭐', meaning: '나 자신', desc: '' }
+};
+
+// 기둥 위치별 의미
+const PILLAR_MEANING = {
+    '년주': '조상궁 — 조부모, 가문, 어린 시절(0~15세), 사회적 배경',
+    '월주': '부모궁 — 부모, 형제, 청년기(15~30세), 직장/사회생활',
+    '일주': '배우자궁 — 나 자신(천간)과 배우자(지지), 중년기(30~45세)',
+    '시주': '자녀궁 — 자식, 제자, 말년(45세~), 노후와 결과'
+};
 
 // ═══════════════════════════════════════
 // 일간별 상세 해석
@@ -529,6 +555,31 @@ function calculate() {
     }
     infoHTML += '';
     document.getElementById('infoGrid').innerHTML = infoHTML;
+
+    // 기둥별 해석
+    const pillarData = [
+        { name: '년주', data: yp },
+        { name: '월주', data: mp },
+        { name: '일주', data: dp },
+        { name: '시주', data: hp }
+    ];
+    let pillarInterpHTML = '';
+    pillarData.forEach(p => {
+        if (!p.data) return;
+        const stemGod = p.name === '일주' ? '일간' : getTenGod(dayStem, p.data.stem);
+        const godInfo = TEN_GOD_DESC[stemGod] || { icon: '•', meaning: '', desc: '' };
+        const pillarMeaning = PILLAR_MEANING[p.name];
+        pillarInterpHTML += `
+            <div class="interp-card">
+                <div class="interp-title">${godInfo.icon} ${p.name}: ${STEMS[p.data.stem]}${BRANCHES[p.data.branch]} — ${stemGod}</div>
+                <div class="interp-text">
+                    <strong>📍 위치:</strong> ${pillarMeaning}<br><br>
+                    <strong>🔮 ${stemGod}:</strong> ${godInfo.meaning}<br>
+                    ${godInfo.desc}
+                </div>
+            </div>`;
+    });
+    document.getElementById('pillarInterpWrap').innerHTML = pillarInterpHTML;
 
     // 성격 해석
     document.getElementById('interpWrap').innerHTML = `
