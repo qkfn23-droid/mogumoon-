@@ -267,19 +267,95 @@ function toggleTime() {
     });
 }
 
-// 간략화된 자미두수 계산 (명궁 주성 배치)
+// ═══════════════════════════════════════
+// 양력→음력 변환기 (1940~2025)
+// ═══════════════════════════════════════
+const LUNAR_DATA = [
+    0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,// 1940-1949
+    0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,// 1950-1959
+    0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,// 1960-1969
+    0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,// 1970-1979
+    0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,// 1980-1989
+    0x06ca0,0x0b550,0x15355,0x04da0,0x0a5b0,0x14573,0x052b0,0x0a9a8,0x0e950,0x06aa0,// 1990-1999
+    0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,// 2000-2009
+    0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b6a0,0x195a6,// 2010-2019
+    0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50                                   // 2020-2025
+];
+
+function lunarMonthDays(y, m) {
+    return (LUNAR_DATA[y - 1940] & (0x10000 >> m)) ? 30 : 29;
+}
+function lunarLeapMonth(y) {
+    return LUNAR_DATA[y - 1940] & 0xf;
+}
+function lunarLeapDays(y) {
+    if (lunarLeapMonth(y)) return (LUNAR_DATA[y - 1940] & 0x10000) ? 30 : 29;
+    return 0;
+}
+function lunarYearDays(y) {
+    let sum = 348;
+    for (let i = 0x8000; i > 0x8; i >>= 1) sum += (LUNAR_DATA[y - 1940] & i) ? 1 : 0;
+    return sum + lunarLeapDays(y);
+}
+
+// 양력 날짜 기준일: 1940년 1월 30일 = 음력 1939년 12월 21일 → 음력 1940년 1월 1일 = 양력 1940년 2월 8일
+const LUNAR_BASE = new Date(1940, 1, 8); // 1940-02-08
+
+function solarToLunar(sY, sM, sD) {
+    const target = new Date(sY, sM - 1, sD);
+    let offset = Math.floor((target - LUNAR_BASE) / 86400000);
+
+    if (offset < 0) return { year: sY, month: sM, day: sD, leap: false }; // fallback
+
+    let lunarY = 1940, lunarM = 1, lunarD = 1;
+    let isLeap = false;
+
+    // 년도 찾기
+    for (let i = 1940; i <= 2025 && offset > 0; i++) {
+        const yDays = lunarYearDays(i);
+        if (offset < yDays) { lunarY = i; break; }
+        offset -= yDays;
+        lunarY = i + 1;
+    }
+
+    // 월 찾기
+    const leapM = lunarLeapMonth(lunarY);
+    for (let i = 1; i <= 12; i++) {
+        const mDays = lunarMonthDays(lunarY, i);
+        if (offset < mDays) { lunarM = i; lunarD = offset + 1; break; }
+        offset -= mDays;
+        // 윤달 체크
+        if (i === leapM) {
+            const lDays = lunarLeapDays(lunarY);
+            if (offset < lDays) { lunarM = i; lunarD = offset + 1; isLeap = true; break; }
+            offset -= lDays;
+        }
+    }
+
+    return { year: lunarY, month: lunarM, day: lunarD, leap: isLeap };
+}
+
+// ═══════════════════════════════════════
+// 자미두수 계산 (음력 기반)
+// ═══════════════════════════════════════
 function calculate() {
-    const year = parseInt(document.getElementById('birthYear').value);
-    const month = parseInt(document.getElementById('birthMonth').value);
-    const day = parseInt(document.getElementById('birthDay').value);
+    const solarYear = parseInt(document.getElementById('birthYear').value);
+    const solarMonth = parseInt(document.getElementById('birthMonth').value);
+    const solarDay = parseInt(document.getElementById('birthDay').value);
     const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? 6 : parseInt(document.getElementById('birthHour').value);
     const gender = document.getElementById('gender').value;
 
-    // 명궁 위치 계산 (간략화)
+    // 양력 → 음력 변환
+    const lunar = solarToLunar(solarYear, solarMonth, solarDay);
+    const year = lunar.year;
+    const month = lunar.month;
+    const day = lunar.day;
+
+    // 명궁 위치 계산 (음력 월 + 시진 기반)
     const mingIdx = (14 - month + hourIdx) % 12;
 
-    // 주성 배치 (간략화 — 자미성 위치 기반)
-    const ziWeiPos = (day + 2) % 12; // 간략화된 자미성 위치
+    // 자미성 위치 (음력 일 기반)
+    const ziWeiPos = (day + 2) % 12;
 
     // 각 궁에 별 배치
     const palaceStars = [];
@@ -342,6 +418,8 @@ function calculate() {
 
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item"><div class="info-label">양력 생일</div><div class="info-value">${solarYear}년 ${solarMonth}월 ${solarDay}일</div></div>
+        <div class="info-item"><div class="info-label">음력 생일 (계산 기준)</div><div class="info-value">${lunar.year}년 ${lunar.leap ? '윤' : ''}${lunar.month}월 ${lunar.day}일</div></div>
         <div class="info-item"><div class="info-label">명궁 주성</div><div class="info-value">${starData.glyph} ${mainStar}성</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">명궁 위치</div><div class="info-value">${DIZHI[mingIdx]}궁 (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">오행</div><div class="info-value">${wuxing}명</div></div>
