@@ -650,14 +650,35 @@ function calculate() {
     const hourGod = hp ? getTenGod(dayStem, hp.stem) : null;
     const hourInterp = hourGod ? HOUR_PILLAR_INTERP[hourGod] : null;
 
+    // 사주 전체에서 배우자 관련 십신 찾기
+    const allPillars = [yp, mp, dp, hp].filter(Boolean);
+    const allTenGods = allPillars.map(p => getTenGod(dayStem, p.stem));
+    const spouseGodMale = ['정재','편재']; // 남자 배우자성
+    const spouseGodFemale = ['정관','편관']; // 여자 배우자성
+    const spouseGods = gender === 'm' ? spouseGodMale : spouseGodFemale;
+    const hasSpouseGod = allTenGods.some(g => spouseGods.includes(g));
+    const spouseGodFound = allTenGods.filter(g => spouseGods.includes(g));
+
+    let genderSpouseText = '';
+    if (gender === 'm') {
+        if (spouseGodFound.includes('정재')) genderSpouseText += '<strong>💍 정재(正妻)가 사주에 있습니다:</strong> 아내복이 있습니다. 안정적이고 헌신적인 배우자를 만날 가능성이 높습니다. 결혼 생활이 순탄한 편.<br>';
+        if (spouseGodFound.includes('편재')) genderSpouseText += '<strong>💫 편재(偏財)가 사주에 있습니다:</strong> 이성에게 인기가 많고 여러 인연이 있을 수 있습니다. 바람끼 주의. 사업적 만남이 연애로 발전하기도.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>배우자성(재성)이 사주에 없습니다:</strong> 결혼이 늦거나 배우자와의 인연이 약할 수 있습니다. 적극적으로 만남을 찾아야 합니다.<br>';
+    } else {
+        if (spouseGodFound.includes('정관')) genderSpouseText += '<strong>💍 정관(正官)이 사주에 있습니다:</strong> 남편복이 있습니다. 사회적으로 안정된 배우자를 만날 가능성이 높습니다. 명예로운 결혼 생활.<br>';
+        if (spouseGodFound.includes('편관')) genderSpouseText += '<strong>💫 편관(七殺)이 사주에 있습니다:</strong> 카리스마 있는 남성에게 끌립니다. 강렬한 연애를 하지만 관계가 불안정할 수 있습니다.<br>';
+        if (!hasSpouseGod) genderSpouseText += '<strong>배우자성(관성)이 사주에 없습니다:</strong> 결혼이 늦거나 배우자와의 인연이 약할 수 있습니다. 적극적으로 만남을 찾아야 합니다.<br>';
+    }
+
     // 배우자
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 배우자궁 (일지: ${spouseBranch})</div>
+            <div class="interp-title">💕 배우자궁 (일지: ${spouseBranch}) — ${gender === 'm' ? '남성' : '여성'} 기준</div>
             <div class="interp-text">
                 <strong>📐 배우자 외모 & 첫인상:</strong><br>${spouseApp}<br><br>
+                ${genderSpouseText}<br>
                 <strong>💑 연애 & 결혼:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 자녀운 (시주: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}
             </div>
