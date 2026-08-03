@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        'Zi Wei': 'Elegant and refined appearance. Confident posture with a dignified impression. Looks great in formal wear and stands out anywhere. Good skin and an overall polished style.',
+        'Tian Ji': 'Intellectual and delicate appearance. Tends to be slim; glasses suit them well. Sharp, intelligent eyes with a bookish aura. Neat and tidy style.',
+        'Tai Yang': 'Bright and vibrant appearance. Large, lively eyes with a warm smile. Healthy skin tone and an athletic build. Looks great in vivid colors.',
+        'Wu Qu': 'Strong and solid impression. Angular face with sharp eyes. Well-built, muscular or toned physique. Simple and practical fashion sense.',
+        'Tian Tong': 'Youthful and cute appearance. Soft or slightly rounded build. Charming smile with an approachable impression. Casual and comfortable style.',
+        'Lian Zhen': 'Sexy and captivating appearance. Distinct features with intense eyes. Fashion-forward and trendy style. The type who leaves a strong first impression.',
+        'Tian Fu': 'Stable and warm impression. Round face with a comfortable smile. Slightly plump with a cozy aura. Neat and conservative fashion.',
+        'Tai Yin': 'Soft and feminine appearance (regardless of gender). Fair, smooth skin with large eyes. A subtle, moon-like charm. Pastel tones suit them well with an elegant aura.',
+        'Tan Lang': 'Attractive and glamorous appearance. Great proportions with excellent fashion sense. Sparkling eyes and irresistible when smiling. A trendsetter type who draws attention from the opposite sex.',
+        'Ju Men': 'Intellectual and sharp impression. Broad forehead with piercing eyes. Notable mouth or distinctive lips. Most attractive when speaking.',
+        'Tian Xiang': 'Clean and well-groomed appearance. Dresses well and always looks put-together. Takes good care of skin and physique. A brand-conscious stylist.',
+        'Tian Liang': 'Mature and dependable appearance. Looks older than their age with a trustworthy impression. Classic style. The type who becomes more attractive with age.',
+        'Qi Sha': 'Intense and charismatic appearance. Sharp eyes with a strong jawline. Athletic build; enjoys working out. Suits leather jackets and bold styles.',
+        'Po Jun': 'Unique and distinctive appearance. Unconventional hairstyles or fashion. A style ahead of its time. Polarizing charm that is anything but ordinary.'
+    };
+    const defaultSpouseApp = 'Ordinary and approachable appearance. Not particularly eye-catching but gives a comfortable impression. Clean and neat style. The type whose charm grows on you over time — more attractive the more you get to know them rather than love at first sight.';
+    const spouseAppText = '<strong>📐 Spouse Appearance & First Impression:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Spouse Palace: ${DIZHI[spouseIdx]} Palace ${spouseStar ? '— ' + spouseStar + ' Star' : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar} Star\'s view on marriage:</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Spouse Personality:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'No main star in the Spouse Palace — your spouse will have a calm and stable personality. A quiet married life without major upheaval.'}<br><br><strong>${mainStar} Star\'s view on marriage:</strong> ${starData.love}</div>
         </div>
     `;
 

@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        '紫微': '品格があり高級感のある外見。堂々とした姿勢と威厳のある印象。フォーマルな服装が似合い、どこにいても存在感が際立つ。肌がきれいで全体的に洗練されたスタイル。',
+        '天機': '知的で繊細な外見。やせ型でメガネが似合う。目が聡明に見え、読書好きな雰囲気。清潔感があり端正なスタイル。',
+        '太陽': '明るく活気のある外見。目が大きく輝いており、笑顔が温かい。健康的な肌色に活動的な体型。華やかな色の服が似合う。',
+        '武曲': '力強くしっかりした印象。角ばった顔立ちに鋭い目つき。体格がよく筋肉質か引き締まっている。シンプルで実用的なファッション。',
+        '天同': '童顔でかわいらしい外見。ぽっちゃりか柔らかい体型。笑顔が魅力的で親しみやすい印象。カジュアルで楽な服装。',
+        '廉貞': 'セクシーで魅惑的な外見。はっきりした目鼻立ちに強烈な眼差し。ファッションに関心が高くトレンディなスタイル。強い第一印象を残すタイプ。',
+        '天府': '安定感があり温かい印象。丸い顔に穏やかな笑顔。やや丸みを帯びた体型で包容力のある雰囲気。清潔感のある保守的なファッション。',
+        '太陰': '柔らかく女性的な外見（性別問わず）。肌が白くきめ細やかで目が大きい。月のようにほのかな魅力。パステルカラーが似合い上品な雰囲気。',
+        '貪狼': '魅力的で華やかな外見。優れたプロポーションにファッションセンス抜群。目がキラキラしていて笑うと魅力爆発。トレンドセッタータイプで異性の視線を集める。',
+        '巨門': '知的で鋭い印象。額が広く眼光が鋭い。口が大きいか唇に特徴がある。話している時が最も魅力的に見えるタイプ。',
+        '天相': '清潔感があり端正な外見。着こなしが上手で常に整った印象。肌の手入れも体型管理も徹底的。ブランド好きのスタイリスト。',
+        '天梁': '成熟して頼もしい外見。年齢より大人びて見え、信頼感を与える印象。クラシックなスタイル。年を重ねるほど魅力が増すタイプ。',
+        '七殺': '強烈でカリスマ性のある外見。鋭い目つきに力強い顎のライン。体格がよくスポーツを好むタイプ。レザージャケットや力強いスタイルが似合う。',
+        '破軍': '独特で個性的な外見。破格的なヘアスタイルやファッション。時代を先取りするスタイル。平凡ではない魅力で好みが分かれる。'
+    };
+    const defaultSpouseApp = '平凡で親しみやすい外見。特に目立つわけではないが、安心感を与える印象。清潔で端正なスタイル。時間が経つほど情が湧くタイプで、一目惚れよりも知れば知るほど魅力を感じる外見。';
+    const spouseAppText = '<strong>📐 配偶者の外見と第一印象:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 夫妻宮: ${DIZHI[spouseIdx]}宮 ${spouseStar ? '— ' + spouseStar + '星' : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '夫妻宮に主星がないため、配偶者は平凡で安定した性格です。大きな波乱なく穏やかな結婚生活。'}<br><br><strong>命宮${mainStar}星の結婚観：</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 配偶者の性格:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '夫妻宮に主星がないため、配偶者は平凡で安定した性格です。大きな波乱なく穏やかな結婚生活。'}<br><br><strong>命宮${mainStar}星の結婚観：</strong> ${starData.love}</div>
         </div>
     `;
 

@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        'Zi Wei': 'Apparence élégante et raffinée. Posture assurée avec une impression digne. Superbe en tenue formelle et se démarque partout. Belle peau et un style globalement soigné.',
+        'Tian Ji': 'Apparence intellectuelle et délicate. Plutôt mince ; les lunettes lui vont bien. Regard vif et intelligent avec une aura studieuse. Style net et soigné.',
+        'Tai Yang': 'Apparence lumineuse et dynamique. Grands yeux vifs avec un sourire chaleureux. Teint sain et silhouette sportive. Les couleurs vives lui vont à merveille.',
+        'Wu Qu': 'Impression forte et solide. Visage anguleux avec un regard perçant. Bien bâti, musclé ou tonique. Mode simple et pratique.',
+        'Tian Tong': 'Apparence juvénile et mignonne. Silhouette douce ou légèrement arrondie. Sourire charmant avec une impression accessible. Style décontracté et confortable.',
+        'Lian Zhen': 'Apparence sexy et envoûtante. Traits distincts avec un regard intense. Passionné de mode et style tendance. Le type qui laisse une forte première impression.',
+        'Tian Fu': 'Impression stable et chaleureuse. Visage rond avec un sourire apaisant. Légèrement enrobé avec une aura réconfortante. Mode soignée et conservatrice.',
+        'Tai Yin': 'Apparence douce et féminine (quel que soit le genre). Peau claire et lisse avec de grands yeux. Un charme subtil, semblable à la lune. Les tons pastel lui conviennent avec une aura élégante.',
+        'Tan Lang': 'Apparence séduisante et glamour. Excellentes proportions avec un sens de la mode exceptionnel. Yeux pétillants et irrésistible en souriant. Type trendsetter qui attire les regards du sexe opposé.',
+        'Ju Men': 'Impression intellectuelle et incisive. Front large avec un regard perçant. Bouche notable ou lèvres distinctives. Plus séduisant en parlant.',
+        'Tian Xiang': 'Apparence propre et bien soignée. S\'habille bien et a toujours l\'air impeccable. Prend soin de sa peau et de sa silhouette. Un styliste amateur de marques.',
+        'Tian Liang': 'Apparence mature et fiable. Paraît plus âgé que son âge avec une impression de confiance. Style classique. Le type qui devient plus séduisant avec l\'âge.',
+        'Qi Sha': 'Apparence intense et charismatique. Regard perçant avec une mâchoire forte. Silhouette athlétique ; aime le sport. Les vestes en cuir et les styles audacieux lui conviennent.',
+        'Po Jun': 'Apparence unique et distinctive. Coiffures ou mode non conventionnelles. Un style en avance sur son temps. Charme polarisant qui est tout sauf ordinaire.'
+    };
+    const defaultSpouseApp = 'Apparence ordinaire et accessible. Pas particulièrement voyant mais donne une impression confortable. Style propre et soigné. Le type dont le charme grandit avec le temps — plus attirant à mesure qu\'on le connaît plutôt qu\'un coup de foudre.';
+    const spouseAppText = '<strong>📐 Apparence & première impression du conjoint :</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Palais du Conjoint : Palais ${DIZHI[spouseIdx]} ${spouseStar ? '— Étoile ' + spouseStar : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Pas d\'étoile principale dans le Palais du Conjoint — votre conjoint aura une personnalité calme et stable. Une vie conjugale tranquille sans grands bouleversements.'}<br><br><strong>Vision de l'étoile ${mainStar} sur le mariage :</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Personnalité du conjoint :</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Pas d\'étoile principale dans le Palais du Conjoint — votre conjoint aura une personnalité calme et stable. Une vie conjugale tranquille sans grands bouleversements.'}<br><br><strong>Vision de l'étoile ${mainStar} sur le mariage :</strong> ${starData.love}</div>
         </div>
     `;
 

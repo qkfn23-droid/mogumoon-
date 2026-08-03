@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        'Zi Wei': 'Elegantes und vornehmes Erscheinungsbild. Selbstbewusste Haltung mit würdevollem Eindruck. Sieht in formeller Kleidung großartig aus und fällt überall auf. Gute Haut und ein insgesamt gepflegter Stil.',
+        'Tian Ji': 'Intellektuelles und feines Erscheinungsbild. Eher schlank; Brillen stehen ihnen gut. Scharfe, intelligente Augen mit einer belesenen Ausstrahlung. Ordentlicher und gepflegter Stil.',
+        'Tai Yang': 'Helles und lebhaftes Erscheinungsbild. Große, lebendige Augen mit einem warmen Lächeln. Gesunder Hautton und eine sportliche Figur. Sieht in kräftigen Farben großartig aus.',
+        'Wu Qu': 'Starker und solider Eindruck. Kantiges Gesicht mit scharfen Augen. Kräftig gebaut, muskulös oder durchtrainiert. Schlichter und praktischer Modestil.',
+        'Tian Tong': 'Jugendliches und niedliches Erscheinungsbild. Weiche oder leicht rundliche Figur. Charmantes Lächeln mit einem zugänglichen Eindruck. Lässiger und bequemer Stil.',
+        'Lian Zhen': 'Sexy und fesselndes Erscheinungsbild. Markante Gesichtszüge mit intensivem Blick. Modebewusst und trendiger Stil. Der Typ, der einen starken ersten Eindruck hinterlässt.',
+        'Tian Fu': 'Stabiler und warmer Eindruck. Rundes Gesicht mit einem gemütlichen Lächeln. Etwas füllig mit einer behaglichen Ausstrahlung. Ordentliche und konservative Mode.',
+        'Tai Yin': 'Weiches und feminines Erscheinungsbild (unabhängig vom Geschlecht). Helle, glatte Haut mit großen Augen. Ein subtiler, mondähnlicher Charme. Pastelltöne stehen ihnen gut mit einer eleganten Ausstrahlung.',
+        'Tan Lang': 'Attraktives und glamouröses Erscheinungsbild. Tolle Proportionen mit exzellentem Modesinn. Funkelnde Augen und unwiderstehlich beim Lächeln. Ein Trendsetter-Typ, der Blicke des anderen Geschlechts auf sich zieht.',
+        'Ju Men': 'Intellektueller und scharfer Eindruck. Breite Stirn mit durchdringendem Blick. Auffälliger Mund oder markante Lippen. Am attraktivsten beim Sprechen.',
+        'Tian Xiang': 'Sauberes und gepflegtes Erscheinungsbild. Kleidet sich gut und wirkt immer zusammengestellt. Gute Hautpflege und konsequentes Figurmanagement. Ein markenbewusster Stylist.',
+        'Tian Liang': 'Reifes und verlässliches Erscheinungsbild. Wirkt älter als das tatsächliche Alter mit einem vertrauenerweckenden Eindruck. Klassischer Stil. Der Typ, der mit dem Alter attraktiver wird.',
+        'Qi Sha': 'Intensives und charismatisches Erscheinungsbild. Scharfe Augen mit starker Kieferlinie. Sportliche Figur; trainiert gerne. Lederjacken und markante Stile stehen ihnen.',
+        'Po Jun': 'Einzigartiges und unverwechselbares Erscheinungsbild. Unkonventionelle Frisuren oder Mode. Ein Stil, der seiner Zeit voraus ist. Polarisierender Charme, der alles andere als gewöhnlich ist.'
+    };
+    const defaultSpouseApp = 'Gewöhnliches und zugängliches Erscheinungsbild. Nicht besonders auffällig, aber vermittelt einen angenehmen Eindruck. Sauberer und ordentlicher Stil. Der Typ, dessen Charme mit der Zeit wächst — attraktiver, je besser man ihn kennenlernt, statt Liebe auf den ersten Blick.';
+    const spouseAppText = '<strong>📐 Aussehen & erster Eindruck des Ehepartners:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Ehepartnerpalast: ${DIZHI[spouseIdx]} Palast ${spouseStar ? '— ' + spouseStar + ' Stern' : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Kein Hauptstern im Ehepartnerpalast — Ihr Ehepartner wird eine ruhige und stabile Persönlichkeit haben. Ein ruhiges Eheleben ohne große Umwälzungen.'}<br><br><strong>${mainStar} Sterns Sicht auf die Ehe:</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Persönlichkeit des Ehepartners:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Kein Hauptstern im Ehepartnerpalast — Ihr Ehepartner wird eine ruhige und stabile Persönlichkeit haben. Ein ruhiges Eheleben ohne große Umwälzungen.'}<br><br><strong>${mainStar} Sterns Sicht auf die Ehe:</strong> ${starData.love}</div>
         </div>
     `;
 

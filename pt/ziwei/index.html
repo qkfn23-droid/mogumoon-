@@ -364,10 +364,29 @@ function calculate() {
     const spouseIdx = (mingIdx + 2) % 12;
     const spouseStars = palaceStars[spouseIdx];
     const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseAppearanceZW = {
+        'Zi Wei': 'Aparencia elegante e refinada. Postura confiante com uma impressao digna. Fica otimo em trajes formais e se destaca em qualquer lugar. Pele bonita e um estilo geral polido.',
+        'Tian Ji': 'Aparencia intelectual e delicada. Tende a ser magro; oculos ficam bem. Olhos perspicazes e inteligentes com uma aura estudiosa. Estilo limpo e arrumado.',
+        'Tai Yang': 'Aparencia brilhante e vibrante. Olhos grandes e vivos com um sorriso caloroso. Tom de pele saudavel e corpo atletico. Fica otimo em cores vibrantes.',
+        'Wu Qu': 'Impressao forte e solida. Rosto angular com olhos penetrantes. Bem construido, musculoso ou tonificado. Moda simples e pratica.',
+        'Tian Tong': 'Aparencia jovem e fofa. Corpo macio ou levemente arredondado. Sorriso encantador com uma impressao acessivel. Estilo casual e confortavel.',
+        'Lian Zhen': 'Aparencia sexy e cativante. Tracos distintos com olhos intensos. Antenado com moda e estilo moderno. O tipo que deixa uma forte primeira impressao.',
+        'Tian Fu': 'Impressao estavel e calorosa. Rosto redondo com um sorriso confortavel. Levemente rechonchudo com uma aura acolhedora. Moda limpa e conservadora.',
+        'Tai Yin': 'Aparencia suave e feminina (independente do genero). Pele clara e lisa com olhos grandes. Um charme sutil, semelhante a lua. Tons pastel ficam bem com uma aura elegante.',
+        'Tan Lang': 'Aparencia atraente e glamorosa. Otimas proporcoes com excelente senso de moda. Olhos brilhantes e irresistivel ao sorrir. Tipo trendsetter que atrai olhares do sexo oposto.',
+        'Ju Men': 'Impressao intelectual e afiada. Testa larga com olhar penetrante. Boca notavel ou labios distintivos. Mais atraente quando fala.',
+        'Tian Xiang': 'Aparencia limpa e bem cuidada. Veste-se bem e sempre parece impecavel. Cuida bem da pele e da forma fisica. Um estilista que gosta de marcas.',
+        'Tian Liang': 'Aparencia madura e confiavel. Parece mais velho que a idade real com uma impressao de confianca. Estilo classico. O tipo que fica mais atraente com a idade.',
+        'Qi Sha': 'Aparencia intensa e carismatica. Olhos penetrantes com mandibula forte. Corpo atletico; gosta de se exercitar. Jaquetas de couro e estilos marcantes combinam.',
+        'Po Jun': 'Aparencia unica e diferenciada. Penteados ou moda nao convencionais. Um estilo a frente do seu tempo. Charme polarizador que e tudo menos comum.'
+    };
+    const defaultSpouseApp = 'Aparencia comum e acessivel. Nao particularmente chamativo, mas transmite uma impressao confortavel. Estilo limpo e arrumado. O tipo cujo charme cresce com o tempo — mais atraente quanto mais voce o conhece, em vez de amor a primeira vista.';
+    const spouseAppText = '<strong>📐 Aparencia & Primeira Impressao do Conjuge:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Palacio do Conjuge: Palacio ${DIZHI[spouseIdx]} ${spouseStar ? '— Estrela ' + spouseStar : ''}</div>
-            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Nenhuma estrela principal no Palacio do Conjuge — seu conjuge tera uma personalidade calma e estavel. Uma vida conjugal tranquila sem grandes turbulencias.'}<br><br><strong>Visao da Estrela ${mainStar} sobre o casamento:</strong> ${starData.love}</div>
+            <div class="interp-text">${spouseAppText}<strong>📋 Personalidade do Conjuge:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : 'Nenhuma estrela principal no Palacio do Conjuge — seu conjuge tera uma personalidade calma e estavel. Uma vida conjugal tranquila sem grandes turbulencias.'}<br><br><strong>Visao da Estrela ${mainStar} sobre o casamento:</strong> ${starData.love}</div>
         </div>
     `;
 
