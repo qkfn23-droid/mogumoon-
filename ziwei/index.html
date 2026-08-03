@@ -381,7 +381,8 @@ function calculate() {
         '파군': '독특하고 개성 있는 외모. 파격적인 헤어스타일이나 패션. 시대를 앞서가는 스타일. 평범하지 않은 매력으로 호불호가 갈림.'
     };
 
-    const spouseAppText = spouseStar && spouseAppearanceZW[spouseStar] ? '<strong>📐 배우자 외모 & 첫인상:</strong><br>' + spouseAppearanceZW[spouseStar] + '<br><br>' : '';
+    const defaultSpouseApp = '평범하고 친근한 외모. 특별히 튀지 않지만 편안한 인상을 주는 사람. 깔끔하고 단정한 스타일. 시간이 갈수록 정이 드는 타입으로, 첫눈에 반하기보다 알아갈수록 매력이 느껴지는 외모.';
+    const spouseAppText = '<strong>📐 배우자 외모 & 첫인상:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
 
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
