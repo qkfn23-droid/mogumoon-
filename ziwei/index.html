@@ -250,9 +250,9 @@ const GRID_MAP = [
 function initForm() {
     const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
     const h = document.getElementById('birthHour');
-    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '년'; if (i === 1993) o.selected = true; y.appendChild(o); }
-    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '월'; if (i === 7) o.selected = true; m.appendChild(o); }
-    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '일'; if (i === 25) o.selected = true; d.appendChild(o); }
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '년'; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '월'; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '일'; if (i === 15) o.selected = true; d.appendChild(o); }
     for (let i = 0; i < 12; i++) {
         const labels = ['자시(23~1)','축시(1~3)','인시(3~5)','묘시(5~7)','진시(7~9)','사시(9~11)','오시(11~13)','미시(13~15)','신시(15~17)','유시(17~19)','술시(19~21)','해시(21~23)'];
         const o = document.createElement('option'); o.value = i; o.textContent = labels[i]; if (i === 5) o.selected = true; h.appendChild(o);

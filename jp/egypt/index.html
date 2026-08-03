@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古代エジプトデカン - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a1508, #2a2010); border-bottom: 1px solid #3a3020; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #f39c12; letter-spacing: 2px; font-weight: 700; }
+        header a span { color: #e67e22; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #f39c12; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a1508, #2a2010); border: 1px solid #3a3020; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #f39c12; margin-bottom: 6px; }
+        .input-row { display: flex; gap: 10px; }
+        .input-row select { flex: 1; padding: 12px 14px; background: #0a0a1a; border: 1px solid #4a3a20; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23f39c12' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+        .input-row select:focus { border-color: #f39c12; }
+
+        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #e67e22, #f39c12); color: #0a0a1a; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+        .calc-btn:hover { transform: translateY(-1px); }
+
+        .result-section { display: none; }
+        .section-title { font-size: 18px; color: #f39c12; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a3020; }
+
+        .decan-card { background: linear-gradient(135deg, #2a2010, #1a1508); border: 2px solid #f39c12; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+        .decan-glyph { font-size: 70px; margin-bottom: 10px; display: block; }
+        .decan-name { font-size: 28px; color: #f39c12; font-weight: 700; margin-bottom: 4px; }
+        .decan-deity { font-size: 16px; color: #e67e22; margin-bottom: 8px; }
+        .decan-dates { font-size: 13px; color: #888; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } }
+        .info-item { background: #1a1508; border: 1px solid #3a3020; border-radius: 12px; padding: 16px; }
+        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-value { font-size: 16px; color: #f39c12; font-weight: 600; }
+        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
+
+        .interp-card { background: linear-gradient(135deg, #1a1508, #2a2010); border: 1px solid #3a3020; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .interp-title { font-size: 14px; color: #f39c12; font-weight: 600; margin-bottom: 8px; }
+        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span>Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>𓂀 古代エジプトデカン</h2>
+        <p>空を36の区域に分けた最も古い星座体系</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>生年月日</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">𓂀 デカン確認</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <h3 class="section-title">𓁟 あなたのエジプトデカン</h3>
+        <div id="decanCard"></div>
+        <div class="info-grid" id="infoGrid"></div>
+
+        <h3 class="section-title">📖 性格＆運命</h3>
+        <div id="personalityWrap"></div>
+
+        <h3 class="section-title">💕 愛＆関係</h3>
+        <div id="loveWrap"></div>
+
+        <h3 class="section-title">💰 財運＆職業</h3>
+        <div id="careerWrap"></div>
+
+        <h3 class="section-title">🏥 健康</h3>
+        <div id="healthWrap"></div>
+
+        <h3 class="section-title">💞 相性 (相性の良い神)</h3>
+        <div id="compatWrap"></div>
+
+        <h3 class="section-title">🍀 ラッキー情報</h3>
+        <div id="luckyWrap"></div>
+    </div>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// 36 Egyptian Decans (10-day periods)
+const DECANS = [
+    { name: 'ナイルの神', deity: 'ハピ (Hapi)', glyph: '🌊', element: '水', dates: '1/1~1/10',
+      startM:1, startD:1, endM:1, endD:10,
+      personality: 'ナイル川のように豊かで寛大な性格です。命を育むエネルギーを持ち、周囲の人々に豊かさをもたらします。感情が深く直感的で、水のように流れる柔軟さを持っています。どんな環境にも適応する驚くべき能力があります。',
+      love: '深い感情的なつながりを求めます。パートナーを豊かにする献身的な愛。嫉妬心があるかもしれませんが、一度愛するとナイル川のように絶え間なく流れ続けます。',
+      career: '農業、環境、医療、料理、カウンセリング分野に才能。他者を育て世話する職業が適しています。財は着実に流れ込みます。',
+      health: '腎臓、膀胱、水分代謝に注意。水を十分に飲み、感情的ストレスを管理してください。',
+      lucky: { color: '青色、ターコイズ', stone: 'アクアマリン', number: '3, 7', animal: 'ワニ' },
+      compat: [3,7,11,17,23,29] },
+
+    { name: 'アムンの息子', deity: 'アムン=ラー (Amun-Ra)', glyph: '☀️', element: '火', dates: '1/11~1/20',
+      startM:1, startD:11, endM:1, endD:20,
+      personality: '太陽神のエネルギーを持つ強力なリーダーです。カリスマにあふれ、周囲を照らす存在。野望が大きく自尊心が強く、正義を重視します。創造的で楽観的な性格で、闇の中でも光を見つけます。',
+      love: '情熱的でドラマチックな愛。パートナーを王/女王のように扱います。尊敬されたい欲求が強く、無視されると深く傷つきます。',
+      career: '政治、経営、芸術、エンターテインメント、宗教指導者。リーダーシップのポジションで輝きます。金に関連する分野で財運。',
+      health: '心臓、背中、目に注意。太陽の下での活動が癒しとなりますが、過度な熱に注意。',
+      lucky: { color: '金色、オレンジ', stone: '琥珀(Amber)', number: '1, 9', animal: 'タカ' },
+      compat: [4,8,13,19,25,31] },
+
+    { name: 'ムトの娘', deity: 'ムト (Mut)', glyph: '🦅', element: '風', dates: '1/21~1/31',
+      startM:1, startD:21, endM:1, endD:31,
+      personality: '母神ムトの保護エネルギー。養育し保護する本能が強いです。忍耐力が深く実用的で、家族とコミュニティを最優先に考えます。鷲の目で遠くを見通す洞察力。',
+      love: '保護的で献身的な愛。家庭を築くことを重視。母性的な愛でパートナーを包みますが、時には過保護になることがあります。',
+      career: '教育、医療、社会福祉、法律、不動産。保護と養育に関連する職業が適しています。安定した財産蓄積。',
+      health: '乳房、子宮、消化器系に注意。ストレスを家庭問題として受けないよう境界設定。',
+      lucky: { color: '白、銀色', stone: '真珠', number: '2, 6', animal: '鷲' },
+      compat: [5,9,14,20,26,32] },
+
+    { name: 'ゲブの大地', deity: 'ゲブ (Geb)', glyph: '🌍', element: '土', dates: '2/1~2/10',
+      startM:2, startD:1, endM:2, endD:10,
+      personality: '大地の神ゲブの安定したエネルギー。足が地にしっかりついたリアリストです。信頼でき責任感が強く、約束を必ず守ります。自然と深いつながりを感じます。',
+      love: '安定した忠実な愛。物質的安定を提供し長続きする関係を築きます。変化を嫌うのでパートナーに一貫性を期待します。',
+      career: '建築、農業、不動産、鉱業、環境。土に関連するすべての分野で成功。遅いが確実な財産蓄積。',
+      health: '骨、関節、皮膚に注意。大地との接触（裸足歩き）が癒し。カルシウム摂取が重要。',
+      lucky: { color: '茶色、緑色', stone: 'ジャスパー', number: '4, 8', animal: 'ガチョウ' },
+      compat: [0,6,10,18,24,30] },
+
+    { name: 'オシリスの審判', deity: 'オシリス (Osiris)', glyph: '⚖️', element: '水', dates: '2/11~2/20',
+      startM:2, startD:11, endM:2, endD:20,
+      personality: '死と復活の神オシリスの変革エネルギー。命の循環を理解する深い魂です。正義感が強く真実を追求し、どんな試練も復活に変える力があります。',
+      love: '深く変革的な愛。魂の伴侶を探します。裏切りを許すのは難しいですが、真の愛の前では新しい始まりを受け入れます。',
+      career: '法律、心理学、医学、葬儀、保険、考古学。変革と再生に関連する分野。遺産や相続による財運。',
+      health: '生殖器、排泄器系に注意。感情的浄化が身体の健康に直結。瞑想と修行が重要。',
+      lucky: { color: '黒、緑', stone: '黒曜石', number: '5, 13', animal: 'ジャッカル' },
+      compat: [1,7,11,19,25,31] },
+
+    { name: 'イシスの魔法', deity: 'イシス (Isis)', glyph: '✨', element: '風', dates: '2/21~3/1',
+      startM:2, startD:21, endM:3, endD:1,
+      personality: '魔法の女神イシスの神秘的なエネルギー。直感が極めて強く治癒能力があります。賢明で多才であり、どんな問題でも解決する方法を見つけ出します。愛の力を信じるロマンティックな魂。',
+      love: '魔法のような愛を夢見ます。パートナーのために果てまで行ける献身。イシスがオシリスを復活させたように、愛の奇跡を生み出します。',
+      career: '医学、薬学、代替医療、心理学、霊的治癒、研究。治癒と魔法（技術）に関連する分野。知恵で財を集めます。',
+      health: '免疫、リンパに注意。薬草と自然治癒に関心。月の周期に応じて健康が変わることがあります。',
+      lucky: { color: '紫、紺色', stone: 'ラピスラズリ', number: '7, 11', animal: '牛' },
+      compat: [2,8,12,16,26,32] },
+
+    { name: 'トートの知恵', deity: 'トート (Thoth)', glyph: '📚', element: '風', dates: '3/2~3/11',
+      startM:3, startD:2, endM:3, endD:11,
+      personality: '知識と月の神トートの知的エネルギー。学習とコミュニケーションに優れた才能があります。文章、計算、科学に天賦の素質。真実を記録し伝える使命を持って生まれました。',
+      love: '知的交流が最も重要。会話が通じなければ関係を維持するのが難しいです。書籍や知識を共に分かち合えるパートナーを求めます。',
+      career: '学者、作家、教授、科学者、IT、会計、翻訳。知識とコミュニケーションに関連するすべての分野。知的能力で財を集めます。',
+      health: '神経系、呼吸器に注意。過度な精神活動によるストレス。瞑想と睡眠が重要。',
+      lucky: { color: '銀色、紫', stone: 'ムーンストーン', number: '3, 9', animal: 'トキ(ibis)' },
+      compat: [0,3,9,15,21,27] },
+
+    { name: 'ホルスの眼', deity: 'ホルス (Horus)', glyph: '👁️', element: '火', dates: '3/12~3/21',
+      startM:3, startD:12, endM:3, endD:21,
+      personality: 'タカの神ホルスの戦士エネルギー。鋭い視野と勇気を持っています。正義のために戦い、悪を退ける守護者です。目標に向かって一直線に飛ぶ集中力。',
+      love: '保護的で情熱的な愛。パートナーを守るためなら何でもします。嫉妬心が強いですがそれだけ愛も深いです。',
+      career: '軍人、警察、パイロット、外科医、スポーツ、法律。正義と保護に関連する職業。勇気で財を集めます。',
+      health: '目、頭、血圧に注意。怒りのコントロールが健康の核心。武術や格闘技がエネルギー発散に役立ちます。',
+      lucky: { color: '赤、金色', stone: 'カーネリアン', number: '1, 5', animal: 'タカ' },
+      compat: [1,4,10,16,22,28] },
+
+    { name: 'アヌビスの案内', deity: 'アヌビス (Anubis)', glyph: '🐺', element: '土', dates: '3/22~3/31',
+      startM:3, startD:22, endM:3, endD:31,
+      personality: '冥界の案内者アヌビスの神秘的なエネルギー。生と死の境界を理解する深い魂。忠実で保護的であり、秘密をよく守ります。直感が強く人の本性を見抜きます。',
+      love: '忠実で深い愛。一度愛すると冥界まで付いていくほどの献身。裏切りは絶対に許しません。',
+      career: '刑事、探偵、心理学者、葬儀、セキュリティ、考古学。隠された真実を探す職業。秘密の収入源。',
+      health: '骨、関節、免疫に注意。夜にエネルギーが強くなるため夜型生活に注意。',
+      lucky: { color: '黒、金色', stone: '黒曜石', number: '8, 13', animal: 'ジャッカル' },
+      compat: [2,5,11,17,23,29] },
+
+    { name: 'セトの嵐', deity: 'セト (Set)', glyph: '⛈️', element: '火', dates: '4/1~4/10',
+      startM:4, startD:1, endM:4, endD:10,
+      personality: '混沌と嵐の神セトの破壊的でありながらも強力なエネルギー。規則を打ち破る反逆者であり革新家。恐れを知らず極限状況でさらに強くなります。誤解されやすいですが必要な変化をもたらします。',
+      love: '強烈で嵐のような愛。退屈な関係は耐えられません。絶え間ない刺激と冒険を求め、愛も戦争のようにします。',
+      career: '革命家、発明家、危機管理、冒険家、軍事戦略家。極限状況での職業。破格な方法で財運。',
+      health: '神経系、筋肉、血圧に注意。怒りとストレスの管理が核心。激しい運動がエネルギー発散。',
+      lucky: { color: '赤、黒', stone: 'ルビー', number: '9, 13', animal: 'カバ' },
+      compat: [1,7,13,19,25,31] },
+
+    { name: 'バステトの猫', deity: 'バステト (Bastet)', glyph: '🐈', element: '水', dates: '4/11~4/20',
+      startM:4, startD:11, endM:4, endD:20,
+      personality: '猫の女神バステトの優雅で神秘的なエネルギー。独立的でありながらも社交的。芸術と美を愛し、家庭の守護者。柔らかな外見の裏に鋭い爪を隠しています。',
+      love: '独立的でありながらも愛情があふれる愛。猫のように自由を求めますが愛する人のそばにいたがります。感覚的で官能的。',
+      career: 'ファッション、ビューティー、芸術、インテリア、動物関連、セキュリティ。美と保護を組み合わせた分野。優雅に財を集めます。',
+      health: '皮膚、アレルギー、女性疾患に注意。ストレッチとヨガが良い。睡眠の質が重要。',
+      lucky: { color: '金色、ピンク', stone: 'ローズクォーツ', number: '2, 6', animal: '猫' },
+      compat: [0,6,12,18,24,30] },
+
+    { name: 'セクメトの炎', deity: 'セクメト (Sekhmet)', glyph: '🦁', element: '火', dates: '4/21~4/30',
+      startM:4, startD:21, endM:4, endD:30,
+      personality: 'ライオン女神セクメトの強力な戦士エネルギー。正義と治癒の両面を持ちます。破壊も治癒もできる強力な力。一度決心すると止まらない不屈の意志。',
+      love: '情熱的で保護的な愛。ライオンのように家族を守り、愛する人のために火の中に飛び込みます。裏切りにはセクメトの怒りが爆発。',
+      career: '軍人、外科医、消防士、アスリート、ヒーラー。強い意志が必要な職業。勇気で大きな財運も可能。',
+      health: '発熱、炎症、血圧に注意。怒りの管理が必須。太陽の下での運動が良いが過熱に注意。',
+      lucky: { color: '赤、金色', stone: 'カーネリアン', number: '1, 9', animal: 'ライオン' },
+      compat: [1,7,13,19,25,31] },
+
+    { name: 'ハトホルの愛', deity: 'ハトホル (Hathor)', glyph: '💃', element: '土', dates: '5/1~5/10',
+      startM:5, startD:1, endM:5, endD:10,
+      personality: '愛と祝祭の女神ハトホルの豊かなエネルギー。美、音楽、ダンスを愛します。社交的で魅力的であり、周囲に喜びをもたらします。感覚的な楽しみを追求するグルメ。',
+      love: '愛そのものの化身！ロマンティックで官能的でパートナーに豊かな愛を与えます。音楽とダンスで愛を表現。美しいデートを好みます。',
+      career: '音楽、ダンス、ファッション、美容、料理、ホテル業、ワイン。喜びと美を生み出すすべての職業。豊かに財が入ります。',
+      health: '肝臓、腰に注意。過食と過度の飲酒に注意。ダンスと音楽が最高の癒し。',
+      lucky: { color: 'ピンク、金色', stone: 'エメラルド', number: '6, 2', animal: '牛' },
+      compat: [0,4,10,16,22,28] },
+
+    { name: 'ソベクの河', deity: 'ソベク (Sobek)', glyph: '🐊', element: '水', dates: '5/11~5/20',
+      startM:5, startD:11, endM:5, endD:20,
+      personality: 'ワニの神ソベクの強力で原初的なエネルギー。本能的で素早い決断力を持ちます。水中で機会を待ち瞬時に掴み取る戦略家。豊穣と多産の象徴。',
+      love: '本能的で情熱的な愛。一度心を決めたら絶対に放しません。所有欲が強いですがその分保護的。',
+      career: '金融、投資、不動産、スポーツ、軍事戦略。機会を捉える分野。素早い判断で大きな財運も可能。',
+      health: '歯、骨、皮膚に注意。水中運動（水泳）が最高の癒し。ストレスを水で解消。',
+      lucky: { color: '緑、銀色', stone: 'ターコイズ', number: '5, 8', animal: 'ワニ' },
+      compat: [3,9,15,21,27,33] },
+
+    { name: 'プタハの創造', deity: 'プタハ (Ptah)', glyph: '🔨', element: '土', dates: '5/21~5/31',
+      startM:5, startD:21, endM:5, endD:31,
+      personality: '創造の神プタハの職人エネルギー。無から有を生み出す創造力があります。几帳面で技術的であり、手で行うすべての仕事に優れています。言葉より行動で示す実用主義者。',
+      love: '行動で愛を表現します。贈り物を直接作ったり、家を修繕したり、何かを創造して愛を見せます。口数は少ないですが真心は深いです。',
+      career: 'エンジニア、建築家、職人、芸術家、彫刻家、技術者。手で作るすべての職業。技術で安定した財運。',
+      health: '手首、関節に注意。創作活動が癒し。過度な完璧主義によるストレスに注意。',
+      lucky: { color: '青、茶色', stone: 'サファイア', number: '4, 7', animal: '雄牛' },
+      compat: [2,6,12,18,24,30] },
+
+    { name: 'ラーの栄光', deity: 'ラー (Ra)', glyph: '🌅', element: '火', dates: '6/1~6/10',
+      startM:6, startD:1, endM:6, endD:10,
+      personality: '太陽神ラーの絶対的エネルギー。すべてのエジプトの神の中で最高権威の神です。リーダーシップと創造力が最大化された存在。光を照らす所すべてに命が芽吹き、存在自体が権威です。',
+      love: '王のような愛をします。パートナーを最高に待遇しそれに見合った尊敬を求めます。太陽のように温かいですが近づきすぎると焼かれることもあります。',
+      career: 'CEO、政治家、宗教指導者、王族、大企業役員。最高の地位にふさわしい。権威で大きな財運。',
+      health: '心臓、血管、目に注意。適度に日光を浴びること。自尊感情が健康の核心。',
+      lucky: { color: '金色、赤', stone: 'サンストーン', number: '1, 10', animal: 'フンコロガシ(スカラベ)' },
+      compat: [1,7,11,19,25,31] },
+
+    { name: 'マアトの正義', deity: 'マアト (Maat)', glyph: '⚖️', element: '風', dates: '6/11~6/20',
+      startM:6, startD:11, endM:6, endD:20,
+      personality: '真実と正義の女神マアトの均衡エネルギー。すべてにおいて公正さを追求します。偽りを許さず、世界の秩序を正そうとします。羽のように軽い心を追求する純粋な魂。',
+      love: '公正でバランスの取れた愛。関係で対等であることを重視し一方だけが犠牲になることを拒否します。正直なコミュニケーションが愛の基本。',
+      career: '裁判官、弁護士、監査官、倫理委員、仲裁者。正義と均衡に関連する職業。誠実さで信頼を得て財運。',
+      health: '肺、皮膚、バランス感覚に注意。ヨガとバランス運動が良い。ストレスを公正に解消。',
+      lucky: { color: '白、青', stone: 'ラピスラズリ', number: '7, 11', animal: 'ダチョウ(羽)' },
+      compat: [0,5,9,17,23,29] },
+
+    // 残りのデカン (6/21~12/31)
+    { name: 'ネイトの矢', deity: 'ネイト (Neith)', glyph: '🏹', element: '水', dates: '6/21~6/30', startM:6, startD:21, endM:6, endD:30,
+      personality: '戦争と機織りの女神ネイトの強烈な戦士エネルギーを持って生まれました。運命の糸を自ら織る機織りの女神らしく、自分の人生を自らデザインし作り上げていく独立的な性格です。目標に向かって矢のように一直線に突き進み、障害物の前で決して退きません。古代エジプトでネイトは創造以前から存在した原初的な女神で、このデカンの人々も原初的で本能的な力を持っています。戦場でも品格を失わない高貴な戦士の気質です。',
+      love: '独立的でありながらも情熱的な愛をします。弱いパートナーは望まず、自分と対等に競い合える強い相手に惹かれます。ネイトが戦場と機織り両方を支配したように、愛でも強さと繊細さを同時に見せます。一度選んだパートナーには戦士の忠誠を捧げます。',
+      career: '軍人、ファッションデザイナー、実業家、戦略コンサルタント、武器設計など独立的で戦略的な分野で輝きます。機織りの女神らしく繊維、ファッション、デザイン産業でも大きな成功を収めることができます。自身の事業を運営し独立的に財を蓄積します。',
+      health: '肩、腕、手首など上半身に注意が必要です。弓術やアーチェリーのような集中力が必要な運動が癒しに役立ちます。戦士の気質で無理をしやすいので十分な休息を必ず取ってください。', lucky: { color: '赤、緑', stone: 'ジャスパー', number: '3, 9', animal: 'フンコロガシ' }, compat: [1,8,14,20,26,32] },
+    { name: 'ケプリの変身', deity: 'ケプリ (Khepri)', glyph: '🪲', element: '土', dates: '7/1~7/10', startM:7, startD:1, endM:7, endD:10,
+      personality: '夜明けの太陽を転がすスカラベ神ケプリの変革エネルギーを持っています。毎朝太陽を再び昇らせる神のように、自分自身を絶え間なく新しく作り変えていく変身の達人です。失敗と挫折を恐れず、どんな状況でも新しい始まりを作り出します。変化を自然に受け入れる柔軟さがあり、停滞した生活に耐えられません。進化と成長が人生のキーワードです。',
+      love: '関係の中で絶え間なく成長し、毎日新しい愛を発見します。パートナーと共に変化し進化するダイナミックな関係を望みます。停滞した関係は耐えがたく、互いをより良い人間にしてくれる愛を追求します。スカラベが太陽を転がすように関係にエネルギーを注ぎ込みます。',
+      career: '革新、スタートアップ、自己啓発、コンサルティング、技術革命など変革に関連するすべての分野で卓越しています。一つの分野に留まるよりも何度ものキャリアチェンジを通じて成長します。新しい試みから財を発見し、失敗を恐れない挑戦精神が成功を導きます。',
+      health: '消化器系と皮膚の健康に特に注意が必要です。変化の多い生活からくるストレスを管理してください。朝早く起きて日光を浴びることがケプリのエネルギーを充電する最高の方法です。', lucky: { color: '金色、緑', stone: '琥珀', number: '1, 7', animal: 'スカラベ' }, compat: [3,9,15,21,27,33] },
+    { name: 'ネフティスの夜', deity: 'ネフティス (Nephthys)', glyph: '🌙', element: '水', dates: '7/11~7/20', startM:7, startD:11, endM:7, endD:20,
+      personality: '夜と哀悼の女神ネフティスの深く神秘的なエネルギーを持っています。見えない世界を感知する驚くべき直感力があり、他の人の悲しみと苦しみを深く理解し癒す共感能力が卓越しています。イシスの姉妹であり影であるネフティスのように、光の裏にある闇の意味を知る賢明な魂です。外見は静かですが内面には限りない深さがあります。他の人が見えないものを見ます。',
+      love: '深い共感と癒しの愛をします。傷ついた魂を見出し包み込む能力があります。表面的な関係よりも魂の深い所でつながる関係を求めます。夜の女神らしく闇の中でも愛の光を見つけ出し、パートナーの隠された痛みを癒してあげます。',
+      career: 'カウンセラー、心理療法士、ホスピス、葬儀ディレクター、夜勤専門職など見えない所で働く職業に適しています。ネフティスが死者を世話したように、他者の苦しみを和らげる仕事に大きなやりがいを感じます。財は静かだが着実に集まります。',
+      health: '睡眠の質と免疫システムに特別な注意が必要です。夜にエネルギーが高まるため睡眠パターンが不規則になりやすいです。月光の下での瞑想や散歩が情緒的安定と健康回復に大きく役立ちます。', lucky: { color: '紺色、銀色', stone: 'ムーンストーン', number: '2, 11', animal: 'フクロウ' }, compat: [4,8,12,22,28,34] },
+    { name: 'クヌムのろくろ', deity: 'クヌム (Khnum)', glyph: '🏺', element: '土', dates: '7/21~7/31', startM:7, startD:21, endM:7, endD:31,
+      personality: 'ろくろで人間の肉体を形作った創造の羊神クヌムの職人エネルギーを持っています。ナイル川上流の急流を治める神らしく、荒い原材料を美しい作品に変える変換の能力があります。人を形作るように関係やプロジェクトを丹精込めて作り上げ、決して急ぎません。忍耐力が深く完成度を重視し、自分の手で作ったものに対する誇りが強いです。メンターとしての資質が優れ、他の人の潜在力を引き出します。',
+      love: 'ろくろの上で粘土を形作るように丹精込めて関係を築いていきます。急がないゆったりとした愛で、時間をかけてパートナーを深く理解しようとします。クヌムが各人間を唯一無二に形作ったように、パートナーの独自性を尊重し愛します。安定的で持続的な関係に幸福を感じ、家庭を大切にします。',
+      career: '陶芸家、彫刻家、建築家、教師、メンター、コーチなど何かを作り育てる職業に天賦の才能があります。クヌムがナイル川の氾濫を司ったように、水資源管理や環境工学分野でも成功できます。職人精神で築いた名声が安定した財につながります。',
+      health: '腰と腎臓の健康に特に気を配る必要があります。長時間座って作業する習慣があるのでストレッチと姿勢矯正が重要です。水を十分に飲み、ナイルの神らしく水に関連する活動が健康に役立ちます。', lucky: { color: '茶色、金色', stone: 'タイガーアイ', number: '4, 8', animal: '羊' }, compat: [0,6,14,20,26,32] },
+    { name: 'セシャトの星', deity: 'セシャト (Seshat)', glyph: '⭐', element: '風', dates: '8/1~8/10', startM:8, startD:1, endM:8, endD:10,
+      personality: '記録と測量の女神セシャトの精密な知的エネルギーを持っています。ピラミッドの設計図を描いた女神らしく、建築と数学に天賦の才能を見せます。正確で分析的な知性ですべてを体系的に整理し記録します。歴史と知識を保存しようとする強い使命感があり、セシャトがファラオの治世期間を記録したように細部を見逃さない完璧主義的傾向です。静かですがその知識の深さは図書館一つを満たすほど膨大です。',
+      love: '知的交流が愛の必須条件です。記録するように関係のすべての瞬間を覚えており、記念日やパートナーが言ったことを絶対に忘れません。セシャトが星を測量したようにパートナーを深く観察し理解します。感情表現は不器用ですが行動と細やかな配慮で愛を証明します。',
+      career: '建築家、数学者、歴史学者、司書、記録管理者、データサイエンティストなど精密さと記録が必要な分野で輝きます。セシャトが神殿の礎を置く儀式を司ったように、何かの基礎と構造を設計する仕事に卓越しています。几帳面さと正確性で信頼を得て安定した財を蓄積します。',
+      health: '目の疲れと手首の健康に注意が必要です。精密な作業に没頭して姿勢が悪くなりやすいので定期的な休憩とストレッチが重要です。星を観測するように夜空を眺める時間が精神的な癒しに役立ちます。', lucky: { color: '銀色、白', stone: '水晶', number: '3, 7', animal: 'ヒョウ' }, compat: [5,11,15,21,27,33] },
+    { name: 'ソカルの大地', deity: 'ソカル (Sokar)', glyph: '🪶', element: '土', dates: '8/11~8/20', startM:8, startD:11, endM:8, endD:20,
+      personality: 'メンフィスの大地と死の神ソカルの深く重厚なエネルギーを持っています。地下に隠された宝物を見つけ出す卓越した能力があり、他の人が見えない価値を発見します。忍耐し待ち正確な瞬間に行動する戦略的な性格です。ソカルがメンフィスのネクロポリスを支配したように、終わったものから新しい価値を引き出す再生の知恵があります。寡黙ですがその沈黙の中に深い洞察が込められています。',
+      love: '遅いが限りなく深い愛をします。表面の下に隠された真心は大地の鉱脈のように豊富です。簡単に心を開きませんが一度開くと揺るがない堅固な愛を見せます。パートナーの隠された価値を見出しそれを世界に表してくれる存在です。',
+      career: '鉱業、考古学、投資、不動産、骨董品鑑定、トレジャーハンターなど隠された価値を発掘する分野で成功します。ソカル祭がエジプトで最も重要な行事の一つだったように、イベント企画や文化事業でも才能を発揮します。忍耐力で長期投資から大きな財を得ます。',
+      health: '骨と関節の健康に特別な関心が必要です。地下や室内で過ごす時間が多いのでビタミンD補充と日光浴が重要です。大地との接触を通じてエネルギーを充電してください。', lucky: { color: '黒、茶色', stone: '黒曜石', number: '8, 4', animal: 'タカ' }, compat: [2,8,14,20,26,32] },
+    { name: 'ヌトの空', deity: 'ヌト (Nut)', glyph: '🌌', element: '風', dates: '8/21~8/31', startM:8, startD:21, endM:8, endD:31,
+      personality: '天の女神ヌトの無限で広大なエネルギーを持っています。毎夜星々を飲み込み明け方に再び産む女神のように、終わりなき循環と再生の力があります。すべてを包み込む巨大な包容力と宇宙的視野を持ち、小さなことに囚われません。夢は空のように大きく、いかなる制限も受け入れない自由な魂です。ヌトが空のアーチをなすように、他の人々を守る傘のような存在です。',
+      love: '無限で自由な愛をします。ヌトがゲブ（大地）との愛でオシリス、イシス、セト、ネフティスを産んだように、愛から偉大なものを誕生させます。パートナーに制限を設けず空のように広い心で包み込みます。ただし所有しようとすると星のように遠ざかることがあります。',
+      career: '天文学者、航空パイロット、宇宙工学者、芸術家、哲学者など広い視野が必要な分野で輝きます。ヌトが空全体を司ったように、大きな絵を描く企画や戦略分野で卓越した能力を発揮します。自由な想像力が独創的な財の創出につながります。',
+      health: '脊椎と呼吸器の健康に注意が必要です。天の女神らしく開放的な空間での呼吸運動とストレッチが大きく役立ちます。夜空の星を眺めながら瞑想することが精神的健康に最高の癒しです。', lucky: { color: '紺色、星模様', stone: 'スターサファイア', number: '5, 12', animal: '牛' }, compat: [1,7,13,19,25,31] },
+    { name: 'ミンの豊穣', deity: 'ミン (Min)', glyph: '🌿', element: '土', dates: '9/1~9/10', startM:9, startD:1, endM:9, endD:10,
+      personality: '多産と豊穣の神ミンのあふれる生命エネルギーを持っています。古代エジプトの収穫祭を主宰した神らしく、生命力にあふれ性的魅力が強いです。植物のように絶え間なく成長し、周囲の人々に豊穣と活力をもたらします。肉体的エネルギーが旺盛で、生活の感覚的な楽しみを深く味わいます。ミンが砂漠の旅人を守ったように、困難な状況でも生存本能と活力を失いません。',
+      love: '情熱的で感覚的な愛をします。多産の神らしく豊かな感情を注ぎ込み、物質的にもパートナーを豊かに待遇します。身体的な親密さを重視し愛を全身で表現します。ミンの祭りのように愛にも喜びと祝福があふれます。',
+      career: '農業、食品業、健康産業、フィットネストレーナー、生命工学、園芸など成長と豊穣に関連する分野で成功します。ミンがレタス畑の神であったように、小さな種から大きな収穫を生み出す才能があります。着実な努力で豊かな財を収穫します。',
+      health: '生殖器とホルモンバランスに注意が必要です。旺盛なエネルギーを適切に分配しないと消耗することがあります。自然の中での活動と新鮮な食品の摂取が健康の核心です。', lucky: { color: '緑、金色', stone: 'エメラルド', number: '2, 9', animal: '雄牛' }, compat: [0,6,12,18,24,30] },
+    { name: 'モンチュの戦争', deity: 'モンチュ (Montu)', glyph: '⚔️', element: '火', dates: '9/11~9/20', startM:9, startD:11, endM:9, endD:20,
+      personality: '戦争の神モンチュの強烈な戦士エネルギーを持っています。テーベの守護神としてファラオたちが戦場で呼んだ戦争の神らしく、勇気と戦闘本能が極度に強いです。挑戦を楽しみ競争の中で輝く生まれながらの戦士です。モンチュが雄牛の姿を取ったように、一度突進すると止まらない不屈の意志があります。恐れを知らず、危機的状況でむしろ強くなります。',
+      love: '征服するように愛し、挑戦的な相手に惹かれます。簡単に手に入る愛には興味を感じず、自分と対等に戦える強いパートナーを求めます。愛でも戦士らしく直進し、心を決めたら勢いよく突き進みます。保護本能が強く愛する人のためにはどんな敵とも立ち向かいます。',
+      career: '軍人、プロスポーツ選手、武術家、競争の激しいビジネス分野で頭角を現します。モンチュの戦車のように素早く目標に向かって突進する分野が適しています。競争に勝って得る報酬で大きな財を集めます。',
+      health: '頭痛と外傷性の怪我に注意が必要です。戦闘的気質で無理しやすいので適切な回復時間が必須です。格闘技や高強度トレーニングでエネルギーを健全に放出してください。', lucky: { color: '赤、黒', stone: 'ルビー', number: '1, 9', animal: '雄牛' }, compat: [1,7,11,19,25,31] },
+    { name: 'ワジェトの毒', deity: 'ワジェト (Wadjet)', glyph: '🐍', element: '水', dates: '9/21~9/30', startM:9, startD:21, endM:9, endD:30,
+      personality: 'コブラ女神ワジェトの致命的で神秘的なエネルギーを持っています。ファラオの額に飾られたウラエウス（コブラ王冠）の女神らしく、王室級の保護本能が強いです。危険を直感する驚くべき能力があり、静かに忍耐しながら正確な瞬間に致命的に行動します。下エジプトの守護女神として、愛する人と領土を守ることに一切の妥協がありません。外見は落ち着いていますが内面にはコブラの毒のように強烈な情熱が隠されています。',
+      love: '保護的で直感的な愛をします。パートナーに迫る危険を事前に感知し遮断する守護者の役割をします。ワジェトが幼いホルスを守ったように、愛する人を全力で守ります。裏切りに対してはコブラの毒のように致命的に反応するため、信頼を破らないことが重要です。',
+      career: 'セキュリティ専門家、医師、薬学者、毒性学者、宝石鑑定士、外交官など鋭い判断力が必要な分野で成功します。ワジェトの目のように危険と機会を同時に感知する能力で投資でも成果を上げます。秘密情報を扱う職業で特に輝きます。',
+      health: '毒素の蓄積とアレルギー反応に注意が必要です。デトックス食事と浄化療法が健康維持に重要です。ワジェトのエネルギーを浄化するために温かいお湯での入浴が役立ちます。', lucky: { color: '緑、金色', stone: 'サーペンティン', number: '5, 8', animal: 'コブラ' }, compat: [3,9,15,21,27,33] },
+    { name: 'シューの風', deity: 'シュー (Shu)', glyph: '💨', element: '風', dates: '10/1~10/10', startM:10, startD:1, endM:10, endD:10,
+      personality: '風と大気の神シューの自由でダイナミックなエネルギーを持っています。空（ヌト）と大地（ゲブ）を分離して生命が存在する空間を作った神らしく、混沌の中から秩序を生み出す仲裁者の能力が卓越しています。自由で独立的であり、いかなる束縛も耐えがたいです。風のようにどこへでも行け、どこにも縛られない魂です。シューが光と空気を象徴するように、明確な思考と透明なコミュニケーション能力があります。',
+      love: '自由な愛を追求しパートナーの空間と独立を尊重する関係を望みます。シューがヌトとゲブの間に立ったように、適切な距離を維持しながらも関係を支える役割をします。束縛する愛には風のように逃げますが、自由を与えるパートナーには限りなく戻ってきます。コミュニケーションがうまくいく関係で幸福を感じます。',
+      career: '航空関連職業、環境運動家、仲裁者、カウンセラー、風力エネルギー、コミュニケーション専門家などコミュニケーションと空間に関連する分野で輝きます。シューが空と大地の間を支えたように、対立する両者を仲裁する役割で大きな価値を発揮します。自由な魂らしくフリーランスで財を集めます。',
+      health: '肺と呼吸器の健康が最も重要です。新鮮な空気の中での呼吸運動と有酸素運動が必須です。密閉された空間に長時間いるとエネルギーが急激に落ちるので換気と屋外活動を頻繁に行ってください。', lucky: { color: '水色、白', stone: 'アクアマリン', number: '3, 7', animal: 'ライオン' }, compat: [2,5,11,17,23,29] },
+    { name: 'テフヌトの雨', deity: 'テフヌト (Tefnut)', glyph: '🌧️', element: '水', dates: '10/11~10/20', startM:10, startD:11, endM:10, endD:20,
+      personality: '湿気と雨の女神テフヌトの感情的で浄化するエネルギーを持っています。神話でエジプトを離れてから戻り大地に生命をもたらした女神のように、消えてから戻る循環のエネルギーが人生全体を貫きます。感情が深く変化に富み、雨のように一瞬で降り注ぐ感情の爆発があります。テフヌトがライオンの姿を取ったように、柔らかい雨の裏には荒々しい野性が隠れています。浄化と再生の能力があり周囲の停滞したエネルギーを洗い流します。',
+      love: '感情的で変化に富んだ愛をします。テフヌトがエジプトを離れてから戻ったように、関係でも離れてから戻るパターンが現れることがあります。感情の雨が降り注げばすべてを潤す強烈な愛です。テフヌトが戻った時にエジプト中が喜んだように、この人の愛を受けると世界が祝福で満ちる感覚です。',
+      career: '水資源管理、環境科学、心理療法、浄化産業、スパ、ウェルネス分野で成功します。テフヌトが大地に雨を降らせ生命をもたらしたように、停滞した状況に活力を吹き込む役割で輝きます。感情的エネルギーを生産的に活用すれば豊富な財が流れ込みます。',
+      health: '涙腺と水分代謝に特別な注意が必要です。感情変動が激しいと身体にも影響するため感情管理が健康の核心です。温泉や水泳など水に関連する活動が最高の癒しです。', lucky: { color: '青、銀色', stone: 'ムーンストーン', number: '2, 11', animal: 'ライオン' }, compat: [0,6,10,18,24,30] },
+    { name: 'アテンの円盤', deity: 'アテン (Aten)', glyph: '☀️', element: '火', dates: '10/21~10/31', startM:10, startD:21, endM:10, endD:31,
+      personality: '太陽円盤アテンの純粋で革命的な光のエネルギーを持っています。ファラオ・アクナテンがすべての神を捨てアテンのみを崇拝したように、既存の慣習と伝統を大胆に打ち破る進歩的思考の持ち主です。唯一神思想の源となった神らしく、一つの真理への揺るぎない確信があります。時代を先行く革新家であり、他者が理解できなくても自分の道を歩みます。純粋な光のように偽りや偽善に耐えられません。',
+      love: '純粋で革新的な愛をします。伝統的な関係の形式に縛られず、自分だけの愛の方法を作り上げていきます。アクナテンとネフェルティティの愛のように、パートナーと共に新しい世界を作り上げる関係を夢見ます。魂の真のつながりを追求し外見や条件に左右されません。',
+      career: '革新企業家、科学研究者、技術開発者、宗教革新家、社会運動家など新しいパラダイムを作る分野で輝きます。アテンがエジプトの宗教を完全に変えたように、既存のシステムを革新する役割に天賦の才能があります。革新的なアイデアで大きな財を創出します。',
+      health: '皮膚の健康とビタミンDの値に注意が必要です。太陽のエネルギーを直接受けることが重要ですが過度な紫外線は避けてください。瞑想と光治癒（光線療法）が精神的、肉体的健康に大きく役立ちます。', lucky: { color: '金色、白', stone: 'シトリン', number: '1, 10', animal: 'フンコロガシ' }, compat: [1,7,13,19,25,31] },
+    { name: 'アンクの生命', deity: 'アンク (Ankh)', glyph: '☥', element: '風', dates: '11/1~11/10', startM:11, startD:1, endM:11, endD:10,
+      personality: '永遠の生命の象徴アンクの神聖なエネルギーを持っています。古代エジプトで神々が手に持っていた生命の鍵らしく、生の喜びと永遠を同時に追求します。治癒と再生のエネルギーが極めて強く、死後も続くものの価値を理解しています。霊的な深さがありながらも現実の生命力を失わないバランスの取れた存在です。アンクが鍵の形をしているように、閉ざされた扉を開く解決者の役割をします。',
+      love: '永遠の愛を追求し前世と来世をつなぐ縁を信じます。アンクがこの世とあの世をつなぐ鍵であるように、愛でも肉体的結合と霊的結合の両方を重視します。一度結ばれた縁は死をもって断ち切れないと信じ、それだけ深く真剣な愛をします。軽いまたは一時的な関係には関心がありません。',
+      career: '医師、霊的ヒーラー、哲学者、宝石職人、生命工学研究者など生命と永遠に関連する分野で成功します。アンクがすべての神殿に刻まれたように、普遍的で根本的な価値を扱う職業で輝きます。人を救い癒す仕事で財とやりがいを同時に得ます。',
+      health: '循環器系と免疫システムに特別な注意が必要です。アンクのエネルギーを維持するために生命力を充電する活動が重要です。自然の中の散歩と瞑想、そして他者を助けるボランティア活動が健康の核心です。', lucky: { color: '金色、ターコイズ', stone: 'ターコイズ', number: '7, 13', animal: '鷲' }, compat: [4,8,14,20,26,32] },
+    { name: 'スフィンクスの謎', deity: 'スフィンクス (Sphinx)', glyph: '🦁', element: '土', dates: '11/11~11/20', startM:11, startD:11, endM:11, endD:20,
+      personality: '謎のスフィンクスの神秘的で複合的なエネルギーを持っています。人間の知恵、ライオンの力、鷲の視野を同時に持つ存在で、真実を守る守護者です。「朝は四本足、昼は二本足、夕は三本足で歩くものは？」という謎のように、生の本質を見抜く洞察力があります。秘密を守る能力が卓越しており、簡単に本心を明かしません。ギザの大スフィンクスのように数千年を耐える忍耐と威厳を備えています。',
+      love: '謎めいた愛をします。パートナーの真心を試し確認しようとする傾向があり、簡単に心を開きません。スフィンクスの謎を解いてこそ通過できるように、この人の愛を得るには真正さと知恵が必要です。しかし一旦謎を解けば、その先には想像以上の深い愛が待っています。',
+      career: '教授、研究者、心理学者、セキュリティ専門家、暗号解読家、考古学者など秘密と知識を扱う分野で輝きます。スフィンクスが神殿の入口を守ったように、重要な情報と資源を守る役割で卓越した能力を発揮します。知的能力と洞察力で高い価値を認められ財を集めます。',
+      health: '精神的ストレスと頭痛に特別な注意が必要です。常に警戒状態を維持しようとする習慣が緊張と疲労を引き起こします。謎を一旦下ろしてシンプルな楽しみを見つけることが健康の核心です。', lucky: { color: '砂色、金色', stone: 'タイガーアイ', number: '3, 11', animal: 'スフィンクス' }, compat: [2,5,11,17,23,29] },
+    { name: 'ピラミッドの頂', deity: 'ベンベン (Benben)', glyph: '🔺', element: '火', dates: '11/21~11/30', startM:11, startD:21, endM:11, endD:30,
+      personality: 'ピラミッドの頂石ベンベンの上昇と永遠のエネルギーを持っています。古代エジプトで最初の大地であり創造の出発点とされたベンベン石のように、頂点への絶え間ない野望と永遠に残る遺産を追求します。体系的で目標志向的であり、人生のピラミッドを一層一層積み上げていく建築家です。ピラミッドが数千年を耐えたように、一度建てたものは永遠に崩れない堅固さがあります。頂点に立つことが運命だと信じ、その信念が現実を作ります。',
+      love: '共に頂点に向かって歩ける野望あるパートナーを求めます。ピラミッドの二面が頂点で出会うように、各自の道を歩みながらも結局一つの頂点で出会う関係を夢見ます。愛でも品格と威厳を重視し、自分とパートナーの両方を高い所へ導きます。永遠に残る愛の記念碑を建てようとします。',
+      career: 'CEO、建築家、政治指導者、歴史学者、プロジェクトマネージャーなど頂点を目指すすべての分野で成功します。ベンベン石が太陽の最初の光を受けたように、新しい時代を開く最初の人になる役割に適しています。体系的な計画と実行力でピラミッドのように堅固な財を蓄積します。',
+      health: '背中と脊椎の健康に特別な注意が必要です。常に高い所を目指す姿勢で腰に負担がかかることがあります。ピラミッドの均衡のように姿勢矯正とコアの筋力強化が健康の核心です。', lucky: { color: '金色、白', stone: 'ダイヤモンド', number: '1, 4', animal: 'タカ' }, compat: [1,7,13,19,25,31] },
+    { name: 'スカラベの誕生', deity: 'ケペラ (Khepera)', glyph: '🌅', element: '土', dates: '12/1~12/10', startM:12, startD:1, endM:12, endD:10,
+      personality: '明けの太陽を転がすスカラベのもう一つの形態ケペラの再誕生エネルギーを持っています。ケプリと同一の根源ですが年末に位置するデカンとして、一年の終わりに新しい始まりを見出す特別な能力があります。毎日自分自身を新しく作り替える再誕生のエネルギーが尽きることなく、失敗や終わりが怖くありません。スカラベが糞から生命を生み出すように、最も低い所から最も高い価値を創造します。循環と変化を自然の法則として受け入れる知恵があります。',
+      love: '終わりなく新しくなる愛をします。毎日違う姿でパートナーを驚かせ、関係が決して退屈になりません。スカラベが毎日新しい太陽を転がすように、愛にも毎日新しいエネルギーを吹き込みます。関係の危機も再誕生の機会に変えるポジティブな愛の錬金術師です。',
+      career: 'スタートアップ創業者、革新コンサルタント、リハビリ療法士、自己啓発コーチ、リサイクル産業など再誕生と革新に関連する分野で輝きます。ケペラが毎日太陽を新しくしたように、古いものを新しく作る能力で独創的な財を創出します。何度もの失敗を踏み台に大きな成功を収めるタイプです。',
+      health: '消化器系と全般的なエネルギー管理に注意が必要です。絶え間ない変化と再誕生のエネルギーが体力を消耗させることがあるため十分な栄養摂取が重要です。朝の日の出を見ながら一日を始めることがケペラのエネルギーを最大に引き出す方法です。', lucky: { color: '金色、緑', stone: 'ペリドット', number: '1, 8', animal: 'スカラベ' }, compat: [3,9,15,21,27,33] },
+    { name: 'ワセトの王笏', deity: 'ワセト (Waset)', glyph: '👑', element: '風', dates: '12/11~12/20', startM:12, startD:11, endM:12, endD:20,
+      personality: 'テーベ（現ルクソール）の王笏ワセトの権威と統治エネルギーを持っています。エジプト新王国時代の首都でありアムン=ラーの都テーベの名を冠したこのデカンは、生まれながらにリーダーの気質を持っています。自然と周囲を統率し、伝統と秩序を重視する保守的でありながらも威厳のある性向です。ファラオが王笏（ワス笏）を持って統治したように、権威と責任感を同時に持った存在です。歴史と伝統に対する深い敬意があります。',
+      love: '王と女王のような品格ある愛を追求します。関係でも威厳と尊敬を重視し、パートナーに王族にふさわしい待遇をします。テーベの神殿のように壮大で美しい愛を夢見、軽い恋愛よりは真剣で格式のある関係を好みます。一度選んだパートナーへの忠誠はファラオの誓いほど重いです。',
+      career: '政治家、外交官、高位行政官、法律家、文化財管理、博物館長など権威と伝統が重要な分野で輝きます。ワセトがエジプトの宗教的首都であったように、文化と宗教関連分野でも大きな成功を収めることができます。権威と名声で自然に財が付いてきます。',
+      health: '頭痛と首の健康に注意が必要です。重い王冠をかぶったように責任感の重さが身体に影響します。首と肩の緊張をほぐすマッサージと瞑想が健康維持に重要です。', lucky: { color: '紫、金色', stone: 'アメジスト', number: '5, 9', animal: 'タカ' }, compat: [1,4,10,16,22,28] },
+    { name: 'ナイルの終わり', deity: 'ハピ (Hapi-End)', glyph: '🌊', element: '水', dates: '12/21~12/31', startM:12, startD:21, endM:12, endD:31,
+      personality: 'ナイル川の循環が完成する時期に生まれた、終わりと始まりが出会う地点のエネルギーを持っています。最初のデカンのハピと同じ神ですが、ここでは氾濫が終わり次の循環を準備する成熟した段階です。深い霊的洞察と循環の知恵を持ち、すべてのものは結局戻ってくることを知る賢者です。一年を締めくくる時期らしく、整理し完成する能力が卓越しています。ナイル川が海に流れるように、すべての経験をより大きな知恵に統合します。',
+      love: '輪廻する愛をします。終わりが新しい始まりであることを知る成熟した愛であり、別れの中でも感謝を見出せます。ナイルの氾濫のように愛が終わってもその場所には肥沃な土壌が残ることを理解しています。前世の縁を直感的に見抜き、魂の成長を助ける関係を追求します。',
+      career: '哲学者、霊的指導者、歴史学者、環境科学者、退職計画カウンセラーなど循環と完成に関連する分野で輝きます。ナイル川がエジプト文明全体を育てたように、大きなシステムの循環を理解し管理する役割に適しています。知恵と経験で安定した豊かな財を蓄積します。',
+      health: '循環器系と足の健康に注意が必要です。ナイル川の流れのように血液循環が円滑であってこそ全体の健康が維持されます。水辺の散歩や足湯が最高の癒しであり、一年を締めくくる時期に生まれただけに年末の健康診断を必ず受けてください。', lucky: { color: '青、銀色', stone: 'アクアマリン', number: '12, 3', animal: 'ワニ' }, compat: [0,6,12,18,24,30] }
+];
+
+function getDecanIndex(month, day) {
+    for (let i = 0; i < DECANS.length; i++) {
+        const d = DECANS[i];
+        const start = d.startM * 100 + d.startD;
+        const end = d.endM * 100 + d.endD;
+        const target = month * 100 + day;
+        if (target >= start && target <= end) return i;
+    }
+    return 0;
+}
+
+function initForm() {
+    const y = document.getElementById('birthYear');
+    const m = document.getElementById('birthMonth');
+    const d = document.getElementById('birthDay');
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '年'; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '月'; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '日'; if (i === 15) o.selected = true; d.appendChild(o); }
+}
+
+function calculate() {
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+    const idx = getDecanIndex(month, day);
+    const decan = DECANS[idx];
+
+    // Decan Card
+    document.getElementById('decanCard').innerHTML = `
+        <div class="decan-card">
+            <span class="decan-glyph">${decan.glyph}</span>
+            <div class="decan-name">${decan.name}</div>
+            <div class="decan-deity">守護神: ${decan.deity}</div>
+            <div class="decan-dates">${decan.dates}</div>
+        </div>
+    `;
+
+    // Info Grid
+    document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item">
+            <div class="info-label">守護神</div>
+            <div class="info-value">${decan.glyph} ${decan.deity}</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">元素</div>
+            <div class="info-value">${decan.element}</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">デカン番号</div>
+            <div class="info-value">${idx + 1} / 36</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">期間</div>
+            <div class="info-value">${decan.dates}</div>
+        </div>
+    `;
+
+    // Personality
+    document.getElementById('personalityWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">${decan.glyph} ${decan.name} — ${decan.deity}</div>
+            <div class="interp-text">${decan.personality}</div>
+        </div>
+    `;
+
+    // Love
+    document.getElementById('loveWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💕 ${decan.deity}の愛の方式</div>
+            <div class="interp-text">${decan.love}</div>
+        </div>
+    `;
+
+    // Career
+    document.getElementById('careerWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💼 職業＆財運</div>
+            <div class="interp-text">${decan.career}</div>
+        </div>
+    `;
+
+    // Health
+    document.getElementById('healthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">🏥 健康上の注意点</div>
+            <div class="interp-text">${decan.health}</div>
+        </div>
+    `;
+
+    // Compatibility
+    let compatHtml = '<div class="interp-card"><div class="interp-title">💞 相性の良い守護神</div><div class="interp-text">';
+    decan.compat.forEach(ci => {
+        if (ci < DECANS.length) {
+            const c = DECANS[ci];
+            compatHtml += `${c.glyph} <strong>${c.name}</strong> (${c.deity}) — ${c.dates}<br>`;
+        }
+    });
+    compatHtml += '</div></div>';
+    document.getElementById('compatWrap').innerHTML = compatHtml;
+
+    // Lucky
+    document.getElementById('luckyWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-text">
+                <strong>🎨 ラッキーカラー:</strong> ${decan.lucky.color}<br>
+                <strong>💎 ラッキーストーン:</strong> ${decan.lucky.stone}<br>
+                <strong>🔢 ラッキーナンバー:</strong> ${decan.lucky.number}<br>
+                <strong>🐾 守護動物:</strong> ${decan.lucky.animal}
+            </div>
+        </div>
+    `;
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+initForm();
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
+</html>

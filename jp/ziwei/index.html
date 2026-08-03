@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紫微斗数 - MOGU Moon</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d1e, #2a1530); border-bottom: 1px solid #3a2540; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
+        header a span { color: #c44389; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a0d1e, #2a1530); border: 1px solid #3a2540; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #e84393; margin-bottom: 6px; }
+        .optional-tag { font-size: 11px; color: #666; font-weight: 400; }
+        .input-row { display: flex; gap: 10px; }
+        .input-row select { flex: 1; padding: 12px 14px; background: #0a0a1a; border: 1px solid #3a2540; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23e84393' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+        select:focus { border-color: #e84393; }
+
+        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #c44389, #e84393); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+        .calc-btn:hover { transform: translateY(-1px); }
+
+        .result-section { display: none; }
+        .section-title { font-size: 18px; color: #e84393; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2540; }
+
+        .main-star-card { background: linear-gradient(135deg, #2a1530, #1a0d1e); border: 2px solid #e84393; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+        .main-star-glyph { font-size: 60px; margin-bottom: 10px; display: block; }
+        .main-star-name { font-size: 28px; color: #e84393; font-weight: 700; margin-bottom: 4px; }
+        .main-star-sub { font-size: 14px; color: #c44389; }
+
+        .palace-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 0; border: 2px solid #e84393; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+        .palace-cell { border: 1px solid #2a1530; padding: 8px; min-height: 70px; background: #0d0515; font-size: 11px; position: relative; }
+        .palace-cell.empty { background: #0a0a12; }
+        .palace-name { color: #e84393; font-weight: 600; font-size: 10px; }
+        .palace-star { color: #c9a84c; font-size: 10px; margin-top: 2px; }
+        .palace-cell.ming { background: #1a0d2a; border: 1px solid #e84393; }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 55px; font-size: 9px; } }
+        .info-item { background: #1a0d1e; border: 1px solid #3a2540; border-radius: 12px; padding: 16px; }
+        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
+        .info-value { font-size: 16px; color: #e84393; font-weight: 600; }
+        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
+
+        .interp-card { background: linear-gradient(135deg, #1a0d1e, #2a1530); border: 1px solid #3a2540; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+        .interp-title { font-size: 14px; color: #e84393; font-weight: 600; margin-bottom: 8px; }
+        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
+
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span>Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💜 紫微斗数</h2>
+        <p>紫微星（北極星）を中心とした中国皇室占星術</p>
+    </div>
+
+    <div class="form-box">
+        <div class="input-group">
+            <label>生年月日（新暦）</label>
+            <div class="input-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>出生時間 <span class="optional-tag">(不明の場合は「不明」を選択)</span></label>
+            <div class="input-row">
+                <select id="birthAmpm"><option value="am">午前</option><option value="pm">午後</option></select>
+                <select id="birthHour"></select>
+                <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">時間を入力</option><option value="unknown">不明</option></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>性別</label>
+            <div class="input-row">
+                <select id="gender">
+                    <option value="m">男性</option>
+                    <option value="f">女性</option>
+                </select>
+            </div>
+        </div>
+        <button class="calc-btn" onclick="calculate()">💜 紫微斗数 命盤を生成</button>
+    </div>
+
+    <div class="result-section" id="resultSection">
+        <h3 class="section-title">⭐ 命宮の主星（あなたの核心の星）</h3>
+        <div id="mainStarWrap"></div>
+
+        <h3 class="section-title">🏛️ 十二宮の配置</h3>
+        <div class="palace-grid" id="palaceGrid"></div>
+
+        <div class="info-grid" id="infoGrid"></div>
+
+        <h3 class="section-title">📖 命宮主星の詳細解釈</h3>
+        <div id="mainInterpWrap"></div>
+
+        <h3 class="section-title">💕 夫妻宮（配偶者）</h3>
+        <div id="spouseWrap"></div>
+
+        <h3 class="section-title">💰 財帛宮（財運）</h3>
+        <div id="wealthWrap"></div>
+
+        <h3 class="section-title">💼 官禄宮（職業）</h3>
+        <div id="careerWrap"></div>
+
+        <h3 class="section-title">🏥 疾厄宮（健康）</h3>
+        <div id="healthWrap"></div>
+
+        <h3 class="section-title">⏳ 大運（10年周期）</h3>
+        <div id="dashaWrap"></div>
+    </div>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// ═══════════════════════════════════════
+// 紫微斗数 14主星
+// ═══════════════════════════════════════
+const MAIN_STARS = {
+    '紫微': { glyph: '💜', element: '土', yin: false, rank: '皇帝',
+        personality: '紫微星（北極星）は皇帝の星です。天の中心に位置し、すべての星があなたを中心に助けます。生まれながらのリーダーでカリスマに満ちています。プライドが高く、自然に権威を行使します。幼い頃から同年代の中でリーダー役を務め、周囲の子供たちが自然についてきます。人間関係では敬意を重視し、自分を軽く扱う人は遠ざけます。人生哲学は「最高でなければいっそやらない」であり、外見は堂々としていますが、内面には王冠の重さに匹敵する深い孤独を抱えています。',
+        love: 'パートナーに王/王妃としての扱いを求めます。品格のある愛をし、平凡な関係では満足しません。理想の配偶者は社会的地位があるか品格の高い人です。結婚は比較的遅い方で、条件が合わなければ結婚を決意しません。別れる時も品位を保とうとしますが、プライドが大きく傷つくと関係を完全に断ち切る傾向があります。',
+        career: 'CEO、政治家、高級官僚、王族、宗教指導者に向いています。組織のトップで輝き、中間管理職よりも最終決定権者として能力を発揮します。若い頃は参謀役から始めても、最終的にはリーダーの座に就きます。大企業の役員、学会長、協会長など権威ある地位が似合います。',
+        wealth: '貴人の助けにより財が入ります。投資よりも地位と名声を通じた収入が主です。品格を持ってお金を使い、むやみに浪費しませんが、体面の維持にかなりの費用をかけます。40代以降に財運が安定し、老後は豊かな方です。',
+        health: '脾臓、胃腸に注意が必要です。高い地位から来るストレス性疾患（胃潰瘍、不眠症）に弱いです。孤独感が慢性疲労やうつにつながることがあるので、心を分かち合える親しい人をそばに置くことが重要です。瞑想や高級な趣味（ゴルフ、茶道）が健康管理に役立ちます。',
+        advice: '王冠は重いですが、あなただけが被ることができます。孤独を恐れないでください。しかし、謙虚に人をそばに置く方法を学んでください。真の皇帝とは一人で君臨する者ではなく、人々が喜んでついてくる者です。' },
+    '天機': { glyph: '🧠', element: '木', yin: true, rank: '謀士',
+        personality: '天機星は知恵と戦略の星です。優れた頭脳と分析力を持ち、すべてを計算し計画します。宗教、哲学、学問に関心が深く、霊的傾向が強いです。繊細で優しいですが優柔不断になることがあります。幼い頃から好奇心旺盛で「なぜ？」という質問を絶えず繰り返し、本が好きな子供でした。会話で相手の意図を素早く把握しますが、考えすぎて行動が遅いのが弱点です。完璧な計画を立てようとしてタイミングを逃すという独特なアイロニーを持つ人です。',
+        love: '知的交流が最も重要です。会話が通じるパートナーを求め、感情よりも理性で愛する傾向があります。理想の配偶者は知的で霊的な深みのある人です。恋愛初期に分析的に接近しすぎて相手が疲れることがあるので注意が必要です。別れた後も長い間原因を分析し、同じ過ちを繰り返さないようにします。',
+        career: '戦略家、参謀、宗教者、学者、ITエンジニア、コンサルタントで輝きます。頭脳を使う職業が適性で、データアナリスト、AI研究員、哲学教授などが合います。初めは補佐役からスタートしますが、専門性が蓄積されればその分野の最高権威者になれます。フリーランスよりも安定した組織で能力を発揮します。',
+        wealth: '頭脳で稼ぎます。安定していますが、大きな富よりも知的満足を追求する傾向があります。投資は徹底的な分析の後に行い、リスクを極度に回避します。支出は書籍、講座、技術機器など知的投資に集中します。30代半ばから専門性を基盤に収入が安定します。',
+        health: '肝臓、神経系に注意が必要です。過度な思考による不眠症と神経衰弱が最大の敵です。頭痛や肩こりが慢性化する可能性があるので、規則的なストレッチと瞑想が必須です。頭を空にする趣味（自然散歩、園芸）を持てば健康が大きく改善されます。',
+        advice: '考えるだけでは世界は変わりません。70%の確信が持てたら果敢に行動してください。あなたの知恵は実行されて初めて光ります。完璧な計画よりも不完全な実行の方が価値があります。' },
+    '太陽': { glyph: '☀️', element: '火', yin: false, rank: '官星',
+        personality: '太陽星は光と名誉の星です。明るく活気があり、周囲を照らします。男性性が強く、公的活動で輝きます。父親との関係が重要で、利他的で犠牲的です。幼い頃から正義感が強く、弱い友達の代わりに戦ってあげる子供でした。人の中でムードメーカーの役割を果たし、暗い雰囲気を明るく変える才能があります。人生哲学は「世界に光を照らすこと」であり、自分を燃やして他者を照らすろうそくのような存在です。',
+        love: '温かく寛大な愛をします。パートナーを輝かせますが、家庭よりも社会活動を優先することがあります。理想の配偶者は社会活動を理解し、頼もしく後ろを支えてくれる人です。結婚後も外での活動が多く家庭がおろそかになりやすいので、意識的に家族の時間を作る必要があります。別れる時、相手よりも周囲の人々がもっと残念がるタイプです。',
+        career: '政治家、公務員、教授、放送人、社会運動家、外交官が適しています。大衆の前に立つ職業で輝き、NGO代表、ニュースキャスター、国際機関の職員などが合います。キャリア初期から注目される方で、30代にはすでに業界で名前が知られます。ただし、過度な奉仕で自分の利益を逃さないよう注意が必要です。',
+        wealth: '名誉を通じた財産蓄積が主です。給与収入は安定していますが、利他的性向のため事業は難しいことがあります。他者のための支出（寄付、プレゼント、接待）が多く、貯蓄が容易ではありません。資産運用よりも名誉職からの副収入パターンで、50代以降に社会的功績による報いが伴います。',
+        health: '目、心臓、血圧に注意が必要です。過労が最大の敵で、他者のために自分の健康を後回しにする習慣があります。定期的な心臓検診と眼科検診を欠かさないでください。朝早く日光を浴びながら散歩することが太陽星にとって最高の癒しです。',
+        advice: '世界を照らすのも良いですが、時には自分にも光を向けてください。自分を完全に燃やしてしまえば、誰も照らすことができません。家庭と自分自身という小さな宇宙もあなたの光を待っています。' },
+    '武曲': { glyph: '💰', element: '金', yin: true, rank: '財星',
+        personality: '武曲星は財と決断の星です。財務感覚に優れ実行力が強いです。武人の気質もあり、果敢な決定を下します。寂しがりですが表には出しません。幼い頃からお小遣いを貯めたり小さな商売をして、お金の価値を早くに悟った子供でした。人間関係では信頼を重視し、約束を破る人はすぐに整理します。人生哲学は「お金がなければ愛も夢も守れない」であり、感情より結果で語る行動派です。',
+        love: '行動で愛を表現します。「愛してる」よりも通帳残高で真心を示すタイプです。理想の配偶者は経済観念がしっかりしていて独立した人です。結婚は経済的基盤が整った後にしようとする傾向が強いです。別れる時は感情を押し殺して仕事に没頭し、外見では大丈夫なふりをしますが内心では長く苦しみます。',
+        career: '金融、投資、事業、軍人、スポーツ、不動産開発分野で成功します。ファンドマネージャー、証券アナリスト、貿易業、フランチャイズ事業家などが合います。20代後半から経済的センスが輝き始め、40代に事業的頂点に達します。人の下で働くよりも独立して自分の事業をする方がはるかに有利です。',
+        wealth: '14主星中最高の財運を持っています！生まれつきの財務感覚で大きな富を蓄積できます。投資は果敢ですが計算的で、不動産と株式の両方で成果を出します。節約するところは徹底的に節約し、投資する時は果敢に賭けます。30代半ばから資産が急激に増える時期が来ます。',
+        health: '肺、呼吸器に注意が必要です。金属関連の事故（交通事故、刃物による怪我）に気をつけてください。感情を押し殺す習慣が慢性的な筋肉痛と肩の痛みとして現れます。寂しさが過度の飲酒につながらないよう注意し、定期的に感情を表現できる場（運動、会話）を作ってください。',
+        advice: 'お金はあなたの強力な武器ですが、お金だけでは埋められない空白があります。感情を表現することは弱さではなく勇気です。「愛してる」の一言が通帳残高1億より人の心をしっかりとつかみます。' },
+    '天同': { glyph: '🎭', element: '水', yin: false, rank: '福星',
+        personality: '天同星は福禄と楽しみの星です。楽天的で芸術的、人生を楽しみます。童心を持つ永遠の少年/少女であり、感性が豊かで社交的です。幼い頃は明るくかわいい子供で大人たちの愛を独占し、年を重ねてもその純粋さを失いません。人々に笑いを与える才能があり、どこに行っても人気があります。ただし怠惰だったり優柔不断になることがあり、難しい決断の前で逃げる傾向があります。人生哲学は「楽しくなければ意味がない」です。',
+        love: 'ロマンチックで感性的な愛をします。恋愛を楽しみ、甘い言葉が上手な永遠のロマンチストです。理想の配偶者は自分の純粋さを理解し、現実的な部分を補完してくれる人です。結婚を急がず、感情が確かになるまでゆっくり関係を発展させます。別れた後は悲しみますが、新しい楽しみを見つけて素早く回復する方です。',
+        career: '芸術家、芸能人、料理人、サービス業、福祉分野で輝きます。放送作家、YouTubeクリエイター、グルメコラムニスト、プレイセラピストなどが合います。キャリア初期は方向を定められず複数の職業を転々とすることがありますが、本当に好きなことを見つけると驚くべき集中力を見せます。30代後半に自分の分野を確立する場合が多いです。',
+        wealth: '福が多く食べていくのに困りませんが、大きな富を築くのは難しいです。稼いだらすぐに楽しむことに使う消費型で、グルメ、旅行、趣味への支出が大きいです。貯蓄は自動引き落としで強制設定するのが良いでしょう。思いがけない幸運（宝くじ、プレゼント、遺産）で財が入ることがしばしばあります。',
+        health: '腎臓、膀胱に注意が必要です。食べ過ぎ、飲みすぎが最大の健康リスクです。楽しむことが好きなので食習慣が不規則になりやすく、肥満と糖尿病に注意が必要です。楽しくできる運動（ダンス、水泳、ヨガ）を選べば継続できます。',
+        advice: '楽しみを追求することはあなたの才能ですが、時には不快なことにも向き合ってこそ成長します。怠惰と余裕は違います。今日を楽しみつつ、明日のあなたも楽しめるように少しだけ準備しておいてください。' },
+    '廉貞': { glyph: '🔥', element: '火', yin: true, rank: '刑星',
+        personality: '廉貞星は芸術と情熱の星です。感情が激しく芸術的センスに優れています。魅力的で社交的ですが、感情の起伏が大きいです。愛と憎しみが極端で、一度はまると深くはまります。幼い頃から感受性が鋭く、音楽や美術に早くから目覚め、同年代より大人びた感情を感じます。人々に強烈な第一印象を残し、好き嫌いがはっきりした関係を結びます。人生哲学は「熱く生きなければ生きていることにならない」であり、ぬるさを最も軽蔑します。',
+        love: '炎のような愛をします！情熱的で激しく、愛する時はすべてを賭けます。理想の配偶者は自分の情熱を受け止められる強い人です。結婚前に何度も熱い恋愛を経験し、結婚時期が不規則です。別れる時は極度の苦痛を感じ、忘れるためにまた別の情熱に身を投じるパターンがあります。嫉妬と執着を抑えることが幸せな関係の鍵です。',
+        career: '芸術家、デザイナー、芸能人、法律家、犯罪捜査官に適しています。ファッションデザイナー、映画監督、検察官、刑事、タトゥーアーティストなど強烈さが求められる職業で輝きます。情熱を注げる分野を見つければ驚くべき成果を出しますが、興味を失うと急激にやる気が落ちます。20代から才能を認められ、芸術分野では早くに成功する場合が多いです。',
+        wealth: '感情によって財の変動が大きいです。芸術で大きな収入を得ることもありますが、衝動消費が最大の敵です。気分が良い時に浪費し、気分が悪い時に「自分へのご褒美」消費をするパターンに注意してください。財は30代後半から安定し、感情管理がすなわち資産管理です。',
+        health: '心臓、血液関連の疾患に注意が必要です。感情ストレスが身体に直接影響し、動悸や血圧変動が頻繁です。火傷、炎症、高熱に弱いので注意してください。感情を芸術に昇華させることが最高の健康法で、激しい運動（ボクシング、ランニング）が感情解消に効果的です。',
+        advice: 'あなたの情熱は世界を変えられる力ですが、火は制御しなければ自分まで焼き尽くします。恋に落ちる時、一歩だけ引いて眺めてください。熱さの中の一握りの冷静さがあなたの人生を守ります。' },
+    '天府': { glyph: '📊', element: '土', yin: true, rank: '財庫',
+        personality: '天府星は財産管理と安定の星です。保守的で安定しており、財務管理に優れています。倉庫番のように蓄え管理することに卓越しています。温和で誠実ですが冒険を避けます。幼い頃から整理整頓が得意で物を大切にする子供で、親に「大人びている」とよく言われました。人間関係では頼りになる存在で、約束とルールを徹底的に守ります。人生哲学は「安定こそ幸福」であり、急激な変化より漸進的成長を好みます。',
+        love: '安定して心地よい愛をします。パートナーに物質的安定を提供し、献身的です。理想の配偶者は安定志向で家庭的な人です。恋愛はゆっくり始まりますが、一度始まると長く続きます。ただし変化を嫌うため関係が停滞することがあり、別れはめったにしませんが、決心すればきれいに整理します。',
+        career: '会計士、財務管理者、銀行員、不動産管理、物流、保険分野に適しています。税理士、監査官、資産管理士、物流センター管理者などが合います。キャリア初期から着実に成果を積み重ね、華やかな成功よりも安定した昇進をします。定年まで一つの職場で勤務する場合が多く、転職より社内成長を好みます。',
+        wealth: '安定的に財を蓄えます。大きな富よりも安定した資産管理に才能があります。投資は元本保証型（預金、債券、配当株）を好み、衝動買いをほとんどしません。支出内容を几帳面に記録する習慣があり、お金が漏れる所がありません。着実な積立で50代に相当な資産を形成します。',
+        health: '脾臓、消化器に注意が必要です。動きが少なく座って仕事する時間が多いため、肥満に弱いです。規則正しい生活が健康の鍵で、食事時間と睡眠時間を一定に保ってください。週末も平日と同じリズムを維持するのが良く、軽い散歩や園芸が適した運動です。',
+        advice: '安定は大切ですが、度が過ぎると停滞になります。年に一度はやったことのないことに挑戦してみてください。小さな冒険があなたの人生に新鮮な空気を吹き込んでくれるでしょう。すべてを管理できることがあなたの強みなので、変化も管理しながら受け入れてみてください。' },
+    '太陰': { glyph: '🌙', element: '水', yin: true, rank: '財星',
+        personality: '太陰星は月の星です。柔らかく繊細で内面が豊かです。女性性が強く直感に優れています。母親との関係が重要で、不動産と縁が深いです。幼い頃から感受性が鋭く他の子供たちの感情をよく読み取り、静かですが深い内面世界を持つ子供でした。人々に安らぎを与える存在で、相談役を頻繁に務めます。夜に活発になる夜行性で、人生哲学は「見えない場所で輝くのも光」です。',
+        love: '柔らかく献身的な愛をします。パートナーを細やかに気遣い、感情豊かでロマンチックです。理想の配偶者は感性的でありながら現実的な安定感を与えてくれる人です。結婚には感情的確信が必要で、急ぎません。別れる時は表には出しませんが、月明かりのように静かに長く苦しみ、一人の時間が必要です。',
+        career: '不動産、ホテル、インテリア、美容、芸術、心理カウンセリングに適しています。インテリアデザイナー、ホテリエ、エステティシャン、不動産仲介士などが合います。夜勤や夜に働く職業（バーテンダー、天文学者、夜間救急室）でも強みを見せます。キャリア中盤以降、不動産関連事業で大きな成功を収める可能性が高いです。',
+        wealth: '不動産で大きな財を蓄えることができます！土地や建物への投資が有利で、母親や女性を通じた財の縁が深いです。投資は長期的で安定したものを好み、不動産競売やリノベーション投資に才能があります。30代後半から不動産資産が大きく増え、賃貸収入が安定した老後を保障します。',
+        health: '腎臓、女性疾患（生理不順、子宮関連）に注意が必要です。睡眠の健康が特に重要で、不規則な睡眠がすべての健康問題の始まりです。夜行性なので睡眠リズムが崩れやすく、就寝時間を一定に保ってください。月明かりの下の散歩や水中運動（水泳、アクアヨガ）が太陰星に最適な癒しです。',
+        advice: 'あなたの柔らかさは世界を癒す力です。しかし月がいつも他者を照らすように、自分は暗闇に置かないでください。あなたの感情と必要も大切です。時には自分のために輝く方法を学んでください。' },
+    '貪狼': { glyph: '🎰', element: '水木', yin: false, rank: '桃花',
+        personality: '貪狼星は欲望と魅力の星です。八方美人で多才多芸です。社交的で魅力的、芸術と芸能に才能があります。幼い頃からパフォーマンスの才能があり学芸会の主役で、大人の前でも物怖じしない大胆な子供でした。新しいことへの好奇心が強く、一つに深くはまってはすぐに別のことに移るパターンがあります。しかし欲が深く誘惑に弱く、ギャンブルや贅沢に溺れる危険があるので注意が必要です。人生哲学は「欲しいものは必ず手に入れる」です。',
+        love: '魅力溢れる恋愛をします！異性にとても人気があり、恋愛経験が豊富です。理想の配偶者は自分と同じくらい魅力的で自由を尊重してくれる人です。結婚時期が不規則で、早い結婚と遅い結婚の両極端が多いです。浮気性になることがあり、関係の安定が生涯の課題で、別れと再結合を繰り返すパターンに注意が必要です。',
+        career: '芸能人、営業、マーケティング、娯楽業、芸術、外交に適しています。インフルエンサー、イベントプランナー、ワインソムリエ、ファッションバイヤー、エンターテインメントマネージャーなどが合います。多才で複数の分野を行き来でき、人脈を活用した事業で大きな成果を出します。一つの分野に定着すれば30代後半に華やかな成功を収めます。',
+        wealth: '稼ぐのも上手で使うのも上手です。臨時収入（投資の大当たり、宝くじ、相続）の可能性が他の星より高いですが、ギャンブルは絶対禁物です。交際費、娯楽費の支出が大きく、収入にムラがあります。「稼いだ分だけ使う」パターンを破るには、収入の30%を自動貯蓄するシステムが必須です。40代から財の管理意識が芽生えれば大きな資産を作ることができます。',
+        health: '肝臓、生殖器に注意が必要です。過度な快楽追求（飲酒、過食、性的放縦）による健康問題が最大のリスクです。肝臓の定期検診を受けてください。節制が鍵で、趣味を運動や芸術創作など健全な方向に転換すれば、健康と魅力が同時に向上します。',
+        advice: 'あなたの魅力と才能は無限ですが、すべてを一度に手に入れることはできません。本当に欲しいもの一つを選び、深く掘り下げてください。広く浅い人生より、一つの分野で深く輝くあなたの方がもっと魅力的です。' },
+    '巨門': { glyph: '📢', element: '水', yin: true, rank: '暗星',
+        personality: '巨門星は口舌と論争の星です。話術に優れ論理的ですが、口論に巻き込まれやすいです。真実を追求し批判的思考力が強いです。幼い頃から口数が多く質問が尽きず先生を困惑させた子供でした。不正を見ると黙っていられず声を上げ、嘘を極度に嫌います。人間関係で「一言」が敵を作ることもあれば、生涯の同志を作ることもあります。人生哲学は「真実は必ず明らかにされるべきだ」であり、沈黙より発言を選ぶ人です。',
+        love: '言葉で傷つけやすく、パートナーとの口論が多くなりがちです。理想の配偶者は論理的でありながらユーモアのセンスがあり、論争を会話に変えられる人です。結婚前に口舌による恋愛危機を経験することがあり、結婚時期は言葉が柔らかくなる30代以降が有利です。別れる時は相手に言いたいことが多すぎてきれいに終わらせるのが難しいです。',
+        career: '弁護士、教授、評論家、放送人、カウンセラー、ジャーナリストに適しています。ポッドキャスト司会者、法律コンサルタント、討論専門家、外国語通訳翻訳者などが合います。言葉と文章を使う職業で成功し、専門性を積むほど発言の重みが変わります。キャリア初期には口舌の問題で苦労しますが、30代半ば以降に実力を認められると急成長します。',
+        wealth: '口で食べていきます。講演、教育、相談、著述で収入を得ます。口舌による財の損失（訴訟、示談金）に注意してください。投資より専門知識を売る方が安定的で、一言の価値を高めることがすなわち資産運用です。40代以降、講演料と著作権収入が安定した収入源になります。',
+        health: '喉、気管支、口腔の健康に注意が必要です。話をたくさんするので声帯結節、慢性咽頭炎に弱いです。ストレスが消化器に直接影響し、胃腸障害が頻繁です。一日に「沈黙の時間」30分を作れば、喉の健康と精神的健康が同時に良くなります。',
+        advice: 'あなたの言葉には刃のような力があります。その力を人を傷つけるために使うのか、真実を世に伝えるために使うのかはあなたの選択です。一テンポ遅く話す習慣が敵を減らし、人生を変えます。' },
+    '天相': { glyph: '🎀', element: '水', yin: true, rank: '印星',
+        personality: '天相星は衣装と印綬の星です。外見に気を遣い体面を重視します。秩序正しく規則的で公務員気質があります。幼い頃から服をきちんと着て、部屋を整理整頓し、礼儀正しい模範生でした。人間関係では格式を重視し、第一印象に大きな意味を置きます。依存的傾向があり、一人で仕事するより組織で輝き、良いリーダーの下で最高の補佐役を果たします。人生哲学は「形式が内容を作る」であり、外面の整頓が内面の安定につながると信じています。',
+        love: '体面を重視する愛をします。外見と条件が重要で、社会的に認められる関係を求めます。理想の配偶者はきちんとしていて社会的地位が安定している人です。結婚は条件が整ってからで、周囲に祝福される結婚式を重視します。別れる時は体面が大きく傷つき、「人にどう説明しよう」を最初に心配します。',
+        career: '公務員、秘書、ファッション関連、ブランド管理、行政に適しています。秘書室長、儀典担当官、スタイリスト、高級ブランドマネージャー、航空会社CAなどが合います。規則と体系の中で仕事する時に能力を発揮し、混乱した環境ではストレスが大きいです。キャリアの成長は着実で、組織内で信頼される存在として定着します。',
+        wealth: '安定した給与収入が主です。大きな富より安定した生活を追求し、外見管理（衣類、美容、健康）への支出が大きい方です。投資は保守的で安全な金融商品を好みます。ブランド品への消費が多いので、予算を事前に決めておくのが良いでしょう。40代以降、退職金と年金が安定した老後を保障します。',
+        health: '皮膚、呼吸器に注意が必要です。ストレスが肌に出やすく（蕁麻疹、アトピー、ニキビ）、季節の変わり目に呼吸器疾患に弱いです。外見管理に気を遣うことが自尊心と健康に同時に役立ちます。規則的なスキンケアルーティンと十分な水分摂取を維持してください。',
+        advice: '外面の美しさも大切ですが、最も素敵な服は自信です。体面にとらわれて本当に欲しいものを諦めないでください。他人の視線より自分の満足の方が価値ある人生を作ります。' },
+    '天梁': { glyph: '🛡️', element: '土', yin: false, rank: '蔭星',
+        personality: '天梁星は陰の保護の星です。長寿と福徳の星であり、年上の貴人の助けを多く受けます。保守的で伝統的、義理を重視します。幼い頃から大人びていて頼もしく、祖父母に特別に可愛がられた子供でした。人の間で仲裁者の役割をよくし、対立する場面でバランスを取る能力があります。変化より伝統を尊重し、検証された方法を好みます。人生哲学は「急がず、しかし確実に」であり、ゆっくりだが揺るがない人生を送ります。',
+        love: '安定して義理堅い愛をします。年の差がある関係（年上との縁）で幸せになる可能性が高いです。理想の配偶者は伝統的な価値観を持つ成熟した人です。結婚は慎重に決め、一度結婚すれば長続きする関係を築きます。別れはほとんどしませんが、関係が終われば「縁がなかった」と淡々と整理します。',
+        career: '医師、薬剤師、公務員、宗教者、社会福祉士、保険設計士に適しています。漢方医、看護師、高齢者福祉専門家、文化財管理士などが合います。守り育てる職業でやりがいを感じ、年を重ねるほど専門性と人望が高まります。退職後も社会活動を続ける場合が多いです。',
+        wealth: '安定的だがゆっくりとした財の蓄積が特徴です。年を重ねるほど豊かになり、急な投資より長期積立、年金、保険など安全な資産運用を好みます。若い頃は裕福でなくても、50代以降に安定した資産が形成されます。目上の人や貴人の推薦で思わぬ財の機会が訪れます。',
+        health: '長寿の星です！基礎体力が良く、年を取っても健康な方です。胃腸の管理だけ気をつければ大きな病気なく長生きできます。伝統的な健康法（漢方、薬膳料理、気功）が合い、規則正しい食事と十分な睡眠が長寿の秘訣です。',
+        advice: 'あなたの安定感は周囲の人々にとって大きな力になります。しかし「これが伝統だから」という理由だけで新しいことを拒否しないでください。伝統の知恵と新しい時代の流れを組み合わせる時、あなたはより大きな守護者になります。' },
+    '七殺': { glyph: '⚔️', element: '金火', yin: false, rank: '将星',
+        personality: '七殺星は将軍の星です。強い意志と決断力、そして破壊と再建の力を持っています。人生の起伏が大きいですが、危機でより強くなります。独立的で反抗的、権威に挑戦します。幼い頃から強いプライドと闘争心を見せ、不公正なルールに正面から立ち向かう子供でした。人間関係では「弱い姿を見せない」という鉄則を持ち、仲間には限りなく頼もしいですが、敵には容赦がありません。人生哲学は「倒れても立ち上がれば負けではない」であり、逆境を糧にする人です。',
+        love: '強烈で嵐のような愛をします。結婚生活に波乱が多いことがあり、普通の関係は退屈に感じます。理想の配偶者は自分と同じくらい強くて柔らかさも持つ人です。結婚時期が不規則で、離婚後に再婚する場合もあります。別れる時、表面的には淡々としていますが、内面で戦争を繰り広げ、そのエネルギーを仕事や挑戦に転換します。',
+        career: '軍人、警察官、外科医、事業家、革命家、危機管理専門家に適しています。特殊部隊員、消防士、救急医学科医師、ベンチャー創業者、スタントマンなどが合います。危険と挑戦がある職業で真価を発揮し、安定した事務職は魂を蝕みます。30代に大きな失敗を経験しますが、それが40代の大成功の種になります。',
+        wealth: '大きな成功と大きな失敗の両方を経験します。ハイリスク・ハイリターンの典型で、平凡な資産運用には興味がありません。事業投資、ベンチャー投資など攻撃的な投資を好み、一度に大きく稼ぎ一度に大きく失うことがあります。失敗しても必ず再起し、最終的には自力で富を築くタイプが多いです。',
+        health: '事故、手術に特に注意が必要です。筋肉、血管関連の疾患（筋肉断裂、動脈硬化）に弱いです。エネルギーが過剰なので、武術、格闘技、クロスフィットなど激しい運動で発散することが必須です。刃物や金属道具を扱う時は格別に注意し、交通安全にも常に気をつけてください。',
+        advice: 'あなたの強さは世界を変えることができますが、真の将軍は戦う時を知る人です。すべての戦いで勝とうとしないでください。時には退くことがより大きな勝利のための戦略です。柔らかさは弱さではなく、より高い次元の強さです。' },
+    '破軍': { glyph: '💥', element: '水', yin: false, rank: '破壊',
+        personality: '破軍星は破壊と革新の星です。既存の秩序を打ち壊し新しいものを作る革命家です。消費が大きく変動が多いですが、破壊した後は必ず再建します。幼い頃からルールを破ることに快感を覚え、「なぜこうしなきゃいけないの？」が口癖の子供でした。人間関係で強い影響力を持ち、出会うと相手の人生観が変わることもあります。自由で反抗的、安定した生活を自ら壊して新たに始める勇気があります。人生哲学は「古いものを壊さなければ新しいものは生まれない」です。',
+        love: '変幻自在な愛をします。何度もの恋愛や結婚を経験することがあり、破壊と再建を繰り返す関係パターンがあります。理想の配偶者は変化を恐れず一緒に新しい人生を作っていける柔軟な人です。結婚より同棲を好むこともあり、形式にとらわれない関係を望みます。別れる時は未練なく去りますが、時間が経つとその経験から深い意味を見出します。',
+        career: '開拓者、冒険家、解体/再建関連、芸術、革新分野に適しています。スタートアップ創業者、都市再生専門家、解体工事業、現代美術作家、イノベーションコンサルタントなどが合います。既存のシステムを覆し新しいパラダイムを作る仕事で天才性を見せ、安定した職場では長く続きません。何度ものキャリア転換を経て、最終的に自分だけの領域を開拓します。',
+        wealth: '入ってくるものも大きく出ていくものも大きいです。貯蓄より投資型で、破産と再起を繰り返すことがあります。新しい事業への投資が好きで、他の人が注目しない分野で大当たりすることもあります。消費が大きい方で、必要と感じれば躊躇なく支出します。財の流れが不規則なので、最低限の緊急資金だけは必ず確保しておいてください。',
+        health: '事故、怪我に特に注意が必要です。腎臓、生殖器に注意し、冒険的活動（エクストリームスポーツ、旅行）での安全に気をつけてください。エネルギーが爆発的なので、激しい運動（サーフィン、ロッククライミング、マラソン）で消耗するのが健康に役立ちます。破壊本能を建設的に転換できないと、自己破壊的行動（過度の飲酒、無謀な挑戦）として現れることがあるので注意してください。',
+        advice: '破壊はあなたの才能ですが、何のために壊すのか常に忘れないでください。目的のない破壊は暴力であり、目的のある破壊は革命です。壊した後には必ずもっと美しいものを建ててください。それがあなたの存在理由です。' }
+};
+
+const STAR_NAMES = ['紫微','天機','太陽','武曲','天同','廉貞','天府','太陰','貪狼','巨門','天相','天梁','七殺','破軍'];
+
+// 十二宮名
+const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','交友宮','官禄宮','田宅宮','福徳宮','父母宮'];
+const PALACE_DESC = ['自分自身','兄弟姉妹','配偶者','子女','財運','健康','移動/海外','友人/人脈','職業/名声','不動産/家庭','福と徳','両親/目上'];
+
+// 南インド式グリッドマッピング
+const GRID_MAP = [
+    [11,0,1,2],
+    [10,-1,-1,3],
+    [9,-1,-1,4],
+    [8,7,6,5]
+];
+
+function initForm() {
+    const y = document.getElementById('birthYear'), m = document.getElementById('birthMonth'), d = document.getElementById('birthDay');
+    const h = document.getElementById('birthHour');
+    for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '年'; if (i === 1995) o.selected = true; y.appendChild(o); }
+    for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '月'; if (i === 3) o.selected = true; m.appendChild(o); }
+    for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '日'; if (i === 15) o.selected = true; d.appendChild(o); }
+    for (let i = 0; i < 12; i++) {
+        const labels = ['子の刻(23~1)','丑の刻(1~3)','寅の刻(3~5)','卯の刻(5~7)','辰の刻(7~9)','巳の刻(9~11)','午の刻(11~13)','未の刻(13~15)','申の刻(15~17)','酉の刻(17~19)','戌の刻(19~21)','亥の刻(21~23)'];
+        const o = document.createElement('option'); o.value = i; o.textContent = labels[i]; if (i === 5) o.selected = true; h.appendChild(o);
+    }
+}
+
+function toggleTime() {
+    const disabled = document.getElementById('birthTimeUnknown').value === 'unknown';
+    ['birthAmpm','birthHour'].forEach(id => {
+        document.getElementById(id).disabled = disabled;
+        document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
+    });
+}
+
+// 簡略化された紫微斗数計算（命宮主星配置）
+function calculate() {
+    const year = parseInt(document.getElementById('birthYear').value);
+    const month = parseInt(document.getElementById('birthMonth').value);
+    const day = parseInt(document.getElementById('birthDay').value);
+    const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? 6 : parseInt(document.getElementById('birthHour').value);
+    const gender = document.getElementById('gender').value;
+
+    // 命宮位置計算（簡略化）
+    const mingIdx = (14 - month + hourIdx) % 12;
+
+    // 主星配置（簡略化 — 紫微星位置基準）
+    const ziWeiPos = (day + 2) % 12; // 簡略化された紫微星位置
+
+    // 各宮に星を配置
+    const palaceStars = [];
+    for (let i = 0; i < 12; i++) palaceStars.push([]);
+
+    // 14主星配置（簡略化）
+    const starPositions = [];
+    STAR_NAMES.forEach((name, idx) => {
+        const pos = (ziWeiPos + idx * 2 + Math.floor(idx / 3)) % 12;
+        starPositions.push({ name, pos });
+        palaceStars[pos].push(name);
+    });
+
+    // 命宮の主星を探す
+    const mingStars = palaceStars[mingIdx];
+    const mainStar = mingStars.length > 0 ? mingStars[0] : STAR_NAMES[(mingIdx + day) % 14];
+    const starData = MAIN_STARS[mainStar];
+
+    // 五行
+    const WUXING = ['金','水','木','火','土'];
+    const wuxing = WUXING[(year + month) % 5];
+
+    // 命宮天干
+    const TIANGAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+    const tiangan = TIANGAN[(year - 4) % 10];
+
+    // 命宮地支
+    const DIZHI = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+    const mingDizhi = DIZHI[mingIdx];
+
+    // Main Star Card
+    document.getElementById('mainStarWrap').innerHTML = `
+        <div class="main-star-card">
+            <span class="main-star-glyph">${starData.glyph}</span>
+            <div class="main-star-name">${mainStar}星（${starData.rank}）</div>
+            <div class="main-star-sub">五行: ${starData.element} | 命宮: ${DIZHI[mingIdx]}宮</div>
+        </div>
+    `;
+
+    // Palace Grid
+    const grid = document.getElementById('palaceGrid');
+    grid.innerHTML = '';
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const pIdx = GRID_MAP[row][col];
+            if (pIdx === -1) {
+                cell.className = 'palace-cell empty';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">紫微<br>斗数</div>' : '';
+            } else {
+                cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '');
+                cell.innerHTML = `<div class="palace-name">${PALACES[pIdx]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[pIdx]}</div>`;
+                if (palaceStars[pIdx].length > 0) {
+                    cell.innerHTML += `<div class="palace-star">${palaceStars[pIdx].join(' ')}</div>`;
+                }
+            }
+            grid.appendChild(cell);
+        }
+    }
+
+    // Info Grid
+    document.getElementById('infoGrid').innerHTML = `
+        <div class="info-item"><div class="info-label">命宮主星</div><div class="info-value">${starData.glyph} ${mainStar}星</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">命宮位置</div><div class="info-value">${DIZHI[mingIdx]}宮（${tiangan}${mingDizhi}）</div></div>
+        <div class="info-item"><div class="info-label">五行</div><div class="info-value">${wuxing}命</div></div>
+        <div class="info-item"><div class="info-label">性別/陰陽</div><div class="info-value">${gender === 'm' ? '男性（陽）' : '女性（陰）'}</div></div>
+    `;
+
+    // Main Interpretation
+    document.getElementById('mainInterpWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">${starData.glyph} ${mainStar}星 — 「${starData.rank}」</div>
+            <div class="interp-text">${starData.personality}</div>
+        </div>
+        <div class="interp-card">
+            <div class="interp-title">💡 ${mainStar}星の人生アドバイス</div>
+            <div class="interp-text">${starData.advice}</div>
+        </div>
+    `;
+
+    // Spouse (夫妻宮 = 命宮 + 2)
+    const spouseIdx = (mingIdx + 2) % 12;
+    const spouseStars = palaceStars[spouseIdx];
+    const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    document.getElementById('spouseWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💕 夫妻宮: ${DIZHI[spouseIdx]}宮 ${spouseStar ? '— ' + spouseStar + '星' : ''}</div>
+            <div class="interp-text">${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '夫妻宮に主星がないため、配偶者は平凡で安定した性格です。大きな波乱なく穏やかな結婚生活。'}<br><br><strong>命宮${mainStar}星の結婚観：</strong> ${starData.love}</div>
+        </div>
+    `;
+
+    // Wealth (財帛宮 = 命宮 + 4)
+    const wealthIdx = (mingIdx + 4) % 12;
+    const wealthStars = palaceStars[wealthIdx];
+    const wealthStar = wealthStars.length > 0 ? wealthStars[0] : null;
+    document.getElementById('wealthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💰 財帛宮: ${DIZHI[wealthIdx]}宮 ${wealthStar ? '— ' + wealthStar + '星' : ''}</div>
+            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : '財帛宮に主星がないため、財は安定していますが特別な変動なく着実です。'}<br><br><strong>命宮${mainStar}星の財運観：</strong> ${starData.wealth}</div>
+        </div>
+    `;
+
+    // Career (官禄宮 = 命宮 + 8)
+    const careerIdx = (mingIdx + 8) % 12;
+    const careerStars = palaceStars[careerIdx];
+    const careerStar = careerStars.length > 0 ? careerStars[0] : null;
+    document.getElementById('careerWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">💼 官禄宮: ${DIZHI[careerIdx]}宮 ${careerStar ? '— ' + careerStar + '星' : ''}</div>
+            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : '官禄宮に主星がないため、職業は安定して平凡です。組織内で着実に成長。'}<br><br><strong>命宮${mainStar}星の職業観：</strong> ${starData.career}</div>
+        </div>
+    `;
+
+    // Health (疾厄宮 = 命宮 + 5)
+    const healthIdx = (mingIdx + 5) % 12;
+    document.getElementById('healthWrap').innerHTML = `
+        <div class="interp-card">
+            <div class="interp-title">🏥 疾厄宮: ${DIZHI[healthIdx]}宮</div>
+            <div class="interp-text"><strong>命宮${mainStar}星の健康：</strong> ${starData.health}</div>
+        </div>
+    `;
+
+    // 大運（10年周期）
+    let dashaHtml = '<div style="background:#0d0515;border:1px solid #3a2540;border-radius:12px;overflow:hidden;">';
+    const now = new Date();
+    const currentAge = now.getFullYear() - year;
+    for (let i = 0; i < 8; i++) {
+        const startAge = 2 + i * 10;
+        const endAge = 11 + i * 10;
+        const palIdx = (mingIdx + i) % 12;
+        const stars = palaceStars[palIdx];
+        const isCurrent = currentAge >= startAge && currentAge <= endAge;
+
+        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
+            <span style="min-width:60px;font-weight:700;color:#e84393;">${startAge}~${endAge}歳</span>
+            <span style="flex:1;color:#999;">${DIZHI[palIdx]}宮 ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">現在</span>' : ''}
+        </div>`;
+    }
+    dashaHtml += '</div>';
+    document.getElementById('dashaWrap').innerHTML = dashaHtml;
+
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+initForm();
+document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+</script>
+
+</body>
+</html>
