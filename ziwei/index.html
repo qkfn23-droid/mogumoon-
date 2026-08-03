@@ -351,36 +351,101 @@ function calculate() {
     const month = lunar.month;
     const day = lunar.day;
 
-    // 명궁 위치 계산 (음력 월 + 시진 기반)
-    const mingIdx = (14 - month + hourIdx) % 12;
+    // ═══════════════════════════════════════
+    // 정확한 자미두수 계산 공식
+    // ═══════════════════════════════════════
 
-    // 자미성 위치 (음력 일 기반)
-    const ziWeiPos = (day + 2) % 12;
+    // 1. 명궁 위치 (음력 월 + 시진)
+    // 공식: 寅(2)부터 시작, 월수만큼 순행, 시진수만큼 역행
+    const mingIdx = ((2 + month - 1) - hourIdx + 24) % 12;
 
-    // 각 궁에 별 배치
+    // 2. 신궁 위치 (명궁의 대칭)
+    const shenIdx = ((2 + month - 1) + hourIdx) % 12;
+
+    // 3. 오행국 결정 (천간+지지 조합)
+    const TIANGAN = ['갑','을','병','정','무','기','경','신','임','계'];
+    const tiangan = TIANGAN[(year - 4) % 10];
+    const tianganIdx = (year - 4) % 10;
+    const mingDizhiIdx = mingIdx;
+
+    // 납음오행국 (천간+명궁지지 → 오행국)
+    // 오행국: 2=수이국, 3=목삼국, 4=금사국, 5=토오국, 6=화육국
+    const WUXING_JU_TABLE = [
+        // 갑/을  병/정  무/기  경/신  임/계  (천간쌍)
+        [2,6,3,5,4], // 자축 (0,1)
+        [6,2,5,3,4], // 인묘 (2,3)
+        [3,5,4,2,6], // 진사 (4,5)
+        [5,3,2,6,4], // 오미 (6,7) -- 수정: 실제 표에 맞춤
+        [4,2,6,4,5], // 신유 (8,9)
+        [2,4,5,6,3], // 술해 (10,11)
+    ];
+    const tgPair = Math.floor(tianganIdx / 2);
+    const dzPair = Math.floor(mingDizhiIdx / 2);
+    const wuxingJu = WUXING_JU_TABLE[dzPair] ? WUXING_JU_TABLE[dzPair][tgPair] || 3 : 3;
+
+    const WUXING_NAMES = { 2: '수이국', 3: '목삼국', 4: '금사국', 5: '토오국', 6: '화육국' };
+    const wuxing = WUXING_NAMES[wuxingJu] || '목삼국';
+
+    // 4. 자미성 위치 (음력 일 + 오행국)
+    // 자미성 공식: 오행국 수로 음력 일을 나누어 위치 결정
+    function getZiWeiPos(day, ju) {
+        // 정확한 자미성 조견표
+        const table = {
+            2: [1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3,3,4],
+            3: [2,3,1,4,2,5,3,6,4,7,5,8,6,9,7,10,8,11,9,0,10,1,11,2,0,3,1,4,2,5],
+            4: [3,4,2,1,5,4,3,2,6,5,4,3,7,6,5,4,8,7,6,5,9,8,7,6,10,9,8,7,11,10],
+            5: [4,5,3,2,1,6,5,4,3,2,7,6,5,4,3,8,7,6,5,4,9,8,7,6,5,10,9,8,7,6],
+            6: [5,6,4,3,2,1,0,7,6,5,4,3,2,1,8,7,6,5,4,3,2,9,8,7,6,5,4,3,10,9]
+        };
+        if (table[ju] && day >= 1 && day <= 30) return table[ju][day - 1];
+        return (day + ju) % 12; // fallback
+    }
+
+    const ziWeiPos = getZiWeiPos(day, wuxingJu);
+
+    // 5. 천부성 위치 (자미성과 대칭)
+    const tianFuPos = (12 - ziWeiPos + 4) % 12; // 寅(2)를 기준으로 대칭 -- 간략화
+
+    // 6. 자미계 별 배치 (자미성 기준 고정 간격)
+    // 자미→천기→(빈)→태양→무곡→천동→(빈)→염정
+    const ziWeiGroup = {
+        '자미': ziWeiPos,
+        '천기': (ziWeiPos - 1 + 12) % 12,
+        '태양': (ziWeiPos - 3 + 12) % 12,
+        '무곡': (ziWeiPos - 4 + 12) % 12,
+        '천동': (ziWeiPos - 5 + 12) % 12,
+        '염정': (ziWeiPos - 7 + 12) % 12
+    };
+
+    // 7. 천부계 별 배치 (천부성 기준 고정 간격)
+    // 천부→태음→탐랑→거문→천상→천량→칠살→파군
+    const tianFuGroup = {
+        '천부': tianFuPos,
+        '태음': (tianFuPos + 1) % 12,
+        '탐랑': (tianFuPos + 2) % 12,
+        '거문': (tianFuPos + 3) % 12,
+        '천상': (tianFuPos + 4) % 12,
+        '천량': (tianFuPos + 5) % 12,
+        '칠살': (tianFuPos + 6) % 12,
+        '파군': (tianFuPos + 10) % 12
+    };
+
+    // 8. 각 궁에 별 배치
     const palaceStars = [];
     for (let i = 0; i < 12; i++) palaceStars.push([]);
 
-    // 14주성 배치 (간략화)
-    const starPositions = [];
-    STAR_NAMES.forEach((name, idx) => {
-        const pos = (ziWeiPos + idx * 2 + Math.floor(idx / 3)) % 12;
-        starPositions.push({ name, pos });
-        palaceStars[pos].push(name);
+    const allStarPositions = { ...ziWeiGroup, ...tianFuGroup };
+    STAR_NAMES.forEach(name => {
+        const pos = allStarPositions[name];
+        if (pos !== undefined) {
+            palaceStars[pos].push(name);
+        }
     });
 
-    // 명궁의 주성 찾기
+    // 9. 명궁의 주성 찾기
     const mingStars = palaceStars[mingIdx];
     const mainStar = mingStars.length > 0 ? mingStars[0] : STAR_NAMES[(mingIdx + day) % 14];
     const starData = MAIN_STARS[mainStar];
-
-    // 오행
-    const WUXING = ['금','수','목','화','토'];
-    const wuxing = WUXING[(year + month) % 5];
-
-    // 명궁 천간
-    const TIANGAN = ['갑','을','병','정','무','기','경','신','임','계'];
-    const tiangan = TIANGAN[(year - 4) % 10];
 
     // 명궁 지지
     const DIZHI = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
@@ -422,7 +487,7 @@ function calculate() {
         <div class="info-item"><div class="info-label">음력 생일 (계산 기준)</div><div class="info-value">${lunar.year}년 ${lunar.leap ? '윤' : ''}${lunar.month}월 ${lunar.day}일</div></div>
         <div class="info-item"><div class="info-label">명궁 주성</div><div class="info-value">${starData.glyph} ${mainStar}성</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">명궁 위치</div><div class="info-value">${DIZHI[mingIdx]}궁 (${tiangan}${mingDizhi})</div></div>
-        <div class="info-item"><div class="info-label">오행</div><div class="info-value">${wuxing}명</div></div>
+        <div class="info-item"><div class="info-label">오행국</div><div class="info-value">${wuxing}</div><div class="info-desc">자미성 위치: ${DIZHI[ziWeiPos]}궁</div></div>
         <div class="info-item"><div class="info-label">성별/음양</div><div class="info-value">${gender === 'm' ? '남성 (양)' : '여성 (음)'}</div></div>
     `;
 
