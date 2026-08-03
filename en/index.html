@@ -33,9 +33,30 @@
             z-index: -1;
         }
 
+        .lang-switch {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+        }
+        .lang-switch a {
+            color: #c9a84c;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border: 1px solid #c9a84c;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .lang-switch a:hover {
+            background: #c9a84c;
+            color: #0a0a1a;
+        }
+
         header {
             text-align: center;
             padding: 60px 20px 30px;
+            position: relative;
         }
 
         header .mascot {
@@ -287,6 +308,7 @@
 <body>
 
 <header>
+    <div class="lang-switch"><a href="/">KR</a></div>
     <div class="speech-bubble">Welcome to the world of astrology ✨</div>
     <div class="mascot">
         <span class="star">✦</span>
