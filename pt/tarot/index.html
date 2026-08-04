@@ -35,7 +35,7 @@
         .tarot-card .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
         .tarot-card.flipped .card-inner { transform: rotateY(180deg); }
         .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .card-back { background: linear-gradient(135deg, #2a1540, #1a0d2e); border: 2px solid #9b59b6; }
+        .card-back { background: linear-gradient(135deg, #2a1540, #1a0d2e); border: 2px solid #9b59b6; overflow: hidden; position: relative; }
         .card-back .pattern { font-size: 40px; opacity: 0.5; }
         .card-back .label { font-size: 11px; color: #9b59b6; margin-top: 8px; letter-spacing: 2px; }
         .card-front { background: linear-gradient(135deg, #1a0d2e, #0d0520); border: 2px solid #c39bd3; transform: rotateY(180deg); padding: 12px; }
@@ -362,7 +362,7 @@ function startDraw() {
         cardEl.innerHTML = `
             <div class="card-inner">
                 <div class="card-back">
-                    <div class="pattern">✨🔮✨</div>
+                    <div class="stars"></div>
                     <div class="label">TAROT</div>
                 </div>
                 <div class="card-front" id="front-${i}">
