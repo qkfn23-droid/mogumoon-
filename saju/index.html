@@ -738,14 +738,44 @@ function calculate() {
         if (!hasSpouseGod) genderSpouseText += '<strong>배우자성(관성)이 사주에 없습니다:</strong> 결혼이 늦거나 배우자와의 인연이 약할 수 있습니다. 적극적으로 만남을 찾아야 합니다.<br>';
     }
 
+    // 배우자성의 오행이 외모에 미치는 영향
+    const SPOUSE_STAR_APPEARANCE = {
+        '목': '키가 크고 슬림한 체형. 부드럽고 자연스러운 분위기. 나무처럼 곧은 자세.',
+        '화': '눈이 밝고 미소가 매력적. 활발하고 따뜻한 인상. 화사한 분위기.',
+        '토': '안정적이고 포근한 인상. 둥근 얼굴형. 믿음직하고 편안한 느낌.',
+        '금': '깔끔하고 단정한 외모. 날카로운 이목구비. 세련되고 차가운 매력.',
+        '수': '신비롭고 깊은 눈빛. 차분하고 지적인 인상. 조용하지만 끌리는 매력.'
+    };
+
+    // 배우자성 찾기 (천간 기준)
+    let spouseStarStem = null;
+    allPillars.forEach((p, i) => {
+        const god = getTenGod(dayStem, p.stem);
+        if (spouseGods.includes(god) && !spouseStarStem) {
+            spouseStarStem = p.stem;
+        }
+    });
+
+    const spouseStarEl = spouseStarStem !== null ? ELEMENTS[spouseStarStem] : null;
+    const spouseStarAppText = spouseStarEl ? SPOUSE_STAR_APPEARANCE[spouseStarEl] : '';
+
     // 배우자
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+
+    // 일지 + 배우자성 종합 해석
+    let combinedApp = '<strong>📐 배우자 외모 & 첫인상:</strong><br>';
+    combinedApp += `<strong>▸ 배우자궁 (${spouseBranch}):</strong> ${spouseApp}<br>`;
+    if (spouseStarEl) {
+        combinedApp += `<br><strong>▸ 배우자성 (${spouseStarEl}):</strong> ${spouseStarAppText}<br>`;
+        combinedApp += `<br><strong>▸ 종합:</strong> 겉으로는 ${spouseApp.split('.')[0]}이지만, 내면에는 ${spouseStarAppText.split('.')[0].toLowerCase()}을 가진 사람. 두 가지 매력이 공존합니다.<br>`;
+    }
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 배우자궁 (일지: ${spouseBranch}) — ${gender === 'm' ? '남성' : '여성'} 기준</div>
             <div class="interp-text">
-                <strong>📐 배우자 외모 & 첫인상:</strong><br>${spouseApp}<br><br>
+                ${combinedApp}<br>
                 ${genderSpouseText}<br>
                 <strong>💑 연애 & 결혼:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 자녀운 (시주: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}
