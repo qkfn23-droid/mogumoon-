@@ -318,9 +318,9 @@ function showReading() {
                 <div class="reading-card">
                     <div class="reading-title">${UI.oshiSummaryTitle.replace("{name}",oshiName)}</div>
                     <div class="reading-text">
-                        핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.<br><br>
-                        정방향 ${upCount}장, 역방향 ${downCount}장.<br>
-                        ${upCount > downCount ? `<strong>${oshiName}은(는) 전체적으로 당신에게 긍정적인 감정을 가지고 있다고 합니다.</strong> 마음을 열고 다가가도 좋을 것 같다고 합니다.` : `<strong>${oshiName}은(는) 복잡한 감정 속에 있다고 합니다.</strong> 하지만 마음 깊은 곳에서는 당신을 소중하게 여기고 있다고 합니다. 시간이 필요할 뿐이라고 합니다.`}
+                        ${UI.oshiMainCard.replace("{emoji}",mainTheme.emoji).replace("{card}",mainTheme.name)}<br><br>
+                        ${UI.oshiCount.replace("{up}",upCount).replace("{down}",downCount)}<br>
+                        ${upCount > downCount ? UI.oshiPositive.replace(/\{name\}/g,oshiName) : UI.oshiChallenge.replace(/\{name\}/g,oshiName)}
                     </div>
                 </div>
             `;
@@ -329,11 +329,11 @@ function showReading() {
                 <div class="reading-card">
                     <div class="reading-title">${UI.summaryTitle}</div>
                     <div class="reading-text">
-                        이 리딩의 핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.
-                        ${mainTheme.reversed ? '역방향으로 나왔으므로, ' + mainTheme.down.split('.')[0] + '에 주의하세요.' : mainTheme.up.split('.')[0] + '의 에너지가 강합니다.'}
+                        ${UI.summaryMainCard.replace("{emoji}",mainTheme.emoji).replace("{card}",mainTheme.name)}
+                        ${mainTheme.reversed ? UI.summaryReversed.replace("{text}",mainTheme.down.split('.')[0]) : UI.summaryUpright.replace("{text}",mainTheme.up.split('.')[0])}
                         <br><br>
-                        전체적으로 ${upCount}장이 정방향, ${downCount}장이 역방향입니다.
-                        ${downCount > spreadCount / 2 ? '' + UI.summaryChallenge : UI.summaryPositive}
+                        ${UI.summaryOverall.replace("{up}",upCount).replace("{down}",downCount)}
+                        ${downCount > spreadCount / 2 ? UI.summaryChallenge : UI.summaryPositive}
                     </div>
                 </div>
             `;
