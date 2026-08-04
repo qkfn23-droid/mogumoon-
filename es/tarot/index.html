@@ -72,39 +72,39 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🃏 타로 카드</h2>
-        <p>카드를 뽑아 당신의 운명을 읽어보세요</p>
+        <h2 id="ui-pageTitle"></h2>
+        <p id="ui-pageSubtitle"></p>
     </div>
 
     <div class="mode-selector" style="display:flex;gap:0;margin-bottom:20px;border:2px solid #3a2550;border-radius:10px;overflow:hidden;">
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🃏 일반 타로</button>
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')">💜 최애 타로</button>
+        <button class="mode-btn" id="ui-modeNormal" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')"></button>
+        <button class="mode-btn" id="ui-modeOshi" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')"></button>
     </div>
 
     <div id="oshiBox" style="display:none;background:linear-gradient(135deg,#1a0d2e,#2a1540);border:1px solid #3a2550;border-radius:12px;padding:24px;margin-bottom:16px;text-align:center;">
-        <div style="font-size:14px;color:#9b59b6;margin-bottom:12px;font-weight:600;">💜 최애의 이름을 입력하세요</div>
-        <input type="text" id="oshiName" placeholder="예: 고조 사토루, 레비, 카미나..." style="width:100%;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;text-align:center;">
-        <div style="font-size:11px;color:#666;margin-top:8px;margin-bottom:16px;">애니/만화/게임/아이돌 누구든 OK!</div>
+        <div id="ui-oshiTitle" style="font-size:14px;color:#9b59b6;margin-bottom:12px;font-weight:600;"></div>
+        <input type="text" id="oshiName" style="width:100%;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;text-align:center;">
+        <div id="ui-oshiHint" style="font-size:11px;color:#666;margin-top:8px;margin-bottom:16px;"></div>
         <div style="font-size:14px;color:#c39bd3;line-height:1.8;font-style:italic;border-top:1px solid #3a2550;padding-top:14px;">
-            ✨ 그 사람의 마음을 떠올리며<br>카드를 선택하세요 ✨<br>
-            <span style="font-size:12px;color:#666;">카드가 최애의 숨겨진 감정을 보여줍니다</span>
+            <span id="ui-oshiQuestion"></span><br>
+            <span id="ui-oshiQuestionSub" style="font-size:12px;color:#666;"></span>
         </div>
     </div>
 
     <div class="spread-selector" style="flex-direction:column;gap:10px;" id="spreadNormal">
-        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">💫 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
-        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>과거 · 현재 · 미래</strong> <span style="font-size:12px;color:#888;margin-left:8px;">시간의 흐름 · 3장</span></button>
-        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>심층 리딩</strong> <span style="font-size:12px;color:#888;margin-left:8px;">자세한 분석 · 5장</span></button>
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;" id="ui-spread1"></button>
+        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;" id="ui-spread3"></button>
+        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;" id="ui-spread5"></button>
     </div>
 
     <div class="question-box" id="questionBox" style="border:none;background:transparent;padding:10px;">
         <div style="font-size:14px;color:#c39bd3;line-height:1.8;text-align:center;font-style:italic;">
-            ✨ 마음속에 궁금한 것을 떠올리며<br>카드를 선택하세요 ✨<br>
-            <span style="font-size:12px;color:#666;">카드는 당신의 무의식이 선택합니다</span>
+            <span id="ui-questionText"></span><br>
+            <span id="ui-questionSub" style="font-size:12px;color:#666;"></span>
         </div>
     </div>
 
-    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🃏 카드 섞기</button>
+    <button class="draw-btn" id="drawBtn" onclick="startDraw()"></button>
 
     <div id="pickInstruction" style="display:none;text-align:center;margin-bottom:16px;">
         <span style="font-size:15px;color:#c39bd3;" id="pickText">카드를 <strong>1장</strong> 선택하세요</span>
@@ -114,7 +114,7 @@
 
     <div class="reading-section" id="readingSection"></div>
 
-    <div class="disclaimer">🃏 타로는 재미와 자기 성찰을 위한 도구입니다. 중요한 결정은 전문가와 상담하세요.</div>
+    <div class="disclaimer" id="ui-disclaimer"></div>
 </div>
 
 <div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">공유:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a></div>
@@ -129,9 +129,31 @@
 <script>
 const MAJOR = TAROT_CARDS.filter(c => c.suit === 'major');
 const ALL_CARDS = TAROT_CARDS;
+const UI = TAROT_UI;
 let spreadCount = 1;
 let drawnCards = [];
 let mode = 'normal';
+
+// UI 텍스트 적용
+function initUI() {
+    document.getElementById('ui-pageTitle').innerHTML = UI.pageTitle;
+    document.getElementById('ui-pageSubtitle').textContent = UI.pageSubtitle;
+    document.getElementById('ui-modeNormal').textContent = UI.modeNormal;
+    document.getElementById('ui-modeOshi').textContent = UI.modeOshi;
+    document.getElementById('ui-oshiTitle').textContent = UI.oshiTitle;
+    document.getElementById('oshiName').placeholder = UI.oshiPlaceholder;
+    document.getElementById('ui-oshiHint').textContent = UI.oshiHint;
+    document.getElementById('ui-oshiQuestion').innerHTML = UI.oshiQuestionText;
+    document.getElementById('ui-oshiQuestionSub').textContent = UI.oshiQuestionSub;
+    document.getElementById('ui-spread1').innerHTML = UI.spreadOne;
+    document.getElementById('ui-spread3').innerHTML = UI.spreadThree;
+    document.getElementById('ui-spread5').innerHTML = UI.spreadFive;
+    document.getElementById('ui-questionText').innerHTML = UI.questionText;
+    document.getElementById('ui-questionSub').textContent = UI.questionSub;
+    document.getElementById('drawBtn').innerHTML = UI.btnShuffle;
+    document.getElementById('ui-disclaimer').textContent = UI.disclaimer;
+}
+initUI();
 
 function setMode(m) {
     mode = m;
@@ -144,7 +166,7 @@ function setMode(m) {
     document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; } // 최애 모드는 3장 고정
-    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🃏 카드 섞기';
+    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? UI.btnShuffleOshi : UI.btnShuffle;
     // 모드 전환 시 초기화
     document.getElementById('cardsArea').innerHTML = '';
     document.getElementById('readingSection').innerHTML = '';
@@ -199,10 +221,10 @@ function startDraw() {
 
     // Show instruction
     document.getElementById('pickInstruction').style.display = 'block';
-    document.getElementById('pickText').innerHTML = `카드를 <strong>${spreadCount}장</strong> 선택하세요`;
+    document.getElementById('pickText').innerHTML = `${UI.pickInstruction.replace("{n}",spreadCount)}`;
 
     // Hide draw button, show reset
-    document.getElementById('drawBtn').innerHTML = '🔄 다시 섞기';
+    document.getElementById('drawBtn').innerHTML = UI.btnReshuffle;
 }
 
 function pickCard(index, cardEl) {
@@ -214,13 +236,13 @@ function pickCard(index, cardEl) {
 
     // Set card front content
     const front = document.getElementById('front-' + index);
-    const suitLabels = {major:'메이저',wands:'완드',cups:'컵',swords:'소드',pentacles:'펜타클'};
+    const suitLabels = UI.suitLabels;
     front.className = 'card-face card-front';
     front.innerHTML = `
         <div class="card-number" style="font-size:10px;color:#666;">${suitLabels[card.suit] || ''}</div>
         <div class="card-emoji">${card.emoji}</div>
         <div class="card-name">${card.name}</div>
-        ${card.reversed ? '<div class="card-direction">역방향 ↓</div>' : ''}
+        ${card.reversed ? '<div class="card-direction">' + UI.reversed + '</div>' : ''}
     `;
 
     // Flip animation
@@ -232,9 +254,9 @@ function pickCard(index, cardEl) {
     // Update instruction
     const remaining = spreadCount - pickedCount;
     if (remaining > 0) {
-        document.getElementById('pickText').innerHTML = `<strong>${remaining}장</strong> 더 선택하세요`;
+        document.getElementById('pickText').innerHTML = `${UI.pickMore.replace("{n}",remaining)}`;
     } else {
-        document.getElementById('pickText').innerHTML = '✨ 모든 카드를 선택했습니다!';
+        document.getElementById('pickText').innerHTML = UI.pickDone;
 
         // Dim unselected cards
         document.querySelectorAll('.tarot-card:not(.flipped)').forEach(c => c.classList.add('dimmed'));
@@ -271,7 +293,7 @@ function showReading() {
         } else {
             reading = card.reversed ? card.down : card.up;
         }
-        const dir = card.reversed ? '(역방향 ↓)' : '(정방향 ↑)';
+        const dir = card.reversed ? '(' + UI.reversed + ')' : '(' + UI.upright + ')';
         const titlePrefix = isOshi ? `💜 ${oshiName} — ` : '';
 
         html += `
@@ -294,7 +316,7 @@ function showReading() {
         if (isOshi) {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">💜 ${oshiName}의 종합적인 마음</div>
+                    <div class="reading-title">${UI.oshiSummaryTitle.replace("{name}",oshiName)}</div>
                     <div class="reading-text">
                         핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.<br><br>
                         정방향 ${upCount}장, 역방향 ${downCount}장.<br>
@@ -305,13 +327,13 @@ function showReading() {
         } else {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">🃏 종합 해석</div>
+                    <div class="reading-title">${UI.summaryTitle}</div>
                     <div class="reading-text">
                         이 리딩의 핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.
                         ${mainTheme.reversed ? '역방향으로 나왔으므로, ' + mainTheme.down.split('.')[0] + '에 주의하세요.' : mainTheme.up.split('.')[0] + '의 에너지가 강합니다.'}
                         <br><br>
                         전체적으로 ${upCount}장이 정방향, ${downCount}장이 역방향입니다.
-                        ${downCount > spreadCount / 2 ? '도전적인 시기이지만, 역방향 카드는 내면의 성장을 의미하기도 합니다.' : '긍정적인 에너지가 우세합니다. 자신감을 가지세요.'}
+                        ${downCount > spreadCount / 2 ? '' + UI.summaryChallenge : UI.summaryPositive}
                     </div>
                 </div>
             `;
