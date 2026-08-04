@@ -45,7 +45,11 @@
         .card-front .card-direction { font-size: 10px; color: #e74c3c; margin-top: 4px; }
         .card-front.reversed { transform: rotateY(180deg) rotate(180deg); }
 
-        @media (max-width: 500px) { .tarot-card { width: 100px; height: 160px; } .card-front .card-emoji { font-size: 32px; } .card-front .card-name { font-size: 10px; } }
+        .tarot-card:hover:not(.flipped):not(.dimmed) { transform: translateY(-10px); }
+        .tarot-card.dimmed { opacity: 0.3; pointer-events: none; transform: scale(0.9); }
+        .tarot-card.selected { transform: translateY(-20px); }
+        .tarot-card { transition: all 0.3s; }
+        @media (max-width: 500px) { .tarot-card { width: 80px; height: 130px; } .card-front .card-emoji { font-size: 28px; } .card-front .card-name { font-size: 9px; } .card-back .pattern { font-size: 24px; } }
 
         .reading-section { display: none; }
         .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
@@ -92,9 +96,13 @@
         <input type="text" id="question" placeholder="질문을 마음속에 품고... (선택)">
     </div>
 
-    <button class="draw-btn" onclick="drawCards()">🔮 카드 뽑기</button>
+    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 카드 섞기</button>
 
-    <div class="cards-area" id="cardsArea"></div>
+    <div id="pickInstruction" style="display:none;text-align:center;margin-bottom:16px;">
+        <span style="font-size:15px;color:#c39bd3;" id="pickText">카드를 <strong>1장</strong> 선택하세요</span>
+    </div>
+
+    <div class="cards-area" id="cardsArea" style="flex-wrap:wrap;"></div>
 
     <div class="reading-section" id="readingSection"></div>
 
@@ -189,57 +197,90 @@ function setSpread(n) {
     document.getElementById('readingSection').style.display = 'none';
 }
 
-function drawCards() {
+let shuffledDeck = [];
+let pickedCount = 0;
+
+function startDraw() {
     const area = document.getElementById('cardsArea');
     area.innerHTML = '';
     document.getElementById('readingSection').innerHTML = '';
     document.getElementById('readingSection').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 
-    // Shuffle and pick
-    const shuffled = [...MAJOR].sort(() => Math.random() - 0.5);
-    drawnCards = shuffled.slice(0, spreadCount).map(card => ({
-        ...card,
-        reversed: Math.random() < 0.3 // 30% 확률로 역방향
-    }));
+    // Shuffle deck
+    shuffledDeck = [...MAJOR].sort(() => Math.random() - 0.5);
 
-    const positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : [''];
-
-    drawnCards.forEach((card, i) => {
+    // Display 10 face-down cards to choose from
+    const displayCount = Math.max(10, spreadCount + 5);
+    for (let i = 0; i < displayCount; i++) {
         const cardEl = document.createElement('div');
         cardEl.className = 'tarot-card';
+        cardEl.dataset.index = i;
         cardEl.innerHTML = `
             <div class="card-inner">
                 <div class="card-back">
                     <div class="pattern">✨🔮✨</div>
                     <div class="label">TAROT</div>
                 </div>
-                <div class="card-front ${card.reversed ? 'reversed' : ''}">
-                    <div class="card-number">${card.num}</div>
-                    <div class="card-emoji">${card.emoji}</div>
-                    <div class="card-name">${card.name}</div>
-                    ${card.reversed ? '<div class="card-direction">역방향 ↓</div>' : ''}
+                <div class="card-front" id="front-${i}">
                 </div>
             </div>
         `;
+        cardEl.onclick = () => pickCard(i, cardEl);
 
-        // Delay flip animation
+        // Animate in with delay
+        cardEl.style.opacity = '0';
         setTimeout(() => {
             area.appendChild(cardEl);
-            setTimeout(() => {
-                cardEl.classList.add('flipped');
-                if (i === drawnCards.length - 1) {
-                    setTimeout(showReading, 800);
-                }
-            }, 300 + i * 400);
-        }, i * 200);
+            setTimeout(() => { cardEl.style.opacity = '1'; }, 50);
+        }, i * 80);
+    }
 
-        // Position label
-        if (positions[i]) {
-            const label = document.createElement('div');
-            label.style.cssText = 'width:140px;text-align:center;';
-            // label added after card
-        }
-    });
+    // Show instruction
+    document.getElementById('pickInstruction').style.display = 'block';
+    document.getElementById('pickText').innerHTML = `카드를 <strong>${spreadCount}장</strong> 선택하세요`;
+
+    // Hide draw button, show reset
+    document.getElementById('drawBtn').innerHTML = '🔄 다시 섞기';
+}
+
+function pickCard(index, cardEl) {
+    if (cardEl.classList.contains('flipped') || pickedCount >= spreadCount) return;
+
+    // Assign a card from shuffled deck
+    const card = shuffledDeck[index];
+    card.reversed = Math.random() < 0.3;
+
+    // Set card front content
+    const front = document.getElementById('front-' + index);
+    front.className = 'card-front' + (card.reversed ? ' reversed' : '');
+    front.innerHTML = `
+        <div class="card-number">${card.num}</div>
+        <div class="card-emoji">${card.emoji}</div>
+        <div class="card-name">${card.name}</div>
+        ${card.reversed ? '<div class="card-direction">역방향 ↓</div>' : ''}
+    `;
+
+    // Flip animation
+    cardEl.classList.add('flipped');
+    cardEl.classList.add('selected');
+    drawnCards.push(card);
+    pickedCount++;
+
+    // Update instruction
+    const remaining = spreadCount - pickedCount;
+    if (remaining > 0) {
+        document.getElementById('pickText').innerHTML = `<strong>${remaining}장</strong> 더 선택하세요`;
+    } else {
+        document.getElementById('pickText').innerHTML = '✨ 모든 카드를 선택했습니다!';
+
+        // Dim unselected cards
+        document.querySelectorAll('.tarot-card:not(.flipped)').forEach(c => c.classList.add('dimmed'));
+
+        // Show reading after delay
+        setTimeout(showReading, 1000);
+    }
 }
 
 function showReading() {
