@@ -71,12 +71,12 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🔮 タロットカード</h2>
+        <h2>🃏 タロットカード</h2>
         <p>カードを引いて、あなたの運命を読んでみましょう</p>
     </div>
 
     <div class="mode-selector" style="display:flex;gap:0;margin-bottom:20px;border:2px solid #3a2550;border-radius:10px;overflow:hidden;">
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🔮 通常タロット</button>
+        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🃏 通常タロット</button>
         <button class="mode-btn" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')">💜 推しタロット</button>
     </div>
 
@@ -91,7 +91,7 @@
     </div>
 
     <div class="spread-selector" style="flex-direction:column;gap:10px;" id="spreadNormal">
-        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>ワンカード</strong> <span style="font-size:12px;color:#888;margin-left:8px;">素早い答え · 1枚</span></button>
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">💫 <strong>ワンカード</strong> <span style="font-size:12px;color:#888;margin-left:8px;">素早い答え · 1枚</span></button>
         <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>過去 · 現在 · 未来</strong> <span style="font-size:12px;color:#888;margin-left:8px;">時間の流れ · 3枚</span></button>
         <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>ディープリーディング</strong> <span style="font-size:12px;color:#888;margin-left:8px;">詳細な分析 · 5枚</span></button>
     </div>
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 カードをシャッフル</button>
+    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🃏 カードをシャッフル</button>
 
     <div id="pickInstruction" style="display:none;text-align:center;margin-bottom:16px;">
         <span style="font-size:15px;color:#c39bd3;" id="pickText">カードを <strong>1枚</strong> 選んでください</span>
@@ -113,7 +113,7 @@
 
     <div class="reading-section" id="readingSection"></div>
 
-    <div class="disclaimer">🔮 タロットは楽しみと自己内省のためのツールです。重要な決断は専門家にご相談ください。</div>
+    <div class="disclaimer">🃏 タロットは楽しみと自己内省のためのツールです。重要な決断は専門家にご相談ください。</div>
 </div>
 
 <div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">シェア：</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='コピー完了！';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URLをコピー</a></div>
@@ -325,7 +325,7 @@ function setMode(m) {
     document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; }
-    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 カードをシャッフル' : '🔮 カードをシャッフル';
+    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 カードをシャッフル' : '🃏 カードをシャッフル';
 }
 
 function setSpread(n) {
@@ -470,7 +470,7 @@ function showReading() {
         } else {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">🔮 総合解釈</div>
+                    <div class="reading-title">🃏 総合解釈</div>
                     <div class="reading-text">
                         このリーディングのキーカードは <strong>${mainTheme.emoji} ${mainTheme.name}</strong> です。
                         ${mainTheme.reversed ? '逆位置で出ているため、' + mainTheme.down.split('。')[0] + 'に注意してください。' : mainTheme.up.split('。')[0] + 'のエネルギーが強く出ています。'}
