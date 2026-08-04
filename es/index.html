@@ -357,7 +357,7 @@
             .civ-card { padding: 18px; gap: 14px; }
         }
     </style>
-</head>
+<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .form-box,.light-mode .calc-box,.light-mode .interp-card,.light-mode .info-item,.light-mode .palace-cell{background:#fff !important;border-color:#ddd !important;color:#333 !important}.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}.light-mode footer{color:#999 !important}.light-mode .civ-card{background:#fff !important;border-color:#ddd !important}.light-mode .civ-name{color:#333 !important}.light-mode .civ-sub,.light-mode .civ-desc{color:#666 !important}.light-mode .container,.light-mode .page-title p{color:#666 !important}</style></head>
 <body>
 
 <header>
@@ -446,5 +446,5 @@
     &copy; 2025 MOGU Moon
 </footer>
 
-</body>
+<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script></body>
 </html>
