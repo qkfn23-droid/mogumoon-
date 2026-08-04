@@ -234,8 +234,8 @@ function startDraw() {
     // Shuffle full 78-card deck
     shuffledDeck = [...ALL_CARDS].sort(() => Math.random() - 0.5);
 
-    // Display 10 face-down cards to choose from
-    const displayCount = Math.max(10, spreadCount + 5);
+    // Display cards based on spread count
+    const displayCount = spreadCount === 1 ? 7 : spreadCount === 3 ? 12 : 15;
     for (let i = 0; i < displayCount; i++) {
         const cardEl = document.createElement('div');
         cardEl.className = 'tarot-card';
