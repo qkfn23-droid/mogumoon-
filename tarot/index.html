@@ -86,10 +86,15 @@
         <div style="font-size:11px;color:#666;margin-top:8px;">애니/만화/게임/아이돌 누구든 OK!</div>
     </div>
 
-    <div class="spread-selector" style="flex-direction:column;gap:10px;">
+    <div class="spread-selector" style="flex-direction:column;gap:10px;" id="spreadNormal">
         <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
         <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>과거 · 현재 · 미래</strong> <span style="font-size:12px;color:#888;margin-left:8px;">시간의 흐름 · 3장</span></button>
         <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>심층 리딩</strong> <span style="font-size:12px;color:#888;margin-left:8px;">자세한 분석 · 5장</span></button>
+    </div>
+    <div class="spread-selector" style="flex-direction:column;gap:10px;display:none;" id="spreadOshi">
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">💜 <strong>한마디</strong> <span style="font-size:12px;color:#888;margin-left:8px;">최애의 한마디 · 1장</span></button>
+        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">💕 <strong>마음 읽기</strong> <span style="font-size:12px;color:#888;margin-left:8px;">과거·현재·미래 감정 · 3장</span></button>
+        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">🔥 <strong>심층 감정</strong> <span style="font-size:12px;color:#888;margin-left:8px;">최애의 깊은 속마음 · 5장</span></button>
     </div>
 
     <div class="question-box" id="questionBox" style="border:none;background:transparent;padding:10px;">
@@ -148,6 +153,8 @@ const MAJOR = [
 
 const POSITIONS_3 = ['과거', '현재', '미래'];
 const POSITIONS_5 = ['현재 상황', '도전/장애', '과거 영향', '가까운 미래', '최종 결과'];
+const OSHI_POSITIONS_3 = ['과거의 감정', '지금 느끼는 마음', '앞으로의 감정'];
+const OSHI_POSITIONS_5 = ['첫인상', '숨긴 감정', '진짜 속마음', '당신에게 바라는 것', '두 사람의 미래'];
 
 let spreadCount = 1;
 let drawnCards = [];
@@ -197,6 +204,8 @@ function setMode(m) {
     btns[1].style.color = m === 'oshi' ? '#fff' : '#9b59b6';
     document.getElementById('oshiBox').style.display = m === 'oshi' ? 'block' : 'none';
     document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
+    document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
+    document.getElementById('spreadOshi').style.display = m === 'oshi' ? 'flex' : 'none';
     document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🔮 카드 섞기';
 }
 
@@ -297,7 +306,12 @@ function pickCard(index, cardEl) {
 
 function showReading() {
     const section = document.getElementById('readingSection');
-    const positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : ['오늘의 카드'];
+    let positions;
+    if (isOshi) {
+        positions = spreadCount === 3 ? OSHI_POSITIONS_3 : spreadCount === 5 ? OSHI_POSITIONS_5 : [oshiName + '의 한마디'];
+    } else {
+        positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : ['오늘의 카드'];
+    }
     let html = '';
 
     const oshiName = document.getElementById('oshiName')?.value?.trim() || '그 사람';
