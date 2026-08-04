@@ -32,7 +32,7 @@
         .cards-area { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; justify-items: center; margin-bottom: 30px; min-height: 220px; max-width: 620px; margin-left: auto; margin-right: auto; }
         @media (max-width: 500px) { .cards-area { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
 
-        .tarot-card { width: 140px; height: 220px; border-radius: 12px; cursor: pointer; perspective: 600px; }
+        .tarot-card { width: 100%; max-width: 140px; aspect-ratio: 2/3; border-radius: 12px; cursor: pointer; perspective: 600px; }
         .tarot-card .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
         .tarot-card.flipped .card-inner { transform: rotateY(180deg); }
         .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -54,7 +54,7 @@
         .tarot-card.dimmed { opacity: 0.3; pointer-events: none; }
         .tarot-card.selected { box-shadow: 0 0 15px rgba(155,89,182,0.5); }
         .tarot-card { transition: all 0.3s; }
-        @media (max-width: 500px) { .tarot-card { width: 80px; height: 130px; } .card-front .card-emoji { font-size: 28px; } .card-front .card-name { font-size: 9px; } .card-back .pattern { font-size: 24px; } }
+        @media (max-width: 500px) { .card-front .card-emoji { font-size: 28px; } .card-front .card-name { font-size: 9px; } }
 
         .reading-section { display: none; }
         .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
