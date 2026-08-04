@@ -71,12 +71,12 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🔮 타로 카드</h2>
+        <h2>🃏 타로 카드</h2>
         <p>카드를 뽑아 당신의 운명을 읽어보세요</p>
     </div>
 
     <div class="mode-selector" style="display:flex;gap:0;margin-bottom:20px;border:2px solid #3a2550;border-radius:10px;overflow:hidden;">
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🔮 일반 타로</button>
+        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🃏 일반 타로</button>
         <button class="mode-btn" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')">💜 최애 타로</button>
     </div>
 
@@ -91,7 +91,7 @@
     </div>
 
     <div class="spread-selector" style="flex-direction:column;gap:10px;" id="spreadNormal">
-        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🎴 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
         <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>과거 · 현재 · 미래</strong> <span style="font-size:12px;color:#888;margin-left:8px;">시간의 흐름 · 3장</span></button>
         <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>심층 리딩</strong> <span style="font-size:12px;color:#888;margin-left:8px;">자세한 분석 · 5장</span></button>
     </div>
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 카드 섞기</button>
+    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🃏 카드 섞기</button>
 
     <div id="pickInstruction" style="display:none;text-align:center;margin-bottom:16px;">
         <span style="font-size:15px;color:#c39bd3;" id="pickText">카드를 <strong>1장</strong> 선택하세요</span>
@@ -113,7 +113,7 @@
 
     <div class="reading-section" id="readingSection"></div>
 
-    <div class="disclaimer">🔮 타로는 재미와 자기 성찰을 위한 도구입니다. 중요한 결정은 전문가와 상담하세요.</div>
+    <div class="disclaimer">🃏 타로는 재미와 자기 성찰을 위한 도구입니다. 중요한 결정은 전문가와 상담하세요.</div>
 </div>
 
 <div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">공유:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a></div>
@@ -360,7 +360,7 @@ function setMode(m) {
     document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; } // 최애 모드는 3장 고정
-    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🔮 카드 섞기';
+    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🃏 카드 섞기';
 }
 
 function setSpread(n) {
@@ -395,7 +395,7 @@ function startDraw() {
         cardEl.innerHTML = `
             <div class="card-inner">
                 <div class="card-back">
-                    <div class="pattern">✨🔮✨</div>
+                    <div class="pattern">✨🃏✨</div>
                     <div class="label">TAROT</div>
                 </div>
                 <div class="card-front" id="front-${i}">
@@ -520,7 +520,7 @@ function showReading() {
         } else {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">🔮 종합 해석</div>
+                    <div class="reading-title">🃏 종합 해석</div>
                     <div class="reading-text">
                         이 리딩의 핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.
                         ${mainTheme.reversed ? '역방향으로 나왔으므로, ' + mainTheme.down.split('.')[0] + '에 주의하세요.' : mainTheme.up.split('.')[0] + '의 에너지가 강합니다.'}

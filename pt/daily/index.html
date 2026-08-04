@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="pt">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘의 운세 - MOGU Moon</title>
-    <meta name="description" content="매일 바뀌는 오늘의 타로 카드, 별자리 운세, 행운의 색상과 숫자.">
+    <title>Horóscopo do Dia - MOGU Moon</title>
+    <meta name="description" content="Carta de tarô, horóscopo, cor e número da sorte do dia.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -62,28 +62,28 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🌅 오늘의 운세</h2>
+        <h2>🌅 Horóscopo do Dia</h2>
         <div class="date" id="todayDate">-</div>
     </div>
 
-    <!-- 오늘의 타로 -->
+    <!-- Tarô do dia -->
     <div class="daily-card" id="dailyTarot"></div>
 
-    <!-- 오늘의 조언 -->
+    <!-- Conselho do dia -->
     <div class="advice" id="dailyAdvice"></div>
 
-    <!-- 행운 정보 -->
+    <!-- Informações de sorte -->
     <div class="luck-grid" id="luckGrid"></div>
 
-    <!-- 별자리별 운세 -->
+    <!-- Horóscopo por signo -->
     <div class="zodiac-section">
-        <h3>⭐ 별자리별 오늘의 운세</h3>
+        <h3>⭐ Horóscopo por Signo</h3>
         <div class="zodiac-grid" id="zodiacGrid"></div>
     </div>
     <div class="zodiac-reading" id="zodiacReading"></div>
 </div>
 
-<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">공유:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a></div>
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">Compartilhar:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiado!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a></div>
 
 <footer>&copy; 2025 MOGU Moon</footer>
 
@@ -92,7 +92,7 @@
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
 
 <script>
-// 날짜 기반 시드 랜덤 (같은 날 = 같은 결과)
+// Aleatoriedade baseada na data (mesmo dia = mesmo resultado)
 function seededRandom(seed) {
     let s = seed;
     return function() {
@@ -102,69 +102,70 @@ function seededRandom(seed) {
 }
 
 const today = new Date();
-const dateStr = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
-const dayNames = ['일','월','화','수','목','금','토'];
-document.getElementById('todayDate').textContent = `${dateStr} (${dayNames[today.getDay()]}요일)`;
+const dayNames = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const monthNames = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const dateStr = `${today.getDate()} de ${monthNames[today.getMonth()]} de ${today.getFullYear()}`;
+document.getElementById('todayDate').textContent = `${dateStr} (${dayNames[today.getDay()]})`;
 
 const dateSeed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
 const rand = seededRandom(dateSeed);
 
 // ═══════════════════════════════════════
-// 오늘의 타로
+// Tarô do dia
 // ═══════════════════════════════════════
 const TAROT = [
-    {name:'광대',emoji:'🃏',msg:'새로운 시작의 에너지가 가득합니다. 두려워하지 말고 첫 발을 내디디세요.'},
-    {name:'마법사',emoji:'🪄',msg:'당신에게 필요한 모든 것이 이미 있습니다. 집중하면 기적을 만들 수 있는 날.'},
-    {name:'여사제',emoji:'🌙',msg:'직관이 매우 강한 날입니다. 논리보다 느낌을 믿으세요.'},
-    {name:'여황제',emoji:'🌺',msg:'풍요와 아름다움이 넘치는 날. 자신을 돌보고 감각을 즐기세요.'},
-    {name:'황제',emoji:'👑',msg:'리더십을 발휘할 수 있는 날. 체계적으로 접근하면 성공합니다.'},
-    {name:'교황',emoji:'🙏',msg:'배움의 날. 좋은 조언을 얻거나 누군가에게 지혜를 나눌 수 있습니다.'},
-    {name:'연인',emoji:'💕',msg:'사랑과 선택의 날. 마음이 이끄는 대로 따르세요. 인연이 찾아올 수 있습니다.'},
-    {name:'전차',emoji:'⚡',msg:'의지력이 강한 날! 목표를 향해 달려가세요. 장애물도 돌파할 수 있습니다.'},
-    {name:'힘',emoji:'🦁',msg:'내면의 힘이 빛나는 날. 부드러움으로 어려움을 극복하세요.'},
-    {name:'은둔자',emoji:'🔦',msg:'혼자만의 시간이 필요한 날. 내면을 들여다보면 답을 찾을 수 있습니다.'},
-    {name:'운명의 수레바퀴',emoji:'🎡',msg:'변화의 바람이 불고 있습니다. 흐름에 몸을 맡기면 행운이 찾아옵니다.'},
-    {name:'정의',emoji:'⚖️',msg:'공정한 결과가 찾아오는 날. 진실되게 행동하세요.'},
-    {name:'매달린 사람',emoji:'🙃',msg:'다른 각도에서 바라보세요. 관점을 바꾸면 새로운 답이 보입니다.'},
-    {name:'죽음',emoji:'💀',msg:'끝남은 새로운 시작. 낡은 것을 놓아주고 변화를 받아들이세요.'},
-    {name:'절제',emoji:'🌊',msg:'균형과 조화의 날. 극단을 피하고 중용을 지키세요.'},
-    {name:'악마',emoji:'😈',msg:'유혹에 주의하세요. 집착을 내려놓으면 자유로워집니다.'},
-    {name:'탑',emoji:'🗼',msg:'예상치 못한 변화가 올 수 있습니다. 하지만 그것이 더 나은 것을 위한 것임을 기억하세요.'},
-    {name:'별',emoji:'⭐',msg:'희망이 빛나는 날! 꿈을 포기하지 마세요. 우주가 응원하고 있습니다.'},
-    {name:'달',emoji:'🌙',msg:'직관에 귀 기울이세요. 모든 것이 명확하지 않지만, 안개 속에서도 길은 있습니다.'},
-    {name:'태양',emoji:'☀️',msg:'밝고 행복한 에너지의 날! 자신감을 가지고 빛나세요. 좋은 일이 생깁니다.'},
-    {name:'심판',emoji:'📯',msg:'과거를 정리하고 새출발할 수 있는 날. 소명에 응답하세요.'},
-    {name:'세계',emoji:'🌍',msg:'완성과 달성의 날! 하나의 순환이 마무리됩니다. 축하합니다.'}
+    {name:'O Louco',emoji:'🃏',msg:'Uma energia de novos começos preenche o ar. Não tenha medo — dê o primeiro passo.'},
+    {name:'O Mago',emoji:'🪄',msg:'Tudo o que você precisa já está em você. Com foco, você pode criar maravilhas hoje.'},
+    {name:'A Sacerdotisa',emoji:'🌙',msg:'Sua intuição está poderosa hoje. Confie no que sente, não apenas no que pensa.'},
+    {name:'A Imperatriz',emoji:'🌺',msg:'Um dia de abundância e beleza. Cuide de si mesmo e aprecie os prazeres da vida.'},
+    {name:'O Imperador',emoji:'👑',msg:'Um dia para exercer liderança. Uma abordagem estruturada levará ao sucesso.'},
+    {name:'O Hierofante',emoji:'🙏',msg:'Um dia de aprendizado. Você pode receber bons conselhos ou compartilhar sabedoria com alguém.'},
+    {name:'Os Amantes',emoji:'💕',msg:'Um dia de amor e escolhas. Siga o seu coração — um encontro especial pode estar a caminho.'},
+    {name:'O Carro',emoji:'⚡',msg:'Sua força de vontade está no auge! Avance em direção ao seu objetivo — você pode superar qualquer obstáculo.'},
+    {name:'A Força',emoji:'🦁',msg:'Sua força interior brilha hoje. Supere as dificuldades com gentileza e calma.'},
+    {name:'O Eremita',emoji:'🔦',msg:'Você precisa de um tempo sozinho hoje. Olhe para dentro — as respostas estão lá.'},
+    {name:'A Roda da Fortuna',emoji:'🎡',msg:'Os ventos da mudança estão soprando. Deixe-se levar pela correnteza e a sorte virá até você.'},
+    {name:'A Justiça',emoji:'⚖️',msg:'Resultados justos chegam hoje. Aja com integridade e honestidade.'},
+    {name:'O Enforcado',emoji:'🙃',msg:'Tente ver as coisas de um ângulo diferente. Uma nova perspectiva revelará novas respostas.'},
+    {name:'A Morte',emoji:'💀',msg:'Os fins são novos começos. Deixe para trás o que já não serve e abrace a mudança.'},
+    {name:'A Temperança',emoji:'🌊',msg:'Um dia de equilíbrio e harmonia. Evite os extremos e mantenha a moderação.'},
+    {name:'O Diabo',emoji:'😈',msg:'Cuidado com as tentações. Soltar os apegos trará liberdade.'},
+    {name:'A Torre',emoji:'🗼',msg:'Mudanças inesperadas podem surgir. Mas lembre-se: elas abrem caminho para algo melhor.'},
+    {name:'A Estrela',emoji:'⭐',msg:'Um dia de esperança brilhante! Não abandone seus sonhos. O universo está torcendo por você.'},
+    {name:'A Lua',emoji:'🌙',msg:'Ouça sua intuição. Nem tudo está claro, mas há um caminho mesmo na neblina.'},
+    {name:'O Sol',emoji:'☀️',msg:'Uma energia alegre e radiante! Tenha confiança e brilhe. Coisas boas estão por vir.'},
+    {name:'O Julgamento',emoji:'📯',msg:'Um dia para fechar o passado e começar de novo. Responda ao seu chamado.'},
+    {name:'O Mundo',emoji:'🌍',msg:'Um dia de realização e completude! Um ciclo se encerra. Parabéns.'}
 ];
 
 const todayCard = TAROT[Math.floor(rand() * TAROT.length)];
 document.getElementById('dailyTarot').innerHTML = `
-    <div class="section-label">오늘의 타로 카드</div>
+    <div class="section-label">Carta de Tarô do Dia</div>
     <div class="card-emoji">${todayCard.emoji}</div>
     <div class="card-name">${todayCard.name}</div>
-    <div class="card-sub">메이저 아르카나</div>
+    <div class="card-sub">Arcano Maior</div>
     <div class="reading">${todayCard.msg}</div>
 `;
 
 // ═══════════════════════════════════════
-// 오늘의 조언
+// Conselho do dia
 // ═══════════════════════════════════════
 const ADVICES = [
-    {emoji:'🌱',text:'작은 것에 감사하면 큰 행복이 찾아옵니다.'},
-    {emoji:'🔥',text:'오늘 하지 않으면 내일은 더 어렵습니다. 지금 시작하세요.'},
-    {emoji:'🌊',text:'흐름에 맡기세요. 억지로 밀어붙이면 역효과가 납니다.'},
-    {emoji:'⭐',text:'당신은 생각보다 훨씬 강합니다. 자신을 믿으세요.'},
-    {emoji:'🦋',text:'변화를 두려워하지 마세요. 나비가 되려면 애벌레는 변해야 합니다.'},
-    {emoji:'🌸',text:'아름다움은 완벽함이 아니라 진정성에서 옵니다.'},
-    {emoji:'🎯',text:'목표에 집중하세요. 산만함은 성공의 가장 큰 적입니다.'},
-    {emoji:'💎',text:'시련은 당신을 깎아 보석으로 만드는 과정입니다.'},
-    {emoji:'🌈',text:'비 온 뒤에 무지개가 뜹니다. 어려운 시기도 곧 지나갑니다.'},
-    {emoji:'🕯️',text:'어둠 속에서도 촛불 하나면 충분합니다. 당신이 그 빛입니다.'},
-    {emoji:'🐢',text:'느려도 괜찮습니다. 방향이 맞으면 속도는 중요하지 않습니다.'},
-    {emoji:'🦅',text:'높이 날수록 넓게 보입니다. 시야를 넓히세요.'},
-    {emoji:'🎵',text:'마음이 힘들 때는 좋아하는 음악을 들으세요. 치유가 시작됩니다.'},
-    {emoji:'🤝',text:'혼자 할 수 없는 일은 도움을 청하세요. 약함이 아니라 용기입니다.'},
-    {emoji:'🌙',text:'오늘 밤 잠들기 전, 내일의 자신에게 감사의 말을 건네보세요.'},
+    {emoji:'🌱',text:'Ser grato pelas pequenas coisas atrai uma grande felicidade.'},
+    {emoji:'🔥',text:'O que não é feito hoje fica mais difícil amanhã. Comece agora.'},
+    {emoji:'🌊',text:'Deixe-se levar pela correnteza. Forçar as coisas pode ter o efeito contrário.'},
+    {emoji:'⭐',text:'Você é muito mais forte do que imagina. Acredite em si mesmo.'},
+    {emoji:'🦋',text:'Não tenha medo da mudança. A lagarta precisa se transformar para se tornar borboleta.'},
+    {emoji:'🌸',text:'A beleza vem da autenticidade, não da perfeição.'},
+    {emoji:'🎯',text:'Mantenha o foco no seu objetivo. A distração é o maior inimigo do sucesso.'},
+    {emoji:'💎',text:'As provações são o processo que o transforma em um diamante.'},
+    {emoji:'🌈',text:'Após a chuva vem o arco-íris. Os tempos difíceis também passarão.'},
+    {emoji:'🕯️',text:'Até na escuridão, uma vela é suficiente. Você é essa luz.'},
+    {emoji:'🐢',text:'Não importa a velocidade, desde que a direção seja certa.'},
+    {emoji:'🦅',text:'Quanto mais alto você voa, mais longe você enxerga. Amplie sua visão.'},
+    {emoji:'🎵',text:'Quando o coração está pesado, ouça sua música favorita. A cura começa aí.'},
+    {emoji:'🤝',text:'Pedir ajuda no que não consegue sozinho não é fraqueza — é coragem.'},
+    {emoji:'🌙',text:'Antes de dormir esta noite, diga uma palavra de gratidão ao seu eu de amanhã.'},
 ];
 
 const todayAdvice = ADVICES[Math.floor(rand() * ADVICES.length)];
@@ -174,63 +175,63 @@ document.getElementById('dailyAdvice').innerHTML = `
 `;
 
 // ═══════════════════════════════════════
-// 행운 정보
+// Informações de sorte
 // ═══════════════════════════════════════
-const COLORS = ['빨강','주황','노랑','초록','하늘','파랑','보라','분홍','흰색','검정','금색','은색'];
+const COLORS = ['Vermelho','Laranja','Amarelo','Verde','Azul-céu','Azul','Roxo','Rosa','Branco','Preto','Dourado','Prateado'];
 const COLOR_HEX = ['#e74c3c','#e67e22','#f1c40f','#27ae60','#3498db','#2c3e50','#9b59b6','#e84393','#ecf0f1','#2c3e50','#f39c12','#bdc3c7'];
-const ELEMENTS = ['불','물','바람','흙','빛'];
-const DIRECTIONS = ['동쪽','서쪽','남쪽','북쪽','동남쪽','동북쪽','서남쪽','서북쪽'];
+const ELEMENTS = ['Fogo','Água','Ar','Terra','Luz'];
+const DIRECTIONS = ['Leste','Oeste','Sul','Norte','Sudeste','Nordeste','Sudoeste','Noroeste'];
 
 const luckyNum = Math.floor(rand() * 99) + 1;
 const luckyColorIdx = Math.floor(rand() * COLORS.length);
 const luckyElement = ELEMENTS[Math.floor(rand() * ELEMENTS.length)];
 const luckyDir = DIRECTIONS[Math.floor(rand() * DIRECTIONS.length)];
 const luckyTime = Math.floor(rand() * 12) + 1;
-const compatibility = ['양자리','황소자리','쌍둥이자리','게자리','사자자리','처녀자리','천칭자리','전갈자리','사수자리','염소자리','물병자리','물고기자리'][Math.floor(rand() * 12)];
+const compatibility = ['Áries','Touro','Gêmeos','Câncer','Leão','Virgem','Libra','Escorpião','Sagitário','Capricórnio','Aquário','Peixes'][Math.floor(rand() * 12)];
 
 document.getElementById('luckGrid').innerHTML = `
-    <div class="luck-item"><div class="luck-label">행운의 숫자</div><div class="luck-value">${luckyNum}</div></div>
-    <div class="luck-item"><div class="luck-label">행운의 색상</div><div class="luck-value" style="color:${COLOR_HEX[luckyColorIdx]}">${COLORS[luckyColorIdx]}</div></div>
-    <div class="luck-item"><div class="luck-label">행운의 원소</div><div class="luck-value">${luckyElement}</div></div>
-    <div class="luck-item"><div class="luck-label">행운의 방향</div><div class="luck-value">${luckyDir}</div></div>
-    <div class="luck-item"><div class="luck-label">행운의 시간</div><div class="luck-value">${luckyTime}시</div></div>
-    <div class="luck-item"><div class="luck-label">오늘의 궁합</div><div class="luck-value" style="font-size:14px;">${compatibility}</div></div>
+    <div class="luck-item"><div class="luck-label">Número da Sorte</div><div class="luck-value">${luckyNum}</div></div>
+    <div class="luck-item"><div class="luck-label">Cor da Sorte</div><div class="luck-value" style="color:${COLOR_HEX[luckyColorIdx]}">${COLORS[luckyColorIdx]}</div></div>
+    <div class="luck-item"><div class="luck-label">Elemento da Sorte</div><div class="luck-value">${luckyElement}</div></div>
+    <div class="luck-item"><div class="luck-label">Direção da Sorte</div><div class="luck-value">${luckyDir}</div></div>
+    <div class="luck-item"><div class="luck-label">Hora da Sorte</div><div class="luck-value">${luckyTime}h</div></div>
+    <div class="luck-item"><div class="luck-label">Compatível Hoje</div><div class="luck-value" style="font-size:14px;">${compatibility}</div></div>
 `;
 
 // ═══════════════════════════════════════
-// 별자리별 운세
+// Horóscopo por signo
 // ═══════════════════════════════════════
 const ZODIAC = [
-    {name:'양자리',emoji:'♈',date:'3/21~4/19'},
-    {name:'황소자리',emoji:'♉',date:'4/20~5/20'},
-    {name:'쌍둥이자리',emoji:'♊',date:'5/21~6/20'},
-    {name:'게자리',emoji:'♋',date:'6/21~7/22'},
-    {name:'사자자리',emoji:'♌',date:'7/23~8/22'},
-    {name:'처녀자리',emoji:'♍',date:'8/23~9/22'},
-    {name:'천칭자리',emoji:'♎',date:'9/23~10/22'},
-    {name:'전갈자리',emoji:'♏',date:'10/23~11/21'},
-    {name:'사수자리',emoji:'♐',date:'11/22~12/21'},
-    {name:'염소자리',emoji:'♑',date:'12/22~1/19'},
-    {name:'물병자리',emoji:'♒',date:'1/20~2/18'},
-    {name:'물고기자리',emoji:'♓',date:'2/19~3/20'}
+    {name:'Áries',emoji:'♈',date:'21/03 ~ 19/04'},
+    {name:'Touro',emoji:'♉',date:'20/04 ~ 20/05'},
+    {name:'Gêmeos',emoji:'♊',date:'21/05 ~ 20/06'},
+    {name:'Câncer',emoji:'♋',date:'21/06 ~ 22/07'},
+    {name:'Leão',emoji:'♌',date:'23/07 ~ 22/08'},
+    {name:'Virgem',emoji:'♍',date:'23/08 ~ 22/09'},
+    {name:'Libra',emoji:'♎',date:'23/09 ~ 22/10'},
+    {name:'Escorpião',emoji:'♏',date:'23/10 ~ 21/11'},
+    {name:'Sagitário',emoji:'♐',date:'22/11 ~ 21/12'},
+    {name:'Capricórnio',emoji:'♑',date:'22/12 ~ 19/01'},
+    {name:'Aquário',emoji:'♒',date:'20/01 ~ 18/02'},
+    {name:'Peixes',emoji:'♓',date:'19/02 ~ 20/03'}
 ];
 
 const ZODIAC_MSGS = [
-    ['오늘은 새로운 도전이 보상받는 날입니다. 주저하지 말고 행동으로 옮기세요.','인간관계에서 따뜻한 교류가 있을 수 있습니다.','재정적으로 신중하되, 작은 투자는 괜찮습니다.'],
-    ['안정적인 하루가 예상됩니다. 루틴을 지키면 좋은 결과가 옵니다.','사랑하는 사람과 깊은 대화를 나눌 기회.','지출보다 저축에 집중하면 좋은 날.'],
-    ['소통의 날! 아이디어가 샘솟습니다. 회의나 발표에서 빛나세요.','새로운 만남이 기대됩니다.','정보 수집이 재물운으로 이어질 수 있습니다.'],
-    ['감정이 풍부한 날입니다. 직관을 믿으세요.','가족과 함께하면 힐링이 됩니다.','집과 관련된 결정에 좋은 날.'],
-    ['주목받는 날! 자신감을 가지고 앞에 나서세요.','로맨틱한 순간이 찾아올 수 있습니다.','리더십을 발휘하면 금전적 보상이 따릅니다.'],
-    ['꼼꼼함이 빛나는 날. 디테일에 신경 쓰면 큰 실수를 피할 수 있습니다.','진심 어린 조언이 관계를 깊게 합니다.','건강 관련 투자가 장기적으로 이득.'],
-    ['조화와 균형의 날. 갈등을 중재하면 인정받습니다.','파트너십이 강화됩니다.','협력을 통한 수익이 기대됩니다.'],
-    ['깊은 통찰력이 빛나는 날. 표면 아래를 읽으세요.','비밀이 밝혀지거나 깊은 유대가 형성됩니다.','장기적 투자에 좋은 직감이 옵니다.'],
-    ['모험의 날! 새로운 경험에 열려 있으면 행운이 찾아옵니다.','낯선 사람과의 만남이 인상적.','해외나 먼 곳에서 좋은 소식.'],
-    ['성실함이 보상받는 날. 꾸준히 해온 일이 결실을 맺습니다.','어른이나 멘토에게 좋은 평가를 받습니다.','커리어 관련 좋은 소식이 올 수 있습니다.'],
-    ['독창적 아이디어가 넘치는 날. 틀을 깨면 새 길이 열립니다.','같은 취향의 사람과 의미 있는 교류.','기술이나 혁신 관련 기회.'],
-    ['직관이 매우 강한 날. 꿈이나 영감에 주의를 기울이세요.','감성적인 교류가 관계를 따뜻하게 합니다.','예술이나 창작에 투자하면 좋습니다.']
+    ['Hoje novos desafios serão recompensados. Não hesite — passe à ação.','Trocas calorosas são possíveis nos relacionamentos.','Seja prudente financeiramente, mas pequenos investimentos estão bem.'],
+    ['Um dia estável se aproxima. Seguir a rotina trará bons resultados.','Uma oportunidade para uma conversa profunda com alguém querido.','Um bom dia para focar em poupar em vez de gastar.'],
+    ['Dia de comunicação! As ideias fluem. Brilhe em reuniões e apresentações.','Novos encontros são esperados.','Reunir informações pode se converter em fortuna.'],
+    ['Um dia de emoções ricas. Confie na sua intuição.','Passar tempo com a família traz cura.','Um bom dia para decisões relacionadas ao lar.'],
+    ['Dia de estar no centro das atenções! Tenha confiança e apareça.','Momentos românticos podem surgir.','Exercer liderança traz recompensas financeiras.'],
+    ['Dia em que a atenção ao detalhe brilha. Cuidar dos detalhes evita grandes erros.','Conselhos sinceros aprofundam os relacionamentos.','Investir em saúde traz benefícios a longo prazo.'],
+    ['Dia de harmonia e equilíbrio. Mediar conflitos traz reconhecimento.','As parcerias se fortalecem.','Ganhos por meio da cooperação são esperados.'],
+    ['Dia de insights profundos. Leia o que está abaixo da superfície.','Segredos revelados ou vínculos profundos formados.','Uma boa intuição para investimentos de longo prazo.'],
+    ['Dia de aventura! Estar aberto a novas experiências traz sorte.','Encontros com estranhos deixam impressão.','Boas notícias vindas de longe ou do exterior.'],
+    ['Dia em que a diligência é recompensada. O trabalho consistente dá frutos.','Uma avaliação positiva de um superior ou mentor.','Boas notícias relacionadas à carreira podem chegar.'],
+    ['Dia transbordando de ideias originais. Quebrar padrões abre novos caminhos.','Trocas significativas com pessoas de gostos similares.','Oportunidades ligadas a tecnologia ou inovação.'],
+    ['Dia de intuição muito forte. Preste atenção aos sonhos e à inspiração.','Trocas emocionais aquecem os relacionamentos.','Investir em arte ou criatividade é favorável.']
 ];
 
-// Build zodiac grid
+// Montar grade de signos
 let zodiacHTML = '';
 ZODIAC.forEach((z, i) => {
     zodiacHTML += `<button class="zodiac-btn" onclick="showZodiac(${i})"><span class="emoji">${z.emoji}</span>${z.name}</button>`;
@@ -256,15 +257,15 @@ function showZodiac(idx) {
         <div class="zr-title">${z.emoji} ${z.name}</div>
         <div class="zr-date">${z.date}</div>
         <div class="zr-text">
-            <strong>💫 총운:</strong> ${msgs[0]}<br><br>
-            <strong>💕 애정운:</strong> ${msgs[1]}<br><br>
-            <strong>💰 금전운:</strong> ${msgs[2]}
+            <strong>💫 Geral:</strong> ${msgs[0]}<br><br>
+            <strong>💕 Amor:</strong> ${msgs[1]}<br><br>
+            <strong>💰 Finanças:</strong> ${msgs[2]}
         </div>
         <div class="zr-meters">
-            <div class="zr-meter">총운 ${overall}%<div class="bar"><div class="bar-fill" style="width:${overall}%"></div></div></div>
-            <div class="zr-meter">애정운 ${love}%<div class="bar"><div class="bar-fill" style="width:${love}%;background:#e84393"></div></div></div>
-            <div class="zr-meter">직장운 ${work}%<div class="bar"><div class="bar-fill" style="width:${work}%;background:#3498db"></div></div></div>
-            <div class="zr-meter">금전운 ${money}%<div class="bar"><div class="bar-fill" style="width:${money}%;background:#27ae60"></div></div></div>
+            <div class="zr-meter">Geral ${overall}%<div class="bar"><div class="bar-fill" style="width:${overall}%"></div></div></div>
+            <div class="zr-meter">Amor ${love}%<div class="bar"><div class="bar-fill" style="width:${love}%;background:#e84393"></div></div></div>
+            <div class="zr-meter">Trabalho ${work}%<div class="bar"><div class="bar-fill" style="width:${work}%;background:#3498db"></div></div></div>
+            <div class="zr-meter">Finanças ${money}%<div class="bar"><div class="bar-fill" style="width:${money}%;background:#27ae60"></div></div></div>
         </div>
     `;
     zr.style.display = 'block';
