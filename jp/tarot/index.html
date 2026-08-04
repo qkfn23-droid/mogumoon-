@@ -35,7 +35,8 @@
         .tarot-card { width: 140px; height: 210px; border-radius: 12px; cursor: pointer; perspective: 600px; flex-shrink: 0; }
         .tarot-card .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
         .tarot-card.flipped .card-inner { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .tarot-card:not(.flipped) .card-front { visibility: hidden; }
         .card-back { background: linear-gradient(135deg, #2a1540, #1a0d2e); border: 2px solid #9b59b6; overflow: hidden; position: relative; }
         .card-back::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(155,89,182,0.3); border-radius: 8px; }
         .card-back::after { content: '✦'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 28px; color: rgba(155,89,182,0.5); text-shadow: 0 0 10px rgba(155,89,182,0.3); }
