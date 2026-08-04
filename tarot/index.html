@@ -179,7 +179,7 @@ function setMode(m) {
 function setSpread(n) {
     spreadCount = n;
     document.querySelectorAll('.spread-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+    event.target.closest('.spread-btn').classList.add('active');
     document.getElementById('cardsArea').innerHTML = '';
     document.getElementById('readingSection').innerHTML = '';
     document.getElementById('readingSection').style.display = 'none';
