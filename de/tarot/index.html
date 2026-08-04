@@ -341,6 +341,13 @@ function setMode(m) {
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; }
     document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 Karten mischen' : '🃏 Karten mischen';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function setSpread(n) {
@@ -393,6 +400,13 @@ function startDraw() {
     document.getElementById('pickText').innerHTML = `Wähle <strong>${spreadCount} Karte${spreadCount > 1 ? 'n' : ''}</strong>`;
 
     document.getElementById('drawBtn').innerHTML = '🔄 Neu mischen';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function pickCard(index, cardEl) {

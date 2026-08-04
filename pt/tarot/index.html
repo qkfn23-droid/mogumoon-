@@ -334,6 +334,13 @@ function setMode(m) {
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; }
     document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 Embaralhar as Cartas' : '🃏 Embaralhar as Cartas';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function setSpread(n) {
@@ -386,6 +393,13 @@ function startDraw() {
     document.getElementById('pickText').innerHTML = `Escolha <strong>${spreadCount} carta${spreadCount > 1 ? 's' : ''}</strong>`;
 
     document.getElementById('drawBtn').innerHTML = '🔄 Embaralhar de Novo';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function pickCard(index, cardEl) {

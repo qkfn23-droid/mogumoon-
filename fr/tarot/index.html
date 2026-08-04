@@ -396,6 +396,13 @@ function setMode(m) {
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; }
     document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 Melanger les cartes' : '🃏 Melanger les cartes';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function setSpread(n) {
@@ -446,6 +453,13 @@ function startDraw() {
     document.getElementById('pickInstruction').style.display = 'block';
     document.getElementById('pickText').innerHTML = `Choisissez <strong>${spreadCount} carte${spreadCount > 1 ? 's' : ''}</strong>`;
     document.getElementById('drawBtn').innerHTML = '🔄 Remelanger';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function pickCard(index, cardEl) {

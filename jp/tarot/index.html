@@ -330,6 +330,13 @@ function setMode(m) {
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
     if (m === 'oshi') { spreadCount = 3; }
     document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 カードをシャッフル' : '🃏 カードをシャッフル';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function setSpread(n) {
@@ -382,6 +389,13 @@ function startDraw() {
     document.getElementById('pickText').innerHTML = `カードを <strong>${spreadCount}枚</strong> 選んでください`;
 
     document.getElementById('drawBtn').innerHTML = '🔄 もう一度シャッフル';
+    // clear on mode switch
+    document.getElementById('cardsArea').innerHTML = '';
+    document.getElementById('readingSection').innerHTML = '';
+    document.getElementById('readingSection').style.display = 'none';
+    document.getElementById('pickInstruction').style.display = 'none';
+    drawnCards = [];
+    pickedCount = 0;
 }
 
 function pickCard(index, cardEl) {
