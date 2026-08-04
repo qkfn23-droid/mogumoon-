@@ -254,3 +254,226 @@ down:'Mangelnde Selbstfürsorge, Workaholic.'},
 up:'Finanzieller Erfolg und Stabilität! Geschäftssinn und pragmatische Führung. Reiche Früchte werden geerntet.',
 down:'Gier, Materialismus. Geld ist nicht alles.'}
 ];
+
+// ═══════════════════════════════════════
+// UI-Texte (nur diesen Teil bei Übersetzung ändern)
+// ═══════════════════════════════════════
+const TAROT_UI = {
+    pageTitle: "🃏 Tarot-Karten",
+    pageSubtitle: "Ziehe eine Karte und lies dein Schicksal",
+    modeNormal: "🃏 Normales Tarot",
+    modeOshi: "💜 Liebling-Tarot",
+    spreadOne: "💫 <strong>Eine Karte</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Schnelle Antwort · 1 Karte</span>",
+    spreadThree: "⏳ <strong>Vergangenheit · Gegenwart · Zukunft</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Zeitlicher Fluss · 3 Karten</span>",
+    spreadFive: "⭐ <strong>Tiefenlesung</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Detaillierte Analyse · 5 Karten</span>",
+    questionText: "✨ Denke an deine Frage und<br>wähle eine Karte ✨",
+    questionSub: "Die Karten werden von deinem Unterbewusstsein gewählt",
+    oshiTitle: "💜 Gib den Namen deines Lieblings ein",
+    oshiPlaceholder: "z.B. Gojo Satoru, Levi, Kamina...",
+    oshiHint: "Anime / Manga / Spiel / Idol – alle willkommen!",
+    oshiQuestionText: "✨ Denke an diese Person und<br>wähle eine Karte ✨",
+    oshiQuestionSub: "Die Karten zeigen die verborgenen Gefühle deines Lieblings",
+    btnShuffle: "🃏 Karten mischen",
+    btnShuffleOshi: "💜 Karten mischen",
+    btnReshuffle: "🔄 Neu mischen",
+    pickInstruction: "Wähle <strong>{n} Karte(n)</strong>",
+    pickMore: "Wähle noch <strong>{n} weitere(n)</strong>",
+    pickDone: "✨ Alle Karten wurden gewählt!",
+    disclaimer: "🃏 Tarot ist ein Werkzeug zur Unterhaltung und Selbstreflexion. Bei wichtigen Entscheidungen bitte Fachleute konsultieren.",
+    positions3: ["Vergangenheit", "Gegenwart", "Zukunft"],
+    positions5: ["Aktuelle Situation", "Herausforderung / Hindernis", "Einfluss der Vergangenheit", "Nahe Zukunft", "Endergebnis"],
+    oshiPositions3: ["Als er/sie dich zum ersten Mal sah", "Was er/sie jetzt über dich denkt", "Was er/sie dir künftig geben möchte"],
+    oshiPositions5: ["Erster Eindruck", "Was verborgen gehalten wird", "Wahre innere Gefühle", "Was von dir erhofft wird", "Eure gemeinsame Zukunft"],
+    todayCard: "Karte des Tages",
+    oshiOneCard: "Ein Wort von {name}",
+    reversed: "Umgekehrt ↓",
+    upright: "Aufrecht ↑",
+    summaryTitle: "🃏 Gesamtdeutung",
+    oshiSummaryTitle: "💜 Die Gesamtgefühle von {name}",
+    summaryPositive: "Positive Energie überwiegt. Hab Vertrauen in dich.",
+    summaryChallenge: "Eine herausfordernde Zeit, aber umgekehrte Karten können auch inneres Wachstum bedeuten.",
+    oshiPositive: "Laut {name} hegt er/sie dir gegenüber insgesamt positive Gefühle. Es scheint, als könnte man sich öffnen und auf ihn/sie zugehen.",
+    oshiChallenge: "Laut {name} steckt er/sie in gemischten Gefühlen. Aber im tiefsten Innern schätzt er/sie dich sehr. Es braucht nur etwas Zeit, heißt es.",
+    defaultOshiName: "diese Person",
+    suitLabels: {major:"Große Arkana", wands:"Stäbe", cups:"Kelche", swords:"Schwerter", pentacles:"Münzen"},
+    share: "Teilen:",
+    copyUrl: "URL kopieren",
+};
+
+// ═══════════════════════════════════════
+// Liebling-Modus — Große Arkana
+// ═══════════════════════════════════════
+const OSHI_READINGS = {
+    0: {up:"Laut {name} könnte er/sie mit dir jedes Abenteuer wagen. Er/sie spürt echte Neugier auf dich und kommt furchtlos auf dich zu.",down:"Laut {name} möchte er/sie auf dich zugehen, ist aber noch nicht bereit. Das Herz ist da, aber das Timing wird noch abgewogen."},
+    1: {up:"Laut {name} hat er/sie bei dir etwas ganz Besonderes gespürt. Deine bloße Anwesenheit ist für {name} eine Inspiration.",down:"Laut {name} möchte er/sie dir seine/ihre wahren Gefühle zeigen, weiß aber nicht wie."},
+    2: {up:"Laut {name} spricht er/sie nicht darüber, denkt aber viel an dich. Er/sie beobachtet dich still.",down:"Laut {name} gibt es Gefühle, die er/sie vor dir verbirgt. Er/sie ist nur noch nicht bereit, sie zu zeigen."},
+    3: {up:"Laut {name} fühlt er/sie sich bei dir am wohlsten. Du bist für {name} wie ein sicherer Hafen.",down:"Laut {name} möchte er/sie sich auf dich stützen, traut sich aus Stolz aber nicht, es zuerst zu sagen."},
+    4: {up:"Laut {name} möchte er/sie dich beschützen. Hinter der starken Fassade verbirgt sich eine warme Zuneigung zu dir.",down:"Laut {name} bereut er/sie es, dir gegenüber zu streng gewesen zu sein."},
+    5: {up:"Laut {name} unterstützt er/sie dein Wachstum von ganzem Herzen.",down:"Laut {name} hat er/sie erkannt, dass er/sie auf dem bisherigen Weg nicht zu dir gelangen kann."},
+    6: {up:"Laut {name} hegt er/sie besondere Gefühle für dich. Er/sie spürt eine Anziehung zu dir, die mit niemandem sonst vergleichbar ist.",down:"Laut {name} erlebt er/sie innerliche Konflikte in der Beziehung zu dir. Aber im tiefsten Herzen will er/sie dich."},
+    7: {up:"Laut {name} würde er/sie für dich alles tun. Du bist der Antrieb, der {name} nach vorne bringt.",down:"Laut {name} hat er/sie die Orientierung verloren. Ein Wort von dir könnte ihm/ihr enorm helfen."},
+    8: {up:"Laut {name} ist er/sie von deiner starken und gleichzeitig sanften Seite angezogen.",down:"Laut {name} hat er/sie Angst, sich vor dir schwach zu zeigen."},
+    9: {up:"Laut {name} denkt er/sie in stillen Momenten an dich. Er/sie empfindet tiefe Sehnsucht.",down:"Laut {name} hält er/sie bewusst Abstand – nicht weil er/sie dich ablehnt, sondern weil er/sie Zeit braucht, sich selbst zu sortieren."},
+    10: {up:"Laut {name} fühlt er/sie, dass die Begegnung mit dir Schicksal war.",down:"Laut {name} stimmt das Timing gerade nicht. Aber das Band zwischen euch ist nicht gerissen."},
+    11: {up:"Laut {name} hat er/sie dir gegenüber ein aufrichtiges Herz.",down:"Laut {name} tut es ihm/ihr leid, in der Vergangenheit dir gegenüber nicht fair gewesen zu sein."},
+    12: {up:"Laut {name} ist er/sie bereit, für dich Opfer zu bringen. So wichtig bist du ihm/ihr.",down:"Laut {name} wartet er/sie darauf, dass du zuerst die Hand ausstreckst."},
+    13: {up:"Laut {name} geht die Beziehung zu euch in eine neue Phase über.",down:"Laut {name} möchte er/sie die bisherige Beziehung neu gestalten. Es ist eine Veränderung hin zu etwas Besserem."},
+    14: {up:"Laut {name} beruhigt ihn/sie deine Nähe. Er/sie spürt eine genau passende Balance zwischen euch.",down:"Laut {name} bemüht er/sie sich, das emotionale Gleichgewicht zu finden."},
+    15: {up:"Laut {name} fühlt er/sie sich stark zu dir hingezogen. Er/sie kann dem Reiz nicht widerstehen.",down:"Laut {name} hat er/sie versucht, die Gefühle für dich zu ordnen, aber es fällt schwer."},
+    16: {up:"Laut {name} hat dich er/sie sein/ihr Weltbild verändert.",down:"Laut {name} hat er/sie erkannt, dass die Gefühle für dich völlig anders waren als erwartet."},
+    17: {up:"Laut {name} bist du für ihn/sie wie ein Stern im Dunkel.",down:"Laut {name} hat er/sie kurz die Hoffnung verloren, aber wenn er/sie an dich denkt, kann er/sie weitermachen."},
+    18: {up:"Laut {name} empfindet er/sie für dich Gefühle, die sich mit Worten nicht beschreiben lassen.",down:"Laut {name} beginnen sich die verwirrten Gefühle zu klären. Er/sie hat erkannt, was er/sie für dich wirklich fühlt."},
+    19: {up:"Laut {name} ist er/sie am glücklichsten, wenn er/sie bei dir ist. Du bist für {name} wie die Sonne.",down:"Laut {name} möchte er/sie dir Glück geben, ist aber schlecht darin, es auszudrücken."},
+    20: {up:"Laut {name} war alles in der Vergangenheit ein Weg, der zu dir geführt hat.",down:"Laut {name} bereut er/sie, dir gegenüber in der Vergangenheit nicht besser gewesen zu sein."},
+    21: {up:"Laut {name} fühlt er/sie, dass die Beziehung zu dir vollkommen ist. Ihr seid füreinander das Beste.",down:"Laut {name} spürt er/sie noch kleine Lücken in eurer Beziehung. Aber es ist fast vollendet."}
+};
+
+// ═══════════════════════════════════════
+// Liebling-Modus — Kleine Arkana (nach Suit)
+// ═══════════════════════════════════════
+const OSHI_MINOR = {
+    wands: {
+        up: [
+            "Laut {name} beginnt eine neue Leidenschaft für dich in ihm/ihr zu entflammen.",
+            "Laut {name} stellt er/sie sich die gemeinsame Zukunft mit dir ernsthaft vor.",
+            "Laut {name} trägt die Zeit mit dir Früchte.",
+            "Laut {name} fühlt er/sie sich bei dir wie auf einem Fest.",
+            "Laut {name} möchte er/sie durch dich ein besserer Mensch werden.",
+            "Laut {name} möchte er/sie von dir anerkannt werden.",
+            "Laut {name} nimmt er/sie jede Herausforderung an, wenn es um dich geht.",
+            "Laut {name} vertiefen sich seine/ihre Gefühle für dich rasch.",
+            "Laut {name} ist er/sie erschöpft davon, die Gefühle für dich zu bewahren, gibt aber nicht auf.",
+            "Laut {name} trägt er/sie vieles für dich, aber weil du es bist, ist es in Ordnung.",
+            "Laut {name} möchte er/sie dir eine aufregende Neuigkeit mitteilen.",
+            "Laut {name} möchte er/sie dir mutig seine/ihre Gefühle gestehen.",
+            "Laut {name} fühlt er/sie sich vor dir voller Selbstvertrauen.",
+            "Laut {name} möchte er/sie gemeinsam mit dir große Träume verwirklichen.",
+        ],
+        down: [
+            "Laut {name} ist die Leidenschaft nicht erloschen – er/sie weiß nur nicht, wie er/sie sie ausdrücken soll.",
+            "Laut {name} hat er/sie Angst vor der gemeinsamen Zukunft. Die Angst, dich zu verlieren, lähmt ihn/sie.",
+            "Laut {name} ist er/sie wegen ausbleibender Ergebnisse verunsichert, denkt aber nicht ans Aufgeben.",
+            "Laut {name} spürt er/sie Unsicherheit in der Beziehung zu dir.",
+            "Laut {name} möchte er/sie unnötige Konflikte vermeiden.",
+            "Laut {name} ist er/sie verletzt, weil er/sie das Gefühl hat, von dir nicht anerkannt zu werden.",
+            "Laut {name} ist er/sie erschöpft und braucht eine Pause. Seine/ihre Gefühle ändern sich dadurch nicht.",
+            "Laut {name} ist er/sie frustriert, weil alles so langsam vorangeht.",
+            "Laut {name} steht er/sie kurz vor dem Burnout. Er/sie braucht ein Wort von dir.",
+            "Laut {name} ist es zu viel, um es alleine zu tragen. Er/sie möchte sich auf dich stützen.",
+            "Laut {name} hat er/sie etwas zu sagen, aber es ist noch nicht der richtige Moment.",
+            "Laut {name} bereut er/sie vorschnelles Handeln.",
+            "Laut {name} hat er/sie vor dir das Selbstvertrauen verloren und möchte es zurückgewinnen.",
+            "Laut {name} möchte er/sie sich sanft annähern.",
+        ]
+    },
+    cups: {
+        up: [
+            "Laut {name} erwachen in ihm/ihr neue Gefühle für dich.",
+            "Laut {name} fühlt er/sie eine tiefe Verbundenheit mit dir.",
+            "Laut {name} ist die Zeit mit dir die schönste.",
+            "Laut {name} hat er/sie erst jetzt erkannt, wie wertvoll du bist.",
+            "Laut {name} hat er/sie durch dich Schmerz erlitten, aber dadurch verstanden, wie kostbar du bist.",
+            "Laut {name} bewahrt er/sie die Erinnerungen mit dir in Ehren.",
+            "Laut {name} ist die echte Version von dir besser als jede Vorstellung.",
+            "Laut {name} möchte er/sie die Beziehung auf eine tiefere Ebene bringen.",
+            "Laut {name} hat er/sie das Gefühl, dass ein gemeinsamer Wunsch in Erfüllung geht.",
+            "Laut {name} ist die Zeit mit dir das vollkommene Glück.",
+            "Laut {name} möchte er/sie dir ein aufrichtiges Geständnis machen.",
+            "Laut {name} möchte er/sie dich auf romantische Weise ansprechen.",
+            "Laut {name} versteht er/sie deine Gefühle, ohne dass du sie aussprichst.",
+            "Laut {name} möchte er/sie gemeinsam mit dir wachsen.",
+        ],
+        down: [
+            "Laut {name} fühlt er/sie sich emotional leer. Du könntest diese Leere füllen.",
+            "Laut {name} hat er/sie das Gefühl, dass das Gleichgewicht in der Beziehung gestört ist.",
+            "Laut {name} hat er/sie im Vergnügen Wichtiges übersehen.",
+            "Laut {name} beginnt er/sie, neue Möglichkeiten anzunehmen.",
+            "Laut {name} überwindet er/sie den Schmerz der Vergangenheit. Du hast ihn/sie geheilt.",
+            "Laut {name} hat er/sie an der Vergangenheit festgehalten. Jetzt schaut er/sie nach vorne.",
+            "Laut {name} beginnt er/sie, die echte Version von dir statt einer Illusion zu sehen.",
+            "Laut {name} weiß er/sie, dass er/sie loslassen sollte, und hat trotzdem noch Sehnsucht.",
+            "Laut {name} hat er/sie erkannt, dass dein Herz wichtiger ist als Materielles.",
+            "Laut {name} hätte er/sie dich fast verloren, weil er/sie Perfektion gesucht hat.",
+            "Laut {name} reflektiert er/sie seine/ihre emotionale Unreife.",
+            "Laut {name} möchte er/sie dich so sehen, wie du wirklich bist.",
+            "Laut {name} ist er/sie von Gefühlen überwältigt. Er/sie braucht deine Ruhe.",
+            "Laut {name} möchte er/sie dir gegenüber ehrlich sein.",
+        ]
+    },
+    swords: {
+        up: [
+            "Laut {name} hat er/sie eine klare Entscheidung über dich getroffen.",
+            "Laut {name} wird bald eine Antwort kommen.",
+            "Laut {name} hat ihm/ihr der Schmerz durch dich Wachstum gebracht.",
+            "Laut {name} ruht er/sie sich aus und denkt dabei an dich.",
+            "Laut {name} möchte er/sie mit dir keinen unnötigen Streit haben.",
+            "Laut {name} nähert er/sie sich dir nach einer schwierigen Zeit.",
+            "Laut {name} möchte er/sie von nun an ehrlich auf dich zugehen.",
+            "Laut {name} versucht er/sie, die selbst errichteten Mauern einzureißen und auf dich zuzugehen.",
+            "Laut {name} macht er/sie sich solche Sorgen um dich, dass er/sie nicht schlafen kann.",
+            "Laut {name} hat er/sie den Tiefpunkt erreicht, aber steht wieder auf – wegen dir.",
+            "Laut {name} möchte er/sie dich besser kennenlernen.",
+            "Laut {name} wird er/sie nicht länger zögern.",
+            "Laut {name} erkennt er/sie deinen wahren Wert.",
+            "Laut {name} möchte er/sie die Beziehung zu dir klug führen.",
+        ],
+        down: [
+            "Laut {name} ist er/sie durcheinander.",
+            "Laut {name} beginnt er/sie, eine Antwort zu sehen.",
+            "Laut {name} erholt er/sie sich von Wunden.",
+            "Laut {name} würde er/sie sich wünschen, dass du ihm/ihr Ruhe gönnst.",
+            "Laut {name} ist es vor dir in Ordnung, schwach zu sein.",
+            "Laut {name} nimmt er/sie Veränderungen an, wenn du dabei bist.",
+            "Laut {name} wird er/sie von nun an ehrlich vorgehen.",
+            "Laut {name} beginnt er/sie, sich aus selbst gesetzten Grenzen zu befreien.",
+            "Laut {name} beginnt er/sie, die Sorgen loszulassen – dank dir.",
+            "Laut {name} geht die schlimmste Zeit vorbei.",
+            "Laut {name} soll man sich keine Gedanken über oberflächliche Gerüchte machen.",
+            "Laut {name} wird er/sie es langsam angehen.",
+            "Laut {name} möchte er/sie wärmer werden.",
+            "Laut {name} möchte er/sie auch deine Meinung hören.",
+        ]
+    },
+    pentacles: {
+        up: [
+            "Laut {name} möchte er/sie ernsthaft in die Beziehung zu dir investieren.",
+            "Laut {name} ist er/sie zwar beschäftigt, aber du hast Priorität.",
+            "Laut {name} kommen die besten Ergebnisse heraus, wenn er/sie mit dir arbeitet.",
+            "Laut {name} möchte er/sie die Beziehung zu dir sicher bewahren.",
+            "Laut {name} ist es tröstlich, dass du in schwierigen Zeiten in der Nähe bist.",
+            "Laut {name} möchte er/sie dir großzügig geben.",
+            "Laut {name} wird sicher ein gutes Ergebnis kommen.",
+            "Laut {name} bemüht er/sie sich, für dich ein besserer Mensch zu werden.",
+            "Laut {name} möchte er/sie eine reiche Beziehung mit dir aufbauen.",
+            "Laut {name} möchte er/sie für immer mit dir zusammen sein.",
+            "Laut {name} möchte er/sie dich langsam kennenlernen.",
+            "Laut {name} nähert er/sie sich dir langsam, aber sicher.",
+            "Laut {name} möchte er/sie eine Balance finden, die realistisch und zugleich warmherzig ist.",
+            "Laut {name} möchte er/sie gemeinsam mit dir großen Erfolg erzielen.",
+        ],
+        down: [
+            "Laut {name} tut es ihm/ihr leid, eine Chance verpasst zu haben.",
+            "Laut {name} hast du ihn/sie aufgefangen.",
+            "Laut {name} möchte er/sie bei dir sein.",
+            "Laut {name} wird er/sie lernen loszulassen.",
+            "Laut {name} ist das Licht der Erholung in Sicht.",
+            "Laut {name} möchte er/sie das Gleichgewicht wiederherstellen.",
+            "Laut {name} ist es fast geschafft. Er/sie sagt, du sollst nicht aufgeben.",
+            "Laut {name} bist du ein neuer Ansporn für ihn/sie.",
+            "Laut {name} wäre es gut, wenn du an seiner/ihrer Seite bist.",
+            "Laut {name} ist die Beziehung zu dir wichtiger als Materielles.",
+            "Laut {name} wird er/sie mit beiden Beinen auf dem Boden bleiben.",
+            "Laut {name} tut es ihm/ihr leid, langsam zu sein, aber seine/ihre Gefühle sind aufrichtig.",
+            "Laut {name} möchte er/sie gesund werden und zu dir zurückkehren.",
+            "Laut {name} möchte er/sie sich dir von Herzen nähern.",
+        ]
+    }
+};
+
+function convertToOshi(card, name) {
+    const suitData = OSHI_MINOR[card.suit];
+    if (!suitData) return card.reversed ? card.down : card.up;
+    const idx = Math.min(card.num - 1, 13);
+    const texts = card.reversed ? suitData.down : suitData.up;
+    return (texts[idx] || texts[0]).replace(/\{name\}/g, name);
+}

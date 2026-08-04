@@ -254,3 +254,226 @@ down:'Manque de soin de soi, bourreau de travail.'},
 up:'Succès financier et stabilité ! Sens des affaires et leadership pratique. Récolte de fruits abondants.',
 down:'Avarice, matérialisme. L\'argent n\'est pas tout.'}
 ];
+
+// ═══════════════════════════════════════
+// Textes UI (modifier uniquement cette section pour la traduction)
+// ═══════════════════════════════════════
+const TAROT_UI = {
+    pageTitle: "🃏 Tarot",
+    pageSubtitle: "Tirez une carte et lisez votre destin",
+    modeNormal: "🃏 Tarot classique",
+    modeOshi: "💜 Tarot de votre chouchou",
+    spreadOne: "💫 <strong>Un seul tirage</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Réponse rapide · 1 carte</span>",
+    spreadThree: "⏳ <strong>Passé · Présent · Futur</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Flux du temps · 3 cartes</span>",
+    spreadFive: "⭐ <strong>Lecture approfondie</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Analyse détaillée · 5 cartes</span>",
+    questionText: "✨ Pensez à ce qui vous préoccupe<br>et choisissez vos cartes ✨",
+    questionSub: "Les cartes sont choisies par votre inconscient",
+    oshiTitle: "💜 Entrez le nom de votre chouchou",
+    oshiPlaceholder: "Ex : Gojo Satoru, Levi, Kamina...",
+    oshiHint: "Anime, manga, jeu, idole — tout est permis !",
+    oshiQuestionText: "✨ Pensez à cette personne<br>et choisissez vos cartes ✨",
+    oshiQuestionSub: "Les cartes révèlent les émotions cachées de votre chouchou",
+    btnShuffle: "🃏 Mélanger les cartes",
+    btnShuffleOshi: "💜 Mélanger les cartes",
+    btnReshuffle: "🔄 Mélanger à nouveau",
+    pickInstruction: "Choisissez <strong>{n} carte(s)</strong>",
+    pickMore: "Choisissez encore <strong>{n} carte(s)</strong>",
+    pickDone: "✨ Vous avez choisi toutes les cartes !",
+    disclaimer: "🃏 Le tarot est un outil de divertissement et d\'introspection. Pour les décisions importantes, consultez un professionnel.",
+    positions3: ["Passé", "Présent", "Futur"],
+    positions5: ["Situation actuelle", "Défi / Obstacle", "Influence passée", "Futur proche", "Résultat final"],
+    oshiPositions3: ["Quand il·elle vous a vu·e pour la première fois", "Ce qu\'il·elle pense de vous maintenant", "Ce qu\'il·elle vous réserve"],
+    oshiPositions5: ["Première impression", "Ce qu\'il·elle cache", "Son vrai fond de cœur", "Ce qu\'il·elle espère de vous", "L\'avenir entre vous deux"],
+    todayCard: "La carte du jour",
+    oshiOneCard: "Le mot de {name}",
+    reversed: "Renversée ↓",
+    upright: "Droite ↑",
+    summaryTitle: "🃏 Interprétation générale",
+    oshiSummaryTitle: "💜 Les sentiments globaux de {name}",
+    summaryPositive: "Les énergies positives dominent. Ayez confiance en vous.",
+    summaryChallenge: "Une période de défi, mais les cartes renversées peuvent aussi signifier une croissance intérieure.",
+    oshiPositive: "Selon {name}, il·elle éprouve dans l\'ensemble des sentiments positifs envers vous. Il semble qu\'il·elle soit prêt·e à s\'ouvrir et à se rapprocher.",
+    oshiChallenge: "Selon {name}, il·elle se trouve dans un tourbillon d\'émotions complexes. Mais au fond de son cœur, il·elle vous chérit. Il lui faut juste un peu de temps.",
+    defaultOshiName: "Cette personne",
+    suitLabels: {major:"Majeur", wands:"Bâtons", cups:"Coupes", swords:"Épées", pentacles:"Pentacles"},
+    share: "Partager :",
+    copyUrl: "Copier l\'URL",
+};
+
+// ═══════════════════════════════════════
+// Interprétations chouchou — Arcanes Majeurs
+// ═══════════════════════════════════════
+const OSHI_READINGS = {
+    0: {up:"Selon {name}, il·elle est prêt·e à se lancer dans n\'importe quelle aventure avec vous. Il·elle ressent une curiosité pure à votre égard et s\'approche sans crainte.", down:"Selon {name}, il·elle veut se rapprocher de vous, mais n\'est pas encore prêt·e. Le cœur y est, mais il·elle cherche le bon moment."},
+    1: {up:"Selon {name}, il·elle a senti quelque chose de spécial en vous. Votre seule présence lui est une source d\'inspiration.", down:"Selon {name}, il·elle veut vous montrer sa sincérité, mais ne sait pas comment s\'y prendre."},
+    2: {up:"Selon {name}, il·elle ne le dit pas, mais pense beaucoup à vous. Il·elle vous observe en silence.", down:"Selon {name}, il·elle cache des sentiments pour vous. Ce n\'est que le bon moment qui n\'est pas encore venu."},
+    3: {up:"Selon {name}, il·elle se sent le plus à l\'aise quand il·elle est avec vous. Vous êtes pour lui·elle un véritable havre de paix.", down:"Selon {name}, il·elle voudrait s\'appuyer sur vous, mais son amour-propre l\'empêche de parler en premier."},
+    4: {up:"Selon {name}, il·elle veut vous protéger. Derrière son apparence forte se cache une tendresse sincère à votre égard.", down:"Selon {name}, il·elle regrette d\'avoir été trop sévère avec vous."},
+    5: {up:"Selon {name}, il·elle vous encourage sincèrement dans votre évolution.", down:"Selon {name}, il·elle a réalisé que les méthodes traditionnelles ne lui permettent pas de vous atteindre."},
+    6: {up:"Selon {name}, il·elle nourrit des sentiments particuliers pour vous. Il·elle ressent une attirance différente de tout ce qu\'il·elle a connu.", down:"Selon {name}, il·elle vit un conflit intérieur dans votre relation. Mais au fond, c\'est vous qu\'il·elle désire."},
+    7: {up:"Selon {name}, il·elle est capable de tout faire pour vous. Vous êtes la force qui le·la pousse à avancer.", down:"Selon {name}, il·elle a perdu le fil et erre. Un seul mot de votre part lui serait d\'un grand secours."},
+    8: {up:"Selon {name}, il·elle est attiré·e par votre force et votre douceur à la fois.", down:"Selon {name}, il·elle a peur de montrer sa vulnérabilité devant vous."},
+    9: {up:"Selon {name}, dans ses moments de solitude, c\'est à vous qu\'il·elle pense. Il·elle ressent un profond manque.", down:"Selon {name}, il·elle prend volontairement ses distances, non pas parce qu\'il·elle vous déteste, mais parce qu\'il·elle a besoin de s\'ordonner intérieurement."},
+    10: {up:"Selon {name}, il·elle a le sentiment que votre rencontre était inévitable.", down:"Selon {name}, il·elle sent que le timing n\'est pas au rendez-vous. Mais le fil du destin n\'est pas rompu."},
+    11: {up:"Selon {name}, il·elle vous porte un cœur sans mensonge.", down:"Selon {name}, il·elle s\'excuse de n\'avoir pas été juste envers vous par le passé."},
+    12: {up:"Selon {name}, il·elle est prêt·e à se sacrifier pour vous. C\'est à quel point vous êtes précieux·se pour lui·elle.", down:"Selon {name}, il·elle attend que vous tendiez la main en premier."},
+    13: {up:"Selon {name}, la relation entre vous deux passe à une nouvelle étape.", down:"Selon {name}, il·elle souhaite mettre de l\'ordre dans la relation existante. C\'est un changement pour quelque chose de meilleur."},
+    14: {up:"Selon {name}, il·elle se sent apaisé·e quand il·elle est avec vous. Il·elle ressent un équilibre parfait entre vous deux.", down:"Selon {name}, il·elle s\'efforce de trouver l\'équilibre dans ses émotions."},
+    15: {up:"Selon {name}, il·elle ressent une attirance puissante pour vous. Un charme auquel il·elle ne peut résister.", down:"Selon {name}, il·elle a essayé de faire le point sur ses sentiments pour vous, mais ce n\'est pas si simple."},
+    16: {up:"Selon {name}, vous avez changé sa vision du monde.", down:"Selon {name}, il·elle a réalisé que ses sentiments pour vous étaient totalement différents de ce qu\'il·elle attendait."},
+    17: {up:"Selon {name}, vous êtes pour lui·elle comme une étoile dans l\'obscurité.", down:"Selon {name}, il·elle a momentanément perdu espoir, mais en pensant à vous, il·elle peut avancer à nouveau."},
+    18: {up:"Selon {name}, il·elle ressent pour vous des émotions qu\'il·elle ne sait pas mettre en mots.", down:"Selon {name}, les émotions confuses commencent à se clarifier. Il·elle a pris conscience de ses vrais sentiments pour vous."},
+    19: {up:"Selon {name}, c\'est avec vous qu\'il·elle est le plus heureux·se. Vous êtes pour lui·elle comme le soleil.", down:"Selon {name}, il·elle veut vous apporter du bonheur, mais il·elle est maladroit·e pour l\'exprimer."},
+    20: {up:"Selon {name}, il·elle a le sentiment que tout ce qui s\'est passé dans le passé n\'était qu\'un chemin pour vous rencontrer.", down:"Selon {name}, il·elle regrette de ne pas avoir mieux agi envers vous dans le passé."},
+    21: {up:"Selon {name}, il·elle trouve la relation entre vous deux parfaite. Vous êtes les meilleurs l\'un pour l\'autre.", down:"Selon {name}, il·elle sent qu\'il reste encore des imperfections dans votre relation. Mais vous êtes presque arrivé·e à l\'idéal."}
+};
+
+// ═══════════════════════════════════════
+// Interprétations chouchou — Arcanes Mineurs (par suite)
+// ═══════════════════════════════════════
+const OSHI_MINOR = {
+    wands: {
+        up: [
+            "Selon {name}, une nouvelle passion commence à s\'enflammer pour vous.",
+            "Selon {name}, il·elle envisage sérieusement un avenir avec vous.",
+            "Selon {name}, le temps passé ensemble porte ses fruits.",
+            "Selon {name}, être avec vous, c\'est comme une fête.",
+            "Selon {name}, vous lui donnez envie de devenir une meilleure personne.",
+            "Selon {name}, il·elle veut être reconnu·e à vos yeux.",
+            "Selon {name}, il·elle est prêt·e à relever n\'importe quel défi pour vous.",
+            "Selon {name}, ses sentiments pour vous s\'approfondissent rapidement.",
+            "Selon {name}, il·elle est épuisé·e de garder ses sentiments pour vous, mais il·elle ne renonce pas.",
+            "Selon {name}, il·elle porte beaucoup pour vous, mais c\'est parce que c\'est vous, et ça lui convient.",
+            "Selon {name}, il·elle veut vous annoncer une nouvelle palpitante.",
+            "Selon {name}, il·elle veut vous faire part de ses sentiments avec audace.",
+            "Selon {name}, il·elle déborde de confiance devant vous.",
+            "Selon {name}, il·elle veut réaliser de grands rêves avec vous.",
+        ],
+        down: [
+            "Selon {name}, sa passion pour vous n\'a pas disparu — il·elle ne sait juste pas comment l\'exprimer.",
+            "Selon {name}, l\'avenir avec vous lui fait peur. Il·elle a peur de vous perdre.",
+            "Selon {name}, les résultats ne sont pas à la hauteur et il·elle s\'inquiète, mais n\'a pas l\'intention d\'abandonner.",
+            "Selon {name}, il·elle ressent une instabilité dans votre relation.",
+            "Selon {name}, il·elle veut éviter les conflits inutiles.",
+            "Selon {name}, il·elle est blessé·e de ne pas se sentir reconnu·e par vous.",
+            "Selon {name}, il·elle est épuisé·e et veut faire une pause. Ses sentiments ne changent pas.",
+            "Selon {name}, la situation avance lentement et il·elle trouve ça frustrant.",
+            "Selon {name}, il·elle est au bord du burn-out. Un mot de vous lui serait précieux.",
+            "Selon {name}, c\'est difficile à gérer seul·e. Il·elle veut s\'appuyer sur vous.",
+            "Selon {name}, il·elle a quelque chose à vous dire, mais ce n\'est pas encore le bon moment.",
+            "Selon {name}, il·elle regrette d\'avoir agi trop impulsivement.",
+            "Selon {name}, il·elle a perdu confiance devant vous. Il·elle veut la retrouver.",
+            "Selon {name}, il·elle veut s\'approcher de vous avec douceur.",
+        ]
+    },
+    cups: {
+        up: [
+            "Selon {name}, un nouveau sentiment est en train d\'éclore pour vous.",
+            "Selon {name}, il·elle ressent un lien profond avec vous.",
+            "Selon {name}, les moments passés avec vous sont les plus agréables.",
+            "Selon {name}, il·elle vient tout juste de réaliser à quel point vous lui êtes précieux·se.",
+            "Selon {name}, vous l\'avez blessé·e, mais c\'est ce qui lui a fait comprendre à quel point vous comptez.",
+            "Selon {name}, il·elle chérit précieusement les souvenirs avec vous.",
+            "Selon {name}, le vrai vous est encore mieux que l\'idéal qu\'il·elle s\'était imaginé.",
+            "Selon {name}, il·elle veut aller vers une relation plus profonde.",
+            "Selon {name}, il·elle a le sentiment que son vœu avec vous se réalise.",
+            "Selon {name}, être avec vous est un bonheur parfait.",
+            "Selon {name}, il·elle veut vous faire une déclaration sincère.",
+            "Selon {name}, il·elle veut s\'approcher de vous de façon romantique.",
+            "Selon {name}, il·elle connaît vos émotions sans que vous ayez besoin de les exprimer.",
+            "Selon {name}, il·elle veut grandir avec vous.",
+        ],
+        down: [
+            "Selon {name}, il·elle se sent émotionnellement vide. C\'est vous qui pouvez le·la combler.",
+            "Selon {name}, il·elle a l\'impression que l\'équilibre de la relation est rompu.",
+            "Selon {name}, il·elle s\'était laissé·e emporter par le plaisir et avait négligé l\'essentiel.",
+            "Selon {name}, il·elle commence à accepter de nouvelles opportunités.",
+            "Selon {name}, il·elle est en train de guérir d\'une tristesse passée. C\'est vous qui l\'avez aidé·e.",
+            "Selon {name}, il·elle s\'accrochait au passé. Maintenant, il·elle regarde devant.",
+            "Selon {name}, il·elle s\'est réveillé·e des illusions et commence à voir le vrai vous.",
+            "Selon {name}, il·elle sait qu\'il·elle doit partir, mais il lui reste des regrets.",
+            "Selon {name}, il·elle a compris que votre cœur compte plus que les biens matériels.",
+            "Selon {name}, il·elle a failli vous perdre à force de chercher la perfection.",
+            "Selon {name}, il·elle réfléchit à ses manques de maturité émotionnelle.",
+            "Selon {name}, il·elle veut vous voir tel·le que vous êtes vraiment.",
+            "Selon {name}, il·elle est submergé·e émotionnellement. Il·elle a besoin de votre stabilité.",
+            "Selon {name}, il·elle veut être honnête avec vous.",
+        ]
+    },
+    swords: {
+        up: [
+            "Selon {name}, il·elle a pris une décision claire à votre sujet.",
+            "Selon {name}, la réponse ne tardera pas.",
+            "Selon {name}, vous l\'avez blessé·e, mais cette douleur est devenue une croissance.",
+            "Selon {name}, il·elle se repose en pensant à vous.",
+            "Selon {name}, il·elle ne veut pas de querelles inutiles avec vous.",
+            "Selon {name}, il·elle traverse une période difficile pour venir vers vous.",
+            "Selon {name}, il·elle est décidé·e à s\'approcher de vous honnêtement désormais.",
+            "Selon {name}, il·elle essaie de démolir les murs qu\'il·elle s\'est construits pour venir vers vous.",
+            "Selon {name}, il·elle perd le sommeil à s\'inquiéter pour vous.",
+            "Selon {name}, il·elle a touché le fond mais se relève. C\'est grâce à vous.",
+            "Selon {name}, il·elle veut en apprendre davantage sur vous.",
+            "Selon {name}, il·elle ne veut plus hésiter.",
+            "Selon {name}, il·elle reconnaît votre vraie valeur.",
+            "Selon {name}, il·elle veut guider votre relation avec sagesse.",
+        ],
+        down: [
+            "Selon {name}, il·elle est dans la confusion.",
+            "Selon {name}, la réponse commence à se dessiner.",
+            "Selon {name}, il·elle est en train de guérir de ses blessures.",
+            "Selon {name}, il·elle aimerait que vous lui laissiez du repos.",
+            "Selon {name}, devant vous, il·elle peut se permettre d\'être vulnérable.",
+            "Selon {name}, il·elle acceptera le changement si c\'est avec vous.",
+            "Selon {name}, il·elle est décidé·e à s\'approcher de vous honnêtement désormais.",
+            "Selon {name}, il·elle commence à s\'affranchir des limites qu\'il·elle s\'est imposées.",
+            "Selon {name}, il·elle commence à lâcher les inquiétudes. C\'est grâce à vous.",
+            "Selon {name}, la pire période est en train de passer.",
+            "Selon {name}, il·elle vous dit de ne pas vous soucier des rumeurs légères.",
+            "Selon {name}, il·elle ira à son rythme.",
+            "Selon {name}, il·elle veut devenir plus chaleureux·se.",
+            "Selon {name}, il·elle veut aussi écouter votre avis.",
+        ]
+    },
+    pentacles: {
+        up: [
+            "Selon {name}, il·elle veut investir sérieusement dans votre relation.",
+            "Selon {name}, il·elle est occupé·e, mais vous êtes sa priorité.",
+            "Selon {name}, travailler avec vous donne les meilleurs résultats.",
+            "Selon {name}, il·elle veut protéger précieusement votre relation.",
+            "Selon {name}, c\'est une période difficile, mais votre proximité lui est un réconfort.",
+            "Selon {name}, il·elle veut vous donner sans compter.",
+            "Selon {name}, de bons résultats arriveront à coup sûr.",
+            "Selon {name}, il·elle s\'efforce de devenir une meilleure personne pour vous.",
+            "Selon {name}, il·elle veut construire une relation riche avec vous.",
+            "Selon {name}, il·elle veut rester avec vous pour très longtemps.",
+            "Selon {name}, il·elle veut apprendre à vous connaître petit à petit.",
+            "Selon {name}, il·elle avance lentement mais sûrement vers vous.",
+            "Selon {name}, il·elle veut trouver un équilibre à la fois pragmatique et chaleureux.",
+            "Selon {name}, il·elle veut remporter un grand succès avec vous.",
+        ],
+        down: [
+            "Selon {name}, il·elle regrette d\'avoir laissé passer une chance.",
+            "Selon {name}, c\'est vous qui l\'avez rattrapé·e.",
+            "Selon {name}, il·elle sera avec vous.",
+            "Selon {name}, il·elle apprendra à lâcher prise.",
+            "Selon {name}, la lumière du rétablissement est en vue.",
+            "Selon {name}, il·elle veut retrouver l\'équilibre.",
+            "Selon {name}, on y est presque. Il·elle vous dit de ne pas abandonner.",
+            "Selon {name}, vous lui avez apporté un nouveau souffle.",
+            "Selon {name}, si vous êtes à ses côtés, tout ira bien.",
+            "Selon {name}, votre relation compte plus que n\'importe quel bien matériel.",
+            "Selon {name}, il·elle va reprendre pied.",
+            "Selon {name}, il·elle s\'excuse d\'être lent·e, mais ses sentiments sont sincères.",
+            "Selon {name}, il·elle se remettra sur pied et reviendra vers vous.",
+            "Selon {name}, il·elle s\'approchera de vous avec toute sa sincérité.",
+        ]
+    }
+};
+
+function convertToOshi(card, name) {
+    const suitData = OSHI_MINOR[card.suit];
+    if (!suitData) return card.reversed ? card.down : card.up;
+    const idx = Math.min(card.num - 1, 13);
+    const texts = card.reversed ? suitData.down : suitData.up;
+    return (texts[idx] || texts[0]).replace(/\{name\}/g, name);
+}

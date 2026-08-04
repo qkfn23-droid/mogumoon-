@@ -254,3 +254,226 @@ down:'Falta de autocuidado, adicción al trabajo.'},
 up:'¡Éxito financiero y estabilidad! Habilidad para los negocios y liderazgo práctico. Cosechas una abundante recompensa.',
 down:'Avaricia, materialismo. El dinero no lo es todo.'}
 ];
+
+// ═══════════════════════════════════════
+// UI Textos (modificar solo esta sección al traducir)
+// ═══════════════════════════════════════
+const TAROT_UI = {
+    pageTitle: "🃏 Tarot",
+    pageSubtitle: "Saca una carta y lee tu destino",
+    modeNormal: "🃏 Tarot Normal",
+    modeOshi: "💜 Tarot Oshi",
+    spreadOne: "💫 <strong>Una carta</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Respuesta rápida · 1 carta</span>",
+    spreadThree: "⏳ <strong>Pasado · Presente · Futuro</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Flujo del tiempo · 3 cartas</span>",
+    spreadFive: "⭐ <strong>Lectura Profunda</strong> <span style=\"font-size:12px;color:#888;margin-left:8px;\">Análisis detallado · 5 cartas</span>",
+    questionText: "✨ Piensa en lo que quieres saber<br>y elige una carta ✨",
+    questionSub: "Las cartas las elige tu inconsciente",
+    oshiTitle: "💜 Escribe el nombre de tu oshi",
+    oshiPlaceholder: "Ej: Gojo Satoru, Levi, Kamina...",
+    oshiHint: "¡Cualquiera de anime, manga, juego o idol está bien!",
+    oshiQuestionText: "✨ Piensa en esa persona<br>y elige una carta ✨",
+    oshiQuestionSub: "Las cartas revelan los sentimientos ocultos de tu oshi",
+    btnShuffle: "🃏 Barajar cartas",
+    btnShuffleOshi: "💜 Barajar cartas",
+    btnReshuffle: "🔄 Barajar de nuevo",
+    pickInstruction: "Elige <strong>{n} carta(s)</strong>",
+    pickMore: "Elige <strong>{n} más</strong>",
+    pickDone: "✨ ¡Has elegido todas las cartas!",
+    disclaimer: "🃏 El tarot es una herramienta de entretenimiento y reflexión personal. Para decisiones importantes, consulta a un profesional.",
+    positions3: ["Pasado", "Presente", "Futuro"],
+    positions5: ["Situación actual", "Desafío/Obstáculo", "Influencia del pasado", "Futuro cercano", "Resultado final"],
+    oshiPositions3: ["Cuando te vio por primera vez", "Lo que piensa de ti ahora", "Lo que te deparará en el futuro"],
+    oshiPositions5: ["Primera impresión", "Lo que está ocultando", "Sus verdaderos sentimientos", "Lo que desea de ti", "El futuro de los dos"],
+    todayCard: "La carta del día",
+    oshiOneCard: "Lo que dice {name}",
+    reversed: "Invertida ↓",
+    upright: "Derecha ↑",
+    summaryTitle: "🃏 Interpretación general",
+    oshiSummaryTitle: "💜 Los sentimientos de {name} en conjunto",
+    summaryPositive: "Predomina la energía positiva. Ten confianza en ti mismo.",
+    summaryChallenge: "Es un período de desafíos, pero las cartas invertidas también indican crecimiento interior.",
+    oshiPositive: "Según {name}, en general tiene sentimientos positivos hacia ti. Dice que puedes abrirle tu corazón y acercarte.",
+    oshiChallenge: "Según {name}, está en medio de sentimientos complejos. Pero en lo más profundo de su corazón te valora. Dice que solo necesita tiempo.",
+    defaultOshiName: "esa persona",
+    suitLabels: {major:"Mayor", wands:"Bastos", cups:"Copas", swords:"Espadas", pentacles:"Oros"},
+    share: "Compartir:",
+    copyUrl: "Copiar URL",
+};
+
+// ═══════════════════════════════════════
+// Modo Oshi — Arcanos Mayores
+// ═══════════════════════════════════════
+const OSHI_READINGS = {
+    0: {up:"Según {name}, contigo se lanzaría a cualquier aventura. Siente una curiosidad pura hacia ti y se está acercando sin miedo.",down:"Según {name}, quiere acercarse pero todavía no está listo. Tiene ganas, pero está esperando el momento."},
+    1: {up:"Según {name}, sintió algo especial en ti desde el principio. Tu sola presencia le inspira.",down:"Según {name}, quiere mostrarte su corazón sincero pero no sabe cómo."},
+    2: {up:"Según {name}, aunque no lo dice, piensa mucho en ti. Te está observando en silencio.",down:"Según {name}, tiene sentimientos que te oculta. Solo es que aún no está listo para mostrarlos."},
+    3: {up:"Según {name}, se siente más a gusto cuando está contigo. Eres como un refugio para él.",down:"Según {name}, quiere apoyarse en ti pero el orgullo le impide hablar primero."},
+    4: {up:"Según {name}, quiere protegerte. Detrás de su imagen fuerte esconde un corazón cálido hacia ti.",down:"Según {name}, se arrepiente de haber sido demasiado duro contigo."},
+    5: {up:"Según {name}, te apoya de verdad en tu crecimiento.",down:"Según {name}, se ha dado cuenta de que la manera tradicional no llega hasta ti."},
+    6: {up:"Según {name}, siente algo especial por ti. Una atracción distinta a cualquier otra.",down:"Según {name}, siente un conflicto interno en la relación contigo. Pero en lo más profundo te desea."},
+    7: {up:"Según {name}, haría cualquier cosa por ti. Eres su motivación para seguir adelante.",down:"Según {name}, ha perdido el rumbo. Una sola palabra tuya podría ser de gran ayuda."},
+    8: {up:"Según {name}, le atraes por tu lado fuerte pero a la vez suave.",down:"Según {name}, le da miedo mostrarse débil ante ti."},
+    9: {up:"Según {name}, en sus momentos de soledad piensa en ti. Siente una profunda nostalgia.",down:"Según {name}, se está alejando a propósito, pero no es porque no le gustes. Solo necesita tiempo para ordenar sus sentimientos."},
+    10: {up:"Según {name}, siente que conocerte fue el destino.",down:"Según {name}, siente que el momento aún no es el correcto. Pero el hilo del destino no se ha roto."},
+    11: {up:"Según {name}, los sentimientos que tiene hacia ti son genuinos y sin mentiras.",down:"Según {name}, lamenta no haber sido justo contigo en el pasado."},
+    12: {up:"Según {name}, estaría dispuesto a sacrificarse por ti. Eres alguien tan valioso para él.",down:"Según {name}, está esperando a que seas tú quien tienda la mano primero."},
+    13: {up:"Según {name}, la relación contigo está pasando a una nueva etapa.",down:"Según {name}, quiere cerrar la relación anterior. Es un cambio para construir algo mejor."},
+    14: {up:"Según {name}, cuando está contigo su corazón se serena. Siente el equilibrio perfecto entre los dos.",down:"Según {name}, está intentando encontrar el equilibrio emocional."},
+    15: {up:"Según {name}, se siente fuertemente atraído hacia ti. Un atractivo al que no puede resistirse.",down:"Según {name}, intentó ordenar sus sentimientos hacia ti, pero no es fácil."},
+    16: {up:"Según {name}, tú cambiaste su visión del mundo.",down:"Según {name}, se ha dado cuenta de que los sentimientos que tiene por ti son completamente distintos a lo que esperaba."},
+    17: {up:"Según {name}, para él eres como una estrella en la oscuridad.",down:"Según {name}, perdió la esperanza por un momento, pero pensar en ti le da fuerzas para seguir."},
+    18: {up:"Según {name}, siente algo hacia ti que no puede expresar con palabras.",down:"Según {name}, los sentimientos que estaban confusos empiezan a ordenarse. Ha comprendido su verdadero corazón hacia ti."},
+    19: {up:"Según {name}, es más feliz cuando está contigo. Para él eres como el sol.",down:"Según {name}, quiere darte felicidad pero le cuesta expresarlo."},
+    20: {up:"Según {name}, siente que todo lo que vivió antes fue el camino para encontrarte.",down:"Según {name}, se arrepiente de no haberte tratado mejor en el pasado."},
+    21: {up:"Según {name}, siente que la relación contigo es perfecta. Son lo mejor el uno para el otro.",down:"Según {name}, siente que aún falta algo en la relación. Pero dice que están casi completos."}
+};
+
+// ═══════════════════════════════════════
+// Modo Oshi — Arcanos Menores (por palo)
+// ═══════════════════════════════════════
+const OSHI_MINOR = {
+    wands: {
+        up: [
+            "Según {name}, ha empezado a arder una nueva pasión hacia ti.",
+            "Según {name}, está pensando en serio en un futuro contigo.",
+            "Según {name}, el tiempo compartido contigo está dando frutos.",
+            "Según {name}, estar contigo es como estar en una fiesta.",
+            "Según {name}, quiere ser mejor persona por ti.",
+            "Según {name}, quiere ser reconocido por ti.",
+            "Según {name}, aceptaría cualquier desafío si es por ti.",
+            "Según {name}, sus sentimientos hacia ti se están profundizando rápidamente.",
+            "Según {name}, está agotado de proteger sus sentimientos hacia ti, pero no se rendirá.",
+            "Según {name}, está cargando mucho por ti, pero no le importa porque eres tú.",
+            "Según {name}, quiere contarte una noticia emocionante sobre ti.",
+            "Según {name}, quiere confesarle sus sentimientos con valentía.",
+            "Según {name}, se siente lleno de confianza cuando está frente a ti.",
+            "Según {name}, quiere alcanzar grandes sueños contigo.",
+        ],
+        down: [
+            "Según {name}, la pasión no se ha apagado, solo no sabe cómo expresarla.",
+            "Según {name}, le da miedo el futuro contigo. Le asusta perderte.",
+            "Según {name}, está inquieto porque los resultados no son los esperados, pero no tiene intención de rendirse.",
+            "Según {name}, siente inestabilidad en la relación contigo.",
+            "Según {name}, quiere evitar conflictos innecesarios.",
+            "Según {name}, le duele sentir que no está siendo reconocido por ti.",
+            "Según {name}, está cansado y necesita descansar un momento. Sus sentimientos no cambian.",
+            "Según {name}, le frustra que las cosas avancen despacio.",
+            "Según {name}, está al borde del agotamiento. Necesita una palabra tuya.",
+            "Según {name}, le cuesta llevarlo solo. Quiere apoyarse en ti.",
+            "Según {name}, tiene algo que decirte pero todavía no es el momento.",
+            "Según {name}, se arrepiente de haber actuado de forma precipitada.",
+            "Según {name}, perdió la confianza ante ti. Quiere recuperarla.",
+            "Según {name}, quiere acercarse a ti con suavidad.",
+        ]
+    },
+    cups: {
+        up: [
+            "Según {name}, están floreciendo nuevas emociones hacia ti.",
+            "Según {name}, siente un profundo vínculo contigo.",
+            "Según {name}, el tiempo que pasa contigo es el que más disfruta.",
+            "Según {name}, acaba de darse cuenta de lo valioso que eres para él.",
+            "Según {name}, sufrió por tu causa, pero eso le hizo ver cuánto te aprecia.",
+            "Según {name}, guarda con cariño los recuerdos que tiene contigo.",
+            "Según {name}, el tú real le gusta más que cualquier fantasía.",
+            "Según {name}, quiere avanzar hacia una relación más profunda.",
+            "Según {name}, siente que su deseo de estar contigo se está cumpliendo.",
+            "Según {name}, estar contigo es la felicidad perfecta.",
+            "Según {name}, quiere hacerte una confesión sincera.",
+            "Según {name}, quiere acercarse a ti de forma romántica.",
+            "Según {name}, conoce tus sentimientos sin que lo digas.",
+            "Según {name}, quiere crecer contigo.",
+        ],
+        down: [
+            "Según {name}, se siente emocionalmente vacío. Dice que tú puedes llenarlo.",
+            "Según {name}, siente que el equilibrio de la relación se ha roto.",
+            "Según {name}, estaba dejando escapar lo importante por los placeres.",
+            "Según {name}, ha empezado a aceptar nuevas oportunidades.",
+            "Según {name}, está saliendo de la tristeza del pasado. Dice que tú le has sanado.",
+            "Según {name}, reconoce que estaba aferrado al pasado. Ahora mirará al frente.",
+            "Según {name}, ha despertado de las ilusiones y ha empezado a verte tal como eres.",
+            "Según {name}, sabe que debería irse pero le queda nostalgia.",
+            "Según {name}, se ha dado cuenta de que tu corazón importa más que lo material.",
+            "Según {name}, estuvo a punto de perderte por buscar la perfección.",
+            "Según {name}, reflexiona sobre su inmadurez emocional.",
+            "Según {name}, quiere verte tal como eres.",
+            "Según {name}, le cuesta estar abrumado por las emociones. Necesita tu serenidad.",
+            "Según {name}, quiere ser honesto contigo.",
+        ]
+    },
+    swords: {
+        up: [
+            "Según {name}, ha llegado a una conclusión clara sobre ti.",
+            "Según {name}, pronto tendrá una respuesta.",
+            "Según {name}, sufrió por ti, pero ese dolor se convirtió en crecimiento.",
+            "Según {name}, descansa pensando en ti.",
+            "Según {name}, no quiere tener peleas innecesarias contigo.",
+            "Según {name}, está pasando por un período difícil para acercarse a ti.",
+            "Según {name}, a partir de ahora se acercará con honestidad.",
+            "Según {name}, está intentando derribar el muro que él mismo construyó para acercarse a ti.",
+            "Según {name}, no puede dormir de preocupación por ti.",
+            "Según {name}, tocó fondo pero está levantándose. Dice que tú eres la razón.",
+            "Según {name}, quiere conocerte más.",
+            "Según {name}, ya no va a dudar más.",
+            "Según {name}, está reconociendo tu verdadero valor.",
+            "Según {name}, quiere guiar la relación contigo con sabiduría.",
+        ],
+        down: [
+            "Según {name}, está confundido.",
+            "Según {name}, ha empezado a ver la respuesta.",
+            "Según {name}, está recuperándose de una herida.",
+            "Según {name}, desearía que le dejaras descansar.",
+            "Según {name}, está bien mostrarse débil ante ti.",
+            "Según {name}, aceptará el cambio si estás tú a su lado.",
+            "Según {name}, a partir de ahora se acercará con honestidad.",
+            "Según {name}, ha empezado a liberarse de los límites que él mismo se impuso.",
+            "Según {name}, ha empezado a soltar las preocupaciones. Dice que es gracias a ti.",
+            "Según {name}, lo peor ya está pasando.",
+            "Según {name}, dice que no hagas caso a los rumores sin importancia.",
+            "Según {name}, irá poco a poco.",
+            "Según {name}, quiere sentir calor.",
+            "Según {name}, también quiere escuchar tu opinión.",
+        ]
+    },
+    pentacles: {
+        up: [
+            "Según {name}, quiere invertir en serio en la relación contigo.",
+            "Según {name}, aunque está ocupado, tú eres la prioridad.",
+            "Según {name}, trabajar contigo produce los mejores resultados.",
+            "Según {name}, quiere proteger la relación contigo de forma segura.",
+            "Según {name}, en este período difícil le consuela que estés cerca.",
+            "Según {name}, quiere darte todo sin escatimar.",
+            "Según {name}, seguro que vendrán buenos resultados.",
+            "Según {name}, está esforzándose por ser mejor persona para ti.",
+            "Según {name}, quiere construir una relación próspera contigo.",
+            "Según {name}, quiere estar contigo por mucho tiempo.",
+            "Según {name}, quiere conocerte poco a poco.",
+            "Según {name}, se está acercando lento pero seguro.",
+            "Según {name}, quiere encontrar un equilibrio a la vez práctico y cálido.",
+            "Según {name}, quiere alcanzar un gran éxito contigo.",
+        ],
+        down: [
+            "Según {name}, lamenta haber perdido la oportunidad.",
+            "Según {name}, dice que tú le detuviste cuando iba a caer.",
+            "Según {name}, dice que estará contigo.",
+            "Según {name}, aprenderá a soltar.",
+            "Según {name}, ve la luz de la recuperación.",
+            "Según {name}, quiere volver a encontrar el equilibrio.",
+            "Según {name}, ya casi han llegado. Dice que no te rindas.",
+            "Según {name}, tú le has dado un nuevo impulso.",
+            "Según {name}, si estás a su lado, estará bien.",
+            "Según {name}, la relación contigo importa más que lo material.",
+            "Según {name}, pondrá los pies en la tierra.",
+            "Según {name}, lo siente por ir lento, pero sus sentimientos son seguros.",
+            "Según {name}, se recuperará y volverá a ti.",
+            "Según {name}, se acercará a ti de corazón.",
+        ]
+    }
+};
+
+function convertToOshi(card, name) {
+    const suitData = OSHI_MINOR[card.suit];
+    if (!suitData) return card.reversed ? card.down : card.up;
+    const idx = Math.min(card.num - 1, 13);
+    const texts = card.reversed ? suitData.down : suitData.up;
+    return (texts[idx] || texts[0]).replace(/\{name\}/g, name);
+}

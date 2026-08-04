@@ -254,3 +254,226 @@ down:'Lack of self-care, workaholic tendencies.'},
 up:'Financial success and stability! Business acumen and practical leadership. Reaping abundant results.',
 down:'Greed, worship of money. Money is not everything.'}
 ];
+
+// ═══════════════════════════════════════
+// UI Text
+// ═══════════════════════════════════════
+const TAROT_UI = {
+    pageTitle: "🃏 Tarot Cards",
+    pageSubtitle: "Draw a card and read your destiny",
+    modeNormal: "🃏 Normal Tarot",
+    modeOshi: "💜 Oshi Tarot",
+    spreadOne: '💫 <strong>One Card</strong> <span style="font-size:12px;color:#888;margin-left:8px;">Quick answer · 1 card</span>',
+    spreadThree: '⏳ <strong>Past · Present · Future</strong> <span style="font-size:12px;color:#888;margin-left:8px;">Flow of time · 3 cards</span>',
+    spreadFive: '⭐ <strong>In-Depth Reading</strong> <span style="font-size:12px;color:#888;margin-left:8px;">Detailed analysis · 5 cards</span>',
+    questionText: "✨ Hold your question in mind<br>and choose your cards ✨",
+    questionSub: "The cards are chosen by your subconscious",
+    oshiTitle: "💜 Enter your oshi's name",
+    oshiPlaceholder: "e.g. Gojo Satoru, Levi, Kamina...",
+    oshiHint: "Anime / manga / game / idol — anyone is OK!",
+    oshiQuestionText: "✨ Picture that person in your mind<br>and choose your cards ✨",
+    oshiQuestionSub: "The cards reveal your oshi's hidden feelings",
+    btnShuffle: "🃏 Shuffle Cards",
+    btnShuffleOshi: "💜 Shuffle Cards",
+    btnReshuffle: "🔄 Shuffle Again",
+    pickInstruction: "Choose <strong>{n} cards</strong>",
+    pickMore: "Choose <strong>{n} more</strong>",
+    pickDone: "✨ All cards have been selected!",
+    disclaimer: "🃏 Tarot is a tool for fun and self-reflection. For important decisions, consult a professional.",
+    positions3: ["Past", "Present", "Future"],
+    positions5: ["Current Situation", "Challenge / Obstacle", "Past Influence", "Near Future", "Final Outcome"],
+    oshiPositions3: ["When they first saw you", "How they feel about you now", "What they'll do for you"],
+    oshiPositions5: ["First impression", "What they're hiding", "Their true feelings", "What they want from you", "Where you two are headed"],
+    todayCard: "Today's Card",
+    oshiOneCard: "{name}'s Message",
+    reversed: "Reversed ↓",
+    upright: "Upright ↑",
+    summaryTitle: "🃏 Overall Reading",
+    oshiSummaryTitle: "💜 {name}'s Overall Feelings",
+    summaryPositive: "Positive energy is dominant. Have confidence in yourself.",
+    summaryChallenge: "It's a challenging time, but reversed cards can also signify inner growth.",
+    oshiPositive: "According to {name}, they hold positive feelings toward you overall. It seems like a good time to open your heart and reach out.",
+    oshiChallenge: "According to {name}, they're in the midst of complex emotions. But deep down, they hold you dear. They just need a little more time.",
+    defaultOshiName: "That Person",
+    suitLabels: {major:"Major",wands:"Wands",cups:"Cups",swords:"Swords",pentacles:"Pentacles"},
+    share: "Share:",
+    copyUrl: "Copy URL",
+};
+
+// ═══════════════════════════════════════
+// Oshi Mode Readings — Major Arcana
+// ═══════════════════════════════════════
+const OSHI_READINGS = {
+    0: {up:"According to {name}, they could set off on any adventure as long as you're with them. They feel a pure curiosity toward you and are approaching without fear.",down:"According to {name}, they want to get closer to you but aren't ready yet. The feelings are there, but they're waiting for the right timing."},
+    1: {up:"According to {name}, they felt something special about you. Your very presence is an inspiration to them.",down:"According to {name}, they want to show you their true self but don't know how."},
+    2: {up:"According to {name}, they don't say it out loud, but they think about you a lot. They're watching over you quietly.",down:"According to {name}, there are feelings they're hiding from you. They're just not ready to reveal them yet."},
+    3: {up:"According to {name}, they feel most at ease when they're with you. You're like a sanctuary to them.",down:"According to {name}, they want to lean on you but their pride keeps them from saying it first."},
+    4: {up:"According to {name}, they want to protect you. Behind their strong exterior, they're hiding a warm heart for you.",down:"According to {name}, they regret having been too hard on you."},
+    5: {up:"According to {name}, they're sincerely rooting for your growth.",down:"According to {name}, they've realized the old way of doing things can't reach you."},
+    6: {up:"According to {name}, they hold special feelings for you. They feel an attraction unlike anything they've felt for anyone else.",down:"According to {name}, they feel conflicted about your relationship. But deep in their heart, they want you."},
+    7: {up:"According to {name}, they'd do anything for you. You're the driving force that keeps them moving forward.",down:"According to {name}, they've lost their direction and are wandering. A single word from you could make all the difference."},
+    8: {up:"According to {name}, they're drawn to your strength combined with your gentleness.",down:"According to {name}, they're afraid of showing their weak side in front of you."},
+    9: {up:"According to {name}, they think of you during their time alone. They feel a deep longing.",down:"According to {name}, they're keeping their distance on purpose — but it's not because they dislike you. They just need time to sort themselves out."},
+    10: {up:"According to {name}, they feel that meeting you was fate.",down:"According to {name}, they feel the timing isn't right just now. But the thread of fate between you hasn't been cut."},
+    11: {up:"According to {name}, they hold nothing but an honest heart toward you.",down:"According to {name}, they're sorry for not being fair to you in the past."},
+    12: {up:"According to {name}, they'd willingly sacrifice for you. That's how precious you are to them.",down:"According to {name}, they're waiting for you to reach out your hand first."},
+    13: {up:"According to {name}, the relationship with you is moving into a new phase.",down:"According to {name}, they want to put the old dynamic behind them. It's a change that leads to something better."},
+    14: {up:"According to {name}, their heart feels calm when they're with you. They sense a balance that's just right for both of you.",down:"According to {name}, they're working to find their emotional balance."},
+    15: {up:"According to {name}, they're strongly drawn to you. They feel an attraction they can't resist.",down:"According to {name}, they tried to sort out their feelings for you, but it's not easy."},
+    16: {up:"According to {name}, you've changed their entire worldview.",down:"According to {name}, they've realized their feelings for you were completely different from what they expected."},
+    17: {up:"According to {name}, you're like a star in the darkness to them.",down:"According to {name}, they lost hope for a moment — but thinking of you gives them the strength to keep going."},
+    18: {up:"According to {name}, they feel something about you that they can't put into words.",down:"According to {name}, the confusion they felt has started to clear. They've realized their true feelings for you."},
+    19: {up:"According to {name}, they're happiest when they're with you. You're like the sun to them.",down:"According to {name}, they want to bring you happiness but they're not good at showing it."},
+    20: {up:"According to {name}, they feel that everything in the past was a journey leading them to you.",down:"According to {name}, they regret not treating you better in the past."},
+    21: {up:"According to {name}, they feel like their relationship with you is perfect. You're each other's greatest presence.",down:"According to {name}, they still feel something is lacking in your relationship. But they say it's almost complete."}
+};
+
+// ═══════════════════════════════════════
+// Oshi Mode Readings — Minor Arcana (by suit)
+// ═══════════════════════════════════════
+const OSHI_MINOR = {
+    wands: {
+        up: [
+            "According to {name}, a new passion for you has begun to burn.",
+            "According to {name}, they're seriously picturing a future with you.",
+            "According to {name}, the time you've shared together is bearing fruit.",
+            "According to {name}, being with you feels like a celebration.",
+            "According to {name}, you make them want to become a better person.",
+            "According to {name}, they want to be recognized by you.",
+            "According to {name}, they'd take on any challenge for you.",
+            "According to {name}, their feelings for you are deepening rapidly.",
+            "According to {name}, they're exhausted from protecting their heart for you — but they won't give up.",
+            "According to {name}, they're carrying a lot for you — but because it's you, it's okay.",
+            "According to {name}, they want to share some exciting news about you.",
+            "According to {name}, they want to boldly tell you how they feel.",
+            "According to {name}, they feel full of confidence when they're around you.",
+            "According to {name}, they want to achieve great things together with you.",
+        ],
+        down: [
+            "According to {name}, their passion for you hasn't faded — they just don't know how to express it.",
+            "According to {name}, the future with you frightens them. They're afraid of losing you.",
+            "According to {name}, things aren't going as well as hoped, but they have no intention of giving up.",
+            "According to {name}, they feel a sense of instability in your relationship.",
+            "According to {name}, they want to avoid unnecessary conflict.",
+            "According to {name}, they're hurt by the feeling that you don't recognize them.",
+            "According to {name}, they're tired and need a break. Their feelings haven't changed.",
+            "According to {name}, they're frustrated that things are moving slowly.",
+            "According to {name}, they're on the verge of burnout. They need a word from you.",
+            "According to {name}, it's hard to handle alone. They want to lean on you.",
+            "According to {name}, there's something they want to tell you, but the time isn't right yet.",
+            "According to {name}, they regret acting too hastily.",
+            "According to {name}, they've lost confidence around you. They want to find it again.",
+            "According to {name}, they want to approach you more gently.",
+        ]
+    },
+    cups: {
+        up: [
+            "According to {name}, new feelings for you are blossoming.",
+            "According to {name}, they feel a deep bond with you.",
+            "According to {name}, the time they spend with you is the most enjoyable.",
+            "According to {name}, they've finally realized how precious you are.",
+            "According to {name}, you hurt them — but that's how they learned how precious you are.",
+            "According to {name}, they cherish every memory they have with you.",
+            "According to {name}, the real you is better than any fantasy.",
+            "According to {name}, they want to take things to a deeper level.",
+            "According to {name}, they feel like their wish about you is coming true.",
+            "According to {name}, being with you is perfect happiness.",
+            "According to {name}, they want to make a heartfelt confession to you.",
+            "According to {name}, they want to approach you in a romantic way.",
+            "According to {name}, they know what you're feeling without you having to say it.",
+            "According to {name}, they want to grow alongside you.",
+        ],
+        down: [
+            "According to {name}, they feel emotionally empty. They say you could fill that void.",
+            "According to {name}, it feels like the balance in the relationship has broken down.",
+            "According to {name}, they were so caught up in having fun that they missed something important.",
+            "According to {name}, they've started to accept new opportunities.",
+            "According to {name}, they're moving past the sadness of the past. They say you helped heal them.",
+            "According to {name}, they were clinging to the past. They say they'll look forward now.",
+            "According to {name}, they've woken from a fantasy and started seeing the real you.",
+            "According to {name}, they know they should let go, but they still have lingering feelings.",
+            "According to {name}, they've realized your heart matters more than material things.",
+            "According to {name}, they almost lost you by chasing perfection.",
+            "According to {name}, they're reflecting on how emotionally immature they were.",
+            "According to {name}, they're going to see you as you truly are.",
+            "According to {name}, they're overwhelmed by their emotions. They need your steadiness.",
+            "According to {name}, they want to be honest with you.",
+        ]
+    },
+    swords: {
+        up: [
+            "According to {name}, they've reached a definite conclusion about you.",
+            "According to {name}, an answer is coming soon.",
+            "According to {name}, you hurt them — but that pain became their growth.",
+            "According to {name}, they're resting while thinking of you.",
+            "According to {name}, they don't want any unnecessary arguments with you.",
+            "According to {name}, they're making their way through a hard period to reach you.",
+            "According to {name}, they're going to approach you honestly from now on.",
+            "According to {name}, they're trying to tear down the walls they built and get closer to you.",
+            "According to {name}, they're losing sleep worrying about you.",
+            "According to {name}, they hit rock bottom but they're getting back up. You're the reason why.",
+            "According to {name}, they want to know more about you.",
+            "According to {name}, they won't hesitate any longer.",
+            "According to {name}, they're seeing your true worth.",
+            "According to {name}, they want to guide your relationship with wisdom.",
+        ],
+        down: [
+            "According to {name}, they're feeling confused.",
+            "According to {name}, they're starting to see an answer.",
+            "According to {name}, they're recovering from a wound.",
+            "According to {name}, they want you to let them rest.",
+            "According to {name}, it's okay to be vulnerable in front of you.",
+            "According to {name}, they'll accept change as long as you're with them.",
+            "According to {name}, they're going to approach you honestly from now on.",
+            "According to {name}, they've started breaking free from the limits they set for themselves.",
+            "According to {name}, they've started letting go of worry. They say it's thanks to you.",
+            "According to {name}, the worst period is passing.",
+            "According to {name}, you shouldn't worry about idle rumors.",
+            "According to {name}, they're going to take things slowly.",
+            "According to {name}, they want to be warmer.",
+            "According to {name}, they want to hear your thoughts too.",
+        ]
+    },
+    pentacles: {
+        up: [
+            "According to {name}, they want to invest seriously in the relationship with you.",
+            "According to {name}, they're busy — but you come first.",
+            "According to {name}, working with you brings out the best results.",
+            "According to {name}, they want to keep your relationship safe and secure.",
+            "According to {name}, it's a tough time, but having you nearby is a comfort.",
+            "According to {name}, they want to give to you without holding back.",
+            "According to {name}, a good outcome will definitely come.",
+            "According to {name}, they're working to become a better person for you.",
+            "According to {name}, they want to build a rich and fulfilling relationship with you.",
+            "According to {name}, they want to be with you for a long, long time.",
+            "According to {name}, they want to get to know you slowly.",
+            "According to {name}, they're making their way toward you slowly but surely.",
+            "According to {name}, they want to find a balance that's both practical and warm.",
+            "According to {name}, they want to achieve great success together with you.",
+        ],
+        down: [
+            "According to {name}, they're sad about the opportunity they feel they missed.",
+            "According to {name}, they say you caught them.",
+            "According to {name}, they're going to stay by your side.",
+            "According to {name}, they're going to learn how to let go.",
+            "According to {name}, they can see the light of recovery.",
+            "According to {name}, they want to restore the balance.",
+            "According to {name}, they're almost there. They say don't give up.",
+            "According to {name}, you've become a new source of inspiration for them.",
+            "According to {name}, they'll be okay if you're by their side.",
+            "According to {name}, your relationship matters more to them than anything material.",
+            "According to {name}, they're going to keep their feet on the ground.",
+            "According to {name}, they're sorry for being slow — but their feelings are certain.",
+            "According to {name}, they're going to get healthy and come back to you.",
+            "According to {name}, they're going to approach you with a sincere heart.",
+        ]
+    }
+};
+
+function convertToOshi(card, name) {
+    const suitData = OSHI_MINOR[card.suit];
+    if (!suitData) return card.reversed ? card.down : card.up;
+    const idx = Math.min(card.num - 1, 13);
+    const texts = card.reversed ? suitData.down : suitData.up;
+    return (texts[idx] || texts[0]).replace(/\{name\}/g, name);
+}
