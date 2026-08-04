@@ -92,8 +92,15 @@
         <button class="spread-btn" onclick="setSpread(5)">5장</button>
     </div>
 
-    <div class="question-box">
-        <input type="text" id="question" placeholder="질문을 마음속에 품고... (선택)">
+    <div class="question-box" id="questionBox">
+        <div style="font-size:13px;color:#9b59b6;margin-bottom:10px;">무엇이 궁금한가요?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;" id="topicBtns">
+            <button onclick="setTopic(this,'연애')" class="topic-btn" style="padding:8px 16px;border:1px solid #3a2550;border-radius:20px;background:transparent;color:#c39bd3;font-size:13px;cursor:pointer;">💕 연애/사랑</button>
+            <button onclick="setTopic(this,'직업')" class="topic-btn" style="padding:8px 16px;border:1px solid #3a2550;border-radius:20px;background:transparent;color:#c39bd3;font-size:13px;cursor:pointer;">💼 직업/진로</button>
+            <button onclick="setTopic(this,'재물')" class="topic-btn" style="padding:8px 16px;border:1px solid #3a2550;border-radius:20px;background:transparent;color:#c39bd3;font-size:13px;cursor:pointer;">💰 재물/금전</button>
+            <button onclick="setTopic(this,'오늘')" class="topic-btn" style="padding:8px 16px;border:1px solid #3a2550;border-radius:20px;background:transparent;color:#c39bd3;font-size:13px;cursor:pointer;">🎯 오늘의 운세</button>
+            <button onclick="setTopic(this,'결정')" class="topic-btn" style="padding:8px 16px;border:1px solid #3a2550;border-radius:20px;background:transparent;color:#c39bd3;font-size:13px;cursor:pointer;">🤔 예/아니오</button>
+        </div>
     </div>
 
     <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 카드 섞기</button>
@@ -176,6 +183,15 @@ const OSHI_READINGS = {
     21: {up:'🌍 당신과 {name}의 관계는 완벽합니다! 서로에게 최고의 존재. 이보다 좋을 수 없어요.',down:'{name}은(는) 당신과의 관계에서 아직 한 조각이 부족하다고 느끼고 있어요. 하지만 거의 완성에 가까워요.'}
 };
 
+let selectedTopic = '오늘';
+
+function setTopic(btn, topic) {
+    selectedTopic = topic;
+    document.querySelectorAll('.topic-btn').forEach(b => { b.style.background = 'transparent'; b.style.color = '#c39bd3'; });
+    btn.style.background = '#9b59b6';
+    btn.style.color = '#fff';
+}
+
 function setMode(m) {
     mode = m;
     const btns = document.querySelectorAll('.mode-btn');
@@ -184,8 +200,8 @@ function setMode(m) {
     btns[1].style.background = m === 'oshi' ? '#9b59b6' : 'transparent';
     btns[1].style.color = m === 'oshi' ? '#fff' : '#9b59b6';
     document.getElementById('oshiBox').style.display = m === 'oshi' ? 'block' : 'none';
-    document.getElementById('question').placeholder = m === 'oshi' ? '최애에게 묻고 싶은 것... (선택)' : '질문을 마음속에 품고... (선택)';
-    document.querySelector('.draw-btn').innerHTML = m === 'oshi' ? '💜 최애 카드 뽑기' : '🔮 카드 뽑기';
+    document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
+    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🔮 카드 섞기';
 }
 
 function setSpread(n) {
