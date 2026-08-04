@@ -48,7 +48,8 @@
         .card-front .card-name { font-size: 13px; color: #c39bd3; font-weight: 700; text-align: center; margin-bottom: 4px; }
         .card-front .card-number { font-size: 11px; color: #777; }
         .card-front .card-direction { font-size: 10px; color: #e74c3c; margin-top: 4px; }
-        .card-front.reversed { transform: rotateY(180deg) rotate(180deg); }
+        .card-front.reversed { transform: rotateY(180deg); }
+        .card-front.reversed .card-direction { color: #e74c3c; font-weight: 700; }
 
         .tarot-card:hover:not(.flipped):not(.dimmed) { box-shadow: 0 0 12px rgba(155,89,182,0.4); }
         .tarot-card.dimmed { opacity: 0.2; pointer-events: none; filter: grayscale(1); }
