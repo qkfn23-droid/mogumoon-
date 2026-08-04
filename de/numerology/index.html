@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerologie - Lebenszahl · Ausdruckszahl · Herzenszahl | MOGU Moon</title>
+    <meta name="description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl mit deinem Geburtsdatum und Namen.">
+    <link rel="canonical" href="https://mogumoon.com/de/numerology/">
+    <meta property="og:title" content="Numerologie - Lebenszahl · Ausdruckszahl · Herzenszahl | MOGU Moon">
+    <meta property="og:description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/de/numerology/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Was ist Numerologie?","acceptedAnswer":{"@type":"Answer","text":"Numerologie ist eine alte Wissenschaft, die Persoenlichkeit und Schicksal durch die Bedeutung von Zahlen analysiert. Sie wurde von Pythagoras systematisiert."}},
+        {"@type":"Question","name":"Was ist die Lebenszahl (Life Path Number)?","acceptedAnswer":{"@type":"Answer","text":"Es ist die Summe aller Ziffern des Geburtsdatums, reduziert auf eine einzelne Ziffer. Sie zeigt die grosse Richtung und den Zweck deines Lebens an."}},
+        {"@type":"Question","name":"Was sind Meisterzahlen?","acceptedAnswer":{"@type":"Answer","text":"11, 22 und 33 sind Meisterzahlen, die nicht weiter reduziert werden. Es sind machtvolle Zahlen mit einer besonderen spirituellen Aufgabe."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #c9a84c; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .form-row { margin-bottom: 16px; }
+        .form-row label { display: block; font-size: 13px; color: #c9a84c; margin-bottom: 6px; font-weight: 600; }
+        .form-row input, .form-row select { width: 100%; padding: 12px; background: #0a0a1a; border: 1px solid #3a2550; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; }
+        .form-row input:focus, .form-row select:focus { border-color: #c9a84c; }
+        .form-row input::placeholder { color: #555; }
+        .form-hint { font-size: 11px; color: #666; margin-top: 4px; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #b8860b, #c9a84c); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+
+        .result-section { display: none; }
+        .result-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .result-number { font-size: 36px; font-weight: 900; color: #c9a84c; min-width: 50px; text-align: center; }
+        .result-label { font-size: 14px; color: #c9a84c; font-weight: 600; }
+        .result-sublabel { font-size: 11px; color: #888; }
+        .result-text { font-size: 14px; color: #999; line-height: 1.7; }
+        .result-text strong { color: #c9a84c; }
+        .result-calc { font-size: 12px; color: #666; margin-bottom: 10px; font-family: monospace; }
+        .master-badge { display: inline-block; background: rgba(201,168,76,0.2); color: #c9a84c; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-left: 8px; border: 1px solid rgba(201,168,76,0.3); }
+
+        .number-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .number-cell { text-align: center; padding: 16px 8px; background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 10px; }
+        .number-cell .num { font-size: 28px; font-weight: 900; color: #c9a84c; }
+        .number-cell .label { font-size: 11px; color: #888; margin-top: 4px; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🔢 Numerologie</h2>
+        <p>Entdecke dein Schicksal durch die Kraft der Zahlen</p>
+    </div>
+
+    <div class="form-box">
+        <div class="form-row">
+            <label>Geburtsdatum</label>
+            <div style="display:flex;gap:10px;">
+                <select id="birthYear" style="flex:2;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%23c9a84c%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;cursor:pointer;">
+                </select>
+                <select id="birthMonth" style="flex:1;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%23c9a84c%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;cursor:pointer;">
+                </select>
+                <select id="birthDay" style="flex:1;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%23c9a84c%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;cursor:pointer;">
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label>Vollstaendiger Name (Full Name) <span style="font-size:11px;color:#666;font-weight:400;">optional</span></label>
+            <input type="text" id="fullName" placeholder="z.B. Max Mustermann" style="text-transform:uppercase;">
+            <div class="form-hint">Gib deinen Namen in lateinischen Buchstaben ein. Wird fuer die Berechnung von Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl verwendet.</div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">🔢 Numerologie analysieren</button>
+
+    <div id="resultSection" class="result-section">
+        <div class="number-grid" id="numberGrid"></div>
+        <div id="resultCards"></div>
+    </div>
+
+    <div class="disclaimer">🔢 Numerologie ist ein Werkzeug zur Selbsterkenntnis und Reflexion. Konsultiere bei wichtigen Entscheidungen einen Fachmann.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #3a2540;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Teilen:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Kopiert!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL kopieren</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// Pythagoraische Numerologie — Alphabet-Zahlen-Zuordnung
+const LETTER_MAP = {
+    A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,
+    J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,
+    S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8
+};
+const VOWELS = new Set("AEIOU");
+
+// Reduzieren unter Beibehaltung der Meisterzahlen
+function reduceNum(n) {
+    while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+        n = String(n).split("").reduce((s, d) => s + Number(d), 0);
+    }
+    return n;
+}
+
+// Lebenszahl (Life Path) — Jahr/Monat/Tag einzeln reduzieren und addieren
+function lifePathNumber(y, m, d) {
+    const ry = reduceNum(y);
+    const rm = reduceNum(m);
+    const rd = reduceNum(d);
+    return reduceNum(ry + rm + rd);
+}
+
+// Geburtstagszahl (Birthday Number)
+function birthdayNumber(d) {
+    return reduceNum(d);
+}
+
+// Ausdruckszahl (Expression/Destiny) — Summe aller Buchstaben des Namens
+function expressionNumber(name) {
+    const letters = name.toUpperCase().replace(/[^A-Z]/g, "");
+    if (!letters) return null;
+    const sum = letters.split("").reduce((s, c) => s + (LETTER_MAP[c] || 0), 0);
+    return reduceNum(sum);
+}
+
+// Herzenszahl (Soul Urge) — nur Vokale
+function soulUrgeNumber(name) {
+    const letters = name.toUpperCase().replace(/[^A-Z]/g, "");
+    if (!letters) return null;
+    const sum = letters.split("").filter(c => VOWELS.has(c)).reduce((s, c) => s + (LETTER_MAP[c] || 0), 0);
+    return reduceNum(sum);
+}
+
+// Persoenlichkeitszahl (Personality) — nur Konsonanten
+function personalityNumber(name) {
+    const letters = name.toUpperCase().replace(/[^A-Z]/g, "");
+    if (!letters) return null;
+    const sum = letters.split("").filter(c => !VOWELS.has(c)).reduce((s, c) => s + (LETTER_MAP[c] || 0), 0);
+    return reduceNum(sum);
+}
+
+// Reifezahl (Maturity) — Lebenszahl + Ausdruckszahl
+function maturityNumber(lp, expr) {
+    if (expr === null) return null;
+    return reduceNum(lp + expr);
+}
+
+const MASTER = {11: true, 22: true, 33: true};
+
+const LIFE_PATH = {
+    1: {title:"Fuehrungsperson · Pionier", text:"Du bist eine unabhaengige, ehrgeizige Person, die neue Wege ebnet. Dein starker Wille und deine Originalitaet fuehren die Menschen um dich herum. Dein Selbstvertrauen ist maechtig, obwohl du manchmal stur wirken kannst. Du hast die Kraft, Dinge allein zu erreichen, aber wenn du lernst zusammenzuarbeiten, wirst du noch groesseren Erfolg haben."},
+    2: {title:"Harmonie · Diplomat", text:"Du bist sanft, sensibel und kannst die Gefuehle anderer gut lesen. Du glaenzt als Vermittler und strahlst in Kooperation und Partnerschaften. Du hast eine starke Tendenz, Konflikte zu vermeiden, und liebst den Frieden. Deine Intuition ist scharf und du kannst die Wahrheit hinter den Menschen sehen."},
+    3: {title:"Ausdruck · Kuenstler", text:"Du bist kreativ, optimistisch und sehr gesellig. Du hast das Talent, Menschen durch Worte und Schrift zu inspirieren. Du strahlst in Kunst, Schreiben und Schauspielerei. Deine Energie neigt jedoch dazu, sich zu zerstreuen, daher ist Konzentration notwendig."},
+    4: {title:"Aufbau · Pragmatiker", text:"Du bist fleissig, systematisch und zuverlassig. Du bist geschickt darin, solide Grundlagen zu schaffen und mit Beharrlichkeit Grosses zu erreichen. Du schatzt Regeln und Ordnung und strebst nach Stabilitaet. Fuerchte dich nicht vor Veraenderungen und entwickle Flexibilitaet, um noch mehr zu wachsen."},
+    5: {title:"Freiheit · Abenteurer", text:"Du liebst Veraenderung und sehnst dich nach Freiheit. Du bist ueberbordend neugierig und waechst durch vielfaeltige Erfahrungen. Reisen, neue Menschen und Herausforderungen sind der Motor deines Lebens. Es faellt dir schwer, an einem Ort zu bleiben, aber du brauchst auch ein gewisses Mass an Stabilitaet."},
+    6: {title:"Verantwortung · Beschuetzer", text:"Du liebst dein Zuhause und deine Familie und hast ein starkes Verantwortungsbewusstsein. Du strahlst Fuersorge-Energie aus und bist die Stutze der Menschen um dich herum. Du hast ein natuerliches Talent dafuer, harmonische Umgebungen zu schaffen, und einen starken Gerechtigkeitssinn. Pass auf, dass du dich nicht selbst verlierst, waehrend du fuer andere sorgst."},
+    7: {title:"Forschung · Analytiker", text:"Du denkst tief und erforschst die Wahrheit. Du hast eine starke spirituelle und intellektuelle Neigung, und Zeit allein ist fuer dich unerlasslich. Du hast die Faehigkeit, uber die Oberflaeche hinaus zu sehen, und glaenzt in Forschung, Philosophie und Spiritualitaet. Geniesse die Einsamkeit, aber unterscheide sie von ungewollter Isolation."},
+    8: {title:"Macht · Erfolgreich", text:"Du strebst nach materiellem Erfolg und Autoritaet. Du hast ein ausgezeichnetes Geschaftssinn und starke Fuehrungsqualitaeten. Du hast die Faehigkeit, grosse Ziele zu setzen und zu erreichen. Du hast Talent im Umgang mit Geld und Macht, aber das Verlieren des Gleichgewichts kann dich autoritaer machen."},
+    9: {title:"Ideal · Humanist", text:"Du strahlst Menschlichkeit aus und bist idealistisch. Du fuhlst dich zu Dienst, Kunst und Heilung hingezogen und moechtest die Welt zu einem besseren Ort machen. Du bist emotional reich und hast eine grosse Empathiefaehigkeit. Deine Lebensaufgabe ist es, die Vergangenheit loszulassen und vorwaerts zu gehen."},
+    11: {title:"Inspiration · Meister der Intuition", text:"Die Meisterzahl 11 besitzt eine herausragende Intuition und spirituelle Einsicht. Du nimmst das Unsichtbare wahr und siehst Wahrheiten, die andere nicht kennen. Du hast die Veranlagung eines Kuenstlers, Heilers oder spirituellen Fuehrers. Da innere Konflikte und Spannungen gross sind, ist Gleichgewicht entscheidend."},
+    22: {title:"Aufbau · Visionaerer Meister", text:"Die Meisterzahl 22 hat die Kraft, eine enorme Vision zur Realitaet zu machen. Es ist die maechtigste Zahl, die Praktikabilitaet (4) und Intuition (11) verbindet. Sie eignet sich fuer Grossprojekte, Organisationsaufbau und weltveraendernde Arbeit. Sie traegt eine grosse Verantwortung, hat aber das entsprechende Potenzial."},
+    33: {title:"Heilung · Meister der Liebe", text:"Die Meisterzahl 33 ist der hoechste Heiler und Lehrer. Sie fuehrt andere mit bedingungsloser Liebe und Hingabe. Es ist die maximierte Form der Fuersorge-Energie der 6, und du solltest darauf achten, dich nicht zu sehr aufzuopfern. Du bist ein Wesen, das die Welt erleuchtet."}
+};
+
+const EXPRESSION = {
+    1: {title:"Unabhaengige Fuehrung", text:"Dein Name traegt die Energie des Pioniers. Du hast das Talent, originelle Ideen zu verwirklichen und andere zu fuehren."},
+    2: {title:"Harmonische Zusammenarbeit", text:"Dein Name traegt die Energie des Diplomaten. Dein Talent, Menschen zu verbinden und Frieden zu schaffen, ist herausragend."},
+    3: {title:"Kreativer Ausdruck", text:"Dein Name traegt die Energie des Kuenstlers. Du hast das Talent, dich durch Worte, Schrift und Kunst mit der Welt zu verstaendigen."},
+    4: {title:"Systematischer Aufbau", text:"Dein Name traegt die Energie des Architekten. Du hast das Talent, solide Grundlagen zu schaffen und praktische Ergebnisse zu erzielen."},
+    5: {title:"Vielseitige Kommunikation", text:"Dein Name traegt die Energie des Abenteurers. Du passt dich dem Wandel an und zeigst Faehigkeiten in verschiedenen Bereichen."},
+    6: {title:"Heilung und Dienst", text:"Dein Name traegt die Energie des Beschuetzers. Du hast das Talent, fuer Menschen zu sorgen und schoene Umgebungen zu schaffen."},
+    7: {title:"Tiefe Analyse", text:"Dein Name traegt die Energie des Gelehrten. Du hast das Talent, tief zu graben und verborgene Wahrheiten aufzudecken."},
+    8: {title:"Materieller Erfolg", text:"Dein Name traegt die Energie des Fuehrers. Dein Talent, Organisationen zu leiten und Reichtum zu schaffen, ist aussergewoehnlich."},
+    9: {title:"Humanitaere Vision", text:"Dein Name traegt die Energie des Weisen. Du beobachtest die Welt mit weitem Blick und inspirierst Menschen."},
+    11: {title:"Spiritueller Bote", text:"Meisterzahl! Dein Name traegt die Energie eines Boten, der Inspiration vermittelt. Du fuehrst Menschen mit Intuition."},
+    22: {title:"Grosser Erbauer", text:"Meisterzahl! Dein Name traegt die Energie eines Erbauers, der die Welt veraendert. Du verwandelst Visionen in Realitaet."},
+    33: {title:"Universeller Heiler", text:"Meisterzahl! Dein Name traegt die Energie der unendlichen Liebe. Deine blosse Existenz ist Heilung."}
+};
+
+const SOUL_URGE = {
+    1: "Im tiefsten Inneren sehnst du dich nach Unabhaengigkeit und Fuehrung. Du hast den starken Wunsch, deinen eigenen Weg zu gehen.",
+    2: "Im tiefsten Inneren sehnst du dich nach Liebe und Harmonie. Du wunschst dir echte Partnerschaft und friedvolle Beziehungen.",
+    3: "Im tiefsten Inneren sehnst du dich nach Selbstausdruck und Kreation. Du moechtest Freude teilen und dich durch Kunst verstaendigen.",
+    4: "Im tiefsten Inneren sehnst du dich nach Stabilitaet und Ordnung. Du moechtest dein Leben auf einem soliden Fundament aufbauen.",
+    5: "Im tiefsten Inneren sehnst du dich nach Freiheit und Abenteuer. Du moechtest ein Leben ohne Fesseln fuehren.",
+    6: "Im tiefsten Inneren sehnst du dich nach Familie und Liebe. Du moechtest fuer jemanden sorgen und ein schoenes Zuhause schaffen.",
+    7: "Im tiefsten Inneren sehnst du dich nach Wahrheit und Weisheit. Du moechtest den Sinn des Lebens verstehen und tiefe Einsicht gewinnen.",
+    8: "Im tiefsten Inneren sehnst du dich nach Errungenschaften und Anerkennung. Du moechtest deine Faehigkeiten auf einer grossen Buehne entfalten.",
+    9: "Im tiefsten Inneren sehnst du dich danach, der Menschheit zu dienen. Du moechtest die Welt zu einem besseren Ort machen.",
+    11: "Meisterzahl! Du sehnst dich nach spirituellem Erwachen und der Wahrheit einer hoeheren Dimension. Du spuerst eine Anziehung zur unsichtbaren Welt.",
+    22: "Meisterzahl! Du hast ein tiefes Verlangen, ein grosses Erbe fuer die Menschheit zu hinterlassen.",
+    33: "Meisterzahl! Es gibt eine Sehnsucht der Seele, alle Wesen mit bedingungsloser Liebe zu umhuellen."
+};
+
+const PERSONALITY = {
+    1: "Andere sehen dich als eine selbstbewusste und unabhaengige Person. Du strahlst die Aura einer Fuehrungspersoenlichkeit aus.",
+    2: "Andere sehen dich als eine sanfte und freundliche Person. Deine Anwesenheit laesst andere sich wohlfuehlen.",
+    3: "Andere sehen dich als eine strahlende und attraktive Person. Du hast Humor und schaffst eine gute Stimmung.",
+    4: "Andere sehen dich als eine zuverlaessige und vertrauenswuerdige Person. Du vermittelst ein Gefuehl von Stabilitaet.",
+    5: "Andere sehen dich als eine lebhafte und attraktive Person. Du machst den Eindruck, voller Energie zu sein.",
+    6: "Andere sehen dich als eine warme und verantwortungsbewusste Person. Du strahlst eine haeusliche Atmosphaere aus.",
+    7: "Andere sehen dich als eine geheimnisvolle und intellektuelle Person. Du hast eine Aura, die schwer zu durchdringen ist.",
+    8: "Andere sehen dich als eine erfolgreiche und faehige Person. Du machst einen professionellen Eindruck.",
+    9: "Andere sehen dich als eine grosszuegige und charismatische Person. Deine Faehigkeit zur Inklusion ist spuerbar.",
+    11: "Meisterzahl! Du machst einen spirituellen und charismatischen Eindruck. Deine Praesenz ist einzigartig.",
+    22: "Meisterzahl! Du wirst als machtvoller Fuehrer mit Vision gesehen. Du machst den Eindruck, jemand zu sein, der Grosses erreichen wird.",
+    33: "Meisterzahl! Du hast eine Praesenz wie ein warmes Licht. In deiner Naehe entsteht ein Gefuehl von Heilung."
+};
+
+const BIRTHDAY = {
+    1: "Du hast einen starken Unabhaengigkeitssinn und Fuehrungsqualitaeten.",
+    2: "Du bist feinfuehlig, intuitiv und ausgezeichnet in der Zusammenarbeit.",
+    3: "Du bist frohlich, kreativ und hast grosse Ausdruckskraft.",
+    4: "Du bist praktisch, fleissig und hast ein solides Fundament.",
+    5: "Du bist frei, sehr anpassungsfaehig und geniessst Veraenderungen.",
+    6: "Du hast ein starkes Verantwortungsbewusstsein, bist haeuslich und liebst Schoenheit.",
+    7: "Du bist analytisch, spirituell und denkst tief nach.",
+    8: "Du bist ehrgeizig, entschlossen und leistungsorientiert.",
+    9: "Du bist idealistisch, grosszuegig und liebst die Menschheit.",
+    11: "Meisterzahl! Intuition und Inspiration sind maechtig.",
+    22: "Meisterzahl! Verwirklicht grandiose Visionen.",
+    33: "Meisterzahl! Besitzt unendliche Liebe und Heilkraft."
+};
+
+function calculate() {
+    const y = parseInt(document.getElementById("birthYear").value);
+    const m = parseInt(document.getElementById("birthMonth").value);
+    const d = parseInt(document.getElementById("birthDay").value);
+    const nameVal = document.getElementById("fullName").value.trim();
+    if (!y) return alert("Bitte waehle dein Geburtsdatum aus.");
+
+    const lp = lifePathNumber(y, m, d);
+    const bd = birthdayNumber(d);
+    const expr = expressionNumber(nameVal);
+    const soul = soulUrgeNumber(nameVal);
+    const pers = personalityNumber(nameVal);
+    const matu = maturityNumber(lp, expr);
+
+    const gridItems = [
+        {num: lp, label: "Lebenszahl"},
+        {num: bd, label: "Geburtstag"},
+    ];
+    if (expr !== null) gridItems.push({num: expr, label: "Ausdruck"});
+    if (soul !== null) gridItems.push({num: soul, label: "Herz"});
+    if (pers !== null) gridItems.push({num: pers, label: "Persoenlichkeit"});
+    if (matu !== null) gridItems.push({num: matu, label: "Reife"});
+
+    const gridEl = document.getElementById("numberGrid");
+    gridEl.innerHTML = gridItems.map(i => `
+        <div class="number-cell">
+            <div class="num">${i.num}${MASTER[i.num] ? "<span class=\"master-badge\">MASTER</span>" : ""}</div>
+            <div class="label">${i.label}</div>
+        </div>
+    `).join("");
+
+    let html = "";
+
+    const lpData = LIFE_PATH[lp];
+    html += makeCard("Lebenszahl (Life Path)", lp, `${y} \u2192 ${reduceNum(y)} + ${m} \u2192 ${reduceNum(m)} + ${d} \u2192 ${reduceNum(d)} = ${lp}`, lpData.title, lpData.text);
+
+    html += makeCard("Geburtstagszahl (Birthday)", bd, `Geboren am ${d}.`, BIRTHDAY[bd] ? "Energie des Geburtstages" : "", BIRTHDAY[bd] || "");
+
+    if (expr !== null) {
+        const eData = EXPRESSION[expr];
+        html += makeCard("Ausdruckszahl (Expression)", expr, "Summe aller Buchstaben des Namens", eData.title, eData.text);
+    }
+    if (soul !== null) {
+        html += makeCard("Herzenszahl (Soul Urge)", soul, "Summe der Vokale (A,E,I,O,U) des Namens", "Inneres Verlangen", SOUL_URGE[soul]);
+    }
+    if (pers !== null) {
+        html += makeCard("Persoenlichkeitszahl (Personality)", pers, "Summe der Konsonanten des Namens", "Aeusserer Eindruck", PERSONALITY[pers]);
+    }
+    if (matu !== null) {
+        html += makeCard("Reifezahl (Maturity)", matu, `Lebenszahl(${lp}) + Ausdruckszahl(${expr}) = ${lp + expr} \u2192 ${matu}`, "Thema der zweiten Lebenshaelfte", `Die Reifezahl ist die Energie, die in der zweiten Lebenshaelfte (ab 40) stark zum Vorschein kommt. ${LIFE_PATH[matu] ? LIFE_PATH[matu].text.split(".")[0] + "." : ""}`);
+    }
+
+    if (!nameVal) {
+        html += `<div class="result-card" style="text-align:center;color:#666;">
+            <p>Gib deinen vollstaendigen Namen ein, um auch <strong style="color:#c9a84c;">Ausdruckszahl, Herzenszahl, Persoenlichkeitszahl und Reifezahl</strong> zu sehen.</p>
+        </div>`;
+    }
+
+    document.getElementById("resultCards").innerHTML = html;
+    document.getElementById("resultSection").style.display = "block";
+    document.getElementById("shareBar").style.display = "block";
+    document.getElementById("resultSection").scrollIntoView({behavior: "smooth"});
+}
+
+function makeCard(label, num, calc, subtitle, text) {
+    return `
+        <div class="result-card">
+            <div class="result-header">
+                <div class="result-number">${num}${MASTER[num] ? "<span class=\"master-badge\">MASTER</span>" : ""}</div>
+                <div>
+                    <div class="result-label">${label}</div>
+                    ${subtitle ? `<div class="result-sublabel">${subtitle}</div>` : ""}
+                </div>
+            </div>
+            <div class="result-calc">${calc}</div>
+            <div class="result-text">${text}</div>
+        </div>
+    `;
+}
+
+// Auswahlfelder initialisieren
+(function() {
+    const yEl = document.getElementById("birthYear");
+    const mEl = document.getElementById("birthMonth");
+    const dEl = document.getElementById("birthDay");
+    const now = new Date();
+
+    yEl.innerHTML = "<option value=\"\">Jahr</option>";
+    for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}</option>`;
+
+    mEl.innerHTML = "<option value=\"\">Monat</option>";
+    for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}</option>`;
+
+    function updateDays() {
+        const y = parseInt(yEl.value) || 2000;
+        const m = parseInt(mEl.value) || 1;
+        const maxD = new Date(y, m, 0).getDate();
+        const cur = parseInt(dEl.value);
+        dEl.innerHTML = "<option value=\"\">Tag</option>";
+        for (let d = 1; d <= maxD; d++) dEl.innerHTML += `<option value="${d}"${d === cur ? " selected" : ""}>${d}</option>`;
+    }
+    yEl.onchange = updateDays;
+    mEl.onchange = updateDays;
+    updateDays();
+})();
+</script>
+
+</body>
+</html>
