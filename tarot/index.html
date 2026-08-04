@@ -124,8 +124,11 @@
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#9b59b6;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
 
+<script src="cards.js"></script>
 <script>
-const MAJOR = [
+const MAJOR = TAROT_CARDS.filter(c => c.suit === 'major');
+const ALL_CARDS = TAROT_CARDS;
+const OLD_MAJOR = [
     {num:0,name:'광대',en:'The Fool',emoji:'🃏',up:'새로운 시작, 모험, 순수함, 자유로운 영혼. 두려움 없이 새로운 여정을 시작할 때입니다. 직감을 믿고 한 발짝 내디디세요.',down:'무모함, 경솔한 판단. 준비 없이 뛰어들면 위험합니다. 한 번 더 생각하세요.'},
     {num:1,name:'마법사',en:'The Magician',emoji:'🪄',up:'능력, 창의력, 의지력. 당신에게 필요한 모든 도구가 이미 있습니다. 집중하면 원하는 것을 이룰 수 있습니다.',down:'속임수, 재능 낭비. 능력을 잘못된 곳에 쓰고 있거나, 자신감이 부족한 상태입니다.'},
     {num:2,name:'여사제',en:'The High Priestess',emoji:'🌙',up:'직관, 신비, 내면의 지혜. 답은 이미 당신 안에 있습니다. 조용히 내면의 목소리에 귀 기울이세요.',down:'숨겨진 동기, 표면적 판단. 겉으로 보이는 것만 믿지 마세요. 더 깊이 파고들어야 합니다.'},
@@ -228,8 +231,8 @@ function startDraw() {
     drawnCards = [];
     pickedCount = 0;
 
-    // Shuffle deck
-    shuffledDeck = [...MAJOR].sort(() => Math.random() - 0.5);
+    // Shuffle full 78-card deck
+    shuffledDeck = [...ALL_CARDS].sort(() => Math.random() - 0.5);
 
     // Display 10 face-down cards to choose from
     const displayCount = Math.max(10, spreadCount + 5);
@@ -274,9 +277,10 @@ function pickCard(index, cardEl) {
 
     // Set card front content
     const front = document.getElementById('front-' + index);
+    const suitLabels = {major:'메이저',wands:'완드',cups:'컵',swords:'소드',pentacles:'펜타클'};
     front.className = 'card-front' + (card.reversed ? ' reversed' : '');
     front.innerHTML = `
-        <div class="card-number">${card.num}</div>
+        <div class="card-number" style="font-size:10px;color:#666;">${suitLabels[card.suit] || ''}</div>
         <div class="card-emoji">${card.emoji}</div>
         <div class="card-name">${card.name}</div>
         ${card.reversed ? '<div class="card-direction">역방향 ↓</div>' : ''}
@@ -319,7 +323,7 @@ function showReading() {
     drawnCards.forEach((card, i) => {
         const posName = positions[i] || '';
         let reading;
-        if (isOshi && OSHI_READINGS[card.num]) {
+        if (isOshi && card.suit === 'major' && OSHI_READINGS[card.num]) {
             const oshi = OSHI_READINGS[card.num];
             reading = (card.reversed ? oshi.down : oshi.up).replace(/\{name\}/g, oshiName);
         } else {
