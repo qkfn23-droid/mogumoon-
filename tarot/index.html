@@ -86,10 +86,10 @@
         <div style="font-size:11px;color:#666;margin-top:8px;">애니/만화/게임/아이돌 누구든 OK!</div>
     </div>
 
-    <div class="spread-selector">
-        <button class="spread-btn active" onclick="setSpread(1)">1장</button>
-        <button class="spread-btn" onclick="setSpread(3)">3장</button>
-        <button class="spread-btn" onclick="setSpread(5)">5장</button>
+    <div class="spread-selector" style="flex-direction:column;gap:10px;">
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
+        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>과거 · 현재 · 미래</strong> <span style="font-size:12px;color:#888;margin-left:8px;">시간의 흐름 · 3장</span></button>
+        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>심층 리딩</strong> <span style="font-size:12px;color:#888;margin-left:8px;">자세한 분석 · 5장</span></button>
     </div>
 
     <div class="question-box" id="questionBox" style="border:none;background:transparent;padding:10px;">
