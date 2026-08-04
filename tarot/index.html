@@ -309,6 +309,9 @@ function pickCard(index, cardEl) {
 
 function showReading() {
     const section = document.getElementById('readingSection');
+    const oshiName = document.getElementById('oshiName')?.value?.trim() || '그 사람';
+    const isOshi = mode === 'oshi';
+
     let positions;
     if (isOshi) {
         positions = spreadCount === 3 ? OSHI_POSITIONS_3 : spreadCount === 5 ? OSHI_POSITIONS_5 : [oshiName + '의 한마디'];
@@ -316,9 +319,6 @@ function showReading() {
         positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : ['오늘의 카드'];
     }
     let html = '';
-
-    const oshiName = document.getElementById('oshiName')?.value?.trim() || '그 사람';
-    const isOshi = mode === 'oshi';
 
     drawnCards.forEach((card, i) => {
         const posName = positions[i] || '';
