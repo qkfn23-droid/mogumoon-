@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="es">
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타로 카드 - MOGU Moon</title>
-    <meta name="description" content="무료 온라인 타로 카드 리딩. 1장, 3장, 5장 스프레드. 메이저 아르카나 22장 + 마이너 아르카나 56장.">
+    <title>Tarot - MOGU Moon</title>
+    <meta name="description" content="Lectura de tarot online gratuita. Tiradas de 1, 3 y 5 cartas. 22 Arcanos Mayores + 56 Arcanos Menores.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -71,52 +71,52 @@
 
 <div class="container">
     <div class="page-title">
-        <h2>🔮 타로 카드</h2>
-        <p>카드를 뽑아 당신의 운명을 읽어보세요</p>
+        <h2>🔮 Tarot</h2>
+        <p>Saca tus cartas y lee tu destino</p>
     </div>
 
     <div class="mode-selector" style="display:flex;gap:0;margin-bottom:20px;border:2px solid #3a2550;border-radius:10px;overflow:hidden;">
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🔮 일반 타로</button>
-        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')">💜 최애 타로</button>
+        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')">🔮 Tarot normal</button>
+        <button class="mode-btn" style="flex:1;padding:12px;border:none;background:transparent;color:#9b59b6;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('oshi')">💜 Tarot de tu oshi</button>
     </div>
 
     <div id="oshiBox" style="display:none;background:linear-gradient(135deg,#1a0d2e,#2a1540);border:1px solid #3a2550;border-radius:12px;padding:24px;margin-bottom:16px;text-align:center;">
-        <div style="font-size:14px;color:#9b59b6;margin-bottom:12px;font-weight:600;">💜 최애의 이름을 입력하세요</div>
-        <input type="text" id="oshiName" placeholder="예: 고조 사토루, 레비, 카미나..." style="width:100%;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;text-align:center;">
-        <div style="font-size:11px;color:#666;margin-top:8px;margin-bottom:16px;">애니/만화/게임/아이돌 누구든 OK!</div>
+        <div style="font-size:14px;color:#9b59b6;margin-bottom:12px;font-weight:600;">💜 Escribe el nombre de tu oshi</div>
+        <input type="text" id="oshiName" placeholder="Ej: Gojo Satoru, Levi, Kamina..." style="width:100%;padding:12px;background:#0a0a1a;border:1px solid #3a2550;border-radius:8px;color:#e0d8cc;font-size:15px;outline:none;text-align:center;">
+        <div style="font-size:11px;color:#666;margin-top:8px;margin-bottom:16px;">¡Anime, manga, juegos, idols — cualquiera vale!</div>
         <div style="font-size:14px;color:#c39bd3;line-height:1.8;font-style:italic;border-top:1px solid #3a2550;padding-top:14px;">
-            ✨ 그 사람의 마음을 떠올리며<br>카드를 선택하세요 ✨<br>
-            <span style="font-size:12px;color:#666;">카드가 최애의 숨겨진 감정을 보여줍니다</span>
+            ✨ Piensa en los sentimientos de esa persona<br>y elige tus cartas ✨<br>
+            <span style="font-size:12px;color:#666;">Las cartas revelan las emociones ocultas de tu oshi</span>
         </div>
     </div>
 
     <div class="spread-selector" style="flex-direction:column;gap:10px;" id="spreadNormal">
-        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>원카드</strong> <span style="font-size:12px;color:#888;margin-left:8px;">빠른 답변 · 1장</span></button>
-        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>과거 · 현재 · 미래</strong> <span style="font-size:12px;color:#888;margin-left:8px;">시간의 흐름 · 3장</span></button>
-        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>심층 리딩</strong> <span style="font-size:12px;color:#888;margin-left:8px;">자세한 분석 · 5장</span></button>
+        <button class="spread-btn active" onclick="setSpread(1)" style="padding:14px 20px;text-align:left;">🔮 <strong>Una carta</strong> <span style="font-size:12px;color:#888;margin-left:8px;">Respuesta rápida · 1 carta</span></button>
+        <button class="spread-btn" onclick="setSpread(3)" style="padding:14px 20px;text-align:left;">⏳ <strong>Pasado · Presente · Futuro</strong> <span style="font-size:12px;color:#888;margin-left:8px;">El flujo del tiempo · 3 cartas</span></button>
+        <button class="spread-btn" onclick="setSpread(5)" style="padding:14px 20px;text-align:left;">⭐ <strong>Lectura profunda</strong> <span style="font-size:12px;color:#888;margin-left:8px;">Análisis detallado · 5 cartas</span></button>
     </div>
 
     <div class="question-box" id="questionBox" style="border:none;background:transparent;padding:10px;">
         <div style="font-size:14px;color:#c39bd3;line-height:1.8;text-align:center;font-style:italic;">
-            ✨ 마음속에 궁금한 것을 떠올리며<br>카드를 선택하세요 ✨<br>
-            <span style="font-size:12px;color:#666;">카드는 당신의 무의식이 선택합니다</span>
+            ✨ Piensa en lo que quieres saber<br>y elige tus cartas ✨<br>
+            <span style="font-size:12px;color:#666;">Es tu inconsciente quien elige las cartas</span>
         </div>
     </div>
 
-    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 카드 섞기</button>
+    <button class="draw-btn" id="drawBtn" onclick="startDraw()">🔮 Barajar las cartas</button>
 
     <div id="pickInstruction" style="display:none;text-align:center;margin-bottom:16px;">
-        <span style="font-size:15px;color:#c39bd3;" id="pickText">카드를 <strong>1장</strong> 선택하세요</span>
+        <span style="font-size:15px;color:#c39bd3;" id="pickText">Elige <strong>1 carta</strong></span>
     </div>
 
     <div class="cards-area" id="cardsArea" style="flex-wrap:wrap;"></div>
 
     <div class="reading-section" id="readingSection"></div>
 
-    <div class="disclaimer">🔮 타로는 재미와 자기 성찰을 위한 도구입니다. 중요한 결정은 전문가와 상담하세요.</div>
+    <div class="disclaimer">🔮 El tarot es una herramienta de entretenimiento y reflexion personal. Para decisiones importantes, consulta a un profesional.</div>
 </div>
 
-<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">공유:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a></div>
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">Compartir:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiado!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a></div>
 
 <footer>&copy; 2025 MOGU Moon</footer>
 
@@ -128,206 +128,180 @@
 <script>
 const MAJOR = TAROT_CARDS.filter(c => c.suit === 'major');
 const ALL_CARDS = TAROT_CARDS;
-const OLD_MAJOR = [
-    {num:0,name:'광대',en:'The Fool',emoji:'🃏',up:'새로운 시작, 모험, 순수함, 자유로운 영혼. 두려움 없이 새로운 여정을 시작할 때입니다. 직감을 믿고 한 발짝 내디디세요.',down:'무모함, 경솔한 판단. 준비 없이 뛰어들면 위험합니다. 한 번 더 생각하세요.'},
-    {num:1,name:'마법사',en:'The Magician',emoji:'🪄',up:'능력, 창의력, 의지력. 당신에게 필요한 모든 도구가 이미 있습니다. 집중하면 원하는 것을 이룰 수 있습니다.',down:'속임수, 재능 낭비. 능력을 잘못된 곳에 쓰고 있거나, 자신감이 부족한 상태입니다.'},
-    {num:2,name:'여사제',en:'The High Priestess',emoji:'🌙',up:'직관, 신비, 내면의 지혜. 답은 이미 당신 안에 있습니다. 조용히 내면의 목소리에 귀 기울이세요.',down:'숨겨진 동기, 표면적 판단. 겉으로 보이는 것만 믿지 마세요. 더 깊이 파고들어야 합니다.'},
-    {num:3,name:'여황제',en:'The Empress',emoji:'🌺',up:'풍요, 모성, 아름다움, 자연. 사랑과 풍요가 넘치는 시기입니다. 감각을 즐기고 자신을 돌보세요.',down:'과잉 의존, 창의적 막힘. 남에게 너무 의존하거나, 자기 자신을 돌보지 못하고 있습니다.'},
-    {num:4,name:'황제',en:'The Emperor',emoji:'👑',up:'권위, 구조, 리더십, 안정. 체계적으로 접근하면 성공합니다. 규율과 질서가 필요한 때입니다.',down:'독재, 경직, 통제 욕구. 너무 완고하거나 통제하려 들고 있습니다. 유연함이 필요합니다.'},
-    {num:5,name:'교황',en:'The Hierophant',emoji:'🙏',up:'전통, 가르침, 영적 지혜. 멘토나 전통적 가치에서 답을 찾을 수 있습니다. 배움의 시기입니다.',down:'반항, 비관습적 접근. 기존 방식이 맞지 않습니다. 자기만의 길을 찾아야 할 때입니다.'},
-    {num:6,name:'연인',en:'The Lovers',emoji:'💕',up:'사랑, 조화, 선택. 중요한 결정 앞에 서 있습니다. 마음이 이끄는 대로 선택하세요. 사랑이 찾아옵니다.',down:'불화, 유혹, 잘못된 선택. 가치관의 충돌이 있습니다. 외부 유혹에 흔들리지 마세요.'},
-    {num:7,name:'전차',en:'The Chariot',emoji:'⚡',up:'승리, 결단, 전진. 강한 의지로 장애물을 극복할 수 있습니다. 지금은 멈추지 말고 돌진할 때입니다.',down:'방향 상실, 통제력 상실. 어디로 가야 할지 모르겠다면 잠시 멈추고 방향을 재설정하세요.'},
-    {num:8,name:'힘',en:'Strength',emoji:'🦁',up:'내면의 힘, 용기, 인내. 부드러운 힘이 거친 힘을 이깁니다. 인내심으로 상황을 다스리세요.',down:'자기 의심, 나약함. 자신감을 잃었거나 감정에 압도되고 있습니다. 내면의 힘을 되찾으세요.'},
-    {num:9,name:'은둔자',en:'The Hermit',emoji:'🔦',up:'성찰, 고독, 내면 탐구. 혼자만의 시간이 필요합니다. 답은 밖이 아니라 안에 있습니다.',down:'고립, 외로움, 편협. 너무 오래 혼자 있으면 세상과 단절됩니다. 다시 연결할 때입니다.'},
-    {num:10,name:'운명의 수레바퀴',en:'Wheel of Fortune',emoji:'🎡',up:'변화, 행운, 순환. 운명의 바퀴가 돌아갑니다. 좋은 변화가 다가오고 있으니 기회를 잡으세요.',down:'불운, 저항, 정체. 변화에 저항하고 있습니다. 흐름에 맡기세요. 나쁜 시기도 지나갑니다.'},
-    {num:11,name:'정의',en:'Justice',emoji:'⚖️',up:'공정, 진실, 결과. 행동에는 결과가 따릅니다. 정직하고 공정하게 행동하면 좋은 결과가 옵니다.',down:'불공정, 부정직. 불공평한 상황에 처했거나, 책임을 회피하고 있습니다. 진실을 마주하세요.'},
-    {num:12,name:'매달린 사람',en:'The Hanged Man',emoji:'🙃',up:'포기, 새로운 시각, 기다림. 다른 각도에서 보면 답이 보입니다. 지금은 행동보다 관찰의 시간입니다.',down:'무의미한 희생, 지연. 헛되이 기다리고 있습니다. 관점을 바꾸거나 행동해야 합니다.'},
-    {num:13,name:'죽음',en:'Death',emoji:'💀',up:'끝과 새 시작, 변환, 전환. 무언가가 끝나야 새것이 시작됩니다. 두려워하지 마세요. 이것은 필요한 변화입니다.',down:'변화 저항, 정체. 끝내야 할 것을 붙잡고 있습니다. 놓아주세요.'},
-    {num:14,name:'절제',en:'Temperance',emoji:'🌊',up:'균형, 조화, 절제. 극단을 피하고 중용을 지키세요. 인내와 조화가 좋은 결과를 가져옵니다.',down:'불균형, 과잉. 한쪽으로 치우쳐 있습니다. 균형을 되찾아야 합니다.'},
-    {num:15,name:'악마',en:'The Devil',emoji:'😈',up:'유혹, 속박, 집착. 무언가에 중독되거나 집착하고 있습니다. 스스로 만든 사슬을 끊을 힘이 있습니다.',down:'해방, 사슬 끊기. 중독이나 나쁜 습관에서 벗어나고 있습니다. 자유를 되찾으세요.'},
-    {num:16,name:'탑',en:'The Tower',emoji:'🗼',up:'붕괴, 갑작스러운 변화, 깨달음. 충격적인 변화가 올 수 있지만, 이것은 필요한 파괴입니다. 새로 세울 수 있습니다.',down:'재난 회피, 변화 거부. 무너져야 할 것이 무너지지 않고 있습니다. 더 큰 붕괴가 올 수 있습니다.'},
-    {num:17,name:'별',en:'The Star',emoji:'⭐',up:'희망, 영감, 치유. 어둠 뒤에 별이 빛납니다. 희망을 잃지 마세요. 우주가 당신을 돕고 있습니다.',down:'희망 상실, 낙담. 희망을 잃고 있지만, 별은 항상 그 자리에 있습니다. 다시 올려다보세요.'},
-    {num:18,name:'달',en:'The Moon',emoji:'🌙',up:'직관, 환상, 무의식. 모든 것이 명확하지 않은 시기입니다. 직관을 믿되 환상에 빠지지 마세요.',down:'혼란 해소, 진실 드러남. 안개가 걷히고 진실이 보이기 시작합니다.'},
-    {num:19,name:'태양',en:'The Sun',emoji:'☀️',up:'성공, 기쁨, 활력, 긍정. 밝고 따뜻한 에너지가 넘칩니다! 행복한 시기가 왔습니다. 자신감을 가지세요.',down:'약한 낙관, 지연된 성공. 성공이 오고 있지만 조금 늦어질 수 있습니다. 긍정을 유지하세요.'},
-    {num:20,name:'심판',en:'Judgement',emoji:'📯',up:'부활, 각성, 소명. 인생의 전환점입니다. 과거를 정리하고 새로운 소명을 받아들이세요.',down:'자기 의심, 과거에 갇힘. 과거의 실수에서 벗어나지 못하고 있습니다. 자신을 용서하세요.'},
-    {num:21,name:'세계',en:'The World',emoji:'🌍',up:'완성, 달성, 통합. 하나의 순환이 완성되었습니다! 축하합니다. 새로운 여정이 곧 시작됩니다.',down:'미완성, 아쉬움. 거의 다 왔지만 마지막 한 조각이 빠져 있습니다. 포기하지 마세요.'}
-];
 
-const POSITIONS_3 = ['과거', '현재', '미래'];
-const POSITIONS_5 = ['현재 상황', '도전/장애', '과거 영향', '가까운 미래', '최종 결과'];
-const OSHI_POSITIONS_3 = ['처음 당신을 봤을 때', '지금 당신에 대해', '앞으로 당신에게'];
-const OSHI_POSITIONS_5 = ['첫인상', '숨기고 있는 것', '진짜 속마음', '당신에게 바라는 것', '두 사람의 앞으로'];
+const POSITIONS_3 = ['Pasado', 'Presente', 'Futuro'];
+const POSITIONS_5 = ['Situacion actual', 'Desafio / Obstaculo', 'Influencia del pasado', 'Futuro cercano', 'Resultado final'];
+const OSHI_POSITIONS_3 = ['Cuando te vio por primera vez', 'Lo que siente por ti ahora', 'Lo que te depara en el futuro'];
+const OSHI_POSITIONS_5 = ['Primera impresion', 'Lo que oculta', 'Sus sentimientos reales', 'Lo que desea de ti', 'El futuro de los dos'];
 
 let spreadCount = 1;
 let drawnCards = [];
 let mode = 'normal';
 
-// 최애 모드용 해석 (~라고 합니다 체)
 const OSHI_READINGS = {
-    0: {up:'{name}은(는) 당신과 함께라면 어떤 모험이든 떠날 수 있다고 합니다. 당신에게 순수한 호기심을 느끼고 있으며, 두려움 없이 다가오고 있다고 합니다.',down:'{name}은(는) 당신에게 다가가고 싶지만 아직 준비가 안 됐다고 합니다. 마음은 있지만 타이밍을 재고 있다고 합니다.'},
-    1: {up:'{name}은(는) 당신에게서 특별한 무언가를 느꼈다고 합니다. 당신의 존재 자체가 {name}에게 영감을 준다고 합니다. 당신이 가진 가능성에 주목하고 있다고 합니다.',down:'{name}은(는) 당신에게 진심을 보여주고 싶지만 방법을 모르겠다고 합니다. 표현이 서툴 뿐 마음은 진짜라고 합니다.'},
-    2: {up:'{name}은(는) 말하지 않지만 당신에 대해 많이 생각하고 있다고 합니다. 당신의 사소한 것까지 기억하고 있으며, 조용히 지켜보고 있다고 합니다.',down:'{name}은(는) 당신에게 숨기고 있는 감정이 있다고 합니다. 아직 드러낼 준비가 되지 않았을 뿐이라고 합니다.'},
-    3: {up:'{name}은(는) 당신과 함께 있을 때 가장 편안하다고 합니다. 당신은 {name}에게 안식처 같은 존재라고 합니다. 따뜻하게 감싸주는 당신의 존재가 소중하다고 합니다.',down:'{name}은(는) 당신에게 의지하고 싶지만 자존심 때문에 먼저 말하지 못한다고 합니다.'},
-    4: {up:'{name}은(는) 당신을 지켜주고 싶다고 합니다. 강한 모습 뒤에 당신을 향한 따뜻한 마음을 숨기고 있다고 합니다.',down:'{name}은(는) 당신에게 너무 엄격했던 것을 후회하고 있다고 합니다. 다시 기회가 있다면 더 부드럽게 대하고 싶다고 합니다.'},
-    5: {up:'{name}은(는) 당신의 성장을 진심으로 응원하고 있다고 합니다. 당신에게 중요한 것을 전해주고 싶다고 합니다.',down:'{name}은(는) 기존의 방식으로는 당신에게 닿을 수 없다는 걸 깨달았다고 합니다. 새로운 방법을 찾고 있다고 합니다.'},
-    6: {up:'💕 {name}은(는) 당신에게 특별한 감정을 품고 있다고 합니다. 다른 누구와도 다른 끌림을 느끼고 있다고 합니다. 이 인연은 운명적이라고 합니다.',down:'{name}은(는) 당신과의 관계에서 갈등을 느끼고 있다고 합니다. 하지만 마음 깊은 곳에서는 당신을 원하고 있다고 합니다.'},
-    7: {up:'{name}은(는) 당신을 위해서라면 무엇이든 할 수 있다고 합니다. 당신은 {name}이(가) 앞으로 나아가는 원동력이라고 합니다.',down:'{name}은(는) 방향을 잃고 방황하고 있다고 합니다. 당신의 한마디가 큰 힘이 될 거라고 합니다.'},
-    8: {up:'{name}은(는) 당신의 강인하면서도 부드러운 면에 끌린다고 합니다. 겉으로 드러내지 않지만 깊이 존경하고 있다고 합니다.',down:'{name}은(는) 당신 앞에서 약한 모습을 보이는 것이 두렵다고 합니다. 완벽해 보이고 싶은 마음이 크다고 합니다.'},
-    9: {up:'{name}은(는) 혼자 있는 시간에 당신을 떠올린다고 합니다. 조용하지만 깊은 그리움을 느끼고 있다고 합니다.',down:'{name}은(는) 일부러 거리를 두고 있지만 싫어서가 아니라고 합니다. 자기 자신을 정리하는 시간이 필요하다고 합니다.'},
-    10: {up:'{name}은(는) 당신과의 만남이 우연이 아니라 운명이라고 느끼고 있다고 합니다. 모든 것이 연결되어 있다고 합니다.',down:'{name}은(는) 지금은 타이밍이 맞지 않다고 느끼고 있다고 합니다. 하지만 인연의 끈은 끊어지지 않았다고 합니다.'},
-    11: {up:'{name}은(는) 당신에게 거짓 없는 마음을 가지고 있다고 합니다. 공정하고 진실된 감정이라고 합니다.',down:'{name}은(는) 과거에 당신에게 공정하지 못했던 것에 대해 미안하다고 합니다.'},
-    12: {up:'{name}은(는) 당신을 위해 기꺼이 희생할 수 있다고 합니다. 그만큼 소중한 존재라고 합니다.',down:'{name}은(는) 당신이 먼저 손을 내밀어주길 기다리고 있다고 합니다. 본인이 먼저 말하기엔 용기가 부족하다고 합니다.'},
-    13: {up:'{name}과(와)의 관계가 새로운 단계로 넘어가고 있다고 합니다. 이전과는 다른 더 깊은 인연이 시작된다고 합니다.',down:'{name}은(는) 기존의 관계를 한번 정리하고 싶다고 합니다. 더 좋은 관계를 위한 변화라고 합니다.'},
-    14: {up:'{name}은(는) 당신과 함께 있으면 마음이 편안해진다고 합니다. 서로에게 딱 맞는 균형을 느끼고 있다고 합니다.',down:'{name}은(는) 감정의 균형을 잡으려 노력 중이라고 합니다. 조금만 시간을 달라고 합니다.'},
-    15: {up:'🔥 {name}은(는) 당신에게 강하게 끌리고 있다고 합니다. 거부할 수 없는 매력을 느끼고 있으며, 자기도 이 감정을 어쩌지 못한다고 합니다.',down:'{name}은(는) 당신에 대한 마음을 정리하려 했지만 쉽지 않다고 합니다. 그만큼 당신이 강렬한 존재라고 합니다.'},
-    16: {up:'{name}은(는) 당신 때문에 세계관이 바뀌었다고 합니다. 당신을 만나기 전과 후의 삶이 완전히 다르다고 합니다.',down:'{name}은(는) 당신에 대한 감정이 예상과 완전히 달랐다는 걸 깨달았다고 합니다. 충격적이지만 나쁜 의미는 아니라고 합니다.'},
-    17: {up:'⭐ {name}에게 당신은 어둠 속의 별과 같은 존재라고 합니다. 당신이 있어서 희망을 잃지 않는다고 합니다.',down:'{name}은(는) 잠시 희망을 잃었지만, 당신을 떠올리면 다시 앞으로 나아갈 수 있다고 합니다.'},
-    18: {up:'{name}은(는) 당신에 대해 말로 설명할 수 없는 감정을 느끼고 있다고 합니다. 복잡하지만 확실히 끌린다고 합니다.',down:'{name}은(는) 혼란스러웠던 감정이 정리되기 시작했다고 합니다. 당신에 대한 진심을 깨달았다고 합니다.'},
-    19: {up:'☀️ {name}은(는) 당신과 함께 있을 때 가장 행복하다고 합니다. 당신은 {name}에게 태양 같은 존재라고 합니다.',down:'{name}은(는) 당신에게 행복을 주고 싶지만 표현이 서툴다고 합니다. 마음만큼은 누구보다 진심이라고 합니다.'},
-    20: {up:'{name}은(는) 과거의 모든 일이 당신을 만나기 위한 과정이었다고 느끼고 있다고 합니다. 운명적인 만남이라고 합니다.',down:'{name}은(는) 당신에게 더 잘하지 못한 과거를 후회하고 있다고 합니다. 다시 기회가 주어진다면 다르게 하고 싶다고 합니다.'},
-    21: {up:'🌍 {name}은(는) 당신과의 관계가 완벽하다고 느끼고 있다고 합니다. 서로에게 최고의 존재이며, 이보다 좋을 수 없다고 합니다.',down:'{name}은(는) 당신과의 관계에서 아직 부족한 부분이 있다고 느끼고 있다고 합니다. 하지만 거의 완성에 가깝다고 합니다.'}
+    0: {up:'Segun {name}, contigo a su lado estaria dispuesto/a a embarcarse en cualquier aventura. Siente una curiosidad pura hacia ti y se acerca sin miedo.',down:'Segun {name}, quiere acercarse a ti pero aun no esta listo/a. El sentimiento esta, pero esta midiendo el momento.'},
+    1: {up:'Segun {name}, sintio algo especial en ti desde el principio. Tu presencia misma le inspira. Esta prestando atencion a todo el potencial que llevas dentro.',down:'Segun {name}, quiere mostrarte su corazon pero no sabe como. Solo le cuesta expresarlo — los sentimientos son reales.'},
+    2: {up:'Segun {name}, aunque no lo dice, piensa mucho en ti. Recuerda hasta los detalles mas pequenos y te observa en silencio.',down:'Segun {name}, hay emociones que te oculta. Simplemente aun no esta listo/a para mostrarlas.'},
+    3: {up:'Segun {name}, se siente mas comodo/a cuando esta contigo. Eres como un refugio para el/ella. Tu presencia, que lo/la envuelve con calidez, le es muy valiosa.',down:'Segun {name}, quiere apoyarse en ti pero el orgullo le impide decirlo primero.'},
+    4: {up:'Segun {name}, quiere protegerte. Detras de su imagen fuerte esconde un corazon calido hacia ti.',down:'Segun {name}, se arrepiente de haber sido demasiado severo/a contigo. Si tuviera otra oportunidad, se acercaria con mas suavidad.'},
+    5: {up:'Segun {name}, te apoya de corazon en tu crecimiento. Quiere transmitirte algo importante.',down:'Segun {name}, se ha dado cuenta de que con los metodos habituales no puede llegar a ti. Esta buscando una nueva forma.'},
+    6: {up:'Segun {name}, siente algo especial por ti. Experimenta una atraccion diferente a la que siente por cualquier otra persona. Este vinculo es de los que el destino teje.',down:'Segun {name}, siente conflicto en su relacion contigo. Pero en lo mas profundo de su corazon, te desea.'},
+    7: {up:'Segun {name}, haria cualquier cosa por ti. Eres la fuerza que le impulsa hacia adelante.',down:'Segun {name}, ha perdido el rumbo y esta a la deriva. Una sola palabra tuya podria ser de gran ayuda.'},
+    8: {up:'Segun {name}, le atraes esa faceta tuya a la vez fuerte y suave. Aunque no lo demuestra, te respeta profundamente.',down:'Segun {name}, le da miedo mostrar su lado debil ante ti. Quiere parecer perfecto/a.'},
+    9: {up:'Segun {name}, en sus momentos de soledad piensa en ti. Siente una nostalgia tranquila pero profunda.',down:'Segun {name}, se aleja a proposito, pero no es porque no le gustes. Necesita tiempo para ordenarse por dentro.'},
+    10: {up:'Segun {name}, siente que el encuentro contigo no fue una casualidad, sino el destino. Todo esta conectado.',down:'Segun {name}, siente que ahora el momento no es el adecuado. Pero el hilo del destino no se ha roto.'},
+    11: {up:'Segun {name}, los sentimientos que tiene hacia ti son sinceros y sin mentiras. Son emociones justas y verdaderas.',down:'Segun {name}, lo siente si en el pasado no fue justo/a contigo.'},
+    12: {up:'Segun {name}, estaria dispuesto/a a sacrificarse por ti. Eso dice lo valioso/a que eres para el/ella.',down:'Segun {name}, esta esperando a que tu extiendas la mano primero. Le falta valor para hablar antes.'},
+    13: {up:'Segun {name}, la relacion contigo esta pasando a una nueva etapa. Comienza un vinculo mas profundo que el anterior.',down:'Segun {name}, quiere reorganizar la relacion actual. Es un cambio para que sea mejor.'},
+    14: {up:'Segun {name}, estar contigo le tranquiliza el corazon. Siente el equilibrio perfecto entre los dos.',down:'Segun {name}, esta esforzandose por encontrar el equilibrio emocional. Pide un poco de tiempo.'},
+    15: {up:'Segun {name}, siente una fuerte atraccion hacia ti. Percibe un magnetismo irresistible y ni siquiera puede controlar esos sentimientos.',down:'Segun {name}, intento ordenar sus sentimientos hacia ti, pero no ha sido facil. Asi de intensa es tu presencia para el/ella.'},
+    16: {up:'Segun {name}, tu cambiaste su vision del mundo. Su vida antes y despues de conocerte es completamente diferente.',down:'Segun {name}, se ha dado cuenta de que sus sentimientos hacia ti eran totalmente distintos a lo que esperaba. Es impactante, pero no en el mal sentido.'},
+    17: {up:'Segun {name}, para el/ella eres como una estrella en la oscuridad. Gracias a ti no pierde la esperanza.',down:'Segun {name}, perdio la esperanza por un momento, pero cuando piensa en ti puede volver a seguir adelante.'},
+    18: {up:'Segun {name}, siente emociones que no sabe como describir con palabras. Es complicado, pero claramente siente una atraccion.',down:'Segun {name}, los sentimientos que estaban revueltos empiezan a aclararse. Ha comprendido cuales son sus verdaderos sentimientos hacia ti.'},
+    19: {up:'Segun {name}, es mas feliz cuando esta contigo. Para el/ella eres como el sol.',down:'Segun {name}, quiere darte felicidad pero le cuesta expresarlo. Sus sentimientos, mas que los de nadie, son genuinos.'},
+    20: {up:'Segun {name}, siente que todo lo que ha vivido era el camino para llegar a ti. Es un encuentro del destino.',down:'Segun {name}, se arrepiente de no haberlo hecho mejor contigo en el pasado. Si se le diera otra oportunidad, actuaria de otra forma.'},
+    21: {up:'Segun {name}, siente que la relacion contigo es perfecta. Son lo mejor el uno para el otro y no podria ser mejor.',down:'Segun {name}, siente que en la relacion contigo todavia hay algo que le falta. Pero esta casi completa.'}
 };
 
-// 마이너 아르카나 최애 변환 (suit별 + 번호별)
 const OSHI_MINOR = {
     wands: {
-        theme: '열정',
+        theme: 'pasion',
         up: [
-            '{name}은(는) 당신에 대한 새로운 열정이 타오르기 시작했다고 합니다. 당신이 {name}에게 불꽃을 일으켰다고 합니다.',
-            '{name}은(는) 당신과의 미래를 진지하게 그려보고 있다고 합니다. 큰 그림 속에 당신이 있다고 합니다.',
-            '{name}은(는) 당신과 함께한 시간이 결실을 맺고 있다고 느끼고 있다고 합니다. 기대 이상이라고 합니다.',
-            '{name}은(는) 당신과 함께 있으면 축제 같다고 합니다. 함께하는 모든 순간이 특별하다고 합니다.',
-            '{name}은(는) 당신 때문에 경쟁심이 생겼다고 합니다. 더 나은 사람이 되고 싶다고 합니다.',
-            '{name}은(는) 당신에게 인정받고 싶다고 합니다. 당신의 칭찬이 무엇보다 큰 힘이 된다고 합니다.',
-            '{name}은(는) 당신을 위해서라면 어떤 도전도 받아들이겠다고 합니다. 포기하지 않겠다고 합니다.',
-            '{name}은(는) 당신에 대한 감정이 빠르게 깊어지고 있다고 합니다. 자기도 놀랄 정도라고 합니다.',
-            '{name}은(는) 당신을 향한 마음을 지키느라 지쳤지만 포기하지 않겠다고 합니다. 거의 다 왔다고 합니다.',
-            '{name}은(는) 당신을 위해 너무 많은 것을 짊어지고 있다고 합니다. 하지만 당신이라서 괜찮다고 합니다.',
-            '{name}은(는) 당신에 대한 설레는 소식을 전하고 싶다고 합니다. 좋은 일이 있을 거라고 합니다.',
-            '{name}은(는) 당신에게 열정적으로 돌진하고 싶다고 합니다. 대담하게 마음을 전하고 싶다고 합니다.',
-            '{name}은(는) 당신 앞에서 자신감이 넘친다고 합니다. 당신이 {name}의 매력을 끌어낸다고 합니다.',
-            '{name}은(는) 당신과 함께 큰 꿈을 이루고 싶다고 합니다. 비전의 중심에 당신이 있다고 합니다.',
+            'Segun {name}, una nueva pasion por ti empieza a arder. Dices que has encendido una llama en el/ella.',
+            'Segun {name}, esta pensando seriamente en un futuro contigo. Tu estas en el gran cuadro.',
+            'Segun {name}, siente que el tiempo compartido contigo esta dando frutos. Es mas de lo que esperaba.',
+            'Segun {name}, estar contigo es como una fiesta. Cada momento juntos es especial.',
+            'Segun {name}, tu le has despertado el espiritu competitivo. Quiere ser mejor persona.',
+            'Segun {name}, quiere que le reconozcas. Tu elogio es la mayor fuerza que tiene.',
+            'Segun {name}, aceptaria cualquier desafio por ti. No se va a rendir.',
+            'Segun {name}, los sentimientos hacia ti estan profundizando rapidamente. Se sorprende el/ella mismo/a.',
+            'Segun {name}, esta cansado/a de proteger sus sentimientos hacia ti, pero no va a rendirse. Ya casi llega.',
+            'Segun {name}, esta cargando demasiado por ti. Pero como eres tu, no le importa.',
+            'Segun {name}, quiere darte una noticia emocionante sobre ti. Van a pasar cosas buenas.',
+            'Segun {name}, quiere lanzarse hacia ti con pasion. Quiere confesarte sus sentimientos con audacia.',
+            'Segun {name}, se siente lleno/a de confianza frente a ti. Tu sacas lo mejor de el/ella.',
+            'Segun {name}, quiere alcanzar grandes suenos contigo. Tu estas en el centro de su vision.',
         ],
         down: [
-            '{name}은(는) 당신에 대한 열정이 식었다기보다, 표현 방법을 모르겠다고 합니다.',
-            '{name}은(는) 당신과의 미래가 두렵다고 합니다. 확신이 없어서가 아니라 잃을까봐 무섭다고 합니다.',
-            '{name}은(는) 기대만큼 결과가 나오지 않아 불안하다고 합니다. 하지만 당신을 포기할 생각은 없다고 합니다.',
-            '{name}은(는) 당신과의 관계에서 불안정함을 느끼고 있다고 합니다. 기반을 다시 다지고 싶다고 합니다.',
-            '{name}은(는) 불필요한 갈등을 피하고 싶다고 합니다. 당신과 싸우고 싶지 않다고 합니다.',
-            '{name}은(는) 당신에게 인정받지 못하는 것 같아 속상하다고 합니다.',
-            '{name}은(는) 지쳐서 잠시 쉬고 싶다고 합니다. 당신을 향한 마음은 변하지 않는다고 합니다.',
-            '{name}은(는) 상황이 느리게 진행되어 답답하다고 합니다. 기다려달라고 합니다.',
-            '{name}은(는) 번아웃 직전이라고 합니다. 당신의 따뜻한 한마디가 필요하다고 합니다.',
-            '{name}은(는) 혼자 감당하기 힘들다고 합니다. 당신에게 기대고 싶다고 합니다.',
-            '{name}은(는) 전하고 싶은 말이 있지만 아직 때가 아니라고 합니다.',
-            '{name}은(는) 성급하게 행동한 것을 후회하고 있다고 합니다.',
-            '{name}은(는) 당신 앞에서 자신감을 잃었다고 합니다. 다시 찾고 싶다고 합니다.',
-            '{name}은(는) 당신에게 너무 강하게 나간 것 같다고 합니다. 부드럽게 다가가고 싶다고 합니다.',
+            'Segun {name}, no es que la pasion por ti se haya apagado, es que no sabe como expresarla.',
+            'Segun {name}, le da miedo el futuro contigo. No es porque no este seguro/a, sino por miedo a perderte.',
+            'Segun {name}, esta nervioso/a porque los resultados no han sido los esperados. Pero no piensa en renunciar a ti.',
+            'Segun {name}, siente inestabilidad en la relacion contigo. Quiere volver a asentar las bases.',
+            'Segun {name}, quiere evitar conflictos innecesarios. No quiere pelearse contigo.',
+            'Segun {name}, esta triste porque siente que no le reconoces.',
+            'Segun {name}, esta agotado/a y quiere descansar un poco. Los sentimientos hacia ti no cambian.',
+            'Segun {name}, la situacion avanza lentamente y eso le desespera. Pide que esperes.',
+            'Segun {name}, esta al borde del burnout. Necesita una palabra amable tuya.',
+            'Segun {name}, le cuesta aguantar solo/a. Quiere apoyarse en ti.',
+            'Segun {name}, tiene algo que decirte pero aun no es el momento.',
+            'Segun {name}, se arrepiente de haber actuado de forma precipitada.',
+            'Segun {name}, ha perdido la confianza frente a ti. Quiere recuperarla.',
+            'Segun {name}, cree que ha ido demasiado fuerte. Quiere acercarse con mas suavidad.',
         ]
     },
     cups: {
-        theme: '감정',
+        theme: 'emocion',
         up: [
-            '{name}은(는) 당신에 대한 새로운 감정이 피어나고 있다고 합니다. 마음이 충만해지는 느낌이라고 합니다.',
-            '{name}은(는) 당신과 깊은 유대를 느끼고 있다고 합니다. 진정한 인연이라고 합니다.',
-            '{name}은(는) 당신과 함께하는 시간이 가장 즐겁다고 합니다. 웃음이 끊이지 않는다고 합니다.',
-            '{name}은(는) 당신의 소중함을 미처 몰랐다고 합니다. 이제야 눈이 떠졌다고 합니다.',
-            '{name}은(는) 당신 때문에 마음이 아팠지만, 그래서 더 소중하다는 걸 알게 됐다고 합니다.',
-            '{name}은(는) 당신과의 추억을 소중하게 간직하고 있다고 합니다. 그때가 그립다고 합니다.',
-            '{name}은(는) 당신에 대한 환상이 있다고 합니다. 하지만 현실의 당신이 더 좋다고 합니다.',
-            '{name}은(는) 더 깊은 관계로 나아가고 싶다고 합니다. 지금의 관계에 만족하지 못한다고 합니다.',
-            '{name}은(는) 당신과의 소원이 이루어지고 있다고 느끼고 있다고 합니다. 행복하다고 합니다.',
-            '{name}은(는) 당신과 함께하는 것이 완벽한 행복이라고 합니다. 더 바랄 것이 없다고 합니다.',
-            '{name}은(는) 당신에게 감성적인 메시지를 전하고 싶다고 합니다. 진심을 담은 고백이라고 합니다.',
-            '{name}은(는) 당신에게 로맨틱하게 다가가고 싶다고 합니다. 감정에 충실하고 싶다고 합니다.',
-            '{name}은(는) 당신의 감정을 깊이 이해하고 있다고 합니다. 말하지 않아도 안다고 합니다.',
-            '{name}은(는) 감정적으로 성숙한 관계를 원한다고 합니다. 당신과 함께 성장하고 싶다고 합니다.',
+            'Segun {name}, esta floreciendo un nuevo sentimiento hacia ti. Se siente con el corazon lleno.',
+            'Segun {name}, siente un vinculo profundo contigo. Dice que sois una conexion verdadera.',
+            'Segun {name}, el tiempo que pasa contigo es el mas divertido. Las risas no paran.',
+            'Segun {name}, no sabia lo valioso/a que eras. Ahora los ojos se le han abierto.',
+            'Segun {name}, sufrio por tu culpa, pero por eso ha comprendido que eres aun mas importante.',
+            'Segun {name}, guarda con carino los recuerdos contigo. Echa de menos aquellos momentos.',
+            'Segun {name}, tiene una ilusion sobre ti. Pero dice que la realidad le gusta mas.',
+            'Segun {name}, quiere pasar a una relacion mas profunda. No esta satisfecho/a con lo que hay ahora.',
+            'Segun {name}, siente que el deseo de estar contigo se esta cumpliendo. Es feliz.',
+            'Segun {name}, estar contigo es la felicidad perfecta. No le falta nada mas.',
+            'Segun {name}, quiere enviarte un mensaje emotivo. Es una confesion llena de sinceridad.',
+            'Segun {name}, quiere acercarse a ti de forma romantica. Quiere ser fiel a sus emociones.',
+            'Segun {name}, entiende profundamente tus emociones. Dice que lo sabe aunque no lo digas.',
+            'Segun {name}, quiere una relacion emocionalmente madura. Quiere crecer contigo.',
         ],
         down: [
-            '{name}은(는) 감정적으로 공허하다고 합니다. 당신이 그 빈자리를 채워줄 수 있다고 합니다.',
-            '{name}은(는) 관계의 균형이 무너진 것 같다고 합니다. 다시 맞추고 싶다고 합니다.',
-            '{name}은(는) 즐거움에 빠져 중요한 것을 놓치고 있었다고 합니다. 당신이 그걸 깨닫게 해줬다고 합니다.',
-            '{name}은(는) 새로운 기회를 받아들이기 시작했다고 합니다. 당신 덕분이라고 합니다.',
-            '{name}은(는) 과거의 슬픔에서 벗어나고 있다고 합니다. 당신이 치유해줬다고 합니다.',
-            '{name}은(는) 과거에 집착하고 있었다고 합니다. 이제 앞을 보겠다고 합니다.',
-            '{name}은(는) 환상에서 깨어나 현실의 당신을 보기 시작했다고 합니다.',
-            '{name}은(는) 떠나야 할 것을 알면서도 미련이 남는다고 합니다.',
-            '{name}은(는) 물질적인 것보다 당신의 마음이 중요하다는 걸 깨달았다고 합니다.',
-            '{name}은(는) 완벽을 추구하다 당신을 놓칠 뻔했다고 합니다.',
-            '{name}은(는) 감정적으로 미성숙했던 것을 반성하고 있다고 합니다.',
-            '{name}은(는) 비현실적인 기대를 내려놓았다고 합니다. 있는 그대로의 당신을 보겠다고 합니다.',
-            '{name}은(는) 감정에 압도당해 힘들다고 합니다. 당신의 안정감이 필요하다고 합니다.',
-            '{name}은(는) 감정을 억누르고 있었다고 합니다. 당신에게는 솔직해지고 싶다고 합니다.',
+            'Segun {name}, se siente emocionalmente vacio/a. Dice que tu puedes llenar ese hueco.',
+            'Segun {name}, siente que el equilibrio de la relacion se ha roto. Quiere reajustarlo.',
+            'Segun {name}, se estaba perdiendo cosas importantes por los placeres. Tu se lo has hecho ver.',
+            'Segun {name}, ha empezado a aceptar nuevas oportunidades. Dice que es gracias a ti.',
+            'Segun {name}, esta saliendo de la tristeza del pasado. Dices que le has sanado.',
+            'Segun {name}, estaba apegado/a al pasado. Ahora dice que mirara hacia adelante.',
+            'Segun {name}, ha despertado de las ilusiones y ha empezado a verte de verdad.',
+            'Segun {name}, sabe que deberia irse pero le queda apego.',
+            'Segun {name}, se ha dado cuenta de que tu corazon importa mas que lo material.',
+            'Segun {name}, casi te pierde por buscar la perfeccion.',
+            'Segun {name}, esta reflexionando sobre haber sido emocionalmente inmaduro/a.',
+            'Segun {name}, ha dejado de lado las expectativas poco realistas. Va a verte tal como eres.',
+            'Segun {name}, le esta costando soportar el peso de las emociones. Necesita tu estabilidad.',
+            'Segun {name}, estaba reprimiendo sus emociones. Dice que contigo quiere ser sincero/a.',
         ]
     },
     swords: {
-        theme: '생각',
+        theme: 'pensamiento',
         up: [
-            '{name}은(는) 당신에 대해 확실한 결론을 내렸다고 합니다. 흔들리지 않는 마음이라고 합니다.',
-            '{name}은(는) 당신과의 관계에서 결정을 내리지 못하고 있다고 합니다. 하지만 곧 답이 나올 거라고 합니다.',
-            '{name}은(는) 당신 때문에 마음이 아팠지만 그 아픔이 성장이 되었다고 합니다.',
-            '{name}은(는) 당신을 생각하며 쉬고 있다고 합니다. 재충전 중이라고 합니다.',
-            '{name}은(는) 당신과의 관계에서 불필요한 싸움은 하고 싶지 않다고 합니다.',
-            '{name}은(는) 어려운 시기를 지나 당신에게 다가가고 있다고 합니다. 거의 도착했다고 합니다.',
-            '{name}은(는) 당신에게 솔직하지 못했던 것을 반성하고 있다고 합니다. 앞으로는 정직하겠다고 합니다.',
-            '{name}은(는) 스스로 만든 벽을 허물고 당신에게 다가가려 한다고 합니다.',
-            '{name}은(는) 당신에 대한 걱정으로 잠을 못 이루고 있다고 합니다. 그만큼 신경 쓰인다고 합니다.',
-            '{name}은(는) 바닥을 쳤지만 다시 일어서고 있다고 합니다. 당신이 일어서는 이유라고 합니다.',
-            '{name}은(는) 당신에 대해 더 알고 싶다고 합니다. 호기심이 가득하다고 합니다.',
-            '{name}은(는) 당신을 위해 결단력 있게 행동하겠다고 합니다. 더 이상 망설이지 않겠다고 합니다.',
-            '{name}은(는) 당신의 진가를 알아보고 있다고 합니다. 명확하게 판단하고 있다고 합니다.',
-            '{name}은(는) 공정하고 현명하게 당신과의 관계를 이끌고 싶다고 합니다.',
+            'Segun {name}, ha llegado a una conclusion clara sobre ti. Es un sentimiento inamovible.',
+            'Segun {name}, no ha podido decidirse en la relacion contigo. Pero pronto llegara a una respuesta.',
+            'Segun {name}, sufrio por tu culpa pero ese dolor se convirtio en crecimiento.',
+            'Segun {name}, esta descansando pensando en ti. Esta recargando energias.',
+            'Segun {name}, no quiere peleas innecesarias en la relacion contigo.',
+            'Segun {name}, esta atravesando un periodo dificil para acercarse a ti. Ya casi llega.',
+            'Segun {name}, se arrepiente de no haber sido sincero/a contigo. A partir de ahora sera honesto/a.',
+            'Segun {name}, esta intentando derribar el muro que se ha construido para acercarse a ti.',
+            'Segun {name}, no puede dormir de preocuparse por ti. Asi de importante eres para el/ella.',
+            'Segun {name}, toco fondo pero se esta levantando. Tu eres la razon para levantarse.',
+            'Segun {name}, quiere conocerte mas. Dice que esta lleno/a de curiosidad.',
+            'Segun {name}, va a actuar con decision por ti. No va a dudar mas.',
+            'Segun {name}, esta reconociendo tu verdadero valor. Lo esta juzgando con claridad.',
+            'Segun {name}, quiere guiar la relacion contigo de forma justa y sabia.',
         ],
         down: [
-            '{name}은(는) 혼란스럽다고 합니다. 당신에 대한 판단이 흐려져 있다고 합니다.',
-            '{name}은(는) 결정을 미루고 있었지만 이제 답이 보이기 시작했다고 합니다.',
-            '{name}은(는) 상처에서 회복 중이라고 합니다. 시간이 필요하다고 합니다.',
-            '{name}은(는) 쉬지 못하고 무리하고 있다고 합니다. 당신이 쉬게 해줬으면 한다고 합니다.',
-            '{name}은(는) 자존심을 내려놓겠다고 합니다. 당신 앞에서는 약해져도 괜찮다고 합니다.',
-            '{name}은(는) 변화를 받아들이기 시작했다고 합니다. 당신과 함께라면 괜찮다고 합니다.',
-            '{name}은(는) 앞으로는 정직하게 다가가겠다고 합니다. 속임수 같은 건 없다고 합니다.',
-            '{name}은(는) 자기가 만든 제한에서 벗어나기 시작했다고 합니다. 자유로워지고 있다고 합니다.',
-            '{name}은(는) 걱정을 내려놓기 시작했다고 합니다. 당신 덕분이라고 합니다.',
-            '{name}은(는) 최악의 시기가 지나가고 있다고 합니다. 희망이 보인다고 합니다.',
-            '{name}은(는) 가벼운 소문에 신경 쓰지 말라고 합니다. 진심은 따로 있다고 합니다.',
-            '{name}은(는) 성급했던 것을 반성하고 있다고 합니다. 천천히 가겠다고 합니다.',
-            '{name}은(는) 너무 차갑게 대한 것 같다고 합니다. 따뜻해지고 싶다고 합니다.',
-            '{name}은(는) 독단적이었던 것을 반성한다고 합니다. 당신의 의견도 듣겠다고 합니다.',
+            'Segun {name}, esta confuso/a. Su juicio sobre ti esta nublado.',
+            'Segun {name}, estaba postergando la decision, pero ahora empieza a ver la respuesta.',
+            'Segun {name}, esta recuperandose de la herida. Necesita tiempo.',
+            'Segun {name}, esta esforzandose demasiado sin descansar. Quisiera que tu le ayudaras a descansar.',
+            'Segun {name}, va a dejar el orgullo a un lado. Dice que ante ti esta bien ser debil.',
+            'Segun {name}, ha empezado a aceptar el cambio. Dice que contigo esta bien.',
+            'Segun {name}, a partir de ahora se acercara con honestidad. Dice que no hay ningun engano.',
+            'Segun {name}, ha empezado a liberarse de los limites que se habia impuesto. Se esta volviendo libre.',
+            'Segun {name}, ha empezado a soltar las preocupaciones. Dice que es gracias a ti.',
+            'Segun {name}, lo peor esta pasando. Dice que ve la esperanza.',
+            'Segun {name}, dice que no prestes atencion a los rumores sin fundamento. La verdad es diferente.',
+            'Segun {name}, se arrepiente de haber sido precipitado/a. Ira despacio.',
+            'Segun {name}, cree que fue demasiado frio/a. Quiere ser mas calido/a.',
+            'Segun {name}, reflexiona sobre haber sido autoritario/a. Quiere escuchar tambien tu opinion.',
         ]
     },
     pentacles: {
-        theme: '현실',
+        theme: 'realidad',
         up: [
-            '{name}은(는) 당신과의 관계에 진지하게 투자하고 싶다고 합니다. 확실한 마음이라고 합니다.',
-            '{name}은(는) 당신과 여러 가지를 동시에 해내고 싶다고 합니다. 바쁘지만 당신이 우선이라고 합니다.',
-            '{name}은(는) 당신과 함께 일하면 최고의 결과가 나온다고 합니다. 환상의 팀이라고 합니다.',
-            '{name}은(는) 당신과의 관계를 안전하게 지키고 싶다고 합니다. 소중하기 때문이라고 합니다.',
-            '{name}은(는) 힘든 시기를 겪고 있지만 당신이 가까이에 있어 위안이 된다고 합니다.',
-            '{name}은(는) 당신에게 아낌없이 주고 싶다고 합니다. 관대한 마음이라고 합니다.',
-            '{name}은(는) 당신을 위해 인내하며 기다리고 있다고 합니다. 반드시 좋은 결과가 올 거라고 합니다.',
-            '{name}은(는) 당신을 위해 더 나은 사람이 되려고 노력 중이라고 합니다. 갈고닦는 중이라고 합니다.',
-            '{name}은(는) 당신과 함께 독립적이고 풍요로운 관계를 만들고 싶다고 합니다.',
-            '{name}은(는) 당신과 오래오래 함께하고 싶다고 합니다. 영원한 관계를 꿈꾸고 있다고 합니다.',
-            '{name}은(는) 당신에 대해 성실하게 배우고 있다고 합니다. 천천히 알아가고 싶다고 합니다.',
-            '{name}은(는) 느리지만 확실하게 당신에게 다가가고 있다고 합니다. 꾸준함이 무기라고 합니다.',
-            '{name}은(는) 당신과의 관계에서 현실적이면서도 따뜻한 균형을 잡고 싶다고 합니다.',
-            '{name}은(는) 당신과 함께 큰 성공을 거두고 싶다고 합니다. 풍요로운 미래를 약속한다고 합니다.',
+            'Segun {name}, quiere invertir seriamente en la relacion contigo. Es un sentimiento firme.',
+            'Segun {name}, quiere hacer muchas cosas a la vez contigo. Aunque este ocupado/a, tu eres la prioridad.',
+            'Segun {name}, trabajar contigo da los mejores resultados. Sois el equipo perfecto.',
+            'Segun {name}, quiere proteger la relacion contigo de forma segura. Porque te valora.',
+            'Segun {name}, esta pasando por un momento dificil, pero tu cerca de el/ella le sirve de consuelo.',
+            'Segun {name}, quiere darte sin reservas. Es un corazon generoso.',
+            'Segun {name}, esta esperando con paciencia por ti. Dice que seguramente llegara un buen resultado.',
+            'Segun {name}, esta esforzandose por ser mejor persona para ti. Esta puliendose.',
+            'Segun {name}, quiere construir una relacion independiente y prospera contigo.',
+            'Segun {name}, quiere estar contigo por mucho, mucho tiempo. Suena con una relacion eterna.',
+            'Segun {name}, te esta conociendo con dedicacion. Quiere ir descubriendote poco a poco.',
+            'Segun {name}, se esta acercando a ti lenta pero seguramente. Su arma es la constancia.',
+            'Segun {name}, quiere encontrar un equilibrio realista pero calido en la relacion contigo.',
+            'Segun {name}, quiere alcanzar un gran exito contigo. Promete un futuro prospero.',
         ],
         down: [
-            '{name}은(는) 기회를 놓친 것 같아 아쉽다고 합니다. 다음에는 놓치지 않겠다고 합니다.',
-            '{name}은(는) 균형을 잃고 무너질 뻔했다고 합니다. 당신이 잡아줬다고 합니다.',
-            '{name}은(는) 혼자서만 해결하려다 실패했다고 합니다. 당신과 함께 하겠다고 합니다.',
-            '{name}은(는) 너무 움켜쥐고 있었다고 합니다. 놓아주는 법을 배우겠다고 합니다.',
-            '{name}은(는) 최악의 상황이 지나가고 있다고 합니다. 회복의 빛이 보인다고 합니다.',
-            '{name}은(는) 주고받음의 균형이 무너졌다고 느끼고 있다고 합니다. 다시 맞추고 싶다고 합니다.',
-            '{name}은(는) 조급해하지 말라고 합니다. 거의 다 왔다고 합니다. 포기하지 말라고 합니다.',
-            '{name}은(는) 반복되는 일상에 지쳤다고 합니다. 당신이 새로운 자극이 되어줬다고 합니다.',
-            '{name}은(는) 독립하고 싶지만 불안하다고 합니다. 당신이 옆에 있어주면 괜찮겠다고 합니다.',
-            '{name}은(는) 물질보다 당신과의 관계가 중요하다는 걸 깨달았다고 합니다.',
-            '{name}은(는) 현실적이지 못했던 것을 반성한다고 합니다. 발을 땅에 딛겠다고 합니다.',
-            '{name}은(는) 너무 느려서 미안하다고 합니다. 하지만 확실한 마음이라고 합니다.',
-            '{name}은(는) 자기 돌봄이 부족했다고 합니다. 건강해져서 당신에게 돌아가겠다고 합니다.',
-            '{name}은(는) 욕심을 부렸다고 합니다. 당신에게 진심으로 다가가겠다고 합니다.',
+            'Segun {name}, esta triste por haber perdido la oportunidad. La proxima vez no la dejara escapar.',
+            'Segun {name}, estaba a punto de derrumbarse por perder el equilibrio. Dices que le sujetaste.',
+            'Segun {name}, intento resolverlo solo/a y fracaso. Dice que lo hara contigo.',
+            'Segun {name}, estaba apretando demasiado. Va a aprender a soltar.',
+            'Segun {name}, lo peor esta pasando. Se ve la luz de la recuperacion.',
+            'Segun {name}, siente que el equilibrio en el dar y recibir se ha roto. Quiere reajustarlo.',
+            'Segun {name}, dice que no te impacientes. Dice que ya casi llegas. Que no te rindas.',
+            'Segun {name}, esta cansado/a de la rutina que se repite. Dice que tu le has dado un nuevo estimulo.',
+            'Segun {name}, quiere ser independiente pero esta nervioso/a. Dice que si tu estas a su lado estara bien.',
+            'Segun {name}, se ha dado cuenta de que la relacion contigo importa mas que lo material.',
+            'Segun {name}, reflexiona sobre no haber sido practico/a. Va a poner los pies en el suelo.',
+            'Segun {name}, lo siente por haber sido tan lento/a. Pero dice que es un sentimiento firme.',
+            'Segun {name}, dice que le ha faltado cuidarse. Va a recuperarse y volver contigo.',
+            'Segun {name}, dice que fue demasiado ambicioso/a. Va a acercarse a ti con sinceridad.',
         ]
     }
 };
@@ -340,7 +314,7 @@ function convertToOshi(card, name) {
     return (texts[idx] || texts[0]).replace(/\{name\}/g, name);
 }
 
-let selectedTopic = '오늘';
+let selectedTopic = 'hoy';
 
 function setTopic(btn, topic) {
     selectedTopic = topic;
@@ -359,8 +333,8 @@ function setMode(m) {
     document.getElementById('oshiBox').style.display = m === 'oshi' ? 'block' : 'none';
     document.getElementById('questionBox').style.display = m === 'oshi' ? 'none' : 'block';
     document.getElementById('spreadNormal').style.display = m === 'normal' ? 'flex' : 'none';
-    if (m === 'oshi') { spreadCount = 3; } // 최애 모드는 3장 고정
-    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 카드 섞기' : '🔮 카드 섞기';
+    if (m === 'oshi') { spreadCount = 3; }
+    document.getElementById('drawBtn').innerHTML = m === 'oshi' ? '💜 Barajar las cartas' : '🔮 Barajar las cartas';
 }
 
 function setSpread(n) {
@@ -383,10 +357,8 @@ function startDraw() {
     drawnCards = [];
     pickedCount = 0;
 
-    // Shuffle full 78-card deck
     shuffledDeck = [...ALL_CARDS].sort(() => Math.random() - 0.5);
 
-    // Display cards based on spread count
     const displayCount = spreadCount === 1 ? 7 : spreadCount === 3 ? 12 : 15;
     for (let i = 0; i < displayCount; i++) {
         const cardEl = document.createElement('div');
@@ -404,7 +376,6 @@ function startDraw() {
         `;
         cardEl.onclick = () => pickCard(i, cardEl);
 
-        // Animate in with delay
         cardEl.style.opacity = '0';
         setTimeout(() => {
             area.appendChild(cardEl);
@@ -412,63 +383,55 @@ function startDraw() {
         }, i * 80);
     }
 
-    // Show instruction
     document.getElementById('pickInstruction').style.display = 'block';
-    document.getElementById('pickText').innerHTML = `카드를 <strong>${spreadCount}장</strong> 선택하세요`;
+    document.getElementById('pickText').innerHTML = `Elige <strong>${spreadCount} carta${spreadCount > 1 ? 's' : ''}</strong>`;
 
-    // Hide draw button, show reset
-    document.getElementById('drawBtn').innerHTML = '🔄 다시 섞기';
+    document.getElementById('drawBtn').innerHTML = '🔄 Volver a barajar';
 }
 
 function pickCard(index, cardEl) {
     if (cardEl.classList.contains('flipped') || pickedCount >= spreadCount) return;
 
-    // Assign a card from shuffled deck
     const card = shuffledDeck[index];
     card.reversed = Math.random() < 0.3;
 
-    // Set card front content
     const front = document.getElementById('front-' + index);
-    const suitLabels = {major:'메이저',wands:'완드',cups:'컵',swords:'소드',pentacles:'펜타클'};
+    const suitLabels = {major:'Mayor',wands:'Bastos',cups:'Copas',swords:'Espadas',pentacles:'Oros'};
     front.className = 'card-front' + (card.reversed ? ' reversed' : '');
     front.innerHTML = `
         <div class="card-number" style="font-size:10px;color:#666;">${suitLabels[card.suit] || ''}</div>
         <div class="card-emoji">${card.emoji}</div>
         <div class="card-name">${card.name}</div>
-        ${card.reversed ? '<div class="card-direction">역방향 ↓</div>' : ''}
+        ${card.reversed ? '<div class="card-direction">Invertida ↓</div>' : ''}
     `;
 
-    // Flip animation
     cardEl.classList.add('flipped');
     cardEl.classList.add('selected');
     drawnCards.push(card);
     pickedCount++;
 
-    // Update instruction
     const remaining = spreadCount - pickedCount;
     if (remaining > 0) {
-        document.getElementById('pickText').innerHTML = `<strong>${remaining}장</strong> 더 선택하세요`;
+        document.getElementById('pickText').innerHTML = `Elige <strong>${remaining} carta${remaining > 1 ? 's' : ''}</strong> mas`;
     } else {
-        document.getElementById('pickText').innerHTML = '✨ 모든 카드를 선택했습니다!';
+        document.getElementById('pickText').innerHTML = '✨ Has elegido todas las cartas!';
 
-        // Dim unselected cards
         document.querySelectorAll('.tarot-card:not(.flipped)').forEach(c => c.classList.add('dimmed'));
 
-        // Show reading after delay
         setTimeout(showReading, 1000);
     }
 }
 
 function showReading() {
     const section = document.getElementById('readingSection');
-    const oshiName = document.getElementById('oshiName')?.value?.trim() || '그 사람';
+    const oshiName = document.getElementById('oshiName')?.value?.trim() || 'esa persona';
     const isOshi = mode === 'oshi';
 
     let positions;
     if (isOshi) {
-        positions = spreadCount === 3 ? OSHI_POSITIONS_3 : spreadCount === 5 ? OSHI_POSITIONS_5 : [oshiName + '의 한마디'];
+        positions = spreadCount === 3 ? OSHI_POSITIONS_3 : spreadCount === 5 ? OSHI_POSITIONS_5 : ['Un mensaje de ' + oshiName];
     } else {
-        positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : ['오늘의 카드'];
+        positions = spreadCount === 3 ? POSITIONS_3 : spreadCount === 5 ? POSITIONS_5 : ['La carta del dia'];
     }
     let html = '';
 
@@ -480,27 +443,25 @@ function showReading() {
                 const oshi = OSHI_READINGS[card.num];
                 reading = (card.reversed ? oshi.down : oshi.up).replace(/\{name\}/g, oshiName);
             } else {
-                // 마이너 아르카나 최애 변환
                 reading = convertToOshi(card, oshiName);
             }
         } else {
             reading = card.reversed ? card.down : card.up;
         }
-        const dir = card.reversed ? '(역방향 ↓)' : '(정방향 ↑)';
+        const dir = card.reversed ? '(Invertida ↓)' : '(Derecha ↑)';
         const titlePrefix = isOshi ? `💜 ${oshiName} — ` : '';
 
         html += `
             <div class="reading-card">
                 <div class="reading-title">${card.emoji} ${titlePrefix}${posName ? posName + ': ' : ''}${card.name} ${dir}</div>
                 <div class="reading-text">
-                    <strong>${card.en} — ${card.num}번</strong><br><br>
+                    <strong>${card.en} — n.º ${card.num}</strong><br><br>
                     ${reading}
                 </div>
             </div>
         `;
     });
 
-    // 종합 해석 (3장 이상)
     if (spreadCount >= 3) {
         const mainTheme = drawnCards[Math.floor(drawnCards.length / 2)];
         const upCount = drawnCards.filter(c => !c.reversed).length;
@@ -509,24 +470,24 @@ function showReading() {
         if (isOshi) {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">💜 ${oshiName}의 종합적인 마음</div>
+                    <div class="reading-title">💜 Los sentimientos de ${oshiName} en conjunto</div>
                     <div class="reading-text">
-                        핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.<br><br>
-                        정방향 ${upCount}장, 역방향 ${downCount}장.<br>
-                        ${upCount > downCount ? `<strong>${oshiName}은(는) 전체적으로 당신에게 긍정적인 감정을 가지고 있다고 합니다.</strong> 마음을 열고 다가가도 좋을 것 같다고 합니다.` : `<strong>${oshiName}은(는) 복잡한 감정 속에 있다고 합니다.</strong> 하지만 마음 깊은 곳에서는 당신을 소중하게 여기고 있다고 합니다. 시간이 필요할 뿐이라고 합니다.`}
+                        La carta central es <strong>${mainTheme.emoji} ${mainTheme.name}</strong>.<br><br>
+                        ${upCount} carta${upCount !== 1 ? 's' : ''} derecha${upCount !== 1 ? 's' : ''}, ${downCount} invertida${downCount !== 1 ? 's' : ''}.<br>
+                        ${upCount > downCount ? `<strong>Segun ${oshiName}, en general siente emociones positivas hacia ti.</strong> Parece que puedes acercarte con el corazon abierto.` : `<strong>Segun ${oshiName}, esta en medio de emociones complejas.</strong> Pero en lo mas profundo de su corazon te tiene en alta estima. Solo necesita tiempo.`}
                     </div>
                 </div>
             `;
         } else {
             html += `
                 <div class="reading-card">
-                    <div class="reading-title">🔮 종합 해석</div>
+                    <div class="reading-title">🔮 Interpretacion general</div>
                     <div class="reading-text">
-                        이 리딩의 핵심 카드는 <strong>${mainTheme.emoji} ${mainTheme.name}</strong>입니다.
-                        ${mainTheme.reversed ? '역방향으로 나왔으므로, ' + mainTheme.down.split('.')[0] + '에 주의하세요.' : mainTheme.up.split('.')[0] + '의 에너지가 강합니다.'}
+                        La carta central de esta lectura es <strong>${mainTheme.emoji} ${mainTheme.name}</strong>.
+                        ${mainTheme.reversed ? 'Ha salido invertida, asi que ten cuidado con: ' + mainTheme.down.split('.')[0] + '.' : 'La energia de ' + mainTheme.up.split('.')[0] + ' es dominante.'}
                         <br><br>
-                        전체적으로 ${upCount}장이 정방향, ${downCount}장이 역방향입니다.
-                        ${downCount > spreadCount / 2 ? '도전적인 시기이지만, 역방향 카드는 내면의 성장을 의미하기도 합니다.' : '긍정적인 에너지가 우세합니다. 자신감을 가지세요.'}
+                        En total, ${upCount} carta${upCount !== 1 ? 's' : ''} derecha${upCount !== 1 ? 's' : ''} y ${downCount} invertida${downCount !== 1 ? 's' : ''}.
+                        ${downCount > spreadCount / 2 ? 'Es un periodo desafiante, pero las cartas invertidas tambien pueden indicar crecimiento interior.' : 'La energia positiva predomina. Ten confianza en ti mismo/a.'}
                     </div>
                 </div>
             `;
