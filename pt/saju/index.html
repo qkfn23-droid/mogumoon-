@@ -708,14 +708,44 @@ function calculate() {
         if (!hasSpouseGod) genderSpouseText += '<strong>A estrela conjugal (estrela oficial) não está no seu Saju:</strong> O casamento pode ser tardio ou o vínculo com o cônjuge pode ser fraco. É preciso buscar ativamente por relacionamentos.<br>';
     }
 
+    // Aparência da estrela conjugal (baseada no elemento do Tronco Celestial)
+    const SPOUSE_STAR_APPEARANCE = {
+        'Madeira': 'Físico alto e esguio. Atmosfera suave e natural. Postura ereta como uma árvore.',
+        'Fogo':    'Olhos brilhantes e sorriso atraente. Impressão viva e calorosa. Energia radiante e vibrante.',
+        'Terra':   'Impressão estável e acolhedora. Traços faciais arredondados. Presença confiável e reconfortante.',
+        'Metal':   'Aparência cuidada e bem arrumada. Traços faciais nítidos e definidos. Refinado com um charme frio.',
+        'Água':    'Olhos misteriosos e profundos. Impressão calma e intelectual. Discreto, mas de magnetismo irresistível.'
+    };
+
+    // Encontrar o tronco da estrela conjugal (em todos os pilares)
+    let spouseStarStem = null;
+    allPillars.forEach((p) => {
+        const god = getTenGod(dayStem, p.stem);
+        if (spouseGods.includes(god) && !spouseStarStem) {
+            spouseStarStem = p.stem;
+        }
+    });
+
+    const spouseStarEl = spouseStarStem !== null ? ELEMENTS[spouseStarStem] : null;
+    const spouseStarAppText = spouseStarEl ? SPOUSE_STAR_APPEARANCE[spouseStarEl] : '';
+
     // Cônjuge
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+
+    // Interpretação combinada: Ramo do Dia + Estrela Conjugal
+    let combinedApp = '<strong>📐 Aparência &amp; Primeira Impressão do Cônjuge:</strong><br>';
+    combinedApp += `<strong>▸ Palácio do Cônjuge (${spouseBranch}):</strong> ${spouseApp}<br>`;
+    if (spouseStarEl) {
+        combinedApp += `<br><strong>▸ Estrela Conjugal (${spouseStarEl}):</strong> ${spouseStarAppText}<br>`;
+        combinedApp += `<br><strong>▸ Combinado:</strong> Por fora, ${spouseApp.split('.')[0].toLowerCase()}, mas por dentro, ${spouseStarAppText.split('.')[0].toLowerCase()}. Dois encantos coexistem.<br>`;
+    }
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Palácio do Cônjuge (Ramo do Dia: ${spouseBranch}) — Perspectiva ${gender === 'm' ? 'Masculina' : 'Feminina'}</div>
             <div class="interp-text">
-                <strong>📐 Aparência &amp; Primeira Impressão do Cônjuge:</strong><br>${spouseApp}<br><br>
+                ${combinedApp}<br>
                 ${genderSpouseText}<br>
                 <strong>💑 Namoro &amp; Casamento:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 Sorte com Filhos (Pilar da Hora: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}

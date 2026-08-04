@@ -727,14 +727,44 @@ function calculate() {
         if (!hasSpouseGod) genderSpouseText += '<strong>No spouse star (Officer star) in your chart:</strong> Marriage may come late, or the bond with a spouse may be weak. You need to actively seek out connections.<br>';
     }
 
+    // Spouse star appearance (based on Heavenly Stem element)
+    const SPOUSE_STAR_APPEARANCE = {
+        'Wood':  'Tall and slender build. A soft, natural atmosphere. Upright posture like a tree.',
+        'Fire':  'Bright eyes and an attractive smile. Lively and warm impression. A radiant, vibrant energy.',
+        'Earth': 'A stable and warm impression. Rounded facial features. A reliable and comforting presence.',
+        'Metal': 'A neat and well-groomed appearance. Sharp, defined facial features. Refined with a cool allure.',
+        'Water': 'Mysterious and deep eyes. A calm, intellectual impression. Quiet yet irresistibly magnetic.'
+    };
+
+    // Find spouse star stem (from Heavenly Stems across all pillars)
+    let spouseStarStem = null;
+    allPillars.forEach((p) => {
+        const god = getTenGod(dayStem, p.stem);
+        if (spouseGods.includes(god) && !spouseStarStem) {
+            spouseStarStem = p.stem;
+        }
+    });
+
+    const spouseStarEl = spouseStarStem !== null ? ELEMENTS[spouseStarStem] : null;
+    const spouseStarAppText = spouseStarEl ? SPOUSE_STAR_APPEARANCE[spouseStarEl] : '';
+
     // Spouse section
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+
+    // Day Branch + Spouse Star combined interpretation
+    let combinedApp = '<strong>📐 Spouse Appearance &amp; First Impression:</strong><br>';
+    combinedApp += `<strong>▸ Spouse Palace (${spouseBranch}):</strong> ${spouseApp}<br>`;
+    if (spouseStarEl) {
+        combinedApp += `<br><strong>▸ Spouse Star (${spouseStarEl}):</strong> ${spouseStarAppText}<br>`;
+        combinedApp += `<br><strong>▸ Combined:</strong> On the outside, ${spouseApp.split('.')[0].toLowerCase()}, but on the inside, ${spouseStarAppText.split('.')[0].toLowerCase()}. Two charms coexist.<br>`;
+    }
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Spouse Palace (Day Branch: ${spouseBranch}) — ${gender === 'm' ? 'Male' : 'Female'} perspective</div>
             <div class="interp-text">
-                <strong>📐 Spouse Appearance &amp; First Impression:</strong><br>${spouseApp}<br><br>
+                ${combinedApp}<br>
                 ${genderSpouseText}<br>
                 <strong>💑 Romance &amp; Marriage:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 Children Fortune (Hour Pillar: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}

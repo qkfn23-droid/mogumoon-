@@ -719,14 +719,44 @@ function calculate() {
         if (!hasSpouseGod) genderSpouseText += '<strong>Kein Partnergoett (Offiziersstern) im BaZi:</strong> Die Heirat kann sich verzoegern oder die Verbindung zum Partner ist moeglicherweise schwach. Sie muessen aktiv Begegnungen suchen.<br>';
     }
 
+    // Partnersterneaussehen (basierend auf dem Element des Himmelsstammes)
+    const SPOUSE_STAR_APPEARANCE = {
+        'Holz':   'Grossgewachsen und schlank. Sanfte, natuerliche Ausstrahlung. Aufrechte Haltung wie ein Baum.',
+        'Feuer':  'Helle Augen und ein attraktives Laecheln. Lebhafter und warmer Eindruck. Strahlende, lebendige Energie.',
+        'Erde':   'Stabiler und geborgener Eindruck. Runde Gesichtszuege. Zuverlaessige und troestliche Gegenwart.',
+        'Metall': 'Gepflegtes und ordentliches Aeusseres. Scharfe, klare Gesichtszuege. Raffiniert mit kuehlem Charme.',
+        'Wasser': 'Geheimnisvolle, tiefe Augen. Ruhiger, intellektueller Eindruck. Still, aber unwiderstehlich anziehend.'
+    };
+
+    // Partnerstamm ermitteln (aus allen Saeulenstammen)
+    let spouseStarStem = null;
+    allPillars.forEach((p) => {
+        const god = getTenGod(dayStem, p.stem);
+        if (spouseGods.includes(god) && !spouseStarStem) {
+            spouseStarStem = p.stem;
+        }
+    });
+
+    const spouseStarEl = spouseStarStem !== null ? ELEMENTS[spouseStarStem] : null;
+    const spouseStarAppText = spouseStarEl ? SPOUSE_STAR_APPEARANCE[spouseStarEl] : '';
+
     // Partner
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+
+    // Tageszweig + Partnerstern Gesamtinterpretation
+    let combinedApp = '<strong>📐 Partneraussehen &amp; Ersteindruck:</strong><br>';
+    combinedApp += `<strong>▸ Partnerpalast (${spouseBranch}):</strong> ${spouseApp}<br>`;
+    if (spouseStarEl) {
+        combinedApp += `<br><strong>▸ Partnerstern (${spouseStarEl}):</strong> ${spouseStarAppText}<br>`;
+        combinedApp += `<br><strong>▸ Zusammenfassung:</strong> Aeusserlich ${spouseApp.split('.')[0].toLowerCase()}, aber innerlich ${spouseStarAppText.split('.')[0].toLowerCase()}. Zwei Reize koexistieren.<br>`;
+    }
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 Partnerpalast (Tageszweig: ${spouseBranch}) — ${gender === 'm' ? 'Maennlich' : 'Weiblich'}</div>
             <div class="interp-text">
-                <strong>📐 Partneraussehen &amp; Ersteindruck:</strong><br>${spouseApp}<br><br>
+                ${combinedApp}<br>
                 ${genderSpouseText}<br>
                 <strong>💑 Liebe &amp; Ehe:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 Kinderglueck (Stunden-Saeule: ' + hourGod + '):</strong><br>' + hourInterp.children : ''}

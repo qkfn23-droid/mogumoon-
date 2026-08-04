@@ -724,14 +724,44 @@ function calculate() {
         if (!hasSpouseGod) genderSpouseText += '<strong>配偶者星（官星）が四柱にありません:</strong> 結婚が遅れるか、配偶者との縁が弱いことがあります。積極的に出会いを求める必要があります。<br>';
     }
 
+    // 配偶者星の外見（天干の五行基準）
+    const SPOUSE_STAR_APPEARANCE = {
+        '木': 'キが高くスリムな体型。柔らかく自然な雰囲気。木のようにまっすぐな姿勢。',
+        '火': '目が明るく笑顔が魅力的。活発で温かい印象。華やかで生き生きとしたエネルギー。',
+        '土': '安定していてポかな印象。丸みのある顔立ち。信頼感があり、そばにいると安心する存在。',
+        '金': '清潔感があり、きっちりとした外見。きりっとした目鼻立ち。洗練されたクールな魅力。',
+        '水': '神秘的で深みのある目。落ち着いた知的な印象。静かだけど惹かれてしまう不思議な魅力。'
+    };
+
+    // 配偶者星の天干を探す（四柱全体から）
+    let spouseStarStem = null;
+    allPillars.forEach((p) => {
+        const god = getTenGod(dayStem, p.stem);
+        if (spouseGods.includes(god) && !spouseStarStem) {
+            spouseStarStem = p.stem;
+        }
+    });
+
+    const spouseStarEl = spouseStarStem !== null ? ELEMENTS[spouseStarStem] : null;
+    const spouseStarAppText = spouseStarEl ? SPOUSE_STAR_APPEARANCE[spouseStarEl] : '';
+
     // 配偶者
     const spouseBranch = BRANCHES[dp.branch];
     const spouseApp = SPOUSE_APPEARANCE[spouseBranch] || '';
+
+    // 日支 + 配偶者星 総合解釈
+    let combinedApp = '<strong>📐 配偶者の外見 &amp; 第一印象:</strong><br>';
+    combinedApp += `<strong>▸ 配偶者宮（${spouseBranch}）:</strong> ${spouseApp}<br>`;
+    if (spouseStarEl) {
+        combinedApp += `<br><strong>▸ 配偶者星（${spouseStarEl}）:</strong> ${spouseStarAppText}<br>`;
+        combinedApp += `<br><strong>▸ 総合:</strong> 外見は${spouseApp.split('。')[0]}ですが、内面には${spouseStarAppText.split('。')[0]}を持つ人。二つの魅力が共存します。<br>`;
+    }
+
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💕 配偶者宮（日支：${spouseBranch}）— ${gender === 'm' ? '男性' : '女性'}基準</div>
             <div class="interp-text">
-                <strong>📐 配偶者の外見 &amp; 第一印象:</strong><br>${spouseApp}<br><br>
+                ${combinedApp}<br>
                 ${genderSpouseText}<br>
                 <strong>💑 恋愛 &amp; 結婚:</strong><br>${dm.love}
                 ${hourInterp ? '<br><br><strong>👶 子供運（時柱: ' + hourGod + '）:</strong><br>' + hourInterp.children : ''}
