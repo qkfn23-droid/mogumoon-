@@ -29,32 +29,28 @@
         .draw-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #8e44ad, #9b59b6); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
         .draw-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(155,89,182,0.3); }
 
-        .cards-area { display: grid; grid-template-columns: repeat(4, 140px); gap: 12px; justify-content: center; margin-bottom: 30px; }
-        
+        .cards-area { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
 
-        .tarot-card { width: 140px; height: 210px; border-radius: 12px; cursor: pointer; perspective: 600px; flex-shrink: 0; }
-        .tarot-card .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
+        .tarot-card { width: 120px; height: 180px; cursor: pointer; perspective: 800px; }
+        .tarot-card .card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s; }
         .tarot-card.flipped .card-inner { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .card-back { background: linear-gradient(135deg, #2a1540, #1a0d2e); border: 2px solid #9b59b6; overflow: hidden; position: relative; }
-        .card-back::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(155,89,182,0.3); border-radius: 8px; }
-        .card-back::after { content: '✦'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 28px; color: rgba(155,89,182,0.5); text-shadow: 0 0 10px rgba(155,89,182,0.3); }
-        .card-back .stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(155,89,182,0.25) 1px, transparent 1px); background-size: 18px 18px; }
-        .card-back .pattern { display: none; }
-        .card-back .pattern { font-size: 40px; opacity: 0.5; }
-        .card-back .label { font-size: 9px; color: rgba(155,89,182,0.5); letter-spacing: 3px; position: absolute; bottom: 10px; }
-        .card-front { background: linear-gradient(135deg, #1a0d2e, #0d0520); border: 2px solid #c39bd3; transform: rotateY(180deg); padding: 12px; }
-        .card-front .card-emoji { font-size: 48px; margin-bottom: 8px; }
-        .card-front .card-name { font-size: 13px; color: #c39bd3; font-weight: 700; text-align: center; margin-bottom: 4px; }
-        .card-front .card-number { font-size: 11px; color: #777; }
-        .card-front .card-direction { font-size: 10px; color: #e74c3c; margin-top: 4px; }
-        .card-front.reversed { transform: rotateY(180deg); }
-        .card-front.reversed .card-direction { color: #e74c3c; font-weight: 700; }
 
-        .tarot-card:hover:not(.flipped):not(.dimmed) { box-shadow: 0 0 12px rgba(155,89,182,0.4); }
-        .tarot-card.dimmed { opacity: 0.2; pointer-events: none; filter: grayscale(1); }
-        .tarot-card.flipped { box-shadow: 0 0 15px rgba(155,89,182,0.5); }
-        @media (max-width: 500px) { .card-front .card-emoji { font-size: 28px; } .card-front .card-name { font-size: 9px; } }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        .card-back { background: linear-gradient(135deg, #2a1540, #1a0d2e); border: 2px solid #9b59b6; overflow: hidden; }
+        .card-back::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(155,89,182,0.3); border-radius: 6px; }
+        .card-back::after { content: "✦"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 24px; color: rgba(155,89,182,0.5); }
+        .card-back .stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(155,89,182,0.2) 1px, transparent 1px); background-size: 16px 16px; }
+        .card-back .label { font-size: 8px; color: rgba(155,89,182,0.4); letter-spacing: 3px; position: absolute; bottom: 8px; }
+
+        .card-front { background: linear-gradient(135deg, #1a0d2e, #0d0520); border: 2px solid #c39bd3; transform: rotateY(180deg); padding: 10px; }
+        .card-front .card-emoji { font-size: 36px; margin-bottom: 6px; }
+        .card-front .card-name { font-size: 11px; color: #c39bd3; font-weight: 700; text-align: center; }
+        .card-front .card-number { font-size: 9px; color: #777; }
+        .card-front .card-direction { font-size: 9px; color: #e74c3c; margin-top: 3px; }
+
+        .tarot-card.dimmed { opacity: 0.15; pointer-events: none; }
+        @media (max-width: 500px) { .tarot-card { width: 90px; height: 135px; } .card-front .card-emoji { font-size: 24px; } .card-front .card-name { font-size: 8px; } }
 
         .reading-section { display: none; }
         .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
@@ -435,11 +431,11 @@ function startDraw() {
         cardEl.dataset.index = i;
         cardEl.innerHTML = `
             <div class="card-inner">
-                <div class="card-back">
+                <div class="card-face card-back">
                     <div class="stars"></div>
                     <div class="label">TAROT</div>
                 </div>
-                <div class="card-front" id="front-${i}">
+                <div class="card-face card-front" id="front-${i}">
                 </div>
             </div>
         `;
@@ -467,7 +463,7 @@ function pickCard(index, cardEl) {
 
     const front = document.getElementById('front-' + index);
     const suitLabels = {major:'Majeur',wands:'Batons',cups:'Coupes',swords:'Epees',pentacles:'Pentacles'};
-    front.className = 'card-front' + (card.reversed ? ' reversed' : '');
+    front.className = 'card-face card-front';
     front.innerHTML = `
         <div class="card-number" style="font-size:10px;color:#666;">${suitLabels[card.suit] || ''}</div>
         <div class="card-emoji">${card.emoji}</div>
