@@ -392,11 +392,7 @@ function startDraw() {
         `;
         cardEl.onclick = () => pickCard(i, cardEl);
 
-        cardEl.style.opacity = '0';
-        setTimeout(() => {
-            area.appendChild(cardEl);
-            setTimeout(() => { cardEl.style.opacity = '1'; }, 50);
-        }, i * 80);
+        area.appendChild(cardEl);
     }
 
     document.getElementById('pickInstruction').style.display = 'block';
