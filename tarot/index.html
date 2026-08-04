@@ -50,10 +50,10 @@
         .card-front .card-direction { font-size: 10px; color: #e74c3c; margin-top: 4px; }
         .card-front.reversed { transform: rotateY(180deg) rotate(180deg); }
 
-        .tarot-card:hover:not(.flipped):not(.dimmed) { transform: translateY(-6px); }
+        .tarot-card:hover:not(.flipped):not(.dimmed) { box-shadow: 0 0 12px rgba(155,89,182,0.4); }
         .tarot-card.dimmed { opacity: 0.2; pointer-events: none; filter: grayscale(1); }
-        .tarot-card.selected { box-shadow: 0 0 15px rgba(155,89,182,0.5); }
-        .tarot-card { transition: all 0.3s; }
+        .tarot-card.flipped { box-shadow: 0 0 15px rgba(155,89,182,0.5); }
+        .tarot-card { transition: box-shadow 0.3s, opacity 0.3s, filter 0.3s; }
         @media (max-width: 500px) { .card-front .card-emoji { font-size: 28px; } .card-front .card-name { font-size: 9px; } }
 
         .reading-section { display: none; }
@@ -452,7 +452,7 @@ function pickCard(index, cardEl) {
 
     // Flip animation
     cardEl.classList.add('flipped');
-    cardEl.classList.add('selected');
+    // selected removed - card stays in place
     drawnCards.push(card);
     pickedCount++;
 
