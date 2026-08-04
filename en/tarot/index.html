@@ -268,14 +268,14 @@ function pickCard(index, cardEl) {
 
 function showReading() {
     const section = document.getElementById('readingSection');
-    const oshiName = document.getElementById('oshiName')?.value?.trim() || '그 사람';
+    const oshiName = document.getElementById('oshiName')?.value?.trim() || UI.defaultOshiName;
     const isOshi = mode === 'oshi';
 
     let positions;
     if (isOshi) {
-        positions = spreadCount === 3 ? OSHI_TAROT_UI.positions3 : spreadCount === 5 ? OSHI_TAROT_UI.positions5 : [oshiName + '의 한마디'];
+        positions = spreadCount === 3 ? UI.oshiPositions3 : spreadCount === 5 ? UI.oshiPositions5 : [UI.oshiOneCard.replace('{name}', oshiName)];
     } else {
-        positions = spreadCount === 3 ? TAROT_UI.positions3 : spreadCount === 5 ? TAROT_UI.positions5 : ['오늘의 카드'];
+        positions = spreadCount === 3 ? UI.positions3 : spreadCount === 5 ? UI.positions5 : [UI.todayCard];
     }
     let html = '';
 
@@ -300,7 +300,7 @@ function showReading() {
             <div class="reading-card">
                 <div class="reading-title">${card.emoji} ${titlePrefix}${posName ? posName + ': ' : ''}${card.name} ${dir}</div>
                 <div class="reading-text">
-                    <strong>${card.en} — ${card.num}번</strong><br><br>
+                    <strong>${card.en} — #${card.num}</strong><br><br>
                     ${reading}
                 </div>
             </div>
