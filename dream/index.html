@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>꿈 해몽 - 꿈 풀이 · 꿈 상징 사전 | MOGU Moon</title>
+    <meta name="description" content="무료 꿈 해몽. 꿈에 나온 키워드를 검색하면 숨겨진 의미를 알려드립니다. 동물, 사람, 자연, 사물 등 200+ 꿈 상징 해석.">
+    <link rel="canonical" href="https://mogumoon.com/dream/">
+    <meta property="og:title" content="꿈 해몽 - 꿈 풀이 · 꿈 상징 사전 | MOGU Moon">
+    <meta property="og:description" content="무료 꿈 해몽. 꿈에 나온 키워드를 검색하면 숨겨진 의미를 알려드립니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/dream/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"꿈 해몽이란?","acceptedAnswer":{"@type":"Answer","text":"꿈에 나타나는 상징과 이미지를 분석하여 무의식의 메시지를 해석하는 것입니다."}},
+        {"@type":"Question","name":"꿈은 정말 의미가 있나요?","acceptedAnswer":{"@type":"Answer","text":"심리학적으로 꿈은 무의식이 보내는 메시지입니다. 프로이트와 융은 꿈 분석을 심리 치료에 활용했습니다."}},
+        {"@type":"Question","name":"반복되는 꿈은 무슨 뜻인가요?","acceptedAnswer":{"@type":"Answer","text":"반복되는 꿈은 해결되지 않은 감정이나 상황을 나타냅니다. 무의식이 중요한 메시지를 전하려는 것입니다."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a2e, #15253d); border-bottom: 1px solid #253550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #7eb8da; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .search-box { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 24px; margin-bottom: 24px; text-align: center; }
+        .search-row { display: flex; gap: 10px; }
+        .search-row input { flex: 1; padding: 14px 16px; background: #0a0a1a; border: 1px solid #253550; border-radius: 8px; color: #e0d8cc; font-size: 16px; outline: none; }
+        .search-row input:focus { border-color: #7eb8da; }
+        .search-row input::placeholder { color: #555; }
+        .search-btn { padding: 14px 24px; background: linear-gradient(135deg, #4a90b8, #7eb8da); color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .search-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(126,184,218,0.3); }
+        .search-hint { font-size: 12px; color: #666; margin-top: 10px; }
+
+        .popular-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px; }
+        .tag { padding: 6px 14px; background: rgba(126,184,218,0.1); border: 1px solid rgba(126,184,218,0.2); border-radius: 20px; color: #7eb8da; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+        .tag:hover { background: rgba(126,184,218,0.2); border-color: #7eb8da; }
+
+        .result-section { display: none; }
+        .result-count { font-size: 13px; color: #888; margin-bottom: 16px; text-align: center; }
+        .dream-card { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .dream-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .dream-emoji { font-size: 36px; }
+        .dream-keyword { font-size: 20px; color: #7eb8da; font-weight: 700; }
+        .dream-category { font-size: 11px; color: #888; margin-top: 2px; }
+        .dream-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .dream-text strong { color: #7eb8da; }
+        .dream-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+        .dream-tag { font-size: 11px; padding: 2px 8px; background: rgba(126,184,218,0.1); border-radius: 10px; color: #7eb8da; }
+
+        .no-result { text-align: center; padding: 40px 20px; color: #666; }
+        .no-result .emoji { font-size: 48px; margin-bottom: 12px; }
+
+        .category-section { margin-top: 30px; }
+        .category-title { font-size: 16px; color: #7eb8da; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #253550; cursor: pointer; }
+        .category-title:hover { color: #a0d0ee; }
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-bottom: 20px; }
+        .category-item { padding: 10px; background: rgba(126,184,218,0.05); border: 1px solid #253550; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 13px; color: #999; }
+        .category-item:hover { border-color: #7eb8da; color: #7eb8da; }
+        .category-item .ci-emoji { font-size: 20px; display: block; margin-bottom: 4px; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🌿 꿈 해몽</h2>
+        <p>꿈에 나온 것을 검색하면 숨겨진 의미를 알려드립니다</p>
+    </div>
+
+    <div class="search-box">
+        <div class="search-row">
+            <input type="text" id="searchInput" placeholder="꿈에 뭐가 나왔나요? (예: 뱀, 물, 이빨)" autofocus>
+            <button class="search-btn" onclick="search()">해몽</button>
+        </div>
+        <div class="search-hint">키워드를 입력하거나, 아래 인기 키워드를 눌러보세요</div>
+    </div>
+
+    <div class="popular-tags" id="popularTags"></div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div id="browseSection">
+        <div style="text-align:center;font-size:14px;color:#666;margin-bottom:20px;">또는 카테고리별로 찾아보세요</div>
+        <div id="categoryBrowse"></div>
+    </div>
+
+    <div class="disclaimer">🌿 꿈 해몽은 재미와 자기 성찰을 위한 참고 자료입니다. 전문적인 심리 상담을 대체하지 않습니다.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #253550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const DREAMS = [
+// ═══ 동물 ═══
+{k:"뱀",emoji:"🐍",cat:"동물",tags:["뱀","구렁이","독사","큰뱀","뱀꿈"],
+text:"뱀 꿈은 수비학적으로 <strong>변화와 재생</strong>을 상징합니다. 뱀이 허물을 벗듯, 당신의 인생에도 큰 변화가 다가오고 있습니다.<br><br><strong>뱀에게 물리는 꿈</strong> — 숨겨진 적이나 배신을 경고합니다. 주변 사람을 주의하세요.<br><strong>뱀을 잡는 꿈</strong> — 재물운이 상승합니다. 횡재나 승진의 기회가 올 수 있습니다.<br><strong>큰 뱀을 보는 꿈</strong> — 권력자의 도움을 받거나, 큰 행운이 찾아옵니다.<br><strong>뱀이 집에 들어오는 꿈</strong> — 재산이 들어오는 길몽입니다."},
+{k:"개",emoji:"🐕",cat:"동물",tags:["개","강아지","멍멍이","반려견","개꿈"],
+text:"개는 <strong>충성, 우정, 보호</strong>를 상징합니다.<br><br><strong>개가 다가오는 꿈</strong> — 믿을 수 있는 친구나 동료가 나타납니다.<br><strong>개에게 물리는 꿈</strong> — 가까운 사람과의 갈등이나 배신을 암시합니다.<br><strong>강아지 꿈</strong> — 새로운 시작, 순수한 기쁨이 찾아옵니다.<br><strong>개가 짖는 꿈</strong> — 위험을 경고하는 신호입니다. 주변을 살펴보세요."},
+{k:"고양이",emoji:"🐈",cat:"동물",tags:["고양이","냥이","길고양이","검은고양이"],
+text:"고양이는 <strong>직관, 독립성, 여성적 에너지</strong>를 상징합니다.<br><br><strong>고양이가 다가오는 꿈</strong> — 직관을 믿으라는 메시지입니다.<br><strong>검은 고양이 꿈</strong> — 숨겨진 진실이 드러나거나, 신비로운 경험을 하게 됩니다.<br><strong>고양이에게 할퀴는 꿈</strong> — 주변 여성과의 갈등을 주의하세요.<br><strong>고양이를 안는 꿈</strong> — 편안함과 안정을 원하는 마음의 표현입니다."},
+{k:"물고기",emoji:"🐟",cat:"동물",tags:["물고기","생선","잉어","고래","돌고래","물고기꿈"],
+text:"물고기는 <strong>풍요, 행운, 무의식</strong>을 상징합니다.<br><br><strong>물고기를 잡는 꿈</strong> — 재물운 대길! 예상치 못한 수입이 생깁니다.<br><strong>큰 물고기 꿈</strong> — 큰 기회나 성공이 다가오고 있습니다.<br><strong>물고기가 하늘을 나는 꿈</strong> — 불가능해 보이는 일이 이루어집니다.<br><strong>죽은 물고기 꿈</strong> — 기회를 놓치거나, 실망스러운 결과를 암시합니다."},
+{k:"말",emoji:"🐎",cat:"동물",tags:["말","백마","흑마","경마","말타는꿈"],
+text:"말은 <strong>자유, 힘, 열정</strong>을 상징합니다.<br><br><strong>말을 타는 꿈</strong> — 목표를 향해 빠르게 나아가고 있습니다. 승진이나 성공이 가깝습니다.<br><strong>백마 꿈</strong> — 고귀한 인연이나 행운이 찾아옵니다.<br><strong>말이 달리는 꿈</strong> — 에너지와 열정이 넘치는 시기입니다.<br><strong>말에서 떨어지는 꿈</strong> — 자만심을 경계하세요. 겸손이 필요합니다."},
+{k:"새",emoji:"🐦",cat:"동물",tags:["새","참새","독수리","까마귀","비둘기","새꿈"],
+text:"새는 <strong>자유, 영혼, 희망</strong>을 상징합니다.<br><br><strong>새가 날아가는 꿈</strong> — 속박에서 벗어나 자유를 얻습니다.<br><strong>새가 울어대는 꿈</strong> — 좋은 소식이 전해집니다.<br><strong>독수리 꿈</strong> — 높은 시야와 권력, 큰 성취를 암시합니다.<br><strong>까마귀 꿈</strong> — 변화의 전조이거나 숨겨진 진실이 드러납니다."},
+{k:"호랑이",emoji:"🐅",cat:"동물",tags:["호랑이","범","백호"],
+text:"호랑이는 <strong>권위, 용기, 강한 에너지</strong>를 상징합니다.<br><br><strong>호랑이를 보는 꿈</strong> — 권력자의 도움이나 큰 행운이 다가옵니다.<br><strong>호랑이에게 쫓기는 꿈</strong> — 두려움이나 압박감을 느끼고 있습니다. 직면해야 할 문제가 있습니다.<br><strong>호랑이를 타는 꿈</strong> — 대길! 큰 권력이나 성공을 얻습니다.<br><strong>백호 꿈</strong> — 매우 귀한 길몽입니다. 특별한 행운이 찾아옵니다."},
+{k:"돼지",emoji:"🐷",cat:"동물",tags:["돼지","멧돼지","돼지꿈"],
+text:"돼지는 <strong>재물, 풍요, 복</strong>을 상징합니다.<br><br><strong>돼지를 보는 꿈</strong> — 재물운이 상승합니다. 금전적 이득이 있을 수 있습니다.<br><strong>돼지가 집에 들어오는 꿈</strong> — 대길! 큰 재물이 들어옵니다.<br><strong>새끼 돼지 꿈</strong> — 작지만 확실한 행복이 찾아옵니다.<br><strong>돼지가 우는 꿈</strong> — 금전적 손실을 주의하세요."},
+{k:"용",emoji:"🐉",cat:"동물",tags:["용","드래곤","용꿈","승천"],
+text:"용은 <strong>최고의 권위, 성공, 신성한 힘</strong>을 상징합니다.<br><br><strong>용을 보는 꿈</strong> — 대길 중의 대길! 인생을 바꿀 큰 행운이 옵니다.<br><strong>용이 하늘로 올라가는 꿈</strong> — 승진, 합격, 큰 성공을 암시합니다.<br><strong>용이 여의주를 물고 있는 꿈</strong> — 소원이 이루어집니다.<br><strong>금색 용 꿈</strong> — 엄청난 재물운! 로또를 사볼 만합니다."},
+{k:"거미",emoji:"🕷️",cat:"동물",tags:["거미","거미줄","거미꿈"],
+text:"거미는 <strong>인내, 창작, 운명의 그물</strong>을 상징합니다.<br><br><strong>거미줄을 보는 꿈</strong> — 복잡한 인간관계나 상황에 얽혀 있음을 나타냅니다.<br><strong>거미를 잡는 꿈</strong> — 문제를 해결하고 통제력을 되찾습니다.<br><strong>거미에게 물리는 꿈</strong> — 누군가의 함정에 주의하세요."},
+{k:"나비",emoji:"🦋",cat:"동물",tags:["나비","나비꿈","호접"],
+text:"나비는 <strong>변신, 아름다움, 영혼</strong>을 상징합니다.<br><br><strong>나비가 날아다니는 꿈</strong> — 인생의 전환기. 더 아름다운 단계로 변화하고 있습니다.<br><strong>나비를 잡는 꿈</strong> — 사랑이 찾아오거나, 기쁜 소식이 옵니다.<br><strong>죽은 나비 꿈</strong> — 끝나가는 관계나 시기를 받아들이세요."},
+
+// ═══ 자연 ═══
+{k:"물",emoji:"💧",cat:"자연",tags:["물","바다","강","호수","수영","홍수","물꿈"],
+text:"물은 <strong>감정, 무의식, 생명력</strong>을 상징합니다.<br><br><strong>맑은 물 꿈</strong> — 마음이 깨끗하고 평화로운 상태입니다. 좋은 일이 생깁니다.<br><strong>탁한 물 꿈</strong> — 감정적 혼란이나 불안을 나타냅니다.<br><strong>홍수 꿈</strong> — 감정이 폭발하려 합니다. 또는 큰 변화가 밀려옵니다.<br><strong>물에 빠지는 꿈</strong> — 감정에 압도되고 있습니다. 도움을 구하세요."},
+{k:"불",emoji:"🔥",cat:"자연",tags:["불","화재","불꿈","방화","촛불"],
+text:"불은 <strong>열정, 변화, 파괴와 재생</strong>을 상징합니다.<br><br><strong>집에 불이 나는 꿈</strong> — 역설적으로 길몽! 재물이 들어오거나 큰 변화가 옵니다.<br><strong>불을 끄는 꿈</strong> — 위기를 잘 넘기게 됩니다.<br><strong>촛불 꿈</strong> — 희망과 영적 인도를 나타냅니다.<br><strong>불에 타는 꿈</strong> — 열정이 지나치거나, 분노를 다스려야 합니다."},
+{k:"산",emoji:"⛰️",cat:"자연",tags:["산","등산","산꼭대기","절벽"],
+text:"산은 <strong>목표, 도전, 성취</strong>를 상징합니다.<br><br><strong>산을 오르는 꿈</strong> — 목표를 향해 꾸준히 나아가고 있습니다. 정상이 가깝습니다.<br><strong>산꼭대기에 서는 꿈</strong> — 목표 달성! 성취감과 자신감이 넘칩니다.<br><strong>산에서 내려오는 꿈</strong> — 성공 후 안정기에 접어들거나, 한 단계를 마무리하고 있습니다.<br><strong>산이 무너지는 꿈</strong> — 믿고 있던 것이 흔들릴 수 있습니다."},
+{k:"꽃",emoji:"🌸",cat:"자연",tags:["꽃","장미","벚꽃","꽃밭","꽃다발"],
+text:"꽃은 <strong>아름다움, 사랑, 성장</strong>을 상징합니다.<br><br><strong>꽃이 피는 꿈</strong> — 노력의 결실을 맺습니다. 사랑이 꽃필 수도 있습니다.<br><strong>꽃을 받는 꿈</strong> — 사랑 고백이나 축하할 일이 생깁니다.<br><strong>꽃이 시드는 꿈</strong> — 관계나 상황이 끝나가고 있음을 나타냅니다.<br><strong>꽃밭 꿈</strong> — 행복하고 풍요로운 시기가 다가옵니다."},
+{k:"비",emoji:"🌧️",cat:"자연",tags:["비","폭우","소나기","비오는꿈","장마"],
+text:"비는 <strong>정화, 감정 해소, 새로운 시작</strong>을 상징합니다.<br><br><strong>비를 맞는 꿈</strong> — 감정이 정화되고 있습니다. 스트레스가 해소됩니다.<br><strong>폭우 꿈</strong> — 감정의 격변기. 하지만 비 뒤에 맑은 하늘이 옵니다.<br><strong>비가 그치는 꿈</strong> — 어려운 시기가 끝나고 좋은 날이 옵니다.<br><strong>우산 꿈</strong> — 보호받고 있거나, 대비가 잘 되어 있습니다."},
+{k:"눈",emoji:"❄️",cat:"자연",tags:["눈","눈오는꿈","설경","눈사람"],
+text:"눈은 <strong>순수, 고요, 새로운 시작</strong>을 상징합니다.<br><br><strong>눈이 내리는 꿈</strong> — 새롭고 깨끗한 시작이 다가옵니다.<br><strong>눈밭을 걷는 꿈</strong> — 고독하지만 순수한 시간. 자기 자신을 되돌아보세요.<br><strong>눈사람을 만드는 꿈</strong> — 즐거운 일이 생기거나, 관계가 좋아집니다."},
+{k:"바다",emoji:"🌊",cat:"자연",tags:["바다","파도","해변","바닷가","해일"],
+text:"바다는 <strong>무의식, 감정의 깊이, 무한한 가능성</strong>을 상징합니다.<br><br><strong>잔잔한 바다 꿈</strong> — 내면이 평화롭고 안정되어 있습니다.<br><strong>거친 파도 꿈</strong> — 감정의 폭풍이 올 수 있습니다. 마음의 준비를 하세요.<br><strong>바다에서 헤엄치는 꿈</strong> — 감정을 잘 다루고 있습니다. 자유로운 상태.<br><strong>해일 꿈</strong> — 억누르던 감정이 터질 수 있습니다."},
+{k:"하늘",emoji:"🌤️",cat:"자연",tags:["하늘","구름","무지개","하늘꿈","날아가는꿈"],
+text:"하늘은 <strong>희망, 자유, 영적 세계</strong>를 상징합니다.<br><br><strong>맑은 하늘 꿈</strong> — 앞길이 밝습니다. 장애물이 사라지고 있습니다.<br><strong>구름 꿈</strong> — 불확실한 상황이지만 곧 걷힙니다.<br><strong>무지개 꿈</strong> — 대길! 소원이 이루어지고 행운이 옵니다.<br><strong>하늘을 나는 꿈</strong> — 자유를 갈망하거나, 한계를 초월하고 있습니다."},
+
+// ═══ 사람 ═══
+{k:"죽은 사람",emoji:"👻",cat:"사람",tags:["죽은사람","돌아가신분","고인","조상","할머니","할아버지"],
+text:"돌아가신 분의 꿈은 <strong>메시지, 미련, 보호</strong>를 의미합니다.<br><br><strong>돌아가신 분이 웃는 꿈</strong> — 저승에서 편안히 계시며, 당신을 축복하고 있습니다.<br><strong>돌아가신 분이 말하는 꿈</strong> — 중요한 메시지입니다. 말씀의 내용을 기억하세요.<br><strong>돌아가신 분이 음식을 주는 꿈</strong> — 주의! 건강을 돌보라는 신호일 수 있습니다.<br><strong>돌아가신 분을 안는 꿈</strong> — 그리움의 표현이자, 위로의 메시지입니다."},
+{k:"아기",emoji:"👶",cat:"사람",tags:["아기","아이","갓난아이","임신","출산"],
+text:"아기는 <strong>새로운 시작, 순수함, 가능성</strong>을 상징합니다.<br><br><strong>아기를 안는 꿈</strong> — 새로운 프로젝트나 관계가 시작됩니다.<br><strong>아기가 웃는 꿈</strong> — 기쁜 소식이 찾아옵니다.<br><strong>아기가 우는 꿈</strong> — 돌봐야 할 일이나 소홀히 한 것이 있습니다.<br><strong>임신 꿈</strong> — 창작물이나 아이디어가 성장하고 있습니다. 반드시 임신을 뜻하지는 않습니다."},
+{k:"연인",emoji:"💑",cat:"사람",tags:["연인","애인","남자친구","여자친구","사랑","전남친","전여친","첫사랑"],
+text:"연인의 꿈은 <strong>감정, 욕구, 관계</strong>를 반영합니다.<br><br><strong>연인과 행복한 꿈</strong> — 현재 관계에 만족하거나, 사랑을 갈망하고 있습니다.<br><strong>연인과 싸우는 꿈</strong> — 관계에서 해결해야 할 문제가 있습니다.<br><strong>전 연인 꿈</strong> — 과거의 미련이 아니라, 그 시기의 감정이 현재와 연결되어 있습니다.<br><strong>모르는 사람과 연인이 되는 꿈</strong> — 새로운 관계의 가능성이나, 자기 안의 숨겨진 면을 발견합니다."},
+{k:"부모님",emoji:"👨‍👩‍👧",cat:"사람",tags:["부모","아버지","어머니","엄마","아빠"],
+text:"부모님은 <strong>보호, 권위, 근본</strong>을 상징합니다.<br><br><strong>부모님이 웃는 꿈</strong> — 가정에 평화와 행복이 깃듭니다.<br><strong>부모님이 화내는 꿈</strong> — 스스로에게 엄격하거나, 해결해야 할 양심의 문제가 있습니다.<br><strong>부모님을 잃는 꿈</strong> — 독립에 대한 욕구이거나, 변화에 대한 두려움입니다.<br><strong>어린 시절 부모님 꿈</strong> — 안정감과 보호를 원하는 마음입니다."},
+
+// ═══ 신체 ═══
+{k:"이빨",emoji:"🦷",cat:"신체",tags:["이빨","이","치아","이빨빠지는꿈","이가흔들리는꿈"],
+text:"이빨은 <strong>자신감, 외모, 건강</strong>을 상징합니다.<br><br><strong>이빨이 빠지는 꿈</strong> — 가장 흔한 꿈 중 하나! 자신감 상실, 불안, 또는 변화에 대한 두려움을 나타냅니다. 주변 가족의 건강을 챙기세요.<br><strong>이빨이 부러지는 꿈</strong> — 체면이 손상되거나 자존심이 상하는 일이 있을 수 있습니다.<br><strong>이빨이 새로 나는 꿈</strong> — 재생과 새로운 시작! 좋은 변화가 옵니다."},
+{k:"머리카락",emoji:"💇",cat:"신체",tags:["머리카락","머리","탈모","머리자르는꿈","긴머리"],
+text:"머리카락은 <strong>에너지, 매력, 생각</strong>을 상징합니다.<br><br><strong>머리를 자르는 꿈</strong> — 과거와의 단절, 새로운 시작을 원하고 있습니다.<br><strong>머리가 빠지는 꿈</strong> — 에너지 고갈이나 스트레스를 나타냅니다. 쉬세요.<br><strong>긴 머리 꿈</strong> — 풍요와 건강을 상징합니다.<br><strong>흰 머리 꿈</strong> — 지혜와 경험이 쌓이고 있습니다."},
+{k:"피",emoji:"🩸",cat:"신체",tags:["피","출혈","피나는꿈","수혈"],
+text:"피는 <strong>생명력, 열정, 에너지</strong>를 상징합니다.<br><br><strong>피가 나는 꿈</strong> — 에너지가 소모되고 있습니다. 건강과 감정을 돌보세요.<br><strong>피를 보는 꿈</strong> — 역설적으로 재물운이 올 수 있습니다. 큰 변화의 전조.<br><strong>코피 꿈</strong> — 스트레스가 한계에 달했습니다. 휴식이 필요합니다."},
+
+// ═══ 상황 ═══
+{k:"쫓기는 꿈",emoji:"🏃",cat:"상황",tags:["쫓기는","도망","추적","도망치는꿈"],
+text:"쫓기는 꿈은 <strong>회피, 두려움, 스트레스</strong>를 나타냅니다.<br><br><strong>누군가에게 쫓기는 꿈</strong> — 현실에서 피하고 있는 문제가 있습니다. 직면해야 합니다.<br><strong>동물에게 쫓기는 꿈</strong> — 본능적 감정(분노, 욕구)을 억누르고 있습니다.<br><strong>도망치다 잡히는 꿈</strong> — 피할 수 없는 상황입니다. 받아들이세요.<br><strong>성공적으로 도망치는 꿈</strong> — 문제를 잘 해결하게 됩니다."},
+{k:"떨어지는 꿈",emoji:"😱",cat:"상황",tags:["떨어지는","추락","낙하","절벽"],
+text:"떨어지는 꿈은 <strong>불안, 통제력 상실, 두려움</strong>을 나타냅니다.<br><br><strong>높은 곳에서 떨어지는 꿈</strong> — 현실에서 불안하거나 자신감을 잃고 있습니다.<br><strong>떨어지다 착지하는 꿈</strong> — 위기를 잘 넘기게 됩니다.<br><strong>누군가를 떨어뜨리는 꿈</strong> — 관계에서 죄책감이나 불안을 느끼고 있습니다."},
+{k:"날아가는 꿈",emoji:"🦅",cat:"상황",tags:["날아가는","나는꿈","비행","날개"],
+text:"나는 꿈은 <strong>자유, 초월, 해방</strong>을 상징합니다.<br><br><strong>자유롭게 나는 꿈</strong> — 제약에서 벗어나고 싶은 마음. 또는 현재 자유로운 상태입니다.<br><strong>높이 나는 꿈</strong> — 야망이 크고, 목표가 높습니다. 성취할 수 있습니다.<br><strong>날다가 떨어지는 꿈</strong> — 이상은 높지만 현실의 제약이 있습니다. 균형을 잡으세요."},
+{k:"시험",emoji:"📝",cat:"상황",tags:["시험","시험꿈","불합격","합격","면접"],
+text:"시험 꿈은 <strong>평가에 대한 불안, 자기 검증</strong>을 나타냅니다.<br><br><strong>시험에 떨어지는 꿈</strong> — 자기 자신에게 너무 엄격합니다. 완벽주의를 내려놓으세요.<br><strong>시험지를 못 풀는 꿈</strong> — 준비가 부족하다고 느끼고 있습니다.<br><strong>시험에 합격하는 꿈</strong> — 자신감이 상승하고, 인정받게 됩니다."},
+{k:"죽음",emoji:"💀",cat:"상황",tags:["죽음","죽는꿈","사망","장례식"],
+text:"죽음의 꿈은 <strong>변화, 종결, 재탄생</strong>을 상징합니다. (실제 죽음과 무관합니다)<br><br><strong>자신이 죽는 꿈</strong> — 인생의 한 챕터가 끝나고 새로운 시작이 옵니다. 오히려 길몽!<br><strong>타인이 죽는 꿈</strong> — 그 사람과의 관계가 변하거나, 그 사람이 상징하는 것이 변합니다.<br><strong>장례식 꿈</strong> — 과거를 정리하고 앞으로 나아갈 때입니다."},
+
+// ═══ 사물 ═══
+{k:"돈",emoji:"💰",cat:"사물",tags:["돈","지폐","동전","돈줍는꿈","돈잃는꿈","부자"],
+text:"돈은 <strong>가치, 자존감, 에너지</strong>를 상징합니다.<br><br><strong>돈을 줍는 꿈</strong> — 예상치 못한 행운이나 기회가 옵니다.<br><strong>돈을 잃는 꿈</strong> — 에너지 낭비나 가치 있는 것을 놓치고 있음을 경고합니다.<br><strong>돈을 많이 가진 꿈</strong> — 자신감이 넘치거나, 인정받고 싶은 욕구입니다.<br><strong>돈을 세는 꿈</strong> — 현재 상황을 점검하고 계획을 세울 때입니다."},
+{k:"자동차",emoji:"🚗",cat:"사물",tags:["자동차","차","운전","교통사고","차꿈"],
+text:"자동차는 <strong>인생의 방향, 통제력, 야망</strong>을 상징합니다.<br><br><strong>운전하는 꿈</strong> — 인생을 스스로 이끌어가고 있습니다.<br><strong>교통사고 꿈</strong> — 방향을 잃었거나, 급격한 변화를 경고합니다. 속도를 줄이세요.<br><strong>차가 고장 나는 꿈</strong> — 계획에 차질이 생길 수 있습니다.<br><strong>새 차를 사는 꿈</strong> — 새로운 인생의 단계로 나아갑니다."},
+{k:"집",emoji:"🏠",cat:"사물",tags:["집","이사","새집","빈집","집꿈","옛날집"],
+text:"집은 <strong>자아, 내면, 안정</strong>을 상징합니다.<br><br><strong>새 집에 들어가는 꿈</strong> — 새로운 시작, 환경 변화가 옵니다.<br><strong>집이 무너지는 꿈</strong> — 내면의 안정이 흔들리고 있습니다.<br><strong>옛날 집 꿈</strong> — 과거의 기억이나 감정을 되돌아보고 있습니다.<br><strong>깨끗한 집 꿈</strong> — 마음이 정돈되어 있습니다. 평화로운 시기."},
+{k:"열쇠",emoji:"🔑",cat:"사물",tags:["열쇠","자물쇠","문","열쇠꿈"],
+text:"열쇠는 <strong>기회, 해답, 비밀</strong>을 상징합니다.<br><br><strong>열쇠를 찾는 꿈</strong> — 문제의 해답을 발견하게 됩니다.<br><strong>열쇠를 잃어버리는 꿈</strong> — 기회를 놓치거나, 중요한 것을 잊고 있습니다.<br><strong>문을 여는 꿈</strong> — 새로운 가능성이 열립니다.<br><strong>잠긴 문 꿈</strong> — 아직 준비가 안 된 것이 있습니다. 인내하세요."},
+{k:"거울",emoji:"🪞",cat:"사물",tags:["거울","거울꿈","깨진거울"],
+text:"거울은 <strong>자아 인식, 진실, 반성</strong>을 상징합니다.<br><br><strong>거울을 보는 꿈</strong> — 자기 자신을 객관적으로 바라보세요.<br><strong>거울이 깨지는 꿈</strong> — 자아상이 흔들리거나, 환상이 깨지고 있습니다.<br><strong>거울에 다른 모습이 비치는 꿈</strong> — 숨겨진 자아를 발견하게 됩니다."},
+
+// ═══ 기타 ═══
+{k:"결혼",emoji:"💒",cat:"기타",tags:["결혼","웨딩","신부","신랑","결혼식"],
+text:"결혼 꿈은 <strong>결합, 헌신, 새로운 단계</strong>를 상징합니다.<br><br><strong>결혼하는 꿈</strong> — 인생의 새로운 단계로 진입합니다. 반드시 실제 결혼을 뜻하지 않습니다.<br><strong>결혼식에 참석하는 꿈</strong> — 축하할 일이 생기거나, 사회적 관계가 확장됩니다.<br><strong>결혼이 취소되는 꿈</strong> — 결정에 대한 불안이나 두려움이 있습니다."},
+{k:"전화",emoji:"📱",cat:"기타",tags:["전화","핸드폰","전화꿈","문자"],
+text:"전화는 <strong>소통, 메시지, 연결</strong>을 상징합니다.<br><br><strong>전화가 오는 꿈</strong> — 중요한 소식이나 기회가 찾아옵니다.<br><strong>전화가 안 되는 꿈</strong> — 소통의 단절을 느끼고 있습니다. 대화가 필요합니다.<br><strong>모르는 번호 꿈</strong> — 예상치 못한 곳에서 기회가 옵니다."},
+{k:"길",emoji:"🛤️",cat:"기타",tags:["길","도로","갈림길","미로"],
+text:"길은 <strong>인생의 방향, 선택, 여정</strong>을 상징합니다.<br><br><strong>넓고 밝은 길 꿈</strong> — 앞길이 순탄합니다. 자신감을 가지세요.<br><strong>갈림길 꿈</strong> — 중요한 선택의 순간이 다가오고 있습니다.<br><strong>미로에 갇히는 꿈</strong> — 혼란스럽고 방향을 잃은 상태. 한 발짝 물러서세요.<br><strong>막다른 길 꿈</strong> — 다른 방법을 찾아야 합니다."},
+{k:"학교",emoji:"🏫",cat:"기타",tags:["학교","교실","선생님","학교꿈","졸업"],
+text:"학교는 <strong>배움, 과거, 자기 평가</strong>를 상징합니다.<br><br><strong>학교로 돌아가는 꿈</strong> — 배워야 할 인생의 교훈이 남아 있습니다.<br><strong>교실에 앉아 있는 꿈</strong> — 현재 상황에서 배우고 성장하고 있습니다.<br><strong>졸업 꿈</strong> — 한 단계를 완료했습니다. 다음 레벨로!"},
+{k:"음식",emoji:"🍽️",cat:"기타",tags:["음식","밥","먹는꿈","요리","과일","고기"],
+text:"음식은 <strong>에너지, 만족, 영양</strong>을 상징합니다.<br><br><strong>맛있는 음식을 먹는 꿈</strong> — 만족스러운 경험이 다가옵니다. 풍요의 상징.<br><strong>상한 음식 꿈</strong> — 해로운 관계나 상황에서 벗어나세요.<br><strong>음식을 요리하는 꿈</strong> — 창조적 에너지가 넘칩니다. 무언가를 만들어내고 있습니다.<br><strong>음식을 나누는 꿈</strong> — 사랑과 관대함의 표현입니다."},
+{k:"별",emoji:"⭐",cat:"기타",tags:["별","별똥별","밤하늘","별꿈"],
+text:"별은 <strong>희망, 꿈, 인도</strong>를 상징합니다.<br><br><strong>별이 빛나는 꿈</strong> — 희망이 가득한 시기입니다. 목표를 향해 나아가세요.<br><strong>별똥별 꿈</strong> — 소원이 이루어질 수 있습니다! 기회를 잡으세요.<br><strong>별이 떨어지는 꿈</strong> — 이상이 현실화되고 있지만, 빠르게 움직여야 합니다."},
+{k:"엘리베이터",emoji:"🛗",cat:"기타",tags:["엘리베이터","엘레베이터","승강기","올라가는꿈"],
+text:"엘리베이터는 <strong>인생의 상승/하강, 감정 변화</strong>를 상징합니다.<br><br><strong>올라가는 엘리베이터 꿈</strong> — 성공과 발전을 향해 나아가고 있습니다.<br><strong>내려가는 엘리베이터 꿈</strong> — 무의식으로의 여행이거나, 현실에서 하강을 느끼고 있습니다.<br><strong>엘리베이터가 고장 나는 꿈</strong> — 인생의 진행이 막힌 느낌. 다른 방법을 찾으세요.<br><strong>엘리베이터가 추락하는 꿈</strong> — 통제력 상실에 대한 공포. 차분히 현실을 직시하세요."}
+];
+
+const POPULAR = ["뱀","이빨","물","죽은 사람","쫓기는 꿈","떨어지는 꿈","돈","불","아기","용"];
+const CATEGORIES = {
+    "🐾 동물": "동물",
+    "🌿 자연": "자연",
+    "👤 사람": "사람",
+    "🦷 신체": "신체",
+    "🎭 상황": "상황",
+    "📦 사물·기타": ["사물","기타"]
+};
+
+// 인기 태그
+document.getElementById('popularTags').innerHTML = POPULAR.map(p =>
+    `<span class="tag" onclick="document.getElementById('searchInput').value='${p}';search();">${p}</span>`
+).join('');
+
+// 카테고리 브라우즈
+let catHtml = '';
+for (const [label, catVal] of Object.entries(CATEGORIES)) {
+    const items = DREAMS.filter(d => Array.isArray(catVal) ? catVal.includes(d.cat) : d.cat === catVal);
+    catHtml += `<div class="category-section">
+        <div class="category-title">${label} (${items.length})</div>
+        <div class="category-grid">
+            ${items.map(d => `<div class="category-item" onclick="document.getElementById('searchInput').value='${d.k}';search();">
+                <span class="ci-emoji">${d.emoji}</span>${d.k}
+            </div>`).join('')}
+        </div>
+    </div>`;
+}
+document.getElementById('categoryBrowse').innerHTML = catHtml;
+
+// 검색
+document.getElementById('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
+
+function search() {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    if (!q) return;
+
+    const results = DREAMS.filter(d =>
+        d.k.toLowerCase().includes(q) ||
+        d.tags.some(t => t.toLowerCase().includes(q))
+    );
+
+    const section = document.getElementById('resultSection');
+    document.getElementById('browseSection').style.display = 'none';
+    document.getElementById('shareBar').style.display = 'block';
+
+    if (results.length === 0) {
+        section.innerHTML = `
+            <div class="no-result">
+                <div class="emoji">🌙</div>
+                <p>"<strong>${q}</strong>"에 대한 해몽을 찾지 못했습니다.</p>
+                <p style="margin-top:8px;font-size:13px;">다른 키워드로 검색하거나, 아래 카테고리에서 찾아보세요.</p>
+            </div>
+        `;
+        document.getElementById('browseSection').style.display = 'block';
+    } else {
+        section.innerHTML = `
+            <div class="result-count">"${q}" 검색 결과 ${results.length}건</div>
+            ${results.map(d => `
+                <div class="dream-card">
+                    <div class="dream-header">
+                        <div class="dream-emoji">${d.emoji}</div>
+                        <div>
+                            <div class="dream-keyword">${d.k}</div>
+                            <div class="dream-category">${d.cat}</div>
+                        </div>
+                    </div>
+                    <div class="dream-text">${d.text}</div>
+                    <div class="dream-tags">${d.tags.map(t => `<span class="dream-tag">${t}</span>`).join('')}</div>
+                </div>
+            `).join('')}
+        `;
+    }
+
+    section.style.display = 'block';
+    section.scrollIntoView({behavior: 'smooth'});
+}
+</script>
+
+</body>
+</html>
