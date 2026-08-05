@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바이오리듬 - 신체·감성·지성 리듬 그래프 | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/biorhythm/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/biorhythm/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/biorhythm/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/biorhythm/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/biorhythm/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/biorhythm/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/biorhythm/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/biorhythm/">
+    <meta name="description" content="무료 바이오리듬 계산기. 생년월일을 입력하면 신체(23일), 감성(28일), 지성(33일) 리듬을 그래프로 보여줍니다.">
+    <link rel="canonical" href="https://mogumoon.com/biorhythm/">
+    <meta property="og:title" content="바이오리듬 - 신체·감성·지성 리듬 | MOGU Moon">
+    <meta property="og:description" content="생년월일로 신체, 감성, 지성 바이오리듬을 확인하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/biorhythm/">
+    <meta property="og:image" content="https://mogumoon.com/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"바이오리듬이란?","acceptedAnswer":{"@type":"Answer","text":"바이오리듬은 생년월일을 기준으로 신체(23일), 감성(28일), 지성(33일) 주기의 리듬을 계산하여 컨디션을 예측하는 이론입니다."}},
+        {"@type":"Question","name":"바이오리듬은 과학적인가요?","acceptedAnswer":{"@type":"Answer","text":"바이오리듬 이론은 과학적으로 입증되지 않았지만, 자기 컨디션을 돌아보는 재미있는 참고 도구로 활용됩니다."}},
+        {"@type":"Question","name":"위험일이란?","acceptedAnswer":{"@type":"Answer","text":"각 리듬이 0을 지나는 날을 위험일이라 합니다. 이때 해당 영역의 컨디션이 불안정하다고 봅니다."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a2e, #15253d); border-bottom: 1px solid #253550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4fc3f7; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 24px; margin-bottom: 24px; text-align: center; }
+        .form-row label { display: block; font-size: 13px; color: #4fc3f7; margin-bottom: 8px; font-weight: 600; }
+        .date-row { display: flex; gap: 10px; justify-content: center; }
+        .date-row select { flex: 1; max-width: 140px; padding: 12px; background: #0a0a1a; border: 1px solid #253550; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%234fc3f7%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #0277bd, #4fc3f7); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(79,195,247,0.3); }
+
+        .result-section { display: none; }
+        .chart-container { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .chart-title { font-size: 14px; color: #4fc3f7; font-weight: 600; margin-bottom: 12px; text-align: center; }
+        canvas { width: 100%; border-radius: 8px; }
+
+        .today-scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+        .score-card { padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #253550; }
+        .score-card .sc-emoji { font-size: 28px; margin-bottom: 6px; }
+        .score-card .sc-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+        .score-card .sc-value { font-size: 28px; font-weight: 900; }
+        .score-card .sc-status { font-size: 12px; margin-top: 4px; }
+        .score-card .sc-cycle { font-size: 11px; color: #666; margin-top: 2px; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #4fc3f7; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #4fc3f7; }
+
+        .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+        .nav-btns { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+        .nav-btn { padding: 8px 20px; background: rgba(79,195,247,0.1); border: 1px solid #253550; border-radius: 8px; color: #4fc3f7; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+        .nav-btn:hover { border-color: #4fc3f7; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .today-scores { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>📊 바이오리듬</h2>
+        <p>생년월일로 신체·감성·지성 리듬을 확인하세요</p>
+    </div>
+
+    <div class="form-box">
+        <div class="form-row">
+            <label>생년월일</label>
+            <div class="date-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">📊 바이오리듬 보기</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">📊 바이오리듬은 재미와 자기 관리를 위한 참고 도구입니다. 과학적으로 입증된 이론이 아닙니다.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #253550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const CYCLES = {physical:23, emotional:28, intellectual:33};
+const COLORS = {physical:'#e74c3c', emotional:'#2ecc71', intellectual:'#3498db'};
+const NAMES = {physical:'신체', emotional:'감성', intellectual:'지성'};
+const EMOJIS = {physical:'💪', emotional:'💚', intellectual:'🧠'};
+
+let offsetDays = 0;
+let birthDate = null;
+
+function daysBetween(d1, d2) {
+    return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+}
+
+function bioValue(totalDays, cycle) {
+    return Math.sin((2 * Math.PI * totalDays) / cycle);
+}
+
+function getStatus(val) {
+    if (val > 0.8) return {text:'최고조 🔥', color:'#2ecc71'};
+    if (val > 0.3) return {text:'좋음 ↑', color:'#4fc3f7'};
+    if (val > -0.3) return {text:'보통 →', color:'#f39c12'};
+    if (val > -0.8) return {text:'저조 ↓', color:'#e67e22'};
+    return {text:'최저 ⚠️', color:'#e74c3c'};
+}
+
+function getAdvice(p, e, i) {
+    let advice = '';
+    if (p > 0.5) advice += '<strong>신체:</strong> 에너지가 넘칩니다! 운동이나 활동적인 일에 적합합니다.<br>';
+    else if (p < -0.5) advice += '<strong>신체:</strong> 체력이 저하되어 있습니다. 무리하지 말고 충분히 쉬세요.<br>';
+    else advice += '<strong>신체:</strong> 보통 수준입니다. 적당한 활동이 좋습니다.<br>';
+
+    if (e > 0.5) advice += '<strong>감성:</strong> 감정이 풍부하고 안정적입니다. 사람을 만나고 사랑을 표현하세요.<br>';
+    else if (e < -0.5) advice += '<strong>감성:</strong> 감정이 예민해져 있습니다. 갈등을 피하고 혼자만의 시간을 가지세요.<br>';
+    else advice += '<strong>감성:</strong> 감정적으로 안정적입니다. 평소대로 지내세요.<br>';
+
+    if (i > 0.5) advice += '<strong>지성:</strong> 두뇌가 맑고 집중력이 높습니다. 공부나 중요한 결정에 최적!';
+    else if (i < -0.5) advice += '<strong>지성:</strong> 판단력이 흐려져 있습니다. 중요한 결정은 미루세요.';
+    else advice += '<strong>지성:</strong> 보통 수준의 집중력입니다. 일상적인 업무에 적합합니다.';
+
+    return advice;
+}
+
+function calculate() {
+    const y = parseInt(document.getElementById('birthYear').value);
+    const m = parseInt(document.getElementById('birthMonth').value);
+    const d = parseInt(document.getElementById('birthDay').value);
+    if (!y || !m || !d) return alert('생년월일을 선택하세요!');
+
+    birthDate = new Date(y, m - 1, d);
+    offsetDays = 0;
+    render();
+}
+
+function render() {
+    const today = new Date();
+    today.setDate(today.getDate() + offsetDays);
+    const totalDays = daysBetween(birthDate, today);
+
+    const p = bioValue(totalDays, CYCLES.physical);
+    const e = bioValue(totalDays, CYCLES.emotional);
+    const i = bioValue(totalDays, CYCLES.intellectual);
+
+    const pSt = getStatus(p), eSt = getStatus(e), iSt = getStatus(i);
+
+    const dayNames = ['일','월','화','수','목','금','토'];
+    const dateStr = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일 (${dayNames[today.getDay()]}요일)`;
+    const livedDays = totalDays;
+
+    const section = document.getElementById('resultSection');
+    section.innerHTML = `
+        <div class="nav-btns">
+            <div class="nav-btn" onclick="offsetDays-=7;render();">◀ 1주 전</div>
+            <div class="nav-btn" onclick="offsetDays--;render();">◀ 어제</div>
+            <div class="nav-btn" onclick="offsetDays=0;render();" style="background:rgba(79,195,247,0.2);">오늘</div>
+            <div class="nav-btn" onclick="offsetDays++;render();">내일 ▶</div>
+            <div class="nav-btn" onclick="offsetDays+=7;render();">1주 후 ▶</div>
+        </div>
+
+        <div style="text-align:center;margin-bottom:16px;">
+            <div style="font-size:16px;color:#4fc3f7;font-weight:700;">${dateStr}</div>
+            <div style="font-size:12px;color:#666;">태어난 지 ${livedDays.toLocaleString()}일째</div>
+        </div>
+
+        <div class="today-scores">
+            <div class="score-card" style="background:rgba(231,76,60,0.06);">
+                <div class="sc-emoji">💪</div>
+                <div class="sc-label">신체</div>
+                <div class="sc-value" style="color:${COLORS.physical};">${Math.round(p * 100)}%</div>
+                <div class="sc-status" style="color:${pSt.color};">${pSt.text}</div>
+                <div class="sc-cycle">주기: 23일</div>
+            </div>
+            <div class="score-card" style="background:rgba(46,204,113,0.06);">
+                <div class="sc-emoji">💚</div>
+                <div class="sc-label">감성</div>
+                <div class="sc-value" style="color:${COLORS.emotional};">${Math.round(e * 100)}%</div>
+                <div class="sc-status" style="color:${eSt.color};">${eSt.text}</div>
+                <div class="sc-cycle">주기: 28일</div>
+            </div>
+            <div class="score-card" style="background:rgba(52,152,219,0.06);">
+                <div class="sc-emoji">🧠</div>
+                <div class="sc-label">지성</div>
+                <div class="sc-value" style="color:${COLORS.intellectual};">${Math.round(i * 100)}%</div>
+                <div class="sc-status" style="color:${iSt.color};">${iSt.text}</div>
+                <div class="sc-cycle">주기: 33일</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">30일 바이오리듬 그래프</div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.physical};"></div>신체 (23일)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.emotional};"></div>감성 (28일)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.intellectual};"></div>지성 (33일)</div>
+            </div>
+            <canvas id="bioChart" width="660" height="300"></canvas>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 오늘의 컨디션 조언</div>
+            <div class="reading-text">${getAdvice(p, e, i)}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📖 바이오리듬이란?</div>
+            <div class="reading-text">
+                바이오리듬은 1900년대 초 빌헬름 플리스 박사가 제안한 이론입니다.<br><br>
+                <strong>💪 신체 리듬 (23일 주기)</strong> — 체력, 지구력, 면역력, 운동 능력에 영향<br>
+                <strong>💚 감성 리듬 (28일 주기)</strong> — 감정, 기분, 창의성, 인간관계에 영향<br>
+                <strong>🧠 지성 리듬 (33일 주기)</strong> — 집중력, 판단력, 기억력, 학습 능력에 영향<br><br>
+                +100%에 가까울수록 최고조, -100%에 가까울수록 저조, 0%를 지나는 날이 <strong>위험일</strong>입니다.
+            </div>
+        </div>
+    `;
+    section.style.display = 'block';
+
+    // 그래프 그리기
+    drawChart(totalDays);
+}
+
+function drawChart(centerDay) {
+    const canvas = document.getElementById('bioChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const midY = H / 2;
+    const amp = H * 0.4;
+    const days = 30;
+    const startDay = centerDay - 15;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // 배경 그리드
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1;
+    // 수평선
+    for (let y of [0.25, 0.5, 0.75]) {
+        ctx.beginPath(); ctx.moveTo(0, H * y); ctx.lineTo(W, H * y); ctx.stroke();
+    }
+    // 0선
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.beginPath(); ctx.moveTo(0, midY); ctx.lineTo(W, midY); ctx.stroke();
+
+    // 오늘 마커
+    const todayX = (15 / days) * W;
+    ctx.fillStyle = 'rgba(79,195,247,0.1)';
+    ctx.fillRect(todayX - 1, 0, 3, H);
+    ctx.fillStyle = 'rgba(79,195,247,0.5)';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('오늘', todayX, 14);
+
+    // 리듬 곡선
+    Object.keys(CYCLES).forEach(key => {
+        ctx.strokeStyle = COLORS[key];
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let d = 0; d <= days; d++) {
+            const x = (d / days) * W;
+            const val = bioValue(startDay + d, CYCLES[key]);
+            const y = midY - val * amp;
+            if (d === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // 오늘 포인트
+        const todayVal = bioValue(centerDay, CYCLES[key]);
+        const ty = midY - todayVal * amp;
+        ctx.fillStyle = COLORS[key];
+        ctx.beginPath();
+        ctx.arc(todayX, ty, 5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // 날짜 라벨
+    ctx.fillStyle = '#555';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    for (let d = 0; d <= days; d += 5) {
+        const date = new Date(birthDate);
+        date.setDate(date.getDate() + startDay + d);
+        const x = (d / days) * W;
+        ctx.fillText(`${date.getMonth()+1}/${date.getDate()}`, x, H - 4);
+    }
+
+    // Y축 라벨
+    ctx.fillStyle = '#444';
+    ctx.textAlign = 'left';
+    ctx.fillText('+100%', 4, 16);
+    ctx.fillText('0%', 4, midY - 4);
+    ctx.fillText('-100%', 4, H - 16);
+}
+
+// select 초기화
+(function() {
+    const yEl = document.getElementById('birthYear');
+    const mEl = document.getElementById('birthMonth');
+    const dEl = document.getElementById('birthDay');
+    const now = new Date();
+
+    yEl.innerHTML = '<option value="">년</option>';
+    for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}년</option>`;
+
+    mEl.innerHTML = '<option value="">월</option>';
+    for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}월</option>`;
+
+    function updateDays() {
+        const y = parseInt(yEl.value) || 2000;
+        const m = parseInt(mEl.value) || 1;
+        const maxD = new Date(y, m, 0).getDate();
+        const cur = parseInt(dEl.value);
+        dEl.innerHTML = '<option value="">일</option>';
+        for (let d = 1; d <= maxD; d++) dEl.innerHTML += `<option value="${d}"${d===cur?' selected':''}>${d}일</option>`;
+    }
+    yEl.onchange = updateDays;
+    mEl.onchange = updateDays;
+    updateDays();
+})();
+</script>
+
+</body>
+</html>
