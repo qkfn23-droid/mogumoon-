@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biorritmo - Fisico · Emocional · Intelectual | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/biorhythm/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/biorhythm/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/biorhythm/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/biorhythm/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/biorhythm/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/biorhythm/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/biorhythm/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/biorhythm/">
+    <meta name="description" content="Calculadora de biorritmo gratuita. Insira sua data de nascimento para ver os ritmos Fisico (23d), Emocional (28d) e Intelectual (33d) em grafico.">
+    <link rel="canonical" href="https://mogumoon.com/pt/biorhythm/">
+    <meta property="og:title" content="Biorritmo - Fisico · Emocional · Intelectual | MOGU Moon">
+    <meta property="og:description" content="Insira sua data de nascimento para ver seus biorritmos Fisico, Emocional e Intelectual.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/pt/biorhythm/">
+    <meta property="og:image" content="https://mogumoon.com/pt/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"O que e biorritmo ?","acceptedAnswer":{"@type":"Answer","text":"O biorritmo e uma teoria que preve sua condicao calculando ciclos Fisico (23d), Emocional (28d) e Intelectual (33d) a partir da sua data de nascimento."}},
+        {"@type":"Question","name":"O biorritmo e cientifico ?","acceptedAnswer":{"@type":"Answer","text":"A teoria do biorritmo nao e cientificamente comprovada, mas e usada como uma ferramenta de referencia divertida para o autoconhecimento."}},
+        {"@type":"Question","name":"O que e um dia critico ?","acceptedAnswer":{"@type":"Answer","text":"Um dia critico e o dia em que um ritmo passa por zero. A condicao correspondente e considerada instavel nesse dia."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a2e, #15253d); border-bottom: 1px solid #253550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4fc3f7; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-box { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 24px; margin-bottom: 24px; text-align: center; }
+        .form-row label { display: block; font-size: 13px; color: #4fc3f7; margin-bottom: 8px; font-weight: 600; }
+        .date-row { display: flex; gap: 10px; justify-content: center; }
+        .date-row select { flex: 1; max-width: 140px; padding: 12px; background: #0a0a1a; border: 1px solid #253550; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%234fc3f7%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #0277bd, #4fc3f7); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(79,195,247,0.3); }
+
+        .result-section { display: none; }
+        .chart-container { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .chart-title { font-size: 14px; color: #4fc3f7; font-weight: 600; margin-bottom: 12px; text-align: center; }
+        canvas { width: 100%; border-radius: 8px; }
+
+        .today-scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+        .score-card { padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #253550; }
+        .score-card .sc-emoji { font-size: 28px; margin-bottom: 6px; }
+        .score-card .sc-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+        .score-card .sc-value { font-size: 28px; font-weight: 900; }
+        .score-card .sc-status { font-size: 12px; margin-top: 4px; }
+        .score-card .sc-cycle { font-size: 11px; color: #666; margin-top: 2px; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a2e, #15253d); border: 1px solid #253550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #4fc3f7; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #4fc3f7; }
+
+        .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+        .nav-btns { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+        .nav-btn { padding: 8px 20px; background: rgba(79,195,247,0.1); border: 1px solid #253550; border-radius: 8px; color: #4fc3f7; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+        .nav-btn:hover { border-color: #4fc3f7; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .today-scores { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>📊 Biorritmo</h2>
+        <p>Insira sua data de nascimento para ver seus ritmos Fisico, Emocional e Intelectual</p>
+    </div>
+
+    <div class="form-box">
+        <div class="form-row">
+            <label>Data de nascimento</label>
+            <div class="date-row">
+                <select id="birthYear"></select>
+                <select id="birthMonth"></select>
+                <select id="birthDay"></select>
+            </div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">📊 Ver Biorritmo</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">📊 O biorritmo e uma ferramenta de referencia para diversao e autogestao. Nao e uma teoria cientificamente comprovada.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #253550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Compartilhar:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiado!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const CYCLES = {physical:23, emotional:28, intellectual:33};
+const COLORS = {physical:"#e74c3c", emotional:"#2ecc71", intellectual:"#3498db"};
+const NAMES = {physical:"Fisico", emotional:"Emocional", intellectual:"Intelectual"};
+const EMOJIS = {physical:"💪", emotional:"💚", intellectual:"🧠"};
+
+let offsetDays = 0;
+let birthDate = null;
+
+function daysBetween(d1, d2) {
+    return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+}
+
+function bioValue(totalDays, cycle) {
+    return Math.sin((2 * Math.PI * totalDays) / cycle);
+}
+
+function getStatus(val) {
+    if (val > 0.8) return {text:"No auge 🔥", color:"#2ecc71"};
+    if (val > 0.3) return {text:"Bom ↑", color:"#4fc3f7"};
+    if (val > -0.3) return {text:"Normal →", color:"#f39c12"};
+    if (val > -0.8) return {text:"Fraco ↓", color:"#e67e22"};
+    return {text:"No minimo ⚠️", color:"#e74c3c"};
+}
+
+function getAdvice(p, e, i) {
+    let advice = "";
+    if (p > 0.5) advice += "<strong>Fisico:</strong> Voce esta cheio de energia! Ideal para exercicios e atividades fisicas.<br>";
+    else if (p < -0.5) advice += "<strong>Fisico:</strong> Sua energia esta baixa. Nao se esforce demais e descanse o suficiente.<br>";
+    else advice += "<strong>Fisico:</strong> Nivel normal. Atividade moderada e recomendada.<br>";
+
+    if (e > 0.5) advice += "<strong>Emocional:</strong> Suas emocoes estao ricas e estaveis. Encontre pessoas e expresse seu afeto.<br>";
+    else if (e < -0.5) advice += "<strong>Emocional:</strong> Suas emocoes estao a flor da pele. Evite conflitos e reserve um tempo para si mesmo.<br>";
+    else advice += "<strong>Emocional:</strong> Equilibrio emocional normal. Continue como de costume.<br>";
+
+    if (i > 0.5) advice += "<strong>Intelectual:</strong> Sua mente esta clara e sua concentracao esta no maximo. Perfeito para estudar ou tomar decisoes importantes!";
+    else if (i < -0.5) advice += "<strong>Intelectual:</strong> Seu julgamento esta enfraquecido. Adie decisoes importantes.";
+    else advice += "<strong>Intelectual:</strong> Concentracao normal. Adequado para tarefas cotidianas.";
+
+    return advice;
+}
+
+function calculate() {
+    const y = parseInt(document.getElementById("birthYear").value);
+    const m = parseInt(document.getElementById("birthMonth").value);
+    const d = parseInt(document.getElementById("birthDay").value);
+    if (!y || !m || !d) return alert("Por favor, selecione sua data de nascimento!");
+
+    birthDate = new Date(y, m - 1, d);
+    offsetDays = 0;
+    render();
+}
+
+function render() {
+    const today = new Date();
+    today.setDate(today.getDate() + offsetDays);
+    const totalDays = daysBetween(birthDate, today);
+
+    const p = bioValue(totalDays, CYCLES.physical);
+    const e = bioValue(totalDays, CYCLES.emotional);
+    const i = bioValue(totalDays, CYCLES.intellectual);
+
+    const pSt = getStatus(p), eSt = getStatus(e), iSt = getStatus(i);
+
+    const dayNames = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+    const dateStr = `${dayNames[today.getDay()]} ${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+    const livedDays = totalDays;
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML = `
+        <div class="nav-btns">
+            <div class="nav-btn" onclick="offsetDays-=7;render();">◀ 1 Semana</div>
+            <div class="nav-btn" onclick="offsetDays--;render();">◀ Ontem</div>
+            <div class="nav-btn" onclick="offsetDays=0;render();" style="background:rgba(79,195,247,0.2);">Hoje</div>
+            <div class="nav-btn" onclick="offsetDays++;render();">Amanha ▶</div>
+            <div class="nav-btn" onclick="offsetDays+=7;render();">1 Semana ▶</div>
+        </div>
+
+        <div style="text-align:center;margin-bottom:16px;">
+            <div style="font-size:16px;color:#4fc3f7;font-weight:700;">${dateStr}</div>
+            <div style="font-size:12px;color:#666;">Dia ${livedDays.toLocaleString()} desde o nascimento</div>
+        </div>
+
+        <div class="today-scores">
+            <div class="score-card" style="background:rgba(231,76,60,0.06);">
+                <div class="sc-emoji">💪</div>
+                <div class="sc-label">Fisico</div>
+                <div class="sc-value" style="color:${COLORS.physical};">${Math.round(p * 100)}%</div>
+                <div class="sc-status" style="color:${pSt.color};">${pSt.text}</div>
+                <div class="sc-cycle">Ciclo: 23 dias</div>
+            </div>
+            <div class="score-card" style="background:rgba(46,204,113,0.06);">
+                <div class="sc-emoji">💚</div>
+                <div class="sc-label">Emocional</div>
+                <div class="sc-value" style="color:${COLORS.emotional};">${Math.round(e * 100)}%</div>
+                <div class="sc-status" style="color:${eSt.color};">${eSt.text}</div>
+                <div class="sc-cycle">Ciclo: 28 dias</div>
+            </div>
+            <div class="score-card" style="background:rgba(52,152,219,0.06);">
+                <div class="sc-emoji">🧠</div>
+                <div class="sc-label">Intelectual</div>
+                <div class="sc-value" style="color:${COLORS.intellectual};">${Math.round(i * 100)}%</div>
+                <div class="sc-status" style="color:${iSt.color};">${iSt.text}</div>
+                <div class="sc-cycle">Ciclo: 33 dias</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">Grafico de biorritmo de 30 dias</div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.physical};"></div>Fisico (23d)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.emotional};"></div>Emocional (28d)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.intellectual};"></div>Intelectual (33d)</div>
+            </div>
+            <canvas id="bioChart" width="660" height="300"></canvas>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 Dicas de hoje</div>
+            <div class="reading-text">${getAdvice(p, e, i)}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📖 O que e biorritmo ?</div>
+            <div class="reading-text">
+                O biorritmo e uma teoria proposta no inicio dos anos 1900 pelo Dr. Wilhelm Fliess.<br><br>
+                <strong>💪 Ritmo Fisico (ciclo de 23 dias)</strong> — Influencia a forca fisica, resistencia, imunidade e capacidades esportivas<br>
+                <strong>💚 Ritmo Emocional (ciclo de 28 dias)</strong> — Influencia as emocoes, o humor, a criatividade e os relacionamentos sociais<br>
+                <strong>🧠 Ritmo Intelectual (ciclo de 33 dias)</strong> — Influencia a concentracao, o julgamento, a memoria e a capacidade de aprendizagem<br><br>
+                Quanto mais proximo de +100%, melhor; quanto mais proximo de -100%, mais baixo voce esta. O dia em que o ritmo passa por 0% e chamado de <strong>dia critico</strong>.
+            </div>
+        </div>
+    `;
+    section.style.display = "block";
+
+    drawChart(totalDays);
+}
+
+function drawChart(centerDay) {
+    const canvas = document.getElementById("bioChart");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width, H = canvas.height;
+    const midY = H / 2;
+    const amp = H * 0.4;
+    const days = 30;
+    const startDay = centerDay - 15;
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.strokeStyle = "rgba(255,255,255,0.05)";
+    ctx.lineWidth = 1;
+    for (let y of [0.25, 0.5, 0.75]) {
+        ctx.beginPath(); ctx.moveTo(0, H * y); ctx.lineTo(W, H * y); ctx.stroke();
+    }
+    ctx.strokeStyle = "rgba(255,255,255,0.15)";
+    ctx.beginPath(); ctx.moveTo(0, midY); ctx.lineTo(W, midY); ctx.stroke();
+
+    const todayX = (15 / days) * W;
+    ctx.fillStyle = "rgba(79,195,247,0.1)";
+    ctx.fillRect(todayX - 1, 0, 3, H);
+    ctx.fillStyle = "rgba(79,195,247,0.5)";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Hoje", todayX, 14);
+
+    Object.keys(CYCLES).forEach(key => {
+        ctx.strokeStyle = COLORS[key];
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let d = 0; d <= days; d++) {
+            const x = (d / days) * W;
+            const val = bioValue(startDay + d, CYCLES[key]);
+            const y = midY - val * amp;
+            if (d === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        const todayVal = bioValue(centerDay, CYCLES[key]);
+        const ty = midY - todayVal * amp;
+        ctx.fillStyle = COLORS[key];
+        ctx.beginPath();
+        ctx.arc(todayX, ty, 5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    ctx.fillStyle = "#555";
+    ctx.font = "10px sans-serif";
+    ctx.textAlign = "center";
+    for (let d = 0; d <= days; d += 5) {
+        const date = new Date(birthDate);
+        date.setDate(date.getDate() + startDay + d);
+        const x = (d / days) * W;
+        ctx.fillText(`${date.getMonth()+1}/${date.getDate()}`, x, H - 4);
+    }
+
+    ctx.fillStyle = "#444";
+    ctx.textAlign = "left";
+    ctx.fillText("+100%", 4, 16);
+    ctx.fillText("0%", 4, midY - 4);
+    ctx.fillText("-100%", 4, H - 16);
+}
+
+(function() {
+    const yEl = document.getElementById("birthYear");
+    const mEl = document.getElementById("birthMonth");
+    const dEl = document.getElementById("birthDay");
+    const now = new Date();
+
+    yEl.innerHTML = "<option value=\"\">Ano</option>";
+    for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}</option>`;
+
+    mEl.innerHTML = "<option value=\"\">Mes</option>";
+    for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}</option>`;
+
+    function updateDays() {
+        const y = parseInt(yEl.value) || 2000;
+        const m = parseInt(mEl.value) || 1;
+        const maxD = new Date(y, m, 0).getDate();
+        const cur = parseInt(dEl.value);
+        dEl.innerHTML = "<option value=\"\">Dia</option>";
+        for (let d = 1; d <= maxD; d++) dEl.innerHTML += `<option value="${d}"${d===cur?" selected":""}>${d}</option>`;
+    }
+    yEl.onchange = updateDays;
+    mEl.onchange = updateDays;
+    updateDays();
+})();
+</script>
+
+</body>
+</html>
