@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정구 - 마법의 수정구에게 물어보세요 | MOGU Moon</title>
+    <meta name="description" content="무료 수정구 점. 마음속 질문을 떠올리고 수정구를 터치하면 신비로운 답변을 받을 수 있습니다. Magic 8-Ball 스타일의 재미있는 점술.">
+    <link rel="canonical" href="https://mogumoon.com/crystal/">
+    <meta property="og:title" content="수정구 - 마법의 수정구에게 물어보세요 | MOGU Moon">
+    <meta property="og:description" content="무료 수정구 점. 마음속 질문을 떠올리고 수정구를 터치하면 신비로운 답변을 받을 수 있습니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/crystal/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"수정구 점이란?","acceptedAnswer":{"@type":"Answer","text":"수정구를 응시하며 질문하면 무의식의 답변을 받는 고대 점술입니다. 여기서는 재미있는 랜덤 답변 형식으로 즐길 수 있습니다."}},
+        {"@type":"Question","name":"수정구 답변은 정확한가요?","acceptedAnswer":{"@type":"Answer","text":"수정구 점은 재미와 자기 성찰을 위한 것입니다. 중요한 결정은 전문가와 상담하세요."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06061a; color: #e0d8cc; min-height: 100vh; overflow-x: hidden; }
+        header { background: linear-gradient(135deg, #0a0a2e, #12123a); border-bottom: 1px solid #2a2a5a; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 600px; margin: 20px auto 40px; padding: 0 20px; text-align: center; }
+        .page-title h2 { font-size: 28px; color: #a78bfa; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; margin-bottom: 30px; }
+
+        .question-box { margin-bottom: 30px; }
+        .question-box input { width: 100%; padding: 14px 20px; background: rgba(167,139,250,0.08); border: 1px solid #3a2a6a; border-radius: 12px; color: #e0d8cc; font-size: 16px; outline: none; text-align: center; }
+        .question-box input:focus { border-color: #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.15); }
+        .question-box input::placeholder { color: #555; }
+        .question-hint { font-size: 12px; color: #666; margin-top: 8px; }
+
+        .crystal-wrapper { position: relative; width: 280px; height: 280px; margin: 0 auto 30px; cursor: pointer; }
+        .crystal-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%); animation: pulse 3s ease-in-out infinite; }
+        .crystal-ball { width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(200,180,255,0.3), rgba(100,60,180,0.15) 40%, rgba(30,15,60,0.8) 70%, #0a0520 100%); border: 2px solid rgba(167,139,250,0.3); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .crystal-ball:hover { border-color: rgba(167,139,250,0.6); box-shadow: 0 0 40px rgba(167,139,250,0.2); }
+        .crystal-ball:active { transform: scale(0.97); }
+        .crystal-shine { position: absolute; top: 15%; left: 20%; width: 60px; height: 30px; background: radial-gradient(ellipse, rgba(255,255,255,0.25), transparent); border-radius: 50%; transform: rotate(-30deg); }
+        .crystal-shine2 { position: absolute; top: 25%; left: 55%; width: 20px; height: 10px; background: radial-gradient(ellipse, rgba(255,255,255,0.15), transparent); border-radius: 50%; transform: rotate(-20deg); }
+
+        .crystal-text { font-size: 15px; color: rgba(167,139,250,0.6); padding: 30px; text-align: center; line-height: 1.6; z-index: 1; transition: all 0.5s; font-style: italic; }
+        .crystal-text.active { color: #e0d8ee; font-size: 17px; text-shadow: 0 0 20px rgba(167,139,250,0.5); }
+
+        .crystal-base { width: 200px; height: 30px; margin: -10px auto 0; background: linear-gradient(180deg, #2a1a4a, #1a0d30); border-radius: 0 0 100px 100px / 0 0 30px 30px; border: 1px solid rgba(167,139,250,0.2); border-top: none; }
+
+        .ask-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #7c3aed, #a78bfa); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.3s; margin-bottom: 16px; }
+        .ask-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 25px rgba(167,139,250,0.4); }
+        .ask-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .ask-sub { font-size: 12px; color: #666; margin-bottom: 30px; }
+
+        .history-section { margin-top: 40px; text-align: left; }
+        .history-title { font-size: 14px; color: #a78bfa; margin-bottom: 12px; font-weight: 600; letter-spacing: 1px; }
+        .history-item { background: rgba(167,139,250,0.06); border: 1px solid #2a2a5a; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+        .history-q { font-size: 13px; color: #888; margin-bottom: 6px; }
+        .history-a { font-size: 15px; color: #c4b5fd; font-style: italic; }
+        .history-type { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; font-weight: 600; }
+        .type-positive { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .type-neutral { background: rgba(234,179,8,0.15); color: #eab308; }
+        .type-negative { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .type-mystical { background: rgba(167,139,250,0.15); color: #a78bfa; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+
+        @keyframes pulse { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .crystal-ball.shaking { animation: shake 0.6s ease-in-out; }
+        @keyframes shake {
+            0%,100% { transform: rotate(0); }
+            15% { transform: rotate(-3deg); }
+            30% { transform: rotate(3deg); }
+            45% { transform: rotate(-2deg); }
+            60% { transform: rotate(2deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .mist { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 60%); opacity: 0; animation: none; }
+        .mist.active { animation: mistSwirl 2s ease-in-out; }
+        @keyframes mistSwirl {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.2) rotate(180deg); }
+            100% { opacity: 0; transform: scale(1.5) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🔮 수정구</h2>
+        <p>마음속 질문을 떠올리고, 수정구에게 물어보세요</p>
+    </div>
+
+    <div class="question-box">
+        <input type="text" id="questionInput" placeholder="질문을 입력하세요... (예: 이번 시험 합격할까?)" maxlength="100">
+        <div class="question-hint">질문을 입력하거나, 마음속으로 떠올린 채 수정구를 터치하세요</div>
+    </div>
+
+    <div class="crystal-wrapper" onclick="askCrystal()">
+        <div class="crystal-glow"></div>
+        <div class="crystal-ball" id="crystalBall">
+            <div class="crystal-shine"></div>
+            <div class="crystal-shine2"></div>
+            <div class="mist" id="mist"></div>
+            <div class="crystal-text" id="crystalText">수정구를<br>터치하세요</div>
+        </div>
+    </div>
+    <div class="crystal-base"></div>
+
+    <button class="ask-btn" id="askBtn" onclick="askCrystal()">🔮 수정구에게 묻기</button>
+    <div class="ask-sub">또는 수정구를 직접 터치하세요</div>
+
+    <div class="history-section" id="historySection" style="display:none;">
+        <div class="history-title">📜 이전 답변들</div>
+        <div id="historyList"></div>
+    </div>
+
+    <div class="disclaimer">🔮 수정구 점은 재미와 자기 성찰을 위한 것입니다. 중요한 결정은 전문가와 상담하세요.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #2a2a5a;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const ANSWERS = [
+    // 긍정 (positive)
+    {text:"그렇습니다. 확실합니다.", type:"positive"},
+    {text:"의심할 여지 없이 그렇습니다.", type:"positive"},
+    {text:"절대적으로 그렇습니다.", type:"positive"},
+    {text:"네, 분명히 그렇습니다.", type:"positive"},
+    {text:"당신이 믿는 대로 될 것입니다.", type:"positive"},
+    {text:"별들이 당신 편입니다.", type:"positive"},
+    {text:"운명이 미소짓고 있습니다.", type:"positive"},
+    {text:"좋은 기운이 느껴집니다... 그렇습니다!", type:"positive"},
+    {text:"수정구가 밝게 빛납니다. 긍정의 신호입니다.", type:"positive"},
+    {text:"우주가 '예'라고 속삭입니다.", type:"positive"},
+    {text:"길이 열려 있습니다. 나아가세요.", type:"positive"},
+    {text:"당신의 소원은 이루어질 것입니다.", type:"positive"},
+    {text:"희망을 품으세요. 좋은 일이 다가옵니다.", type:"positive"},
+    {text:"지금이 행동할 때입니다. 성공이 기다립니다.", type:"positive"},
+    {text:"수정구 속에 빛이 보입니다. 행운의 징조!", type:"positive"},
+
+    // 중립 (neutral)
+    {text:"안개가 자욱합니다... 아직 확실하지 않습니다.", type:"neutral"},
+    {text:"나중에 다시 물어보세요.", type:"neutral"},
+    {text:"지금은 답을 줄 수 없습니다.", type:"neutral"},
+    {text:"집중해서 다시 물어보세요.", type:"neutral"},
+    {text:"수정구가 흔들립니다... 결과가 불확실합니다.", type:"neutral"},
+    {text:"시간이 답을 줄 것입니다. 기다리세요.", type:"neutral"},
+    {text:"양면이 있습니다. 신중하게 판단하세요.", type:"neutral"},
+    {text:"운명은 아직 결정되지 않았습니다.", type:"neutral"},
+    {text:"답은 당신 안에 있습니다. 더 깊이 들여다보세요.", type:"neutral"},
+    {text:"수정구가 두 가지 빛을 보여줍니다... 선택은 당신의 몫.", type:"neutral"},
+
+    // 부정 (negative)
+    {text:"그럴 가능성은 낮습니다.", type:"negative"},
+    {text:"아닙니다.", type:"negative"},
+    {text:"별들이 반대합니다.", type:"negative"},
+    {text:"수정구가 어두워집니다... 좋지 않은 신호입니다.", type:"negative"},
+    {text:"지금은 때가 아닙니다.", type:"negative"},
+    {text:"다른 길을 찾아보세요.", type:"negative"},
+    {text:"기대하지 않는 것이 좋겠습니다.", type:"negative"},
+    {text:"수정구가 경고합니다. 신중하세요.", type:"negative"},
+    {text:"지금 방향을 바꾸는 것이 현명합니다.", type:"negative"},
+    {text:"그 선택은 후회를 부를 수 있습니다.", type:"negative"},
+
+    // 신비 (mystical)
+    {text:"달이 차오를 때 답이 드러날 것입니다.", type:"mystical"},
+    {text:"꿈에서 힌트를 찾으세요.", type:"mystical"},
+    {text:"세 번째 기회에 주목하세요.", type:"mystical"},
+    {text:"예상치 못한 곳에서 답이 올 것입니다.", type:"mystical"},
+    {text:"수정구가 나비를 보여줍니다... 변화가 옵니다.", type:"mystical"},
+    {text:"과거를 놓아야 미래가 열립니다.", type:"mystical"},
+    {text:"가까운 사람의 말에 답이 숨어 있습니다.", type:"mystical"},
+    {text:"물 가까이에서 영감을 얻을 것입니다.", type:"mystical"},
+    {text:"수정구 속에 문이 보입니다... 열쇠는 용기입니다.", type:"mystical"},
+    {text:"별자리가 정렬되고 있습니다. 곧 알게 될 것입니다.", type:"mystical"},
+    {text:"지금 느끼는 직감을 믿으세요. 그것이 답입니다.", type:"mystical"},
+    {text:"우연이라고 생각한 것... 그것은 운명이었습니다.", type:"mystical"},
+];
+
+const TYPE_LABELS = {positive:"긍정",neutral:"중립",negative:"부정",mystical:"신비"};
+const TYPE_CLASS = {positive:"type-positive",neutral:"type-neutral",negative:"type-negative",mystical:"type-mystical"};
+
+let isAsking = false;
+const history = [];
+
+function askCrystal() {
+    if (isAsking) return;
+    isAsking = true;
+
+    const btn = document.getElementById('askBtn');
+    const ball = document.getElementById('crystalBall');
+    const textEl = document.getElementById('crystalText');
+    const mist = document.getElementById('mist');
+    const question = document.getElementById('questionInput').value.trim();
+
+    btn.disabled = true;
+    textEl.className = 'crystal-text';
+    textEl.innerHTML = '...';
+    ball.classList.add('shaking');
+    mist.classList.remove('active');
+    void mist.offsetWidth;
+    mist.classList.add('active');
+
+    setTimeout(() => {
+        ball.classList.remove('shaking');
+        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+
+        textEl.innerHTML = answer.text;
+        textEl.className = 'crystal-text active';
+
+        // 히스토리 추가
+        history.unshift({q: question || '(마음속 질문)', a: answer.text, type: answer.type});
+        updateHistory();
+
+        btn.disabled = false;
+        isAsking = false;
+    }, 1500);
+}
+
+function updateHistory() {
+    if (history.length === 0) return;
+    document.getElementById('historySection').style.display = 'block';
+    document.getElementById('historyList').innerHTML = history.slice(0, 10).map(h => `
+        <div class="history-item" style="animation:fadeIn 0.3s ease-out;">
+            <div class="history-q">Q: ${h.q} <span class="history-type ${TYPE_CLASS[h.type]}">${TYPE_LABELS[h.type]}</span></div>
+            <div class="history-a">"${h.a}"</div>
+        </div>
+    `).join('');
+}
+
+document.getElementById('questionInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') askCrystal();
+});
+</script>
+
+</body>
+</html>
