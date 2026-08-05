@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>별자리 궁합 - 12별자리 연애·우정 궁합 테스트 | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/zodiac-compat/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/zodiac-compat/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/zodiac-compat/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/zodiac-compat/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/zodiac-compat/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/zodiac-compat/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/zodiac-compat/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/zodiac-compat/">
+    <meta name="description" content="무료 별자리 궁합 테스트. 두 별자리를 선택하면 연애 궁합, 우정 궁합, 장단점, 조언을 알려드립니다.">
+    <link rel="canonical" href="https://mogumoon.com/zodiac-compat/">
+    <meta property="og:title" content="별자리 궁합 - 12별자리 연애·우정 궁합 | MOGU Moon">
+    <meta property="og:description" content="무료 별자리 궁합 테스트. 두 별자리를 선택하면 연애·우정 궁합을 알려드립니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/zodiac-compat/">
+    <meta property="og:image" content="https://mogumoon.com/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"별자리 궁합이란?","acceptedAnswer":{"@type":"Answer","text":"12별자리(황도12궁)의 원소와 성질을 기반으로 두 사람의 연애, 우정, 관계 호환성을 분석하는 점술입니다."}},
+        {"@type":"Question","name":"별자리 궁합은 정확한가요?","acceptedAnswer":{"@type":"Answer","text":"별자리 궁합은 재미와 자기 이해를 위한 참고 자료입니다. 실제 관계는 노력과 소통이 더 중요합니다."}},
+        {"@type":"Question","name":"같은 별자리끼리는 잘 맞나요?","acceptedAnswer":{"@type":"Answer","text":"같은 별자리는 서로를 잘 이해하지만, 비슷한 단점도 증폭될 수 있습니다. 원소와 성질에 따라 다릅니다."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .select-section { display: flex; gap: 20px; align-items: center; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+        .zodiac-picker { flex: 1; min-width: 200px; }
+        .zodiac-picker label { display: block; font-size: 13px; color: #e84393; margin-bottom: 8px; font-weight: 600; text-align: center; }
+        .zodiac-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .zodiac-btn { padding: 10px 4px; background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .zodiac-btn:hover { border-color: #e84393; background: rgba(232,67,147,0.12); }
+        .zodiac-btn.selected { border-color: #e84393; background: rgba(232,67,147,0.2); box-shadow: 0 0 12px rgba(232,67,147,0.2); }
+        .zodiac-btn .zb-emoji { font-size: 22px; display: block; }
+        .zodiac-btn .zb-name { font-size: 10px; color: #999; margin-top: 2px; }
+        .heart-divider { font-size: 36px; color: #e84393; padding: 0 10px; margin-top: 20px; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #c2185b, #e84393); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232,67,147,0.3); }
+
+        .result-section { display: none; }
+        .compat-header { text-align: center; margin-bottom: 24px; }
+        .compat-signs { font-size: 48px; margin-bottom: 8px; }
+        .compat-names { font-size: 20px; color: #e84393; font-weight: 700; margin-bottom: 8px; }
+
+        .score-display { text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 3px solid; }
+        .score-num { font-size: 42px; font-weight: 900; }
+        .score-label { font-size: 12px; color: #888; }
+
+        .score-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .score-bar-item { background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 10px; padding: 14px; }
+        .sb-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .sb-bar { height: 8px; background: #2a1540; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+        .sb-fill { height: 100%; border-radius: 4px; transition: width 0.8s; }
+        .sb-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #e84393; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #e84393; }
+
+        .retry-btn { display: block; width: 100%; padding: 14px; background: transparent; border: 2px solid #e84393; color: #e84393; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { background: rgba(232,67,147,0.1); }
+
+        .element-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+        .el-fire { background: rgba(231,76,60,0.2); color: #e74c3c; }
+        .el-earth { background: rgba(212,168,83,0.2); color: #d4a853; }
+        .el-air { background: rgba(52,152,219,0.2); color: #3498db; }
+        .el-water { background: rgba(155,89,182,0.2); color: #9b59b6; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 500px) { .zodiac-grid { grid-template-columns: repeat(3, 1fr); } .score-bars { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💕 별자리 궁합</h2>
+        <p>두 별자리를 선택하고 연애·우정 궁합을 확인하세요</p>
+    </div>
+
+    <div class="select-section">
+        <div class="zodiac-picker">
+            <label>나의 별자리</label>
+            <div class="zodiac-grid" id="picker1"></div>
+        </div>
+        <div class="heart-divider">💕</div>
+        <div class="zodiac-picker">
+            <label>상대의 별자리</label>
+            <div class="zodiac-grid" id="picker2"></div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="checkCompat()">💕 궁합 보기</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">💕 별자리 궁합은 재미와 자기 이해를 위한 것입니다. 진짜 사랑은 별자리가 아니라 마음에서 옵니다.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const SIGNS = [
+    {name:"양자리",emoji:"♈",en:"Aries",date:"3/21~4/19",element:"fire",quality:"cardinal",ruler:"화성"},
+    {name:"황소자리",emoji:"♉",en:"Taurus",date:"4/20~5/20",element:"earth",quality:"fixed",ruler:"금성"},
+    {name:"쌍둥이자리",emoji:"♊",en:"Gemini",date:"5/21~6/21",element:"air",quality:"mutable",ruler:"수성"},
+    {name:"게자리",emoji:"♋",en:"Cancer",date:"6/22~7/22",element:"water",quality:"cardinal",ruler:"달"},
+    {name:"사자자리",emoji:"♌",en:"Leo",date:"7/23~8/22",element:"fire",quality:"fixed",ruler:"태양"},
+    {name:"처녀자리",emoji:"♍",en:"Virgo",date:"8/23~9/22",element:"earth",quality:"mutable",ruler:"수성"},
+    {name:"천칭자리",emoji:"♎",en:"Libra",date:"9/23~10/22",element:"air",quality:"cardinal",ruler:"금성"},
+    {name:"전갈자리",emoji:"♏",en:"Scorpio",date:"10/23~11/21",element:"water",quality:"fixed",ruler:"명왕성"},
+    {name:"사수자리",emoji:"♐",en:"Sagittarius",date:"11/22~12/21",element:"fire",quality:"mutable",ruler:"목성"},
+    {name:"염소자리",emoji:"♑",en:"Capricorn",date:"12/22~1/19",element:"earth",quality:"cardinal",ruler:"토성"},
+    {name:"물병자리",emoji:"♒",en:"Aquarius",date:"1/20~2/18",element:"air",quality:"fixed",ruler:"천왕성"},
+    {name:"물고기자리",emoji:"♓",en:"Pisces",date:"2/19~3/20",element:"water",quality:"mutable",ruler:"해왕성"}
+];
+
+const ELEMENT_NAME = {fire:"불",earth:"흙",air:"바람",water:"물"};
+const ELEMENT_CLASS = {fire:"el-fire",earth:"el-earth",air:"el-air",water:"el-water"};
+
+// 궁합 매트릭스 (0~11 x 0~11, 총합 점수 기반)
+// 같은원소=높음, 보완원소=중상, 충돌원소=낮음, 90도=도전
+const COMPAT = {};
+function key(a,b){ return Math.min(a,b)+'-'+Math.max(a,b); }
+
+// 원소 궁합 기본점수
+function baseScore(a,b) {
+    const ea = SIGNS[a].element, eb = SIGNS[b].element;
+    if (ea === eb) return 85; // 같은 원소
+    if ((ea==='fire'&&eb==='air')||(ea==='air'&&eb==='fire')) return 80;
+    if ((ea==='earth'&&eb==='water')||(ea==='water'&&eb==='earth')) return 80;
+    if ((ea==='fire'&&eb==='earth')||(ea==='earth'&&eb==='fire')) return 55;
+    if ((ea==='fire'&&eb==='water')||(ea==='water'&&eb==='fire')) return 45;
+    if ((ea==='air'&&eb==='water')||(ea==='water'&&eb==='air')) return 50;
+    if ((ea==='air'&&eb==='earth')||(ea==='earth'&&eb==='air')) return 50;
+    return 60;
+}
+
+// 각도 궁합 보정
+function angleBonus(a,b) {
+    const diff = Math.abs(a-b);
+    const angle = Math.min(diff, 12-diff);
+    if (angle===0) return 5;   // 합(같은자리)
+    if (angle===1) return -5;  // 반합 옆자리
+    if (angle===2) return 10;  // 60도 섹스타일
+    if (angle===3) return -10; // 90도 스퀘어
+    if (angle===4) return 8;   // 120도 트라인
+    if (angle===5) return -3;  // 150도 불편
+    if (angle===6) return 0;   // 180도 대립(매력+갈등)
+    return 0;
+}
+
+const READINGS = [
+    // [i][j] 형태 대신 동적 생성
+];
+
+// 궁합별 상세 해석 데이터
+const DETAIL = {
+    "fire-fire":{love:"두 불이 만나면 폭발적인 열정! 함께 있으면 짜릿하고 흥분되지만, 둘 다 양보를 모르면 대형 싸움이 날 수 있습니다. 서로의 불꽃을 존중하되, 가끔은 한 발 물러서세요.",friend:"최고의 모험 파트너! 함께라면 뭐든 재미있습니다. 다만 경쟁심이 과하면 우정에 금이 갈 수 있어요.",tip:"서로의 리더십을 번갈아 인정하세요. 두 왕이 한 성에 있으면 충돌하지만, 번갈아 이끌면 무적입니다."},
+    "earth-earth":{love:"안정적이고 신뢰가 깊은 관계입니다. 서로의 가치관이 비슷해 편안하지만, 너무 안정만 추구하면 지루해질 수 있습니다. 가끔 일상을 벗어난 모험을 함께 하세요.",friend:"가장 믿을 수 있는 친구. 현실적이고 실용적인 관계로, 서로에게 진심어린 조언을 해줍니다.",tip:"변화를 두려워하지 마세요. 안정은 좋지만, 새로운 경험이 관계에 활력을 줍니다."},
+    "air-air":{love:"지적 대화가 끊이지 않는 관계! 서로의 생각을 자극하고 영감을 줍니다. 하지만 감정적 깊이가 부족할 수 있어요. 가끔은 머리가 아닌 가슴으로 대화하세요.",friend:"최고의 토론 파트너이자 아이디어 뱅크. 함께 있으면 끊임없이 새로운 것을 발견합니다.",tip:"생각만 하지 말고 행동으로 옮기세요. 아이디어는 실현해야 의미가 있습니다."},
+    "water-water":{love:"영혼까지 이해하는 깊은 사랑. 서로의 감정을 말하지 않아도 느낍니다. 하지만 감정의 소용돌이에 함께 빠질 위험이 있어요. 객관적 시야가 필요합니다.",friend:"눈빛만으로 통하는 친구. 서로의 아픔을 자기 것처럼 느끼는 깊은 유대가 있습니다.",tip:"감정에 빠지지 말고 때로는 이성적으로 판단하세요. 둘 다 바다에 빠지면 구해줄 사람이 없습니다."},
+    "fire-air":{love:"불에 바람이 더해지면 더 크게 타오릅니다! 서로에게 영감과 에너지를 주는 환상의 조합. 불은 열정을, 바람은 아이디어를 제공합니다.",friend:"함께하면 무한한 가능성! 모험, 여행, 새로운 도전을 함께 하기 최고입니다.",tip:"바람이 너무 세면 불이 꺼질 수 있어요. 적당한 거리감이 관계를 지속시킵니다."},
+    "fire-earth":{love:"열정과 안정의 만남. 불이 너무 뜨거우면 흙이 마르고, 흙이 너무 무거우면 불이 꺼집니다. 서로의 속도를 맞추는 것이 핵심입니다.",friend:"현실주의자와 이상주의자의 조합. 서로의 부족한 점을 채워줄 수 있지만 갈등도 있습니다.",tip:"서로의 세계를 존중하세요. 불은 흙에게 모험을, 흙은 불에게 안정을 선물하세요."},
+    "fire-water":{love:"뜨거운 불과 차가운 물 — 증기가 피어오르는 격정적 관계! 끌어당기는 힘은 강하지만, 충돌도 잦습니다. 불은 물의 감성을, 물은 불의 행동력을 배우세요.",friend:"쉽지 않지만 서로에게 성장을 주는 관계. 균형을 찾으면 놀라운 시너지가 납니다.",tip:"서로를 바꾸려 하지 마세요. 불은 불답게, 물은 물답게 — 그것이 존중입니다."},
+    "earth-water":{love:"물이 대지를 적시듯, 부드럽고 자연스러운 사랑. 감정적 깊이(물)와 현실적 안정(흙)이 만나 든든한 관계를 만듭니다. 함께 정원을 가꾸는 느낌.",friend:"서로에게 편안한 안식처가 되어주는 친구. 묵묵히 곁에 있어주는 관계입니다.",tip:"변화를 함께 받아들이세요. 너무 안전한 곳에만 머물면 성장이 멈춥니다."},
+    "earth-air":{love:"흙과 바람은 쉽게 이해되지 않는 조합. 흙은 안정을, 바람은 자유를 원합니다. 하지만 서로를 이해하면 대지에 바람이 부는 것처럼 상쾌한 관계가 됩니다.",friend:"관점이 완전히 달라서 신선하지만, 깊은 유대를 쌓기엔 노력이 필요합니다.",tip:"서로의 다름을 비판하지 말고 호기심으로 바라보세요. 차이가 매력이 됩니다."},
+    "air-water":{love:"생각(바람)과 감정(물)의 만남. 서로를 이해하기 어렵지만, 노력하면 매우 깊은 관계가 됩니다. 바람은 수면에 파문을 일으키고, 물은 바람에 깊이를 줍니다.",friend:"소통 방식이 달라 오해가 생기기 쉽지만, 서로에게 부족한 부분을 채워줍니다.",tip:"바람은 감정을 무시하지 말고, 물은 논리를 거부하지 마세요. 양쪽 다 필요합니다."}
+};
+
+let selected1 = -1, selected2 = -1;
+
+// 별자리 선택 UI 생성
+function renderPickers() {
+    ['picker1','picker2'].forEach((id, pidx) => {
+        const el = document.getElementById(id);
+        el.innerHTML = SIGNS.map((s, i) => `
+            <div class="zodiac-btn" data-idx="${i}" data-picker="${pidx}" onclick="selectSign(${pidx},${i})">
+                <span class="zb-emoji">${s.emoji}</span>
+                <span class="zb-name">${s.name}</span>
+            </div>
+        `).join('');
+    });
+}
+
+function selectSign(picker, idx) {
+    if (picker === 0) selected1 = idx; else selected2 = idx;
+    document.querySelectorAll(`#picker${picker+1} .zodiac-btn`).forEach(b => {
+        b.classList.toggle('selected', parseInt(b.dataset.idx) === idx);
+    });
+}
+
+function getElementPair(a, b) {
+    const pair = [SIGNS[a].element, SIGNS[b].element].sort().join('-');
+    return pair;
+}
+
+function checkCompat() {
+    if (selected1 < 0 || selected2 < 0) return alert('두 별자리를 모두 선택해주세요!');
+
+    const s1 = SIGNS[selected1], s2 = SIGNS[selected2];
+    const total = Math.min(100, Math.max(20, baseScore(selected1, selected2) + angleBonus(selected1, selected2) + Math.floor(Math.random()*11) - 5));
+    const love = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const friend = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const comm = Math.min(100, Math.max(15, (s1.element===s2.element ? 85 : s1.element==='air'||s2.element==='air' ? 75 : 55) + Math.floor(Math.random()*15) - 7));
+    const passion = Math.min(100, Math.max(15, (s1.element==='fire'||s2.element==='fire' ? 80 : s1.element==='water'||s2.element==='water' ? 70 : 55) + Math.floor(Math.random()*15) - 7));
+
+    const pair = getElementPair(selected1, selected2);
+    const detail = DETAIL[pair] || DETAIL[pair.split('-').reverse().join('-')] || {love:"서로 다른 매력으로 끌리는 관계입니다.",friend:"노력하면 좋은 친구가 될 수 있습니다.",tip:"서로를 이해하려는 노력이 필요합니다."};
+
+    const scoreColor = total >= 80 ? '#e84393' : total >= 60 ? '#f39c12' : total >= 40 ? '#3498db' : '#e74c3c';
+    const scoreText = total >= 90 ? '운명적 궁합!' : total >= 80 ? '환상의 궁합!' : total >= 70 ? '아주 좋은 궁합' : total >= 60 ? '좋은 궁합' : total >= 50 ? '보통 궁합' : total >= 40 ? '노력이 필요한 궁합' : '도전적인 궁합';
+
+    const section = document.getElementById('resultSection');
+    section.innerHTML = `
+        <div class="compat-header">
+            <div class="compat-signs">${s1.emoji} 💕 ${s2.emoji}</div>
+            <div class="compat-names">${s1.name} & ${s2.name}</div>
+            <div style="font-size:13px;color:#888;">
+                ${s1.name} <span class="element-badge ${ELEMENT_CLASS[s1.element]}">${ELEMENT_NAME[s1.element]}</span>
+                &nbsp;×&nbsp;
+                ${s2.name} <span class="element-badge ${ELEMENT_CLASS[s2.element]}">${ELEMENT_NAME[s2.element]}</span>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <div class="score-circle" style="border-color:${scoreColor};background:rgba(232,67,147,0.06);">
+                <div class="score-num" style="color:${scoreColor};">${total}%</div>
+                <div class="score-label">${scoreText}</div>
+            </div>
+        </div>
+
+        <div class="score-bars">
+            <div class="score-bar-item">
+                <div class="sb-label">💕 연애 궁합</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${love}%;background:#e84393;"></div></div>
+                <div class="sb-value" style="color:#e84393;">${love}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">👫 우정 궁합</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${friend}%;background:#3498db;"></div></div>
+                <div class="sb-value" style="color:#3498db;">${friend}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">💬 소통 궁합</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${comm}%;background:#2ecc71;"></div></div>
+                <div class="sb-value" style="color:#2ecc71;">${comm}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">🔥 열정 궁합</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${passion}%;background:#f39c12;"></div></div>
+                <div class="sb-value" style="color:#f39c12;">${passion}%</div>
+            </div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💕 연애 궁합</div>
+            <div class="reading-text">${detail.love}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">👫 우정 궁합</div>
+            <div class="reading-text">${detail.friend}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 관계 조언</div>
+            <div class="reading-text"><strong>${detail.tip}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📊 원소 분석</div>
+            <div class="reading-text">
+                <strong>${s1.name}</strong>: ${ELEMENT_NAME[s1.element]}의 별자리 (${s1.date}) · 수호성 ${s1.ruler}<br>
+                <strong>${s2.name}</strong>: ${ELEMENT_NAME[s2.element]}의 별자리 (${s2.date}) · 수호성 ${s2.ruler}<br><br>
+                ${s1.element === s2.element ?
+                    `같은 원소(${ELEMENT_NAME[s1.element]})끼리의 만남! 서로를 본능적으로 이해하지만, 같은 단점도 증폭될 수 있습니다.` :
+                    `${ELEMENT_NAME[s1.element]}과 ${ELEMENT_NAME[s2.element]}의 만남 — 서로 다른 세계에서 온 두 사람이 만나 새로운 균형을 만들어갑니다.`
+                }
+            </div>
+        </div>
+
+        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';window.scrollTo({top:0,behavior:'smooth'});">🔄 다른 궁합 보기</button>
+    `;
+    section.style.display = 'block';
+    section.scrollIntoView({behavior:'smooth'});
+}
+
+renderPickers();
+</script>
+
+</body>
+</html>
