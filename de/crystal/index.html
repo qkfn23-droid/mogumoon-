@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kristallkugel - Frage die magische Kristallkugel | MOGU Moon</title>
+    <meta name="description" content="Kostenlose magische Kristallkugel. Denke an deine Frage und beruehre die Kristallkugel, um eine geheimnisvolle Antwort zu erhalten. Wahrsagerei im Magic-8-Ball-Stil.">
+    <link rel="canonical" href="https://mogumoon.com/de/crystal/">
+    <meta property="og:title" content="Kristallkugel - Frage die magische Kristallkugel | MOGU Moon">
+    <meta property="og:description" content="Kostenlose magische Kristallkugel. Denke an deine Frage und beruehre die Kristallkugel, um eine geheimnisvolle Antwort zu erhalten.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/de/crystal/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Was ist Kristallkugel-Wahrsagerei?","acceptedAnswer":{"@type":"Answer","text":"Es ist eine alte Wahrsagepraxis, bei der man in die Kristallkugel schaut, um Antworten aus dem Unbewussten zu empfangen. Hier kannst du es mit zuefaelligen, unterhaltsamen Antworten geniessen."}},
+        {"@type":"Question","name":"Sind die Antworten der Kristallkugel genau?","acceptedAnswer":{"@type":"Answer","text":"Die Kristallkugel dient der Unterhaltung und Selbstreflexion. Fuer wichtige Entscheidungen wende dich an einen Fachmann."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06061a; color: #e0d8cc; min-height: 100vh; overflow-x: hidden; }
+        header { background: linear-gradient(135deg, #0a0a2e, #12123a); border-bottom: 1px solid #2a2a5a; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 600px; margin: 20px auto 40px; padding: 0 20px; text-align: center; }
+        .page-title h2 { font-size: 28px; color: #a78bfa; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; margin-bottom: 30px; }
+
+        .question-box { margin-bottom: 30px; }
+        .question-box input { width: 100%; padding: 14px 20px; background: rgba(167,139,250,0.08); border: 1px solid #3a2a6a; border-radius: 12px; color: #e0d8cc; font-size: 16px; outline: none; text-align: center; }
+        .question-box input:focus { border-color: #a78bfa; box-shadow: 0 0 20px rgba(167,139,250,0.15); }
+        .question-box input::placeholder { color: #555; }
+        .question-hint { font-size: 12px; color: #666; margin-top: 8px; }
+
+        .crystal-wrapper { position: relative; width: 280px; height: 280px; margin: 0 auto 30px; cursor: pointer; }
+        .crystal-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%); animation: pulse 3s ease-in-out infinite; }
+        .crystal-ball { width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(200,180,255,0.3), rgba(100,60,180,0.15) 40%, rgba(30,15,60,0.8) 70%, #0a0520 100%); border: 2px solid rgba(167,139,250,0.3); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .crystal-ball:hover { border-color: rgba(167,139,250,0.6); box-shadow: 0 0 40px rgba(167,139,250,0.2); }
+        .crystal-ball:active { transform: scale(0.97); }
+        .crystal-shine { position: absolute; top: 15%; left: 20%; width: 60px; height: 30px; background: radial-gradient(ellipse, rgba(255,255,255,0.25), transparent); border-radius: 50%; transform: rotate(-30deg); }
+        .crystal-shine2 { position: absolute; top: 25%; left: 55%; width: 20px; height: 10px; background: radial-gradient(ellipse, rgba(255,255,255,0.15), transparent); border-radius: 50%; transform: rotate(-20deg); }
+
+        .crystal-text { font-size: 15px; color: rgba(167,139,250,0.6); padding: 30px; text-align: center; line-height: 1.6; z-index: 1; transition: all 0.5s; font-style: italic; }
+        .crystal-text.active { color: #e0d8ee; font-size: 17px; text-shadow: 0 0 20px rgba(167,139,250,0.5); }
+
+        .crystal-base { width: 200px; height: 30px; margin: -10px auto 0; background: linear-gradient(180deg, #2a1a4a, #1a0d30); border-radius: 0 0 100px 100px / 0 0 30px 30px; border: 1px solid rgba(167,139,250,0.2); border-top: none; }
+
+        .ask-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #7c3aed, #a78bfa); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.3s; margin-bottom: 16px; }
+        .ask-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 25px rgba(167,139,250,0.4); }
+        .ask-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .ask-sub { font-size: 12px; color: #666; margin-bottom: 30px; }
+
+        .history-section { margin-top: 40px; text-align: left; }
+        .history-title { font-size: 14px; color: #a78bfa; margin-bottom: 12px; font-weight: 600; letter-spacing: 1px; }
+        .history-item { background: rgba(167,139,250,0.06); border: 1px solid #2a2a5a; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+        .history-q { font-size: 13px; color: #888; margin-bottom: 6px; }
+        .history-a { font-size: 15px; color: #c4b5fd; font-style: italic; }
+        .history-type { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; font-weight: 600; }
+        .type-positive { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .type-neutral { background: rgba(234,179,8,0.15); color: #eab308; }
+        .type-negative { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .type-mystical { background: rgba(167,139,250,0.15); color: #a78bfa; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+
+        @keyframes pulse { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .crystal-ball.shaking { animation: shake 0.6s ease-in-out; }
+        @keyframes shake {
+            0%,100% { transform: rotate(0); }
+            15% { transform: rotate(-3deg); }
+            30% { transform: rotate(3deg); }
+            45% { transform: rotate(-2deg); }
+            60% { transform: rotate(2deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .mist { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 60%); opacity: 0; animation: none; }
+        .mist.active { animation: mistSwirl 2s ease-in-out; }
+        @keyframes mistSwirl {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.2) rotate(180deg); }
+            100% { opacity: 0; transform: scale(1.5) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🔮 Kristallkugel</h2>
+        <p>Denke an deine Frage und frage die Kristallkugel</p>
+    </div>
+
+    <div class="question-box">
+        <input type="text" id="questionInput" placeholder="Stelle deine Frage... (z.B. Werde ich die Pruefung bestehen?)" maxlength="100">
+        <div class="question-hint">Gib deine Frage ein oder denke sie in Gedanken und beruehre die Kristallkugel</div>
+    </div>
+
+    <div class="crystal-wrapper" onclick="askCrystal()">
+        <div class="crystal-glow"></div>
+        <div class="crystal-ball" id="crystalBall">
+            <div class="crystal-shine"></div>
+            <div class="crystal-shine2"></div>
+            <div class="mist" id="mist"></div>
+            <div class="crystal-text" id="crystalText">Beruehre die<br>Kristallkugel</div>
+        </div>
+    </div>
+    <div class="crystal-base"></div>
+
+    <button class="ask-btn" id="askBtn" onclick="askCrystal()">🔮 Die Kugel befragen</button>
+    <div class="ask-sub">Oder beruehre die Kristallkugel direkt</div>
+
+    <div class="history-section" id="historySection" style="display:none;">
+        <div class="history-title">📜 Fruehере Antworten</div>
+        <div id="historyList"></div>
+    </div>
+
+    <div class="disclaimer">🔮 Die Kristallkugel dient der Unterhaltung und Selbstreflexion. Fuer wichtige Entscheidungen wende dich an einen Fachmann.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #2a2a5a;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Teilen:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Kopiert!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL kopieren</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const ANSWERS = [
+    // Positiv
+    {text:"Ja, ganz sicher.", type:"positive"},
+    {text:"Ohne jeden Zweifel.", type:"positive"},
+    {text:"Absolut ja.", type:"positive"},
+    {text:"Ja, ganz bestimmt.", type:"positive"},
+    {text:"Es wird so geschehen, wie du es glaubst.", type:"positive"},
+    {text:"Die Sterne stehen auf deiner Seite.", type:"positive"},
+    {text:"Das Schicksal laechelt dir zu.", type:"positive"},
+    {text:"Ich spuere gute Energie... Ja!", type:"positive"},
+    {text:"Die Kristallkugel leuchtet hell auf. Ein positives Zeichen.", type:"positive"},
+    {text:"Das Universum fluestert 'Ja'.", type:"positive"},
+    {text:"Der Weg steht offen. Geh voran.", type:"positive"},
+    {text:"Dein Wunsch wird in Erfuellung gehen.", type:"positive"},
+    {text:"Hab Hoffnung. Gutes steht bevor.", type:"positive"},
+    {text:"Jetzt ist die Zeit zu handeln. Erfolg wartet auf dich.", type:"positive"},
+    {text:"Ich sehe Licht in der Kristallkugel. Ein Zeichen des Gluecks!", type:"positive"},
+
+    // Neutral
+    {text:"Es ist sehr neblig... noch nicht klar.", type:"neutral"},
+    {text:"Frag spaeter noch einmal.", type:"neutral"},
+    {text:"Im Moment kann ich keine Antwort geben.", type:"neutral"},
+    {text:"Konzentriere dich und frag erneut.", type:"neutral"},
+    {text:"Die Kristallkugel zittert... das Ergebnis ist ungewiss.", type:"neutral"},
+    {text:"Die Zeit wird die Antwort bringen. Hab Geduld.", type:"neutral"},
+    {text:"Es gibt zwei Seiten. Urteile sorgfaeltig.", type:"neutral"},
+    {text:"Das Schicksal ist noch nicht entschieden.", type:"neutral"},
+    {text:"Die Antwort liegt in dir. Schaue tiefer in dich hinein.", type:"neutral"},
+    {text:"Die Kugel zeigt zwei Lichter... die Wahl liegt bei dir.", type:"neutral"},
+
+    // Negativ
+    {text:"Das ist wenig wahrscheinlich.", type:"negative"},
+    {text:"Nein.", type:"negative"},
+    {text:"Die Sterne sind dagegen.", type:"negative"},
+    {text:"Die Kristallkugel verdunkelt sich... kein gutes Zeichen.", type:"negative"},
+    {text:"Jetzt ist nicht die richtige Zeit.", type:"negative"},
+    {text:"Suche einen anderen Weg.", type:"negative"},
+    {text:"Besser, du rechnest nicht damit.", type:"negative"},
+    {text:"Die Kristallkugel warnt dich. Sei vorsichtig.", type:"negative"},
+    {text:"Es ist klug, jetzt die Richtung zu aendern.", type:"negative"},
+    {text:"Diese Entscheidung koennte Bedauern mit sich bringen.", type:"negative"},
+
+    // Mystisch
+    {text:"Wenn der Mond voll ist, wird die Antwort offenbart.", type:"mystical"},
+    {text:"Suche den Hinweis in deinen Traeumen.", type:"mystical"},
+    {text:"Achte auf die dritte Gelegenheit.", type:"mystical"},
+    {text:"Die Antwort kommt von dort, wo du es am wenigsten erwartest.", type:"mystical"},
+    {text:"Die Kugel zeigt einen Schmetterling... Veraenderung ist im Kommen.", type:"mystical"},
+    {text:"Du musst die Vergangenheit loslassen, damit sich die Zukunft oeffnet.", type:"mystical"},
+    {text:"Die Antwort verbirgt sich in den Worten einer dir nahestehenden Person.", type:"mystical"},
+    {text:"Du wirst Inspiration in der Naehe von Wasser finden.", type:"mystical"},
+    {text:"Ich sehe eine Tuer in der Kristallkugel... der Schluessel ist Mut.", type:"mystical"},
+    {text:"Die Sternbilder richten sich aus. Du wirst es bald wissen.", type:"mystical"},
+    {text:"Vertraue der Intuition, die du jetzt spuerst. Das ist die Antwort.", type:"mystical"},
+    {text:"Was du fuer einen Zufall hieltest... war das Schicksal.", type:"mystical"},
+];
+
+const TYPE_LABELS = {positive:"Positiv",neutral:"Neutral",negative:"Negativ",mystical:"Mystisch"};
+const TYPE_CLASS = {positive:"type-positive",neutral:"type-neutral",negative:"type-negative",mystical:"type-mystical"};
+
+let isAsking = false;
+const history = [];
+
+function askCrystal() {
+    if (isAsking) return;
+    isAsking = true;
+
+    const btn = document.getElementById("askBtn");
+    const ball = document.getElementById("crystalBall");
+    const textEl = document.getElementById("crystalText");
+    const mist = document.getElementById("mist");
+    const question = document.getElementById("questionInput").value.trim();
+
+    btn.disabled = true;
+    textEl.className = "crystal-text";
+    textEl.innerHTML = "...";
+    ball.classList.add("shaking");
+    mist.classList.remove("active");
+    void mist.offsetWidth;
+    mist.classList.add("active");
+
+    setTimeout(() => {
+        ball.classList.remove("shaking");
+        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+
+        textEl.innerHTML = answer.text;
+        textEl.className = "crystal-text active";
+
+        history.unshift({q: question || "(Gedankenfrage)", a: answer.text, type: answer.type});
+        updateHistory();
+
+        btn.disabled = false;
+        isAsking = false;
+    }, 1500);
+}
+
+function updateHistory() {
+    if (history.length === 0) return;
+    document.getElementById("historySection").style.display = "block";
+    document.getElementById("historyList").innerHTML = history.slice(0, 10).map(h => `
+        <div class="history-item" style="animation:fadeIn 0.3s ease-out;">
+            <div class="history-q">Q: ${h.q} <span class="history-type ${TYPE_CLASS[h.type]}">${TYPE_LABELS[h.type]}</span></div>
+            <div class="history-a">"${h.a}"</div>
+        </div>
+    `).join("");
+}
+
+document.getElementById("questionInput").addEventListener("keydown", e => {
+    if (e.key === "Enter") askCrystal();
+});
+</script>
+
+</body>
+</html>
