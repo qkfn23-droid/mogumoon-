@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura-Farben-Test - Welche Farbe hat deine Aura? | MOGU Moon</title>
+    <meta name="description" content="Kostenloser Aura-Farben-Test. Entdecke deine Aura-Farbe mit 10 Fragen. Analyse von Persönlichkeit, Energie und spirituellen Eigenschaften.">
+    <link rel="canonical" href="https://mogumoon.com/de/aura/">
+    <meta property="og:title" content="Aura-Farben-Test - Welche Farbe hat deine Aura? | MOGU Moon">
+    <meta property="og:description" content="Kostenloser Aura-Farben-Test. Entdecke deine Aura-Farbe mit 10 Fragen.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/de/aura/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Was ist eine Aura?","acceptedAnswer":{"@type":"Answer","text":"Eine Aura ist ein Energiefeld, das alle Lebewesen umgibt und die Emotionen, Persönlichkeit und den spirituellen Zustand einer Person durch Farben darstellen soll."}},
+        {"@type":"Question","name":"Kann sich die Aura-Farbe verändern?","acceptedAnswer":{"@type":"Answer","text":"Ja, die Aura kann sich je nach emotionalem Zustand, Gesundheit und spirituellem Wachstum verändern. Die Grundfarbe der Aura ist relativ stabil, während Sekundärfarben sich häufig ändern."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #c39bd3; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #2a1540; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #c39bd3, #8e44ad); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #8e44ad; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(195,155,211,0.06); border: 1px solid #3a2550; border-radius: 10px; color: #c39bd3; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #c39bd3; background: rgba(195,155,211,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .aura-orb { width: 220px; height: 220px; border-radius: 50%; margin: 0 auto 24px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .aura-orb .glow { position: absolute; inset: -30px; border-radius: 50%; filter: blur(30px); opacity: 0.5; animation: auraPulse 3s ease-in-out infinite; }
+        .aura-orb .inner { width: 160px; height: 160px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 1; border: 2px solid rgba(255,255,255,0.2); }
+        .aura-orb .color-name { font-size: 24px; font-weight: 900; }
+        .aura-orb .color-emoji { font-size: 40px; margin-bottom: 8px; }
+        @keyframes auraPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 0.7; } }
+
+        .result-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+        .result-subtitle { font-size: 16px; color: #888; margin-bottom: 24px; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 12px 8px; background: rgba(195,155,211,0.06); border: 1px solid #3a2550; border-radius: 10px; text-align: center; }
+        .trait-item .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-item .trait-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #c39bd3; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #c39bd3; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #8e44ad, #c39bd3); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(195,155,211,0.3); }
+
+        .compat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 10px; border-radius: 8px; text-align: center; font-size: 13px; }
+        .compat-good { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🧿 Aura-Farben-Test</h2>
+        <p>Entdecke deine Aura-Farbe mit 10 Fragen</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">Frage 1 / 10</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🧿 Der Aura-Test dient nur zur Unterhaltung und zum Selbstverständnis. Er hat keine wissenschaftliche Grundlage.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Teilen:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL kopieren</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"Wenn du Zeit für dich allein hast, was möchtest du am liebsten tun?",
+     o:[{t:"In der Natur spazieren oder wandern",c:["green","white"]},{t:"Musik hören oder ein Instrument spielen",c:["blue","indigo"]},{t:"Zeichnen oder kreativ tätig sein",c:["yellow","orange"]},{t:"Meditieren oder Yoga machen",c:["purple","white"]},{t:"Freunde anrufen oder treffen",c:["orange","pink"]}]},
+    {q:"Wenn du mit anderen Menschen zusammen bist, bist du meistens...",
+     o:[{t:"Derjenige, der die Stimmung anführt",c:["red","orange"]},{t:"Jemand, der still beobachtet und zuhört",c:["blue","indigo"]},{t:"Jemand, der tiefe Gespräche mit ein oder zwei Personen führt",c:["purple","green"]},{t:"Jemand, der sich flexibel der Stimmung anpasst",c:["yellow","pink"]}]},
+    {q:"Wie reagierst du, wenn du gestresst bist?",
+     o:[{t:"Ich treibe Sport oder mache körperliche Aktivitäten",c:["red","orange"]},{t:"Ich gehe an einen ruhigen Ort und ordne meine Gedanken",c:["blue","indigo"]},{t:"Ich rede mit jemandem und suche Trost",c:["pink","green"]},{t:"Ich erhole mich mit Musik, Filmen oder anderen Künsten",c:["purple","yellow"]},{t:"Ich schlafe oder ruhe mich in der Natur aus",c:["white","green"]}]},
+    {q:"Welcher Wert ist dir am wichtigsten?",
+     o:[{t:"Freiheit und Abenteuer",c:["red","yellow"]},{t:"Liebe und Beziehungen",c:["pink","green"]},{t:"Wissen und Wahrheit",c:["indigo","blue"]},{t:"Kreativität und Selbstausdruck",c:["orange","yellow"]},{t:"Frieden und Harmonie",c:["white","green"]}]},
+    {q:"Zu welchem Ort fühlst du dich instinktiv hingezogen?",
+     o:[{t:"Ein tiefer Wald oder ein Berg",c:["green","white"]},{t:"Das weite Meer oder ein See",c:["blue","indigo"]},{t:"Lebhafte Stadtstraßen",c:["red","orange"]},{t:"Ein altes Tempel oder eine Kathedrale",c:["purple","indigo"]},{t:"Ein blühender Garten",c:["pink","yellow"]}]},
+    {q:"Was wurde dir oft gesagt, als du klein warst?",
+     o:[{t:"Du hast so viel Energie!",c:["red","orange"]},{t:"Du bist so feinfühlig und sensibel!",c:["blue","purple"]},{t:"Du bist so lieb und herzlich!",c:["pink","green"]},{t:"Du bist so einzigartig und kreativ!",c:["yellow","indigo"]},{t:"Du bist so reif für dein Alter!",c:["white","blue"]}]},
+    {q:"Welche Farben oder Stimmungen erscheinen am häufigsten in deinen Träumen?",
+     o:[{t:"Helle, warme Farben (Rot, Orange, Gelb)",c:["red","orange","yellow"]},{t:"Kühle, tiefe Farben (Blau, Indigo)",c:["blue","indigo"]},{t:"Mysteriös und traumhaft (Lila, Rosa)",c:["purple","pink"]},{t:"Naturfarben (Grün, Weiß)",c:["green","white"]},{t:"Ich weiß es nicht / keine Farbe",c:["indigo","white"]}]},
+    {q:"Wenn du ein Tier wählen müsstest, welches wäre es?",
+     o:[{t:"Wolf — Instinkt und Freiheit",c:["indigo","blue"]},{t:"Schmetterling — Verwandlung und Schönheit",c:["purple","pink"]},{t:"Löwe — Mut und Führungsstärke",c:["red","orange"]},{t:"Reh — Sanftheit und Heilung",c:["green","white"]},{t:"Eule — Weisheit und Geheimnis",c:["indigo","purple"]}]},
+    {q:"Mit welchem Satz identifizierst du dich am meisten?",
+     o:[{t:"Das Leben ist kurz – handele jetzt!",c:["red","orange"]},{t:"Alles geschieht aus einem Grund",c:["purple","indigo"]},{t:"Liebe heilt alles",c:["pink","green"]},{t:"Die Wahrheit kommt immer ans Licht",c:["blue","white"]},{t:"Vorstellungskraft ist wichtiger als Wissen",c:["yellow","purple"]}]},
+    {q:"Wenn du deine aktuelle Stimmung in einer Farbe ausdrücken würdest, welche wäre es?",
+     o:[{t:"Rot/Orange — leidenschaftlich, voller Energie",c:["red","orange"]},{t:"Blau/Indigo — ruhig, tiefe Gedanken",c:["blue","indigo"]},{t:"Lila/Rosa — spirituell, liebevoll",c:["purple","pink"]},{t:"Grün/Weiß — Frieden, Heilung",c:["green","white"]},{t:"Gelb — fröhlich und positiv",c:["yellow","orange"]}]}
+];
+
+const AURAS = {
+    red:{name:"Rote Aura",emoji:"🔴",color:"#e74c3c",bg:"rgba(231,76,60,0.15)",
+        keyword:"Leidenschaft · Mut · Tatendrang · Führungsstärke",
+        element:"Feuer",chakra:"Wurzelchakra (1)",
+        personality:"Du bist ein <strong>geborener Anführer und Macher</strong>. Du strotzt vor Energie und stellst dich furchtlos neuen Herausforderungen. Du genießt Wettbewerb und hast die Entschlossenheit, deine Ziele zu verfolgen. Du hinterlässt einen starken Eindruck bei anderen und hast eine unverkennbare Präsenz. Du bist gerecht und tolerierst keine Ungerechtigkeit.",
+        strength:"Entschlossenheit, Mut, Charisma, Ehrlichkeit, Überlebensstärke",
+        weakness:"Ungeduld, Wutbeherrschung, mangelnde Geduld, übermäßiger Wettbewerbsgeist",
+        advice:"Halte manchmal inne und atme durch. Eine Flamme, die nur brennt, verbrennt sich letztendlich selbst. Denk daran, dass auch Sanftheit eine Stärke ist.",
+        good:["orange","gelb"],bad:["blau","indigo"]},
+    orange:{name:"Orange Aura",emoji:"🟠",color:"#e67e22",bg:"rgba(230,126,34,0.15)",
+        keyword:"Kreativität · Freude · Geselligkeit · Abenteuer",
+        element:"Feuer/Wasser",chakra:"Sakralchakra (2)",
+        personality:"Du besitzt eine <strong>Energie, die so hell und warm wie die Sonne</strong> ist. Du bist gesellig und hast einen großartigen Sinn für Humor; du bist überall der Stimmungsmacher. Du hast Kreativität und künstlerisches Gespür und sehnst dich nach neuen Erfahrungen. Du weißt, wie man das Leben genießt.",
+        strength:"Geselligkeit, Kreativität, Anpassungsfähigkeit, Humor, positive Energie",
+        weakness:"Ablenkbarkeit, mangelnde Tiefe, Stimmungsschwankungen, mangelnde Ausdauer",
+        advice:"Füge mehr Tiefe hinzu. Sich breit aufzustellen ist gut, aber wenn du dich tief in etwas versenkst, entsteht ein wahres Meisterwerk.",
+        good:["rot","gelb"],bad:["indigo","lila"]},
+    yellow:{name:"Gelbe Aura",emoji:"🟡",color:"#f1c40f",bg:"rgba(241,196,15,0.15)",
+        keyword:"Intelligenz · Optimismus · Selbstvertrauen · Fröhlichkeit",
+        element:"Feuer",chakra:"Solarplexuschakra (3)",
+        personality:"Du bist jemand, der mit <strong>hellem Verstand und positiver Energie</strong> strahlt. Du liebst das Lernen und bist logisch, aber auch lebensfroh. Du hast Selbstvertrauen und entwickelst ständig neue Ideen. Du bist wie die Sonne, die dein Umfeld erhellt.",
+        strength:"Intellektuelle Neugier, Optimismus, analytisches Denken, Kommunikationsfähigkeit, Selbstvertrauen",
+        weakness:"Überdenken, kritische Tendenz, Unentschlossenheit, Vermeidung von Emotionen",
+        advice:"Nutze nicht nur den Kopf, sondern auch das Herz. Nicht alle Antworten liegen in der Logik. Folge manchmal dem, was du fühlst.",
+        good:["orange","grün"],bad:["indigo","lila"]},
+    green:{name:"Grüne Aura",emoji:"🟢",color:"#27ae60",bg:"rgba(39,174,96,0.15)",
+        keyword:"Heilung · Wachstum · Natur · Gleichgewicht",
+        element:"Holz/Erde",chakra:"Herzchakra (4)",
+        personality:"Du besitzt die <strong>heilende Energie der Natur</strong>. Du hast großes Einfühlungsvermögen und machst Menschen wohlig. Du liebst Wachstum und kümmerst dich sowohl um dich selbst als auch um andere. Du hast eine ausgewogene Perspektive und strebst nach Frieden.",
+        strength:"Empathie, Heilungsfähigkeit, Geduld, Großzügigkeit, Gleichgewichtssinn",
+        weakness:"Selbstaufopferung, Schwierigkeit Nein zu sagen, Unentschlossenheit, Abhängigkeit von anderen",
+        advice:"Kümmere dich erst um dich selbst, bevor du dich um andere kümmerst. Aus einem leeren Becher kann man nichts geben.",
+        good:["rosa","gelb"],bad:["rot","orange"]},
+    blue:{name:"Blaue Aura",emoji:"🔵",color:"#3498db",bg:"rgba(52,152,219,0.15)",
+        keyword:"Wahrheit · Kommunikation · Ruhe · Vertrauen",
+        element:"Wasser",chakra:"Kehlchakra (5)",
+        personality:"Du bist <strong>ruhig und verlässlich wie das tiefe Meer</strong>. Du schätzt die Wahrheit und bist vollkommen ehrlich. Du hast ausgezeichnete Kommunikations- und Zuhörfähigkeiten, die Menschen dazu bringen, sich dir gegenüber natürlich zu öffnen. Du bist stabil und vertrauenswürdig.",
+        strength:"Zuverlässigkeit, Kommunikation, Ruhe, Ehrlichkeit, tiefes Denken",
+        weakness:"Unterdrückung von Emotionen, Perfektionismus, Einsamkeit, Angst vor Veränderung",
+        advice:"Manchmal ist es in Ordnung, nicht perfekt zu sein. Unterdrücke deine Gefühle nicht; lass sie fließen. Sei flexibel wie Wasser.",
+        good:["indigo","grün"],bad:["rot","orange"]},
+    indigo:{name:"Indigo Aura",emoji:"🟣",color:"#8e44ad",bg:"rgba(142,68,173,0.15)",
+        keyword:"Intuition · Einsicht · Geheimnis · Spiritualität",
+        element:"Äther",chakra:"Drittes-Auge-Chakra (6)",
+        personality:"Du bist jemand <strong>mit geöffnetem dritten Auge und starker Intuition</strong>. Du nimmst Unsichtbares wahr und siehst Wahrheiten, die andere nicht kennen. Du genießt tiefes Nachdenken und spirituelle Erkundung und lebst an der Grenze zwischen Träumen und Realität. Du hast ein geheimnisvolles Charisma.",
+        strength:"Intuition, Einsicht, spirituelle Sensibilität, Unabhängigkeit, Tiefe",
+        weakness:"Isolation, Realitätsflucht, Kommunikationsschwierigkeiten, Überempfindlichkeit",
+        advice:"Schau nicht nur in den Himmel, schau auch auf die Erde. Intuition ist wichtig, aber die Vision verwirklicht sich, wenn du mit den Füßen auf dem Boden stehst.",
+        good:["blau","lila"],bad:["rot","gelb"]},
+    purple:{name:"Lila Aura",emoji:"💜",color:"#9b59b6",bg:"rgba(155,89,182,0.15)",
+        keyword:"Spiritualität · Transformation · Charisma · Vision",
+        element:"Äther/Feuer",chakra:"Kronenchakra (7)",
+        personality:"Du bist wie eine <strong>Brücke zwischen der spirituellen und der materiellen Welt</strong>. Du hast starkes Charisma und eine Vision, und du inspirierst Menschen. Du bist künstlerisch und verträumt und gibst dich nicht mit einem gewöhnlichen Leben zufrieden. Du spürst eine besondere Berufung.",
+        strength:"Vision, Charisma, spirituelle Tiefe, Künstlerische Begabung, Transformationskraft",
+        weakness:"Mangelnder Realitätssinn, Einsamkeit, Neigung zu Depressionen, Arroganz",
+        advice:"Vision allein kann die Welt nicht verändern. Bringe deine Träume mit konkreten Taten in die Realität.",
+        good:["indigo","rosa"],bad:["gelb","orange"]},
+    pink:{name:"Rosa Aura",emoji:"💗",color:"#e84393",bg:"rgba(232,67,147,0.15)",
+        keyword:"Liebe · Sanftheit · Empathie · Romantik",
+        element:"Wasser/Luft",chakra:"Oberes Herzchakra (4)",
+        personality:"Du bist <strong>die Liebe selbst in Menschengestalt</strong>. Du bist unendlich sanft und liebevoll, und du überströmst mit Liebe für alle Wesen. Du bist romantisch und sehr sensibel, mit einem ausgeprägten Sinn für Schönheit. Du hast eine tiefe Empathie, die den Schmerz anderer als deinen eigenen fühlt.",
+        strength:"Liebe, Empathie, Sanftheit, Hingabe, emotionale Intelligenz",
+        weakness:"Leichte Verletzlichkeit, Abhängigkeit, emotionale Erschöpfung, mangelnde Grenzen",
+        advice:"Liebe braucht auch Grenzen. Wenn du dich nicht zuerst selbst liebst, wirst du dich beim Lieben anderer erschöpfen.",
+        good:["grün","lila"],bad:["rot","orange"]},
+    white:{name:"Weiße Aura",emoji:"⚪",color:"#ecf0f1",bg:"rgba(236,240,241,0.15)",
+        keyword:"Reinheit · Läuterung · Heilung · Göttlichkeit",
+        element:"Licht",chakra:"Kronenchakra (Transzendenz)",
+        personality:"Du besitzt eine <strong>klare und reine Seele</strong>. Du hast eine saubere Energie, unbefleckt von der Welt. Du hast eine natürliche Heilungsfähigkeit; in deiner Gegenwart reinigt sich der Geist. Du befindest dich auf einem hohen spirituellen Niveau und umarmst alle Farben.",
+        strength:"Reinheit, Heilungsfähigkeit, Inklusivität, spirituelle Reife, Reinigungskraft",
+        weakness:"Naivität, übermäßige Unschuld, mangelnde Selbstverteidigung, Erschöpfung",
+        advice:"Bewahre deine Reinheit, aber kenne auch die Realität der Welt. Du hast die Kraft, alle Farben zu umarmen.",
+        good:["grün","blau"],bad:["rot","orange"]}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(AURAS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressText").textContent = "Frage " + (currentQ + 1) + " / " + QUESTIONS.length;
+
+    document.getElementById("questionCard").innerHTML =
+        "<div class=\"question-num\">FRAGE " + (currentQ + 1) + "</div>" +
+        "<div class=\"question-text\">" + q.q + "</div>" +
+        "<div class=\"options\">" +
+        q.o.map(function(opt, i) { return "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>"; }).join("") +
+        "</div>";
+}
+
+function answer(idx) {
+    const q = QUESTIONS[currentQ];
+    q.o[idx].c.forEach(function(c) { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "Fertig!";
+    document.getElementById("shareBar").style.display = "block";
+
+    const sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
+    const topColor = sorted[0][0];
+    const subColor = sorted[1] ? sorted[1][0] : topColor;
+    const a = AURAS[topColor];
+    const sub = AURAS[subColor];
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML =
+        "<div class=\"aura-orb\">" +
+            "<div class=\"glow\" style=\"background:" + a.color + ";\"></div>" +
+            "<div class=\"inner\" style=\"background:radial-gradient(circle at 40% 40%, " + a.bg + ", rgba(10,10,26,0.9));\">" +
+                "<div class=\"color-emoji\">" + a.emoji + "</div>" +
+                "<div class=\"color-name\" style=\"color:" + a.color + ";\">" + a.name + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<div class=\"result-title\" style=\"color:" + a.color + ";\">Deine Aura ist " + a.name + "!</div>" +
+        "<div class=\"result-subtitle\">" + a.keyword + "</div>" +
+
+        "<div class=\"trait-grid\">" +
+            "<div class=\"trait-item\"><div class=\"trait-label\">Element</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.element + "</div></div>" +
+            "<div class=\"trait-item\"><div class=\"trait-label\">Chakra</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.chakra + "</div></div>" +
+            "<div class=\"trait-item\"><div class=\"trait-label\">Sekundäre Aura</div><div class=\"trait-value\" style=\"color:" + sub.color + ";\">" + sub.emoji + " " + sub.name + "</div></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🧿 Persönlichkeitsanalyse</div>" +
+            "<div class=\"reading-text\">" + a.personality + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💪 Stärken</div>" +
+            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">⚠️ Schwächen</div>" +
+            "<div class=\"reading-text\">" + a.weakness + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💡 Rat deiner Aura</div>" +
+            "<div class=\"reading-text\"><strong>" + a.advice + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💞 Aura-Kompatibilität</div>" +
+            "<div class=\"compat-grid\">" +
+                a.good.map(function(g) { return "<div class=\"compat-item compat-good\">Passende Aura: " + g + "</div>"; }).join("") +
+                a.bad.map(function(b) { return "<div class=\"compat-item compat-bad\">Achtung Aura: " + b + "</div>"; }).join("") +
+            "</div>" +
+        "</div>" +
+
+        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 Erneut testen</button>";
+
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>
