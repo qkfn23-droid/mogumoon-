@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오라 색상 테스트 - 나의 오라는 무슨 색? | MOGU Moon</title>
+    <meta name="description" content="무료 오라 색상 테스트. 10가지 질문으로 당신의 오라 색상을 알아보세요. 성격, 에너지, 영적 특성 분석.">
+    <link rel="canonical" href="https://mogumoon.com/aura/">
+    <meta property="og:title" content="오라 색상 테스트 - 나의 오라는 무슨 색? | MOGU Moon">
+    <meta property="og:description" content="무료 오라 색상 테스트. 10가지 질문으로 당신의 오라 색상을 알아보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/aura/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"오라란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"오라는 모든 생명체를 둘러싼 에너지 장으로, 그 사람의 감정, 성격, 영적 상태를 색상으로 나타낸다고 합니다."}},
+        {"@type":"Question","name":"오라 색상은 바뀌나요?","acceptedAnswer":{"@type":"Answer","text":"네, 오라는 감정 상태, 건강, 영적 성장에 따라 변할 수 있습니다. 기본 오라 색상은 비교적 일정하지만, 보조 색상은 자주 바뀝니다."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #c39bd3; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #2a1540; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #c39bd3, #8e44ad); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #8e44ad; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(195,155,211,0.06); border: 1px solid #3a2550; border-radius: 10px; color: #c39bd3; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #c39bd3; background: rgba(195,155,211,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .aura-orb { width: 220px; height: 220px; border-radius: 50%; margin: 0 auto 24px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .aura-orb .glow { position: absolute; inset: -30px; border-radius: 50%; filter: blur(30px); opacity: 0.5; animation: auraPulse 3s ease-in-out infinite; }
+        .aura-orb .inner { width: 160px; height: 160px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 1; border: 2px solid rgba(255,255,255,0.2); }
+        .aura-orb .color-name { font-size: 24px; font-weight: 900; }
+        .aura-orb .color-emoji { font-size: 40px; margin-bottom: 8px; }
+        @keyframes auraPulse { 0%,100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.1); opacity: 0.7; } }
+
+        .result-title { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+        .result-subtitle { font-size: 16px; color: #888; margin-bottom: 24px; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 12px 8px; background: rgba(195,155,211,0.06); border: 1px solid #3a2550; border-radius: 10px; text-align: center; }
+        .trait-item .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-item .trait-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #c39bd3; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #c39bd3; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #8e44ad, #c39bd3); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(195,155,211,0.3); }
+
+        .compat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 10px; border-radius: 8px; text-align: center; font-size: 13px; }
+        .compat-good { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🧿 오라 색상 테스트</h2>
+        <p>10가지 질문으로 당신의 오라 색상을 알아보세요</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">질문 1 / 10</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🧿 오라 테스트는 재미와 자기 이해를 위한 것입니다. 과학적 근거가 있는 검사가 아닙니다.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"혼자만의 시간이 생기면 가장 하고 싶은 것은?",
+     o:[{t:"자연 속 산책이나 하이킹",c:["green","white"]},{t:"음악 듣기나 악기 연주",c:["blue","indigo"]},{t:"그림 그리기나 창작 활동",c:["yellow","orange"]},{t:"명상이나 요가",c:["purple","white"]},{t:"친구와 통화하거나 만나기",c:["orange","pink"]}]},
+    {q:"사람들과 있을 때 당신은 주로?",
+     o:[{t:"모임의 분위기를 이끄는 편",c:["red","orange"]},{t:"조용히 관찰하며 듣는 편",c:["blue","indigo"]},{t:"한두 명과 깊은 대화를 하는 편",c:["purple","green"]},{t:"분위기에 따라 유연하게 변하는 편",c:["yellow","pink"]}]},
+    {q:"스트레스를 받을 때 당신의 반응은?",
+     o:[{t:"운동이나 활동적인 것으로 풀기",c:["red","orange"]},{t:"조용한 곳에서 혼자 생각 정리",c:["blue","indigo"]},{t:"누군가에게 이야기하며 위로받기",c:["pink","green"]},{t:"음악, 영화 등 예술로 힐링",c:["purple","yellow"]},{t:"잠을 자거나 자연 속에서 쉬기",c:["white","green"]}]},
+    {q:"당신이 가장 중요하게 여기는 가치는?",
+     o:[{t:"자유와 모험",c:["red","yellow"]},{t:"사랑과 인간관계",c:["pink","green"]},{t:"지식과 진리",c:["indigo","blue"]},{t:"창의성과 자기표현",c:["orange","yellow"]},{t:"평화와 조화",c:["white","green"]}]},
+    {q:"직감적으로 끌리는 장소는?",
+     o:[{t:"깊은 숲이나 산",c:["green","white"]},{t:"넓은 바다나 호수",c:["blue","indigo"]},{t:"활기 넘치는 도시 거리",c:["red","orange"]},{t:"오래된 사원이나 성당",c:["purple","indigo"]},{t:"꽃이 가득한 정원",c:["pink","yellow"]}]},
+    {q:"어릴 때부터 자주 들었던 말은?",
+     o:[{t:"넌 참 에너지가 넘치는구나",c:["red","orange"]},{t:"넌 참 감수성이 풍부하구나",c:["blue","purple"]},{t:"넌 참 착하고 다정하구나",c:["pink","green"]},{t:"넌 참 독특하고 창의적이구나",c:["yellow","indigo"]},{t:"넌 참 의젓하고 어른스럽구나",c:["white","blue"]}]},
+    {q:"꿈에서 가장 자주 나오는 색깔이나 분위기는?",
+     o:[{t:"밝고 따뜻한 색 (빨강, 주황, 노랑)",c:["red","orange","yellow"]},{t:"차갑고 깊은 색 (파랑, 남색)",c:["blue","indigo"]},{t:"신비롭고 몽환적 (보라, 분홍)",c:["purple","pink"]},{t:"자연의 색 (초록, 흰색)",c:["green","white"]},{t:"잘 모르겠다 / 색이 없다",c:["indigo","white"]}]},
+    {q:"동물을 하나 고른다면?",
+     o:[{t:"늑대 — 직감과 자유",c:["indigo","blue"]},{t:"나비 — 변신과 아름다움",c:["purple","pink"]},{t:"사자 — 용기와 리더십",c:["red","orange"]},{t:"사슴 — 부드러움과 치유",c:["green","white"]},{t:"부엉이 — 지혜와 신비",c:["indigo","purple"]}]},
+    {q:"가장 공감되는 문장은?",
+     o:[{t:"인생은 짧다, 지금 행동하자!",c:["red","orange"]},{t:"모든 것에는 이유가 있다",c:["purple","indigo"]},{t:"사랑이 모든 것을 치유한다",c:["pink","green"]},{t:"진실은 언젠가 드러난다",c:["blue","white"]},{t:"상상력이 지식보다 중요하다",c:["yellow","purple"]}]},
+    {q:"지금 이 순간 당신의 기분을 색으로 표현한다면?",
+     o:[{t:"빨강/주황 — 열정적, 활력",c:["red","orange"]},{t:"파랑/남색 — 차분, 깊은 생각",c:["blue","indigo"]},{t:"보라/분홍 — 영적, 사랑",c:["purple","pink"]},{t:"초록/흰색 — 평화, 치유",c:["green","white"]},{t:"노랑 — 밝고 긍정적",c:["yellow","orange"]}]}
+];
+
+const AURAS = {
+    red:{name:"빨강 오라",emoji:"🔴",color:"#e74c3c",bg:"rgba(231,76,60,0.15)",
+        keyword:"열정 · 용기 · 행동력 · 리더십",
+        element:"불",chakra:"1번 루트 차크라",
+        personality:"당신은 <strong>타고난 행동가이자 리더</strong>입니다. 에너지가 넘치고, 두려움 없이 새로운 것에 도전합니다. 경쟁을 즐기며, 목표를 향해 돌진하는 추진력이 있습니다. 주변 사람들에게 강한 인상을 남기며, 존재감이 뚜렷합니다. 정의롭고 불의를 참지 못하는 성격입니다.",
+        strength:"결단력, 용기, 카리스마, 솔직함, 생존력",
+        weakness:"조급함, 분노 조절, 참을성 부족, 지나친 경쟁심",
+        advice:"때로는 멈추고 숨을 고르세요. 불꽃은 타오르기만 하면 스스로를 태웁니다. 부드러움도 힘이라는 것을 기억하세요.",
+        good:["주황","노랑"],bad:["파랑","남색"]},
+    orange:{name:"주황 오라",emoji:"🟠",color:"#e67e22",bg:"rgba(230,126,34,0.15)",
+        keyword:"창의성 · 기쁨 · 사교성 · 모험",
+        element:"불/물",chakra:"2번 천골 차크라",
+        personality:"당신은 <strong>태양처럼 밝고 따뜻한 에너지</strong>의 소유자입니다. 사교적이고 유머감각이 뛰어나며, 어디서든 분위기 메이커입니다. 창의적이고 예술적 감각이 있으며, 새로운 경험을 갈망합니다. 삶을 즐기는 법을 아는 사람입니다.",
+        strength:"사교성, 창의력, 적응력, 유머, 긍정적 에너지",
+        weakness:"산만함, 깊이 부족, 감정 기복, 끈기 부족",
+        advice:"깊이를 더하세요. 넓게 퍼지는 것도 좋지만, 하나에 깊이 파고들면 진정한 걸작이 나옵니다.",
+        good:["빨강","노랑"],bad:["남색","보라"]},
+    yellow:{name:"노랑 오라",emoji:"🟡",color:"#f1c40f",bg:"rgba(241,196,15,0.15)",
+        keyword:"지성 · 낙관 · 자신감 · 명랑",
+        element:"불",chakra:"3번 태양신경총 차크라",
+        personality:"당신은 <strong>밝은 지성과 긍정의 에너지</strong>로 빛나는 사람입니다. 배움을 사랑하고, 논리적이면서도 유쾌합니다. 자신감이 넘치며, 새로운 아이디어를 끊임없이 만들어냅니다. 주변을 밝게 만드는 햇살 같은 존재입니다.",
+        strength:"지적 호기심, 낙관주의, 분석력, 소통 능력, 자신감",
+        weakness:"과잉 사고, 비판적, 우유부단, 감정 회피",
+        advice:"머리뿐 아니라 가슴도 쓰세요. 모든 답이 논리에 있지는 않습니다. 때로는 느끼는 대로 따르세요.",
+        good:["주황","초록"],bad:["남색","보라"]},
+    green:{name:"초록 오라",emoji:"🟢",color:"#27ae60",bg:"rgba(39,174,96,0.15)",
+        keyword:"치유 · 성장 · 자연 · 균형",
+        element:"나무/흙",chakra:"4번 하트 차크라",
+        personality:"당신은 <strong>자연의 치유 에너지</strong>를 가진 사람입니다. 공감 능력이 뛰어나고, 사람들을 편안하게 만듭니다. 성장을 사랑하며, 자신과 타인 모두를 돌봅니다. 균형 잡힌 시각을 가지고 있으며, 평화를 추구합니다.",
+        strength:"공감력, 치유 능력, 인내심, 관대함, 균형 감각",
+        weakness:"자기 희생, 거절 못함, 우유부단, 타인 의존",
+        advice:"남을 돌보기 전에 자신을 먼저 돌보세요. 빈 컵으로는 남에게 줄 수 없습니다.",
+        good:["분홍","노랑"],bad:["빨강","주황"]},
+    blue:{name:"파랑 오라",emoji:"🔵",color:"#3498db",bg:"rgba(52,152,219,0.15)",
+        keyword:"진실 · 소통 · 차분함 · 신뢰",
+        element:"물",chakra:"5번 목 차크라",
+        personality:"당신은 <strong>깊은 바다처럼 차분하고 신뢰할 수 있는</strong> 사람입니다. 진실을 중시하며, 거짓 없이 솔직합니다. 뛰어난 소통 능력과 경청 능력을 가지고 있어 사람들이 자연스럽게 마음을 열게 됩니다. 안정적이고 믿음직합니다.",
+        strength:"신뢰성, 소통력, 차분함, 정직, 깊은 사고",
+        weakness:"감정 억제, 완벽주의, 고독, 변화 두려움",
+        advice:"가끔은 완벽하지 않아도 괜찮습니다. 감정을 억누르지 말고 흘려보내세요. 물처럼 유연하게.",
+        good:["남색","초록"],bad:["빨강","주황"]},
+    indigo:{name:"남색 오라",emoji:"🟣",color:"#8e44ad",bg:"rgba(142,68,173,0.15)",
+        keyword:"직관 · 통찰 · 신비 · 영성",
+        element:"에테르",chakra:"6번 제3의 눈 차크라",
+        personality:"당신은 <strong>제3의 눈이 열린 직관의 소유자</strong>입니다. 보이지 않는 것을 감지하고, 남들이 모르는 진실을 꿰뚫어 봅니다. 깊은 사색과 영적 탐구를 즐기며, 꿈과 현실의 경계에서 살고 있습니다. 신비로운 카리스마가 있습니다.",
+        strength:"직관력, 통찰력, 영적 감수성, 독립성, 깊이",
+        weakness:"고립, 현실 도피, 소통 어려움, 예민함",
+        advice:"하늘만 보지 말고 땅도 보세요. 직관도 중요하지만, 현실에 발을 딛고 서야 비전이 실현됩니다.",
+        good:["파랑","보라"],bad:["빨강","노랑"]},
+    purple:{name:"보라 오라",emoji:"💜",color:"#9b59b6",bg:"rgba(155,89,182,0.15)",
+        keyword:"영성 · 변환 · 카리스마 · 비전",
+        element:"에테르/불",chakra:"7번 크라운 차크라",
+        personality:"당신은 <strong>영적 세계와 물질 세계를 잇는 다리</strong> 같은 존재입니다. 강한 카리스마와 비전을 가지고 있으며, 사람들에게 영감을 줍니다. 예술적이고 몽환적이며, 평범한 삶에 만족하지 못합니다. 특별한 사명감을 느낍니다.",
+        strength:"비전, 카리스마, 영적 깊이, 예술성, 변환력",
+        weakness:"현실 감각 부족, 고독, 우울 경향, 오만",
+        advice:"비전만으로는 세상을 바꿀 수 없습니다. 구체적 행동으로 꿈을 현실에 내려놓으세요.",
+        good:["남색","분홍"],bad:["노랑","주황"]},
+    pink:{name:"분홍 오라",emoji:"💗",color:"#e84393",bg:"rgba(232,67,147,0.15)",
+        keyword:"사랑 · 부드러움 · 공감 · 로맨스",
+        element:"물/바람",chakra:"4번 하트 차크라 (상위)",
+        personality:"당신은 <strong>사랑 그 자체인 존재</strong>입니다. 한없이 부드럽고 다정하며, 모든 존재에 대한 사랑이 넘칩니다. 로맨틱하고 감수성이 풍부하며, 아름다움에 민감합니다. 사람들의 아픔을 자기 것처럼 느끼는 깊은 공감력이 있습니다.",
+        strength:"사랑, 공감, 부드러움, 헌신, 감성적 지성",
+        weakness:"상처받기 쉬움, 의존성, 감정적 소모, 경계 부족",
+        advice:"사랑에는 경계도 필요합니다. 자신을 먼저 사랑하지 않으면 남을 사랑하다 지칩니다.",
+        good:["초록","보라"],bad:["빨강","주황"]},
+    white:{name:"흰색 오라",emoji:"⚪",color:"#ecf0f1",bg:"rgba(236,240,241,0.15)",
+        keyword:"순수 · 정화 · 치유 · 신성",
+        element:"빛",chakra:"크라운 차크라 (초월)",
+        personality:"당신은 <strong>맑고 순수한 영혼</strong>의 소유자입니다. 세상의 때가 묻지 않은 깨끗한 에너지를 가지고 있습니다. 자연스러운 치유 능력이 있으며, 함께 있으면 마음이 정화됩니다. 높은 영적 수준에 있으며, 모든 색을 포용합니다.",
+        strength:"순수함, 치유력, 포용력, 영적 성숙, 정화 능력",
+        weakness:"세상물정 모름, 순진함, 자기 방어 부족, 피로",
+        advice:"순수함을 지키되 세상의 현실도 알아야 합니다. 모든 색을 포용하는 힘이 당신에게 있습니다.",
+        good:["초록","파랑"],bad:["빨강","주황"]}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(AURAS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = `질문 ${currentQ + 1} / ${QUESTIONS.length}`;
+
+    document.getElementById('questionCard').innerHTML = `
+        <div class="question-num">QUESTION ${currentQ + 1}</div>
+        <div class="question-text">${q.q}</div>
+        <div class="options">
+            ${q.o.map((opt, i) => `<div class="option-btn" onclick="answer(${i})">${opt.t}</div>`).join('')}
+        </div>
+    `;
+}
+
+function answer(idx) {
+    const q = QUESTIONS[currentQ];
+    q.o[idx].c.forEach(c => { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById('quizSection').style.display = 'none';
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressText').textContent = '완료!';
+    document.getElementById('shareBar').style.display = 'block';
+
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const topColor = sorted[0][0];
+    const subColor = sorted[1] ? sorted[1][0] : topColor;
+    const a = AURAS[topColor];
+    const sub = AURAS[subColor];
+
+    const section = document.getElementById('resultSection');
+    section.innerHTML = `
+        <div class="aura-orb">
+            <div class="glow" style="background:${a.color};"></div>
+            <div class="inner" style="background:radial-gradient(circle at 40% 40%, ${a.bg}, rgba(10,10,26,0.9));">
+                <div class="color-emoji">${a.emoji}</div>
+                <div class="color-name" style="color:${a.color};">${a.name}</div>
+            </div>
+        </div>
+
+        <div class="result-title" style="color:${a.color};">당신의 오라는 ${a.name}!</div>
+        <div class="result-subtitle">${a.keyword}</div>
+
+        <div class="trait-grid">
+            <div class="trait-item"><div class="trait-label">원소</div><div class="trait-value" style="color:${a.color};">${a.element}</div></div>
+            <div class="trait-item"><div class="trait-label">차크라</div><div class="trait-value" style="color:${a.color};">${a.chakra}</div></div>
+            <div class="trait-item"><div class="trait-label">보조 오라</div><div class="trait-value" style="color:${sub.color};">${sub.emoji} ${sub.name}</div></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">🧿 성격 분석</div>
+            <div class="reading-text">${a.personality}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💪 강점</div>
+            <div class="reading-text"><strong>${a.strength}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">⚠️ 약점</div>
+            <div class="reading-text">${a.weakness}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 오라가 전하는 조언</div>
+            <div class="reading-text"><strong>${a.advice}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💞 오라 궁합</div>
+            <div class="compat-grid">
+                ${a.good.map(g => `<div class="compat-item compat-good">잘 맞는 오라: ${AURAS[Object.keys(AURAS).find(k=>AURAS[k].name.includes(g))]?.emoji||''} ${g}</div>`).join('')}
+                ${a.bad.map(b => `<div class="compat-item compat-bad">주의할 오라: ${AURAS[Object.keys(AURAS).find(k=>AURAS[k].name.includes(b))]?.emoji||''} ${b}</div>`).join('')}
+            </div>
+        </div>
+
+        <button class="retry-btn" onclick="location.reload()">🔄 다시 테스트하기</button>
+    `;
+    section.style.display = 'block';
+    section.scrollIntoView({behavior:'smooth'});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>
