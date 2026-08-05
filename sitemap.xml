@@ -143,4 +143,12 @@
   <url><loc>https://mogumoon.com/de/biorhythm/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mogumoon.com/fr/biorhythm/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mogumoon.com/pt/biorhythm/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Birthday Compatibility -->
+  <url><loc>https://mogumoon.com/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mogumoon.com/en/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/jp/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/es/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/de/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/fr/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/pt/birthday-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

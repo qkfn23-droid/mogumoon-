@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibilite par Date de Naissance | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/birthday-compat/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/birthday-compat/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/birthday-compat/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/birthday-compat/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/birthday-compat/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/birthday-compat/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/birthday-compat/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/birthday-compat/">
+    <meta name="description" content="Test de compatibilite gratuit par date de naissance. Entrez les dates de naissance de deux personnes pour analyser leur compatibilite amoureuse, amicale, de communication et de destin selon la numerologie.">
+    <link rel="canonical" href="https://mogumoon.com/fr/birthday-compat/">
+    <meta property="og:title" content="Compatibilite par Date de Naissance | MOGU Moon">
+    <meta property="og:description" content="Analysez la compatibilite amoureuse, amicale et de destin de deux personnes par leur date de naissance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/fr/birthday-compat/">
+    <meta property="og:image" content="https://mogumoon.com/fr/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Qu'est-ce que la compatibilite par date de naissance ?","acceptedAnswer":{"@type":"Answer","text":"C'est une methode qui calcule le nombre de vie de deux personnes a partir de leur date de naissance pour analyser leur compatibilite amoureuse, amicale, de communication et de destin selon la numerologie."}},
+        {"@type":"Question","name":"Qu'est-ce que le nombre de vie ?","acceptedAnswer":{"@type":"Answer","text":"C'est le nombre obtenu en additionnant tous les chiffres de la date de naissance jusqu'a obtenir un seul chiffre. Les valeurs vont de 1 a 9, avec les nombres maitres 11, 22 et 33."}},
+        {"@type":"Question","name":"Que faire si la compatibilite est mauvaise ?","acceptedAnswer":{"@type":"Answer","text":"La compatibilite n'est qu'un guide. Une vraie relation se construit par les efforts mutuels. Comprendre les differences permet d'ameliorer la relation."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .form-section { display: flex; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
+        .person-box { flex: 1; min-width: 250px; background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; text-align: center; }
+        .person-label { font-size: 14px; color: #e84393; font-weight: 700; margin-bottom: 12px; }
+        .person-box input { width: 100%; padding: 10px; background: #0a0a1a; border: 1px solid #3a2550; border-radius: 8px; color: #e0d8cc; font-size: 14px; outline: none; text-align: center; margin-bottom: 10px; }
+        .person-box input::placeholder { color: #555; }
+        .person-box input:focus { border-color: #e84393; }
+        .date-row { display: flex; gap: 8px; }
+        .date-row select { flex: 1; padding: 10px; background: #0a0a1a; border: 1px solid #3a2550; border-radius: 8px; color: #e0d8cc; font-size: 14px; outline: none; appearance: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27%3E%3Cpath fill=%27%23e84393%27 d=%27M5 6L0 0h10z%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 10px center; padding-right: 26px; cursor: pointer; }
+        .heart-mid { display: flex; align-items: center; justify-content: center; font-size: 32px; color: #e84393; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #c2185b, #e84393); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232,67,147,0.3); }
+
+        .result-section { display: none; }
+        .compat-header { text-align: center; margin-bottom: 24px; }
+        .compat-names { font-size: 22px; color: #e84393; font-weight: 700; margin-bottom: 4px; }
+        .compat-nums { font-size: 14px; color: #888; }
+
+        .score-display { text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 3px solid; }
+        .score-num { font-size: 44px; font-weight: 900; }
+        .score-label { font-size: 12px; color: #888; }
+
+        .score-bars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+        .score-bar-item { background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 10px; padding: 14px; }
+        .sb-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .sb-bar { height: 8px; background: #2a1540; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+        .sb-fill { height: 100%; border-radius: 4px; }
+        .sb-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #e84393; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #e84393; }
+
+        .retry-btn { display: block; width: 100%; padding: 14px; background: transparent; border: 2px solid #e84393; color: #e84393; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { background: rgba(232,67,147,0.1); }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 500px) { .score-bars { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💕 Compatibilite par Date de Naissance</h2>
+        <p>Decouvrez la compatibilite de deux personnes par leur date de naissance</p>
+    </div>
+
+    <div class="form-section">
+        <div class="person-box">
+            <div class="person-label">Moi</div>
+            <input type="text" id="name1" placeholder="Prenom (optionnel)" maxlength="20">
+            <div class="date-row">
+                <select id="y1"></select>
+                <select id="m1"></select>
+                <select id="d1"></select>
+            </div>
+        </div>
+        <div class="heart-mid">💕</div>
+        <div class="person-box">
+            <div class="person-label">Partenaire</div>
+            <input type="text" id="name2" placeholder="Prenom (optionnel)" maxlength="20">
+            <div class="date-row">
+                <select id="y2"></select>
+                <select id="m2"></select>
+                <select id="d2"></select>
+            </div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="checkCompat()">💕 Voir la Compatibilite</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">💕 La compatibilite par date de naissance est un outil ludique base sur la numerologie. Le vrai amour se construit avec le coeur, pas avec les chiffres.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Partager :</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copie!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copier l'URL</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+function reduceNum(n) {
+    while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+        n = String(n).split("").reduce((s, d) => s + Number(d), 0);
+    }
+    return n;
+}
+
+function lifePathNumber(y, m, d) {
+    return reduceNum(reduceNum(y) + reduceNum(m) + reduceNum(d));
+}
+
+const NUM_TRAITS = {
+    1: {name:"Leader · Pionnier", element:"Feu", keyword:"Independance, ambition, creativite"},
+    2: {name:"Harmonie · Diplomate", element:"Eau", keyword:"Cooperation, sensibilite, intuition"},
+    3: {name:"Expression · Createur", element:"Feu", keyword:"Sociabilite, optimisme, art"},
+    4: {name:"Construction · Praticien", element:"Terre", keyword:"Serieux, stabilite, methode"},
+    5: {name:"Liberte · Aventurier", element:"Air", keyword:"Changement, curiosite, adaptabilite"},
+    6: {name:"Responsabilite · Protecteur", element:"Terre", keyword:"Famille, soin, justice"},
+    7: {name:"Recherche · Analyste", element:"Air", keyword:"Sagesse, spiritualite, solitude"},
+    8: {name:"Pouvoir · Realisateur", element:"Terre", keyword:"Ambition, business, leadership"},
+    9: {name:"Ideal · Humaniste", element:"Eau", keyword:"Service, empathie, art"},
+    11: {name:"Inspiration · Maitre Intuitif", element:"Ether", keyword:"Intuition, spiritualite, charisme"},
+    22: {name:"Construction · Maitre Visionnaire", element:"Ether", keyword:"Vision, realisation, grande echelle"},
+    33: {name:"Guerison · Maitre de l'Amour", element:"Ether", keyword:"Amour inconditionnel, guerison, devouement"}
+};
+
+const COMPAT_DATA = {
+    same: {
+        score: 78,
+        love: "Deux personnes avec le meme nombre de vie se comprennent comme dans un miroir. Elles partagent les memes forces et les memes faiblesses — meilleure comprrehension mutuelle, mais aussi critique la plus acerbe.",
+        friend: "Une amitie de doubles d'ame. La communication est intuitive, mais le meme entitement peut rendre le compromis difficile.",
+        tip: "Acceptez d'etre le miroir l'un de l'autre. Ce qui vous derange chez l'autre est souvent ce que vous voyez en vous-meme."
+    },
+    complementary: {
+        score: 88,
+        love: "Une combinaison fantastique ou chacun comble parfaitement les lacunes de l'autre ! Ensemble, vous formez un tout. La difference devient attraction.",
+        friend: "Les forces differentes en font une equipe imbattable. Des amis qui elargissent mutuellement leur univers.",
+        tip: "Ne critiquez pas les differences, soyez-en reconnaissants. L'autre apporte ce qui vous manque."
+    },
+    challenging: {
+        score: 52,
+        love: "Une relation difficile mais formatrice. Des frictions peuvent survenir, mais elles vous rendent tous les deux meilleurs.",
+        friend: "Des points de vue tres differents rendent la comprehension ardue, mais l'effort produit les plus grandes lecons.",
+        tip: "La patience est cle. Cette relation n'est pas un chemin facile, c'est un chemin de croissance."
+    },
+    harmonious: {
+        score: 82,
+        love: "Une relation naturellement harmonieuse. Confortable et stable — etre ensemble apporte la paix interieure.",
+        friend: "Une amitie durable et sans pression. Vous etes un refuge l'un pour l'autre.",
+        tip: "Cherchez aussi la croissance dans la stabilite. Trop de confort peut mener a la stagnation."
+    },
+    passionate: {
+        score: 75,
+        love: "Une relation passionnee et pleine d'etincelles ! L'attraction est forte, mais les disputes peuvent etre intenses. Jamais d'ennui.",
+        friend: "L'energie explose quand vous etes ensemble. Parfaits pour les aventures et les defis.",
+        tip: "Canalisez cette passion sainement. Assurez-vous que les flammes ne brulent pas tout — prenez le temps de respirer."
+    }
+};
+
+function getCompatType(n1, n2) {
+    if (n1 === n2) return "same";
+    const sum = n1 + n2;
+    const diff = Math.abs(n1 - n2);
+    if ((n1===1&&n2===2)||(n1===2&&n2===1)||(n1===3&&n2===6)||(n1===6&&n2===3)||
+        (n1===4&&n2===5)||(n1===5&&n2===4)||(n1===7&&n2===9)||(n1===9&&n2===7)||
+        (n1===1&&n2===9)||(n1===9&&n2===1)) return "complementary";
+    if (diff <= 2 || sum === 10 || (n1===2&&n2===6)||(n1===6&&n2===2)||
+        (n1===3&&n2===9)||(n1===9&&n2===3)) return "harmonious";
+    if ((n1===1&&n2===5)||(n1===5&&n2===1)||(n1===3&&n2===5)||(n1===5&&n2===3)||
+        (n1===1&&n2===8)||(n1===8&&n2===1)) return "passionate";
+    if (diff >= 5 || (n1===4&&n2===7)||(n1===7&&n2===4)||
+        (n1===8&&n2===2)||(n1===2&&n2===8)) return "challenging";
+    return "harmonious";
+}
+
+function seededRand(seed) {
+    let s = seed;
+    for (let i = 0; i < 10; i++) s = (s * 16807) % 2147483647;
+    return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+}
+
+function checkCompat() {
+    const y1=parseInt(document.getElementById("y1").value), m1=parseInt(document.getElementById("m1").value), d1=parseInt(document.getElementById("d1").value);
+    const y2=parseInt(document.getElementById("y2").value), m2=parseInt(document.getElementById("m2").value), d2=parseInt(document.getElementById("d2").value);
+    if (!y1||!m1||!d1||!y2||!m2||!d2) return alert("Veuillez selectionner les dates de naissance des deux personnes !");
+
+    const name1 = document.getElementById("name1").value.trim() || "Moi";
+    const name2 = document.getElementById("name2").value.trim() || "Partenaire";
+
+    const lp1 = lifePathNumber(y1, m1, d1);
+    const lp2 = lifePathNumber(y2, m2, d2);
+    const t1 = NUM_TRAITS[lp1] || NUM_TRAITS[lp1 > 9 ? reduceNum(lp1) : lp1];
+    const t2 = NUM_TRAITS[lp2] || NUM_TRAITS[lp2 > 9 ? reduceNum(lp2) : lp2];
+
+    const compatType = getCompatType(lp1 > 9 ? reduceNum(lp1) : lp1, lp2 > 9 ? reduceNum(lp2) : lp2);
+    const data = COMPAT_DATA[compatType];
+
+    const seed = y1*10000+m1*100+d1 + y2*10000+m2*100+d2;
+    const rand = seededRand(seed);
+
+    const total = Math.min(99, Math.max(25, data.score + Math.floor(rand()*16) - 8));
+    const love = Math.min(99, Math.max(20, total + Math.floor(rand()*20) - 10));
+    const friend = Math.min(99, Math.max(20, total + Math.floor(rand()*20) - 10));
+    const comm = Math.min(99, Math.max(20, total + Math.floor(rand()*16) - 8));
+    const destiny = Math.min(99, Math.max(20, total + Math.floor(rand()*24) - 12));
+
+    const scoreColor = total >= 80 ? "#e84393" : total >= 60 ? "#f39c12" : total >= 40 ? "#3498db" : "#e74c3c";
+    const scoreText = total >= 90 ? "Compatibilite legendaire !" : total >= 80 ? "Compatibilite parfaite !" : total >= 70 ? "Tres bonne compatibilite" : total >= 60 ? "Bonne compatibilite" : total >= 50 ? "Compatibilite moyenne" : total >= 40 ? "Necessite des efforts" : "Compatibilite difficile";
+
+    const numAnalysis = lp1 === lp2
+        ? `Les deux personnes ont le nombre de vie <strong>${lp1}</strong> (${t1.name}). Deux ames sur la meme frequence — une comprehension parfaite, mais les memes faiblesses peuvent s'amplifier.`
+        : `Le nombre de vie de <strong>${name1}</strong> est <strong>${lp1}</strong> (${t1.name}), et celui de <strong>${name2}</strong> est <strong>${lp2}</strong> (${t2.name}). L'energie ${t1.element} rencontre l'energie ${t2.element} pour ${compatType === "complementary" ? "se completer parfaitement" : compatType === "harmonious" ? "creer une harmonie naturelle" : compatType === "passionate" ? "generer une attraction intense" : compatType === "challenging" ? "offrir des opportunites de croissance" : "creer une dynamique unique"}.`;
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML = `
+        <div class="compat-header">
+            <div class="compat-names">${name1} 💕 ${name2}</div>
+            <div class="compat-nums">Nombre de vie ${lp1} (${t1.name}) × Nombre de vie ${lp2} (${t2.name})</div>
+        </div>
+
+        <div class="score-display">
+            <div class="score-circle" style="border-color:${scoreColor};background:rgba(232,67,147,0.06);">
+                <div class="score-num" style="color:${scoreColor};">${total}%</div>
+                <div class="score-label">${scoreText}</div>
+            </div>
+        </div>
+
+        <div class="score-bars">
+            <div class="score-bar-item">
+                <div class="sb-label">💕 Amour</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${love}%;background:#e84393;"></div></div>
+                <div class="sb-value" style="color:#e84393;">${love}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">👫 Amitie</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${friend}%;background:#3498db;"></div></div>
+                <div class="sb-value" style="color:#3498db;">${friend}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">💬 Communication</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${comm}%;background:#2ecc71;"></div></div>
+                <div class="sb-value" style="color:#2ecc71;">${comm}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">🔮 Destin</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${destiny}%;background:#9b59b6;"></div></div>
+                <div class="sb-value" style="color:#9b59b6;">${destiny}%</div>
+            </div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">🔢 Analyse des Nombres de Vie</div>
+            <div class="reading-text">${numAnalysis}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💕 Compatibilite Amoureuse</div>
+            <div class="reading-text">${data.love}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">👫 Compatibilite Amicale</div>
+            <div class="reading-text">${data.friend}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 Conseil Relationnel</div>
+            <div class="reading-text"><strong>${data.tip}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📊 Profil des Deux Personnes</div>
+            <div class="reading-text">
+                <strong>${name1}</strong> (${y1}.${m1}.${d1})<br>
+                Nombre de vie : <strong>${lp1}</strong> · ${t1.name} · ${t1.element} · ${t1.keyword}<br><br>
+                <strong>${name2}</strong> (${y2}.${m2}.${d2})<br>
+                Nombre de vie : <strong>${lp2}</strong> · ${t2.name} · ${t2.element} · ${t2.keyword}
+            </div>
+        </div>
+
+        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';window.scrollTo({top:0,behavior:'smooth'});">🔄 Essayer une Autre Combinaison</button>
+    `;
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+(function() {
+    const now = new Date();
+    ["1","2"].forEach(n => {
+        const yEl = document.getElementById("y"+n);
+        const mEl = document.getElementById("m"+n);
+        const dEl = document.getElementById("d"+n);
+
+        yEl.innerHTML = "<option value=\"\">Annee</option>";
+        for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += "<option value=\"" + y + "\">" + y + "</option>";
+
+        mEl.innerHTML = "<option value=\"\">Mois</option>";
+        for (let m = 1; m <= 12; m++) mEl.innerHTML += "<option value=\"" + m + "\">" + m + "</option>";
+
+        function updateDays() {
+            const y = parseInt(yEl.value) || 2000;
+            const m = parseInt(mEl.value) || 1;
+            const maxD = new Date(y, m, 0).getDate();
+            const cur = parseInt(dEl.value);
+            dEl.innerHTML = "<option value=\"\">Jour</option>";
+            for (let d = 1; d <= maxD; d++) dEl.innerHTML += "<option value=\"" + d + "\"" + (d===cur?" selected":"") + ">" + d + "</option>";
+        }
+        yEl.onchange = updateDays;
+        mEl.onchange = updateDays;
+        updateDays();
+    });
+})();
+</script>
+
+</body>
+</html>
