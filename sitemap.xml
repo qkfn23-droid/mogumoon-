@@ -111,4 +111,12 @@
   <url><loc>https://mogumoon.com/pt/iching/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mogumoon.com/pt/aura/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mogumoon.com/pt/moonphase/</loc><lastmod>2026-08-05</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <!-- Zodiac Compatibility -->
+  <url><loc>https://mogumoon.com/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mogumoon.com/en/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/jp/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/es/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/de/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/fr/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mogumoon.com/pt/zodiac-compat/</loc><lastmod>2026-08-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

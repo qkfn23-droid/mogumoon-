@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星座相性 - 12星座の恋愛・友情相性診断 | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/zodiac-compat/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/zodiac-compat/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/zodiac-compat/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/zodiac-compat/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/zodiac-compat/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/zodiac-compat/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/zodiac-compat/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/zodiac-compat/">
+    <meta name="description" content="無料の星座相性診断。二つの星座を選ぶと恋愛相性・友情相性・アドバイスをお伝えします。">
+    <link rel="canonical" href="https://mogumoon.com/jp/zodiac-compat/">
+    <meta property="og:title" content="星座相性 - 12星座の恋愛・友情相性診断 | MOGU Moon">
+    <meta property="og:description" content="無料の星座相性診断。二つの星座を選ぶと恋愛・友情の相性を確認できます。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/jp/zodiac-compat/">
+    <meta property="og:image" content="https://mogumoon.com/jp/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"星座相性とは？","acceptedAnswer":{"@type":"Answer","text":"12星座（黄道十二宮）の元素と性質をもとに、二人の恋愛・友情・関係の相性を分析する占いです。"}},
+        {"@type":"Question","name":"星座相性は正確ですか？","acceptedAnswer":{"@type":"Answer","text":"星座相性は楽しみや自己理解のための参考情報です。実際の関係では努力とコミュニケーションの方がはるかに大切です。"}},
+        {"@type":"Question","name":"同じ星座同士は相性がいいですか？","acceptedAnswer":{"@type":"Answer","text":"同じ星座はお互いをよく理解できますが、共通の欠点が増幅されることもあります。元素と性質によって異なります。"}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .select-section { display: flex; gap: 20px; align-items: center; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+        .zodiac-picker { flex: 1; min-width: 200px; }
+        .zodiac-picker label { display: block; font-size: 13px; color: #e84393; margin-bottom: 8px; font-weight: 600; text-align: center; }
+        .zodiac-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .zodiac-btn { padding: 10px 4px; background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .zodiac-btn:hover { border-color: #e84393; background: rgba(232,67,147,0.12); }
+        .zodiac-btn.selected { border-color: #e84393; background: rgba(232,67,147,0.2); box-shadow: 0 0 12px rgba(232,67,147,0.2); }
+        .zodiac-btn .zb-emoji { font-size: 22px; display: block; }
+        .zodiac-btn .zb-name { font-size: 10px; color: #999; margin-top: 2px; }
+        .heart-divider { font-size: 36px; color: #e84393; padding: 0 10px; margin-top: 20px; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #c2185b, #e84393); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232,67,147,0.3); }
+
+        .result-section { display: none; }
+        .compat-header { text-align: center; margin-bottom: 24px; }
+        .compat-signs { font-size: 48px; margin-bottom: 8px; }
+        .compat-names { font-size: 20px; color: #e84393; font-weight: 700; margin-bottom: 8px; }
+
+        .score-display { text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 3px solid; }
+        .score-num { font-size: 42px; font-weight: 900; }
+        .score-label { font-size: 12px; color: #888; }
+
+        .score-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .score-bar-item { background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 10px; padding: 14px; }
+        .sb-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .sb-bar { height: 8px; background: #2a1540; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+        .sb-fill { height: 100%; border-radius: 4px; transition: width 0.8s; }
+        .sb-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #e84393; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #e84393; }
+
+        .retry-btn { display: block; width: 100%; padding: 14px; background: transparent; border: 2px solid #e84393; color: #e84393; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { background: rgba(232,67,147,0.1); }
+
+        .element-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+        .el-fire { background: rgba(231,76,60,0.2); color: #e74c3c; }
+        .el-earth { background: rgba(212,168,83,0.2); color: #d4a853; }
+        .el-air { background: rgba(52,152,219,0.2); color: #3498db; }
+        .el-water { background: rgba(155,89,182,0.2); color: #9b59b6; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 500px) { .zodiac-grid { grid-template-columns: repeat(3, 1fr); } .score-bars { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💕 星座相性</h2>
+        <p>二つの星座を選んで恋愛・友情の相性を確認しましょう</p>
+    </div>
+
+    <div class="select-section">
+        <div class="zodiac-picker">
+            <label>自分の星座</label>
+            <div class="zodiac-grid" id="picker1"></div>
+        </div>
+        <div class="heart-divider">💕</div>
+        <div class="zodiac-picker">
+            <label>相手の星座</label>
+            <div class="zodiac-grid" id="picker2"></div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="checkCompat()">💕 相性を見る</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">💕 星座相性は楽しみと自己理解のためのものです。本当の愛は星座ではなく、心から生まれます。</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">共有:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='コピー済み!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URLをコピー</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const SIGNS = [
+    {name:"牡羊座",emoji:"♈",date:"3/21~4/19",element:"fire",quality:"cardinal",ruler:"火星"},
+    {name:"牡牛座",emoji:"♉",date:"4/20~5/20",element:"earth",quality:"fixed",ruler:"金星"},
+    {name:"双子座",emoji:"♊",date:"5/21~6/21",element:"air",quality:"mutable",ruler:"水星"},
+    {name:"蟹座",emoji:"♋",date:"6/22~7/22",element:"water",quality:"cardinal",ruler:"月"},
+    {name:"獅子座",emoji:"♌",date:"7/23~8/22",element:"fire",quality:"fixed",ruler:"太陽"},
+    {name:"乙女座",emoji:"♍",date:"8/23~9/22",element:"earth",quality:"mutable",ruler:"水星"},
+    {name:"天秤座",emoji:"♎",date:"9/23~10/22",element:"air",quality:"cardinal",ruler:"金星"},
+    {name:"蠍座",emoji:"♏",date:"10/23~11/21",element:"water",quality:"fixed",ruler:"冥王星"},
+    {name:"射手座",emoji:"♐",date:"11/22~12/21",element:"fire",quality:"mutable",ruler:"木星"},
+    {name:"山羊座",emoji:"♑",date:"12/22~1/19",element:"earth",quality:"cardinal",ruler:"土星"},
+    {name:"水瓶座",emoji:"♒",date:"1/20~2/18",element:"air",quality:"fixed",ruler:"天王星"},
+    {name:"魚座",emoji:"♓",date:"2/19~3/20",element:"water",quality:"mutable",ruler:"海王星"}
+];
+
+const ELEMENT_NAME = {fire:"火",earth:"地",air:"風",water:"水"};
+const ELEMENT_CLASS = {fire:"el-fire",earth:"el-earth",air:"el-air",water:"el-water"};
+
+const COMPAT = {};
+function key(a,b){ return Math.min(a,b)+"-"+Math.max(a,b); }
+
+function baseScore(a,b) {
+    const ea = SIGNS[a].element, eb = SIGNS[b].element;
+    if (ea === eb) return 85;
+    if ((ea==="fire"&&eb==="air")||(ea==="air"&&eb==="fire")) return 80;
+    if ((ea==="earth"&&eb==="water")||(ea==="water"&&eb==="earth")) return 80;
+    if ((ea==="fire"&&eb==="earth")||(ea==="earth"&&eb==="fire")) return 55;
+    if ((ea==="fire"&&eb==="water")||(ea==="water"&&eb==="fire")) return 45;
+    if ((ea==="air"&&eb==="water")||(ea==="water"&&eb==="air")) return 50;
+    if ((ea==="air"&&eb==="earth")||(ea==="earth"&&eb==="air")) return 50;
+    return 60;
+}
+
+function angleBonus(a,b) {
+    const diff = Math.abs(a-b);
+    const angle = Math.min(diff, 12-diff);
+    if (angle===0) return 5;
+    if (angle===1) return -5;
+    if (angle===2) return 10;
+    if (angle===3) return -10;
+    if (angle===4) return 8;
+    if (angle===5) return -3;
+    if (angle===6) return 0;
+    return 0;
+}
+
+const READINGS = [];
+
+const DETAIL = {
+    "fire-fire":{love:"二つの炎が出会うと爆発的な情熱が生まれます！一緒にいるとスリリングで興奮しますが、お互い譲らないと大きな衝突になることも。相手の炎を尊重しながら、時には一歩引いてみましょう。",friend:"最高の冒険パートナー！一緒なら何でも楽しい。ただ競争心が強すぎると友情にひびが入ることも。",tip:"お互いのリーダーシップを交互に認め合いましょう。二人の王が一つの城にいると衝突しますが、交互にリードすれば無敵です。"},
+    "earth-earth":{love:"安定感があり、信頼の深い関係です。価値観が似ているので居心地がいいですが、安定ばかり求めると退屈になることも。時には日常を抜け出す冒険を一緒にしてみましょう。",friend:"最も信頼できる友人。現実的で実用的な関係で、お互いに心からのアドバイスをし合います。",tip:"変化を恐れないで。安定は大切ですが、新しい経験が関係に活力をもたらします。"},
+    "air-air":{love:"知的な会話が尽きない関係！お互いの思考を刺激し合い、インスピレーションを与え合います。ただ感情的な深みが不足しがちです。時には頭でなく心で話してみましょう。",friend:"最高のディスカッションパートナーでありアイデアの宝庫。一緒にいると絶えず新しいものを発見します。",tip:"考えるだけでなく行動に移しましょう。アイデアは実現してこそ意味があります。"},
+    "water-water":{love:"魂まで理解し合える深い愛。言葉にしなくても相手の感情を感じ取ります。ただ感情の渦に一緒に飲み込まれる危険も。客観的な視点を持つことが大切です。",friend:"目と目で通じ合う友人。相手の痛みを自分のことのように感じる深い絆があります。",tip:"感情に溺れず、時には理性的に判断しましょう。二人とも海に沈んだら助けてくれる人がいません。"},
+    "fire-air":{love:"火に風が加わるとさらに大きく燃え上がります！お互いにインスピレーションとエネルギーを与え合う最高の組み合わせ。火は情熱を、風はアイデアをもたらします。",friend:"一緒にいると無限の可能性が！冒険、旅、新しい挑戦を共にするのに最高です。",tip:"風が強すぎると火が消えることも。ほどよい距離感が関係を長続きさせます。"},
+    "fire-earth":{love:"情熱と安定の出会い。火が熱すぎると地が乾き、地が重すぎると火が消えます。お互いのペースを合わせることが鍵です。",friend:"現実主義者と理想主義者の組み合わせ。お互いの足りない部分を補い合えますが、摩擦もあります。",tip:"お互いの世界を尊重しましょう。火は地に冒険を、地は火に安定をプレゼントして。"},
+    "fire-water":{love:"熱い火と冷たい水――蒸気が立ち上る激情的な関係！引き合う力は強いですが、衝突も多いです。火は水の感受性を、水は火の行動力を学びましょう。",friend:"簡単ではないけれど、お互いを成長させてくれる関係。バランスを見つければ驚くほどのシナジーが生まれます。",tip:"お互いを変えようとしないで。火は火らしく、水は水らしく――それが尊重です。"},
+    "earth-water":{love:"水が大地を潤すように、柔らかく自然な愛。感情の深み（水）と現実的な安定（地）が出会い、頼もしい関係を作ります。一緒に庭を育てるような感覚。",friend:"お互いに安らぎの場所になってくれる友人。静かにそばにいてくれる関係です。",tip:"一緒に変化を受け入れましょう。安全な場所にとどまりすぎると成長が止まります。"},
+    "earth-air":{love:"地と風は簡単には理解し合えない組み合わせ。地は安定を、風は自由を求めます。でもお互いを理解できれば、大地に風が吹くような爽やかな関係になります。",friend:"まったく異なる視点が新鮮ですが、深い絆を築くには努力が必要です。",tip:"お互いの違いを批判せず、好奇心で見つめましょう。違いが魅力になります。"},
+    "air-water":{love:"思考（風）と感情（水）の出会い。理解するのは難しいですが、努力すればとても深い関係になれます。風は水面に波紋を作り、水は風に深みを与えます。",friend:"コミュニケーションの方法が違うため誤解が生じやすいですが、お互いの足りない部分を補い合います。",tip:"風は感情を無視せず、水は論理を拒まないで。どちらも必要です。"}
+};
+
+let selected1 = -1, selected2 = -1;
+
+function renderPickers() {
+    ["picker1","picker2"].forEach((id, pidx) => {
+        const el = document.getElementById(id);
+        el.innerHTML = SIGNS.map((s, i) => `
+            <div class="zodiac-btn" data-idx="${i}" data-picker="${pidx}" onclick="selectSign(${pidx},${i})">
+                <span class="zb-emoji">${s.emoji}</span>
+                <span class="zb-name">${s.name}</span>
+            </div>
+        `).join("");
+    });
+}
+
+function selectSign(picker, idx) {
+    if (picker === 0) selected1 = idx; else selected2 = idx;
+    document.querySelectorAll(`#picker${picker+1} .zodiac-btn`).forEach(b => {
+        b.classList.toggle("selected", parseInt(b.dataset.idx) === idx);
+    });
+}
+
+function getElementPair(a, b) {
+    const pair = [SIGNS[a].element, SIGNS[b].element].sort().join("-");
+    return pair;
+}
+
+function checkCompat() {
+    if (selected1 < 0 || selected2 < 0) return alert("二つの星座を選んでください！");
+
+    const s1 = SIGNS[selected1], s2 = SIGNS[selected2];
+    const total = Math.min(100, Math.max(20, baseScore(selected1, selected2) + angleBonus(selected1, selected2) + Math.floor(Math.random()*11) - 5));
+    const love = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const friend = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const comm = Math.min(100, Math.max(15, (s1.element===s2.element ? 85 : s1.element==="air"||s2.element==="air" ? 75 : 55) + Math.floor(Math.random()*15) - 7));
+    const passion = Math.min(100, Math.max(15, (s1.element==="fire"||s2.element==="fire" ? 80 : s1.element==="water"||s2.element==="water" ? 70 : 55) + Math.floor(Math.random()*15) - 7));
+
+    const pair = getElementPair(selected1, selected2);
+    const detail = DETAIL[pair] || DETAIL[pair.split("-").reverse().join("-")] || {love:"互いの違いに惹かれる関係です。",friend:"努力すればよい友人になれます。",tip:"お互いを理解しようとする努力が大切です。"};
+
+    const scoreColor = total >= 80 ? "#e84393" : total >= 60 ? "#f39c12" : total >= 40 ? "#3498db" : "#e74c3c";
+    const scoreText = total >= 90 ? "運命の相性！" : total >= 80 ? "最高の相性！" : total >= 70 ? "とても良い相性" : total >= 60 ? "良い相性" : total >= 50 ? "普通の相性" : total >= 40 ? "努力が必要" : "難しい相性";
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML = `
+        <div class="compat-header">
+            <div class="compat-signs">${s1.emoji} 💕 ${s2.emoji}</div>
+            <div class="compat-names">${s1.name} & ${s2.name}</div>
+            <div style="font-size:13px;color:#888;">
+                ${s1.name} <span class="element-badge ${ELEMENT_CLASS[s1.element]}">${ELEMENT_NAME[s1.element]}</span>
+                &nbsp;×&nbsp;
+                ${s2.name} <span class="element-badge ${ELEMENT_CLASS[s2.element]}">${ELEMENT_NAME[s2.element]}</span>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <div class="score-circle" style="border-color:${scoreColor};background:rgba(232,67,147,0.06);">
+                <div class="score-num" style="color:${scoreColor};">${total}%</div>
+                <div class="score-label">${scoreText}</div>
+            </div>
+        </div>
+
+        <div class="score-bars">
+            <div class="score-bar-item">
+                <div class="sb-label">💕 恋愛相性</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${love}%;background:#e84393;"></div></div>
+                <div class="sb-value" style="color:#e84393;">${love}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">👫 友情相性</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${friend}%;background:#3498db;"></div></div>
+                <div class="sb-value" style="color:#3498db;">${friend}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">💬 コミュニケーション</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${comm}%;background:#2ecc71;"></div></div>
+                <div class="sb-value" style="color:#2ecc71;">${comm}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">🔥 情熱</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${passion}%;background:#f39c12;"></div></div>
+                <div class="sb-value" style="color:#f39c12;">${passion}%</div>
+            </div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💕 恋愛相性</div>
+            <div class="reading-text">${detail.love}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">👫 友情</div>
+            <div class="reading-text">${detail.friend}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 関係アドバイス</div>
+            <div class="reading-text"><strong>${detail.tip}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📊 元素分析</div>
+            <div class="reading-text">
+                <strong>${s1.name}</strong>: ${ELEMENT_NAME[s1.element]}の星座 (${s1.date}) · 守護星: ${s1.ruler}<br>
+                <strong>${s2.name}</strong>: ${ELEMENT_NAME[s2.element]}の星座 (${s2.date}) · 守護星: ${s2.ruler}<br><br>
+                ${s1.element === s2.element ?
+                    `同じ元素（${ELEMENT_NAME[s1.element]}）同士の出会い！本能的にお互いを理解できますが、共通の欠点が増幅されることもあります。` :
+                    `${ELEMENT_NAME[s1.element]}と${ELEMENT_NAME[s2.element]}の出会い――異なる世界から来た二人が新しいバランスを作っていきます。`
+                }
+            </div>
+        </div>
+
+        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';window.scrollTo({top:0,behavior:'smooth'});">🔄 別の相性を見る</button>
+    `;
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+renderPickers();
+</script>
+
+</body>
+</html>

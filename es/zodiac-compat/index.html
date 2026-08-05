@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibilidad Zodiacal - 12 Signos Amor y Amistad | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/zodiac-compat/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/zodiac-compat/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/zodiac-compat/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/zodiac-compat/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/zodiac-compat/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/zodiac-compat/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/zodiac-compat/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/zodiac-compat/">
+    <meta name="description" content="Test de compatibilidad zodiacal gratuito. Elige dos signos y descubre su compatibilidad en el amor, la amistad, sus fortalezas, debilidades y consejos.">
+    <link rel="canonical" href="https://mogumoon.com/es/zodiac-compat/">
+    <meta property="og:title" content="Compatibilidad Zodiacal - 12 Signos Amor y Amistad | MOGU Moon">
+    <meta property="og:description" content="Test de compatibilidad zodiacal gratuito. Elige dos signos y descubre su compatibilidad en amor y amistad.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/es/zodiac-compat/">
+    <meta property="og:image" content="https://mogumoon.com/es/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"¿Qué es la compatibilidad zodiacal?","acceptedAnswer":{"@type":"Answer","text":"Es un método astrológico que analiza la compatibilidad entre dos personas en el amor, la amistad y las relaciones, basándose en los elementos y cualidades de los 12 signos del zodiaco."}},
+        {"@type":"Question","name":"¿Es precisa la compatibilidad zodiacal?","acceptedAnswer":{"@type":"Answer","text":"La compatibilidad zodiacal es una referencia para el entretenimiento y el autoconocimiento. En las relaciones reales, el esfuerzo y la comunicación son más importantes."}},
+        {"@type":"Question","name":"¿Se llevan bien dos personas del mismo signo?","acceptedAnswer":{"@type":"Answer","text":"Los del mismo signo se entienden bien, pero sus defectos similares también pueden amplificarse. Depende del elemento y la cualidad."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #1a0d2e, #2a1540); border-bottom: 1px solid #3a2550; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #e84393; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .select-section { display: flex; gap: 20px; align-items: center; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+        .zodiac-picker { flex: 1; min-width: 200px; }
+        .zodiac-picker label { display: block; font-size: 13px; color: #e84393; margin-bottom: 8px; font-weight: 600; text-align: center; }
+        .zodiac-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .zodiac-btn { padding: 10px 4px; background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .zodiac-btn:hover { border-color: #e84393; background: rgba(232,67,147,0.12); }
+        .zodiac-btn.selected { border-color: #e84393; background: rgba(232,67,147,0.2); box-shadow: 0 0 12px rgba(232,67,147,0.2); }
+        .zodiac-btn .zb-emoji { font-size: 22px; display: block; }
+        .zodiac-btn .zb-name { font-size: 10px; color: #999; margin-top: 2px; }
+        .heart-divider { font-size: 36px; color: #e84393; padding: 0 10px; margin-top: 20px; }
+
+        .calc-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #c2185b, #e84393); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-bottom: 30px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232,67,147,0.3); }
+
+        .result-section { display: none; }
+        .compat-header { text-align: center; margin-bottom: 24px; }
+        .compat-signs { font-size: 48px; margin-bottom: 8px; }
+        .compat-names { font-size: 20px; color: #e84393; font-weight: 700; margin-bottom: 8px; }
+
+        .score-display { text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 3px solid; }
+        .score-num { font-size: 42px; font-weight: 900; }
+        .score-label { font-size: 12px; color: #888; }
+
+        .score-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .score-bar-item { background: rgba(232,67,147,0.06); border: 1px solid #3a2550; border-radius: 10px; padding: 14px; }
+        .sb-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+        .sb-bar { height: 8px; background: #2a1540; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+        .sb-fill { height: 100%; border-radius: 4px; transition: width 0.8s; }
+        .sb-value { font-size: 14px; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #1a0d2e, #2a1540); border: 1px solid #3a2550; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #e84393; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #e84393; }
+
+        .retry-btn { display: block; width: 100%; padding: 14px; background: transparent; border: 2px solid #e84393; color: #e84393; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { background: rgba(232,67,147,0.1); }
+
+        .element-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+        .el-fire { background: rgba(231,76,60,0.2); color: #e74c3c; }
+        .el-earth { background: rgba(212,168,83,0.2); color: #d4a853; }
+        .el-air { background: rgba(52,152,219,0.2); color: #3498db; }
+        .el-water { background: rgba(155,89,182,0.2); color: #9b59b6; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 500px) { .zodiac-grid { grid-template-columns: repeat(3, 1fr); } .score-bars { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>💕 Compatibilidad Zodiacal</h2>
+        <p>Elige dos signos y descubre su compatibilidad en amor y amistad</p>
+    </div>
+
+    <div class="select-section">
+        <div class="zodiac-picker">
+            <label>Mi Signo</label>
+            <div class="zodiac-grid" id="picker1"></div>
+        </div>
+        <div class="heart-divider">💕</div>
+        <div class="zodiac-picker">
+            <label>Su Signo</label>
+            <div class="zodiac-grid" id="picker2"></div>
+        </div>
+    </div>
+
+    <button class="calc-btn" onclick="checkCompat()">💕 Ver Compatibilidad</button>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">💕 La compatibilidad zodiacal es solo para diversión y autoconocimiento. El amor verdadero nace del corazon, no de las estrellas.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2550;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Compartir:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const SIGNS = [
+    {name:"Aries",emoji:"♈",en:"Aries",date:"21/3~19/4",element:"fire",quality:"cardinal",ruler:"Marte"},
+    {name:"Tauro",emoji:"♉",en:"Taurus",date:"20/4~20/5",element:"earth",quality:"fixed",ruler:"Venus"},
+    {name:"Geminis",emoji:"♊",en:"Gemini",date:"21/5~21/6",element:"air",quality:"mutable",ruler:"Mercurio"},
+    {name:"Cancer",emoji:"♋",en:"Cancer",date:"22/6~22/7",element:"water",quality:"cardinal",ruler:"Luna"},
+    {name:"Leo",emoji:"♌",en:"Leo",date:"23/7~22/8",element:"fire",quality:"fixed",ruler:"Sol"},
+    {name:"Virgo",emoji:"♍",en:"Virgo",date:"23/8~22/9",element:"earth",quality:"mutable",ruler:"Mercurio"},
+    {name:"Libra",emoji:"♎",en:"Libra",date:"23/9~22/10",element:"air",quality:"cardinal",ruler:"Venus"},
+    {name:"Escorpio",emoji:"♏",en:"Scorpio",date:"23/10~21/11",element:"water",quality:"fixed",ruler:"Pluton"},
+    {name:"Sagitario",emoji:"♐",en:"Sagittarius",date:"22/11~21/12",element:"fire",quality:"mutable",ruler:"Jupiter"},
+    {name:"Capricornio",emoji:"♑",en:"Capricorn",date:"22/12~19/1",element:"earth",quality:"cardinal",ruler:"Saturno"},
+    {name:"Acuario",emoji:"♒",en:"Aquarius",date:"20/1~18/2",element:"air",quality:"fixed",ruler:"Urano"},
+    {name:"Piscis",emoji:"♓",en:"Pisces",date:"19/2~20/3",element:"water",quality:"mutable",ruler:"Neptuno"}
+];
+
+const ELEMENT_NAME = {fire:"Fuego",earth:"Tierra",air:"Aire",water:"Agua"};
+const ELEMENT_CLASS = {fire:"el-fire",earth:"el-earth",air:"el-air",water:"el-water"};
+
+const COMPAT = {};
+function key(a,b){ return Math.min(a,b)+"-"+Math.max(a,b); }
+
+function baseScore(a,b) {
+    const ea = SIGNS[a].element, eb = SIGNS[b].element;
+    if (ea === eb) return 85;
+    if ((ea==="fire"&&eb==="air")||(ea==="air"&&eb==="fire")) return 80;
+    if ((ea==="earth"&&eb==="water")||(ea==="water"&&eb==="earth")) return 80;
+    if ((ea==="fire"&&eb==="earth")||(ea==="earth"&&eb==="fire")) return 55;
+    if ((ea==="fire"&&eb==="water")||(ea==="water"&&eb==="fire")) return 45;
+    if ((ea==="air"&&eb==="water")||(ea==="water"&&eb==="air")) return 50;
+    if ((ea==="air"&&eb==="earth")||(ea==="earth"&&eb==="air")) return 50;
+    return 60;
+}
+
+function angleBonus(a,b) {
+    const diff = Math.abs(a-b);
+    const angle = Math.min(diff, 12-diff);
+    if (angle===0) return 5;
+    if (angle===1) return -5;
+    if (angle===2) return 10;
+    if (angle===3) return -10;
+    if (angle===4) return 8;
+    if (angle===5) return -3;
+    if (angle===6) return 0;
+    return 0;
+}
+
+const DETAIL = {
+    "fire-fire":{love:"Cuando dos fuegos se encuentran, la pasion es explosiva. Juntos todo es emocionante, pero si ninguno cede, los conflictos pueden ser monumentales. Respetad la llama del otro y sabed cuándo dar un paso atras.",friend:"Los mejores companeros de aventura. Todo es divertido juntos. Pero si la rivalidad se dispara, la amistad puede resentirse.",tip:"Reconoced el liderazgo del otro por turnos. Dos reyes en un castillo chocan, pero si se turnan para liderar, son invencibles."},
+    "earth-earth":{love:"Una relacion estable y de profunda confianza. Los valores compartidos crean comodidad, pero buscar solo la estabilidad puede volverse aburrido. Aventuraos juntos de vez en cuando.",friend:"Los amigos mas fiables. Una relacion practica y realista donde los consejos sinceros fluyen con naturalidad.",tip:"No tengais miedo al cambio. La estabilidad es valiosa, pero las experiencias nuevas dan vida a la relacion."},
+    "air-air":{love:"Una relacion de conversacion intelectual interminable. Se estimulan y se inspiran mutuamente. Sin embargo, puede faltar profundidad emocional. A veces, hablad con el corazon, no solo con la mente.",friend:"Los mejores companeros de debate y fuente de ideas. Juntos descubren algo nuevo sin cesar.",tip:"No os quedeis solo en los planes, pasad a la accion. Las ideas cobran sentido cuando se realizan."},
+    "water-water":{love:"Un amor profundo que llega hasta el alma. Se sienten mutuamente sin necesidad de palabras. Pero existe el riesgo de hundirse juntos en el torbellino emocional. Necesitais perspectiva objetiva.",friend:"Amigos que se comunican con la mirada. Un vinculo profundo que siente el dolor del otro como propio.",tip:"No os perdais en las emociones; a veces juzgad con la razon. Si los dos caen al mar, no hay quien rescate a nadie."},
+    "fire-air":{love:"El viento aviva el fuego y lo hace arder con mas fuerza. Una combinacion fantastica que se dan inspiracion y energia mutuamente. El fuego aporta pasion y el aire, ideas.",friend:"Juntos, posibilidades infinitas. Lo mejor para aventuras, viajes y nuevos retos.",tip:"Un viento demasiado fuerte puede apagar el fuego. Una distancia adecuada mantiene viva la relacion."},
+    "fire-earth":{love:"El encuentro entre la pasion y la estabilidad. Si el fuego es demasiado intenso, la tierra se seca; si la tierra es demasiado pesada, el fuego se apaga. Ajustar el ritmo del otro es la clave.",friend:"La combinacion del realista y el idealista. Pueden compensar sus carencias mutuamente, aunque tambien habra conflictos.",tip:"Respetad los mundos del otro. El fuego regala aventura a la tierra y la tierra ofrece estabilidad al fuego."},
+    "fire-water":{love:"Fuego ardiente y agua fria: una relacion apasionada donde surge el vapor. La atraccion es poderosa, pero los choques son frecuentes. El fuego aprende la sensibilidad del agua y el agua, la determinacion del fuego.",friend:"No es facil, pero es una relacion que os hace crecer. Cuando encontrais el equilibrio, la sinergia es asombrosa.",tip:"No intenteis cambiar al otro. El fuego que sea fuego, el agua que sea agua: eso es respeto."},
+    "earth-water":{love:"Como el agua que empapa la tierra, un amor suave y natural. La profundidad emocional del agua y la estabilidad practica de la tierra crean una relacion solida. Como cuidar un jardin juntos.",friend:"Amigos que se convierten en refugio el uno para el otro. Una relacion de presencia silenciosa y constante.",tip:"Aceptad juntos los cambios. Quedarse siempre en la seguridad detiene el crecimiento."},
+    "earth-air":{love:"Tierra y aire son una combinacion que no se entiende facilmente. La tierra quiere estabilidad y el aire, libertad. Pero si se comprenden, la relacion es tan refrescante como el viento sobre la tierra.",friend:"Perspectivas completamente distintas que resultan estimulantes, aunque construir un vinculo profundo requiere esfuerzo.",tip:"No critiqueis las diferencias del otro, miradlas con curiosidad. La diferencia se convierte en encanto."},
+    "air-water":{love:"El encuentro entre el pensamiento y el sentimiento. Entenderse es dificil, pero con esfuerzo la relacion puede ser muy profunda. El viento crea ondas en la superficie del agua y el agua da profundidad al viento.",friend:"Los malentendidos surgen facilmente por los distintos estilos de comunicacion, pero se compensan las carencias del otro.",tip:"El aire no ignore las emociones y el agua no rechace la logica. Ambas cosas son necesarias."}
+};
+
+let selected1 = -1, selected2 = -1;
+
+function renderPickers() {
+    ["picker1","picker2"].forEach((id, pidx) => {
+        const el = document.getElementById(id);
+        el.innerHTML = SIGNS.map((s, i) => `
+            <div class="zodiac-btn" data-idx="${i}" data-picker="${pidx}" onclick="selectSign(${pidx},${i})">
+                <span class="zb-emoji">${s.emoji}</span>
+                <span class="zb-name">${s.name}</span>
+            </div>
+        `).join("");
+    });
+}
+
+function selectSign(picker, idx) {
+    if (picker === 0) selected1 = idx; else selected2 = idx;
+    document.querySelectorAll(`#picker${picker+1} .zodiac-btn`).forEach(b => {
+        b.classList.toggle("selected", parseInt(b.dataset.idx) === idx);
+    });
+}
+
+function getElementPair(a, b) {
+    const pair = [SIGNS[a].element, SIGNS[b].element].sort().join("-");
+    return pair;
+}
+
+function checkCompat() {
+    if (selected1 < 0 || selected2 < 0) return alert("Por favor, selecciona los dos signos.");
+
+    const s1 = SIGNS[selected1], s2 = SIGNS[selected2];
+    const total = Math.min(100, Math.max(20, baseScore(selected1, selected2) + angleBonus(selected1, selected2) + Math.floor(Math.random()*11) - 5));
+    const love = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const friend = Math.min(100, Math.max(15, total + Math.floor(Math.random()*15) - 7));
+    const comm = Math.min(100, Math.max(15, (s1.element===s2.element ? 85 : s1.element==="air"||s2.element==="air" ? 75 : 55) + Math.floor(Math.random()*15) - 7));
+    const passion = Math.min(100, Math.max(15, (s1.element==="fire"||s2.element==="fire" ? 80 : s1.element==="water"||s2.element==="water" ? 70 : 55) + Math.floor(Math.random()*15) - 7));
+
+    const pair = getElementPair(selected1, selected2);
+    const detail = DETAIL[pair] || DETAIL[pair.split("-").reverse().join("-")] || {love:"Una relacion de atraccion mutua por diferencias.",friend:"Con esfuerzo podeis ser buenos amigos.",tip:"Es necesario esforzarse por comprenderse mutuamente."};
+
+    const scoreColor = total >= 80 ? "#e84393" : total >= 60 ? "#f39c12" : total >= 40 ? "#3498db" : "#e74c3c";
+    const scoreText = total >= 90 ? "Compatibilidad del destino!" : total >= 80 ? "Compatibilidad perfecta!" : total >= 70 ? "Muy buena compatibilidad" : total >= 60 ? "Buena compatibilidad" : total >= 50 ? "Compatibilidad normal" : total >= 40 ? "Requiere esfuerzo" : "Compatibilidad desafiante";
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML = `
+        <div class="compat-header">
+            <div class="compat-signs">${s1.emoji} 💕 ${s2.emoji}</div>
+            <div class="compat-names">${s1.name} & ${s2.name}</div>
+            <div style="font-size:13px;color:#888;">
+                ${s1.name} <span class="element-badge ${ELEMENT_CLASS[s1.element]}">${ELEMENT_NAME[s1.element]}</span>
+                &nbsp;×&nbsp;
+                ${s2.name} <span class="element-badge ${ELEMENT_CLASS[s2.element]}">${ELEMENT_NAME[s2.element]}</span>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <div class="score-circle" style="border-color:${scoreColor};background:rgba(232,67,147,0.06);">
+                <div class="score-num" style="color:${scoreColor};">${total}%</div>
+                <div class="score-label">${scoreText}</div>
+            </div>
+        </div>
+
+        <div class="score-bars">
+            <div class="score-bar-item">
+                <div class="sb-label">💕 Amor</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${love}%;background:#e84393;"></div></div>
+                <div class="sb-value" style="color:#e84393;">${love}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">👫 Amistad</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${friend}%;background:#3498db;"></div></div>
+                <div class="sb-value" style="color:#3498db;">${friend}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">💬 Comunicacion</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${comm}%;background:#2ecc71;"></div></div>
+                <div class="sb-value" style="color:#2ecc71;">${comm}%</div>
+            </div>
+            <div class="score-bar-item">
+                <div class="sb-label">🔥 Pasion</div>
+                <div class="sb-bar"><div class="sb-fill" style="width:${passion}%;background:#f39c12;"></div></div>
+                <div class="sb-value" style="color:#f39c12;">${passion}%</div>
+            </div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💕 Compatibilidad en el Amor</div>
+            <div class="reading-text">${detail.love}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">👫 Compatibilidad en la Amistad</div>
+            <div class="reading-text">${detail.friend}</div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">💡 Consejo para la Relacion</div>
+            <div class="reading-text"><strong>${detail.tip}</strong></div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">📊 Analisis de Elementos</div>
+            <div class="reading-text">
+                <strong>${s1.name}</strong>: Signo de ${ELEMENT_NAME[s1.element]} (${s1.date}) · Regido por ${s1.ruler}<br>
+                <strong>${s2.name}</strong>: Signo de ${ELEMENT_NAME[s2.element]} (${s2.date}) · Regido por ${s2.ruler}<br><br>
+                ${s1.element === s2.element ?
+                    `Dos signos del mismo elemento (${ELEMENT_NAME[s1.element]}). Se comprenden instintivamente, aunque sus debilidades comunes tambien pueden amplificarse.` :
+                    `El encuentro entre ${ELEMENT_NAME[s1.element]} y ${ELEMENT_NAME[s2.element]}: dos personas de mundos distintos que crean juntas un nuevo equilibrio.`
+                }
+            </div>
+        </div>
+
+        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';window.scrollTo({top:0,behavior:'smooth'});">🔄 Probar Otra Combinacion</button>
+    `;
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+renderPickers();
+</script>
+
+</body>
+</html>
