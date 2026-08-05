@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문 페이즈 - 오늘의 달 위상 · 음력 · 달의 의미 | MOGU Moon</title>
+    <meta name="description" content="오늘의 달 위상을 확인하세요. 현재 문 페이즈, 음력 날짜, 달의 영적 의미, 적합한 활동, 다음 보름달/초승달 정보.">
+    <link rel="canonical" href="https://mogumoon.com/moonphase/">
+    <meta property="og:title" content="문 페이즈 - 오늘의 달 위상 | MOGU Moon">
+    <meta property="og:description" content="오늘의 달 위상을 확인하세요. 현재 문 페이즈와 달의 영적 의미.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/moonphase/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"문 페이즈란?","acceptedAnswer":{"@type":"Answer","text":"문 페이즈(Moon Phase)는 달의 위상 변화를 말합니다. 약 29.5일 주기로 초승달→상현달→보름달→하현달→그믐달을 반복합니다."}},
+        {"@type":"Question","name":"달의 위상이 사람에게 영향을 주나요?","acceptedAnswer":{"@type":"Answer","text":"고대부터 달은 감정, 에너지, 직감에 영향을 준다고 믿어져 왔습니다. 보름달에 감정이 고조되고, 초승달에 새 시작이 좋다고 합니다."}},
+        {"@type":"Question","name":"음력은 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"달의 삭망 주기(약 29.5일)를 기반으로 계산됩니다. 초승달이 음력 1일, 보름달이 음력 15일 전후입니다."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06061a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0a0a2e, #12123a); border-bottom: 1px solid #2a2a5a; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #c9c9e0; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .moon-display { text-align: center; margin-bottom: 30px; position: relative; }
+        .moon-date { font-size: 14px; color: #888; margin-bottom: 16px; }
+        .moon-wrapper { position: relative; width: 200px; height: 200px; margin: 0 auto 20px; }
+        .moon-glow { position: absolute; inset: -25px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,200,0.08) 0%, transparent 70%); }
+        .moon-svg { width: 200px; height: 200px; }
+        .moon-name { font-size: 32px; color: #e0dcc8; font-weight: 900; margin-bottom: 4px; }
+        .moon-emoji { font-size: 20px; margin-right: 8px; }
+        .moon-sub { font-size: 15px; color: #aaa; margin-bottom: 4px; }
+        .moon-illumination { font-size: 13px; color: #888; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+        .info-card { background: linear-gradient(135deg, #0d0d2a, #15153a); border: 1px solid #2a2a5a; border-radius: 12px; padding: 16px; text-align: center; }
+        .info-label { font-size: 11px; color: #888; letter-spacing: 1px; margin-bottom: 6px; }
+        .info-value { font-size: 18px; color: #c9c9e0; font-weight: 700; }
+        .info-sub { font-size: 12px; color: #666; margin-top: 4px; }
+
+        .reading-card { background: linear-gradient(135deg, #0d0d2a, #15153a); border: 1px solid #2a2a5a; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .reading-title { font-size: 16px; color: #c9c9e0; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #c9c9e0; }
+
+        .phase-timeline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding: 16px; background: linear-gradient(135deg, #0d0d2a, #15153a); border: 1px solid #2a2a5a; border-radius: 12px; }
+        .phase-item { text-align: center; flex: 1; }
+        .phase-item .ph-emoji { font-size: 24px; margin-bottom: 4px; }
+        .phase-item .ph-name { font-size: 10px; color: #888; }
+        .phase-item.active .ph-emoji { font-size: 32px; }
+        .phase-item.active .ph-name { color: #c9c9e0; font-weight: 700; }
+
+        .activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .activity-item { padding: 10px; border-radius: 8px; font-size: 13px; text-align: center; }
+        .activity-good { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; }
+        .activity-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .phase-item .ph-emoji { font-size: 18px; } .phase-item.active .ph-emoji { font-size: 26px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🌕 문 페이즈</h2>
+        <p>오늘의 달 위상과 숨겨진 의미를 확인하세요</p>
+    </div>
+
+    <div id="moonContent"></div>
+
+    <div class="disclaimer">🌕 달의 위상 정보는 천문학적 계산에 기반하며, 영적 해석은 참고용입니다.</div>
+</div>
+
+<div style="text-align:center;padding:20px 0;border-top:1px solid #2a2a5a;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">공유:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL 복사</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+// 달 위상 계산 (John Conway's algorithm 기반)
+function getMoonPhase(year, month, day) {
+    if (month <= 2) { year--; month += 12; }
+    const A = Math.floor(year / 100);
+    const B = 2 - A + Math.floor(A / 4);
+    const JD = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+    const daysSinceNew = JD - 2451550.1;
+    const newMoons = daysSinceNew / 29.530588853;
+    const phase = newMoons - Math.floor(newMoons);
+    return phase; // 0~1 (0=초승달, 0.5=보름달)
+}
+
+function getPhaseInfo(phase) {
+    const illumination = Math.round(Math.abs(Math.cos(phase * 2 * Math.PI) * -0.5 + 0.5) * 100);
+    const lunarDay = Math.round(phase * 29.5) + 1;
+
+    if (phase < 0.0625) return {name:"초승달 (New Moon)",emoji:"🌑",idx:0,illumination,lunarDay,
+        meaning:"<strong>새로운 시작</strong>의 에너지가 가득합니다. 달이 완전히 숨은 이 시기는 씨앗을 심듯, 새로운 의도와 목표를 세우기에 최적입니다. 내면으로 향하는 시간이며, 조용히 계획을 세우세요. 바깥으로 드러내기보다 안에서 싹을 틔우는 때입니다.",
+        good:["새 프로젝트 시작","목표 설정","명상·성찰","일기 쓰기","디지털 디톡스"],
+        bad:["큰 발표나 공개","결론 내리기","과도한 사교 활동"]};
+    if (phase < 0.1875) return {name:"초승달 직후 (Waxing Crescent)",emoji:"🌒",idx:1,illumination,lunarDay,
+        meaning:"심은 씨앗이 <strong>싹을 틔우는</strong> 시기입니다. 의도를 행동으로 옮기기 시작하세요. 아직 작고 연약하지만, 꾸준히 에너지를 쏟으면 자라납니다. 용기를 내어 첫 걸음을 내디디세요. 완벽하지 않아도 됩니다.",
+        good:["첫 행동 실행","자기계발 시작","새로운 습관 만들기","용기 내기"],
+        bad:["성급한 판단","완벽주의","큰 리스크"]};
+    if (phase < 0.3125) return {name:"상현달 (First Quarter)",emoji:"🌓",idx:2,illumination,lunarDay,
+        meaning:"<strong>결단과 행동</strong>의 시기입니다. 반쪽 달은 빛과 어둠의 균형 — 선택의 순간입니다. 장애물이 나타날 수 있지만, 그것은 당신을 시험하는 것입니다. 과감하게 결정하고 전진하세요. 도전을 피하지 마세요.",
+        good:["중요한 결정","도전·극복","문제 직면","적극적 행동"],
+        bad:["우유부단","포기","회피"]};
+    if (phase < 0.4375) return {name:"상현 후 달 (Waxing Gibbous)",emoji:"🌔",idx:3,illumination,lunarDay,
+        meaning:"<strong>다듬고 완성하는</strong> 시기입니다. 거의 다 찬 달처럼, 목표에 가까워지고 있습니다. 세부사항을 점검하고 마무리하세요. 인내심을 갖고 마지막까지 최선을 다하면 보름달에 결실을 맺습니다.",
+        good:["세부 조정","마무리 작업","인내심 유지","피드백 반영"],
+        bad:["새로운 일 시작","방향 전환","조급함"]};
+    if (phase < 0.5625) return {name:"보름달 (Full Moon)",emoji:"🌕",idx:4,illumination,lunarDay,
+        meaning:"달의 에너지가 <strong>절정</strong>에 달합니다! 감정이 고조되고 직관이 날카로워지며, 숨겨진 것들이 밝혀집니다. 수확의 시기 — 그동안의 노력이 결실을 맺습니다. 감사하고 축하하세요. 보름달 아래에서의 소원은 특별한 힘이 있습니다.",
+        good:["축하·감사","소원 빌기","직관 따르기","결실 수확","사랑 고백"],
+        bad:["감정적 결정","충동적 행동","큰 싸움"]};
+    if (phase < 0.6875) return {name:"보름달 직후 (Waning Gibbous)",emoji:"🌖",idx:5,illumination,lunarDay,
+        meaning:"<strong>나눔과 감사</strong>의 시기입니다. 보름달의 빛이 서서히 줄어들듯, 받은 것을 돌려주고 나누세요. 배운 것을 정리하고 가르치세요. 내면의 지혜가 깊어지는 시기입니다.",
+        good:["나눔·봉사","가르치기·멘토링","감사 표현","정리·반성"],
+        bad:["새 시작","욕심 부리기"]};
+    if (phase < 0.8125) return {name:"하현달 (Last Quarter)",emoji:"🌗",idx:6,illumination,lunarDay,
+        meaning:"<strong>놓아주고 정리하는</strong> 시기입니다. 더 이상 필요 없는 것을 버리세요 — 나쁜 습관, 독성 관계, 오래된 짐. 새것이 들어오려면 자리를 비워야 합니다. 용서하고 놓아주세요.",
+        good:["정리정돈","나쁜 습관 끊기","용서·화해","불필요한 것 버리기"],
+        bad:["새 프로젝트","집착","과거에 매달리기"]};
+    if (phase < 0.9375) return {name:"그믐달 (Waning Crescent)",emoji:"🌘",idx:7,illumination,lunarDay,
+        meaning:"달이 사라지기 직전 — <strong>쉼과 재충전</strong>의 시기입니다. 에너지가 낮아지는 것은 자연스러운 순환입니다. 무리하지 말고 충분히 쉬세요. 명상, 꿈, 직관에 주의를 기울이세요. 곧 새로운 초승달이 뜹니다.",
+        good:["충분한 휴식","명상·기도","꿈 일기","에너지 충전"],
+        bad:["무리한 활동","중요한 시작","과로"]};
+    return {name:"초승달 (New Moon)",emoji:"🌑",idx:0,illumination:0,lunarDay:1,
+        meaning:"<strong>새로운 시작</strong>의 에너지가 가득합니다. 조용히 계획을 세우세요.",
+        good:["새 프로젝트 시작","목표 설정","명상"],
+        bad:["큰 발표","결론 내리기"]};
+}
+
+// 다음 보름달/초승달 찾기
+function findNextPhase(targetPhase, startDate) {
+    const d = new Date(startDate);
+    for (let i = 1; i <= 35; i++) {
+        d.setDate(d.getDate() + 1);
+        const p = getMoonPhase(d.getFullYear(), d.getMonth() + 1, d.getDate());
+        if (targetPhase === 'full' && p >= 0.47 && p <= 0.53) return d;
+        if (targetPhase === 'new' && (p <= 0.03 || p >= 0.97)) return d;
+    }
+    return null;
+}
+
+// 달 SVG 그리기
+function drawMoon(phase) {
+    const r = 90;
+    const cx = 100, cy = 100;
+    let d;
+    const ill = phase <= 0.5 ? phase * 2 : (1 - phase) * 2;
+    const sweep = phase <= 0.5 ? 1 : 0;
+    const bulge = (ill - 0.5) * 2 * r;
+
+    if (phase < 0.01 || phase > 0.99) {
+        // 초승달 - 거의 안 보임
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#1a1a2e" stroke="#333" stroke-width="1"/>`;
+    }
+    if (phase > 0.49 && phase < 0.51) {
+        // 보름달
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#e8e4d4" />
+                <circle cx="${cx-25}" cy="${cy-20}" r="12" fill="rgba(200,195,180,0.5)"/>
+                <circle cx="${cx+20}" cy="${cy+15}" r="8" fill="rgba(200,195,180,0.4)"/>
+                <circle cx="${cx+5}" cy="${cy-35}" r="6" fill="rgba(200,195,180,0.3)"/>`;
+    }
+
+    // 그 외 위상
+    const lightSide = phase <= 0.5 ? 'right' : 'left';
+    const darkFill = '#1a1a2e';
+    const lightFill = '#e8e4d4';
+
+    if (lightSide === 'right') {
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${lightFill}"/>
+                <path d="M${cx},${cy-r} A${r},${r} 0 0,0 ${cx},${cy+r} A${Math.abs(bulge)},${r} 0 0,${bulge > 0 ? 0 : 1} ${cx},${cy-r}" fill="${darkFill}"/>`;
+    } else {
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${lightFill}"/>
+                <path d="M${cx},${cy-r} A${r},${r} 0 0,1 ${cx},${cy+r} A${Math.abs(bulge)},${r} 0 0,${bulge > 0 ? 1 : 0} ${cx},${cy-r}" fill="${darkFill}"/>`;
+    }
+}
+
+// 메인
+const now = new Date();
+const phase = getMoonPhase(now.getFullYear(), now.getMonth() + 1, now.getDate());
+const info = getPhaseInfo(phase);
+const nextFull = findNextPhase('full', now);
+const nextNew = findNextPhase('new', now);
+
+const PHASES = [
+    {emoji:"🌑",name:"초승달"},{emoji:"🌒",name:"초승 후"},{emoji:"🌓",name:"상현달"},
+    {emoji:"🌔",name:"상현 후"},{emoji:"🌕",name:"보름달"},{emoji:"🌖",name:"보름 후"},
+    {emoji:"🌗",name:"하현달"},{emoji:"🌘",name:"그믐달"}
+];
+
+function formatDate(d) {
+    if (!d) return '-';
+    return `${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}.`;
+}
+
+function daysUntil(d) {
+    if (!d) return '-';
+    const diff = Math.ceil((d - now) / (1000*60*60*24));
+    return `${diff}일 후`;
+}
+
+const dayNames = ['일','월','화','수','목','금','토'];
+const todayStr = `${now.getFullYear()}년 ${now.getMonth()+1}월 ${now.getDate()}일 (${dayNames[now.getDay()]}요일)`;
+
+document.getElementById('moonContent').innerHTML = `
+    <div class="moon-display">
+        <div class="moon-date">${todayStr}</div>
+        <div class="moon-wrapper">
+            <div class="moon-glow"></div>
+            <svg class="moon-svg" viewBox="0 0 200 200">${drawMoon(phase)}</svg>
+        </div>
+        <div class="moon-name"><span class="moon-emoji">${info.emoji}</span>${info.name}</div>
+        <div class="moon-sub">음력 약 ${info.lunarDay}일</div>
+        <div class="moon-illumination">밝기: ${info.illumination}%</div>
+    </div>
+
+    <div class="phase-timeline">
+        ${PHASES.map((p, i) => `<div class="phase-item ${i === info.idx ? 'active' : ''}">
+            <div class="ph-emoji">${p.emoji}</div>
+            <div class="ph-name">${p.name}</div>
+        </div>`).join('')}
+    </div>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">다음 보름달 🌕</div>
+            <div class="info-value">${formatDate(nextFull)}</div>
+            <div class="info-sub">${daysUntil(nextFull)}</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">다음 초승달 🌑</div>
+            <div class="info-value">${formatDate(nextNew)}</div>
+            <div class="info-sub">${daysUntil(nextNew)}</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">달 주기</div>
+            <div class="info-value">29.5일</div>
+            <div class="info-sub">삭망 주기</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">현재 위치</div>
+            <div class="info-value">${Math.round(phase * 100)}%</div>
+            <div class="info-sub">주기 진행률</div>
+        </div>
+    </div>
+
+    <div class="reading-card">
+        <div class="reading-title">🌙 오늘의 달이 전하는 메시지</div>
+        <div class="reading-text">${info.meaning}</div>
+    </div>
+
+    <div class="reading-card">
+        <div class="reading-title">✅ 이 시기에 좋은 활동 vs ❌ 피할 활동</div>
+        <div class="activity-grid">
+            ${info.good.map(g => `<div class="activity-item activity-good">✅ ${g}</div>`).join('')}
+            ${info.bad.map(b => `<div class="activity-item activity-bad">❌ ${b}</div>`).join('')}
+        </div>
+    </div>
+
+    <div class="reading-card">
+        <div class="reading-title">📖 달의 8가지 위상</div>
+        <div class="reading-text">
+            <strong>🌑 초승달 (New Moon)</strong> — 새로운 시작, 의도 설정<br>
+            <strong>🌒 초승달 직후 (Waxing Crescent)</strong> — 씨앗이 싹트다, 첫 행동<br>
+            <strong>🌓 상현달 (First Quarter)</strong> — 결단, 도전, 장애물 극복<br>
+            <strong>🌔 상현 후 (Waxing Gibbous)</strong> — 다듬기, 완성 직전<br>
+            <strong>🌕 보름달 (Full Moon)</strong> — 절정, 수확, 감정 고조<br>
+            <strong>🌖 보름 후 (Waning Gibbous)</strong> — 나눔, 감사, 정리<br>
+            <strong>🌗 하현달 (Last Quarter)</strong> — 놓아주기, 정리, 용서<br>
+            <strong>🌘 그믐달 (Waning Crescent)</strong> — 쉼, 재충전, 내면으로
+        </div>
+    </div>
+`;
+</script>
+
+</body>
+</html>
