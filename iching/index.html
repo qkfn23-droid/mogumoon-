@@ -84,9 +84,9 @@
         <p>3000년 역사의 지혜 — 64괘가 당신의 질문에 답합니다</p>
     </div>
 
-    <div class="question-box">
-        <input type="text" id="questionInput" placeholder="마음속 질문을 입력하세요... (예: 이 일을 시작해야 할까?)" maxlength="100">
-        <div class="question-hint">질문을 떠올리며 괘를 뽑으세요. 주역은 '예/아니오'보다 지혜와 방향을 알려줍니다.</div>
+    <div style="text-align:center;margin-bottom:24px;padding:16px;background:rgba(212,168,83,0.06);border:1px solid #3a2a15;border-radius:12px;">
+        <div style="font-size:15px;color:#d4a853;line-height:1.6;font-style:italic;">마음속으로 질문을 떠올리며<br>괘를 뽑으세요 ☯️</div>
+        <div style="font-size:12px;color:#666;margin-top:8px;">주역은 '예/아니오'보다 지혜와 방향을 알려줍니다</div>
     </div>
 
     <button class="cast-btn" onclick="castHexagram()">☯️ 괘 뽑기</button>
@@ -414,7 +414,7 @@ function castHexagram() {
         }
     }
 
-    const question = document.getElementById('questionInput').value.trim();
+    const question = '';
 
     const section = document.getElementById('resultSection');
     section.innerHTML = `
@@ -463,9 +463,6 @@ function castHexagram() {
     section.scrollIntoView({behavior:'smooth'});
 }
 
-document.getElementById('questionInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') castHexagram();
-});
 </script>
 
 </body>

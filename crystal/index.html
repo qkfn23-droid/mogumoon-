@@ -101,9 +101,8 @@
         <p>마음속 질문을 떠올리고, 수정구에게 물어보세요</p>
     </div>
 
-    <div class="question-box">
-        <input type="text" id="questionInput" placeholder="질문을 입력하세요... (예: 이번 시험 합격할까?)" maxlength="100">
-        <div class="question-hint">질문을 입력하거나, 마음속으로 떠올린 채 수정구를 터치하세요</div>
+    <div style="text-align:center;margin-bottom:24px;padding:16px;background:rgba(167,139,250,0.06);border:1px solid #3a2a6a;border-radius:12px;">
+        <div style="font-size:15px;color:#c4b5fd;line-height:1.6;font-style:italic;">마음속으로 질문을 떠올리며<br>수정구를 터치하세요 ✨</div>
     </div>
 
     <div class="crystal-wrapper" onclick="askCrystal()">
@@ -210,7 +209,7 @@ function askCrystal() {
     const ball = document.getElementById('crystalBall');
     const textEl = document.getElementById('crystalText');
     const mist = document.getElementById('mist');
-    const question = document.getElementById('questionInput').value.trim();
+    const question = '';
 
     btn.disabled = true;
     textEl.className = 'crystal-text';
@@ -247,9 +246,6 @@ function updateHistory() {
     `).join('');
 }
 
-document.getElementById('questionInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') askCrystal();
-});
 </script>
 
 </body>
