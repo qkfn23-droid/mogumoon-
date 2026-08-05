@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スピリットアニマル診断 - あなたの守護動物は？ | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/spirit-animal/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/spirit-animal/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/spirit-animal/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/spirit-animal/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/spirit-animal/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/spirit-animal/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/spirit-animal/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/spirit-animal/">
+    <meta name="description" content="無料スピリットアニマル診断。8つの質問であなたの守護動物を見つけましょう。性格、強み、メッセージ、相性動物。">
+    <link rel="canonical" href="https://mogumoon.com/jp/spirit-animal/">
+    <meta property="og:title" content="スピリットアニマル診断 - あなたの守護動物は？ | MOGU Moon">
+    <meta property="og:description" content="8つの質問であなたの守護動物を見つけましょう。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/jp/spirit-animal/">
+    <meta property="og:image" content="https://mogumoon.com/jp/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"スピリットアニマルとは？","acceptedAnswer":{"@type":"Answer","text":"スピリットアニマルはネイティブアメリカンの伝統に由来する概念で、あなたの性格と霊的エネルギーを反映する守護動物です。"}},
+        {"@type":"Question","name":"スピリットアニマルは変わりますか？","acceptedAnswer":{"@type":"Answer","text":"基本のスピリットアニマルは一生を通じてあなたとともにありますが、人生の時期によって一時的に別の動物のエネルギーが訪れることがあります。"}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a0d, #15251a); border-bottom: 1px solid #1a3a20; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4caf50; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #1a3a20; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #2e7d32, #4caf50); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #4caf50; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; color: #81c784; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #4caf50; background: rgba(76,175,80,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .animal-display { margin-bottom: 24px; }
+        .animal-emoji { font-size: 100px; margin-bottom: 12px; display: block; }
+        .animal-name { font-size: 32px; color: #4caf50; font-weight: 900; margin-bottom: 4px; }
+        .animal-title { font-size: 16px; color: #81c784; margin-bottom: 8px; }
+        .animal-element { font-size: 13px; color: #888; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 14px 8px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; text-align: center; }
+        .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-value { font-size: 14px; color: #4caf50; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #4caf50; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #81c784; }
+
+        .compat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 12px; border-radius: 8px; text-align: center; font-size: 14px; }
+        .compat-good { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.2); color: #4caf50; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #2e7d32, #4caf50); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(76,175,80,0.3); }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } .animal-emoji { font-size: 72px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🐾 スピリットアニマル診断</h2>
+        <p>8つの質問であなたの守護動物を見つけましょう</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">質問 1 / 8</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🐾 スピリットアニマル診断は楽しみと自己理解のためのものです。</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #1a3a20;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">共有:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='コピー完了!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URLをコピー</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"自然の中で最も引かれる場所はどこですか？",
+     o:[{t:"深い森の中",c:["wolf","deer","owl"]},{t:"高い山の頂上",c:["eagle","hawk","bear"]},{t:"広大な海",c:["dolphin","whale","turtle"]},{t:"広々とした草原",c:["horse","lion","fox"]}]},
+    {q:"危機的な状況でのあなたの反応は？",
+     o:[{t:"冷静に状況を分析する",c:["owl","hawk","fox"]},{t:"本能的にすぐ行動する",c:["wolf","lion","eagle"]},{t:"まず周りの人の安否を確認する",c:["dolphin","deer","whale"]},{t:"静かに隠れてチャンスを待つ",c:["fox","turtle","cat"]}]},
+    {q:"一人でいる時間についてどう感じますか？",
+     o:[{t:"一人が楽で自由だ",c:["cat","owl","eagle"]},{t:"たまにはいいが人恋しくなる",c:["wolf","horse","deer"]},{t:"一緒にいる方がずっといい",c:["dolphin","lion","whale"]},{t:"一人で深く考えるのが好き",c:["turtle","owl","bear"]}]},
+    {q:"あなたの最大の強みは？",
+     o:[{t:"直感と洞察力",c:["owl","cat","hawk"]},{t:"勇気とリーダーシップ",c:["lion","eagle","wolf"]},{t:"共感と癒しの力",c:["dolphin","deer","whale"]},{t:"忍耐と知恵",c:["turtle","bear","fox"]}]},
+    {q:"夜についてどんな気持ちを持っていますか？",
+     o:[{t:"夜の方がむしろ活気づく",c:["owl","cat","wolf"]},{t:"星を見ながら考えに沈む",c:["eagle","whale","deer"]},{t:"穏やかに休む時間だ",c:["bear","turtle","horse"]},{t:"少し不安だが神秘的だ",c:["fox","hawk","dolphin"]}]},
+    {q:"人の中でのあなたの役割は？",
+     o:[{t:"リーダー・先頭に立つ人",c:["lion","eagle","wolf"]},{t:"アドバイザー・賢明な人",c:["owl","turtle","bear"]},{t:"ムードメーカー・まとめる人",c:["dolphin","fox","horse"]},{t:"静かな観察者・後ろで支える人",c:["deer","cat","hawk"]}]},
+    {q:"夢によく出てくる場面は？",
+     o:[{t:"空を飛ぶ夢",c:["eagle","hawk","owl"]},{t:"水中を自由に泳ぐ夢",c:["dolphin","whale","turtle"]},{t:"森や自然の中を走る夢",c:["wolf","deer","horse"]},{t:"高い所から下を見下ろす夢",c:["cat","lion","fox"]}]},
+    {q:"最も共感できる言葉は？",
+     o:[{t:"自由か死か",c:["eagle","horse","wolf"]},{t:"知識は力なり",c:["owl","fox","hawk"]},{t:"愛がすべてを癒す",c:["dolphin","deer","whale"]},{t:"ゆっくり行く者が遠くまで行く",c:["turtle","bear","cat"]}]}
+];
+
+const ANIMALS = {
+    wolf:{name:"オオカミ",emoji:"🐺",title:"忠実なる守護者",element:"月・風",
+        personality:"あなたのスピリットアニマルは<strong>オオカミ</strong>です。オオカミは忠誠心、直感、そして深い絆を象徴します。あなたは少数の人と深い関係を築き、群れのためなら何でもできる人です。強い直感で危険を察知し、月明かりの下で最も真の自分を発見します。",
+        strength:"忠誠心、直感力、チームワーク、保護本能、粘り強さ",
+        weakness:"孤独感、過度な警戒心、信頼するまでに時間がかかる",
+        message:"一人でも孤独ではありません。あなたの遠吠えは必ず仲間に届きます。真の絆を信じてください。",
+        good:"シカ、ワシ",bad:"ネコ、キツネ"},
+    eagle:{name:"ワシ",emoji:"🦅",title:"大空のビジョナリー",element:"空・火",
+        personality:"あなたのスピリットアニマルは<strong>ワシ</strong>です。ワシは自由、ビジョン、そして超越を象徴します。あなたは高い場所から全体を俯瞰する能力があり、他の人が見えないものを見ます。一度目標を定めると雷のように素早く突き進む決断力の持ち主です。",
+        strength:"ビジョン、決断力、自由精神、集中力、リーダーシップ",
+        weakness:"孤独、他者との距離感、完璧主義",
+        message:"高く飛べば飛ぶほど孤独になります。しかしあなたが見る景色は誰も見られないものです。その視野を分かち合ってください。",
+        good:"オオカミ、タカ",bad:"カメ、クジラ"},
+    owl:{name:"フクロウ",emoji:"🦉",title:"夜の賢者",element:"月・闇",
+        personality:"あなたのスピリットアニマルは<strong>フクロウ</strong>です。フクロウは知恵、直観、そして隠された真実を象徴します。あなたは闇の中でも真実を見抜く目があります。静かな夜に最も澄んだ思考をし、他の人が見落とすものを捉えます。",
+        strength:"知恵、直観、観察力、忍耐、秘密の守り方",
+        weakness:"孤立傾向、昼間の活動が苦手、感情表現の乏しさ",
+        message:"すべてを知る必要はありません。時には知らないままにしておくことも知恵です。闇を恐れないでください、そこに答えがあります。",
+        good:"ネコ、タカ",bad:"イルカ、ライオン"},
+    lion:{name:"ライオン",emoji:"🦁",title:"王者の気",element:"太陽・火",
+        personality:"あなたのスピリットアニマルは<strong>ライオン</strong>です。ライオンは勇気、権威、そして生まれながらのリーダーシップを象徴します。あなたは存在感だけで周囲を圧倒し、危機の瞬間に最も輝く人です。堂々として寛大で、大切なものを守るためにはどんな困難も恐れません。",
+        strength:"勇気、カリスマ、寛大さ、保護本能、自信",
+        weakness:"傲慢さ、頑固さ、承認欲求、一人で抱え込む傾向",
+        message:"真の王は王冠ではなく心で治めます。強さとは咆哮ではなく静かな慈悲です。",
+        good:"オオカミ、ウマ",bad:"ネコ、フクロウ"},
+    dolphin:{name:"イルカ",emoji:"🐬",title:"喜びの癒し手",element:"水・風",
+        personality:"あなたのスピリットアニマルは<strong>イルカ</strong>です。イルカは喜び、コミュニケーション、そして癒しを象徴します。あなたはどこでも明るいエネルギーを放ち、人々を笑顔にする才能があります。共感力が高く傷ついた魂を癒す力があります。",
+        strength:"社交性、共感力、明るいエネルギー、コミュニケーション力、癒し力",
+        weakness:"深みの不足、一人でいることが苦手、感情の消耗",
+        message:"喜びを分かち合う時にあなたは最も輝きます。しかし時には自分の海の深いところも覗いてみてください。",
+        good:"クジラ、シカ",bad:"ワシ、タカ"},
+    fox:{name:"キツネ",emoji:"🦊",title:"賢明な戦略家",element:"森・火",
+        personality:"あなたのスピリットアニマルは<strong>キツネ</strong>です。キツネは賢さ、適応力、そして機知を象徴します。あなたはどんな状況でも生き抜く方法を見つけ出し、他の人が思いつかない解決策を生み出します。魅力的でユーモラスで、相手の心を読むことに長けています。",
+        strength:"賢さ、適応力、機知、観察力、魅力",
+        weakness:"信頼の薄さ、計算高すぎる、本音を隠す傾向",
+        message:"賢さは生存の武器ですが、本音を見せる時に真のつながりが生まれます。時には尻尾を下げて心を開いてください。",
+        good:"タカ、ネコ",bad:"クマ、ライオン"},
+    deer:{name:"シカ",emoji:"🦌",title:"穏やかな癒し手",element:"森・水",
+        personality:"あなたのスピリットアニマルは<strong>シカ</strong>です。シカは穏やかさ、感受性、そして自然との交感を象徴します。あなたは繊細で美しい魂の持ち主で、周囲を平和にする力があります。自然の中で最も安らぎを感じ、芸術的感受性が豊かです。",
+        strength:"繊細さ、共感、穏やかさ、芸術的センス、癒し力",
+        weakness:"臆病さ、傷つきやすさ、対立回避",
+        message:"柔らかさは弱さではありません。あなたの穏やかさが世界をより美しくします。逃げないでください、あなたは思っているより強いのです。",
+        good:"オオカミ、イルカ",bad:"キツネ、タカ"},
+    cat:{name:"ネコ",emoji:"🐱",title:"神秘的な独立者",element:"月・影",
+        personality:"あなたのスピリットアニマルは<strong>ネコ</strong>です。ネコは独立、神秘、そして直観を象徴します。あなたは誰にも依存しない強い自我を持ち、自分だけの世界があります。見えないものを感知する超感覚があり、優雅に自分の道を歩みます。",
+        strength:"独立性、直観、優雅さ、観察力、適応力",
+        weakness:"冷淡に見える、親密感の築きにくさ、気まぐれ",
+        message:"一人の時間があなたを充電させます。しかし時にはゴロゴロ言いながら傍にいることも愛の表現です。",
+        good:"フクロウ、キツネ",bad:"オオカミ、ライオン"},
+    bear:{name:"クマ",emoji:"🐻",title:"静かなる力",element:"大地・森",
+        personality:"あなたのスピリットアニマルは<strong>クマ</strong>です。クマは内なる力、保護、そして内省を象徴します。あなたは静かだが圧倒的な存在感があり、一度怒ると恐ろしいほど強いです。しかし普段は優しく温かい人です。一人だけの時間（冬眠）が必ず必要です。",
+        strength:"内なる力、保護本能、忍耐、内省、温かさ",
+        weakness:"無愛想さ、怠惰な傾向、怒りのコントロール",
+        message:"時には立ち止まって洞窟に入ることも必要です。十分に休んでこそ春にまた出てこられます。",
+        good:"カメ、シカ",bad:"キツネ、ワシ"},
+    turtle:{name:"カメ",emoji:"🐢",title:"永遠の知恵",element:"水・大地",
+        personality:"あなたのスピリットアニマルは<strong>カメ</strong>です。カメは忍耐、知恵、そして長寿を象徴します。あなたはゆっくりでも確実に前進する人です。世界がどれほど速く変わっても自分のペースを失わず、甲羅のような堅固な内面を持っています。",
+        strength:"忍耐、知恵、安定感、着実さ、保護力",
+        weakness:"遅さ、変化への抵抗、殻の中に隠れる傾向",
+        message:"遅いことは恥ずかしいことではありません。あなたが到着した時、それがちょうど正しい時です。",
+        good:"クマ、クジラ",bad:"ワシ、ウマ"},
+    horse:{name:"ウマ",emoji:"🐴",title:"自由なる疾走者",element:"風・火",
+        personality:"あなたのスピリットアニマルは<strong>ウマ</strong>です。ウマは自由、情熱、そして力を象徴します。あなたは生まれながらの自由人で、束縛されることが最も嫌いです。強いエネルギーと情熱で目標に向かって全力で走り、風のように自由な魂を持っています。",
+        strength:"自由精神、エネルギー、情熱、忠誠心、優雅さ",
+        weakness:"安定の欠如、一か所に定住しにくさ、衝動的",
+        message:"走る時が最も美しいあなたですが、時には立ち止まって草を食む余裕も必要です。",
+        good:"ライオン、オオカミ",bad:"カメ、ネコ"},
+    whale:{name:"クジラ",emoji:"🐋",title:"深海の賢者",element:"水・月",
+        personality:"あなたのスピリットアニマルは<strong>クジラ</strong>です。クジラは感情の深さ、霊的知恵、そして宇宙的なつながりを象徴します。あなたは表面的なことに満足できず、常により深い意味を求めます。感情の海が広く深く、他の人の痛みまで感じる共感力があります。",
+        strength:"感情の深さ、霊的知恵、共感、壮大さ、包容力",
+        weakness:"感情に圧倒される、現実感覚の欠如、重さ",
+        message:"海は深いが水面にも上がらなければ息ができません。時には軽く浮かび上がってください。",
+        good:"イルカ、カメ",bad:"ワシ、キツネ"},
+    hawk:{name:"タカ",emoji:"🦅",title:"鋭利な狩人",element:"空・火",
+        personality:"あなたのスピリットアニマルは<strong>タカ</strong>です。タカは集中力、機敏さ、そしてメッセンジャーを象徴します。あなたは一度目標を定めると離さないレーザーのような集中力があります。素早い判断力と行動力でチャンスを正確に捉えます。",
+        strength:"集中力、機敏さ、判断力、メッセージ伝達、鋭さ",
+        weakness:"性急さ、冷酷に見える可能性、忍耐の不足",
+        message:"最も高く飛ぶ鳥が最も遠くを見ます。しかし時には巣に戻って休むことも必要です。",
+        good:"フクロウ、キツネ",bad:"イルカ、シカ"}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(ANIMALS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressText").textContent = "質問 " + (currentQ + 1) + " / " + QUESTIONS.length;
+
+    document.getElementById("questionCard").innerHTML =
+        "<div class=\"question-num\">QUESTION " + (currentQ + 1) + "</div>" +
+        "<div class=\"question-text\">" + q.q + "</div>" +
+        "<div class=\"options\">" +
+        q.o.map(function(opt, i) { return "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>"; }).join("") +
+        "</div>";
+}
+
+function answer(idx) {
+    QUESTIONS[currentQ].o[idx].c.forEach(function(c) { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "完了！";
+    document.getElementById("shareBar").style.display = "block";
+
+    const sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
+    const topKey = sorted[0][0];
+    const subKey = sorted[1] ? sorted[1][0] : topKey;
+    const a = ANIMALS[topKey];
+    const sub = ANIMALS[subKey];
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML =
+        "<div class=\"animal-display\">" +
+            "<span class=\"animal-emoji\">" + a.emoji + "</span>" +
+            "<div class=\"animal-name\">" + a.name + "</div>" +
+            "<div class=\"animal-title\">" + a.title + "</div>" +
+            "<div class=\"animal-element\">元素: " + a.element + "</div>" +
+        "</div>" +
+
+        "<div class=\"trait-grid\">" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">メインの動物</div>" +
+                "<div class=\"trait-value\">" + a.emoji + " " + a.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">サブの動物</div>" +
+                "<div class=\"trait-value\">" + sub.emoji + " " + sub.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">元素</div>" +
+                "<div class=\"trait-value\">" + a.element + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🐾 あなたのスピリットアニマル</div>" +
+            "<div class=\"reading-text\">" + a.personality + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💪 強み</div>" +
+            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">⚠️ 弱み</div>" +
+            "<div class=\"reading-text\">" + a.weakness + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💌 スピリットアニマルのメッセージ</div>" +
+            "<div class=\"reading-text\"><strong>「" + a.message + "」</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🤝 動物の相性</div>" +
+            "<div class=\"compat-row\">" +
+                "<div class=\"compat-item compat-good\">相性のいい動物: " + a.good + "</div>" +
+                "<div class=\"compat-item compat-bad\">注意する動物: " + a.bad + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 もう一度診断する</button>";
+
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>

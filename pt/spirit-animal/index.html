@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Animal Espiritual - Qual e o seu Animal Espiritual? | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/spirit-animal/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/spirit-animal/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/spirit-animal/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/spirit-animal/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/spirit-animal/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/spirit-animal/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/spirit-animal/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/spirit-animal/">
+    <meta name="description" content="Teste de animal espiritual gratuito. Descubra o seu animal guardiao em 8 perguntas. Personalidade, forcas, mensagem, compatibilidade animal.">
+    <link rel="canonical" href="https://mogumoon.com/pt/spirit-animal/">
+    <meta property="og:title" content="Teste de Animal Espiritual - Qual e o seu Animal Espiritual? | MOGU Moon">
+    <meta property="og:description" content="Descubra o seu animal espiritual em 8 perguntas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/pt/spirit-animal/">
+    <meta property="og:image" content="https://mogumoon.com/pt/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"O que e um Animal Espiritual (Spirit Animal)?","acceptedAnswer":{"@type":"Answer","text":"O animal espiritual e um conceito originado nas tradicoes dos povos indigenas americanos. E um animal guardiao que reflete a sua personalidade e energia espiritual."}},
+        {"@type":"Question","name":"O animal espiritual pode mudar?","acceptedAnswer":{"@type":"Answer","text":"O seu animal espiritual principal permanece consigo por toda a vida, mas dependendo da fase da vida, a energia de outros animais pode aparecer temporariamente."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a0d, #15251a); border-bottom: 1px solid #1a3a20; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4caf50; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #1a3a20; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #2e7d32, #4caf50); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #4caf50; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; color: #81c784; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #4caf50; background: rgba(76,175,80,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .animal-display { margin-bottom: 24px; }
+        .animal-emoji { font-size: 100px; margin-bottom: 12px; display: block; }
+        .animal-name { font-size: 32px; color: #4caf50; font-weight: 900; margin-bottom: 4px; }
+        .animal-title { font-size: 16px; color: #81c784; margin-bottom: 8px; }
+        .animal-element { font-size: 13px; color: #888; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 14px 8px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; text-align: center; }
+        .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-value { font-size: 14px; color: #4caf50; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #4caf50; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #81c784; }
+
+        .compat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 12px; border-radius: 8px; text-align: center; font-size: 14px; }
+        .compat-good { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.2); color: #4caf50; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #2e7d32, #4caf50); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(76,175,80,0.3); }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } .animal-emoji { font-size: 72px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🐾 Teste de Animal Espiritual</h2>
+        <p>Descubra o seu animal guardiao em 8 perguntas</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">Pergunta 1 / 8</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🐾 Este teste de animal espiritual e para diversao e autoconhecimento.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #1a3a20;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Compartilhar:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiado!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"Na natureza, qual lugar te atrai mais?",
+     o:[{t:"Uma floresta profunda",c:["wolf","deer","owl"]},{t:"O topo de uma montanha",c:["eagle","hawk","bear"]},{t:"Um vasto oceano",c:["dolphin","whale","turtle"]},{t:"Uma planicie aberta",c:["horse","lion","fox"]}]},
+    {q:"Em uma situacao de crise, qual e a sua reacao?",
+     o:[{t:"Analiso a situacao com calma",c:["owl","hawk","fox"]},{t:"Ajo instintivamente e de imediato",c:["wolf","lion","eagle"]},{t:"Cuido das outras pessoas primeiro",c:["dolphin","deer","whale"]},{t:"Fico quieto e espero a oportunidade certa",c:["fox","turtle","cat"]}]},
+    {q:"Como voce se sente quando esta sozinho(a)?",
+     o:[{t:"Sozinho e confortavel e livre",c:["cat","owl","eagle"]},{t:"As vezes e bom, mas sinto falta das pessoas",c:["wolf","horse","deer"]},{t:"Prefiro muito mais estar com outros",c:["dolphin","lion","whale"]},{t:"Gosto de pensar profundamente a sos",c:["turtle","owl","bear"]}]},
+    {q:"Qual e a sua maior forca?",
+     o:[{t:"Intuicao e perspicacia",c:["owl","cat","hawk"]},{t:"Coragem e lideranca",c:["lion","eagle","wolf"]},{t:"Empatia e capacidade de cura",c:["dolphin","deer","whale"]},{t:"Paciencia e sabedoria",c:["turtle","bear","fox"]}]},
+    {q:"Como voce se sente em relacao a noite?",
+     o:[{t:"A noite me deixa mais animado(a)",c:["owl","cat","wolf"]},{t:"Contemplo as estrelas e fico pensativo(a)",c:["eagle","whale","deer"]},{t:"E um tempo de descanso confortavel",c:["bear","turtle","horse"]},{t:"Um pouco inquietante, mas misterioso",c:["fox","hawk","dolphin"]}]},
+    {q:"Qual e o seu papel dentro de um grupo?",
+     o:[{t:"Lider, aquele que abre o caminho",c:["lion","eagle","wolf"]},{t:"Conselheiro, a voz da sabedoria",c:["owl","turtle","bear"]},{t:"Animador, aquele que une o grupo",c:["dolphin","fox","horse"]},{t:"Observador discreto, apoio nos bastidores",c:["deer","cat","hawk"]}]},
+    {q:"Que cena aparece com frequencia nos seus sonhos?",
+     o:[{t:"Voar pelo ceu",c:["eagle","hawk","owl"]},{t:"Nadar livremente debaixo d'agua",c:["dolphin","whale","turtle"]},{t:"Correr por uma floresta ou na natureza",c:["wolf","deer","horse"]},{t:"Olhar para baixo de um lugar alto",c:["cat","lion","fox"]}]},
+    {q:"Qual citacao ressoa mais com voce?",
+     o:[{t:"Liberdade ou morte",c:["eagle","horse","wolf"]},{t:"Conhecimento e poder",c:["owl","fox","hawk"]},{t:"O amor cura tudo",c:["dolphin","deer","whale"]},{t:"Devagar se vai ao longe",c:["turtle","bear","cat"]}]}
+];
+
+const ANIMALS = {
+    wolf:{name:"Lobo",emoji:"🐺",title:"Guardiao leal",element:"Lua · Vento",
+        personality:"Seu animal espiritual e o <strong>Lobo</strong>. O lobo simboliza lealdade, intuicao e vinculos profundos. Voce cultiva relacoes intensas com um circulo restrito e esta disposto(a) a tudo pela sua matilha. Sua poderosa intuicao detecta perigos, e e sob a luz da lua que voce encontra o seu verdadeiro eu.",
+        strength:"Lealdade, intuicao, espirito de equipe, instinto protetor, perseveranca",
+        weakness:"Sentimento de solidao, desconfianca excessiva, dificuldade em confiar",
+        message:"Estar sozinho nao significa ser solitario. Seu uivo sempre chegara a sua matilha. Acredite nos vinculos verdadeiros.",
+        good:"Cervo, Aguia",bad:"Gato, Raposa"},
+    eagle:{name:"Aguia",emoji:"🦅",title:"Visionario do ceu",element:"Ceu · Fogo",
+        personality:"Seu animal espiritual e a <strong>Aguia</strong>. A aguia simboliza liberdade, visao e superacao. Voce tem a capacidade de enxergar o todo de uma perspectiva elevada e percebe o que os outros nao veem. Uma vez definido o objetivo, sua determinacao o(a) leva ate ele como um raio.",
+        strength:"Visao, determinacao, espirito livre, concentracao, lideranca",
+        weakness:"Solidao, distancia dos outros, perfeccionismo",
+        message:"Quanto mais alto voa, mais sozinho fica. Mas a paisagem que voce contempla e unica. Compartilhe essa perspectiva.",
+        good:"Lobo, Falcao",bad:"Tartaruga, Baleia"},
+    owl:{name:"Coruja",emoji:"🦉",title:"Sabio da noite",element:"Lua · Sombra",
+        personality:"Seu animal espiritual e a <strong>Coruja</strong>. A coruja simboliza sabedoria, intuicao e verdades ocultas. Voce enxerga a verdade mesmo na escuridao. Voce pensa com mais clareza no silencio da noite e capta o que os outros perdem.",
+        strength:"Sabedoria, intuicao, observacao, paciencia, discrição",
+        weakness:"Tendencia ao isolamento, dificuldade durante o dia, falta de expressao emocional",
+        message:"Nao e preciso saber tudo. As vezes, deixar certas coisas na sombra tambem e sabedoria. Nao tenha medo da escuridao — e la que estao as respostas.",
+        good:"Gato, Falcao",bad:"Golfinho, Leao"},
+    lion:{name:"Leao",emoji:"🦁",title:"Energia real",element:"Sol · Fogo",
+        personality:"Seu animal espiritual e o <strong>Leao</strong>. O leao simboliza coragem, autoridade e lideranca inata. Sua simples presenca impoe respeito ao seu redor, e voce brilha mais nos momentos de crise. Orgulhoso(a) e generoso(a), nao teme nenhum obstaculo para proteger o que lhe e querido.",
+        strength:"Coragem, carisma, generosidade, instinto protetor, confianca em si",
+        weakness:"Arrogancia, teimosia, necessidade de reconhecimento, tendencia a carregar tudo sozinho",
+        message:"Um verdadeiro rei governa com o coracao, nao com a coroa. A verdadeira forca nao esta no rugido, mas na compaixao silenciosa.",
+        good:"Lobo, Cavalo",bad:"Gato, Coruja"},
+    dolphin:{name:"Golfinho",emoji:"🐬",title:"Curador de alegria",element:"Agua · Vento",
+        personality:"Seu animal espiritual e o <strong>Golfinho</strong>. O golfinho simboliza alegria, comunicacao e cura. Voce irradia energia positiva onde quer que va e tem o dom de fazer as pessoas sorrirem. Sua grande empatia permite curar almas feridas.",
+        strength:"Sociabilidade, empatia, energia positiva, comunicacao, poder de cura",
+        weakness:"Falta de profundidade, dificuldade de ficar sozinho, esgotamento emocional",
+        message:"Voce brilha mais ao compartilhar a alegria. Mas mergulhe tambem nas profundezas do seu proprio oceano.",
+        good:"Baleia, Cervo",bad:"Aguia, Falcao"},
+    fox:{name:"Raposa",emoji:"🦊",title:"Estrategista brilhante",element:"Floresta · Fogo",
+        personality:"Seu animal espiritual e a <strong>Raposa</strong>. A raposa simboliza inteligencia, adaptabilidade e espirito agil. Voce sempre encontra uma maneira de sobreviver em qualquer situacao e cria solucoes que ninguem mais imagina. Charmoso(a) e bem-humorado(a), voce e excelente em ler as intencoes dos outros.",
+        strength:"Inteligencia, adaptabilidade, espirito agil, observacao, charme",
+        weakness:"Falta de confianca, calculismo excessivo, tendencia a esconder os verdadeiros sentimentos",
+        message:"A inteligencia e uma arma de sobrevivencia, mas e ao mostrar sua sinceridade que nascem as conexoes verdadeiras. Baixe a guarda as vezes e abra seu coracao.",
+        good:"Falcao, Gato",bad:"Urso, Leao"},
+    deer:{name:"Cervo",emoji:"🦌",title:"Curador gentil",element:"Floresta · Agua",
+        personality:"Seu animal espiritual e o <strong>Cervo</strong>. O cervo simboliza gentileza, sensibilidade e comunhao com a natureza. Voce e uma alma delicada e bela que traz paz ao seu redor. Sente-se mais a vontade na natureza e possui uma notavel sensibilidade artistica.",
+        strength:"Delicadeza, empatia, serenidade, senso artistico, poder de cura",
+        weakness:"Timidez, vulnerabilidade, evitar conflitos",
+        message:"A gentileza nao e fraqueza. Sua bondade torna o mundo mais belo. Nao fuja — voce e mais forte do que pensa.",
+        good:"Lobo, Golfinho",bad:"Raposa, Falcao"},
+    cat:{name:"Gato",emoji:"🐱",title:"Independente misterioso",element:"Lua · Sombra",
+        personality:"Seu animal espiritual e o <strong>Gato</strong>. O gato simboliza independencia, misterio e intuicao. Voce tem um eu forte que nao depende de ninguem e um mundo so seu. Possui uma ultrassensibilidade para perceber o invisivel e segue seu proprio caminho com elegancia.",
+        strength:"Independencia, intuicao, elegancia, observacao, adaptabilidade",
+        weakness:"Aparencia fria, dificuldade com a intimidade, humor inconstante",
+        message:"A solidao o(a) recarrega. Mas as vezes ronronar e ficar perto dos outros tambem e uma expressao de amor.",
+        good:"Coruja, Raposa",bad:"Lobo, Leao"},
+    bear:{name:"Urso",emoji:"🐻",title:"Forca tranquila",element:"Terra · Floresta",
+        personality:"Seu animal espiritual e o <strong>Urso</strong>. O urso simboliza forca interior, protecao e introspeccao. Voce tem uma presenca discreta, mas esmagadora, e e temivel quando fica com raiva. Mas no cotidiano, voce e caloroso(a) e acolhedor(a). Precisa inevitavelmente de momentos de solidao (hibernacao).",
+        strength:"Forca interior, instinto protetor, paciencia, introspeccao, calor humano",
+        weakness:"Brusquidao, tendencia a preguica, controle da raiva",
+        message:"As vezes e preciso parar e entrar na caverna. Precisa descansar bem para poder sair na primavera.",
+        good:"Tartaruga, Cervo",bad:"Raposa, Aguia"},
+    turtle:{name:"Tartaruga",emoji:"🐢",title:"Sabedoria eterna",element:"Agua · Terra",
+        personality:"Seu animal espiritual e a <strong>Tartaruga</strong>. A tartaruga simboliza paciencia, sabedoria e longevidade. Voce avanca devagar, mas com certeza. Nao importa a velocidade do mundo, voce nunca perde o seu ritmo e possui uma forca interior solida como uma carapaca.",
+        strength:"Paciencia, sabedoria, estabilidade, constancia, protecao",
+        weakness:"Lentidao, resistencia a mudancas, tendencia a se recolher na carapaca",
+        message:"Ser lento nao e vergonha. Quando voce chega, e exatamente o momento certo.",
+        good:"Urso, Baleia",bad:"Aguia, Cavalo"},
+    horse:{name:"Cavalo",emoji:"🐴",title:"Galopador livre",element:"Vento · Fogo",
+        personality:"Seu animal espiritual e o <strong>Cavalo</strong>. O cavalo simboliza liberdade, paixao e potencia. Voce e um(a) livre-pensador(a) nato(a) que detesta acima de tudo ser preso(a). Com energia e paixao transbordantes, galopa a toda velocidade em direcao aos seus objetivos, com uma alma livre como o vento.",
+        strength:"Espirito livre, energia, paixao, lealdade, elegancia",
+        weakness:"Falta de estabilidade, dificuldade em se estabelecer, impulsividade",
+        message:"Voce e mais belo(a) quando galopa, mas as vezes tambem e preciso parar para pastar tranquilamente.",
+        good:"Leao, Lobo",bad:"Tartaruga, Gato"},
+    whale:{name:"Baleia",emoji:"🐋",title:"Sabio das profundezas",element:"Agua · Lua",
+        personality:"Seu animal espiritual e a <strong>Baleia</strong>. A baleia simboliza profundidade emocional, sabedoria espiritual e conexao cosmica. Voce nao se contenta com a superficie e busca sempre um significado mais profundo. Seu oceano emocional e vasto e profundo, e voce sente ate a dor dos outros.",
+        strength:"Profundidade emocional, sabedoria espiritual, empatia, majestade, benevolencia",
+        weakness:"Ser dominado(a) pelas emocoes, falta de senso pratico, peso emocional",
+        message:"O oceano e profundo, mas e preciso subir a superficie para respirar. Venha a tona de vez em quando.",
+        good:"Golfinho, Tartaruga",bad:"Aguia, Raposa"},
+    hawk:{name:"Falcao",emoji:"🦅",title:"Cacador acurado",element:"Ceu · Fogo",
+        personality:"Seu animal espiritual e o <strong>Falcao</strong>. O falcao simboliza concentracao, agilidade e o papel de mensageiro. Uma vez definido o objetivo, voce possui uma concentracao laser que nao deixa nada escapar. Seu julgamento rapido e senso de acao permitem capturar oportunidades com precisao.",
+        strength:"Concentracao, agilidade, julgamento, transmissao de mensagens, acuidade",
+        weakness:"Precipitacao, aparencia cruel possivel, falta de paciencia",
+        message:"O passaro que voa mais alto ve mais longe. Mas as vezes tambem e preciso voltar ao ninho para descansar.",
+        good:"Coruja, Raposa",bad:"Golfinho, Cervo"}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(ANIMALS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressText").textContent = "Pergunta " + (currentQ + 1) + " / " + QUESTIONS.length;
+
+    document.getElementById("questionCard").innerHTML =
+        "<div class=\"question-num\">PERGUNTA " + (currentQ + 1) + "</div>" +
+        "<div class=\"question-text\">" + q.q + "</div>" +
+        "<div class=\"options\">" +
+        q.o.map((opt, i) => "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>").join("") +
+        "</div>";
+}
+
+function answer(idx) {
+    QUESTIONS[currentQ].o[idx].c.forEach(c => { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "Concluido!";
+    document.getElementById("shareBar").style.display = "block";
+
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const topKey = sorted[0][0];
+    const subKey = sorted[1] ? sorted[1][0] : topKey;
+    const a = ANIMALS[topKey];
+    const sub = ANIMALS[subKey];
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML =
+        "<div class=\"animal-display\">" +
+            "<span class=\"animal-emoji\">" + a.emoji + "</span>" +
+            "<div class=\"animal-name\">" + a.name + "</div>" +
+            "<div class=\"animal-title\">" + a.title + "</div>" +
+            "<div class=\"animal-element\">Elemento: " + a.element + "</div>" +
+        "</div>" +
+
+        "<div class=\"trait-grid\">" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Animal principal</div>" +
+                "<div class=\"trait-value\">" + a.emoji + " " + a.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Animal secundario</div>" +
+                "<div class=\"trait-value\">" + sub.emoji + " " + sub.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Elemento</div>" +
+                "<div class=\"trait-value\">" + a.element + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🐾 Seu animal espiritual</div>" +
+            "<div class=\"reading-text\">" + a.personality + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💪 Forcas</div>" +
+            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">⚠️ Fraquezas</div>" +
+            "<div class=\"reading-text\">" + a.weakness + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💌 Mensagem do seu animal espiritual</div>" +
+            "<div class=\"reading-text\"><strong>\"" + a.message + "\"</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🤝 Compatibilidade animal</div>" +
+            "<div class=\"compat-row\">" +
+                "<div class=\"compat-item compat-good\">Animais compativeis: " + a.good + "</div>" +
+                "<div class=\"compat-item compat-bad\">Animais a observar: " + a.bad + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 Refazer o teste</button>";
+
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>

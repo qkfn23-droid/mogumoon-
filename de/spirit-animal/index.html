@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seelentier-Test - Was ist dein Seelentier? | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/spirit-animal/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/spirit-animal/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/spirit-animal/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/spirit-animal/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/spirit-animal/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/spirit-animal/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/spirit-animal/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/spirit-animal/">
+    <meta name="description" content="Kostenloser Seelentier-Test. Finde dein Schutztier mit 8 Fragen. Persoenlichkeit, Staerken, Botschaft und Kompatibilitaet.">
+    <link rel="canonical" href="https://mogumoon.com/de/spirit-animal/">
+    <meta property="og:title" content="Seelentier-Test - Was ist dein Seelentier? | MOGU Moon">
+    <meta property="og:description" content="Finde dein Seelentier mit 8 Fragen.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/de/spirit-animal/">
+    <meta property="og:image" content="https://mogumoon.com/de/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Was ist ein Seelentier?","acceptedAnswer":{"@type":"Answer","text":"Das Seelentier ist ein Konzept aus der indigenen amerikanischen Tradition und steht fuer ein Schutztier, das deine Persoenlichkeit und spirituelle Energie widerspiegelt."}},
+        {"@type":"Question","name":"Kann sich dein Seelentier veraendern?","acceptedAnswer":{"@type":"Answer","text":"Dein grundlegendes Seelentier begleitet dich ein Leben lang, aber je nach Lebensphase kann voruebergehend die Energie eines anderen Tieres zu dir kommen."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a0d, #15251a); border-bottom: 1px solid #1a3a20; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4caf50; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #1a3a20; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #2e7d32, #4caf50); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #4caf50; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; color: #81c784; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #4caf50; background: rgba(76,175,80,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .animal-display { margin-bottom: 24px; }
+        .animal-emoji { font-size: 100px; margin-bottom: 12px; display: block; }
+        .animal-name { font-size: 32px; color: #4caf50; font-weight: 900; margin-bottom: 4px; }
+        .animal-title { font-size: 16px; color: #81c784; margin-bottom: 8px; }
+        .animal-element { font-size: 13px; color: #888; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 14px 8px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; text-align: center; }
+        .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-value { font-size: 14px; color: #4caf50; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #4caf50; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #81c784; }
+
+        .compat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 12px; border-radius: 8px; text-align: center; font-size: 14px; }
+        .compat-good { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.2); color: #4caf50; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #2e7d32, #4caf50); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(76,175,80,0.3); }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } .animal-emoji { font-size: 72px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🐾 Seelentier-Test</h2>
+        <p>Finde dein Schutztier mit 8 Fragen</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">Frage 1 / 8</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🐾 Der Seelentier-Test dient der Unterhaltung und dem Selbstverstehen.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #1a3a20;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Teilen:</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URL kopieren</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"Welchen Ort in der Natur zieht dich am meisten an?",
+     o:[{t:"Ein tiefer Wald",c:["wolf","deer","owl"]},{t:"Ein hoher Berggipfel",c:["eagle","hawk","bear"]},{t:"Das weite Meer",c:["dolphin","whale","turtle"]},{t:"Eine weite Steppe",c:["horse","lion","fox"]}]},
+    {q:"Wie reagierst du in einer Krisensituation?",
+     o:[{t:"Ich analysiere die Lage kuehlen Kopfes",c:["owl","hawk","fox"]},{t:"Ich handle sofort aus dem Instinkt heraus",c:["wolf","lion","eagle"]},{t:"Ich kuemmere mich zuerst um die anderen",c:["dolphin","deer","whale"]},{t:"Ich warte still ab und suche die Gelegenheit",c:["fox","turtle","cat"]}]},
+    {q:"Wie fuehlt sich Zeit fuer dich allein an?",
+     o:[{t:"Ich bin gerne allein und fuehle mich frei",c:["cat","owl","eagle"]},{t:"Manchmal schoen, aber ich vermisse Menschen",c:["wolf","horse","deer"]},{t:"Ich bin viel lieber in Gesellschaft",c:["dolphin","lion","whale"]},{t:"Ich denke gerne tief in Einsamkeit nach",c:["turtle","owl","bear"]}]},
+    {q:"Was ist deine groesste Staerke?",
+     o:[{t:"Intuition und Weitblick",c:["owl","cat","hawk"]},{t:"Mut und Fuehrungsstaerke",c:["lion","eagle","wolf"]},{t:"Empathie und Heilungsfahigkeit",c:["dolphin","deer","whale"]},{t:"Geduld und Weisheit",c:["turtle","bear","fox"]}]},
+    {q:"Wie fuehlt sich die Nacht fuer dich an?",
+     o:[{t:"Nachts bin ich besonders aktiv",c:["owl","cat","wolf"]},{t:"Ich verliere mich beim Sterneschauen in Gedanken",c:["eagle","whale","deer"]},{t:"Es ist meine Zeit zum ruhigen Ausruhen",c:["bear","turtle","horse"]},{t:"Ein wenig unruhig, aber geheimnisvoll",c:["fox","hawk","dolphin"]}]},
+    {q:"Welche Rolle spielst du unter Menschen?",
+     o:[{t:"Der Anfuehrer, der vorangeht",c:["lion","eagle","wolf"]},{t:"Der Ratgeber, die weise Person",c:["owl","turtle","bear"]},{t:"Der Stimmungsmacher, der alle zusammenbringt",c:["dolphin","fox","horse"]},{t:"Der stille Beobachter, der von hinten unterstuetzt",c:["deer","cat","hawk"]}]},
+    {q:"Welche Szenen tauchen haufig in deinen Traeumen auf?",
+     o:[{t:"Durch den Himmel fliegen",c:["eagle","hawk","owl"]},{t:"Frei im Wasser schwimmen",c:["dolphin","whale","turtle"]},{t:"Durch Wald oder Natur rennen",c:["wolf","deer","horse"]},{t:"Von oben nach unten schauen",c:["cat","lion","fox"]}]},
+    {q:"Mit welchem Spruch identifizierst du dich am meisten?",
+     o:[{t:"Freiheit oder Tod",c:["eagle","horse","wolf"]},{t:"Wissen ist Macht",c:["owl","fox","hawk"]},{t:"Liebe heilt alles",c:["dolphin","deer","whale"]},{t:"Wer langsam geht, geht weit",c:["turtle","bear","cat"]}]}
+];
+
+const ANIMALS = {
+    wolf:{name:"Wolf",emoji:"🐺",title:"Treuer Hueter",element:"Mond · Wind",
+        personality:"Dein Seelentier ist der <strong>Wolf</strong>. Der Wolf symbolisiert Treue, Intuition und tiefe Bindungen. Du pflegst tiefe Beziehungen zu wenigen Menschen und wuerdest alles fuer dein Rudel tun. Deine starke Intuition spuert Gefahr auf und im Mondlicht findest du dein wahres Ich.",
+        strength:"Treue, Intuition, Teamwork, Schutzinstinkt, Ausdauer",
+        weakness:"Einsamkeit, uebertriebenes Misstrauen, es dauert lange bis zum Vertrauen",
+        message:"Allein zu sein bedeutet nicht, sich einsam zu fuehlen. Dein Ruf erreicht das Rudel immer. Glaube an echte Bindungen.",
+        good:"Hirsch, Adler",bad:"Katze, Fuchs"},
+    eagle:{name:"Adler",emoji:"🦅",title:"Visionaer des Himmels",element:"Himmel · Feuer",
+        personality:"Dein Seelentier ist der <strong>Adler</strong>. Der Adler symbolisiert Freiheit, Vision und Transzendenz. Du hast die Faehigkeit, das grosse Ganze von oben zu uberblicken und siehst, was andere nicht sehen. Hast du einmal ein Ziel gesetzt, handelst du mit blitzartiger Entschlossenheit.",
+        strength:"Vision, Entschlossenheit, Freiheitsgeist, Konzentration, Fuehrungsstaerke",
+        weakness:"Einsamkeit, Distanz zu anderen, Perfektionismus",
+        message:"Je hoeher du fliegst, desto einsamer wirst du. Doch die Landschaft, die du siehst, sieht niemand sonst. Teile diese Perspektive.",
+        good:"Wolf, Falke",bad:"Schildkroete, Wal"},
+    owl:{name:"Eule",emoji:"🦉",title:"Weiser der Nacht",element:"Mond · Dunkelheit",
+        personality:"Dein Seelentier ist die <strong>Eule</strong>. Die Eule symbolisiert Weisheit, Intuition und verborgene Wahrheiten. Du hast die Faehigkeit, die Wahrheit auch im Dunkeln zu durchschauen. In stillen Naechten denkst du am klarsten und erkennst, was andere uebersehen.",
+        strength:"Weisheit, Intuition, Beobachtungsgabe, Geduld, Verschwiegenheit",
+        weakness:"Neigung zur Isolation, Schwierigkeiten am Tag, mangelnder Gefuehlsausdruck",
+        message:"Du musst nicht alles wissen. Manchmal ist es auch Weisheit, Dinge offen zu lassen. Fuerchte die Dunkelheit nicht, dort liegen die Antworten.",
+        good:"Katze, Falke",bad:"Delfin, Loewe"},
+    lion:{name:"Loewe",emoji:"🦁",title:"Koenigliche Energie",element:"Sonne · Feuer",
+        personality:"Dein Seelentier ist der <strong>Loewe</strong>. Der Loewe symbolisiert Mut, Autoritaet und natuerliche Fuehrungsstaerke. Deine blosse Anwesenheit beeindruckt deine Umgebung und du glaenzt am meisten in Krisenmomenten. Du bist kuehn und grosszuegig und scheust keine Schwierigkeit, um zu schuetzen, was dir wichtig ist.",
+        strength:"Mut, Charisma, Grosszuegigkeit, Schutzinstinkt, Selbstvertrauen",
+        weakness:"Arroganz, Sturheit, Anerkennungsbedarf, Tendenz, alles allein zu tragen",
+        message:"Der wahre Koenig regiert mit dem Herzen, nicht mit der Krone. Staerke ist nicht das Bruellen, sondern stille Guete.",
+        good:"Wolf, Pferd",bad:"Katze, Eule"},
+    dolphin:{name:"Delfin",emoji:"🐬",title:"Heiler der Freude",element:"Wasser · Wind",
+        personality:"Dein Seelentier ist der <strong>Delfin</strong>. Der Delfin symbolisiert Freude, Kommunikation und Heilung. Du strahlst ueberall positive Energie aus und hast das Talent, Menschen zum Laecheln zu bringen. Deine grosse Empathie verleiht dir die Kraft, verletzte Seelen zu heilen.",
+        strength:"Geselligkeit, Empathie, positive Energie, Kommunikationstalenkt, Heilkraft",
+        weakness:"Mangelnde Tiefe, Schwierigkeit allein zu sein, emotionale Erschoepfung",
+        message:"Wenn du Freude teilst, strahlst du noch mehr. Aber schau ab und zu auch in die Tiefen deines eigenen Ozeans.",
+        good:"Wal, Hirsch",bad:"Adler, Falke"},
+    fox:{name:"Fuchs",emoji:"🦊",title:"Kluger Stratege",element:"Wald · Feuer",
+        personality:"Dein Seelentier ist der <strong>Fuchs</strong>. Der Fuchs symbolisiert Klugheit, Anpassungsfaehigkeit und Witz. Du findest in jeder Situation einen Weg zum Ueberleben und entwickelst Loesungen, die anderen nicht einfallen. Du bist charmant und humorvoll und hervorragend darin, die Gedanken anderer zu lesen.",
+        strength:"Klugheit, Anpassungsfaehigkeit, Witz, Beobachtungsgabe, Charme",
+        weakness:"Mangelndes Vertrauen, zu berechnend, Neigung, echte Gefuehle zu verbergen",
+        message:"Klugheit ist eine Waffe fuer das Ueberleben, aber echte Verbindungen entstehen, wenn du Aufrichtigkeit zeigst. Senke manchmal die Garde und oeffne dein Herz.",
+        good:"Falke, Katze",bad:"Baer, Loewe"},
+    deer:{name:"Hirsch",emoji:"🦌",title:"Sanfter Heiler",element:"Wald · Wasser",
+        personality:"Dein Seelentier ist der <strong>Hirsch</strong>. Der Hirsch symbolisiert Sanftheit, Sensibilitaet und die Verbundenheit mit der Natur. Du bist eine zarte und schoene Seele mit der Kraft, Frieden um dich herum zu schaffen. Du fuehlt dich in der Natur am wohlsten und besitzt ein feines kuenstlerisches Gespuer.",
+        strength:"Zartsinn, Empathie, Friedfertigkeit, kuenstlerisches Gespuer, Heilkraft",
+        weakness:"Scheuheit, leicht verletzbar, Konfliktvermeidung",
+        message:"Sanftheit ist keine Schwaeche. Deine Guete macht die Welt schoener. Lauf nicht weg, du bist staerker als du denkst.",
+        good:"Wolf, Delfin",bad:"Fuchs, Falke"},
+    cat:{name:"Katze",emoji:"🐱",title:"Raetselhafte Unabhaengige",element:"Mond · Schatten",
+        personality:"Dein Seelentier ist die <strong>Katze</strong>. Die Katze symbolisiert Unabhaengigkeit, Geheimnis und Intuition. Du besitzt ein starkes Selbst, das von niemandem abhaengt, und hast deine ganz eigene Welt. Du hast einen sechsten Sinn fuer das Unsichtbare und gehst elegant deinen eigenen Weg.",
+        strength:"Unabhaengigkeit, Intuition, Eleganz, Beobachtungsgabe, Anpassungsfaehigkeit",
+        weakness:"Wirkt kalt, Schwierigkeit mit Naehe, Launenhaftigkeit",
+        message:"Zeit fuer dich allein laedt dich auf. Aber manchmal ist auch ein schnurrendes Beisammensein ein Ausdruck der Liebe.",
+        good:"Eule, Fuchs",bad:"Wolf, Loewe"},
+    bear:{name:"Baer",emoji:"🐻",title:"Stille Kraft",element:"Erde · Wald",
+        personality:"Dein Seelentier ist der <strong>Baer</strong>. Der Baer symbolisiert innere Staerke, Schutz und Selbstreflexion. Du hast eine stille, aber ueberwaeeltigende Praesenz und wenn du einmal wuetend wirst, bist du erschreckend stark. Im Alltag bist du jedoch eine herzliche und gemuetliche Person. Du brauchst Zeit fuer dich allein (Winterschlaf).",
+        strength:"Innere Staerke, Schutzinstinkt, Geduld, Selbstreflexion, Waerme",
+        weakness:"Brummigkeit, Hang zur Faulheit, Wutkontrolle",
+        message:"Manchmal ist es notwendig, innezuhalten und in die Hoehle einzutreten. Du musst genug ausruhen, um im Fruehling wieder herauszukommen.",
+        good:"Schildkroete, Hirsch",bad:"Fuchs, Adler"},
+    turtle:{name:"Schildkroete",emoji:"🐢",title:"Ewige Weisheit",element:"Wasser · Erde",
+        personality:"Dein Seelentier ist die <strong>Schildkroete</strong>. Die Schildkroete symbolisiert Geduld, Weisheit und Langlebigkeit. Du gehst langsam aber sicher voran. Egal wie schnell sich die Welt veraendert, du verlierst dein eigenes Tempo nicht und hast ein festes Innenleben wie dein Panzer.",
+        strength:"Geduld, Weisheit, Stabilitaet, Bestaendigkeit, Schutzkraft",
+        weakness:"Langsamkeit, Widerstand gegen Veraenderung, Tendenz sich im Panzer zu verstecken",
+        message:"Langsam zu sein ist keine Schande. Wenn du ankommst, ist das genau der richtige Moment.",
+        good:"Baer, Wal",bad:"Adler, Pferd"},
+    horse:{name:"Pferd",emoji:"🐴",title:"Freier Laufer",element:"Wind · Feuer",
+        personality:"Dein Seelentier ist das <strong>Pferd</strong>. Das Pferd symbolisiert Freiheit, Leidenschaft und Kraft. Du bist ein geborener Freigeist, dem Einschraenkungen am meisten zuwider sind. Mit grosser Energie und Leidenschaft sprintest du auf deine Ziele zu und hast eine so freie Seele wie der Wind.",
+        strength:"Freiheitsgeist, Energie, Leidenschaft, Treue, Eleganz",
+        weakness:"Mangelnde Stabilitaet, Schwierigkeit sich niederzulassen, Impulsivitaet",
+        message:"Du bist am schoensten wenn du laeufst, aber manchmal musst du auch anhalten und in Ruhe grasen.",
+        good:"Loewe, Wolf",bad:"Schildkroete, Katze"},
+    whale:{name:"Wal",emoji:"🐋",title:"Weiser der Tiefsee",element:"Wasser · Mond",
+        personality:"Dein Seelentier ist der <strong>Wal</strong>. Der Wal symbolisiert emotionale Tiefe, spirituelle Weisheit und kosmische Verbundenheit. Du begnuegst dich nicht mit dem Oberflaechlichen und suchst immer nach tieferer Bedeutung. Dein emotionaler Ozean ist weit und tief und du hast die Empathie, den Schmerz anderer zu spueren.",
+        strength:"Emotionale Tiefe, spirituelle Weisheit, Empathie, Erhabenheit, Aufnahmefahigkeit",
+        weakness:"Von Emotionen ueberwaeeltigt werden, mangelnder Realitaetssinn, emotionale Schwere",
+        message:"Der Ozean ist tief, aber du musst auch an die Oberflaeche kommen um zu atmen. Tauche ab und zu in die Leichtigkeit auf.",
+        good:"Delfin, Schildkroete",bad:"Adler, Fuchs"},
+    hawk:{name:"Falke",emoji:"🦅",title:"Scharfer Jaeger",element:"Himmel · Feuer",
+        personality:"Dein Seelentier ist der <strong>Falke</strong>. Der Falke symbolisiert Konzentration, Beweglichkeit und den Boten. Hast du einmal ein Ziel gesetzt, besitzt du eine lasergleiche Konzentration, die es nie loslaesst. Mit schnellem Urteil und Tatkraft ergreifst du Chancen mit Praezision.",
+        strength:"Konzentration, Beweglichkeit, Urteilsvermoegen, Botschaftsuebermittlung, Schaerfe",
+        weakness:"Ungeduld, kann grausam wirken, mangelnde Geduld",
+        message:"Der Vogel, der am hoechsten fliegt, sieht am weitesten. Aber manchmal muss auch er ins Nest zurueckkehren und ausruhen.",
+        good:"Eule, Fuchs",bad:"Delfin, Hirsch"}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(ANIMALS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressText").textContent = "Frage " + (currentQ + 1) + " / " + QUESTIONS.length;
+
+    document.getElementById("questionCard").innerHTML =
+        "<div class=\"question-num\">FRAGE " + (currentQ + 1) + "</div>" +
+        "<div class=\"question-text\">" + q.q + "</div>" +
+        "<div class=\"options\">" +
+        q.o.map(function(opt, i) { return "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>"; }).join("") +
+        "</div>";
+}
+
+function answer(idx) {
+    QUESTIONS[currentQ].o[idx].c.forEach(function(c) { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "Fertig!";
+    document.getElementById("shareBar").style.display = "block";
+
+    const sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
+    const topKey = sorted[0][0];
+    const subKey = sorted[1] ? sorted[1][0] : topKey;
+    const a = ANIMALS[topKey];
+    const sub = ANIMALS[subKey];
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML =
+        "<div class=\"animal-display\">" +
+            "<span class=\"animal-emoji\">" + a.emoji + "</span>" +
+            "<div class=\"animal-name\">" + a.name + "</div>" +
+            "<div class=\"animal-title\">" + a.title + "</div>" +
+            "<div class=\"animal-element\">Element: " + a.element + "</div>" +
+        "</div>" +
+
+        "<div class=\"trait-grid\">" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Haupttier</div>" +
+                "<div class=\"trait-value\">" + a.emoji + " " + a.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Nebentier</div>" +
+                "<div class=\"trait-value\">" + sub.emoji + " " + sub.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Element</div>" +
+                "<div class=\"trait-value\">" + a.element + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🐾 Dein Seelentier</div>" +
+            "<div class=\"reading-text\">" + a.personality + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💪 Staerken</div>" +
+            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">⚠️ Schwaechen</div>" +
+            "<div class=\"reading-text\">" + a.weakness + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💌 Botschaft deines Seelentiers</div>" +
+            "<div class=\"reading-text\"><strong>\"" + a.message + "\"</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🤝 Tier-Kompatibilitaet</div>" +
+            "<div class=\"compat-row\">" +
+                "<div class=\"compat-item compat-good\">Gut harmoniert mit: " + a.good + "</div>" +
+                "<div class=\"compat-item compat-bad\">Vorsicht mit: " + a.bad + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 Erneut testen</button>";
+
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>

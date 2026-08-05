@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test d'Animal Totem - Quel est votre Animal Totem ? | MOGU Moon</title>
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/spirit-animal/">
+    <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/spirit-animal/">
+    <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/spirit-animal/">
+    <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/spirit-animal/">
+    <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/spirit-animal/">
+    <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/spirit-animal/">
+    <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/spirit-animal/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/spirit-animal/">
+    <meta name="description" content="Test d'animal totem gratuit. Découvrez votre animal gardien en 8 questions. Personnalité, forces, message, compatibilité animale.">
+    <link rel="canonical" href="https://mogumoon.com/fr/spirit-animal/">
+    <meta property="og:title" content="Test d'Animal Totem - Quel est votre Animal Totem ? | MOGU Moon">
+    <meta property="og:description" content="Découvrez votre animal totem en 8 questions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mogumoon.com/fr/spirit-animal/">
+    <meta property="og:image" content="https://mogumoon.com/fr/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Qu'est-ce qu'un animal totem (Spirit Animal) ?","acceptedAnswer":{"@type":"Answer","text":"L'animal totem est un concept issu des traditions amérindiennes. Il s'agit d'un animal gardien qui reflète votre personnalité et votre énergie spirituelle."}},
+        {"@type":"Question","name":"L'animal totem peut-il changer ?","acceptedAnswer":{"@type":"Answer","text":"Votre animal totem principal vous accompagne toute votre vie, mais selon les périodes, l'énergie d'autres animaux peut temporairement vous visiter."}}
+      ]
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #0d1a0d, #15251a); border-bottom: 1px solid #1a3a20; padding: 16px 20px; text-align: center; }
+        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
+        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 30px; }
+        .page-title h2 { font-size: 28px; color: #4caf50; margin-bottom: 8px; }
+        .page-title p { color: #8888aa; font-size: 14px; }
+
+        .progress-bar { width: 100%; height: 6px; background: #1a3a20; border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #2e7d32, #4caf50); border-radius: 3px; transition: width 0.4s; }
+        .progress-text { text-align: center; font-size: 12px; color: #888; margin-bottom: 16px; }
+
+        .question-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; }
+        .question-num { font-size: 12px; color: #4caf50; letter-spacing: 2px; margin-bottom: 12px; }
+        .question-text { font-size: 18px; color: #e0d8cc; line-height: 1.6; margin-bottom: 24px; font-weight: 600; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { padding: 14px 20px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; color: #81c784; font-size: 15px; cursor: pointer; transition: all 0.2s; text-align: left; }
+        .option-btn:hover { border-color: #4caf50; background: rgba(76,175,80,0.12); transform: translateX(4px); }
+
+        .result-section { display: none; text-align: center; }
+        .animal-display { margin-bottom: 24px; }
+        .animal-emoji { font-size: 100px; margin-bottom: 12px; display: block; }
+        .animal-name { font-size: 32px; color: #4caf50; font-weight: 900; margin-bottom: 4px; }
+        .animal-title { font-size: 16px; color: #81c784; margin-bottom: 8px; }
+        .animal-element { font-size: 13px; color: #888; }
+
+        .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+        .trait-item { padding: 14px 8px; background: rgba(76,175,80,0.06); border: 1px solid #1a3a20; border-radius: 10px; text-align: center; }
+        .trait-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .trait-value { font-size: 14px; color: #4caf50; font-weight: 700; }
+
+        .reading-card { background: linear-gradient(135deg, #0d1a0d, #15251a); border: 1px solid #1a3a20; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: left; }
+        .reading-title { font-size: 16px; color: #4caf50; font-weight: 600; margin-bottom: 10px; }
+        .reading-text { font-size: 14px; color: #999; line-height: 1.8; }
+        .reading-text strong { color: #81c784; }
+
+        .compat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .compat-item { padding: 12px; border-radius: 8px; text-align: center; font-size: 14px; }
+        .compat-good { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.2); color: #4caf50; }
+        .compat-bad { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; }
+
+        .retry-btn { display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #2e7d32, #4caf50); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; margin-top: 20px; }
+        .retry-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(76,175,80,0.3); }
+
+        .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+        @media (max-width: 480px) { .trait-grid { grid-template-columns: repeat(2, 1fr); } .animal-emoji { font-size: 72px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
+</header>
+
+<div class="container">
+    <div class="page-title">
+        <h2>🐾 Test d'Animal Totem</h2>
+        <p>Découvrez votre animal gardien en 8 questions</p>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="progressText">Question 1 / 8</div>
+
+    <div id="quizSection">
+        <div class="question-card" id="questionCard"></div>
+    </div>
+
+    <div id="resultSection" class="result-section"></div>
+
+    <div class="disclaimer">🐾 Ce test d'animal totem est conçu pour le plaisir et la connaissance de soi.</div>
+</div>
+
+<div id="shareBar" style="display:none;text-align:center;padding:20px 0;border-top:1px solid #1a3a20;margin-top:30px;">
+    <span style="font-size:13px;color:#888;margin-right:8px;">Partager :</span>
+    <a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a>
+    <a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a>
+    <a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a>
+    <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copié !';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copier l'URL</a>
+</div>
+
+<footer>&copy; 2025 MOGU Moon</footer>
+
+<script>
+const QUESTIONS = [
+    {q:"Dans la nature, quel endroit vous attire le plus ?",
+     o:[{t:"Une forêt profonde",c:["wolf","deer","owl"]},{t:"Un sommet de montagne",c:["eagle","hawk","bear"]},{t:"Un vaste océan",c:["dolphin","whale","turtle"]},{t:"Une large plaine",c:["horse","lion","fox"]}]},
+    {q:"En situation de crise, quelle est votre réaction ?",
+     o:[{t:"J'analyse la situation calmement",c:["owl","hawk","fox"]},{t:"J'agis instinctivement et immédiatement",c:["wolf","lion","eagle"]},{t:"Je m'occupe d'abord des autres",c:["dolphin","deer","whale"]},{t:"Je me cache et j'attends le bon moment",c:["fox","turtle","cat"]}]},
+    {q:"Comment vous sentez-vous quand vous êtes seul(e) ?",
+     o:[{t:"Seul, c'est confortable et libre",c:["cat","owl","eagle"]},{t:"Parfois bien, mais les gens me manquent",c:["wolf","horse","deer"]},{t:"Je préfère de loin être avec les autres",c:["dolphin","lion","whale"]},{t:"J'aime réfléchir profondément en solitaire",c:["turtle","owl","bear"]}]},
+    {q:"Quelle est votre plus grande force ?",
+     o:[{t:"L'intuition et la perspicacité",c:["owl","cat","hawk"]},{t:"Le courage et le leadership",c:["lion","eagle","wolf"]},{t:"L'empathie et la capacité à guérir",c:["dolphin","deer","whale"]},{t:"La patience et la sagesse",c:["turtle","bear","fox"]}]},
+    {q:"Comment vous sentez-vous par rapport à la nuit ?",
+     o:[{t:"La nuit m'anime davantage",c:["owl","cat","wolf"]},{t:"Je contemple les étoiles et je réfléchis",c:["eagle","whale","deer"]},{t:"C'est un temps de repos confortable",c:["bear","turtle","horse"]},{t:"Un peu inquiétant, mais mystérieux",c:["fox","hawk","dolphin"]}]},
+    {q:"Quel est votre rôle au sein d'un groupe ?",
+     o:[{t:"Le leader, celui qui ouvre la voie",c:["lion","eagle","wolf"]},{t:"Le conseiller, la voix de la sagesse",c:["owl","turtle","bear"]},{t:"L'animateur, celui qui rassemble",c:["dolphin","fox","horse"]},{t:"L'observateur discret, le soutien en coulisse",c:["deer","cat","hawk"]}]},
+    {q:"Quelle scène revient souvent dans vos rêves ?",
+     o:[{t:"Voler dans le ciel",c:["eagle","hawk","owl"]},{t:"Nager librement sous l'eau",c:["dolphin","whale","turtle"]},{t:"Courir dans une forêt ou dans la nature",c:["wolf","deer","horse"]},{t:"Regarder en bas depuis un endroit élevé",c:["cat","lion","fox"]}]},
+    {q:"Quelle citation vous touche le plus ?",
+     o:[{t:"La liberté ou la mort",c:["eagle","horse","wolf"]},{t:"Le savoir, c'est le pouvoir",c:["owl","fox","hawk"]},{t:"L'amour guérit tout",c:["dolphin","deer","whale"]},{t:"Qui va lentement va loin",c:["turtle","bear","cat"]}]}
+];
+
+const ANIMALS = {
+    wolf:{name:"Loup",emoji:"🐺",title:"Gardien loyal",element:"Lune · Vent",
+        personality:"Votre animal totem est le <strong>Loup</strong>. Le loup symbolise la loyauté, l'intuition et les liens profonds. Vous entretenez des relations intenses avec un cercle restreint et êtes prêt(e) à tout pour votre meute. Votre puissante intuition détecte les dangers, et c'est sous la lumière de la lune que vous trouvez votre vrai moi.",
+        strength:"Loyauté, intuition, esprit d'équipe, instinct protecteur, persévérance",
+        weakness:"Sentiment de solitude, méfiance excessive, difficultés à faire confiance",
+        message:"Être seul ne signifie pas être solitaire. Votre cri finira toujours par atteindre votre meute. Croyez aux liens véritables.",
+        good:"Cerf, Aigle",bad:"Chat, Renard"},
+    eagle:{name:"Aigle",emoji:"🦅",title:"Visionnaire du ciel",element:"Ciel · Feu",
+        personality:"Votre animal totem est l'<strong>Aigle</strong>. L'aigle symbolise la liberté, la vision et le dépassement. Vous avez la capacité de voir l'ensemble depuis les hauteurs, et vous percevez ce que les autres ne voient pas. Une fois l'objectif fixé, votre détermination vous y propulse comme la foudre.",
+        strength:"Vision, détermination, esprit libre, concentration, leadership",
+        weakness:"Solitude, distance avec les autres, perfectionnisme",
+        message:"Plus vous volez haut, plus vous êtes seul. Mais le paysage que vous contemplez est unique. Partagez cette perspective.",
+        good:"Loup, Faucon",bad:"Tortue, Baleine"},
+    owl:{name:"Hibou",emoji:"🦉",title:"Sage de la nuit",element:"Lune · Ombre",
+        personality:"Votre animal totem est le <strong>Hibou</strong>. Le hibou symbolise la sagesse, l'intuition et les vérités cachées. Vous percez les vérités même dans l'obscurité. Vous pensez le plus clairement dans le calme de la nuit et saisissez ce que les autres manquent.",
+        strength:"Sagesse, intuition, observation, patience, discrétion",
+        weakness:"Tendance à l'isolement, difficulté en journée, manque d'expression émotionnelle",
+        message:"Nul besoin de tout savoir. Parfois, laisser certaines choses dans l'ombre est aussi de la sagesse. N'ayez pas peur de l'obscurité — c'est là que se trouvent les réponses.",
+        good:"Chat, Faucon",bad:"Dauphin, Lion"},
+    lion:{name:"Lion",emoji:"🦁",title:"Énergie royale",element:"Soleil · Feu",
+        personality:"Votre animal totem est le <strong>Lion</strong>. Le lion symbolise le courage, l'autorité et un leadership inné. Votre simple présence en impose à votre entourage, et vous brillez le plus dans les moments de crise. Fier(e) et généreux(se), vous ne craignez aucun obstacle pour protéger ce qui vous est cher.",
+        strength:"Courage, charisme, générosité, instinct protecteur, confiance en soi",
+        weakness:"Arrogance, entêtement, besoin de reconnaissance, tendance à tout porter seul",
+        message:"Un vrai roi gouverne avec le cœur, pas avec la couronne. La vraie force n'est pas dans le rugissement, mais dans la compassion silencieuse.",
+        good:"Loup, Cheval",bad:"Chat, Hibou"},
+    dolphin:{name:"Dauphin",emoji:"🐬",title:"Guérisseur de joie",element:"Eau · Vent",
+        personality:"Votre animal totem est le <strong>Dauphin</strong>. Le dauphin symbolise la joie, la communication et la guérison. Vous rayonnez d'une énergie positive partout où vous allez et avez le don de faire sourire les gens. Votre grande empathie vous permet de guérir les âmes blessées.",
+        strength:"Sociabilité, empathie, énergie positive, communication, pouvoir de guérison",
+        weakness:"Manque de profondeur, difficulté à être seul, épuisement émotionnel",
+        message:"Vous brillez davantage en partageant la joie. Mais plongez aussi parfois dans les profondeurs de votre propre océan.",
+        good:"Baleine, Cerf",bad:"Aigle, Faucon"},
+    fox:{name:"Renard",emoji:"🦊",title:"Stratège brillant",element:"Forêt · Feu",
+        personality:"Votre animal totem est le <strong>Renard</strong>. Le renard symbolise l'intelligence, l'adaptabilité et l'esprit vif. Vous trouvez toujours un moyen de survivre dans n'importe quelle situation et créez des solutions auxquelles personne d'autre ne pense. Charmant(e) et plein(e) d'humour, vous excellez à lire les intentions des autres.",
+        strength:"Intelligence, adaptabilité, esprit vif, observation, charme",
+        weakness:"Manque de confiance, trop calculateur, tendance à cacher ses véritables sentiments",
+        message:"L'intelligence est une arme de survie, mais c'est en montrant votre sincérité que naissent les vraies connexions. Baissez parfois la garde et ouvrez votre cœur.",
+        good:"Faucon, Chat",bad:"Ours, Lion"},
+    deer:{name:"Cerf",emoji:"🦌",title:"Guérisseur doux",element:"Forêt · Eau",
+        personality:"Votre animal totem est le <strong>Cerf</strong>. Le cerf symbolise la douceur, la sensibilité et la communion avec la nature. Vous êtes une âme délicate et belle qui apporte la paix autour de vous. Vous vous sentez le plus à l'aise dans la nature et possédez une sensibilité artistique remarquable.",
+        strength:"Délicatesse, empathie, sérénité, sens artistique, pouvoir de guérison",
+        weakness:"Timidité, vulnérabilité, évitement des conflits",
+        message:"La douceur n'est pas une faiblesse. Votre gentillesse rend le monde plus beau. Ne fuyez pas — vous êtes plus fort(e) que vous ne le pensez.",
+        good:"Loup, Dauphin",bad:"Renard, Faucon"},
+    cat:{name:"Chat",emoji:"🐱",title:"Indépendant mystérieux",element:"Lune · Ombre",
+        personality:"Votre animal totem est le <strong>Chat</strong>. Le chat symbolise l'indépendance, le mystère et l'intuition. Vous avez un moi fort qui ne dépend de personne et un monde bien à vous. Vous possédez une ultra-sensibilité pour percevoir l'invisible et suivez votre propre chemin avec élégance.",
+        strength:"Indépendance, intuition, élégance, observation, adaptabilité",
+        weakness:"Apparence froide, difficulté à l'intimité, humeur changeante",
+        message:"La solitude vous ressource. Mais parfois, ronronner et rester auprès des autres est aussi une expression d'amour.",
+        good:"Hibou, Renard",bad:"Loup, Lion"},
+    bear:{name:"Ours",emoji:"🐻",title:"Force tranquille",element:"Terre · Forêt",
+        personality:"Votre animal totem est l'<strong>Ours</strong>. L'ours symbolise la force intérieure, la protection et l'introspection. Vous avez une présence discrète mais écrasante, et vous êtes redoutable lorsque vous vous mettez en colère. Mais en temps normal, vous êtes chaleureux(se) et accueillant(e). Vous avez impérativement besoin de moments de solitude (hibernation).",
+        strength:"Force intérieure, instinct protecteur, patience, introspection, chaleur",
+        weakness:"Brusquerie, tendance à la paresse, gestion de la colère",
+        message:"Parfois, il faut s'arrêter et rentrer dans la grotte. Il faut bien se reposer pour pouvoir ressortir au printemps.",
+        good:"Tortue, Cerf",bad:"Renard, Aigle"},
+    turtle:{name:"Tortue",emoji:"🐢",title:"Sagesse éternelle",element:"Eau · Terre",
+        personality:"Votre animal totem est la <strong>Tortue</strong>. La tortue symbolise la patience, la sagesse et la longévité. Vous avancez lentement mais sûrement. Peu importe la vitesse du monde, vous ne perdez jamais votre rythme et possédez une force intérieure solide comme une carapace.",
+        strength:"Patience, sagesse, stabilité, constance, protection",
+        weakness:"Lenteur, résistance au changement, tendance à se replier dans sa carapace",
+        message:"Être lent n'est pas une honte. Lorsque vous arrivez, c'est exactement le bon moment.",
+        good:"Ours, Baleine",bad:"Aigle, Cheval"},
+    horse:{name:"Cheval",emoji:"🐴",title:"Galopeur libre",element:"Vent · Feu",
+        personality:"Votre animal totem est le <strong>Cheval</strong>. Le cheval symbolise la liberté, la passion et la puissance. Vous êtes un(e) libre-penseur(se) né(e) qui déteste par-dessus tout être enfermé(e). Avec une énergie et une passion débordantes, vous galopez à pleine vitesse vers vos objectifs, avec une âme libre comme le vent.",
+        strength:"Esprit libre, énergie, passion, loyauté, élégance",
+        weakness:"Manque de stabilité, difficulté à s'établir, impulsivité",
+        message:"Vous êtes le plus beau quand vous galopez, mais parfois il faut aussi s'arrêter pour brouter paisiblement.",
+        good:"Lion, Loup",bad:"Tortue, Chat"},
+    whale:{name:"Baleine",emoji:"🐋",title:"Sage des profondeurs",element:"Eau · Lune",
+        personality:"Votre animal totem est la <strong>Baleine</strong>. La baleine symbolise la profondeur émotionnelle, la sagesse spirituelle et la connexion cosmique. Vous ne vous contentez pas de la surface et cherchez toujours un sens plus profond. Votre océan émotionnel est vaste et profond, et vous ressentez même la douleur des autres.",
+        strength:"Profondeur émotionnelle, sagesse spirituelle, empathie, majesté, bienveillance",
+        weakness:"Être submergé par les émotions, manque de sens pratique, lourdeur",
+        message:"L'océan est profond, mais il faut remonter à la surface pour respirer. Remontez parfois légèrement.",
+        good:"Dauphin, Tortue",bad:"Aigle, Renard"},
+    hawk:{name:"Faucon",emoji:"🦅",title:"Chasseur acéré",element:"Ciel · Feu",
+        personality:"Votre animal totem est le <strong>Faucon</strong>. Le faucon symbolise la concentration, l'agilité et le rôle de messager. Une fois votre objectif fixé, vous possédez une concentration laser qui ne laisse rien vous échapper. Votre jugement rapide et votre sens de l'action vous permettent de saisir les opportunités avec précision.",
+        strength:"Concentration, agilité, jugement, transmission du message, acuité",
+        weakness:"Précipitation, apparence cruelle possible, manque de patience",
+        message:"L'oiseau qui vole le plus haut voit le plus loin. Mais parfois, il faut aussi revenir au nid pour se reposer.",
+        good:"Hibou, Renard",bad:"Dauphin, Cerf"}
+};
+
+let currentQ = 0;
+const scores = {};
+
+function startQuiz() {
+    currentQ = 0;
+    Object.keys(ANIMALS).forEach(k => scores[k] = 0);
+    showQuestion();
+}
+
+function showQuestion() {
+    if (currentQ >= QUESTIONS.length) { showResult(); return; }
+    const q = QUESTIONS[currentQ];
+    const pct = (currentQ / QUESTIONS.length) * 100;
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressText").textContent = "Question " + (currentQ + 1) + " / " + QUESTIONS.length;
+
+    document.getElementById("questionCard").innerHTML =
+        "<div class=\"question-num\">QUESTION " + (currentQ + 1) + "</div>" +
+        "<div class=\"question-text\">" + q.q + "</div>" +
+        "<div class=\"options\">" +
+        q.o.map((opt, i) => "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>").join("") +
+        "</div>";
+}
+
+function answer(idx) {
+    QUESTIONS[currentQ].o[idx].c.forEach(c => { scores[c] = (scores[c] || 0) + 1; });
+    currentQ++;
+    showQuestion();
+}
+
+function showResult() {
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("progressText").textContent = "Terminé !";
+    document.getElementById("shareBar").style.display = "block";
+
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const topKey = sorted[0][0];
+    const subKey = sorted[1] ? sorted[1][0] : topKey;
+    const a = ANIMALS[topKey];
+    const sub = ANIMALS[subKey];
+
+    const section = document.getElementById("resultSection");
+    section.innerHTML =
+        "<div class=\"animal-display\">" +
+            "<span class=\"animal-emoji\">" + a.emoji + "</span>" +
+            "<div class=\"animal-name\">" + a.name + "</div>" +
+            "<div class=\"animal-title\">" + a.title + "</div>" +
+            "<div class=\"animal-element\">Élément : " + a.element + "</div>" +
+        "</div>" +
+
+        "<div class=\"trait-grid\">" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Animal principal</div>" +
+                "<div class=\"trait-value\">" + a.emoji + " " + a.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Animal secondaire</div>" +
+                "<div class=\"trait-value\">" + sub.emoji + " " + sub.name + "</div>" +
+            "</div>" +
+            "<div class=\"trait-item\">" +
+                "<div class=\"trait-label\">Élément</div>" +
+                "<div class=\"trait-value\">" + a.element + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🐾 Votre animal totem</div>" +
+            "<div class=\"reading-text\">" + a.personality + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💪 Forces</div>" +
+            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">⚠️ Faiblesses</div>" +
+            "<div class=\"reading-text\">" + a.weakness + "</div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">💌 Message de votre animal totem</div>" +
+            "<div class=\"reading-text\"><strong>\"" + a.message + "\"</strong></div>" +
+        "</div>" +
+
+        "<div class=\"reading-card\">" +
+            "<div class=\"reading-title\">🤝 Compatibilité animale</div>" +
+            "<div class=\"compat-row\">" +
+                "<div class=\"compat-item compat-good\">Animaux compatibles : " + a.good + "</div>" +
+                "<div class=\"compat-item compat-bad\">Animaux à surveiller : " + a.bad + "</div>" +
+            "</div>" +
+        "</div>" +
+
+        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 Refaire le test</button>";
+
+    section.style.display = "block";
+    section.scrollIntoView({behavior:"smooth"});
+}
+
+startQuiz();
+</script>
+
+</body>
+</html>
