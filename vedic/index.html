@@ -532,6 +532,7 @@
             <div class="chart-grid" id="d9Chart"></div>
         </div>
         <div id="d9InterpWrap"></div>
+        <div id="spouseProfileWrap"></div>
 
         <h3 class="section-title">🌙 나크샤트라 (당신의 별 — 가장 깊은 본성)</h3>
         <div id="nakshatraWrap"></div>
@@ -1225,7 +1226,14 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         </div>
     </div>`;
 
-    // 7. 배우자 종합 프로필 — 만남/배경/이미지/매력
+    document.getElementById('d9InterpWrap').innerHTML = html;
+
+    // 배우자 프로필은 별도 함수로
+    renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign);
+}
+
+function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
+    let html = '';
     const meetingBySgn = [
         '활동적인 장소, 스포츠, 경쟁적 환경, 리더들의 모임에서 만남. 첫 만남이 강렬하고 전격적.',
         '직장, 금융기관, 레스토랑, 자연 속에서 만남. 천천히 신뢰를 쌓으며 가까워지는 타입.',
@@ -1325,7 +1333,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         </div>
     </div>`;
 
-    document.getElementById('d9InterpWrap').innerHTML = html;
+    document.getElementById('spouseProfileWrap').innerHTML = html;
 }
 
 function renderNakshatra(moonPos) {
