@@ -846,9 +846,15 @@ function calculateChart() {
         });
     } catch(e) {}
 
-    // Ascendant (Lagna) - simplified
-    const lst = (280.46061837 + 360.98564736629 * (jd - 2451545.0) + lng) % 360;
-    const lagnaTopical = lst;
+    // Ascendant (Lagna) - proper calculation with latitude
+    const T = (jd - 2451545.0) / 36525;
+    const obliquity = (23.4392911 - 0.0130042 * T - 0.00000164 * T*T) * Math.PI / 180;
+    const gmst = (280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * T*T) % 360;
+    const lst = (gmst + lng + 360) % 360;
+    const ramcRad = lst * Math.PI / 180;
+    const latRad = lat * Math.PI / 180;
+    const ascRad = Math.atan2(Math.cos(ramcRad), -(Math.sin(ramcRad) * Math.cos(obliquity) + Math.tan(latRad) * Math.sin(obliquity)));
+    let lagnaTopical = (ascRad * 180 / Math.PI + 360) % 360;
     const lagnaSidereal = (lagnaTopical - ayanamsa + 360) % 360;
     const lagnaSign = Math.floor(lagnaSidereal / 30);
 
