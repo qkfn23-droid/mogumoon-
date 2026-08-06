@@ -802,9 +802,8 @@ function calculateChart() {
     const birth = getBirthDateTime();
     const { year, month, day, hour, minute } = birth;
 
-    // Convert local time to UTC using timezone offset
-    const localDate = new Date(year, month - 1, day, hour, minute, 0);
-    const utcDate = new Date(localDate.getTime() - tz * 3600000);
+    // Convert local birth time to UTC using city timezone offset
+    const utcDate = new Date(Date.UTC(year, month - 1, day, hour - tz, minute, 0));
     const astroDate = Astronomy.MakeTime(utcDate);
     const jd = toJulianDate(utcDate);
     const ayanamsa = getAyanamsa(jd);
