@@ -1081,25 +1081,16 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         </div>`;
     }
 
-    // 6. Spouse Direction Analysis (UL + A7 + D1 7th + D9 7th combined)
+    // 6. Spouse Direction — 6 Indicator Combined Analysis
     const DIRECTIONS = {
         0:'East', 1:'South', 2:'West', 3:'North',
         4:'East', 5:'South', 6:'West', 7:'North',
         8:'East', 9:'South', 10:'West', 11:'North'
     };
     const DIR_DETAIL = {
-        0:'East (Aries — fire pioneer)',
-        1:'South (Taurus — earth stability)',
-        2:'West (Gemini — air communication)',
-        3:'North (Cancer — water emotion)',
-        4:'East (Leo — fire king)',
-        5:'South (Virgo — earth analysis)',
-        6:'West (Libra — air balance)',
-        7:'North (Scorpio — water depth)',
-        8:'East (Sagittarius — fire exploration)',
-        9:'South (Capricorn — earth achievement)',
-        10:'West (Aquarius — air innovation)',
-        11:'North (Pisces — water spirituality)'
+        0:'East (Aries — fire)',1:'South (Taurus — earth)',2:'West (Gemini — air)',3:'North (Cancer — water)',
+        4:'East (Leo — fire)',5:'South (Virgo — earth)',6:'West (Libra — air)',7:'North (Scorpio — water)',
+        8:'East (Sagittarius — fire)',9:'South (Capricorn — earth)',10:'West (Aquarius — air)',11:'North (Pisces — water)'
     };
 
     function calcArudha(houseNum, lagnaS, pos) {
@@ -1121,11 +1112,18 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const a7Sign = calcArudha(7, d1LagnaSign, d1Positions);
     const d1H7Sign = (d1LagnaSign + 6) % 12;
 
+    const d9H7RulerPlanet = d9Positions.find(p => p.id === d9H7Ruler);
+    const d9H7RulerSign = d9H7RulerPlanet ? d9H7RulerPlanet.d9Sign : d9H7Sign;
+    const venusD9 = d9Positions.find(p => p.id === 'Venus');
+    const venusD9Sign = venusD9 ? venusD9.d9Sign : 0;
+
     const dirSources = [
-        {name:'D1 7th House', sign: d1H7Sign},
-        {name:'D9 7th House', sign: d9H7Sign},
-        {name:'Upapada Lagna (UL)', sign: ulSign},
-        {name:'Darapada (A7)', sign: a7Sign}
+        {name:'D1 7th House', sign: d1H7Sign, desc:'Spouse house in birth chart'},
+        {name:'D9 7th House', sign: d9H7Sign, desc:'Spouse house in Navamsa'},
+        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'Where the D9 7th lord goes'},
+        {name:'D9 Venus', sign: venusD9Sign, desc:'Spouse karaka in Navamsa'},
+        {name:'Upapada (UL)', sign: ulSign, desc:'12th Arudha — spouse background'},
+        {name:'Darapada (A7)', sign: a7Sign, desc:'7th Arudha — spouse social image'}
     ];
 
     const dirCount = {};
@@ -1138,20 +1136,24 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 Spouse Direction — Combined Analysis</div>
+        <div class="interp-title">🧭 Spouse Direction — 6-Indicator Analysis</div>
         <div class="interp-text">
-            Vedic astrology analyzes which direction your spouse may come from using multiple indicators.<br><br>
-            <strong>4 Indicators:</strong><br>
-            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> (${DIR_DETAIL[s.sign]})`).join('<br>')}
+            Vedic astrology determines spouse direction by combining multiple indicators.<br><br>
+            <strong>6 Indicators:</strong><br>
+            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>')}
             <br><br>
-            <strong>🧿 Upapada Lagna (UL):</strong> The Arudha Pada of the 12th house, showing spouse family background and marriage circumstances. Currently in <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong>.<br><br>
-            <strong>🎯 Darapada (A7):</strong> The Arudha Pada of the 7th house, showing spouse social image and external impression. Currently in <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong>.<br><br>
+            <strong>🧿 Upapada Lagna (UL):</strong> Arudha of 12th — spouse family/background → <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong><br>
+            <strong>🎯 Darapada (A7):</strong> Arudha of 7th — spouse social image → <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong><br>
+            <strong>💍 D9 7th Lord (${RULER_NAMES[d9H7Ruler]}):</strong> Where the Navamsa 7th lord sits → <strong>${SIGNS[d9H7RulerSign]} ${SIGN_SYMBOLS[d9H7RulerSign]}</strong><br>
+            <strong>♀ D9 Venus:</strong> Spouse karaka in Navamsa → <strong>${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</strong><br><br>
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">Conclusion: ${agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
-                <strong>${agreement}</strong> out of 4 indicators point to <strong>${primaryDir}</strong>.
-                ${agreement >= 3 ? '<br>3+ indicators agree — <strong>very high probability</strong> of meeting spouse from the ' + primaryDir + ' direction.' : ''}
-                ${agreement <= 1 ? '<br>Indicators are spread — spouse may come from various directions.' : ''}
-                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br>Two directions are equally indicated: ' + sortedDirs[0][0] + ' and ' + sortedDirs[1][0] + '.' : ''}
+                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
+                <strong>${agreement}</strong> out of 6 indicators point to <strong>${primaryDir}</strong>.
+                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong> of meeting spouse from the ' + primaryDir + '. Pay attention to cities, workplaces, or travels in this direction.' : ''}
+                ${agreement === 3 ? '<br>3 indicators agree — <strong>high probability</strong> of ' + primaryDir + ' direction.' : ''}
+                ${agreement === 2 ? '<br>2 indicators agree — ' + primaryDir + ' is favored but other possibilities exist.' : ''}
+                ${agreement <= 1 ? '<br>Indicators are spread — spouse may come from various directions. Keep an open mind.' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally indicated: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong>.' : ''}
             </div>
         </div>
     </div>`;

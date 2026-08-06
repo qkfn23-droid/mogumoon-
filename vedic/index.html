@@ -1162,12 +1162,22 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     // D1 7궁 사인
     const d1H7Sign = (d1LagnaSign + 6) % 12;
 
-    // 방향 집계
+    // D9 7궁 주인의 D9 위치
+    const d9H7RulerPlanet = d9Positions.find(p => p.id === d9H7Ruler);
+    const d9H7RulerSign = d9H7RulerPlanet ? d9H7RulerPlanet.d9Sign : d9H7Sign;
+
+    // D9 금성(Venus) 위치 — 배우자의 카라카(상징 행성)
+    const venusD9 = d9Positions.find(p => p.id === 'Venus');
+    const venusD9Sign = venusD9 ? venusD9.d9Sign : 0;
+
+    // 방향 집계 — 6가지 지표
     const dirSources = [
-        {name:'D1 7궁', sign: d1H7Sign},
-        {name:'D9 7궁', sign: d9H7Sign},
-        {name:'우파파다 라그나(UL)', sign: ulSign},
-        {name:'다라파다(A7)', sign: a7Sign}
+        {name:'D1 7궁', sign: d1H7Sign, desc:'출생 차트의 배우자 하우스'},
+        {name:'D9 7궁', sign: d9H7Sign, desc:'나바암샤의 배우자 하우스'},
+        {name:'D9 7궁주 위치', sign: d9H7RulerSign, desc:'나바암샤 7궁 주인이 가는 사인'},
+        {name:'D9 금성(♀)', sign: venusD9Sign, desc:'배우자 카라카의 나바암샤 위치'},
+        {name:'우파파다(UL)', sign: ulSign, desc:'12궁 아루다 — 배우자 가문/배경'},
+        {name:'다라파다(A7)', sign: a7Sign, desc:'7궁 아루다 — 배우자 사회적 이미지'}
     ];
 
     const dirCount = {};
@@ -1180,20 +1190,24 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 배우자의 방향 — 종합 분석</div>
+        <div class="interp-title">🧭 배우자의 방향 — 6가지 지표 종합 분석</div>
         <div class="interp-text">
             베딕 점성술에서는 배우자가 어느 방향에서 올지를 여러 지표를 종합하여 분석합니다.<br><br>
-            <strong>4가지 지표 분석:</strong><br>
-            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> (${DIR_DETAIL[s.sign]})`).join('<br>')}
+            <strong>6가지 지표 분석:</strong><br>
+            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>')}
             <br><br>
-            <strong>🧿 우파파다 라그나(UL)란?</strong> 12궁의 아루다 파다로, 배우자의 가문/배경과 결혼의 환경을 나타냅니다. 현재 UL은 <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong>에 있습니다.<br><br>
-            <strong>🎯 다라파다(A7)란?</strong> 7궁의 아루다 파다로, 배우자의 사회적 이미지와 외적 인상을 나타냅니다. 현재 A7은 <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong>에 있습니다.<br><br>
+            <strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong><br>
+            <strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong><br>
+            <strong>💍 D9 7궁주(${RULER_NAMES[d9H7Ruler]}):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 방향을 나타냅니다. → <strong>${SIGNS[d9H7RulerSign]} ${SIGN_SYMBOLS[d9H7RulerSign]}</strong><br>
+            <strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</strong><br><br>
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">종합 결론: ${agreement >= 3 ? '매우 강한' : agreement >= 2 ? '강한' : ''} ${primaryDir} 방향</strong><br><br>
-                4가지 지표 중 <strong>${agreement}개</strong>가 <strong>${primaryDir}</strong>을 가리키고 있습니다.
-                ${agreement >= 3 ? '<br>3개 이상의 지표가 일치하여 <strong>매우 높은 확률</strong>로 ' + primaryDir + ' 방향에서 배우자를 만날 가능성이 있습니다.' : ''}
-                ${agreement <= 1 ? '<br>지표가 분산되어 있어 특정 방향보다는 다양한 경로에서 만남이 올 수 있습니다.' : ''}
-                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br>두 방향이 동등하게 나타나 ' + sortedDirs[0][0] + '과 ' + sortedDirs[1][0] + ' 모두 가능성이 있습니다.' : ''}
+                <strong style="font-size:16px;">🧭 종합 결론: ${agreement >= 4 ? '압도적으로 강한' : agreement >= 3 ? '매우 강한' : agreement >= 2 ? '강한' : ''} ${primaryDir} 방향</strong><br><br>
+                6가지 지표 중 <strong>${agreement}개</strong>가 <strong>${primaryDir}</strong>을 가리키고 있습니다.
+                ${agreement >= 4 ? '<br>4개 이상의 지표가 일치! <strong>매우 높은 확률</strong>로 ' + primaryDir + ' 방향에서 배우자를 만날 가능성이 있습니다. 이 방향의 도시, 직장, 여행지에 주목하세요.' : ''}
+                ${agreement === 3 ? '<br>3개 지표 일치 — <strong>높은 확률</strong>로 ' + primaryDir + ' 방향입니다.' : ''}
+                ${agreement === 2 ? '<br>2개 지표 일치 — ' + primaryDir + ' 방향이 우세하지만, 다른 가능성도 있습니다.' : ''}
+                ${agreement <= 1 ? '<br>지표가 분산되어 있어 특정 방향보다는 다양한 경로에서 만남이 올 수 있습니다. 열린 마음으로 인연을 기다리세요.' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 두 방향이 동등: <strong>' + sortedDirs[0][0] + '</strong>과 <strong>' + sortedDirs[1][0] + '</strong> 모두 가능성이 있습니다.' : ''}
             </div>
         </div>
     </div>`;
