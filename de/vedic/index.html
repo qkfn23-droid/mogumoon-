@@ -882,3 +882,7 @@ function renderPlanetTable(positions, lagnaSign, lagnaSidereal) {
     html += '</tr></thead><tbody>';
 
     // Add Lagna first
+    const lagnaDeg = lagnaSidereal % 30;
+    const lagnaNakIdx = Math.floor(lagnaSidereal / (360/27));
+    const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {name:'-'};
+    html += `<tr><td>⬆ ASC (Lagna)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.name}</td><td>1</td></tr>`;
