@@ -858,7 +858,7 @@ function calculateChart() {
     const moonNakshatra = moonPos ? moonPos.nakshatra : 0;
 
     // Render everything
-    renderPlanetTable(positions, lagnaSign);
+    renderPlanetTable(positions, lagnaSign, lagnaSidereal);
     renderD1Chart(positions, lagnaSign);
     renderD9Chart(positions, lagnaSign, lagnaSidereal);
     renderNakshatra(moonPos);
@@ -876,14 +876,16 @@ function calculateChart() {
     document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
 }
 
-function renderPlanetTable(positions, lagnaSign) {
+function renderPlanetTable(positions, lagnaSign, lagnaSidereal) {
     let html = '<table class="planet-table"><thead><tr>';
     html += '<th>행성</th><th>별자리</th><th>도수</th><th>나크샤트라</th><th>하우스</th>';
     html += '</tr></thead><tbody>';
 
-    // Add Lagna first
-    const lagnaDeg = positions.length > 0 ? 0 : 0;
-    html += `<tr><td>⬆ 라그나 (상승궁)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>-</td><td>-</td><td>1</td></tr>`;
+    // Add Lagna first with exact degree
+    const lagnaDeg = lagnaSidereal % 30;
+    const lagnaNakIdx = Math.floor(lagnaSidereal / (360/27));
+    const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {ko:'-'};
+    html += `<tr><td>⬆ 라그나 (상승궁)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
 
     positions.forEach(p => {
         const house = ((p.sign - lagnaSign + 12) % 12) + 1;
