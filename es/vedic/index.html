@@ -520,6 +520,13 @@
             <div class="chart-grid" id="d1Chart"></div>
         </div>
 
+        <h3 class="section-title">🕉️ Carta D9 Navamsa (Matrimonio · Pareja · Dharma)</h3>
+        <div class="chart-container">
+            <div class="chart-label">Navamsa — La carta divisional mas importante que muestra matrimonio, personalidad de la pareja y proposito de vida</div>
+            <div class="chart-grid" id="d9Chart"></div>
+        </div>
+        <div id="d9InterpWrap"></div>
+
         <h3 class="section-title">🌙 Nakshatra (Tu Estrella — Tu Naturaleza Mas Profunda)</h3>
         <div id="nakshatraWrap"></div>
 
@@ -853,6 +860,7 @@ function calculateChart() {
     // Render everything
     renderPlanetTable(positions, lagnaSign);
     renderD1Chart(positions, lagnaSign);
+    renderD9Chart(positions, lagnaSign, lagnaSidereal);
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -932,6 +940,147 @@ function renderD1Chart(positions, lagnaSign) {
             grid.appendChild(cell);
         }
     }
+}
+
+function getNavamsaSign(siderealLon) {
+    const sign = Math.floor(siderealLon / 30);
+    const degInSign = siderealLon % 30;
+    const pada = Math.floor(degInSign / (30/9));
+    const element = sign % 4;
+    const startSign = [0, 9, 6, 3][element];
+    return (startSign + pada) % 12;
+}
+
+function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
+    const d9LagnaSign = getNavamsaSign(lagnaSidereal);
+    const d9Positions = positions.map(p => ({...p, d9Sign: getNavamsaSign(p.sidereal)}));
+
+    const grid = document.getElementById('d9Chart');
+    grid.innerHTML = '';
+    const signPlanets = {};
+    for (let i = 0; i < 12; i++) signPlanets[i] = [];
+    d9Positions.forEach(p => { signPlanets[p.d9Sign].push(p); });
+
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const signIdx = SI_LAYOUT[row][col];
+            if (signIdx === -1) {
+                cell.className = 'chart-cell empty';
+                cell.innerHTML = '<div style="font-size:11px;color:#444;text-align:center;">D9<br>Navamsa</div>';
+            } else {
+                cell.className = 'chart-cell';
+                let content = `<div class="sign-label">${SIGN_SYMBOLS[signIdx]} ${SIGNS[signIdx]}</div>`;
+                if (signIdx === d9LagnaSign) content += '<div class="lagna-marker">ASC</div>';
+                signPlanets[signIdx].forEach(p => {
+                    const cls = (p.natural === 'malefic') ? 'planet malefic' : 'planet benefic';
+                    content += `<div class="${cls}">${p.symbol}</div>`;
+                });
+                cell.innerHTML = content;
+            }
+            grid.appendChild(cell);
+        }
+    }
+    renderD9Interpretation(d9Positions, d9LagnaSign, lagnaSign);
+}
+
+function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
+    const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const RULER_NAMES = {Sun:'Sun',Moon:'Moon',Mars:'Mars',Mercury:'Mercury',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
+
+    function d9HouseOf(signIdx) { return ((signIdx - d9LagnaSign + 12) % 12) + 1; }
+    function d9PlanetsInHouse(h) { return d9Positions.filter(p => d9HouseOf(p.d9Sign) === h); }
+
+    const d9H7Sign = (d9LagnaSign + 6) % 12;
+    const d9H7Ruler = SIGN_RULERS[d9H7Sign];
+    const d9H7Planets = d9PlanetsInHouse(7);
+    const d9H10Sign = (d9LagnaSign + 9) % 12;
+    const d9H10Ruler = SIGN_RULERS[d9H10Sign];
+    const d9H10Planets = d9PlanetsInHouse(10);
+    const d9H4Sign = (d9LagnaSign + 3) % 12;
+    const d9H4Ruler = SIGN_RULERS[d9H4Sign];
+    const d9H4Planets = d9PlanetsInHouse(4);
+    const d9H1Planets = d9PlanetsInHouse(1);
+
+    const careerBySgn = [
+        'Leadership, military, sports, entrepreneurship (fire pioneer)',
+        'Finance, agriculture, arts, real estate, food (stability & material)',
+        'Communication, media, writing, teaching, marketing (intellectual)',
+        'Nursing, caregiving, cooking, hospitality, counseling (emotional care)',
+        'Politics, entertainment, leadership, creativity (shining stage)',
+        'Medicine, accounting, analysis, editing, health/wellness (precise service)',
+        'Law, diplomacy, design, fashion, mediation (balance & beauty)',
+        'Research, investigation, medicine, occult, psychology (depth & transformation)',
+        'Education, travel, philosophy, religion, publishing (expansion & exploration)',
+        'Government, construction, management, CEO, organizational leader (system & authority)',
+        'Technology, IT, invention, social activism, science (innovation)',
+        'Arts, spirituality, healing, music, charity (transcendence & service)'
+    ];
+
+    const planetCareer = {
+        Sun: 'Government official, politician, doctor, CEO — authoritative positions',
+        Moon: 'Nurse, counselor, chef, hospitality — caregiving/emotional roles',
+        Mars: 'Military, police, surgeon, engineer, athlete',
+        Mercury: 'Writer, teacher, programmer, accountant, merchant',
+        Jupiter: 'Professor, judge, religious leader, consultant, senior professional',
+        Venus: 'Designer, actor, musician, fashion, beauty industry',
+        Saturn: 'Construction, mining, agriculture, management, craftsman',
+        Rahu: 'IT, foreign-related, unconventional careers, research',
+        Ketu: 'Spirituality, alternative medicine, research, ascetic'
+    };
+
+    let html = '';
+
+    html += `<div class="interp-card">
+        <div class="interp-title">🕉️ D9 Lagna — You After Marriage: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-text">
+            Navamsa Lagna is in <strong>${SIGNS[d9LagnaSign]}</strong>. This reveals your true self after marriage and in the second half of life (after 30s).
+            ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1 and D9 Lagna are in the same sign!</strong> This is called <strong>Vargottama</strong> — extremely powerful. Your essence remains unchanged after marriage, inner and outer self are aligned.' : ''}
+            ${d9H1Planets.length > 0 ? '<br><br><strong>Planets in D9 1st house:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — These planets strongly influence your personality after marriage.' : ''}
+        </div>
+    </div>`;
+
+    html += `<div class="interp-card">
+        <div class="interp-title">💍 D9 7th House — Spouse Character: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-text">
+            Navamsa 7th house is in <strong>${SIGNS[d9H7Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H7Ruler]}</strong>.<br><br>
+            This reveals your spouse's core personality — someone with the energy of ${SIGNS[d9H7Sign]}.
+            ${d9H7Planets.length > 0 ? '<br><br><strong>Planets in D9 7th house:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! You receive positive energy from your spouse.' : 'Malefic — challenges in marriage, but also opportunities for growth.'}`).join('<br>') : '<br><br>No planets in 7th house — the position of the 7th lord matters more.'}
+        </div>
+    </div>`;
+
+    html += `<div class="interp-card">
+        <div class="interp-title">💼 D9 10th House — Life Purpose (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-text">
+            Navamsa 10th house is in <strong>${SIGNS[d9H10Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H10Ruler]}</strong>.<br><br>
+            While D1's 10th shows your career, D9's 10th reveals your <strong>greater life purpose (Dharma)</strong> — the true calling you pursue after maturity.<br><br>
+            <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
+            ${d9H10Planets.length > 0 ? '<br><br><strong>Planets in D9 10th house:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'Unique career energy'}`).join('<br>') : ''}
+        </div>
+    </div>`;
+
+    html += `<div class="interp-card">
+        <div class="interp-title">👔 Spouse Career — Derived 10th (D9 4th House): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-text">
+            <strong>Derived house principle:</strong> The 10th from 7th (spouse) = D9's 4th house shows your spouse's career/social activity.<br><br>
+            D9 4th house is in <strong>${SIGNS[d9H4Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H4Ruler]}</strong>.<br><br>
+            <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
+            ${d9H4Planets.length > 0 ? '<br><br><strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>') : ''}
+        </div>
+    </div>`;
+
+    const vargottamaPlanets = d9Positions.filter(p => p.sign === p.d9Sign);
+    if (vargottamaPlanets.length > 0) {
+        html += `<div class="interp-card">
+            <div class="interp-title">⭐ Vargottama Planets — Exceptionally Strong</div>
+            <div class="interp-text">
+                Planets in the same sign in both D1 and D9 are called <strong>Vargottama</strong>. These are very powerful, their energy acts consistently throughout life.<br><br>
+                ${vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In ${SIGNS[p.sign]} in both D1 and D9 — exceptionally strong energy!`).join('<br>')}
+            </div>
+        </div>`;
+    }
+
+    document.getElementById('d9InterpWrap').innerHTML = html;
 }
 
 function renderNakshatra(moonPos) {
