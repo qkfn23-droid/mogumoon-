@@ -422,47 +422,47 @@
             <label>Local de nascimento</label>
             <select id="birthCity" onchange="onCityChange()">
                 <optgroup label="🇰🇷 South Korea">
-                    <option value="37.57,126.98" selected>Seoul</option>
-                    <option value="35.18,129.08">Busan</option>
-                    <option value="35.87,128.60">Daegu</option>
-                    <option value="37.46,126.71">Incheon</option>
-                    <option value="35.16,126.85">Gwangju</option>
-                    <option value="36.35,127.38">Daejeon</option>
-                    <option value="35.54,129.31">Ulsan</option>
-                    <option value="33.50,126.53">Jeju</option>
+                    <option value="37.57,126.98,9" selected>Seoul</option>
+                    <option value="35.18,129.08,9">Busan</option>
+                    <option value="35.87,128.60,9">Daegu</option>
+                    <option value="37.46,126.71,9">Incheon</option>
+                    <option value="35.16,126.85,9">Gwangju</option>
+                    <option value="36.35,127.38,9">Daejeon</option>
+                    <option value="35.54,129.31,9">Ulsan</option>
+                    <option value="33.50,126.53,9">Jeju</option>
                 </optgroup>
                 <optgroup label="🇯🇵 Japan">
-                    <option value="35.68,139.69">Tokyo</option>
-                    <option value="34.69,135.50">Osaka</option>
+                    <option value="35.68,139.69,9">Tokyo</option>
+                    <option value="34.69,135.50,9">Osaka</option>
                 </optgroup>
                 <optgroup label="🇨🇳 China / East Asia">
-                    <option value="39.90,116.40">Beijing</option>
-                    <option value="31.23,121.47">Shanghai</option>
-                    <option value="22.32,114.17">Hong Kong</option>
-                    <option value="25.03,121.57">Taipei</option>
-                    <option value="1.35,103.82">Singapore</option>
-                    <option value="13.76,100.50">Bangkok</option>
+                    <option value="39.90,116.40,8">Beijing</option>
+                    <option value="31.23,121.47,8">Shanghai</option>
+                    <option value="22.32,114.17,8">Hong Kong</option>
+                    <option value="25.03,121.57,8">Taipei</option>
+                    <option value="1.35,103.82,8">Singapore</option>
+                    <option value="13.76,100.50,7">Bangkok</option>
                 </optgroup>
                 <optgroup label="🇺🇸 Americas">
-                    <option value="40.71,-74.01">New York</option>
-                    <option value="34.05,-118.24">LA</option>
-                    <option value="41.88,-87.63">Chicago</option>
-                    <option value="37.77,-122.42">San Francisco</option>
-                    <option value="49.28,-123.12">Vancouver</option>
-                    <option value="43.65,-79.38">Toronto</option>
+                    <option value="40.71,-74.01,-5">New York</option>
+                    <option value="34.05,-118.24,-8">LA</option>
+                    <option value="41.88,-87.63,-6">Chicago</option>
+                    <option value="37.77,-122.42,-8">San Francisco</option>
+                    <option value="49.28,-123.12,-8">Vancouver</option>
+                    <option value="43.65,-79.38,-5">Toronto</option>
                 </optgroup>
                 <optgroup label="🇪🇺 Europe">
-                    <option value="51.51,-0.13">London</option>
-                    <option value="48.86,2.35">Paris</option>
-                    <option value="52.52,13.41">Berlin</option>
-                    <option value="40.42,-3.70">Madrid</option>
-                    <option value="41.90,12.50">Rome</option>
+                    <option value="51.51,-0.13,0">London</option>
+                    <option value="48.86,2.35,1">Paris</option>
+                    <option value="52.52,13.41,1">Berlin</option>
+                    <option value="40.42,-3.70,1">Madrid</option>
+                    <option value="41.90,12.50,1">Rome</option>
                 </optgroup>
                 <optgroup label="🌏 Other">
-                    <option value="28.61,77.23">New Delhi</option>
-                    <option value="19.08,72.88">Mumbai</option>
-                    <option value="-33.87,151.21">Sydney</option>
-                    <option value="-23.55,-46.63">Sao Paulo</option>
+                    <option value="28.61,77.23,5.5">New Delhi</option>
+                    <option value="19.08,72.88,5.5">Mumbai</option>
+                    <option value="-33.87,151.21,10">Sydney</option>
+                    <option value="-23.55,-46.63,-3">Sao Paulo</option>
                 </optgroup>
                 <optgroup label="✏️ Entrada Manual">
                     <option value="custom">Inserir Latitude/Longitude manualmente</option>
@@ -760,11 +760,12 @@ function getLatLng() {
     if (sel.value === 'custom') {
         return {
             lat: parseFloat(document.getElementById('birthLat').value) || 37.57,
-            lng: parseFloat(document.getElementById('birthLng').value) || 126.98
+            lng: parseFloat(document.getElementById('birthLng').value) || 126.98,
+            tz: parseFloat(document.getElementById('birthTz') ? document.getElementById('birthTz').value : 9) || 9
         };
     }
-    const [lat, lng] = sel.value.split(',').map(Number);
-    return { lat, lng };
+    const parts = sel.value.split(',').map(Number);
+    return { lat: parts[0], lng: parts[1], tz: parts[2] || 0 };
 }
 
 // Initialize form on page load
@@ -799,12 +800,13 @@ function getPlanetPosition(planetId, date) {
 }
 
 function calculateChart() {
-    const { lat, lng } = getLatLng();
+    const { lat, lng, tz } = getLatLng();
     const birth = getBirthDateTime();
     const { year, month, day, hour, minute } = birth;
 
-    // Create Astronomy date
-    const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, 0));
+    // Convert local time to UTC using timezone offset
+    const localDate = new Date(year, month - 1, day, hour, minute, 0);
+    const utcDate = new Date(localDate.getTime() - tz * 3600000);
     const astroDate = Astronomy.MakeTime(utcDate);
     const jd = toJulianDate(utcDate);
     const ayanamsa = getAyanamsa(jd);
