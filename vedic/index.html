@@ -520,6 +520,13 @@
             <div class="chart-grid" id="d1Chart"></div>
         </div>
 
+        <h3 class="section-title">🕉️ D9 나바암샤 차트 (결혼·배우자·사명)</h3>
+        <div class="chart-container">
+            <div class="chart-label">나바암샤(Navamsa) — 결혼운, 배우자 성격, 인생 후반의 사명을 보여주는 가장 중요한 분할 차트</div>
+            <div class="chart-grid" id="d9Chart"></div>
+        </div>
+        <div id="d9InterpWrap"></div>
+
         <h3 class="section-title">🌙 나크샤트라 (당신의 별 — 가장 깊은 본성)</h3>
         <div id="nakshatraWrap"></div>
 
@@ -853,6 +860,7 @@ function calculateChart() {
     // Render everything
     renderPlanetTable(positions, lagnaSign);
     renderD1Chart(positions, lagnaSign);
+    renderD9Chart(positions, lagnaSign, lagnaSidereal);
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -932,6 +940,178 @@ function renderD1Chart(positions, lagnaSign) {
             grid.appendChild(cell);
         }
     }
+}
+
+function getNavamsaSign(siderealLon) {
+    // 나바암샤: 각 사인(30도)을 9등분(3.333...도), 파다에 따라 사인 배정
+    // 불의 사인(0,4,8=양자리,사자,사수): 양자리부터 시작
+    // 흙의 사인(1,5,9=황소,처녀,염소): 염소자리부터 시작
+    // 바람의 사인(2,6,10=쌍둥이,천칭,물병): 천칭자리부터 시작
+    // 물의 사인(3,7,11=게,전갈,물고기): 게자리부터 시작
+    const sign = Math.floor(siderealLon / 30);
+    const degInSign = siderealLon % 30;
+    const pada = Math.floor(degInSign / (30/9)); // 0~8
+    const element = sign % 4; // 0=불, 1=흙, 2=바람, 3=물
+    const startSign = [0, 9, 6, 3][element]; // 양,염,천,게
+    return (startSign + pada) % 12;
+}
+
+function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
+    // D9 라그나 계산
+    const d9LagnaSign = getNavamsaSign(lagnaSidereal);
+
+    // D9 행성 위치
+    const d9Positions = positions.map(p => ({
+        ...p,
+        d9Sign: getNavamsaSign(p.sidereal)
+    }));
+
+    // 차트 그리기 (D1과 같은 남인도식)
+    const grid = document.getElementById('d9Chart');
+    grid.innerHTML = '';
+
+    const signPlanets = {};
+    for (let i = 0; i < 12; i++) signPlanets[i] = [];
+    d9Positions.forEach(p => { signPlanets[p.d9Sign].push(p); });
+
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const signIdx = SI_LAYOUT[row][col];
+
+            if (signIdx === -1) {
+                cell.className = 'chart-cell empty';
+                cell.innerHTML = '<div style="font-size:11px;color:#444;text-align:center;">D9<br>나바암샤</div>';
+            } else {
+                cell.className = 'chart-cell';
+                let content = `<div class="sign-label">${SIGN_SYMBOLS[signIdx]} ${SIGNS[signIdx]}</div>`;
+                if (signIdx === d9LagnaSign) content += '<div class="lagna-marker">ASC</div>';
+                signPlanets[signIdx].forEach(p => {
+                    const cls = (p.natural === 'malefic') ? 'planet malefic' : 'planet benefic';
+                    content += `<div class="${cls}">${p.symbol}</div>`;
+                });
+                cell.innerHTML = content;
+            }
+            grid.appendChild(cell);
+        }
+    }
+
+    // D9 해석
+    renderD9Interpretation(d9Positions, d9LagnaSign, lagnaSign);
+}
+
+function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
+    const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const RULER_NAMES = {Sun:'태양',Moon:'달',Mars:'화성',Mercury:'수성',Jupiter:'목성',Venus:'금성',Saturn:'토성',Rahu:'라후',Ketu:'케투'};
+
+    function d9HouseOf(signIdx) { return ((signIdx - d9LagnaSign + 12) % 12) + 1; }
+    function d9PlanetsInHouse(h) { return d9Positions.filter(p => d9HouseOf(p.d9Sign) === h); }
+
+    // D9 7궁 (배우자)
+    const d9H7Sign = (d9LagnaSign + 6) % 12;
+    const d9H7Ruler = SIGN_RULERS[d9H7Sign];
+    const d9H7Planets = d9PlanetsInHouse(7);
+
+    // D9 10궁 (사명/dharma 직업)
+    const d9H10Sign = (d9LagnaSign + 9) % 12;
+    const d9H10Ruler = SIGN_RULERS[d9H10Sign];
+    const d9H10Planets = d9PlanetsInHouse(10);
+
+    // 배우자의 10궁 (파생하우스: 7궁에서 10번째 = D9 4궁)
+    const spouseH10 = 4; // 7궁에서 10번째
+    const d9H4Sign = (d9LagnaSign + 3) % 12;
+    const d9H4Ruler = SIGN_RULERS[d9H4Sign];
+    const d9H4Planets = d9PlanetsInHouse(4);
+
+    // D9 1궁 (결혼 후 본인)
+    const d9H1Planets = d9PlanetsInHouse(1);
+
+    // 사인별 직업 경향
+    const careerBySgn = [
+        '리더십, 군대, 스포츠, 기업가 (불의 선구자)',
+        '금융, 농업, 예술, 부동산, 음식 (안정과 물질)',
+        '소통, 미디어, 작가, 교사, 마케팅 (지적 활동)',
+        '간호, 돌봄, 요리, 호텔, 심리상담 (감정 케어)',
+        '정치, 연예, 리더, 고위직, 크리에이터 (빛나는 무대)',
+        '의학, 회계, 분석, 편집, 건강/웰빙 (정밀한 서비스)',
+        '법률, 외교, 디자인, 패션, 중재 (균형과 미)',
+        '연구, 수사, 의학, 오컬트, 심리학 (깊이와 변혁)',
+        '교육, 여행, 철학, 종교, 출판 (확장과 탐구)',
+        '정부, 건설, 관리, CEO, 조직 리더 (체계와 권위)',
+        '기술, IT, 발명, 사회운동, 과학 (혁신)',
+        '예술, 영성, 치유, 음악, 자선 (초월과 봉사)'
+    ];
+
+    // 행성별 배우자 직업 경향
+    const planetCareer = {
+        Sun: '공무원, 정치인, 의사, CEO 등 권위 있는 직업',
+        Moon: '간호사, 상담사, 요리사, 호텔업 등 돌봄/감정 관련',
+        Mars: '군인, 경찰, 외과의사, 엔지니어, 운동선수',
+        Mercury: '작가, 교사, 프로그래머, 회계사, 상인',
+        Jupiter: '교수, 판사, 종교인, 컨설턴트, 고위 전문직',
+        Venus: '디자이너, 배우, 뮤지션, 패션, 뷰티 관련',
+        Saturn: '건설, 광업, 농업, 관리직, 장인',
+        Rahu: 'IT, 해외 관련, 비전통적 직업, 연구',
+        Ketu: '영성, 대체의학, 연구, 수행자'
+    };
+
+    let html = '';
+
+    // 1. D9 라그나 분석 (결혼 후 본인)
+    html += `<div class="interp-card">
+        <div class="interp-title">🕉️ D9 라그나 — 결혼 후의 당신: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-text">
+            나바암샤 라그나가 <strong>${SIGNS[d9LagnaSign]}</strong>에 있습니다. 이것은 결혼 후, 그리고 인생 후반(30대 이후)에 드러나는 당신의 진짜 모습입니다.
+            ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1과 D9 라그나가 같은 사인!</strong> 이것을 <strong>바르고타마(Vargottama)</strong>라 하며, 매우 강력합니다. 당신의 본질이 결혼 후에도 변하지 않으며, 내면과 외면이 일치하는 사람입니다.' : ''}
+            ${d9H1Planets.length > 0 ? '<br><br><strong>D9 1궁의 행성:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — 이 행성들이 결혼 후 당신의 성격에 강하게 영향을 줍니다.' : ''}
+        </div>
+    </div>`;
+
+    // 2. D9 7궁 (배우자)
+    html += `<div class="interp-card">
+        <div class="interp-title">💍 D9 7궁 — 배우자의 성격: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-text">
+            나바암샤 7궁이 <strong>${SIGNS[d9H7Sign]}</strong>에 있으며, 주인 행성은 <strong>${RULER_NAMES[d9H7Ruler]}</strong>입니다.<br><br>
+            이것은 배우자의 핵심 성격을 나타냅니다. ${SIGNS[d9H7Sign]}의 에너지를 가진 파트너 — ${careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력'}의 성질을 가진 사람입니다.
+            ${d9H7Planets.length > 0 ? '<br><br><strong>D9 7궁의 행성:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '길성! 배우자에게서 이 행성의 좋은 에너지를 받습니다.' : '흉성 — 결혼 생활에서 이 행성의 도전이 있을 수 있지만, 성장의 기회이기도 합니다.'}`).join('<br>') : '<br><br>7궁에 행성이 없습니다 — 7궁 주인의 위치가 더 중요합니다.'}
+        </div>
+    </div>`;
+
+    // 3. D9 10궁 (본인의 Dharma/사명)
+    html += `<div class="interp-card">
+        <div class="interp-title">💼 D9 10궁 — 인생의 사명(Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-text">
+            나바암샤 10궁이 <strong>${SIGNS[d9H10Sign]}</strong>에 있으며, 주인 행성은 <strong>${RULER_NAMES[d9H10Ruler]}</strong>입니다.<br><br>
+            D1의 10궁이 '직업'을 보여준다면, D9의 10궁은 <strong>인생의 더 큰 사명(Dharma)</strong>을 보여줍니다. 결혼 후, 그리고 성숙해진 이후에 추구하게 되는 진정한 소명입니다.<br><br>
+            <strong>사명의 방향:</strong> ${careerBySgn[d9H10Sign]}
+            ${d9H10Planets.length > 0 ? '<br><br><strong>D9 10궁의 행성:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || '독특한 직업 에너지'}`).join('<br>') : ''}
+        </div>
+    </div>`;
+
+    // 4. 배우자의 직업 (파생하우스: D9 4궁 = 7궁에서 10번째)
+    html += `<div class="interp-card">
+        <div class="interp-title">👔 배우자의 직업 — 파생 10궁(D9 4궁): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-text">
+            <strong>파생하우스 원리:</strong> 7궁(배우자)에서 10번째 하우스 = D9의 4궁이 배우자의 직업/사회적 활동을 나타냅니다.<br><br>
+            D9 4궁이 <strong>${SIGNS[d9H4Sign]}</strong>에 있으며, 주인 행성은 <strong>${RULER_NAMES[d9H4Ruler]}</strong>입니다.<br><br>
+            <strong>배우자의 직업 경향:</strong> ${careerBySgn[d9H4Sign]}
+            ${d9H4Planets.length > 0 ? '<br><br><strong>D9 4궁(배우자 10궁)의 행성:</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: 배우자가 ${planetCareer[p.id] || '특수한 직업'} 분야에서 활동할 가능성`).join('<br>') : ''}
+        </div>
+    </div>`;
+
+    // 5. 바르고타마 행성 체크
+    const vargottamaPlanets = d9Positions.filter(p => p.sign === p.d9Sign);
+    if (vargottamaPlanets.length > 0) {
+        html += `<div class="interp-card">
+            <div class="interp-title">⭐ 바르고타마(Vargottama) 행성 — 특별히 강한 행성</div>
+            <div class="interp-text">
+                D1과 D9에서 같은 사인에 있는 행성을 <strong>바르고타마</strong>라 합니다. 이 행성은 매우 강력하며, 그 행성의 에너지가 인생 전반에 걸쳐 일관되게 작용합니다.<br><br>
+                ${vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: D1과 D9 모두 ${SIGNS[p.sign]}에 위치 — 이 행성의 에너지가 특별히 강합니다!`).join('<br>')}
+            </div>
+        </div>`;
+    }
+
+    document.getElementById('d9InterpWrap').innerHTML = html;
 }
 
 function renderNakshatra(moonPos) {
