@@ -1080,6 +1080,81 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         </div>`;
     }
 
+    // 6. Spouse Direction Analysis (UL + A7 + D1 7th + D9 7th combined)
+    const DIRECTIONS = {
+        0:'East', 1:'South', 2:'West', 3:'North',
+        4:'East', 5:'South', 6:'West', 7:'North',
+        8:'East', 9:'South', 10:'West', 11:'North'
+    };
+    const DIR_DETAIL = {
+        0:'East (Aries — fire pioneer)',
+        1:'South (Taurus — earth stability)',
+        2:'West (Gemini — air communication)',
+        3:'North (Cancer — water emotion)',
+        4:'East (Leo — fire king)',
+        5:'South (Virgo — earth analysis)',
+        6:'West (Libra — air balance)',
+        7:'North (Scorpio — water depth)',
+        8:'East (Sagittarius — fire exploration)',
+        9:'South (Capricorn — earth achievement)',
+        10:'West (Aquarius — air innovation)',
+        11:'North (Pisces — water spirituality)'
+    };
+
+    function calcArudha(houseNum, lagnaS, pos) {
+        const houseSign = (lagnaS + houseNum - 1) % 12;
+        const ruler = SIGN_RULERS[houseSign];
+        const rulerPlanet = pos.find(p => p.id === ruler);
+        if (!rulerPlanet) return houseSign;
+        const rulerSign = rulerPlanet.sign;
+        const dist = ((rulerSign - houseSign) + 12) % 12;
+        let arudhaSign = (rulerSign + dist) % 12;
+        if (arudhaSign === houseSign || arudhaSign === (houseSign + 6) % 12) {
+            arudhaSign = (houseSign + 9) % 12;
+        }
+        return arudhaSign;
+    }
+
+    const d1Positions = d9Positions;
+    const ulSign = calcArudha(12, d1LagnaSign, d1Positions);
+    const a7Sign = calcArudha(7, d1LagnaSign, d1Positions);
+    const d1H7Sign = (d1LagnaSign + 6) % 12;
+
+    const dirSources = [
+        {name:'D1 7th House', sign: d1H7Sign},
+        {name:'D9 7th House', sign: d9H7Sign},
+        {name:'Upapada Lagna (UL)', sign: ulSign},
+        {name:'Darapada (A7)', sign: a7Sign}
+    ];
+
+    const dirCount = {};
+    dirSources.forEach(s => {
+        const dir = DIRECTIONS[s.sign];
+        dirCount[dir] = (dirCount[dir] || 0) + 1;
+    });
+    const sortedDirs = Object.entries(dirCount).sort((a,b) => b[1] - a[1]);
+    const primaryDir = sortedDirs[0][0];
+    const agreement = sortedDirs[0][1];
+
+    html += `<div class="interp-card">
+        <div class="interp-title">🧭 Spouse Direction — Combined Analysis</div>
+        <div class="interp-text">
+            Vedic astrology analyzes which direction your spouse may come from using multiple indicators.<br><br>
+            <strong>4 Indicators:</strong><br>
+            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> (${DIR_DETAIL[s.sign]})`).join('<br>')}
+            <br><br>
+            <strong>🧿 Upapada Lagna (UL):</strong> The Arudha Pada of the 12th house, showing spouse family background and marriage circumstances. Currently in <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong>.<br><br>
+            <strong>🎯 Darapada (A7):</strong> The Arudha Pada of the 7th house, showing spouse social image and external impression. Currently in <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong>.<br><br>
+            <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
+                <strong style="font-size:16px;">Conclusion: ${agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
+                <strong>${agreement}</strong> out of 4 indicators point to <strong>${primaryDir}</strong>.
+                ${agreement >= 3 ? '<br>3+ indicators agree — <strong>very high probability</strong> of meeting spouse from the ' + primaryDir + ' direction.' : ''}
+                ${agreement <= 1 ? '<br>Indicators are spread — spouse may come from various directions.' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br>Two directions are equally indicated: ' + sortedDirs[0][0] + ' and ' + sortedDirs[1][0] + '.' : ''}
+            </div>
+        </div>
+    </div>`;
+
     document.getElementById('d9InterpWrap').innerHTML = html;
 }
 

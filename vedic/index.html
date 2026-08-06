@@ -1111,6 +1111,91 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         </div>`;
     }
 
+    // 6. 배우자 방향 분석 (UL + A7 + D1 7궁 + D9 7궁 종합)
+    const DIRECTIONS = {
+        0:'동쪽', 1:'남쪽', 2:'서쪽', 3:'북쪽',
+        4:'동쪽', 5:'남쪽', 6:'서쪽', 7:'북쪽',
+        8:'동쪽', 9:'남쪽', 10:'서쪽', 11:'북쪽'
+    };
+    const DIR_DETAIL = {
+        0:'동쪽 (양자리 — 불의 개척자)',
+        1:'남쪽 (황소자리 — 흙의 안정)',
+        2:'서쪽 (쌍둥이자리 — 바람의 소통)',
+        3:'북쪽 (게자리 — 물의 감성)',
+        4:'동쪽 (사자자리 — 불의 왕)',
+        5:'남쪽 (처녀자리 — 흙의 분석)',
+        6:'서쪽 (천칭자리 — 바람의 균형)',
+        7:'북쪽 (전갈자리 — 물의 깊이)',
+        8:'동쪽 (사수자리 — 불의 탐구)',
+        9:'남쪽 (염소자리 — 흙의 성취)',
+        10:'서쪽 (물병자리 — 바람의 혁신)',
+        11:'북쪽 (물고기자리 — 물의 영성)'
+    };
+
+    // Arudha Pada 계산 함수
+    function calcArudha(houseNum, lagnaS, pos) {
+        const houseSign = (lagnaS + houseNum - 1) % 12;
+        const ruler = SIGN_RULERS[houseSign];
+        const rulerPlanet = pos.find(p => p.id === ruler);
+        if (!rulerPlanet) return houseSign;
+        const rulerSign = rulerPlanet.sign;
+        const dist = ((rulerSign - houseSign) + 12) % 12;
+        let arudhaSign = (rulerSign + dist) % 12;
+        // 예외: 아루다가 같은 사인이거나 7번째이면 10번째로
+        if (arudhaSign === houseSign || arudhaSign === (houseSign + 6) % 12) {
+            arudhaSign = (houseSign + 9) % 12;
+        }
+        return arudhaSign;
+    }
+
+    // D1에서의 원래 positions 사용 (d9Positions에는 d1 sign도 있음)
+    const d1Positions = d9Positions; // d9Positions는 {...p, d9Sign} 이므로 p.sign = D1 sign
+
+    // UL (Upapada Lagna) = 12궁의 아루다
+    const ulSign = calcArudha(12, d1LagnaSign, d1Positions);
+
+    // A7 (Darapada) = 7궁의 아루다
+    const a7Sign = calcArudha(7, d1LagnaSign, d1Positions);
+
+    // D1 7궁 사인
+    const d1H7Sign = (d1LagnaSign + 6) % 12;
+
+    // 방향 집계
+    const dirSources = [
+        {name:'D1 7궁', sign: d1H7Sign},
+        {name:'D9 7궁', sign: d9H7Sign},
+        {name:'우파파다 라그나(UL)', sign: ulSign},
+        {name:'다라파다(A7)', sign: a7Sign}
+    ];
+
+    const dirCount = {};
+    dirSources.forEach(s => {
+        const dir = DIRECTIONS[s.sign];
+        dirCount[dir] = (dirCount[dir] || 0) + 1;
+    });
+    const sortedDirs = Object.entries(dirCount).sort((a,b) => b[1] - a[1]);
+    const primaryDir = sortedDirs[0][0];
+    const agreement = sortedDirs[0][1];
+
+    html += `<div class="interp-card">
+        <div class="interp-title">🧭 배우자의 방향 — 종합 분석</div>
+        <div class="interp-text">
+            베딕 점성술에서는 배우자가 어느 방향에서 올지를 여러 지표를 종합하여 분석합니다.<br><br>
+            <strong>4가지 지표 분석:</strong><br>
+            ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> (${DIR_DETAIL[s.sign]})`).join('<br>')}
+            <br><br>
+            <strong>🧿 우파파다 라그나(UL)란?</strong> 12궁의 아루다 파다로, 배우자의 가문/배경과 결혼의 환경을 나타냅니다. 현재 UL은 <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong>에 있습니다.<br><br>
+            <strong>🎯 다라파다(A7)란?</strong> 7궁의 아루다 파다로, 배우자의 사회적 이미지와 외적 인상을 나타냅니다. 현재 A7은 <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong>에 있습니다.<br><br>
+            <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
+                <strong style="font-size:16px;">종합 결론: ${agreement >= 3 ? '매우 강한' : agreement >= 2 ? '강한' : ''} ${primaryDir} 방향</strong><br><br>
+                4가지 지표 중 <strong>${agreement}개</strong>가 <strong>${primaryDir}</strong>을 가리키고 있습니다.
+                ${agreement >= 3 ? '<br>3개 이상의 지표가 일치하여 <strong>매우 높은 확률</strong>로 ' + primaryDir + ' 방향에서 배우자를 만날 가능성이 있습니다.' : ''}
+                ${agreement <= 1 ? '<br>지표가 분산되어 있어 특정 방향보다는 다양한 경로에서 만남이 올 수 있습니다.' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br>두 방향이 동등하게 나타나 ' + sortedDirs[0][0] + '과 ' + sortedDirs[1][0] + ' 모두 가능성이 있습니다.' : ''}
+            </div>
+        </div>
+    </div>`;
+
     document.getElementById('d9InterpWrap').innerHTML = html;
 }
 
