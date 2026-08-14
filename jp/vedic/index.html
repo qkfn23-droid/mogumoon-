@@ -828,23 +828,27 @@ function calculateChart() {
         });
     });
 
-    // Calculate Rahu/Ketu (lunar nodes)
-    try {
-        const moonNode = Astronomy.SearchMoonNode(astroDate);
-        // Approximate Rahu position
-        const rahuTropical = (getPlanetPosition('Moon', astroDate) + 180) % 360; // simplified
-        const rahuSidereal = (rahuTropical - ayanamsa + 360) % 360;
+    // Calculate Rahu/Ketu (Mean Lunar Nodes)
+    // Mean ascending node formula from Meeus "Astronomical Algorithms"
+    {
+        const T = (jd - 2451545.0) / 36525;
+        let rahuTropical = 125.0446 - 1934.1363 * T + 0.0021 * T * T + T * T * T / 467441;
+        rahuTropical = ((rahuTropical % 360) + 360) % 360;
+        const rahuSidereal = ((rahuTropical - ayanamsa) % 360 + 360) % 360;
+        const ketuSidereal = (rahuSidereal + 180) % 360;
         positions.push({
             id: 'Rahu', name: 'ラーフ', symbol: '☊', natural: 'malefic',
             sidereal: rahuSidereal, sign: Math.floor(rahuSidereal / 30),
-            degree: rahuSidereal % 30, nakshatra: Math.floor(rahuSidereal / (360/27))
+            degree: rahuSidereal % 30, nakshatra: Math.floor(rahuSidereal / (360/27)),
+            nakshatraPada: Math.floor((rahuSidereal % (360/27)) / (360/108)) + 1
         });
         positions.push({
             id: 'Ketu', name: 'ケートゥ', symbol: '☋', natural: 'malefic',
-            sidereal: (rahuSidereal + 180) % 360, sign: Math.floor(((rahuSidereal + 180) % 360) / 30),
-            degree: ((rahuSidereal + 180) % 360) % 30, nakshatra: Math.floor(((rahuSidereal + 180) % 360) / (360/27))
+            sidereal: ketuSidereal, sign: Math.floor(ketuSidereal / 30),
+            degree: ketuSidereal % 30, nakshatra: Math.floor(ketuSidereal / (360/27)),
+            nakshatraPada: Math.floor((ketuSidereal % (360/27)) / (360/108)) + 1
         });
-    } catch(e) {}
+    }
 
     // Ascendant (Lagna) - proper calculation with latitude
     const T = (jd - 2451545.0) / 36525;
