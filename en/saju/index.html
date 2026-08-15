@@ -339,9 +339,9 @@ function getMonthPillar(year, month, day) {
 
 function getDayPillar(year, month, day) {
     const target = new Date(Date.UTC(year, month - 1, day));
-    const ref = new Date(Date.UTC(1993, 6, 25));
+    const ref = new Date(Date.UTC(2000, 0, 1));
     const daysDiff = Math.round((target - ref) / 86400000);
-    const stem = (((daysDiff % 10) + 2) % 10 + 10) % 10;
+    const stem = (((daysDiff % 10) + 4) % 10 + 10) % 10;
     const branch = (((daysDiff % 12) + 6) % 12 + 12) % 12;
     return { stem, branch };
 }
