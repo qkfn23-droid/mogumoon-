@@ -135,7 +135,7 @@
 </div>
 
 <div class="seo-content">
-<div class="seo-section"><h2>Zi Wei Dou Shu</h2><p>Generate your Zi Wei chart and analyze 12 palaces. Chinese traditional astrology for detailed life analysis.</p></div>
+<div class="seo-section"><h2>Zi Wei Dou Shu</h2><p>Gere sua carta Zi Wei e analise os 12 palácios. Astrologia tradicional chinesa.</p></div>
 <div class="seo-section"><h2>Perguntas frequentes</h2><details class="seo-faq"><summary>É gratuita?</summary><p>Sim, 100% gratuita. Sem cadastro.</p></details></div>
 <div class="seo-section"><h2>Ferramentas relacionadas</h2><div class="seo-related"></div></div>
 </div>
@@ -394,7 +394,7 @@ function calculate() {
     const shenIdx = ((2 + month - 1) + hourIdx) % 12;
 
     // 3. 오행국 결정 (命宮 干支의 납음오행)
-    const TIANGAN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
+    const TIANGAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
     const tianganIdx = (year - 4) % 10;
     const tiangan = TIANGAN[tianganIdx];
 
@@ -627,7 +627,7 @@ function calculate() {
     const starData = MAIN_STARS[mainStar];
 
     // 명궁 지지
-    const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+    const DIZHI = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
     const mingDizhi = DIZHI[mingIdx];
 
     // Estrela Principal Card
@@ -673,7 +673,7 @@ function calculate() {
     // 동궁 조합 해석 (전통 격국)
     // ═══════════════════════════════════════
     const COMBO_INTERP = {
-        '무곡+천상': { carreira: 'Wu Qu + Tian Xiang = Finance and administration combined. Stable success in banking and accounting.', riqueza: '안정적 재물 축적. 인수(인수(도장)의 별)의 보호 아래 재성(재물의 별)이 빛난다. 꾸준하고 보수적인 투자에 유리.' },
+        '무곡+천상': { carreira: 'Wu Qu + Tian Xiang = Finanças e administração combinadas. Sucesso estável em banco.', riqueza: '안정적 재물 축적. 인수(인수(도장)의 별)의 보호 아래 재성(재물의 별)이 빛난다. 꾸준하고 보수적인 투자에 유리.' },
         '무곡+파군': { carreira: '무곡+파군 (재물+파괴) 동궁 = 무관(군인/경찰)의 격. 군인, 경찰, 무관 계열에서 성공. 파괴와 재건을 통한 재물 획득.', riqueza: '대성대패형. 크게 벌고 크게 잃을 수 있다. 기술직이나 철물 관련 사업에 유리.' },
         '무곡+탐랑': { carreira: 'Wu Qu + Tan Lang = Talent in sales and entertainment. Earns through socializing.', riqueza: 'Earns well and spends well. With Hua Lu: windfall possible.' },
         '무곡+천부': { carreira: 'Wu Qu + Tian Fu = Millionaire formation. Overflowing treasury.', riqueza: 'Supreme wealth fortune. Ability to both earn and save.' },
@@ -686,11 +686,11 @@ function calculate() {
         '염정+칠살': { personality: 'Lian Zhen + Qi Sha = Extremely dangerous in bad position. Commanding in favorable position.' },
         '태양+태음': { personality: '해와 달이 같은 궁에 있는 격. 음양이 함께 빛나 밝으나, 서로의 빛을 가릴 수 있다.' },
         '태양+거문': { personality: 'Tai Yang + Ju Men = Sun illuminates darkness. Favorable for overseas business.' },
-        '태양+천량': { carreira: 'Tai Yang + Tian Liang = Sun illuminates protection (great fortune). Success in public service.', personality: 'Bright, honest, strong protective instinct. Much help from seniors.' },
+        '태양+천량': { carreira: 'Tai Yang + Tian Liang = Sol ilumina proteção (grande fortuna). Sucesso no serviço público.', personality: 'Brilhante, honesto, forte instinto protetor. Muita ajuda dos mais velhos.' },
         '천동+태음': { personality: 'Tian Tong + Tai Yin = Soft and emotional. Talent in arts/religion but lacks decisiveness.' },
         '천동+거문': { personality: 'Tian Tong + Ju Men = Blessing meets darkness. In good position: blessings through speech.', carreira: 'Suited for education, counseling, media. Blessed to live by words.' },
         '천동+천량': { personality: 'Tian Tong + Tian Liang = Carefree formation. Comfortable life. Deep in religion/academics.' },
-        '천기+태음': { personality: 'Tian Ji + Tai Yin = Delicate and intuitive. Talent in real estate/religion/academics.' },
+        '천기+태음': { personality: 'Tian Ji + Tai Yin = Delicado e intuitivo. Talento em imóveis/religião/academia.' },
         '천기+거문': { personality: 'Tian Ji + Ju Men = Strategy and eloquence combined. Great advisor, beware gossip.' },
         '천기+천량': { personality: 'Tian Ji + Tian Liang = Virtuous star combo. Deep in religion/philosophy. Scholar formation.' },
     };
@@ -708,20 +708,20 @@ function calculate() {
 
     // 배우자 외모 (전통 形性賦 기반)
     const SPOUSE_APPEARANCE = {
-        '자미': 'Dignified and authoritative impression.',
-        '천기': 'Intellectual and delicate. Slim with clever eyes.',
-        '태양': 'Bright and energetic. Large eyes, healthy skin.',
-        '무곡': 'Strong and solid. Good physique, few words.',
-        '천동': 'Youthful and friendly. Charming smile.',
-        '염정': 'Sharp features, intense eyes. Captivating.',
-        '천부': 'Warm and comfortable. Round face, cozy aura.',
-        '태음': 'Fair skin, large eyes. Subtle elegant charm.',
-        '탐랑': 'Attractive and glamorous. Great fashion sense.',
-        '거문': 'Wide forehead, sharp eyes. Most attractive when speaking.',
-        '천상': 'Clean and tidy. Well-dressed.',
-        '천량': 'Mature and trustworthy. More attractive with age.',
-        '칠살': 'Intense and charismatic. Sharp eyes.',
-        '파군': 'Unique impression. With Lu: refined charm.',
+        '자미': 'Impressão digna e autoritária.',
+        '천기': 'Intelectual e delicada. Magra com olhos inteligentes.',
+        '태양': 'Brilhante e enérgica. Olhos grandes, pele saudável.',
+        '무곡': 'Forte e sólida. Bom físico, poucas palavras.',
+        '천동': 'Jovem e amigável. Sorriso encantador.',
+        '염정': 'Traços marcados, olhos intensos. Cativante.',
+        '천부': 'Calorosa e confortável. Rosto redondo.',
+        '태음': 'Pele clara, olhos grandes. Charme sutil e elegante.',
+        '탐랑': 'Atraente e glamurosa. Ótimo senso de moda.',
+        '거문': 'Testa larga, olhos agudos. Mais atraente ao falar.',
+        '천상': 'Limpa e arrumada. Bem vestida.',
+        '천량': 'Madura e confiável. Mais atraente com a idade.',
+        '칠살': 'Intensa e carismática. Olhos agudos.',
+        '파군': 'Impressão única. Com Lu: charme refinado.',
     };
 
 
@@ -734,7 +734,7 @@ function calculate() {
         <div class="info-item"><div class="info-label">Posição</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">Cinco Elementos</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei: ${DIZHI[ziWeiPos]}</div></div>
         <div class="info-item"><div class="info-label">Gender/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Masculino (Yang)' : 'Feminino (Yin)'}</div></div>
-        <div class="info-item"><div class="info-label">Palácio do Corpo</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return 'Later personality · direction'; const descs = {'자미':'Leadership and authority strengthen','천기':'Strategy and academic tendencies strengthen','태양':'Social activities and public roles expand','무곡':'Financial sense and decisiveness strengthen','천동':'Pursues blessings and comfortable life','염정':'Emotions intensify, artistic tendencies emerge','천부':'Stability and wealth management develop','태음':'Intuition deepens, real estate connection forms','탐랑':'Charm and sociability strengthen','거문':'Eloquence develops, beware of gossip','천상':'Becomes more image-conscious','천량':'Becomes conservative with more benefactor help','칠살':'Independent and action-oriented. Viagem central in later life','파군':'Pursues change and breaks old order'}; const base = descs[s] || 'Later personality · direction'; return shenIdx === mingIdx ? base + '. 身宮이 命宮과 같은 자리 = 선천과 후천이 같은 방향으로, 타고난 성격이 변하지 않고 강화된다' : base; })()}</div></div>
+        <div class="info-item"><div class="info-label">Palácio do Corpo</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return 'Later personality · direction'; const descs = {'자미':'Liderança e autoridade se fortalecem','천기':'Tendências estratégicas e acadêmicas se fortalecem','태양':'Atividades sociais e papéis públicos se expandem','무곡':'Senso financeiro e decisão se fortalecem','천동':'Busca bênçãos e vida confortável','염정':'Emoções se intensificam, tendências artísticas emergem','천부':'Estabilidade e gestão de riqueza se desenvolvem','태음':'Intuição se aprofunda, conexão com imóveis se forma','탐랑':'Charme e sociabilidade se fortalecem','거문':'Eloquência se desenvolve, cuidado com fofocas','천상':'Torna-se mais consciente da imagem','천량':'Torna-se conservador com mais ajuda de benfeitores','칠살':'Independent and action-oriented. Viagem central in later life','파군':'Busca mudança e quebra a velha ordem'}; const base = descs[s] || 'Later personality · direction'; return shenIdx === mingIdx ? base + '. 身宮이 命宮과 같은 자리 = 선천과 후천이 같은 방향으로, 타고난 성격이 변하지 않고 강화된다' : base; })()}</div></div>
         <div class="info-item"><div class="info-label">Quatro Transformações</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
         <div class="info-item"><div class="info-label">Estrelas Auspiciosas</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">Wen Chang · Wen Qu · Zuo Fu · You Bi · Tian Kui · Tian Yue · Lu Cun</div></div>
         <div class="info-item"><div class="info-label">Estrelas Sha</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">Qing Yang · Tuo Luo · Huo Xing · Ling Xing</div></div>
