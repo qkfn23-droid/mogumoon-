@@ -626,7 +626,7 @@ function calculate() {
     const starData = MAIN_STARS[mainStar];
 
     // 명Palace 지지
-    const DIZHI = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
+    const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
     const mingDizhi = DIZHI[mingIdx];
 
     // Main Star Card
@@ -634,7 +634,7 @@ function calculate() {
         <div class="main-star-card">
             <span class="main-star-glyph">${starData.glyph}</span>
             <div class="main-star-name">${mainStar}Star (${starData.rank})</div>
-            <div class="main-star-sub">오행: ${starData.element} | 명Palace: ${DIZHI[mingIdx]}Palace</div>
+            <div class="main-star-sub">Element: ${starData.element} | 명Palace: ${DIZHI[mingIdx]}Palace</div>
         </div>
     `;
 
