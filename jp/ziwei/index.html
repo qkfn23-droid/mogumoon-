@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="input-group">
-            <label>出生時間 <span class="optional-tag">(모르면 '모름' 선택)</span></label>
+            <label>出生時間 <span class="optional-tag">（不明なら「不明」を選択）</span></label>
             <div class="input-row">
                 <select id="birthAmpm"><option value="am">午前</option><option value="pm">午後</option></select>
                 <select id="birthHour"></select>
@@ -129,13 +129,13 @@
         <h3 class="section-title">🏥 疾厄宮（健康）</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">⏳ 대운 (10年 주기)</h3>
+        <h3 class="section-title">⏳ Major Fortune (10年 주기)</h3>
         <div id="dashaWrap"></div>
     </div>
 </div>
 
 <div class="seo-content">
-<div class="seo-section"><h2>紫微斗数</h2><p>紫微斗数 명반을 생성하고 12궁을 분석합니다. 중국 전통 점성술로 인생의 각 영역을 상세히 파악합니다.</p></div>
+<div class="seo-section"><h2>紫微斗数</h2><p>紫微斗数 명반을 생Star하고 12Palace을 분석합니다. 중국 전통 점Star술로 인생의 각 영역을 상yrs히 파악합니다.</p></div>
 <div class="seo-section"><h2>よくある質問</h2><details class="seo-faq"><summary>このツールは無料ですか？</summary><p>はい、100%無料です。会員登録なしですぐにご利用いただけます。</p></details></div>
 <div class="seo-section"><h2>関連ツール</h2><div class="seo-related"></div></div>
 </div>
@@ -144,7 +144,7 @@
 
 <script>
 // ═══════════════════════════════════════
-// 紫微斗数 14주성
+// 紫微斗数 14주Star
 // ═══════════════════════════════════════
 const MAIN_STARS = {
     '자미': { glyph: '💜', element: '토', yin: true, rank: '帝星',
@@ -256,12 +256,12 @@ const HANJA = {
     '천부':'天府','태음':'太陰','탐랑':'貪狼','거문':'巨門','천상':'天相','천량':'天梁',
     '칠살':'七殺','파군':'破軍',
     '문창':'文昌','문곡':'文曲','좌보':'左輔','우필':'右弼','천괴':'天魁','천月':'天鉞',
-    '록존':'祿存','경양':'擎羊','타라':'陀羅','화성':'火星','영성':'鈴星',
+    'Lu Cun':'祿存','경양':'擎羊','타라':'陀羅','화Star':'火星','영Star':'鈴星',
     '화록':'祿','화권':'權','화과':'科','화기':'忌',
 };
 function hanja(name) { return HANJA[name] || name; }
 
-// 12궁 이름
+// 12Palace Name
 const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','交友宮','官祿宮','田宅宮','福德宮','父母宮'];
 const PALACE_DESC = ['自分自身','兄弟姉妹','配偶者','子女','財運','健康','移動/海外','友人/人脈','職業/名声','不動産/家庭','福と徳','両親/目上'];
 
@@ -294,7 +294,7 @@ function toggleTime() {
 }
 
 // ═══════════════════════════════════════
-// 양력→음력 변환기 (1940~2025)
+// Solar→Lunar Conversion기 (1940~2025)
 // ═══════════════════════════════════════
 // 검증된 음력 데이터 (1900~2100) — calendar.js 기반 검증 완료
 // 비트 구조: [19:4]=각 月 대소(1=30,0=29), [3:0]=윤달 月(0=없음)
@@ -365,7 +365,7 @@ function solarToLunar(sY, sM, sD) {
 }
 
 // ═══════════════════════════════════════
-// 紫微斗数 계산 (음력 기반)
+// 紫微斗数 Calculation (음력 기반)
 // ═══════════════════════════════════════
 function calculate() {
     const solarYear = parseInt(document.getElementById('birthYear').value);
@@ -374,39 +374,39 @@ function calculate() {
     const hourIdx = document.getElementById('birthTimeUnknown').value === 'unknown' ? 6 : parseInt(document.getElementById('birthHour').value);
     const gender = document.getElementById('gender').value;
 
-    // 양력 → 음력 변환
+    // Solar → Lunar Conversion
     const lunar = solarToLunar(solarYear, solarMonth, solarDay);
     const year = lunar.year;
     const month = lunar.month;
     const day = lunar.day;
 
     // ═══════════════════════════════════════
-    // 정확한 紫微斗数 계산 공식
+    // 정확한 紫微斗数 Calculation 공식
     // ═══════════════════════════════════════
 
-    // 1. 命宮位置 (음력 月 + 시진)
-    // 전통 구결: "由寅起正月, 順數至生月, 再由該宮起子時逆數至生時"
-    // 寅(2)에서 月수만큼 순행, 그 자리에서 시진수만큼 역행
+    // 1. 命宮位置 (음력 月 + Birth Hour)
+    // Traditional Rule: "由寅起正月, 順數至生月, 再由該宮起子時逆數至生時"
+    // 寅(2)에서 月수만큼 Forward, 그 자리에서 Birth Hour수만큼 Backward
     const mingIdx = ((2 + month - 1) - hourIdx + 24) % 12;
 
-    // 2. 신궁 위치
-    // 寅에서 月수만큼 순행, 시진수만큼 순행
+    // 2. Body Palace Position
+    // 寅에서 月수만큼 Forward, Birth Hour수만큼 Forward
     const shenIdx = ((2 + month - 1) + hourIdx) % 12;
 
-    // 3. 五行局 결정 (命宮 干支의 납음오행)
+    // 3. 五行局 결정 (命宮 干支의 Nayin Five Elements)
     const TIANGAN = ['갑','을','병','정','무','기','경','신','임','계'];
     const tianganIdx = (year - 4) % 10;
     const tiangan = TIANGAN[tianganIdx];
 
-    // 명궁 천간: 오호둔법 (年干 → 寅宮 천간 결정)
+    // Life Palace Heavenly Stem: Five Tiger Method (年干 → 寅宮 천간 결정)
     // 甲己→丙, 乙庚→戊, 丙辛→庚, 丁壬→壬, 戊癸→甲
     const yinStemBase = [2, 4, 6, 8, 0]; // 甲己→丙(2), 乙庚→戊(4), ...
     const mingTianganIdx = (yinStemBase[tianganIdx % 5] + mingIdx - 2 + 10) % 10;
 
-    // 납음오행 60갑자 테이블 (30쌍)
+    // Nayin Five Elements 60Jiazi Table (30쌍)
     // 甲子乙丑→金4, 丙寅丁卯→火6, 戊辰己巳→木3, ...
     const NAYIN_VALUES = [4,6,3,5,4,6,2,5,4,3,2,5,6,3,2,4,6,3,5,4,6,2,5,4,3,2,5,6,3,2];
-    // 60갑자 순서에서 인덱스 계산
+    // 60갑자 순서에서 인덱스 Calculation
     function getNayinJu(stem, branch) {
         // 간지가 유효한 조합인지 (같은 홀짝)
         if (stem % 2 !== branch % 2) {
@@ -415,7 +415,7 @@ function calculate() {
             if (stem < 0) stem += 10;
         }
         // 60갑자 인덱스: (stem - branch + 12) % 12 가 아니라...
-        // 직접 계산: 甲子=0, 乙丑=1, 丙寅=2, ...
+        // 직접 Calculation: 甲子=0, 乙丑=1, 丙寅=2, ...
         const idx60 = ((stem * 6 - stem * 5 + branch * 5) / 2 + 30) % 30;
         // 더 간단한 방법: stem%5 * 6 + branch//2 에서의 납음
         const row = stem % 5;
@@ -434,10 +434,10 @@ function calculate() {
     const WUXING_NAMES = { 2: '水二局', 3: '木三局', 4: '金四局', 5: '土五局', 6: '火六局' };
     const wuxing = WUXING_NAMES[wuxingJu] || '木三局';
 
-    // 4. 자미성 위치 (음력 日 + 五行局)
-    // 자미성 공식: 五行局 수로 음력 日을 나누어 위치 결정
+    // 4. Zi Wei Position (음력 日 + 五行局)
+    // 자미Star 공식: 五行局 수로 음력 日을 나누어 위치 결정
     function getZiWeiPos(day, ju) {
-        // 정확한 자미성 조견표
+        // 정확한 Zi Wei Lookup Table
         const table = {
             2: [1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3,3,4],
             3: [2,3,1,4,2,5,3,6,4,7,5,8,6,9,7,10,8,11,9,0,10,1,11,2,0,3,1,4,2,5],
@@ -451,10 +451,10 @@ function calculate() {
 
     const ziWeiPos = getZiWeiPos(day, wuxingJu);
 
-    // 5. 천부성 위치 (자미성과 대칭)
+    // 5. Tian Fu Position (자미Star과 대칭)
     const tianFuPos = (12 - ziWeiPos + 4) % 12; // 寅(2)를 기준으로 대칭 -- 간략화
 
-    // 6. 자미계 별 배치 (자미성 기준 고정 간격)
+    // 6. 자미계 별 Placement (Fixed intervals from Zi Wei)
     // 자미→천기→(빈)→태양→무곡→천동→(빈)→(빈)→염정
     const ziWeiGroup = {
         '자미': ziWeiPos,
@@ -465,7 +465,7 @@ function calculate() {
         '염정': (ziWeiPos - 8 + 12) % 12
     };
 
-    // 7. 천부계 별 배치 (천부성 기준 고정 간격)
+    // 7. 천부계 별 Placement (Fixed intervals from Tian Fu)
     // 천부→태음→탐랑→거문→천상→천량→칠살→파군
     const tianFuGroup = {
         '천부': tianFuPos,
@@ -479,17 +479,17 @@ function calculate() {
     };
 
     // ═══════════════════════════════════════
-    // 보조성 (輔星) 계산 — 삼합파 기준
+    // Auxiliary Stars (輔星) Calculation — San He School
     // ═══════════════════════════════════════
     const yearBranch = (year - 4) % 12;
 
-    // 문창 (文昌): 戌(10)에서 시진수만큼 역행
+    // 문창 (文昌): 戌(10)에서 Birth Hour수만큼 Backward
     const wenChangPos = (10 - hourIdx + 12) % 12;
-    // 문곡 (文曲): 辰(4)에서 시진수만큼 순행
+    // 문곡 (文曲): 辰(4)에서 Birth Hour수만큼 Forward
     const wenQuPos = (4 + hourIdx) % 12;
-    // 좌보 (左輔): 辰(4)에서 月수만큼 순행
+    // 좌보 (左輔): 辰(4)에서 月수만큼 Forward
     const zuoFuPos = (4 + month - 1) % 12;
-    // 우필 (右弼): 戌(10)에서 月수만큼 역행
+    // 우필 (右弼): 戌(10)에서 月수만큼 Backward
     const youBiPos = (10 - month + 1 + 12) % 12;
 
     // 천괴/천月 (天魁/天鉞): 年간 기준
@@ -499,23 +499,23 @@ function calculate() {
     };
     const [tianKuiPos, tianYuePos] = kuiYueTable[tianganIdx] || [1,7];
 
-    // 록존 (祿存): 年간 기준
+    // Lu Cun (祿存): 年간 기준
     const lucunTable = [2,3,5,6,5,6,8,9,11,0]; // 甲寅,乙卯,丙巳...
     const lucunPos = lucunTable[tianganIdx];
-    // 경양 (擎羊): 록존+1
+    // 경양 (擎羊): Lu Cun+1
     const qingyangPos = (lucunPos + 1) % 12;
-    // 타라 (陀羅): 록존-1
+    // 타라 (陀羅): Lu Cun-1
     const tuoluoPos = (lucunPos - 1 + 12) % 12;
 
-    // 화성 (火星): 年지 그룹 + 시진
+    // 화Star (火星): 年지 그룹 + Birth Hour
     const huoBase = {2:1, 6:1, 10:1, 8:2, 0:2, 4:2, 5:3, 9:3, 1:3, 11:9, 3:9, 7:9};
     const huoXingPos = ((huoBase[yearBranch] || 1) + hourIdx) % 12;
-    // 영성 (鈴星): 年지 그룹 + 시진
+    // 영Star (鈴星): 年지 그룹 + Birth Hour
     const lingBase = {2:3, 6:3, 10:3, 8:10, 0:10, 4:10, 5:10, 9:10, 1:10, 11:10, 3:10, 7:10};
     const lingXingPos = ((lingBase[yearBranch] || 10) + hourIdx) % 12;
 
     // ═══════════════════════════════════════
-    // 사화 (四化) 계산 — 삼합파 기준
+    // Four Transformations (四化) Calculation — San He School
     // ═══════════════════════════════════════
     // 年간별 [화록, 화권, 화과, 화기] 에 해당하는 별 이름
     const sihuaTable = {
@@ -532,30 +532,30 @@ function calculate() {
     };
     const sihuaNames = ['화록','화권','화과','화기'];
     const sihuaStars = sihuaTable[tianganIdx] || [];
-    const sihuaMap = {}; // star name -> 사화 label
+    const sihuaMap = {}; // star name -> Four Transformations label
     sihuaStars.forEach((star, i) => { sihuaMap[star] = sihuaNames[i]; });
 
     // ═══════════════════════════════════════
-    // 잡성 (雜星) 계산
+    // Minor Stars (雜星) Calculation
     // ═══════════════════════════════════════
     // 천요 (天姚): 年지 기준
     const tianyaoTable = [1,2,3,4,5,6,7,8,9,10,11,0]; // 子→丑, 丑→寅, ...
     const tianyaoPos = tianyaoTable[yearBranch];
-    // 홍란 (紅鸞): 年지 기준 (卯에서 역행)
+    // 홍란 (紅鸞): 年지 기준 (卯에서 Backward)
     const hongluanPos = (3 - yearBranch + 12) % 12;
-    // 천희 (天喜): 홍란 대궁
+    // 천희 (天喜): 홍란 대Palace
     const tianxiPos = (hongluanPos + 6) % 12;
     // 함지 (咸池/목욕): 年지 삼합 기준
     const xianchiTable = {0:9, 1:6, 2:3, 3:0, 4:9, 5:6, 6:3, 7:0, 8:9, 9:6, 10:3, 11:0};
     const xianchiPos = xianchiTable[yearBranch];
-    // 천형 (天刑): 月 기준 (寅에서 순행)
+    // 천형 (天刑): 月 기준 (寅에서 Forward)
     const tianxingPos = (9 + month) % 12;
     // 천마 (天馬): 年지 기준
     const tianmaTable = {0:2, 1:11, 2:8, 3:5, 4:2, 5:11, 6:8, 7:5, 8:2, 9:11, 10:8, 11:5};
     const tianmaPos = tianmaTable[yearBranch];
-    // 지겁 (地劫): 시진 기준 (亥에서 순행)
+    // 지겁 (地劫): Birth Hour 기준 (亥에서 Forward)
     const dijiePos = (11 + hourIdx) % 12;
-    // 천공 (地空): 시진 기준 (亥에서 역행)
+    // 천공 (地空): Birth Hour 기준 (亥에서 Backward)
     const dikongPos = (11 - hourIdx + 12) % 12;
     // 고진 (孤辰): 年지 기준
     const guchenTable = {0:2, 1:2, 2:5, 3:5, 4:5, 5:8, 6:8, 7:8, 8:11, 9:11, 10:11, 11:2};
@@ -577,23 +577,23 @@ function calculate() {
         '고진':'孤辰','과숙':'寡宿',
     };
 
-    // 보조성 + 잡성 위치 모음
+    // Auxiliary Stars + Minor Stars 위치 모음
     const auxStars = {
         '문창': wenChangPos, '문곡': wenQuPos,
         '좌보': zuoFuPos, '우필': youBiPos,
         '천괴': tianKuiPos, '천月': tianYuePos,
-        '록존': lucunPos,
+        'Lu Cun': lucunPos,
         '경양': qingyangPos, '타라': tuoluoPos,
-        '화성': huoXingPos, '영성': lingXingPos,
+        '화Star': huoXingPos, '영Star': lingXingPos,
     };
 
-    // 8. 각 궁에 별 배치
+    // 8. 각 Palace에 별 Placement
     const palaceStars = [];
     const palaceAuxStars = [];
     const palaceMiscStars = [];
     for (let i = 0; i < 12; i++) { palaceStars.push([]); palaceAuxStars.push([]); palaceMiscStars.push([]); }
 
-    // 잡성 배치
+    // Minor Stars Placement
     Object.entries(miscStars).forEach(([name, pos]) => {
         palaceMiscStars[pos].push(MISC_HANJA[name] || name);
     });
@@ -608,8 +608,8 @@ function calculate() {
         }
     });
 
-    // 보조성 배치
-    const SHA_STARS = ['경양','타라','화성','영성'];
+    // Auxiliary Stars Placement
+    const SHA_STARS = ['경양','타라','화Star','영Star'];
     Object.entries(auxStars).forEach(([name, pos]) => {
         let label = hanja(name);
         if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:10px;">' + hanja(sihuaMap[name]) + '</span>';
@@ -621,12 +621,12 @@ function calculate() {
         }
     });
 
-    // 9. 명궁의 주성 찾기 (원본 한글 이름으로 검색)
+    // 9. Find Life Palace main star (Search by original Korean name)
     const mingMainStars = STAR_NAMES.filter(name => allStarPositions[name] === mingIdx);
     const mainStar = mingMainStars.length > 0 ? mingMainStars[0] : STAR_NAMES[(mingIdx + day) % 14];
     const starData = MAIN_STARS[mainStar];
 
-    // 명궁 지지
+    // 명Palace 지지
     const DIZHI = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
     const mingDizhi = DIZHI[mingIdx];
 
@@ -634,8 +634,8 @@ function calculate() {
     document.getElementById('mainStarWrap').innerHTML = `
         <div class="main-star-card">
             <span class="main-star-glyph">${starData.glyph}</span>
-            <div class="main-star-name">${mainStar}성 (${starData.rank})</div>
-            <div class="main-star-sub">오행: ${starData.element} | 명궁: ${DIZHI[mingIdx]}궁</div>
+            <div class="main-star-name">${mainStar}Star (${starData.rank})</div>
+            <div class="main-star-sub">오행: ${starData.element} | 명Palace: ${DIZHI[mingIdx]}Palace</div>
         </div>
     `;
 
@@ -650,7 +650,7 @@ function calculate() {
                 cell.className = 'palace-cell empty';
                 cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">紫微<br>斗數</div>' : '';
             } else {
-                // 궁 이름: 명궁에서 반시계방향으로 배치
+                // Palace Name: 명Palace에서 반시계Direction으로 Placement
                 const palaceOrder = (mingIdx - pIdx + 12) % 12;
                 cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '') + (pIdx === shenIdx ? ' ming' : '');
                 const shenMark = pIdx === shenIdx ? ' <span style="color:#e84393;font-size:10px;">身宮</span>' : '';
@@ -670,29 +670,29 @@ function calculate() {
     }
 
     // ═══════════════════════════════════════
-    // 동궁 조합 해석 (전통 격국)
+    // Combination Interpretation (Traditional Formations)
     // ═══════════════════════════════════════
     const COMBO_INTERP = {
-        '무곡+천상': { career: '武曲+天相（財+印）同宮 = 財印交輝の格. 財務管理と行政を兼備。銀行、会計、財務行政で安定した成功。', wealth: '안정적 財運 축적. 인수(인수(도장)의 별)의 보호 아래 재성(財運의 별)이 빛난다. Favorable for steady, conservative investment.' },
-        '무곡+파군': { career: '무곡+파군 (財運+파괴) 동궁 = 무관(군인/경찰)의 격. 군인, 경찰, 무관 계열에서 성공. 파괴와 재건을 통한 財運 획득.', wealth: '대성대패형. 크게 벌고 크게 잃을 수 있다. 기술직이나 철물 관련 사업에 유리.' },
-        '무곡+탐랑': { career: '무곡+탐랑 (財運+매력) 동궁. Talent in sales, entertainment. 사교로 財運을 벌지만 주색에 주의.', wealth: 'Earns well and spends well. With Hua Lu: windfall possible.' },
-        '무곡+천부': { career: '무곡+천부 (財運+명령) 동궁 = Millionaire formation. 財運 창고가 넘친다. Optimal for corporate finance.', wealth: '최상의 財運운. Ability to both earn and save.' },
-        '자미+천부': { personality: '자미+천부 (황제+명령) 동궁 = 황제의 별+명령의 별. 최고의 귀격. 권위와 안정을 겸비하며, 어디서든 중심이 된다.' },
-        '자미+탐랑': { personality: '자미+탐랑 (황제+매력) 동궁. Noble yet charming. Authority and charm simultaneously attract people.' },
-        '자미+천상': { personality: '자미+천상 (황제+인수) 동궁 = 황제의 별+인수(도장)의 별. 권위와 격식을 겸비. 관직에서 크게 빛난다.' },
-        '자미+칠살': { personality: '자미+칠살 (황제+장군) 동궁 = 자미가 칠살을 다스리는 격. 자미가 칠살을 다스려 위풍당당한 장군이 된다. 제화가 잘 되면 대귀.' },
-        '염정+천부': { personality: '염정+천부 (가둠+명령) 동궁. 가둠의 별이 명령의 별을 만나 안정된다. 感情を制する能力が生まれ、官職で財も得る。' },
-        '염정+탐랑': { personality: '염정+탐랑 (가둠+매력) 동궁 = 도화가 주인을 범하는 격. Extreme peach blossom energy. Overflowing charm but beware of emotional management.' },
-        '염정+칠살': { personality: '염정+칠살 (가둠+장군) 동궁 = 길 위에 시체를 묻는 격(대흉). 나쁜 자리(함지)에서 흉성을 만나면 대흉. 좋은 자리(묘왕)에 있으면 위풍당당.' },
+        '무곡+천상': { career: '武曲+天相（財+印）同宮 = 財印交輝の格. 財務管理と行政を兼備。銀行、会計、財務行政で安定した成功。', wealth: '안정적 財運 축적. 인수(인수(도장)의 별)의 보호 아래 재Star(財運의 별)이 빛난다. Favorable for steady, conservative investment.' },
+        '무곡+파군': { career: '무곡+파군 (財運+파괴) 동Palace = 무관(군인/경찰)의 격. 군인, 경찰, 무관 계열에서 Star공. 파괴와 재건을 통한 財運 획득.', wealth: '대Star대패형. 크게 벌고 크게 잃을 수 있다. 기술직이나 철물 관련 사업에 유리.' },
+        '무곡+탐랑': { career: '무곡+탐랑 (財運+매력) 동Palace. Talent in sales, entertainment. 사교로 財運을 벌지만 주색에 주의.', wealth: 'Earns well and spends well. With Hua Lu: windfall possible.' },
+        '무곡+천부': { career: '무곡+천부 (財運+명령) 동Palace = Millionaire formation. 財運 창고가 넘친다. Optimal for corporate finance.', wealth: '최상의 財運운. Ability to both earn and save.' },
+        '자미+천부': { personality: '자미+천부 (황제+명령) 동Palace = 황제의 별+명령의 별. 최고의 귀격. 권위와 안정을 겸비하며, 어디서든 중심이 된다.' },
+        '자미+탐랑': { personality: '자미+탐랑 (황제+매력) 동Palace. Noble yet charming. Authority and charm simultaneously attract people.' },
+        '자미+천상': { personality: '자미+천상 (황제+인수) 동Palace = 황제의 별+인수(도장)의 별. 권위와 격식을 겸비. 관직에서 크게 빛난다.' },
+        '자미+칠살': { personality: '자미+칠살 (황제+장군) 동Palace = 자미가 칠살을 다스리는 격. 자미가 칠살을 다스려 위풍당당한 장군이 된다. 제화가 잘 되면 대귀.' },
+        '염정+천부': { personality: '염정+천부 (가둠+명령) 동Palace. Imprisoned Star이 명령의 별을 만나 안정된다. 感情を制する能力が生まれ、官職で財も得る。' },
+        '염정+탐랑': { personality: '염정+탐랑 (가둠+매력) 동Palace = 도화가 주인을 범하는 격. Extreme peach blossom energy. Overflowing charm but beware of emotional management.' },
+        '염정+칠살': { personality: '염정+칠살 (가둠+장군) 동Palace = 길 위에 시체를 묻는 격(대흉). 나쁜 자리(함지)에서 Sha Stars을 만나면 대흉. 좋은 자리(묘왕)에 있으면 위풍당당.' },
         '태양+태음': { personality: 'Sun and Moon in the same palace에 있는 격. Yin and Yang shine together but may overshadow each other.' },
-        '태양+거문': { personality: '태양+거문 (빛+어둠) 동궁. Sun illuminates darkness of Ju Men. Favorable for overseas development and foreign business.' },
+        '태양+거문': { personality: '태양+거문 (빛+어둠) 동Palace. Sun illuminates darkness of Ju Men. Favorable for overseas development and foreign business.' },
         '태양+천량': { career: '太陽+天梁（光+蔭）同宮 = 日照天梁格（大吉）。公職、教育、医療で大いに輝く。', personality: 'Bright, honest, with strong protective instinct. Much help from seniors.' },
-        '천동+태음': { personality: '천동+태음 (복+달) 동궁. Soft and emotional. Talent in arts and religion but lacks decisiveness.' },
-        '천동+거문': { personality: '천동+거문 (복+어둠) 동궁. Blessing star meets dark star, gossip exists but, 좋은 자리(묘왕)에 있으면 Blessings come through speech.', career: 'Suited for education, counseling, media. Blessed to live by words.' },
-        '천동+천량': { personality: '천동+천량 (복+보호) 동궁 = Carefree lifestyle formation. Comfortable and leisurely life. Deep connection to religion and academics.' },
+        '천동+태음': { personality: '천동+태음 (복+달) 동Palace. Soft and emotional. Talent in arts and religion but lacks decisiveness.' },
+        '천동+거문': { personality: '천동+거문 (복+어둠) 동Palace. Blessing star meets dark star, gossip exists but, 좋은 자리(묘왕)에 있으면 Blessings come through speech.', career: 'Suited for education, counseling, media. Blessed to live by words.' },
+        '천동+천량': { personality: '천동+천량 (복+보호) 동Palace = Carefree lifestyle formation. Comfortable and leisurely life. Deep connection to religion and academics.' },
         '천기+태음': { personality: '天機+太陰（謀+月）同宮。繊細で直感に優れる。不動産・宗教・学問に才能。' },
-        '천기+거문': { personality: '천기+거문 (참모+어둠) 동궁. Strategy and eloquence combined. Excellent advisor but beware of gossip.' },
-        '천기+천량': { personality: '천기+천량 (참모+보호) 동궁 = 착한 별(선성) 조합. Deeply immersed in religion, philosophy, academics. Caliber of a high monk or scholar.' },
+        '천기+거문': { personality: '천기+거문 (참모+어둠) 동Palace. Strategy and eloquence combined. Excellent advisor but beware of gossip.' },
+        '천기+천량': { personality: '천기+천량 (참모+보호) 동Palace = 착한 별(선Star) 조합. Deeply immersed in religion, philosophy, academics. Caliber of a high monk or scholar.' },
     };
 
     function getComboInterp(palIdx, field) {
@@ -730,14 +730,14 @@ function calculate() {
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item"><div class="info-label">陽暦誕生日</div><div class="info-value">${solarYear}年 ${solarMonth}月 ${solarDay}日</div></div>
         <div class="info-item"><div class="info-label">旧暦誕生日</div><div class="info-value">${lunar.year}年 ${lunar.leap ? '윤' : ''}${lunar.month}月 ${lunar.day}日</div></div>
-        <div class="info-item"><div class="info-label">命宮主星</div><div class="info-value">${starData.glyph} ${mainStar}성</div><div class="info-desc">${starData.rank}</div></div>
-        <div class="info-item"><div class="info-label">命宮位置</div><div class="info-value">${DIZHI[mingIdx]}궁 (${tiangan}${mingDizhi})</div></div>
-        <div class="info-item"><div class="info-label">五行局</div><div class="info-value">${wuxing}</div><div class="info-desc">紫微星位置： ${DIZHI[ziWeiPos]}궁</div></div>
+        <div class="info-item"><div class="info-label">命宮主星</div><div class="info-value">${starData.glyph} ${mainStar}Star</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">命宮位置</div><div class="info-value">${DIZHI[mingIdx]}Palace (${tiangan}${mingDizhi})</div></div>
+        <div class="info-item"><div class="info-label">五行局</div><div class="info-value">${wuxing}</div><div class="info-desc">紫微星位置： ${DIZHI[ziWeiPos]}Palace</div></div>
         <div class="info-item"><div class="info-label">性別/陰陽</div><div class="info-value">${gender === 'm' ? '男性（陽）' : '女性（陰）'}</div></div>
-        <div class="info-item"><div class="info-label">身宮位置</div><div class="info-value">${DIZHI[shenIdx]}궁 (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return '後天的性格・晩年の方向'; const descs = {'자미':'後天的にリーダーシップと権威が強まる','천기':'後天的に知略と宗教/学問の傾向が強まる','태양':'後天的に社会活動と公的役割が大きくなる','무곡':'後天的に財務感覚と決断力が強まる','천동':'後天的に福禄を追求し快適な生活を目指す','염정':'後天的に感情が激しくなり芸術/政治の傾向が出る','천부':'후천적으로 안정과 財運 관리 능력이 발달한다','태음':'後天的に感性と直感が深まり不動産に縁が生まれる','탐랑':'後天的に魅力と社交性が強まり多才多能になる','거문':'後天的に弁舌が発達し口舌に注意が必要','천상':'後天的に体面と格式を重視するようになる','천량':'後天的に保守的になり貴人の助けが多くなる','칠살':'後天的に独立的で行動力が強まる。海外/移動が人生後半の中心','파군':'後天的に変化と革新を追求し既存の秩序を壊す'}; const base = descs[s] || '後天的性格・晩年の方向'; return shenIdx === mingIdx ? base + '. 身宮が命宮と同じ位置 = 先天と後天が同じ方向で、生まれ持った性格が変わらず強化される' : base; })()}</div></div>
+        <div class="info-item"><div class="info-label">身宮位置</div><div class="info-value">${DIZHI[shenIdx]}Palace (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return '後天的性格・晩年の方向'; const descs = {'자미':'後天的にリーダーシップと権威が強まる','천기':'後天的に知略と宗教/学問の傾向が強まる','태양':'後天的に社会活動と公的役割が大きくなる','무곡':'後天的に財務感覚と決断力が強まる','천동':'後天的に福禄を追求し快適な生活を目指す','염정':'後天的に感情が激しくなり芸術/政治の傾向が出る','천부':'후천적으로 안정과 財運 관리 능력이 발달한다','태음':'後天的に感性と直感が深まり不動産に縁が生まれる','탐랑':'後天的に魅力と社交性が強まり多才多能になる','거문':'後天的に弁舌が発達し口舌に注意が必要','천상':'後天的に体面と格式を重視するようになる','천량':'後天的に保守的になり貴人の助けが多くなる','칠살':'後天的に独立的で行動力が強まる。海外/移動が人生後半の中心','파군':'後天的に変化と革新を追求し既存の秩序を壊す'}; const base = descs[s] || '後天的性格・晩年の方向'; return shenIdx === mingIdx ? base + '. 身宮が命宮と同じ位置 = 先天と後天が同じ方向で、生まれ持った性格が変わらず強化される' : base; })()}</div></div>
         <div class="info-item"><div class="info-label">四化</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
         <div class="info-item"><div class="info-label">吉星</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">문창 문곡 좌보 우필 천괴 천月 녹존</div></div>
-        <div class="info-item"><div class="info-label">凶星</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">경양 타라 화성 영성</div></div>
+        <div class="info-item"><div class="info-label">凶星</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">경양 타라 화Star 영Star</div></div>
     `;
 
     // Main Interpretation
@@ -747,8 +747,8 @@ function calculate() {
             <div class="interp-title">${starData.glyph} 命宮: ${palaceStarSummary(mingIdx)}</div>
             <div class="interp-text">
                 ${mingCombo ? '<strong>📋 同宮組合せ解釈：</strong><br>' + mingCombo + '<br><br>' : ''}
-                <strong>${hanja(mainStar)}성 (${starData.rank}):</strong><br>${starData.personality}
-                ${mingMainStars.length > 1 && MAIN_STARS[mingMainStars[1]] ? '<br><br><strong>' + hanja(mingMainStars[1]) + '성 (' + MAIN_STARS[mingMainStars[1]].rank + '):</strong><br>' + MAIN_STARS[mingMainStars[1]].personality : ''}
+                <strong>${hanja(mainStar)}Star (${starData.rank}):</strong><br>${starData.personality}
+                ${mingMainStars.length > 1 && MAIN_STARS[mingMainStars[1]] ? '<br><br><strong>' + hanja(mingMainStars[1]) + 'Star (' + MAIN_STARS[mingMainStars[1]].rank + '):</strong><br>' + MAIN_STARS[mingMainStars[1]].personality : ''}
             </div>
         </div>
         <div class="interp-card">
@@ -758,7 +758,7 @@ function calculate() {
     `;
 
     // ═══════════════════════════════════════
-    // 궁별 해석 헬퍼
+    // Palace Interpretation Helper
     // ═══════════════════════════════════════
     function getPalaceStarList(palIdx) {
         const main = STAR_NAMES.filter(n => allStarPositions[n] === palIdx);
@@ -773,17 +773,17 @@ function calculate() {
         if (p.mainHanja.length) html += '<span style="color:#c9a84c;">' + p.mainHanja.join(' ') + '</span>';
         if (p.auxHanja.length) html += ' <span style="color:#6bc5d2;font-size:12px;">' + p.auxHanja.join(' ') + '</span>';
         if (p.sihua.length) html += ' <span style="color:#ff6b6b;font-size:11px;">[' + p.sihua.join(' ') + ']</span>';
-        return html || '<span style="color:#666;">주성 없음</span>';
+        return html || '<span style="color:#666;">No main star</span>';
     }
 
-    // 궁별 주성 기반 해석 (해당 궁의 별 → 해당 분야 해석)
+    // Palace별 주Star 기반 해석 (해당 Palace의 별 → 해당 분야 해석)
     function palaceInterp(palIdx, field) {
         const stars = STAR_NAMES.filter(n => allStarPositions[n] === palIdx);
         const texts = stars.map(s => MAIN_STARS[s] ? MAIN_STARS[s][field] : '').filter(t => t);
         return texts.length > 0 ? texts.join('<br><br>') : null;
     }
 
-    // Spouse (부처궁 = 명궁에서 반시계 2번째)
+    // Spouse (부처Palace = 명Palace에서 반시계 2번째)
     const spouseIdx = (mingIdx - 2 + 12) % 12;
     const spouseStarInfo = getPalaceStarList(spouseIdx);
     const spouseStar = spouseStarInfo.main.length > 0 ? spouseStarInfo.main[0] : null;
@@ -800,12 +800,12 @@ function calculate() {
                 ${spouseCombo ? '<strong>📋 同宮組合せ解釈：</strong><br>' + spouseCombo + '<br><br>' : ''}
                 <strong>夫妻宮の主星解釈：</strong><br>
                 ${spouseInterp || '夫妻宮に主星なし — 三方四正の星を確認してください。'}
-                <br><br><strong>명궁 ${hanja(mainStar)}성の結婚観：</strong><br>${starData.love}
+                <br><br><strong>명Palace ${hanja(mainStar)}Starの結婚観：</strong><br>${starData.love}
             </div>
         </div>
     `;
 
-    // Wealth (재백궁)
+    // Wealth (재백Palace)
     const wealthIdx = (mingIdx - 4 + 12) % 12;
     const wealthInterp = palaceInterp(wealthIdx, 'wealth');
     const wealthCombo = getComboInterp(wealthIdx, 'wealth') || getComboInterp(wealthIdx, 'personality');
@@ -816,12 +816,12 @@ function calculate() {
                 ${wealthCombo ? '<strong>📋 同宮組合せ解釈：</strong><br>' + wealthCombo + '<br><br>' : ''}
                 <strong>財帛宮の主星解釈：</strong><br>
                 ${wealthInterp || '財帛宮に主星なし — 三方四正の星を確認してください。'}
-                <br><br><strong>명궁 ${hanja(mainStar)}성の財運：</strong><br>${starData.wealth}
+                <br><br><strong>명Palace ${hanja(mainStar)}Starの財運：</strong><br>${starData.wealth}
             </div>
         </div>
     `;
 
-    // Career (관록궁)
+    // Career (관록Palace)
     const careerIdx = (mingIdx - 8 + 12) % 12;
     const careerInterp = palaceInterp(careerIdx, 'career');
     const careerCombo = getComboInterp(careerIdx, 'career') || getComboInterp(careerIdx, 'personality');
@@ -832,12 +832,12 @@ function calculate() {
                 ${careerCombo ? '<strong>📋 同宮組合せ解釈：</strong><br>' + careerCombo + '<br><br>' : ''}
                 <strong>官禄宮の主星解釈：</strong><br>
                 ${careerInterp || '官禄宮に主星なし — 三方四正の星を確認してください。'}
-                <br><br><strong>명궁 ${hanja(mainStar)}성の職業観：</strong><br>${starData.career}
+                <br><br><strong>명Palace ${hanja(mainStar)}Starの職業観：</strong><br>${starData.career}
             </div>
         </div>
     `;
 
-    // Health (질액궁) — 이 궁의 별 기반으로 해석
+    // Health (질액Palace) — 이 Palace의 별 기반으로 해석
     const healthIdx = (mingIdx - 5 + 12) % 12;
     const healthInterp = palaceInterp(healthIdx, 'health');
     document.getElementById('healthWrap').innerHTML = `
@@ -846,15 +846,15 @@ function calculate() {
             <div class="interp-text">
                 <strong>疾厄宮の主星解釈：</strong><br>
                 ${healthInterp || '疾厄宮に主星なし — 命宮主星の健康傾向を参考に。'}
-                <br><br><strong>명궁 ${hanja(mainStar)}성の健康：</strong><br>${starData.health}
+                <br><br><strong>명Palace ${hanja(mainStar)}Starの健康：</strong><br>${starData.health}
             </div>
         </div>
     `;
 
-    // 대운 (10年 주기)
-    // 대한 (大限) 계산
-    // 시작 나이 = 五行局 수 (水二=2, 木三=3, 金四=4, 土五=5, 火六=6)
-    // 방향: 陽男陰女 = 순행(+1), 陰男陽女 = 역행(-1)
+    // Major Fortune (10年 주기)
+    // Major Period (大限) Calculation
+    // Starting Age = 五行局 수 (水二=2, 木三=3, 金四=4, 土五=5, 火六=6)
+    // Direction: 陽男陰女 = Forward(+1), 陰男陽女 = Backward(-1)
     const isYangStem = tianganIdx % 2 === 0;
     const isMale = gender === 'm';
     const dahanForward = (isYangStem && isMale) || (!isYangStem && !isMale);
@@ -870,8 +870,8 @@ function calculate() {
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
 
         dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
-            <span style="min-width:60px;font-weight:700;color:#e84393;">${startAge}~${endAge}세</span>
-            <span style="flex:1;color:#999;">${DIZHI[palIdx]}궁 ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            <span style="min-width:60px;font-weight:700;color:#e84393;">${startAge}~${endAge}yrs</span>
+            <span style="flex:1;color:#999;">${DIZHI[palIdx]}Palace ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
             ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">現在' + (currentAge >= endAge - 1 ? '（転換間近）' : '') + '</span>' : ''}
         </div>`;
     }
