@@ -129,7 +129,7 @@
         <h3 class="section-title">🏥 Health Palace</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">⏳ 대운 (10년 주기)</h3>
+        <h3 class="section-title">⏳ Major Periods (10yr)</h3>
         <div id="dashaWrap"></div>
     </div>
 </div>
@@ -394,7 +394,7 @@ function calculate() {
     const shenIdx = ((2 + month - 1) + hourIdx) % 12;
 
     // 3. 오행국 결정 (命宮 干支의 납음오행)
-    const TIANGAN = ['갑','을','병','정','무','기','경','신','임','계'];
+    const TIANGAN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
     const tianganIdx = (year - 4) % 10;
     const tiangan = TIANGAN[tianganIdx];
 
@@ -730,7 +730,7 @@ function calculate() {
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item"><div class="info-label">Solar Birthday</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
         <div class="info-item"><div class="info-label">Lunar Birthday</div><div class="info-value">${lunar.year}/${lunar.leap ? 'L' : ''}${lunar.month}/${lunar.day}</div></div>
-        <div class="info-item"><div class="info-label">Main Star</div><div class="info-value">${starData.glyph} ${mainStar}성</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">Main Star</div><div class="info-value">${starData.glyph} ${hanja(mainStar)}</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">Palace Position</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei: ${DIZHI[ziWeiPos]}</div></div>
         <div class="info-item"><div class="info-label">Gender/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Male (Yang)' : 'Female (Yin)'}</div></div>
@@ -851,7 +851,7 @@ function calculate() {
         </div>
     `;
 
-    // 대운 (10년 주기)
+    // Major Periods (10yr)
     // 대한 (大限) 계산
     // 시작 나이 = 오행국 수 (水二=2, 木三=3, 金四=4, 土五=5, 火六=6)
     // 방향: 陽男陰女 = 순행(+1), 陰男陽女 = 역행(-1)
