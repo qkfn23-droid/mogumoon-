@@ -534,7 +534,49 @@ function calculate() {
     const sihuaMap = {}; // star name -> 사화 label
     sihuaStars.forEach((star, i) => { sihuaMap[star] = sihuaNames[i]; });
 
-    // 보조성 위치 모음
+    // ═══════════════════════════════════════
+    // 잡성 (雜星) 계산
+    // ═══════════════════════════════════════
+    // 천요 (天姚): 년지 기준
+    const tianyaoTable = [1,2,3,4,5,6,7,8,9,10,11,0]; // 子→丑, 丑→寅, ...
+    const tianyaoPos = tianyaoTable[yearBranch];
+    // 홍란 (紅鸞): 년지 기준 (卯에서 역행)
+    const hongluanPos = (3 - yearBranch + 12) % 12;
+    // 천희 (天喜): 홍란 대궁
+    const tianxiPos = (hongluanPos + 6) % 12;
+    // 함지 (咸池/목욕): 년지 삼합 기준
+    const xianchiTable = {0:9, 1:6, 2:3, 3:0, 4:9, 5:6, 6:3, 7:0, 8:9, 9:6, 10:3, 11:0};
+    const xianchiPos = xianchiTable[yearBranch];
+    // 천형 (天刑): 월 기준 (寅에서 순행)
+    const tianxingPos = (9 + month) % 12;
+    // 천마 (天馬): 년지 기준
+    const tianmaTable = {0:2, 1:11, 2:8, 3:5, 4:2, 5:11, 6:8, 7:5, 8:2, 9:11, 10:8, 11:5};
+    const tianmaPos = tianmaTable[yearBranch];
+    // 지겁 (地劫): 시진 기준 (亥에서 순행)
+    const dijiePos = (11 + hourIdx) % 12;
+    // 천공 (地空): 시진 기준 (亥에서 역행)
+    const dikongPos = (11 - hourIdx + 12) % 12;
+    // 고진 (孤辰): 년지 기준
+    const guchenTable = {0:2, 1:2, 2:5, 3:5, 4:5, 5:8, 6:8, 7:8, 8:11, 9:11, 10:11, 11:2};
+    const guchenPos = guchenTable[yearBranch];
+    // 과숙 (寡宿): 년지 기준
+    const guasuTable = {0:10, 1:10, 2:1, 3:1, 4:1, 5:4, 6:4, 7:4, 8:7, 9:7, 10:7, 11:10};
+    const guasuPos = guasuTable[yearBranch];
+
+    const miscStars = {
+        '천요': tianyaoPos, '홍란': hongluanPos, '천희': tianxiPos,
+        '함지': xianchiPos, '천형': tianxingPos, '천마': tianmaPos,
+        '지겁': dijiePos, '지공': dikongPos,
+        '고진': guchenPos, '과숙': guasuPos,
+    };
+
+    const MISC_HANJA = {
+        '천요':'天姚','홍란':'紅鸞','천희':'天喜','함지':'咸池',
+        '천형':'天刑','천마':'天馬','지겁':'地劫','지공':'地空',
+        '고진':'孤辰','과숙':'寡宿',
+    };
+
+    // 보조성 + 잡성 위치 모음
     const auxStars = {
         '문창': wenChangPos, '문곡': wenQuPos,
         '좌보': zuoFuPos, '우필': youBiPos,
@@ -547,7 +589,13 @@ function calculate() {
     // 8. 각 궁에 별 배치
     const palaceStars = [];
     const palaceAuxStars = [];
-    for (let i = 0; i < 12; i++) { palaceStars.push([]); palaceAuxStars.push([]); }
+    const palaceMiscStars = [];
+    for (let i = 0; i < 12; i++) { palaceStars.push([]); palaceAuxStars.push([]); palaceMiscStars.push([]); }
+
+    // 잡성 배치
+    Object.entries(miscStars).forEach(([name, pos]) => {
+        palaceMiscStars[pos].push(MISC_HANJA[name] || name);
+    });
 
     const allStarPositions = { ...ziWeiGroup, ...tianFuGroup };
     STAR_NAMES.forEach(name => {
@@ -611,6 +659,9 @@ function calculate() {
                 }
                 if (palaceAuxStars[pIdx].length > 0) {
                     cell.innerHTML += `<div style="color:#6bc5d2;font-size:9px;margin-top:2px;">${palaceAuxStars[pIdx].join(' ')}</div>`;
+                }
+                if (palaceMiscStars[pIdx].length > 0) {
+                    cell.innerHTML += `<details style="margin-top:2px;"><summary style="color:#888;font-size:8px;cursor:pointer;">잡성 ▸</summary><div style="color:#a88;font-size:8px;margin-top:2px;">${palaceMiscStars[pIdx].join(' ')}</div></details>`;
                 }
             }
             grid.appendChild(cell);
