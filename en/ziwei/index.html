@@ -378,10 +378,10 @@ function calculate() {
 
     // 1. Life Palace position (lunar month + hour branch)
     //    Formula: start from Yin (2), advance by month, retreat by hour
-    const mingIdx = ((2 + month - 1) - hourIdx + 24) % 12;
+    const mingIdx = (3 - month + hourIdx + 24) % 12;
 
     // 2. Spirit Palace (opposite of Life Palace)
-    const shenIdx = ((2 + month - 1) + hourIdx) % 12;
+    const shenIdx = (1 + month + hourIdx) % 12;
 
     // 3. Five Elements Bureau (Heavenly Stem + Life Palace Branch)
     const TIANGAN_EN = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
