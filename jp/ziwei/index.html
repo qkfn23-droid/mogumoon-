@@ -728,8 +728,8 @@ function calculate() {
 
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item"><div class="info-label">陽暦誕生日</div><div class="info-value">${solarYear}년 ${solarMonth}월 ${solarDay}일</div></div>
-        <div class="info-item"><div class="info-label">旧暦誕生日</div><div class="info-value">${lunar.year}년 ${lunar.leap ? '윤' : ''}${lunar.month}월 ${lunar.day}일</div></div>
+        <div class="info-item"><div class="info-label">陽暦誕生日</div><div class="info-value">${solarYear}年 ${solarMonth}月 ${solarDay}日</div></div>
+        <div class="info-item"><div class="info-label">旧暦誕生日</div><div class="info-value">${lunar.year}年 ${lunar.leap ? '閏' : ''}${lunar.month}月 ${lunar.day}日</div></div>
         <div class="info-item"><div class="info-label">命宮主星</div><div class="info-value">${starData.glyph} ${hanja(mainStar)}星</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">命宮位置</div><div class="info-value">${DIZHI[mingIdx]}宮 (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">五行局</div><div class="info-value">${wuxing}</div><div class="info-desc">紫微星位置: ${DIZHI[ziWeiPos]}宮</div></div>

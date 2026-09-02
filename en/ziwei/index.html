@@ -728,8 +728,8 @@ function calculate() {
 
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item"><div class="info-label">Solar Birthday</div><div class="info-value">${solarYear}년 ${solarMonth}월 ${solarDay}일</div></div>
-        <div class="info-item"><div class="info-label">Lunar Birthday</div><div class="info-value">${lunar.year}년 ${lunar.leap ? '윤' : ''}${lunar.month}월 ${lunar.day}일</div></div>
+        <div class="info-item"><div class="info-label">Solar Birthday</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
+        <div class="info-item"><div class="info-label">Lunar Birthday</div><div class="info-value">${lunar.year}/${lunar.leap ? 'L' : ''}${lunar.month}/${lunar.day}</div></div>
         <div class="info-item"><div class="info-label">Main Star</div><div class="info-value">${starData.glyph} ${mainStar}성</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">Palace Position</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei: ${DIZHI[ziWeiPos]}</div></div>
