@@ -384,34 +384,51 @@ function calculate() {
     // ═══════════════════════════════════════
 
     // 1. 명궁 위치 (음력 월 + 시진)
-    // 전통 구결: "由寅起正月, 逆數至生月, 再順數至生時"
-    // 寅(2)에서 월수만큼 역행, 그 자리에서 시진수만큼 순행
-    const mingIdx = (3 - month + hourIdx + 24) % 12;
+    // 전통 구결: "由寅起正月, 順數至生月, 再由該宮起子時逆數至生時"
+    // 寅(2)에서 월수만큼 순행, 그 자리에서 시진수만큼 역행
+    const mingIdx = ((2 + month - 1) - hourIdx + 24) % 12;
 
     // 2. 신궁 위치
-    // 전통 구결: "由寅起正月, 順數至生月, 再順數至生時"
-    const shenIdx = (1 + month + hourIdx) % 12;
+    // 寅에서 월수만큼 순행, 시진수만큼 순행
+    const shenIdx = ((2 + month - 1) + hourIdx) % 12;
 
-    // 3. 오행국 결정 (천간+지지 조합)
+    // 3. 오행국 결정 (命宮 干支의 납음오행)
     const TIANGAN = ['갑','을','병','정','무','기','경','신','임','계'];
-    const tiangan = TIANGAN[(year - 4) % 10];
     const tianganIdx = (year - 4) % 10;
-    const mingDizhiIdx = mingIdx;
+    const tiangan = TIANGAN[tianganIdx];
 
-    // 납음오행국 (천간+명궁지지 → 오행국)
-    // 오행국: 2=수이국, 3=목삼국, 4=금사국, 5=토오국, 6=화육국
-    const WUXING_JU_TABLE = [
-        // 갑/을  병/정  무/기  경/신  임/계  (천간쌍)
-        [2,6,3,5,4], // 자축 (0,1)
-        [6,2,5,3,4], // 인묘 (2,3)
-        [3,5,4,2,6], // 진사 (4,5)
-        [5,3,2,6,4], // 오미 (6,7) -- 수정: 실제 표에 맞춤
-        [4,2,6,4,5], // 신유 (8,9)
-        [2,4,5,6,3], // 술해 (10,11)
-    ];
-    const tgPair = Math.floor(tianganIdx / 2);
-    const dzPair = Math.floor(mingDizhiIdx / 2);
-    const wuxingJu = WUXING_JU_TABLE[dzPair] ? WUXING_JU_TABLE[dzPair][tgPair] || 3 : 3;
+    // 명궁 천간: 오호둔법 (年干 → 寅宮 천간 결정)
+    // 甲己→丙, 乙庚→戊, 丙辛→庚, 丁壬→壬, 戊癸→甲
+    const yinStemBase = [2, 4, 6, 8, 0]; // 甲己→丙(2), 乙庚→戊(4), ...
+    const mingTianganIdx = (yinStemBase[tianganIdx % 5] + mingIdx - 2 + 10) % 10;
+
+    // 납음오행 60갑자 테이블 (30쌍)
+    // 甲子乙丑→金4, 丙寅丁卯→火6, 戊辰己巳→木3, ...
+    const NAYIN_VALUES = [4,6,3,5,4,6,2,5,4,3,2,5,6,3,2,4,6,3,5,4,6,2,5,4,3,2,5,6,3,2];
+    // 60갑자 순서에서 인덱스 계산
+    function getNayinJu(stem, branch) {
+        // 간지가 유효한 조합인지 (같은 홀짝)
+        if (stem % 2 !== branch % 2) {
+            // 무효 조합: 같은 천간쌍의 유효 조합으로 변환
+            stem = stem - (stem % 2) + (branch % 2);
+            if (stem < 0) stem += 10;
+        }
+        // 60갑자 인덱스: (stem - branch + 12) % 12 가 아니라...
+        // 직접 계산: 甲子=0, 乙丑=1, 丙寅=2, ...
+        const idx60 = ((stem * 6 - stem * 5 + branch * 5) / 2 + 30) % 30;
+        // 더 간단한 방법: stem%5 * 6 + branch//2 에서의 납음
+        const row = stem % 5;
+        const col = Math.floor(branch / 2);
+        const NAYIN_TABLE = [
+            [4,2,6,4,2,6], // 甲己
+            [5,3,4,5,3,4], // 乙庚
+            [2,6,5,2,6,5], // 丙辛
+            [3,4,2,3,4,2], // 丁壬
+            [6,5,3,6,5,3], // 戊癸
+        ];
+        return NAYIN_TABLE[row][col];
+    }
+    const wuxingJu = getNayinJu(mingTianganIdx, mingIdx);
 
     const WUXING_NAMES = { 2: '수이국', 3: '목삼국', 4: '금사국', 5: '토오국', 6: '화육국' };
     const wuxing = WUXING_NAMES[wuxingJu] || '목삼국';
@@ -424,7 +441,7 @@ function calculate() {
             2: [1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3,3,4],
             3: [2,3,1,4,2,5,3,6,4,7,5,8,6,9,7,10,8,11,9,0,10,1,11,2,0,3,1,4,2,5],
             4: [3,4,2,1,5,4,3,2,6,5,4,3,7,6,5,4,8,7,6,5,9,8,7,6,10,9,8,7,11,10],
-            5: [4,5,3,2,1,6,5,4,3,2,7,6,5,4,3,8,7,6,5,4,9,8,7,6,5,10,9,8,7,6],
+            5: [4,5,3,2,1,6,0,7,5,4,3,2,8,1,9,6,5,4,3,10,2,8,7,6,5,11,3,10,9,4],
             6: [5,6,4,3,2,1,0,7,6,5,4,3,2,1,8,7,6,5,4,3,2,9,8,7,6,5,4,3,10,9]
         };
         if (table[ju] && day >= 1 && day <= 30) return table[ju][day - 1];
@@ -437,14 +454,14 @@ function calculate() {
     const tianFuPos = (12 - ziWeiPos + 4) % 12; // 寅(2)를 기준으로 대칭 -- 간략화
 
     // 6. 자미계 별 배치 (자미성 기준 고정 간격)
-    // 자미→천기→(빈)→태양→무곡→천동→(빈)→염정
+    // 자미→천기→(빈)→태양→무곡→천동→(빈)→(빈)→염정
     const ziWeiGroup = {
         '자미': ziWeiPos,
         '천기': (ziWeiPos - 1 + 12) % 12,
         '태양': (ziWeiPos - 3 + 12) % 12,
         '무곡': (ziWeiPos - 4 + 12) % 12,
         '천동': (ziWeiPos - 5 + 12) % 12,
-        '염정': (ziWeiPos - 7 + 12) % 12
+        '염정': (ziWeiPos - 8 + 12) % 12
     };
 
     // 7. 천부계 별 배치 (천부성 기준 고정 간격)
@@ -584,8 +601,10 @@ function calculate() {
                 cell.className = 'palace-cell empty';
                 cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#e84393;font-size:10px;">紫微<br>斗數</div>' : '';
             } else {
+                // 궁 이름: 명궁에서 반시계방향으로 배치
+                const palaceOrder = (mingIdx - pIdx + 12) % 12;
                 cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '');
-                cell.innerHTML = `<div class="palace-name">${PALACES[pIdx]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[pIdx]}</div>`;
+                cell.innerHTML = `<div class="palace-name">${PALACES[palaceOrder]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[palaceOrder]} · ${DIZHI[pIdx]}</div>`;
                 if (palaceStars[pIdx].length > 0) {
                     cell.innerHTML += `<div class="palace-star">${palaceStars[pIdx].join(' ')}</div>`;
                 }
@@ -623,7 +642,7 @@ function calculate() {
     `;
 
     // Spouse (부처궁 = 명궁 + 2)
-    const spouseIdx = (mingIdx + 2) % 12;
+    const spouseIdx = (mingIdx - 2 + 12) % 12;
     const spouseMainStars = STAR_NAMES.filter(n => allStarPositions[n] === spouseIdx);
     const spouseStar = spouseMainStars.length > 0 ? spouseMainStars[0] : null;
     const spouseAppearanceZW = {
@@ -654,7 +673,7 @@ function calculate() {
     `;
 
     // Wealth (재백궁 = 명궁 + 4)
-    const wealthIdx = (mingIdx + 4) % 12;
+    const wealthIdx = (mingIdx - 4 + 12) % 12;
     const wealthMainStars = STAR_NAMES.filter(n => allStarPositions[n] === wealthIdx);
     const wealthStar = wealthMainStars.length > 0 ? wealthMainStars[0] : null;
     document.getElementById('wealthWrap').innerHTML = `
@@ -665,7 +684,7 @@ function calculate() {
     `;
 
     // Career (관록궁 = 명궁 + 8)
-    const careerIdx = (mingIdx + 8) % 12;
+    const careerIdx = (mingIdx - 8 + 12) % 12;
     const careerMainStars = STAR_NAMES.filter(n => allStarPositions[n] === careerIdx);
     const careerStar = careerMainStars.length > 0 ? careerMainStars[0] : null;
     document.getElementById('careerWrap').innerHTML = `
@@ -676,7 +695,7 @@ function calculate() {
     `;
 
     // Health (질액궁 = 명궁 + 5)
-    const healthIdx = (mingIdx + 5) % 12;
+    const healthIdx = (mingIdx - 5 + 12) % 12;
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">🏥 질액궁: ${DIZHI[healthIdx]}궁</div>
@@ -691,7 +710,7 @@ function calculate() {
     for (let i = 0; i < 8; i++) {
         const startAge = 2 + i * 10;
         const endAge = 11 + i * 10;
-        const palIdx = (mingIdx + i) % 12;
+        const palIdx = (mingIdx - i + 12) % 12;
         const stars = palaceStars[palIdx];
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
 
