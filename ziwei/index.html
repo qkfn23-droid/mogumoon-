@@ -44,14 +44,14 @@
         .main-star-sub { font-size: 14px; color: #c44389; }
 
         .palace-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 0; border: 2px solid #e84393; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
-        .palace-cell { border: 1px solid #2a1530; padding: 10px; min-height: 110px; background: #0d0515; font-size: 11px; position: relative; }
+        .palace-cell { border: 1px solid #2a1530; padding: 12px; min-height: 130px; background: #0d0515; font-size: 13px; position: relative; }
         .palace-cell.empty { background: #0a0a12; }
-        .palace-name { color: #e84393; font-weight: 600; font-size: 10px; }
-        .palace-star { color: #c9a84c; font-size: 10px; margin-top: 2px; }
+        .palace-name { color: #e84393; font-weight: 600; font-size: 13px; }
+        .palace-star { color: #c9a84c; font-size: 13px; margin-top: 4px; font-weight: 600; }
         .palace-cell.ming { background: #1a0d2a; border: 1px solid #e84393; }
 
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 80px; font-size: 9px; padding: 6px; } }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 100px; font-size: 11px; padding: 8px; } }
         .info-item { background: #1a0d1e; border: 1px solid #3a2540; border-radius: 12px; padding: 16px; }
         .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
         .info-value { font-size: 16px; color: #e84393; font-weight: 600; }
@@ -602,7 +602,7 @@ function calculate() {
         const pos = allStarPositions[name];
         if (pos !== undefined) {
             let label = hanja(name);
-            if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + hanja(sihuaMap[name]) + '</span>';
+            if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:10px;">' + hanja(sihuaMap[name]) + '</span>';
             palaceStars[pos].push(label);
         }
     });
@@ -611,7 +611,7 @@ function calculate() {
     const SHA_STARS = ['경양','타라','화성','영성'];
     Object.entries(auxStars).forEach(([name, pos]) => {
         let label = hanja(name);
-        if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + hanja(sihuaMap[name]) + '</span>';
+        if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:10px;">' + hanja(sihuaMap[name]) + '</span>';
         const isSha = SHA_STARS.includes(name);
         if (isSha) {
             palaceAuxStars[pos].push('<span style="color:#ff6b6b;">' + label + '</span>');
@@ -652,16 +652,16 @@ function calculate() {
                 // 궁 이름: 명궁에서 반시계방향으로 배치
                 const palaceOrder = (mingIdx - pIdx + 12) % 12;
                 cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '') + (pIdx === shenIdx ? ' ming' : '');
-                const shenMark = pIdx === shenIdx ? ' <span style="color:#e84393;font-size:8px;">身宮</span>' : '';
-                cell.innerHTML = `<div class="palace-name">${PALACES[palaceOrder]}${shenMark}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[palaceOrder]} · ${DIZHI[pIdx]}</div>`;
+                const shenMark = pIdx === shenIdx ? ' <span style="color:#e84393;font-size:10px;">身宮</span>' : '';
+                cell.innerHTML = `<div class="palace-name">${PALACES[palaceOrder]}${shenMark}</div><div style="color:#666;font-size:11px;">${PALACE_DESC[palaceOrder]} · ${DIZHI[pIdx]}</div>`;
                 if (palaceStars[pIdx].length > 0) {
                     cell.innerHTML += `<div class="palace-star">${palaceStars[pIdx].join(' ')}</div>`;
                 }
                 if (palaceAuxStars[pIdx].length > 0) {
-                    cell.innerHTML += `<div style="color:#6bc5d2;font-size:9px;margin-top:2px;">${palaceAuxStars[pIdx].join(' ')}</div>`;
+                    cell.innerHTML += `<div style="color:#6bc5d2;font-size:11px;margin-top:4px;">${palaceAuxStars[pIdx].join(' ')}</div>`;
                 }
                 if (palaceMiscStars[pIdx].length > 0) {
-                    cell.innerHTML += `<details style="margin-top:2px;"><summary style="color:#888;font-size:8px;cursor:pointer;">잡성 ▸</summary><div style="color:#a88;font-size:8px;margin-top:2px;">${palaceMiscStars[pIdx].join(' ')}</div></details>`;
+                    cell.innerHTML += `<details style="margin-top:2px;"><summary style="color:#888;font-size:10px;cursor:pointer;">잡성 ▸</summary><div style="color:#a88;font-size:10px;margin-top:2px;">${palaceMiscStars[pIdx].join(' ')}</div></details>`;
                 }
             }
             grid.appendChild(cell);
