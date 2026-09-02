@@ -44,14 +44,14 @@
         .main-star-sub { font-size: 14px; color: #c44389; }
 
         .palace-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 0; border: 2px solid #e84393; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
-        .palace-cell { border: 1px solid #2a1530; padding: 8px; min-height: 70px; background: #0d0515; font-size: 11px; position: relative; }
+        .palace-cell { border: 1px solid #2a1530; padding: 10px; min-height: 110px; background: #0d0515; font-size: 11px; position: relative; }
         .palace-cell.empty { background: #0a0a12; }
         .palace-name { color: #e84393; font-weight: 600; font-size: 10px; }
         .palace-star { color: #c9a84c; font-size: 10px; margin-top: 2px; }
         .palace-cell.ming { background: #1a0d2a; border: 1px solid #e84393; }
 
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 55px; font-size: 9px; } }
+        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .palace-cell { min-height: 80px; font-size: 9px; padding: 6px; } }
         .info-item { background: #1a0d1e; border: 1px solid #3a2540; border-radius: 12px; padding: 16px; }
         .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
         .info-value { font-size: 16px; color: #e84393; font-weight: 600; }
@@ -249,8 +249,19 @@ const MAIN_STARS = {
 
 const STAR_NAMES = ['자미','천기','태양','무곡','천동','염정','천부','태음','탐랑','거문','천상','천량','칠살','파군'];
 
+// 한자 표시명 매핑 (차트용)
+const HANJA = {
+    '자미':'紫微','천기':'天機','태양':'太陽','무곡':'武曲','천동':'天同','염정':'廉貞',
+    '천부':'天府','태음':'太陰','탐랑':'貪狼','거문':'巨門','천상':'天相','천량':'天梁',
+    '칠살':'七殺','파군':'破軍',
+    '문창':'文昌','문곡':'文曲','좌보':'左輔','우필':'右弼','천괴':'天魁','천월':'天鉞',
+    '록존':'祿存','경양':'擎羊','타라':'陀羅','화성':'火星','영성':'鈴星',
+    '화록':'祿','화권':'權','화과':'科','화기':'忌',
+};
+function hanja(name) { return HANJA[name] || name; }
+
 // 12궁 이름
-const PALACES = ['명궁','형제궁','부처궁','자녀궁','재백궁','질액궁','천이궁','교우궁','관록궁','전택궁','복덕궁','부모궁'];
+const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','交友宮','官祿宮','田宅宮','福德宮','父母宮'];
 const PALACE_DESC = ['나 자신','형제자매','배우자','자녀','재물','건강','이동/해외','친구/인맥','직업/명성','부동산/가정','복과 덕','부모/윗사람'];
 
 // 남인도 스타일 그리드 매핑
@@ -523,17 +534,23 @@ function calculate() {
     STAR_NAMES.forEach(name => {
         const pos = allStarPositions[name];
         if (pos !== undefined) {
-            let label = name;
-            if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + sihuaMap[name] + '</span>';
+            let label = hanja(name);
+            if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + hanja(sihuaMap[name]) + '</span>';
             palaceStars[pos].push(label);
         }
     });
 
     // 보조성 배치
+    const SHA_STARS = ['경양','타라','화성','영성'];
     Object.entries(auxStars).forEach(([name, pos]) => {
-        let label = name;
-        if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + sihuaMap[name] + '</span>';
-        palaceAuxStars[pos].push(label);
+        let label = hanja(name);
+        if (sihuaMap[name]) label += '<span style="color:#ff6b6b;font-size:8px;">' + hanja(sihuaMap[name]) + '</span>';
+        const isSha = SHA_STARS.includes(name);
+        if (isSha) {
+            palaceAuxStars[pos].push('<span style="color:#ff6b6b;">' + label + '</span>');
+        } else {
+            palaceAuxStars[pos].push(label);
+        }
     });
 
     // 9. 명궁의 주성 찾기
@@ -586,9 +603,9 @@ function calculate() {
         <div class="info-item"><div class="info-label">명궁 위치</div><div class="info-value">${DIZHI[mingIdx]}궁 (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">오행국</div><div class="info-value">${wuxing}</div><div class="info-desc">자미성 위치: ${DIZHI[ziWeiPos]}궁</div></div>
         <div class="info-item"><div class="info-label">성별/음양</div><div class="info-value">${gender === 'm' ? '남성 (양)' : '여성 (음)'}</div></div>
-        <div class="info-item"><div class="info-label">사화 (四化)</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${s}<span style="color:#ff6b6b;font-size:11px;">${sihuaNames[i]}</span>`).join(' · ')}</div></div>
-        <div class="info-item"><div class="info-label">길성</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">문창 문곡 좌보 우필 천괴 천월 록존</div></div>
-        <div class="info-item"><div class="info-label">살성</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">경양 타라 화성 영성</div></div>
+        <div class="info-item"><div class="info-label">四化 (사화)</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
+        <div class="info-item"><div class="info-label">吉星 (길성)</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">文昌 文曲 左輔 右弼 天魁 天鉞 祿存</div></div>
+        <div class="info-item"><div class="info-label">煞星 (살성)</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">擎羊 陀羅 火星 鈴星</div></div>
     `;
 
     // Main Interpretation
