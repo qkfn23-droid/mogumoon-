@@ -704,13 +704,20 @@ function calculate() {
     `;
 
     // 대운 (10년 주기)
+    // 대한 (大限) 계산
+    // 시작 나이 = 오행국 수 (水二=2, 木三=3, 金四=4, 土五=5, 火六=6)
+    // 방향: 陽男陰女 = 순행(+1), 陰男陽女 = 역행(-1)
+    const isYangStem = tianganIdx % 2 === 0;
+    const isMale = gender === 'm';
+    const dahanForward = (isYangStem && isMale) || (!isYangStem && !isMale);
+
     let dashaHtml = '<div style="background:#0d0515;border:1px solid #3a2540;border-radius:12px;overflow:hidden;">';
     const now = new Date();
     const currentAge = now.getFullYear() - year;
-    for (let i = 0; i < 8; i++) {
-        const startAge = 2 + i * 10;
-        const endAge = 11 + i * 10;
-        const palIdx = (mingIdx - i + 12) % 12;
+    for (let i = 0; i < 10; i++) {
+        const startAge = wuxingJu + i * 10;
+        const endAge = startAge + 9;
+        const palIdx = dahanForward ? (mingIdx + i) % 12 : (mingIdx - i + 12) % 12;
         const stars = palaceStars[palIdx];
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
 
