@@ -603,8 +603,9 @@ function calculate() {
             } else {
                 // 궁 이름: 명궁에서 반시계방향으로 배치
                 const palaceOrder = (mingIdx - pIdx + 12) % 12;
-                cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '');
-                cell.innerHTML = `<div class="palace-name">${PALACES[palaceOrder]}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[palaceOrder]} · ${DIZHI[pIdx]}</div>`;
+                cell.className = 'palace-cell' + (pIdx === mingIdx ? ' ming' : '') + (pIdx === shenIdx ? ' ming' : '');
+                const shenMark = pIdx === shenIdx ? ' <span style="color:#e84393;font-size:8px;">身宮</span>' : '';
+                cell.innerHTML = `<div class="palace-name">${PALACES[palaceOrder]}${shenMark}</div><div style="color:#666;font-size:9px;">${PALACE_DESC[palaceOrder]} · ${DIZHI[pIdx]}</div>`;
                 if (palaceStars[pIdx].length > 0) {
                     cell.innerHTML += `<div class="palace-star">${palaceStars[pIdx].join(' ')}</div>`;
                 }
@@ -624,6 +625,7 @@ function calculate() {
         <div class="info-item"><div class="info-label">명궁 위치</div><div class="info-value">${DIZHI[mingIdx]}궁 (${tiangan}${mingDizhi})</div></div>
         <div class="info-item"><div class="info-label">오행국</div><div class="info-value">${wuxing}</div><div class="info-desc">자미성 위치: ${DIZHI[ziWeiPos]}궁</div></div>
         <div class="info-item"><div class="info-label">성별/음양</div><div class="info-value">${gender === 'm' ? '남성 (양)' : '여성 (음)'}</div></div>
+        <div class="info-item"><div class="info-label">身宮 위치</div><div class="info-value">${DIZHI[shenIdx]}궁 (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">후천적 성격 · 노년 방향</div></div>
         <div class="info-item"><div class="info-label">四化 (사화)</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
         <div class="info-item"><div class="info-label">吉星 (길성)</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">文昌 文曲 左輔 右弼 天魁 天鉞 祿存</div></div>
         <div class="info-item"><div class="info-label">煞星 (살성)</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">擎羊 陀羅 火星 鈴星</div></div>
@@ -641,65 +643,88 @@ function calculate() {
         </div>
     `;
 
-    // Spouse (부처궁 = 명궁 + 2)
-    const spouseIdx = (mingIdx - 2 + 12) % 12;
-    const spouseMainStars = STAR_NAMES.filter(n => allStarPositions[n] === spouseIdx);
-    const spouseStar = spouseMainStars.length > 0 ? spouseMainStars[0] : null;
-    const spouseAppearanceZW = {
-        '자미': '품격 있고 고급스러운 외모. 당당한 자세와 위엄 있는 인상. 정장이 잘 어울리며 어디서든 눈에 띄는 존재감. 피부가 좋고 전체적으로 깔끔한 스타일.',
-        '천기': '지적이고 섬세한 외모. 마른 편이며 안경이 잘 어울림. 눈이 영리해 보이고 책을 좋아하는 분위기. 깔끔하고 단정한 스타일.',
-        '태양': '밝고 활기찬 외모. 눈이 크고 밝으며 미소가 따뜻함. 건강한 피부 톤에 활동적인 체형. 화사한 색상의 옷이 잘 어울림.',
-        '무곡': '강인하고 단단한 인상. 각진 얼굴형에 날카로운 눈매. 체격이 좋고 근육질이거나 탄탄함. 심플하고 실용적인 패션.',
-        '천동': '동안에 귀여운 외모. 통통하거나 부드러운 체형. 웃는 얼굴이 매력적이며 친근한 인상. 캐주얼하고 편안한 스타일.',
-        '염정': '섹시하고 매혹적인 외모. 또렷한 이목구비에 강렬한 눈빛. 패션에 관심이 많고 트렌디한 스타일. 강한 첫인상을 남기는 타입.',
-        '천부': '안정적이고 따뜻한 인상. 둥근 얼굴에 편안한 미소. 약간 통통한 편이며 포근한 분위기. 깔끔하고 보수적인 패션.',
-        '태음': '부드럽고 여성적인 외모(남녀 불문). 피부가 희고 곱며 눈이 큼. 달처럼 은은한 매력. 파스텔 톤이 잘 어울리며 우아한 분위기.',
-        '탐랑': '매력적이고 화려한 외모. 뛰어난 비율에 패션 감각 최상. 눈이 반짝이고 웃을 때 매력 폭발. 트렌드세터 스타일. 이성의 시선을 끄는 타입.',
-        '거문': '지적이고 날카로운 인상. 이마가 넓고 눈빛이 예리함. 입이 크거나 입술이 특징적. 말할 때 가장 매력적으로 보이는 타입.',
-        '천상': '깔끔하고 단정한 외모. 옷을 잘 입으며 항상 정돈된 인상. 피부 관리를 잘 하고 체형 관리도 철저. 브랜드를 좋아하는 스타일리스트.',
-        '천량': '성숙하고 듬직한 외모. 나이보다 어른스러워 보이며 신뢰감을 주는 인상. 클래식한 스타일. 나이가 들수록 더 매력적으로 변하는 타입.',
-        '칠살': '강렬하고 카리스마 있는 외모. 날카로운 눈매에 강한 턱선. 체격이 좋고 운동을 즐기는 타입. 가죽 재킷이나 강한 스타일이 어울림.',
-        '파군': '독특하고 개성 있는 외모. 파격적인 헤어스타일이나 패션. 시대를 앞서가는 스타일. 평범하지 않은 매력으로 호불호가 갈림.'
-    };
+    // ═══════════════════════════════════════
+    // 궁별 해석 헬퍼
+    // ═══════════════════════════════════════
+    function getPalaceStarList(palIdx) {
+        const main = STAR_NAMES.filter(n => allStarPositions[n] === palIdx);
+        const aux = Object.entries(auxStars).filter(([n, p]) => p === palIdx).map(([n]) => n);
+        const sihua = main.concat(aux).filter(n => sihuaMap[n]).map(n => hanja(n) + hanja(sihuaMap[n]));
+        return { main, aux, sihua, mainHanja: main.map(n => hanja(n)), auxHanja: aux.map(n => hanja(n)) };
+    }
 
-    const defaultSpouseApp = '평범하고 친근한 외모. 특별히 튀지 않지만 편안한 인상을 주는 사람. 깔끔하고 단정한 스타일. 시간이 갈수록 정이 드는 타입으로, 첫눈에 반하기보다 알아갈수록 매력이 느껴지는 외모.';
-    const spouseAppText = '<strong>📐 배우자 외모 & 첫인상:</strong><br>' + (spouseStar && spouseAppearanceZW[spouseStar] ? spouseAppearanceZW[spouseStar] : defaultSpouseApp) + '<br><br>';
+    function palaceStarSummary(palIdx) {
+        const p = getPalaceStarList(palIdx);
+        let html = '';
+        if (p.mainHanja.length) html += '<span style="color:#c9a84c;">' + p.mainHanja.join(' ') + '</span>';
+        if (p.auxHanja.length) html += ' <span style="color:#6bc5d2;font-size:12px;">' + p.auxHanja.join(' ') + '</span>';
+        if (p.sihua.length) html += ' <span style="color:#ff6b6b;font-size:11px;">[' + p.sihua.join(' ') + ']</span>';
+        return html || '<span style="color:#666;">주성 없음</span>';
+    }
+
+    // 궁별 주성 기반 해석 (해당 궁의 별 → 해당 분야 해석)
+    function palaceInterp(palIdx, field) {
+        const stars = STAR_NAMES.filter(n => allStarPositions[n] === palIdx);
+        const texts = stars.map(s => MAIN_STARS[s] ? MAIN_STARS[s][field] : '').filter(t => t);
+        return texts.length > 0 ? texts.join('<br><br>') : null;
+    }
+
+    // Spouse (부처궁 = 명궁에서 반시계 2번째)
+    const spouseIdx = (mingIdx - 2 + 12) % 12;
+    const spouseStarInfo = getPalaceStarList(spouseIdx);
+    const spouseStar = spouseStarInfo.main.length > 0 ? spouseStarInfo.main[0] : null;
+    const spouseInterp = palaceInterp(spouseIdx, 'love');
 
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 부처궁: ${DIZHI[spouseIdx]}궁 ${spouseStar ? '— ' + spouseStar + '성' : ''}</div>
-            <div class="interp-text">${spouseAppText}<strong>📋 배우자 성격:</strong><br>${spouseStar && MAIN_STARS[spouseStar] ? MAIN_STARS[spouseStar].love : '부처궁에 주성이 없어 배우자는 평범하고 안정적인 성격입니다. 큰 파란 없이 조용한 결혼 생활.'}<br><br><strong>명궁 ${mainStar}성의 결혼관:</strong> ${starData.love}</div>
+            <div class="interp-title">💕 夫妻宮 (${DIZHI[spouseIdx]}): ${palaceStarSummary(spouseIdx)}</div>
+            <div class="interp-text">
+                <strong>부처궁 주성 해석:</strong><br>
+                ${spouseInterp || '부처궁에 주성이 없어 삼방사정(三方四正)의 별을 봐야 합니다.'}
+                <br><br><strong>명궁 ${hanja(mainStar)}성의 결혼관:</strong><br>${starData.love}
+            </div>
         </div>
     `;
 
-    // Wealth (재백궁 = 명궁 + 4)
+    // Wealth (재백궁)
     const wealthIdx = (mingIdx - 4 + 12) % 12;
-    const wealthMainStars = STAR_NAMES.filter(n => allStarPositions[n] === wealthIdx);
-    const wealthStar = wealthMainStars.length > 0 ? wealthMainStars[0] : null;
+    const wealthInterp = palaceInterp(wealthIdx, 'wealth');
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💰 재백궁: ${DIZHI[wealthIdx]}궁 ${wealthStar ? '— ' + wealthStar + '성' : ''}</div>
-            <div class="interp-text">${wealthStar && MAIN_STARS[wealthStar] ? MAIN_STARS[wealthStar].wealth : '재백궁에 주성이 없어 재물은 안정적이지만 특별한 변동 없이 꾸준합니다.'}<br><br><strong>명궁 ${mainStar}성의 재물관:</strong> ${starData.wealth}</div>
+            <div class="interp-title">💰 財帛宮 (${DIZHI[wealthIdx]}): ${palaceStarSummary(wealthIdx)}</div>
+            <div class="interp-text">
+                <strong>재백궁 주성 해석:</strong><br>
+                ${wealthInterp || '재백궁에 주성이 없어 삼방사정의 별을 봐야 합니다.'}
+                <br><br><strong>명궁 ${hanja(mainStar)}성의 재물관:</strong><br>${starData.wealth}
+            </div>
         </div>
     `;
 
-    // Career (관록궁 = 명궁 + 8)
+    // Career (관록궁)
     const careerIdx = (mingIdx - 8 + 12) % 12;
-    const careerMainStars = STAR_NAMES.filter(n => allStarPositions[n] === careerIdx);
-    const careerStar = careerMainStars.length > 0 ? careerMainStars[0] : null;
+    const careerInterp = palaceInterp(careerIdx, 'career');
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💼 관록궁: ${DIZHI[careerIdx]}궁 ${careerStar ? '— ' + careerStar + '성' : ''}</div>
-            <div class="interp-text">${careerStar && MAIN_STARS[careerStar] ? MAIN_STARS[careerStar].career : '관록궁에 주성이 없어 직업은 안정적이고 평범합니다. 조직 내에서 꾸준히 성장.'}<br><br><strong>명궁 ${mainStar}성의 직업관:</strong> ${starData.career}</div>
+            <div class="interp-title">💼 官祿宮 (${DIZHI[careerIdx]}): ${palaceStarSummary(careerIdx)}</div>
+            <div class="interp-text">
+                <strong>관록궁 주성 해석:</strong><br>
+                ${careerInterp || '관록궁에 주성이 없어 삼방사정의 별을 봐야 합니다.'}
+                <br><br><strong>명궁 ${hanja(mainStar)}성의 직업관:</strong><br>${starData.career}
+            </div>
         </div>
     `;
 
-    // Health (질액궁 = 명궁 + 5)
+    // Health (질액궁) — 이 궁의 별 기반으로 해석
     const healthIdx = (mingIdx - 5 + 12) % 12;
+    const healthInterp = palaceInterp(healthIdx, 'health');
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">🏥 질액궁: ${DIZHI[healthIdx]}궁</div>
-            <div class="interp-text"><strong>명궁 ${mainStar}성의 건강:</strong> ${starData.health}</div>
+            <div class="interp-title">🏥 疾厄宮 (${DIZHI[healthIdx]}): ${palaceStarSummary(healthIdx)}</div>
+            <div class="interp-text">
+                <strong>질액궁 주성 해석:</strong><br>
+                ${healthInterp || '질액궁에 주성이 없어 명궁 주성의 건강 경향을 참고합니다.'}
+                <br><br><strong>명궁 ${hanja(mainStar)}성의 건강:</strong><br>${starData.health}
+            </div>
         </div>
     `;
 
