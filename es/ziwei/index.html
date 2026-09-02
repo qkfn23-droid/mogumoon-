@@ -106,7 +106,7 @@
     </div>
 
     <div class="result-section" id="resultSection">
-        <h3 class="section-title">⭐ Life Palace Main Star</h3>
+        <h3 class="section-title">⭐ Palacio de Vida Estrella Principal</h3>
         <div id="mainStarWrap"></div>
 
         <h3 class="section-title">🏛️ 12 Palace Chart</h3>
@@ -114,30 +114,30 @@
 
         <div class="info-grid" id="infoGrid"></div>
 
-        <h3 class="section-title">📖 Detailed Interpretation</h3>
+        <h3 class="section-title">📖 Interpretación Detallada</h3>
         <div id="mainInterpWrap"></div>
 
-        <h3 class="section-title">💕 Spouse Palace</h3>
+        <h3 class="section-title">💕 Cónyuge Palace</h3>
         <div id="spouseWrap"></div>
 
-        <h3 class="section-title">💰 Wealth Palace</h3>
+        <h3 class="section-title">💰 Riqueza Palace</h3>
         <div id="wealthWrap"></div>
 
-        <h3 class="section-title">💼 Career Palace</h3>
+        <h3 class="section-title">💼 Carrera Palace</h3>
         <div id="careerWrap"></div>
 
-        <h3 class="section-title">🏥 Health Palace</h3>
+        <h3 class="section-title">🏥 Salud Palace</h3>
         <div id="healthWrap"></div>
 
-        <h3 class="section-title">⏳ Major Periods (10yr)</h3>
+        <h3 class="section-title">⏳ Grandes Períodos (10 años)</h3>
         <div id="dashaWrap"></div>
     </div>
 </div>
 
 <div class="seo-content">
 <div class="seo-section"><h2>Zi Wei Dou Shu</h2><p>Generate your Zi Wei chart and analyze 12 palaces. Chinese traditional astrology for detailed life analysis.</p></div>
-<div class="seo-section"><h2>FAQ</h2><details class="seo-faq"><summary>Is this tool free?</summary><p>Yes, 100% free. No signup required.</p></details></div>
-<div class="seo-section"><h2>Related Tools</h2><div class="seo-related"></div></div>
+<div class="seo-section"><h2>Preguntas frecuentes</h2><details class="seo-faq"><summary>¿Es gratuita?</summary><p>Sí, 100% gratuita. Sin registro.</p></details></div>
+<div class="seo-section"><h2>Herramientas relacionadas</h2><div class="seo-related"></div></div>
 </div>
 <div style="text-align:center;padding:20px 0;border-top:1px solid #3a2540;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">Share:</span><a href="" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copy URL</a></div>
 <footer>&copy; 2025 MOGU Moon</footer>
@@ -147,104 +147,104 @@
 // 자미두수 14주성
 // ═══════════════════════════════════════
 const MAIN_STARS = {
-    '자미': { glyph: '💜', element: 'Earth', yin: true, rank: 'Emperor Star',
+    '자미': { glyph: '💜', element: 'Earth', yin: true, rank: 'Estrella Imperial',
         personality: 'Zi Wei (Purple Star) — Emperor of all stars, ruler of the heavens. Dignified, generous, and authoritative. Lonely when sitting alone; needs support stars (Zuo Fu, You Bi) to shine. High self-esteem, values respect. In a favorable position: loyal and magnanimous. In an unfavorable position: stubborn and isolated.',
         love: 'Demands respect from partner. Seeks a dignified relationship. With support stars: meets a noble spouse. Alone: lonely marriage. With sha stars: risk of solitary marriage life.',
-        career: 'Rises to high positions through benefactors. Suited for leadership, management, administration. Without support stars: may have title without real power.',
-        wealth: 'Wealth comes through status rather than direct earning. With support stars: naturally prosperous. Alone: high maintenance costs for appearances.',
-        health: 'Watch the spleen and stomach. Earth element weakens the digestive system. Stress directly affects the stomach.',
+        carrera: 'Rises to high positions through benefactors. Suited for leadership, management, administration. Without support stars: may have title without real power.',
+        riqueza: 'Riqueza comes through status rather than direct earning. With support stars: naturally prosperous. Alone: high maintenance costs for appearances.',
+        salud: 'Watch the spleen and stomach. Earth element weakens the digestive system. Stress directly affects the stomach.',
         advice: 'Zi Wei must have support stars. Sitting alone makes an Emperor without subjects — keeping people close is the key.' },
-    '천기': { glyph: '🧠', element: 'Wood', yin: true, rank: 'Strategist Star',
+    '천기': { glyph: '🧠', element: 'Wood', yin: true, rank: 'Estrella Estratega',
         personality: 'Tian Ji — Star of wisdom and strategy. Intelligent, quick-minded, and calculating. Deeply interested in religion, philosophy, and academics. Kind but indecisive; thinks too much and acts too slowly. In favorable position: brilliant strategist. In unfavorable position: all schemes, no action.',
         love: 'Values intellectual connection. Wants a partner who can match in conversation. Approaches love rationally rather than emotionally. With sha stars: emotional instability in relationships.',
-        career: 'Suited for advisor, strategist, scholar, religious leader, technical roles. Better as a planner behind the scenes than a direct leader.',
-        wealth: 'Earns through intellect. Stable but not great wealth. Income from expertise and specialized knowledge.',
-        health: 'Watch the liver and nervous system. Wood element weakens the liver and gallbladder. Prone to insomnia and nervous exhaustion from overthinking.',
+        carrera: 'Suited for advisor, strategist, scholar, religious leader, technical roles. Better as a planner behind the scenes than a direct leader.',
+        riqueza: 'Earns through intellect. Stable but not great wealth. Income from expertise and specialized knowledge.',
+        salud: 'Watch the liver and nervous system. Wood element weakens the liver and gallbladder. Prone to insomnia and nervous exhaustion from overthinking.',
         advice: 'Tian Ji is a Moving Star — hard to stay in one place. Do not fear change, but find your center within it.' },
-    '태양': { glyph: '☀️', element: 'Fire', yin: false, rank: 'Star of Office',
+    '태양': { glyph: '☀️', element: 'Fire', yin: false, rank: 'Estrella de Oficio',
         personality: 'Tai Yang (Sun) — Star of light and honor. Bright, honest, and fair. Strong masculine energy, altruistic and self-sacrificing. Strong during daytime birth, weak during nighttime. In favorable position: upright and surrounded by benefactors. In unfavorable position: reputation damage and eye problems.',
         love: 'Warm and generous but prioritizes society over family. Partner may feel lonely. For males: represents self. For females: represents husband and father.',
-        career: 'Suited for public service, education, politics, diplomacy. Shines in public-facing roles. In unfavorable position: effort exceeds reward.',
-        wealth: 'Salary income is primary. Business is difficult due to altruistic nature. Wealth comes indirectly through reputation.',
-        health: 'Watch eyes, heart, and blood pressure. Fire element weakens the cardiovascular system. In unfavorable position with sha stars: risk of eye disease.',
+        carrera: 'Suited for public service, education, politics, diplomacy. Shines in public-facing roles. In unfavorable position: effort exceeds reward.',
+        riqueza: 'Salary income is primary. Business is difficult due to altruistic nature. Riqueza comes indirectly through reputation.',
+        salud: 'Watch eyes, heart, and blood pressure. Fire element weakens the cardiovascular system. In unfavorable position with sha stars: risk of eye disease.',
         advice: 'Tai Yang shines bright in favorable positions (Yin-Mao-Chen-Si-Wu) and dims in unfavorable ones. Palace position matters greatly for this star.' },
-    '무곡': { glyph: '⚔️', element: 'Metal', yin: true, rank: 'Wealth Star',
+    '무곡': { glyph: '⚔️', element: 'Metal', yin: true, rank: 'Estrella de Riqueza',
         personality: 'Wu Qu — Star of wealth and decisiveness. Upright, resolute, with excellent financial sense. A person of few words who shows through actions. Has a solitary side. In favorable position: both wealthy and noble. In unfavorable position with sha stars: risk of legal punishment.',
         love: 'Expresses love through actions, not words. Emotionally reserved but warm inside. May marry late or have thin spousal affinity. With sha stars: marital conflict.',
-        career: 'Suited for finance, military, police, business. Has warrior qualities — excels in roles requiring decisiveness. Interpretation varies greatly depending on companion stars.',
-        wealth: 'The supreme Wealth Star among all 14 main stars. Outstanding ability to directly earn wealth. In favorable position: great fortune. In unfavorable position with sha stars: financial ruin.',
-        health: 'Watch lungs and respiratory system. Metal element weakens lungs and large intestine. Beware of metal-related accidents (traffic, surgery).',
-        advice: 'Wu Qu is characterized by rigidity — must learn softness. As a Solitary Star, it is unfavorable when in the Spouse Palace.' },
-    '천동': { glyph: '😊', element: 'Water', yin: false, rank: 'Blessing Star',
+        carrera: 'Suited for finance, military, police, business. Has warrior qualities — excels in roles requiring decisiveness. Interpretation varies greatly depending on companion stars.',
+        riqueza: 'The supreme Riqueza Star among all 14 main stars. Outstanding ability to directly earn wealth. In favorable position: great fortune. In unfavorable position with sha stars: financial ruin.',
+        salud: 'Watch lungs and respiratory system. Metal element weakens lungs and large intestine. Beware of metal-related accidents (traffic, surgery).',
+        advice: 'Wu Qu is characterized by rigidity — must learn softness. As a Solitary Star, it is unfavorable when in the Cónyuge Palace.' },
+    '천동': { glyph: '😊', element: 'Water', yin: false, rank: 'Estrella de Bendición',
         personality: 'Tian Tong — Star of blessings and joy. Gentle, optimistic, and blessed with good fortune. Has a childlike purity but can be lazy and complacent. Rich in emotions and socially adept. In favorable position: abundant blessings. In unfavorable position: reduced fortune and indecisiveness.',
         love: 'Soft and affectionate, romantic. Avoids conflict and seeks comfortable relationships. With sha stars: emotional turbulence.',
-        career: 'Suited for service industry, arts, welfare, education. Shines in peaceful environments rather than competitive ones. Excels when given good conditions.',
-        wealth: 'Never worries about basic needs but difficult to accumulate great wealth. Spends as fast as earning. Unexpected blessings may bring windfalls.',
-        health: 'Watch kidneys and bladder. Water element weakens the urinary system.',
+        carrera: 'Suited for service industry, arts, welfare, education. Shines in peaceful environments rather than competitive ones. Excels when given good conditions.',
+        riqueza: 'Never worries about basic needs but difficult to accumulate great wealth. Spends as fast as earning. Unexpected blessings may bring windfalls.',
+        salud: 'Watch kidneys and bladder. Water element weakens the urinary system.',
         advice: 'Tian Tong follows the pattern of hardship first, ease later — struggles in youth, comfort in old age. Paradoxically performs better in unfavorable positions through motivation.' },
-    '염정': { glyph: '🔥', element: 'Fire', yin: true, rank: 'Imprisoned Star',
+    '염정': { glyph: '🔥', element: 'Fire', yin: true, rank: 'Estrella Prisionera',
         personality: 'Lian Zhen — Second Peach Blossom Star. Intense emotions and strong focus. Excellent political and negotiation skills. Well-managed: becomes an Official Star. Poorly managed: becomes a Prisoner Star. Love and hate are extreme. In favorable position: commanding presence. In unfavorable position with sha stars: risk of legal trouble, punishment, or bloodshed.',
         love: 'Deep and intense emotions but extreme in expression. Once fallen, falls hard. Jealousy and possessiveness can be strong. With peach blossom stars (Tan Lang, Tian Yao): beware of romantic complications.',
-        career: 'Suited for politics, law, investigation, military, arts. Excels in positions of power. With sha stars: freelance work is better than public office.',
-        wealth: 'Wealth fluctuates with emotions. Well-managed: wealth comes through official channels. Poorly managed: loses wealth through legal troubles.',
-        health: 'Watch heart, blood, and reproductive system. Yin Fire element makes one prone to internal inflammation and blood disorders. In unfavorable position with sha stars: beware of surgery and trauma.',
+        carrera: 'Suited for politics, law, investigation, military, arts. Excels in positions of power. With sha stars: freelance work is better than public office.',
+        riqueza: 'Riqueza fluctuates with emotions. Well-managed: wealth comes through official channels. Poorly managed: loses wealth through legal troubles.',
+        salud: 'Watch heart, blood, and reproductive system. Yin Fire element makes one prone to internal inflammation and blood disorders. In unfavorable position with sha stars: beware of surgery and trauma.',
         advice: 'Lian Zhen: in office becomes an official, in prison becomes a prisoner. The environment determines destiny. Interpretation changes dramatically based on companion stars and transformations.' },
-    '천부': { glyph: '🏛️', element: 'Earth', yin: true, rank: 'Treasury Star',
+    '천부': { glyph: '🏛️', element: 'Earth', yin: true, rank: 'Estrella del Tesoro',
         personality: 'Tian Fu — Head of the Southern Stars. Gentle, stable, with excellent management ability. Like a treasury keeper: conservative and careful. Provides stability wherever placed. With Lu Cun: wealthy. With Kong Jie (emptiness stars): effort without accumulation.',
         love: 'Seeks stable, devoted relationships. Values conditions and environment. Provides material stability to partner.',
-        career: 'Suited for financial management, administration, banking, insurance, real estate. Steady career growth within organizations.',
-        wealth: 'Stable wealth accumulation. Prefers safe investments over speculation. In favorable position: prosperous. With emptiness stars: empty treasury.',
-        health: 'Watch spleen and stomach. Earth element weakens the digestive system.',
+        carrera: 'Suited for financial management, administration, banking, insurance, real estate. Steady career growth within organizations.',
+        riqueza: 'Stable wealth accumulation. Prefers safe investments over speculation. In favorable position: prosperous. With emptiness stars: empty treasury.',
+        salud: 'Watch spleen and stomach. Earth element weakens the digestive system.',
         advice: 'Tian Fu is disastrous when empty — needs Lu Cun or transformation stars to fill the treasury. Companion stars are essential.' },
-    '태음': { glyph: '🌙', element: 'Water', yin: true, rank: 'Wealth Star',
+    '태음': { glyph: '🌙', element: 'Water', yin: true, rank: 'Estrella de Riqueza',
         personality: 'Tai Yin (Moon) — Star of wealth and femininity. Soft, delicate, with rich inner world. Strong feminine energy and excellent intuition. Deep connection to mother/women and real estate. Strong during nighttime birth, weak during daytime. In favorable position (You-Xu-Hai-Zi-Chou): wealthy through property. In unfavorable position: thin connection to mother.',
         love: 'Soft and devoted but keeps emotions inside. Romantic and intuitive. For males: represents wife and mother. For females: represents self.',
-        career: 'Suited for real estate, hospitality, interior design, beauty, arts, nighttime professions. More active at night.',
-        wealth: 'Can accumulate great wealth through real estate. In favorable position: abundant property. In unfavorable position with sha stars: beware of property losses.',
-        health: 'Watch kidneys and female health issues. Yin Water element makes sleep health especially important.',
+        carrera: 'Suited for real estate, hospitality, interior design, beauty, arts, nighttime professions. More active at night.',
+        riqueza: 'Can accumulate great wealth through real estate. In favorable position: abundant property. In unfavorable position with sha stars: beware of property losses.',
+        salud: 'Watch kidneys and female health issues. Yin Water element makes sleep health especially important.',
         advice: 'Tai Yin is opposite to Tai Yang — favorable at night (Hai-Zi-Chou) and unfavorable during day (Si-Wu-Wei). More beneficial for those born at night.' },
-    '탐랑': { glyph: '🎭', element: 'Water/Wood', yin: false, rank: 'Peach Blossom Star',
+    '탐랑': { glyph: '🎭', element: 'Water/Wood', yin: false, rank: 'Estrella Flor de Durazno',
         personality: 'Tan Lang — The #1 Peach Blossom Star. Multi-talented, charming, with strong desires. Socially adept with natural charisma, but hard to focus on one thing. Deep connections to religion, arts, and entertainment. In favorable position: talented and accomplished. In unfavorable position with sha stars: risk of indulgence.',
         love: 'Overflowing charm and excellent romantic sense. Very popular with the opposite sex. Hua Lu (Lu transformation) strengthens peach blossom energy. Hua Ji (Ji transformation) causes emotional obsession and suffering.',
-        career: 'Suited for entertainment, sales, diplomacy, arts, religion. Natural ability to attract people — excels in people-facing careers.',
-        wealth: 'Earns well and spends well. Higher chance of windfalls than other stars, but gambling is strictly forbidden.',
-        health: 'Watch liver and reproductive organs. Water-Wood element weakens liver and gallbladder. Unrestrained pleasure-seeking damages health.',
+        carrera: 'Suited for entertainment, sales, diplomacy, arts, religion. Natural ability to attract people — excels in people-facing careers.',
+        riqueza: 'Earns well and spends well. Higher chance of windfalls than other stars, but gambling is strictly forbidden.',
+        salud: 'Watch liver and reproductive organs. Water-Wood element weakens liver and gallbladder. Unrestrained pleasure-seeking damages health.',
         advice: 'Tan Lang with Huo Xing (Fire Star) or Ling Xing (Bell Star) forms the Huo-Tan Formation — sudden wealth and nobility. The relationship with sha stars is crucial.' },
-    '거문': { glyph: '📢', element: 'Water', yin: true, rank: 'Dark Star',
+    '거문': { glyph: '📢', element: 'Water', yin: true, rank: 'Estrella Oscura',
         personality: 'Ju Men — Star of darkness and eloquence. Exceptional speaking ability and analytical power, but easily entangled in disputes. Suspicious, critical, and truth-seeking. In favorable position: success through eloquence. In unfavorable position with sha stars: trouble through gossip.',
         love: 'Easily hurts with words; frequent arguments with partner. Honest but may lack consideration. Hua Quan (Power transformation): persuasive speech. Hua Ji: endless disputes.',
-        career: 'Suited for lawyer, professor, journalist, counselor, translator. Lives by words and writing.',
-        wealth: 'Earns and loses through speech. Income from lectures, education, writing. Beware of financial loss through lawsuits.',
-        health: 'Watch mouth, throat, and digestive system. Yin Water element prone to chronic throat and stomach issues.',
+        carrera: 'Suited for lawyer, professor, journalist, counselor, translator. Lives by words and writing.',
+        riqueza: 'Earns and loses through speech. Income from lectures, education, writing. Beware of financial loss through lawsuits.',
+        salud: 'Watch mouth, throat, and digestive system. Yin Water element prone to chronic throat and stomach issues.',
         advice: 'Ju Men is a hidden gem — dark on the outside but treasure within. With Hua Lu: gossip becomes wealth. With Hua Ji: gossip becomes disaster.' },
-    '천상': { glyph: '🎀', element: 'Water', yin: true, rank: 'Seal Star',
+    '천상': { glyph: '🎀', element: 'Water', yin: true, rank: 'Estrella del Sello',
         personality: 'Tian Xiang — Star of the seal and proper attire. Neat, polite, and image-conscious. Excellent in supporting roles; trusted within organizations. Heavily influenced by adjacent palaces (Jia Gong effect). In favorable position: loyal minister. Surrounded by sha stars: loses independence.',
         love: 'Values appearance and conditions. Seeks socially recognized relationships. Conscious of others\' opinions.',
-        career: 'Suited for administration, secretary, civil service, fashion, protocol. Shines in supporting roles with steady organizational growth.',
-        wealth: 'Stable salary income. High spending on appearance. Seeks stable lifestyle over great wealth.',
-        health: 'Watch skin and respiratory system. Prone to seasonal respiratory issues.',
+        carrera: 'Suited for administration, secretary, civil service, fashion, protocol. Shines in supporting roles with steady organizational growth.',
+        riqueza: 'Stable salary income. High spending on appearance. Seeks stable lifestyle over great wealth.',
+        salud: 'Watch skin and respiratory system. Prone to seasonal respiratory issues.',
         advice: 'Tian Xiang MUST consider adjacent palaces. Zi Wei and Tian Fu on both sides: great fortune (Cai Yin Jia Yin). Lian Zhen and Wu Qu with Hua Ji: great misfortune (Xing Ji Jia Yin).' },
-    '천량': { glyph: '🛡️', element: 'Earth', yin: false, rank: 'Shadow Star',
+    '천량': { glyph: '🛡️', element: 'Earth', yin: false, rank: 'Estrella Protectora',
         personality: 'Tian Liang — Star of protection and longevity. Mature, loyal, with strong protective instincts. Receives much help from elder benefactors. Conservative and traditional. In favorable position: long life with many benefactors. In unfavorable position with sha stars: protection function weakens.',
         love: 'Seeks stable, mature relationships. Deep affinity with older partners. Relationships once formed last long.',
-        career: 'Suited for medicine, religion, welfare, insurance, public service. Finds fulfillment in protecting and caring professions.',
-        wealth: 'Slow but stable accumulation. Becomes more prosperous with age. Unexpected opportunities through benefactor recommendations.',
-        health: 'Star of longevity! Naturally strong constitution. Watch the stomach. Traditional health methods work well.',
+        carrera: 'Suited for medicine, religion, welfare, insurance, public service. Finds fulfillment in protecting and caring professions.',
+        riqueza: 'Slow but stable accumulation. Becomes more prosperous with age. Unexpected opportunities through benefactor recommendations.',
+        salud: 'Star of longevity! Naturally strong constitution. Watch the stomach. Traditional health methods work well.',
         advice: 'Tian Liang turns misfortune into fortune — even in difficult situations, a benefactor appears to overcome the crisis. However, Hua Ji greatly weakens the protection function.' },
-    '칠살': { glyph: '⚔️', element: 'Metal/Fire', yin: false, rank: 'General Star',
+    '칠살': { glyph: '⚔️', element: 'Metal/Fire', yin: false, rank: 'Estrella del General',
         personality: 'Qi Sha (Seven Killings) — Star of the general. Strong will, decisiveness, and power of destruction and reconstruction. Life has great ups and downs but grows stronger through crisis. Independent and rebellious. In favorable position: commanding general. In unfavorable position with sha stars: extremely turbulent life.',
         love: 'Intense and stormy relationships. Ordinary love feels boring. With Zi Wei: authority is tamed and stabilized. Alone: frequent turbulence.',
-        career: 'Suited for military, police, surgeon, entrepreneur, crisis management. Excels in dangerous and challenging professions.',
-        wealth: 'Great success and great failure type. Wins big and loses big. Always bounces back from failure.',
-        health: 'Especially watch for accidents and surgery. Metal element weakens lungs and musculoskeletal system. Beware of metal-related accidents.',
+        carrera: 'Suited for military, police, surgeon, entrepreneur, crisis management. Excels in dangerous and challenging professions.',
+        riqueza: 'Great success and great failure type. Wins big and loses big. Always bounces back from failure.',
+        salud: 'Especially watch for accidents and surgery. Metal element weakens lungs and musculoskeletal system. Beware of metal-related accidents.',
         advice: 'Qi Sha must meet Zi Wei to be tamed. "Zi Wei controls Seven Killings" is the core principle. Without Zi Wei and with sha stars: extremely turbulent life.' },
-    '파군': { glyph: '💥', element: 'Water', yin: false, rank: 'Consumption Star',
+    '파군': { glyph: '💥', element: 'Water', yin: false, rank: 'Estrella de Consumo',
         personality: 'Po Jun (Breaking Army) — Star of destruction and innovation. Breaks old order and builds anew. High spending with much change, but always reconstructs after destruction. In favorable position: successful reformer. In unfavorable position with sha stars: destruction without reconstruction.',
-        love: 'Marriage may have changes. Po Jun in Spouse Palace traditionally suggests divorce/remarriage possibility, BUT with Hua Lu: "breaking brings gain" — change leads to positive results. Interpretation varies greatly with transformations and sha stars.',
-        career: 'Suited for pioneering, exploration, demolition/reconstruction, innovation. Cannot last long in stable jobs — shines in creating new things.',
-        wealth: 'Big income and big expenses. Investor type over saver. With Hua Lu: "the more you spend, the more comes in" pattern.',
-        health: 'Watch kidneys, reproductive system, and accidents. Water element weakens urogenital system.',
-        advice: 'Po Jun MUST consider the Four Transformations. Hua Lu: break and gain. Hua Quan: break and build. Hua Ji: break and lose. Same star, completely different destiny depending on transformations.' }
+        love: 'Marriage may have changes. Po Jun in Cónyuge Palace traditionally suggests divorce/remarriage possibility, BUT with Hua Lu: "breaking brings gain" — change leads to positive results. Interpretation varies greatly with transformations and sha stars.',
+        carrera: 'Suited for pioneering, exploration, demolition/reconstruction, innovation. Cannot last long in stable jobs — shines in creating new things.',
+        riqueza: 'Big income and big expenses. Investor type over saver. With Hua Lu: "the more you spend, the more comes in" pattern.',
+        salud: 'Watch kidneys, reproductive system, and accidents. Water element weakens urogenital system.',
+        advice: 'Po Jun MUST consider the Cuatro Transformaciones. Hua Lu: break and gain. Hua Quan: break and build. Hua Ji: break and lose. Same star, completely different destiny depending on transformations.' }
 };
 
 
@@ -263,7 +263,7 @@ function hanja(name) { return HANJA[name] || name; }
 
 // 12궁 이름
 const PALACES = ['命宮','兄弟宮','夫妻宮','子女宮','財帛宮','疾厄宮','遷移宮','交友宮','官祿宮','田宅宮','福德宮','父母宮'];
-const PALACE_DESC = ['Self','Siblings','Spouse','Children','Wealth','Health','Travel','Friends','Career','Property','Fortune','Parents'];
+const PALACE_DESC = ['Yo','Hermanos','Cónyuge','Hijos','Riqueza','Salud','Viaje','Amigos','Carrera','Propiedad','Fortuna','Padres'];
 
 // 남인도 스타일 그리드 매핑
 const GRID_MAP = [
@@ -630,12 +630,12 @@ function calculate() {
     const DIZHI = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
     const mingDizhi = DIZHI[mingIdx];
 
-    // Main Star Card
+    // Estrella Principal Card
     document.getElementById('mainStarWrap').innerHTML = `
         <div class="main-star-card">
             <span class="main-star-glyph">${starData.glyph}</span>
             <div class="main-star-name">${hanja(mainStar)} (${starData.rank})</div>
-            <div class="main-star-sub">Element: ${starData.element} | Life Palace: ${DIZHI[mingIdx]}</div>
+            <div class="main-star-sub">Element: ${starData.element} | Palacio de Vida: ${DIZHI[mingIdx]}</div>
         </div>
     `;
 
@@ -673,10 +673,10 @@ function calculate() {
     // 동궁 조합 해석 (전통 격국)
     // ═══════════════════════════════════════
     const COMBO_INTERP = {
-        '무곡+천상': { career: 'Wu Qu + Tian Xiang = Finance and administration combined. Stable success in banking and accounting.', wealth: '안정적 재물 축적. 인수(인수(도장)의 별)의 보호 아래 재성(재물의 별)이 빛난다. 꾸준하고 보수적인 투자에 유리.' },
-        '무곡+파군': { career: '무곡+파군 (재물+파괴) 동궁 = 무관(군인/경찰)의 격. 군인, 경찰, 무관 계열에서 성공. 파괴와 재건을 통한 재물 획득.', wealth: '대성대패형. 크게 벌고 크게 잃을 수 있다. 기술직이나 철물 관련 사업에 유리.' },
-        '무곡+탐랑': { career: 'Wu Qu + Tan Lang = Talent in sales and entertainment. Earns through socializing.', wealth: 'Earns well and spends well. With Hua Lu: windfall possible.' },
-        '무곡+천부': { career: 'Wu Qu + Tian Fu = Millionaire formation. Overflowing treasury.', wealth: 'Supreme wealth fortune. Ability to both earn and save.' },
+        '무곡+천상': { carrera: 'Wu Qu + Tian Xiang = Finance and administration combined. Stable success in banking and accounting.', riqueza: '안정적 재물 축적. 인수(인수(도장)의 별)의 보호 아래 재성(재물의 별)이 빛난다. 꾸준하고 보수적인 투자에 유리.' },
+        '무곡+파군': { carrera: '무곡+파군 (재물+파괴) 동궁 = 무관(군인/경찰)의 격. 군인, 경찰, 무관 계열에서 성공. 파괴와 재건을 통한 재물 획득.', riqueza: '대성대패형. 크게 벌고 크게 잃을 수 있다. 기술직이나 철물 관련 사업에 유리.' },
+        '무곡+탐랑': { carrera: 'Wu Qu + Tan Lang = Talent in sales and entertainment. Earns through socializing.', riqueza: 'Earns well and spends well. With Hua Lu: windfall possible.' },
+        '무곡+천부': { carrera: 'Wu Qu + Tian Fu = Millionaire formation. Overflowing treasury.', riqueza: 'Supreme wealth fortune. Ability to both earn and save.' },
         '자미+천부': { personality: '자미+천부 (황제+명령) 동궁 = 황제의 별+명령의 별. 최고의 귀격. 권위와 안정을 겸비하며, 어디서든 중심이 된다.' },
         '자미+탐랑': { personality: 'Zi Wei + Tan Lang = Noble yet charming. Authority and charisma attract people.' },
         '자미+천상': { personality: '자미+천상 (황제+인수) 동궁 = 황제의 별+인수(도장)의 별. 권위와 격식을 겸비. 관직에서 크게 빛난다.' },
@@ -686,9 +686,9 @@ function calculate() {
         '염정+칠살': { personality: 'Lian Zhen + Qi Sha = Extremely dangerous in bad position. Commanding in favorable position.' },
         '태양+태음': { personality: '해와 달이 같은 궁에 있는 격. 음양이 함께 빛나 밝으나, 서로의 빛을 가릴 수 있다.' },
         '태양+거문': { personality: 'Tai Yang + Ju Men = Sun illuminates darkness. Favorable for overseas business.' },
-        '태양+천량': { career: 'Tai Yang + Tian Liang = Sun illuminates protection (great fortune). Success in public service.', personality: 'Bright, honest, strong protective instinct. Much help from seniors.' },
+        '태양+천량': { carrera: 'Tai Yang + Tian Liang = Sun illuminates protection (great fortune). Success in public service.', personality: 'Bright, honest, strong protective instinct. Much help from seniors.' },
         '천동+태음': { personality: 'Tian Tong + Tai Yin = Soft and emotional. Talent in arts/religion but lacks decisiveness.' },
-        '천동+거문': { personality: 'Tian Tong + Ju Men = Blessing meets darkness. In good position: blessings through speech.', career: 'Suited for education, counseling, media. Blessed to live by words.' },
+        '천동+거문': { personality: 'Tian Tong + Ju Men = Blessing meets darkness. In good position: blessings through speech.', carrera: 'Suited for education, counseling, media. Blessed to live by words.' },
         '천동+천량': { personality: 'Tian Tong + Tian Liang = Carefree formation. Comfortable life. Deep in religion/academics.' },
         '천기+태음': { personality: 'Tian Ji + Tai Yin = Delicate and intuitive. Talent in real estate/religion/academics.' },
         '천기+거문': { personality: 'Tian Ji + Ju Men = Strategy and eloquence combined. Great advisor, beware gossip.' },
@@ -728,16 +728,16 @@ function calculate() {
 
     // Info Grid
     document.getElementById('infoGrid').innerHTML = `
-        <div class="info-item"><div class="info-label">Solar Birthday</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
-        <div class="info-item"><div class="info-label">Lunar Birthday</div><div class="info-value">${lunar.year}/${lunar.leap ? 'L' : ''}${lunar.month}/${lunar.day}</div></div>
-        <div class="info-item"><div class="info-label">Main Star</div><div class="info-value">${starData.glyph} ${hanja(mainStar)}</div><div class="info-desc">${starData.rank}</div></div>
-        <div class="info-item"><div class="info-label">Palace Position</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
-        <div class="info-item"><div class="info-label">Five Elements</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei: ${DIZHI[ziWeiPos]}</div></div>
-        <div class="info-item"><div class="info-label">Gender/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Male (Yang)' : 'Female (Yin)'}</div></div>
-        <div class="info-item"><div class="info-label">Body Palace</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return 'Later personality · direction'; const descs = {'자미':'Leadership and authority strengthen','천기':'Strategy and academic tendencies strengthen','태양':'Social activities and public roles expand','무곡':'Financial sense and decisiveness strengthen','천동':'Pursues blessings and comfortable life','염정':'Emotions intensify, artistic tendencies emerge','천부':'Stability and wealth management develop','태음':'Intuition deepens, real estate connection forms','탐랑':'Charm and sociability strengthen','거문':'Eloquence develops, beware of gossip','천상':'Becomes more image-conscious','천량':'Becomes conservative with more benefactor help','칠살':'Independent and action-oriented. Travel central in later life','파군':'Pursues change and breaks old order'}; const base = descs[s] || 'Later personality · direction'; return shenIdx === mingIdx ? base + '. 身宮이 命宮과 같은 자리 = 선천과 후천이 같은 방향으로, 타고난 성격이 변하지 않고 강화된다' : base; })()}</div></div>
-        <div class="info-item"><div class="info-label">Four Transformations</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
-        <div class="info-item"><div class="info-label">Auspicious Stars</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">Wen Chang · Wen Qu · Zuo Fu · You Bi · Tian Kui · Tian Yue · Lu Cun</div></div>
-        <div class="info-item"><div class="info-label">Sha Stars</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">Qing Yang · Tuo Luo · Huo Xing · Ling Xing</div></div>
+        <div class="info-item"><div class="info-label">Cumpleaños Solar</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
+        <div class="info-item"><div class="info-label">Cumpleaños Lunar</div><div class="info-value">${lunar.year}/${lunar.leap ? 'L' : ''}${lunar.month}/${lunar.day}</div></div>
+        <div class="info-item"><div class="info-label">Estrella Principal</div><div class="info-value">${starData.glyph} ${hanja(mainStar)}</div><div class="info-desc">${starData.rank}</div></div>
+        <div class="info-item"><div class="info-label">Posición</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan}${mingDizhi})</div></div>
+        <div class="info-item"><div class="info-label">Cinco Elementos</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei: ${DIZHI[ziWeiPos]}</div></div>
+        <div class="info-item"><div class="info-label">Gender/Yin-Yang</div><div class="info-value">${gender === 'm' ? 'Masculino (Yang)' : 'Femenino (Yin)'}</div></div>
+        <div class="info-item"><div class="info-label">Palacio del Cuerpo</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx - shenIdx + 12) % 12]})</div><div class="info-desc">${(() => { const shenStars = STAR_NAMES.filter(n => allStarPositions[n] === shenIdx); const s = shenStars[0]; if (!s) return 'Later personality · direction'; const descs = {'자미':'Leadership and authority strengthen','천기':'Strategy and academic tendencies strengthen','태양':'Social activities and public roles expand','무곡':'Financial sense and decisiveness strengthen','천동':'Pursues blessings and comfortable life','염정':'Emotions intensify, artistic tendencies emerge','천부':'Stability and wealth management develop','태음':'Intuition deepens, real estate connection forms','탐랑':'Charm and sociability strengthen','거문':'Eloquence develops, beware of gossip','천상':'Becomes more image-conscious','천량':'Becomes conservative with more benefactor help','칠살':'Independent and action-oriented. Viaje central in later life','파군':'Pursues change and breaks old order'}; const base = descs[s] || 'Later personality · direction'; return shenIdx === mingIdx ? base + '. 身宮이 命宮과 같은 자리 = 선천과 후천이 같은 방향으로, 타고난 성격이 변하지 않고 강화된다' : base; })()}</div></div>
+        <div class="info-item"><div class="info-label">Cuatro Transformaciones</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
+        <div class="info-item"><div class="info-label">Estrellas Auspiciosas</div><div class="info-value" style="font-size:13px;color:#6bc5d2;">Wen Chang · Wen Qu · Zuo Fu · You Bi · Tian Kui · Tian Yue · Lu Cun</div></div>
+        <div class="info-item"><div class="info-label">Estrellas Sha</div><div class="info-value" style="font-size:13px;color:#ff6b6b;">Qing Yang · Tuo Luo · Huo Xing · Ling Xing</div></div>
     `;
 
     // Main Interpretation
@@ -746,13 +746,13 @@ function calculate() {
         <div class="interp-card">
             <div class="interp-title">${starData.glyph} 命宮: ${palaceStarSummary(mingIdx)}</div>
             <div class="interp-text">
-                ${mingCombo ? '<strong>📋 Combination:</strong><br>' + mingCombo + '<br><br>' : ''}
+                ${mingCombo ? '<strong>📋 Combinación:</strong><br>' + mingCombo + '<br><br>' : ''}
                 <strong>${hanja(mainStar)} (${starData.rank}):</strong><br>${starData.personality}
                 ${mingMainStars.length > 1 && MAIN_STARS[mingMainStars[1]] ? '<br><br><strong>' + hanja(mingMainStars[1]) + '성 (' + MAIN_STARS[mingMainStars[1]].rank + '):</strong><br>' + MAIN_STARS[mingMainStars[1]].personality : ''}
             </div>
         </div>
         <div class="interp-card">
-            <div class="interp-title">💡 Advice</div>
+            <div class="interp-title">💡 Consejo</div>
             <div class="interp-text">${starData.advice}${mingMainStars.length > 1 && MAIN_STARS[mingMainStars[1]] ? '<br><br>' + MAIN_STARS[mingMainStars[1]].advice : ''}</div>
         </div>
     `;
@@ -783,7 +783,7 @@ function calculate() {
         return texts.length > 0 ? texts.join('<br><br>') : null;
     }
 
-    // Spouse (부처궁 = 명궁에서 반시계 2번째)
+    // Cónyuge (부처궁 = 명궁에서 반시계 2번째)
     const spouseIdx = (mingIdx - 2 + 12) % 12;
     const spouseStarInfo = getPalaceStarList(spouseIdx);
     const spouseStar = spouseStarInfo.main.length > 0 ? spouseStarInfo.main[0] : null;
@@ -796,16 +796,16 @@ function calculate() {
         <div class="interp-card">
             <div class="interp-title">💕 夫妻宮 (${DIZHI[spouseIdx]}): ${palaceStarSummary(spouseIdx)}</div>
             <div class="interp-text">
-                ${spouseApp ? '<strong>📐 Spouse Appearance:</strong><br>' + spouseApp + '<br><br>' : ''}
-                ${spouseCombo ? '<strong>📋 Combination:</strong><br>' + spouseCombo + '<br><br>' : ''}
-                <strong>Spouse Palace Stars:</strong><br>
-                ${spouseInterp || 'No main star — check Three Directions.'}
-                <br><br><strong>Life Palace ${hanja(mainStar)} marriage:</strong><br>${starData.love}
+                ${spouseApp ? '<strong>📐 Apariencia del cónyuge:</strong><br>' + spouseApp + '<br><br>' : ''}
+                ${spouseCombo ? '<strong>📋 Combinación:</strong><br>' + spouseCombo + '<br><br>' : ''}
+                <strong>Estrellas del Palacio del Cónyuge:</strong><br>
+                ${spouseInterp || 'Sin estrella principal — verificar Tres Direcciones.'}
+                <br><br><strong>Palacio de Vida ${hanja(mainStar)} matrimonio:</strong><br>${starData.love}
             </div>
         </div>
     `;
 
-    // Wealth (재백궁)
+    // Riqueza (재백궁)
     const wealthIdx = (mingIdx - 4 + 12) % 12;
     const wealthInterp = palaceInterp(wealthIdx, 'wealth');
     const wealthCombo = getComboInterp(wealthIdx, 'wealth') || getComboInterp(wealthIdx, 'personality');
@@ -813,15 +813,15 @@ function calculate() {
         <div class="interp-card">
             <div class="interp-title">💰 財帛宮 (${DIZHI[wealthIdx]}): ${palaceStarSummary(wealthIdx)}</div>
             <div class="interp-text">
-                ${wealthCombo ? '<strong>📋 Combination:</strong><br>' + wealthCombo + '<br><br>' : ''}
-                <strong>Wealth Palace Stars:</strong><br>
-                ${wealthInterp || 'No main star — check Three Directions.'}
-                <br><br><strong>Life Palace ${hanja(mainStar)} wealth:</strong><br>${starData.wealth}
+                ${wealthCombo ? '<strong>📋 Combinación:</strong><br>' + wealthCombo + '<br><br>' : ''}
+                <strong>Estrellas del Palacio de Riqueza:</strong><br>
+                ${wealthInterp || 'Sin estrella principal — verificar Tres Direcciones.'}
+                <br><br><strong>Palacio de Vida ${hanja(mainStar)} riqueza:</strong><br>${starData.wealth}
             </div>
         </div>
     `;
 
-    // Career (관록궁)
+    // Carrera (관록궁)
     const careerIdx = (mingIdx - 8 + 12) % 12;
     const careerInterp = palaceInterp(careerIdx, 'career');
     const careerCombo = getComboInterp(careerIdx, 'career') || getComboInterp(careerIdx, 'personality');
@@ -829,29 +829,29 @@ function calculate() {
         <div class="interp-card">
             <div class="interp-title">💼 官祿宮 (${DIZHI[careerIdx]}): ${palaceStarSummary(careerIdx)}</div>
             <div class="interp-text">
-                ${careerCombo ? '<strong>📋 Combination:</strong><br>' + careerCombo + '<br><br>' : ''}
-                <strong>Career Palace Stars:</strong><br>
-                ${careerInterp || 'No main star — check Three Directions.'}
-                <br><br><strong>Life Palace ${hanja(mainStar)} career:</strong><br>${starData.career}
+                ${careerCombo ? '<strong>📋 Combinación:</strong><br>' + careerCombo + '<br><br>' : ''}
+                <strong>Estrellas del Palacio de Carrera:</strong><br>
+                ${careerInterp || 'Sin estrella principal — verificar Tres Direcciones.'}
+                <br><br><strong>Palacio de Vida ${hanja(mainStar)} carrera:</strong><br>${starData.career}
             </div>
         </div>
     `;
 
-    // Health (질액궁) — 이 궁의 별 기반으로 해석
+    // Salud (질액궁) — 이 궁의 별 기반으로 해석
     const healthIdx = (mingIdx - 5 + 12) % 12;
     const healthInterp = palaceInterp(healthIdx, 'health');
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">🏥 疾厄宮 (${DIZHI[healthIdx]}): ${palaceStarSummary(healthIdx)}</div>
             <div class="interp-text">
-                <strong>Health Palace Stars:</strong><br>
-                ${healthInterp || 'No main star — refer to Life Palace star.'}
-                <br><br><strong>Life Palace ${hanja(mainStar)} health:</strong><br>${starData.health}
+                <strong>Estrellas del Palacio de Salud:</strong><br>
+                ${healthInterp || 'Sin estrella principal — referir a estrella del Palacio.'}
+                <br><br><strong>Palacio de Vida ${hanja(mainStar)} salud:</strong><br>${starData.health}
             </div>
         </div>
     `;
 
-    // Major Periods (10yr)
+    // Grandes Períodos (10 años)
     // 대한 (大限) 계산
     // 시작 나이 = 오행국 수 (水二=2, 木三=3, 金四=4, 土五=5, 火六=6)
     // 방향: 陽男陰女 = 순행(+1), 陰男陽女 = 역행(-1)
@@ -867,12 +867,12 @@ function calculate() {
         const endAge = startAge + 9;
         const palIdx = dahanForward ? (mingIdx + i) % 12 : (mingIdx - i + 12) % 12;
         const stars = palaceStars[palIdx];
-        const isCurrent = currentAge >= startAge && currentAge <= endAge;
+        const isActual = currentAge >= startAge && currentAge <= endAge;
 
-        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
+        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isActual ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
             <span style="min-width:60px;font-weight:700;color:#e84393;">${startAge}~${endAge}</span>
             <span style="flex:1;color:#999;">${DIZHI[palIdx]} ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
-            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Current' + (currentAge >= endAge - 1 ? ' (transitioning)' : '') + '</span>' : ''}
+            ${isActual ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Actual' + (currentAge >= endAge - 1 ? ' (en transición)' : '') + '</span>' : ''}
         </div>`;
     }
     dashaHtml += '</div>';
