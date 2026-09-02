@@ -555,9 +555,9 @@ function calculate() {
         }
     });
 
-    // 9. 명궁의 주성 찾기
-    const mingStars = palaceStars[mingIdx];
-    const mainStar = mingStars.length > 0 ? mingStars[0] : STAR_NAMES[(mingIdx + day) % 14];
+    // 9. 명궁의 주성 찾기 (원본 한글 이름으로 검색)
+    const mingMainStars = STAR_NAMES.filter(name => allStarPositions[name] === mingIdx);
+    const mainStar = mingMainStars.length > 0 ? mingMainStars[0] : STAR_NAMES[(mingIdx + day) % 14];
     const starData = MAIN_STARS[mainStar];
 
     // 명궁 지지
@@ -624,8 +624,8 @@ function calculate() {
 
     // Spouse (부처궁 = 명궁 + 2)
     const spouseIdx = (mingIdx + 2) % 12;
-    const spouseStars = palaceStars[spouseIdx];
-    const spouseStar = spouseStars.length > 0 ? spouseStars[0] : null;
+    const spouseMainStars = STAR_NAMES.filter(n => allStarPositions[n] === spouseIdx);
+    const spouseStar = spouseMainStars.length > 0 ? spouseMainStars[0] : null;
     const spouseAppearanceZW = {
         '자미': '품격 있고 고급스러운 외모. 당당한 자세와 위엄 있는 인상. 정장이 잘 어울리며 어디서든 눈에 띄는 존재감. 피부가 좋고 전체적으로 깔끔한 스타일.',
         '천기': '지적이고 섬세한 외모. 마른 편이며 안경이 잘 어울림. 눈이 영리해 보이고 책을 좋아하는 분위기. 깔끔하고 단정한 스타일.',
@@ -655,8 +655,8 @@ function calculate() {
 
     // Wealth (재백궁 = 명궁 + 4)
     const wealthIdx = (mingIdx + 4) % 12;
-    const wealthStars = palaceStars[wealthIdx];
-    const wealthStar = wealthStars.length > 0 ? wealthStars[0] : null;
+    const wealthMainStars = STAR_NAMES.filter(n => allStarPositions[n] === wealthIdx);
+    const wealthStar = wealthMainStars.length > 0 ? wealthMainStars[0] : null;
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💰 재백궁: ${DIZHI[wealthIdx]}궁 ${wealthStar ? '— ' + wealthStar + '성' : ''}</div>
@@ -666,8 +666,8 @@ function calculate() {
 
     // Career (관록궁 = 명궁 + 8)
     const careerIdx = (mingIdx + 8) % 12;
-    const careerStars = palaceStars[careerIdx];
-    const careerStar = careerStars.length > 0 ? careerStars[0] : null;
+    const careerMainStars = STAR_NAMES.filter(n => allStarPositions[n] === careerIdx);
+    const careerStar = careerMainStars.length > 0 ? careerMainStars[0] : null;
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
             <div class="interp-title">💼 관록궁: ${DIZHI[careerIdx]}궁 ${careerStar ? '— ' + careerStar + '성' : ''}</div>
