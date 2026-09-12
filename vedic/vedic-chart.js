@@ -2,11 +2,15 @@
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
 
-// Ayanamsa (Lahiri) - approximate
+// Ayanamsa (Lahiri) - Indian Astronomical Ephemeris official formula
 function getAyanamsa(jd) {
-    // Lahiri ayanamsa approximation
+    // Lahiri (Chitrapaksha): Spica = 0° Libra sidereal
+    // Based on Newcomb precession with IAE reference point
     const T = (jd - 2451545.0) / 36525.0;
-    return 23.85 + 0.0137 * (jd - 2451545.0) / 365.25;
+    // Precession in arcseconds (Newcomb)
+    const prec = 5029.0966 * T + 1.11113 * T * T - 0.000006 * T * T * T;
+    // Lahiri reference calibrated to Indian Astronomical Ephemeris
+    return 23.86325 + prec / 3600.0;
 }
 
 // Zodiac signs

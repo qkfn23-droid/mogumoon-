@@ -2,11 +2,11 @@
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
 
-// Ayanamsa (Lahiri) - approximate
+// Ayanamsa (Lahiri) - Indian Astronomical Ephemeris official formula
 function getAyanamsa(jd) {
-    // Lahiri ayanamsa approximation
     const T = (jd - 2451545.0) / 36525.0;
-    return 23.85 + 0.0137 * (jd - 2451545.0) / 365.25;
+    const prec = 5029.0966 * T + 1.11113 * T * T - 0.000006 * T * T * T;
+    return 23.86325 + prec / 3600.0;
 }
 
 // Zodiac signs
