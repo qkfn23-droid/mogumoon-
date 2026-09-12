@@ -291,6 +291,16 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', '삽탐샤');
     renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', '드와다샴샤');
     renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', '샤슈티암샤');
+    renderDivisionalChart(positions, lagnaSidereal, 2, 'd2Chart', 'd2InterpWrap', 'D2', '호라');
+    renderDivisionalChart(positions, lagnaSidereal, 3, 'd3Chart', 'd3InterpWrap', 'D3', '드레카나');
+    renderDivisionalChart(positions, lagnaSidereal, 4, 'd4Chart', 'd4InterpWrap', 'D4', '차투르탐샤');
+    renderDivisionalChart(positions, lagnaSidereal, 16, 'd16Chart', 'd16InterpWrap', 'D16', '쇼다샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 20, 'd20Chart', 'd20InterpWrap', 'D20', '빔샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 24, 'd24Chart', 'd24InterpWrap', 'D24', '차투르빔샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 27, 'd27Chart', 'd27InterpWrap', 'D27', '삽타빔샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 30, 'd30Chart', 'd30InterpWrap', 'D30', '트림샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', '카베담샤');
+    renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', '악샤베담샤');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -1578,6 +1588,52 @@ function getDivisionalSign(siderealLon, division) {
         // D60 (샤슈티암샤): 같은 사인부터 시작, 60등분
         return (sign + part) % 12;
     }
+    if (division === 2) {
+        // D2 (호라): 홀수 사인=태양(사자=4), 짝수 사인=달(게=3)
+        return (part === 0) ? ((sign % 2 === 0) ? 3 : 4) : ((sign % 2 === 0) ? 4 : 3);
+    } else if (division === 3) {
+        // D3 (드레카나): 같은 사인, 5번째, 9번째
+        const d3starts = [0, 4, 8];
+        return (sign + d3starts[part]) % 12;
+    } else if (division === 4) {
+        // D4 (차투르탐샤): 같은 사인부터 시작
+        return (sign + part * 3) % 12;
+    } else if (division === 16) {
+        // D16 (쇼다샴샤): 양자리부터 순서대로
+        return (sign + part) % 12;
+    } else if (division === 20) {
+        // D20 (빔샴샤): 양자리부터 (불), 사수부터 (흙), 사자부터 (바람), 게부터 (물)
+        const d20start = [0, 8, 4, 3][sign % 4];
+        return (d20start + part) % 12;
+    } else if (division === 24) {
+        // D24 (차투르빔샴샤): 홀수 사인=사자, 짝수 사인=게
+        const d24start = (sign % 2 === 0) ? 4 : 3;
+        return (d24start + part) % 12;
+    } else if (division === 27) {
+        // D27 (삽타빔샴샤/나크샤트람샤): 불→양, 흙→게, 바람→천칭, 물→염소
+        const d27start = [0, 3, 6, 9][sign % 4];
+        return (d27start + part) % 12;
+    } else if (division === 30) {
+        // D30 (트림샴샤): 특수 규칙 (홀수/짝수 사인에 따라 다른 지배성)
+        const d30odd = [0, 10, 8, 2, 6]; // 화성, 토성, 목성, 수성, 금성
+        const d30even = [1, 5, 11, 3, 7]; // 금성, 수성, 목성, 토성, 화성
+        const d30parts = [5, 5, 8, 7, 5]; // 각 부분의 도수
+        let cumDeg = 0;
+        let d30part = 0;
+        for (let i = 0; i < 5; i++) {
+            cumDeg += d30parts[i];
+            if (degInSign < cumDeg) { d30part = i; break; }
+        }
+        return (sign % 2 === 0) ? d30odd[d30part] : d30even[d30part];
+    } else if (division === 40) {
+        // D40 (카베담샤): 홀수 사인=양자리, 짝수 사인=천칭
+        const d40start = (sign % 2 === 0) ? 0 : 6;
+        return (d40start + part) % 12;
+    } else if (division === 45) {
+        // D45 (악샤베담샤): 불→양, 흙→사자, 바람→사수, 물→같은 패턴 반복
+        const d45start = [0, 4, 8, 0][sign % 4];
+        return (d45start + part) % 12;
+    }
     return (sign + part) % 12; // fallback
 }
 
@@ -1737,6 +1793,53 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (sunD60) html += '<br><strong>D60 태양 (' + SIGNS[sunD60.dSign] + '):</strong> 전생의 영혼 목적이 이 사인의 에너지와 연결됩니다.';
         if (moonD60) html += '<br><strong>D60 달 (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
+        html += '</div></div>';
+    }
+
+    } else if (division === 2) {
+        html += '<div class="interp-card"><div class="interp-title">💰 D2 재물 분석</div><div class="interp-text">';
+        html += '<strong>D2 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        const sunSign = dPositions.find(p => p.id === 'Sun');
+        const moonSign = dPositions.find(p => p.id === 'Moon');
+        if (sunSign) html += '<strong>D2 태양:</strong> ' + SIGNS[sunSign.dSign] + ' — 태양이 사자(자기 호라)에 있으면 자수성가형<br>';
+        if (moonSign) html += '<strong>D2 달:</strong> ' + SIGNS[moonSign.dSign] + ' — 달이 게(자기 호라)에 있으면 타인을 통한 부<br>';
+        html += '</div></div>';
+
+    } else if (division === 3) {
+        const d3_3sign = (dLagnaSign + 2) % 12;
+        const d3_3planets = dPositions.filter(p => p.dSign === d3_3sign);
+        html += '<div class="interp-card"><div class="interp-title">👫 D3 형제 분석</div><div class="interp-text">';
+        html += '<strong>D3 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        html += '<strong>D3 3궁 (형제):</strong> ' + SIGNS[d3_3sign] + '<br>';
+        if (d3_3planets.length > 0) html += '<strong>3궁의 행성:</strong> ' + d3_3planets.map(p => p.name).join(', ') + '<br>';
+        html += '</div></div>';
+
+    } else if (division === 4) {
+        const d4_4sign = (dLagnaSign + 3) % 12;
+        html += '<div class="interp-card"><div class="interp-title">🏠 D4 재산 분석</div><div class="interp-text">';
+        html += '<strong>D4 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        html += '<strong>D4 4궁 (부동산/재산):</strong> ' + SIGNS[d4_4sign] + '<br>';
+        html += '</div></div>';
+
+    } else if (division === 24) {
+        const d24_4sign = (dLagnaSign + 3) % 12;
+        const d24_5sign = (dLagnaSign + 4) % 12;
+        html += '<div class="interp-card"><div class="interp-title">📚 D24 교육 분석</div><div class="interp-text">';
+        html += '<strong>D24 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        html += '<strong>D24 4궁 (기초 교육):</strong> ' + SIGNS[d24_4sign] + '<br>';
+        html += '<strong>D24 5궁 (고등 교육):</strong> ' + SIGNS[d24_5sign] + '<br>';
+        const eduFields = ['군사/체육','예술/음악','상업/커뮤니케이션','가정학/심리학','정치/행정','의학/과학','법학/외교','연구/신비학','철학/종교','경영/행정','IT/공학','예술/영성'];
+        html += '<strong>교육 적합 분야:</strong> ' + eduFields[dLagnaSign] + '<br>';
+        html += '</div></div>';
+
+    } else if (division === 30) {
+        html += '<div class="interp-card"><div class="interp-title">⚠️ D30 불행/질병 분석</div><div class="interp-text">';
+        html += '<strong>D30 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        const d30_6sign = (dLagnaSign + 5) % 12;
+        const d30_8sign = (dLagnaSign + 7) % 12;
+        html += '<strong>D30 6궁 (질병):</strong> ' + SIGNS[d30_6sign] + '<br>';
+        html += '<strong>D30 8궁 (위험):</strong> ' + SIGNS[d30_8sign] + '<br>';
+        html += '⚠️ D30은 불행과 장애의 원천을 보여줍니다. 6궁·8궁·12궁의 행성 배치가 중요합니다.';
         html += '</div></div>';
     }
 
