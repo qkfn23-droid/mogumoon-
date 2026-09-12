@@ -249,21 +249,11 @@ function calculateChart() {
         });
     });
 
-    // Calculate Rahu/Ketu (True Lunar Nodes)
-    // Mean node + perturbation corrections from Meeus "Astronomical Algorithms"
+    // Calculate Rahu/Ketu (Mean Lunar Nodes)
+    // Mean ascending node formula from Meeus "Astronomical Algorithms"
     {
         const T = (jd - 2451545.0) / 36525;
-        let meanNode = 125.0446 - 1934.1363 * T + 0.0021 * T * T + T * T * T / 467441;
-        const D = (297.8502 + 445267.1115 * T) * Math.PI / 180;
-        const M = (357.5291 + 35999.0503 * T) * Math.PI / 180;
-        const Mp = (134.9634 + 477198.8675 * T) * Math.PI / 180;
-        const F = (93.2721 + 483202.0175 * T) * Math.PI / 180;
-        let correction = -1.4979 * Math.sin(2 * (D - F))
-                        - 0.1500 * Math.sin(M)
-                        - 0.1226 * Math.sin(2 * D)
-                        + 0.1176 * Math.sin(2 * F)
-                        - 0.0801 * Math.sin(2 * (Mp - F));
-        let rahuTropical = meanNode + correction;
+        let rahuTropical = 125.0446 - 1934.1363 * T + 0.0021 * T * T + T * T * T / 467441;
         rahuTropical = ((rahuTropical % 360) + 360) % 360;
         const rahuSidereal = ((rahuTropical - ayanamsa) % 360 + 360) % 360;
         const ketuSidereal = (rahuSidereal + 180) % 360;
