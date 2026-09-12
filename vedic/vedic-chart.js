@@ -313,7 +313,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', '카베담샤');
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', '악샤베담샤');
     renderNakshatra(moonPos);
-    renderDasha(moonNakshatra, utcDate);
+    renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -791,7 +791,7 @@ function renderNakshatra(moonPos) {
     document.getElementById('nakshatraWrap').innerHTML = html;
 }
 
-function renderDasha(moonNakshatra, birthDate) {
+function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     const nak = NAKSHATRAS[moonNakshatra];
     if (!nak) return;
 
@@ -800,35 +800,95 @@ function renderDasha(moonNakshatra, birthDate) {
     let startIdx = DASHA_ORDER.indexOf(startRuler);
     if (startIdx === -1) startIdx = 0;
 
+    // Calculate remaining portion of first dasha
+    // Each nakshatra spans 13°20' (13.3333°). Moon's position within nakshatra determines elapsed portion.
+    const nakSpan = 360 / 27; // 13.3333°
+    const moonInNak = moonSidereal - (moonNakshatra * nakSpan); // degree within current nakshatra
+    const elapsedFraction = moonInNak / nakSpan; // 0~1, how much of nakshatra has passed
+    const firstDashaYears = DASHA_YEARS[startRuler];
+    const remainingYears = firstDashaYears * (1 - elapsedFraction); // remaining portion of first dasha
+    const remainingDays = remainingYears * 365.25;
+
+    // Helper: add days to date
+    function addDays(date, days) {
+        const d = new Date(date);
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        return d;
+    }
+
+    // Helper: format date
+    function fmtDate(d) {
+        return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0');
+    }
+
+    // Helper: calculate age
+    function getAge(d) {
+        const diff = d.getTime() - birthDate.getTime();
+        return (diff / (365.25 * 24 * 60 * 60 * 1000)).toFixed(1);
+    }
+
     const now = new Date();
     let currentDate = new Date(birthDate);
 
-    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>대운이란?</strong> 인생은 9개 행성이 차례로 지배하는 시기로 나뉩니다. 각 행성이 지배하는 기간 동안 그 행성의 에너지가 삶에 강하게 작용합니다. 아래에서 <strong style="color:#c9a84c;">현재</strong> 표시된 행성이 지금 당신의 인생을 지배하고 있는 행성입니다.</div></div>';
-    html += '<div class="dasha-timeline">';
+    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — 인생은 9개 행성이 차례로 지배하는 시기로 나뉩니다. <strong>대운(Mahadasha)</strong>은 큰 시기, <strong>소대운(Antardasha/Bhukti)</strong>은 대운 안의 세부 시기입니다. 달의 나크샤트라 위치로 계산됩니다.<br><br>';
+    html += '🌙 출생 시 달: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 첫 대운: <strong>' + DASHA_KO[startRuler] + '</strong> (잔여: ' + remainingYears.toFixed(2) + '년)</div></div>';
 
+    // Build all mahadasha periods with correct first period
+    const periods = [];
     for (let i = 0; i < 9; i++) {
         const idx = (startIdx + i) % 9;
         const planet = DASHA_ORDER[idx];
-        const years = DASHA_YEARS[planet];
-
+        const fullYears = DASHA_YEARS[planet];
+        const actualDays = (i === 0) ? remainingDays : fullYears * 365.25;
         const startD = new Date(currentDate);
-        const endD = new Date(currentDate);
-        endD.setFullYear(endD.getFullYear() + years);
-
-        const isCurrent = now >= startD && now < endD;
-
-        const startStr = startD.getFullYear() + '.' + (startD.getMonth()+1);
-        const endStr = endD.getFullYear() + '.' + (endD.getMonth()+1);
-
-        html += `<div class="dasha-item ${isCurrent ? 'current' : ''}">
-            <span class="dasha-planet">${DASHA_KO[planet]}</span>
-            <span class="dasha-period">${startStr} ~ ${endStr}</span>
-            <span class="dasha-years">${years}년</span>
-            ${isCurrent ? '<span class="dasha-badge">현재</span>' : ''}
-        </div>`;
-
+        const endD = addDays(currentDate, actualDays);
+        periods.push({ planet, fullYears, startD, endD, actualDays });
         currentDate = endD;
     }
+
+    html += '<div class="dasha-timeline">';
+
+    periods.forEach((p, pi) => {
+        const isCurrent = now >= p.startD && now < p.endD;
+        const age = getAge(p.startD);
+
+        html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
+        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
+        html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
+        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '년</span>';
+        if (isCurrent) html += '<span class="dasha-badge">현재</span>';
+        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + '세) ▼</span>';
+
+        // Antardasha (Bhukti) - sub-periods within this mahadasha
+        html += '<div class="bhukti-list" style="display:' + (isCurrent ? '' : 'none') + ';margin-top:8px;padding-top:8px;border-top:1px solid #2a2a5a;">';
+
+        const mahaDays = p.actualDays;
+        const mahaYears = p.fullYears;
+        let bhuktiDate = new Date(p.startD);
+        const bhuktiStartIdx = DASHA_ORDER.indexOf(p.planet);
+
+        for (let j = 0; j < 9; j++) {
+            const bIdx = (bhuktiStartIdx + j) % 9;
+            const bPlanet = DASHA_ORDER[bIdx];
+            const bFullDays = (DASHA_YEARS[p.planet] * DASHA_YEARS[bPlanet] / 120) * 365.25;
+            // Scale to actual mahadasha length (for first partial mahadasha)
+            const bDays = bFullDays * (mahaDays / (mahaYears * 365.25));
+            const bStart = new Date(bhuktiDate);
+            const bEnd = addDays(bhuktiDate, bDays);
+            const bCurrent = now >= bStart && now < bEnd;
+            const bAge = getAge(bStart);
+
+            html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
+            html += '<span>' + (bCurrent ? '▶ ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + fmtDate(bStart) + '</span>';
+            html += '<span>(' + bAge + '세)</span>';
+            html += '</div>';
+
+            bhuktiDate = bEnd;
+        }
+
+        html += '</div></div>';
+    });
 
     html += '</div>';
     document.getElementById('dashaWrap').innerHTML = html;
