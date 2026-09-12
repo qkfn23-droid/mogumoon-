@@ -1802,6 +1802,113 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD60) html += '<br><strong>D60 달 (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
         html += '</div></div>';
 
+        // D60 신(Deity) 찾기
+        const D60_DEITIES = [
+            {name:'Ghora', ko:'고라', nature:'malefic', desc:'파괴와 두려움의 신. 전생의 어두운 카르마를 나타냄'},
+            {name:'Rakshasa', ko:'락샤사', nature:'malefic', desc:'악마의 에너지. 강한 욕망과 집착의 전생 카르마'},
+            {name:'Deva', ko:'데바', nature:'benefic', desc:'신성한 존재. 전생의 공덕과 축복이 남아있음'},
+            {name:'Kubera', ko:'쿠베라', nature:'benefic', desc:'재물의 신. 전생에서 부를 쌓은 카르마'},
+            {name:'Yaksha', ko:'야크샤', nature:'benefic', desc:'자연의 수호자. 전생에서 자연과 조화를 이룸'},
+            {name:'Kinnara', ko:'키나라', nature:'benefic', desc:'천상의 음악가. 전생에서 예술적 재능을 쌓음'},
+            {name:'Bhrashta', ko:'브라슈타', nature:'malefic', desc:'타락한 자. 전생에서 높은 곳에서 떨어진 카르마'},
+            {name:'Kulaghna', ko:'쿨라그나', nature:'malefic', desc:'가문의 파괴자. 전생의 가족 관련 카르마'},
+            {name:'Garala', ko:'가랄라', nature:'malefic', desc:'독(毒). 전생에서 독이 되는 행위를 한 카르마'},
+            {name:'Vahni', ko:'바니', nature:'malefic', desc:'불의 신 아그니. 전생에서 분노와 파괴의 카르마'},
+            {name:'Maya', ko:'마야', nature:'malefic', desc:'환상. 전생에서 환상과 기만의 카르마'},
+            {name:'Purishaka', ko:'푸리샤카', nature:'malefic', desc:'속박. 전생에서 타인을 구속한 카르마'},
+            {name:'Apampathi', ko:'아팜파티', nature:'benefic', desc:'물의 주인. 전생에서 정화와 치유의 카르마'},
+            {name:'Marut', ko:'마루트', nature:'benefic', desc:'바람의 신. 전생에서 자유와 변화의 카르마'},
+            {name:'Kala', ko:'칼라', nature:'malefic', desc:'시간의 신. 전생에서 시간과 죽음에 대한 카르마'},
+            {name:'Sarpa', ko:'사르파', nature:'malefic', desc:'뱀. 전생에서 비밀과 배신의 카르마'},
+            {name:'Amrita', ko:'암리타', nature:'benefic', desc:'불사의 감로수. 전생에서 영생을 추구한 카르마'},
+            {name:'Indu', ko:'인두', nature:'benefic', desc:'달. 전생에서 감성과 직관을 쌓은 카르마'},
+            {name:'Mridu', ko:'므리두', nature:'benefic', desc:'부드러운 자. 전생에서 온유함과 자비의 카르마'},
+            {name:'Komala', ko:'코말', nature:'benefic', desc:'섬세한 자. 전생에서 예술과 아름다움의 카르마'},
+            {name:'Heramba', ko:'헤람바', nature:'benefic', desc:'가네샤의 화신. 전생에서 장애를 극복한 카르마'},
+            {name:'Brahma', ko:'브라흐마', nature:'benefic', desc:'창조의 신. 전생에서 창조와 지식의 카르마'},
+            {name:'Vishnu', ko:'비슈누', nature:'benefic', desc:'유지의 신. 전생에서 보호와 질서의 카르마'},
+            {name:'Maheshwara', ko:'마헤시', nature:'benefic', desc:'위대한 신 시바. 전생에서 변혁과 해탈의 카르마'},
+            {name:'Deva2', ko:'데발라', nature:'benefic', desc:'성인. 전생에서 영적 수행의 카르마'},
+            {name:'Bala', ko:'발라', nature:'benefic', desc:'힘. 전생에서 강인함과 용기의 카르마'},
+            {name:'Vishwakarma', ko:'비슈와카르마', nature:'benefic', desc:'우주의 건축가. 전생에서 건설과 창조의 카르마'},
+            {name:'Tamasa', ko:'타마사', nature:'malefic', desc:'어둠. 전생에서 무지와 어둠의 카르마'},
+            {name:'Kanchana', ko:'칸차나', nature:'benefic', desc:'황금. 전생에서 순수함과 가치의 카르마'},
+            {name:'Varaha', ko:'바라하', nature:'benefic', desc:'비슈누의 멧돼지 화신. 전생에서 구원의 카르마'},
+            {name:'Ramasala', ko:'라마살라', nature:'benefic', desc:'라마의 거처. 전생에서 도덕과 의무의 카르마'},
+            {name:'Ghrisha', ko:'그리샤', nature:'benefic', desc:'빛나는 자. 전생에서 지혜와 깨달음의 카르마'},
+            {name:'Indra', ko:'인드라', nature:'benefic', desc:'신들의 왕. 전생에서 지도자와 왕의 카르마'},
+            {name:'Jala', ko:'잘라', nature:'benefic', desc:'물. 전생에서 흐름과 적응의 카르마'},
+            {name:'Vishwa', ko:'비슈와', nature:'benefic', desc:'우주. 전생에서 보편적 사랑의 카르마'},
+            {name:'Amara', ko:'아마라', nature:'benefic', desc:'불멸. 전생에서 영원을 추구한 카르마'},
+            {name:'Bala2', ko:'발라2', nature:'malefic', desc:'어린 힘. 전생에서 미숙한 힘의 사용'},
+            {name:'Pitri', ko:'피트리', nature:'malefic', desc:'조상. 전생에서 조상과 관련된 카르마'},
+            {name:'Rudra', ko:'루드라', nature:'malefic', desc:'폭풍의 신. 전생에서 파괴적 변혁의 카르마'},
+            {name:'Varuna', ko:'바루나', nature:'benefic', desc:'바다의 신. 전생에서 우주 질서를 지킨 카르마'},
+            {name:'Aryama', ko:'아랴마', nature:'benefic', desc:'태양신. 전생에서 우정과 계약의 카르마'},
+            {name:'Mitra', ko:'미트라', nature:'benefic', desc:'우정의 신. 전생에서 신뢰와 동반자의 카르마'},
+            {name:'Agni', ko:'아그니', nature:'malefic', desc:'불의 신. 전생에서 정화의 불의 카르마'},
+            {name:'Varuna2', ko:'바루나2', nature:'benefic', desc:'바다의 신. 전생에서 깊은 지혜의 카르마'},
+            {name:'Gauri', ko:'가우리', nature:'benefic', desc:'파르바티(시바의 아내). 전생에서 헌신과 사랑의 카르마'},
+            {name:'Mahakala', ko:'마하칼라', nature:'malefic', desc:'위대한 시간. 전생에서 시간의 주인이 되려 한 카르마'},
+            {name:'Pitamaha', ko:'피타마하', nature:'benefic', desc:'위대한 아버지 브라흐마. 전생에서 창조자의 카르마'},
+            {name:'Kartikeya', ko:'카르티케야', nature:'benefic', desc:'전쟁의 신. 전생에서 정의로운 전투의 카르마'},
+            {name:'Yama', ko:'야마', nature:'malefic', desc:'죽음의 신. 전생에서 심판과 정의의 카르마'},
+            {name:'Kala2', ko:'칼라2', nature:'malefic', desc:'시간. 전생에서 시간에 쫓긴 카르마'},
+            {name:'Varuna3', ko:'바루나3', nature:'benefic', desc:'바다의 신. 전생에서 법과 진실의 카르마'},
+            {name:'Kubera2', ko:'쿠베라2', nature:'benefic', desc:'재물의 신. 전생에서 관대함의 카르마'},
+            {name:'Aditya', ko:'아디티야', nature:'benefic', desc:'태양신. 전생에서 빛과 진리의 카르마'},
+            {name:'Rishi', ko:'리시', nature:'benefic', desc:'성자. 전생에서 지혜와 수행의 카르마'},
+            {name:'Vasu', ko:'바수', nature:'benefic', desc:'천상의 존재. 전생에서 자연을 다스린 카르마'},
+            {name:'Ashwini', ko:'아슈위니', nature:'benefic', desc:'쌍둥이 치유사. 전생에서 치유의 카르마'},
+            {name:'Naga', ko:'나가', nature:'malefic', desc:'뱀의 신. 전생에서 신비와 비밀의 카르마'},
+            {name:'Gandharva', ko:'간다르바', nature:'benefic', desc:'천상의 음악가. 전생에서 예술과 음악의 카르마'},
+            {name:'Prajapati', ko:'프라자파티', nature:'benefic', desc:'창조주. 전생에서 생명을 창조한 카르마'},
+            {name:'Charachara', ko:'차라차라', nature:'benefic', desc:'움직이는 것과 움직이지 않는 것. 전생에서 만물과 하나였던 카르마'}
+        ];
+
+        // 각 행성의 D60 신 계산
+        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 신(Deity) — 행성별 전생 카르마의 수호신</div><div class="interp-text">';
+        html += '<strong>파라샤라 호라 샤스트라</strong>에 따르면, 각 행성이 위치한 D60 분할에 따라 고유한 신(Deity)이 배정됩니다. 이 신은 그 행성의 전생 카르마 성질을 나타냅니다.<br><br>';
+
+        // 라그나의 D60 신
+        const lagnaDegInSign = lagnaSidereal % 30;
+        const lagnaD60Part = Math.floor(lagnaDegInSign / 0.5);
+        const lagnaSignNum = Math.floor(lagnaSidereal / 30);
+        const lagnaD60Idx = (lagnaSignNum % 2 === 0) ? lagnaD60Part : (59 - lagnaD60Part);
+        const lagnaDeity = D60_DEITIES[lagnaD60Idx];
+        if (lagnaDeity) {
+            const lColor = lagnaDeity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + lColor + ';">';
+            html += '<strong>⬆ 라그나:</strong> #' + (lagnaD60Idx+1) + ' <strong>' + lagnaDeity.name + '</strong> (' + lagnaDeity.ko + ') — <span style="color:' + lColor + '">' + (lagnaDeity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
+            html += '<span style="color:#888;font-size:12px;">' + lagnaDeity.desc + '</span></div>';
+        }
+
+        positions.forEach(p => {
+            const degInSign = p.sidereal % 30;
+            const d60Part = Math.floor(degInSign / 0.5);
+            const signNum = Math.floor(p.sidereal / 30);
+            const d60Idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
+            const deity = D60_DEITIES[d60Idx];
+            if (deity) {
+                const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+                html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + color + ';">';
+                html += '<strong>' + p.symbol + ' ' + p.name + ':</strong> #' + (d60Idx+1) + ' <strong>' + deity.name + '</strong> (' + deity.ko + ') — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
+                html += '<span style="color:#888;font-size:12px;">' + deity.desc + '</span></div>';
+            }
+        });
+
+        const beneficCount = positions.filter(p => {
+            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
+            const signNum = Math.floor(p.sidereal / 30);
+            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
+            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'benefic';
+        }).length;
+        html += '<br><div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;">';
+        html += '<strong>📊 D60 요약:</strong> 9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br>';
+        html += beneficCount >= 6 ? '전체적으로 <strong>전생의 공덕이 많아</strong> 이번 생에서 축복받은 삶입니다.' : beneficCount >= 4 ? '전생 카르마의 균형이 적당합니다. 좋은 카르마와 도전이 공존합니다.' : '전생에서 가져온 도전이 많지만, 이것은 <strong>이번 생에서의 성장 기회</strong>입니다.';
+        html += '</div>'
+        html += '</div></div>';
+
     } else if (division === 2) {
         html += '<div class="interp-card"><div class="interp-title">💰 D2 재물 분석</div><div class="interp-text">';
         html += '<strong>D2 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
