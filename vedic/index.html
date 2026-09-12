@@ -499,7 +499,7 @@
             </div>
         </div>
 
-        <button class="calc-btn" onclick="calculateChart()">🔮 명반 생성</button>
+        <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 명반 생성</button>
     </div>
 
     <!-- Results -->
@@ -639,7 +639,18 @@
     }
 </style>
 
-<script src="../astronomy.browser.min.js"></script>
+<script>
+// Lazy load: astronomy.js loads only when Generate button is clicked
+var _astroLoaded = false;
+function _loadAstro(cb) {
+    if (_astroLoaded) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = '../astronomy.browser.min.js';
+    s.onload = function() { _astroLoaded = true; cb(); };
+    document.head.appendChild(s);
+}
+var _origCalc;
+</script>
 <script>
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
@@ -2193,7 +2204,7 @@ function renderRemedy(positions, lagnaSign) {
 
 // Enter key support
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') calculateChart();
+    if (e.key === 'Enter') _loadAstro(calculateChart);
 });
 </script>
 
