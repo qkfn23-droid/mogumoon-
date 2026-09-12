@@ -701,6 +701,7 @@ function _loadAstro(cb) {
     s.onload = function() { _astroLoaded = true; cb(); };
     document.head.appendChild(s);
 }
+document.addEventListener('dragstart', function(e) { e.preventDefault(); });
 </script>
 <script src="vedic-chart.js" defer></script>
 
