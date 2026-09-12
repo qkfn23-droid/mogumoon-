@@ -1713,8 +1713,6 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (sunD60) html += '<br><strong>D60 Sun (' + SIGNS[sunD60.dSign] + '):</strong> Soul purpose connects with this sign energy.';
         if (moonD60) html += '<br><strong>D60 Moon (' + SIGNS[moonD60.dSign] + '):</strong> Emotional memories remain in this sign.';
         html += '</div></div>';
-    }
-
 
     } else if (division === 2) {
         html += '<div class="interp-card"><div class="interp-title">💰 D2 Wealth Analysis</div><div class="interp-text">';
