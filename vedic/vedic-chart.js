@@ -1830,24 +1830,31 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 60) {
-        // D60 해석: 전생 카르마
+        // D60 해석: 전생 카르마 (소챕터 구조)
         const d60_1lord = SIGN_RULERS[dLagnaSign];
+        // 소챕터 아코디언 헬퍼
+        function subChapter(icon, title, content) {
+            return '<div style="margin:8px 0;border:1px solid #2a2a5a;border-radius:8px;overflow:hidden;">' +
+                '<div onclick="var c=this.nextElementSibling;c.style.display=c.style.display===\'none\'?\'\':\'none\';this.querySelector(\'.sc-arrow\').textContent=c.style.display===\'none\'?\'▶\':\'▼\'" style="cursor:pointer;padding:12px 14px;background:linear-gradient(135deg,#12122a,#1a1a3e);">' +
+                '<span style="font-size:15px;font-weight:700;color:#c9a84c;">' + icon + ' ' + title + '</span>' +
+                '<span class="sc-arrow" style="float:right;color:#666;">▶</span></div>' +
+                '<div style="display:none;padding:14px;">' + content + '</div></div>';
+        }
         const d60_planets_1 = dPositions.filter(p => p.dSign === dLagnaSign);
 
-        // D60 각 사인별 전생 테마
         const pastLifeThemes = [
-            '전사, 지도자 — 전생에 권력을 행사했으며, 이번 생에서도 리더십이 타고남',
-            '예술가, 농부 — 전생에 대지와 자연을 다루었으며, 물질적 안정을 추구함',
-            '학자, 상인 — 전생에 지식과 소통으로 살았으며, 다재다능함이 남아있음',
-            '보호자, 어머니 — 전생에 타인을 돌보았으며, 감정적 깊이가 있음',
-            '왕족, 성직자 — 전생에 높은 지위에 있었으며, 자연스러운 권위가 있음',
-            '치유자, 봉사자 — 전생에 의술이나 봉사에 종사했으며, 분석력이 뛰어남',
-            '외교관, 예술가 — 전생에 조화와 아름다움을 추구했으며, 관계에 능함',
-            '수행자, 연금술사 — 전생에 깊은 변혁을 겪었으며, 신비로운 능력이 있음',
-            '현자, 탐험가 — 전생에 진리를 탐구했으며, 영적 지혜가 남아있음',
-            '관료, 건축가 — 전생에 질서를 세웠으며, 인내와 책임감이 강함',
-            '혁명가, 발명가 — 전생에 시대를 앞서갔으며, 독창적 사고가 있음',
-            '영매, 예술가 — 전생에 영적 세계와 교류했으며, 직관이 매우 강함'
+            '전사, 지도자 — 전생에 권력을 행사했으며, 이번 생에서도 리더십이 타고남. 결단력과 독립심이 영혼에 각인되어 있습니다.',
+            '예술가, 농부 — 전생에 대지와 자연을 다루었으며, 물질적 풍요와 감각적 아름다움을 추구합니다. 안정과 소유에 대한 깊은 본능이 있습니다.',
+            '학자, 상인 — 전생에 지식과 소통으로 살았으며, 다재다능함과 호기심이 남아있습니다. 언어와 교역에 타고난 재능이 있습니다.',
+            '보호자, 양육자 — 전생에 타인을 돌보았으며, 깊은 감수성과 모성적 본능이 있습니다. 가정과 안식처에 대한 강한 카르마가 있습니다.',
+            '왕족, 성직자 — 전생에 높은 지위에 있었으며, 자연스러운 권위와 존엄이 있습니다. 무대 위에 서는 것이 영혼의 본능입니다.',
+            '치유자, 봉사자 — 전생에 의술이나 봉사에 종사했으며, 분석력과 세심함이 뛰어납니다. 타인을 돕는 것이 영혼의 본분입니다.',
+            '외교관, 예술가 — 전생에 조화와 아름다움을 추구했으며, 관계와 균형에 능합니다. 파트너십이 영혼의 핵심 주제입니다.',
+            '수행자, 연금술사 — 전생에 깊은 변혁을 겪었으며, 비밀과 신비에 대한 강한 끌림이 있습니다. 죽음과 재생의 카르마가 있습니다.',
+            '현자, 탐험가 — 전생에 진리를 탐구했으며, 영적 지혜와 모험심이 남아있습니다. 먼 땅과 높은 학문에 대한 카르마가 있습니다.',
+            '관료, 건축가 — 전생에 질서를 세웠으며, 인내와 책임감이 강합니다. 사회적 체계와 규율이 영혼에 각인되어 있습니다.',
+            '혁명가, 발명가 — 전생에 시대를 앞서갔으며, 독창적 사고와 인류애가 있습니다. 기존 질서를 깨는 것이 영혼의 본능입니다.',
+            '영매, 예술가 — 전생에 영적 세계와 교류했으며, 극도로 강한 직관과 꿈의 능력이 있습니다. 초월과 해탈에 가장 가까운 영혼입니다.'
         ];
 
         // 행성별 D60 사인 해석 (전통)
@@ -1856,208 +1863,211 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             Moon: ['전생의 감정적 기억이 불같이 강렬합니다. 분노와 열정이 무의식에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 과제입니다.','전생의 감정적 기억이 따뜻하고 안정적입니다. 풍요와 안정 속에서 살았던 기억이 무의식에 남아, 아름다운 것을 찾습니다.','전생의 감정적 기억이 지적이고 다채롭습니다. 여러 경험을 했던 기억이 남아 호기심이 강합니다.','전생의 감정적 기억이 매우 깊습니다. 가정과 돌봄의 기억이 강하게 남아 감수성이 풍부합니다.','전생의 감정적 기억이 자부심과 존엄으로 가득합니다. 인정받고 존경받았던 기억이 남아있습니다.','전생의 감정적 기억이 봉사와 분석에 관련됩니다. 누군가를 도왔던 기억이 남아 세심한 마음을 가집니다.','전생의 감정적 기억이 조화와 관계에 관련됩니다. 아름다운 관계의 기억이 남아 파트너를 찾습니다.','전생의 감정적 기억이 깊고 강렬합니다. 극적인 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습니다.','전생의 감정적 기억이 자유와 탐구에 관련됩니다. 여행하고 배웠던 기억이 남아 확장을 추구합니다.','전생의 감정적 기억이 책임과 인내에 관련됩니다. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집니다.','전생의 감정적 기억이 독특하고 비범합니다. 다른 사람들과 달랐던 기억이 남아 독립적 감성을 가집니다.','전생의 감정적 기억이 영적이고 초월적입니다. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습니다.']
         };
 
-        html += '<div class="interp-card"><div class="interp-title">🔮 D60 전생 카르마 — 전통 풀이</div><div class="interp-text">';
-        html += '<div style="background:rgba(139,126,200,0.08);border:1px solid rgba(139,126,200,0.2);border-radius:10px;padding:16px;margin-bottom:16px;">';
-        html += '<strong style="font-size:15px;">📜 파라샤라 曰:</strong><br>"샤슈티암샤(D60)는 모든 분할 차트 중 가장 중요하다. 이 차트에서 행성이 길신(吉神)의 분할에 있으면 좋은 결과를, 흉신(凶神)의 분할에 있으면 나쁜 결과를 준다."<br>';
-        html += '<span style="color:#888;font-size:12px;">— 브리핫 파라샤라 호라 샤스트라(BPHS), D60 장(章)</span></div>';
-
-        html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">🪐 D60 라그나 — 당신의 전생 정체성</h4>';
-        html += '<strong>' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')<br>';
-        html += pastLifeThemes[dLagnaSign] + '<br>';
-        if (d60_planets_1.length > 0) {
-            html += '<br>' + d60_planets_1.map(p => p.name).join(', ') + '이(가) D60 라그나에 위치 — 전생의 핵심 카르마가 이 행성들에 집중되어 있으며, 이번 생에서도 이 행성의 에너지를 강하게 체험합니다.<br>';
+        // 신 계산 헬퍼
+        function getDeity(siderealLon) {
+            const deg = siderealLon % 30;
+            const part = Math.floor(deg / 0.5);
+            const sn = Math.floor(siderealLon / 30);
+            const idx = (sn % 2 === 0) ? part : (59 - part);
+            return {idx: idx, deity: D60_DEITIES[idx] || null};
+        }
+        function deityTag(d) {
+            if (!d.deity) return '';
+            const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            return ' — 수호신: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span>';
         }
 
-        // 태양 (영혼의 목적)
+        const houseThemes = ['','자아/존재','재물/가치','소통/학습','가정/안식','창조/사랑','봉사/시련','관계/파트너','변혁/비밀','지혜/종교','사회/직업','소망/이익','해방/초월'];
+
+        // 파라샤라 인용
+        html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
+        html += '📜 <strong>파라샤라 曰:</strong> "샤슈티암샤(D60)는 모든 분할 차트 중 가장 중요하다. 길신(吉神) 분할의 행성은 좋은 결과를, 흉신(凶神) 분할의 행성은 나쁜 결과를 준다."<br>';
+        html += '<span style="color:#666;">— 브리핫 파라샤라 호라 샤스트라(BPHS)</span></div></div>';
+
+        // ─── 소챕터 1: 영혼의 정체성 ───
+        const lagnaD = getDeity(lagnaSidereal);
+        let ch1 = '<strong>D60 라그나: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
+        ch1 += pastLifeThemes[dLagnaSign] + '<br>';
+        if (lagnaD.deity) {
+            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
+                '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나를 수호합니다. ' + lagnaD.deity.desc + ' — 전생의 공덕이 이번 생 전체를 보호하며, 삶에서 자연스럽게 좋은 기회가 찾아옵니다.' :
+                '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나에 영향을 줍니다. ' + lagnaD.deity.desc + ' — 이 카르마적 도전이 이번 생의 성격과 운명에 각인되어 있지만, 극복하면 더 큰 성장이 기다립니다.');
+        }
+        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + '이(가) D60 라그나에 위치 — 전생의 핵심 카르마가 이 행성에 집중되어 있습니다.';
+        html += subChapter('🪐', '영혼의 정체성 — 전생에서 누구였는가', ch1);
+
+        // ─── 소챕터 2: 영혼의 목적 ───
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         if (sunD60) {
-            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">☉ D60 태양 — 영혼의 궁극적 목적</h4>';
-            html += '<strong>' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong><br>';
-            html += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
+            const sunD = getDeity(sunD60.sidereal);
+            let ch2 = '<strong>D60 태양: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
+            ch2 += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
+            if (sunD.deity) {
+                ch2 += '<br>' + (sunD.deity.nature === 'benefic' ?
+                    '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 영혼의 목적을 올바르게 추구했으며, 이번 생에서도 자아 실현이 자연스럽게 이루어집니다.' :
+                    '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 자아와 권위에 대한 도전이 있었으며, 이번 생에서 진정한 자아를 찾는 것이 영혼의 과제입니다.');
+            }
+            html += subChapter('☉', '영혼의 목적 — 왜 태어났는가', ch2);
         }
 
-        // 달 (전생의 감정적 기억)
+        // ─── 소챕터 3: 감정의 기억 ───
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (moonD60) {
-            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">☽ D60 달 — 전생의 감정적 기억</h4>';
-            html += '<strong>' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong><br>';
-            html += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
+            const moonD = getDeity(moonD60.sidereal);
+            let ch3 = '<strong>D60 달: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
+            ch3 += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
+            if (moonD.deity) {
+                ch3 += '<br>' + (moonD.deity.nature === 'benefic' ?
+                    '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생에서 마음이 평화로웠으며, 이번 생에서도 감정적 안정감과 강한 직관을 타고났습니다.' :
+                    '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생의 감정적 상처가 무의식에 남아있습니다. 이 패턴을 인식하고 치유하는 것이 이번 생의 감정적 과제입니다. 명상과 물 근처의 휴식이 도움됩니다.');
+            }
+            html += subChapter('☽', '감정의 기억 — 전생의 무의식 패턴', ch3);
         }
 
-        // 기타 행성 간단 해석
-        const otherD60 = {Mars:'전생에서의 행동 패턴과 용기의 카르마',Mercury:'전생에서의 지적 능력과 소통의 카르마',Jupiter:'전생에서의 지혜와 영적 공덕',Venus:'전생에서의 사랑과 예술적 카르마',Saturn:'전생에서 남은 가장 무거운 업보이자 가장 큰 성장의 열쇠',Rahu:'전생에서 이루지 못한 욕망 — 이번 생의 집착 포인트',Ketu:'전생에서 이미 완성한 것 — 이번 생에서는 놓아야 할 것'};
-        const otherPlanets = dPositions.filter(p => !['Sun','Moon'].includes(p.id));
-        if (otherPlanets.length > 0) {
-            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">🪐 기타 행성의 전생 카르마</h4>';
-            otherPlanets.forEach(p => {
-                const dH = ((p.dSign - dLagnaSign + 12) % 12) + 1;
-                const houseTheme = ['','자아/존재','재물/가치','소통/학습','가정/안식','창조/사랑','봉사/시련','관계/파트너','변혁/비밀','지혜/종교','사회/직업','소망/이익','해방/초월'][dH];
-                html += '<div style="padding:6px 0;border-bottom:1px solid #1a1a3e;"><strong>' + p.symbol + ' ' + p.name + '</strong> → ' + SIGNS[p.dSign] + ' (' + dH + '궁: ' + houseTheme + ')<br>';
-                html += '<span style="color:#888;font-size:12px;">' + (otherD60[p.id]||'') + '. D60에서 ' + dH + '궁에 위치하여, 이 카르마가 <strong>' + houseTheme + '</strong> 영역에서 발현됩니다.</span></div>';
-            });
-        }
-        html += '</div></div>';
+        // ─── 소챕터 4: 배우자 카르마 ───
+        const d60H7sign = (dLagnaSign + 6) % 12;
+        const d60H7lord = SIGN_RULERS[d60H7sign];
+        const d60H7planets = dPositions.filter(p => p.dSign === d60H7sign);
+        const venusD60 = dPositions.find(p => p.id === 'Venus');
+        const jupD60 = dPositions.find(p => p.id === 'Jupiter');
+        const rahuD60 = dPositions.find(p => p.id === 'Rahu');
+        const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
-        // D60 신(Deity) 찾기
-        const D60_DEITIES = [
-            {name:'Ghora', ko:'고라', nature:'malefic', desc:'파괴와 두려움의 신. 전생의 어두운 카르마를 나타냄'},
-            {name:'Rakshasa', ko:'락샤사', nature:'malefic', desc:'악마의 에너지. 강한 욕망과 집착의 전생 카르마'},
-            {name:'Deva', ko:'데바', nature:'benefic', desc:'신성한 존재. 전생의 공덕과 축복이 남아있음'},
-            {name:'Kubera', ko:'쿠베라', nature:'benefic', desc:'재물의 신. 전생에서 부를 쌓은 카르마'},
-            {name:'Yaksha', ko:'야크샤', nature:'benefic', desc:'자연의 수호자. 전생에서 자연과 조화를 이룸'},
-            {name:'Kinnara', ko:'키나라', nature:'benefic', desc:'천상의 음악가. 전생에서 예술적 재능을 쌓음'},
-            {name:'Bhrashta', ko:'브라슈타', nature:'malefic', desc:'타락한 자. 전생에서 높은 곳에서 떨어진 카르마'},
-            {name:'Kulaghna', ko:'쿨라그나', nature:'malefic', desc:'가문의 파괴자. 전생의 가족 관련 카르마'},
-            {name:'Garala', ko:'가랄라', nature:'malefic', desc:'독(毒). 전생에서 독이 되는 행위를 한 카르마'},
-            {name:'Vahni', ko:'바니', nature:'malefic', desc:'불의 신 아그니. 전생에서 분노와 파괴의 카르마'},
-            {name:'Maya', ko:'마야', nature:'malefic', desc:'환상. 전생에서 환상과 기만의 카르마'},
-            {name:'Purishaka', ko:'푸리샤카', nature:'malefic', desc:'속박. 전생에서 타인을 구속한 카르마'},
-            {name:'Apampathi', ko:'아팜파티', nature:'benefic', desc:'물의 주인. 전생에서 정화와 치유의 카르마'},
-            {name:'Marut', ko:'마루트', nature:'benefic', desc:'바람의 신. 전생에서 자유와 변화의 카르마'},
-            {name:'Kala', ko:'칼라', nature:'malefic', desc:'시간의 신. 전생에서 시간과 죽음에 대한 카르마'},
-            {name:'Sarpa', ko:'사르파', nature:'malefic', desc:'뱀. 전생에서 비밀과 배신의 카르마'},
-            {name:'Amrita', ko:'암리타', nature:'benefic', desc:'불사의 감로수. 전생에서 영생을 추구한 카르마'},
-            {name:'Indu', ko:'인두', nature:'benefic', desc:'달. 전생에서 감성과 직관을 쌓은 카르마'},
-            {name:'Mridu', ko:'므리두', nature:'benefic', desc:'부드러운 자. 전생에서 온유함과 자비의 카르마'},
-            {name:'Komala', ko:'코말', nature:'benefic', desc:'섬세한 자. 전생에서 예술과 아름다움의 카르마'},
-            {name:'Heramba', ko:'헤람바', nature:'benefic', desc:'가네샤의 화신. 전생에서 장애를 극복한 카르마'},
-            {name:'Brahma', ko:'브라흐마', nature:'benefic', desc:'창조의 신. 전생에서 창조와 지식의 카르마'},
-            {name:'Vishnu', ko:'비슈누', nature:'benefic', desc:'유지의 신. 전생에서 보호와 질서의 카르마'},
-            {name:'Maheshwara', ko:'마헤시', nature:'benefic', desc:'위대한 신 시바. 전생에서 변혁과 해탈의 카르마'},
-            {name:'Deva2', ko:'데발라', nature:'benefic', desc:'성인. 전생에서 영적 수행의 카르마'},
-            {name:'Bala', ko:'발라', nature:'benefic', desc:'힘. 전생에서 강인함과 용기의 카르마'},
-            {name:'Vishwakarma', ko:'비슈와카르마', nature:'benefic', desc:'우주의 건축가. 전생에서 건설과 창조의 카르마'},
-            {name:'Tamasa', ko:'타마사', nature:'malefic', desc:'어둠. 전생에서 무지와 어둠의 카르마'},
-            {name:'Kanchana', ko:'칸차나', nature:'benefic', desc:'황금. 전생에서 순수함과 가치의 카르마'},
-            {name:'Varaha', ko:'바라하', nature:'benefic', desc:'비슈누의 멧돼지 화신. 전생에서 구원의 카르마'},
-            {name:'Ramasala', ko:'라마살라', nature:'benefic', desc:'라마의 거처. 전생에서 도덕과 의무의 카르마'},
-            {name:'Ghrisha', ko:'그리샤', nature:'benefic', desc:'빛나는 자. 전생에서 지혜와 깨달음의 카르마'},
-            {name:'Indra', ko:'인드라', nature:'benefic', desc:'신들의 왕. 전생에서 지도자와 왕의 카르마'},
-            {name:'Jala', ko:'잘라', nature:'benefic', desc:'물. 전생에서 흐름과 적응의 카르마'},
-            {name:'Vishwa', ko:'비슈와', nature:'benefic', desc:'우주. 전생에서 보편적 사랑의 카르마'},
-            {name:'Amara', ko:'아마라', nature:'benefic', desc:'불멸. 전생에서 영원을 추구한 카르마'},
-            {name:'Bala2', ko:'발라2', nature:'malefic', desc:'어린 힘. 전생에서 미숙한 힘의 사용'},
-            {name:'Pitri', ko:'피트리', nature:'malefic', desc:'조상. 전생에서 조상과 관련된 카르마'},
-            {name:'Rudra', ko:'루드라', nature:'malefic', desc:'폭풍의 신. 전생에서 파괴적 변혁의 카르마'},
-            {name:'Varuna', ko:'바루나', nature:'benefic', desc:'바다의 신. 전생에서 우주 질서를 지킨 카르마'},
-            {name:'Aryama', ko:'아랴마', nature:'benefic', desc:'태양신. 전생에서 우정과 계약의 카르마'},
-            {name:'Mitra', ko:'미트라', nature:'benefic', desc:'우정의 신. 전생에서 신뢰와 동반자의 카르마'},
-            {name:'Agni', ko:'아그니', nature:'malefic', desc:'불의 신. 전생에서 정화의 불의 카르마'},
-            {name:'Varuna2', ko:'바루나2', nature:'benefic', desc:'바다의 신. 전생에서 깊은 지혜의 카르마'},
-            {name:'Gauri', ko:'가우리', nature:'benefic', desc:'파르바티(시바의 아내). 전생에서 헌신과 사랑의 카르마'},
-            {name:'Mahakala', ko:'마하칼라', nature:'malefic', desc:'위대한 시간. 전생에서 시간의 주인이 되려 한 카르마'},
-            {name:'Pitamaha', ko:'피타마하', nature:'benefic', desc:'위대한 아버지 브라흐마. 전생에서 창조자의 카르마'},
-            {name:'Kartikeya', ko:'카르티케야', nature:'benefic', desc:'전쟁의 신. 전생에서 정의로운 전투의 카르마'},
-            {name:'Yama', ko:'야마', nature:'malefic', desc:'죽음의 신. 전생에서 심판과 정의의 카르마'},
-            {name:'Kala2', ko:'칼라2', nature:'malefic', desc:'시간. 전생에서 시간에 쫓긴 카르마'},
-            {name:'Varuna3', ko:'바루나3', nature:'benefic', desc:'바다의 신. 전생에서 법과 진실의 카르마'},
-            {name:'Kubera2', ko:'쿠베라2', nature:'benefic', desc:'재물의 신. 전생에서 관대함의 카르마'},
-            {name:'Aditya', ko:'아디티야', nature:'benefic', desc:'태양신. 전생에서 빛과 진리의 카르마'},
-            {name:'Rishi', ko:'리시', nature:'benefic', desc:'성자. 전생에서 지혜와 수행의 카르마'},
-            {name:'Vasu', ko:'바수', nature:'benefic', desc:'천상의 존재. 전생에서 자연을 다스린 카르마'},
-            {name:'Ashwini', ko:'아슈위니', nature:'benefic', desc:'쌍둥이 치유사. 전생에서 치유의 카르마'},
-            {name:'Naga', ko:'나가', nature:'malefic', desc:'뱀의 신. 전생에서 신비와 비밀의 카르마'},
-            {name:'Gandharva', ko:'간다르바', nature:'benefic', desc:'천상의 음악가. 전생에서 예술과 음악의 카르마'},
-            {name:'Prajapati', ko:'프라자파티', nature:'benefic', desc:'창조주. 전생에서 생명을 창조한 카르마'},
-            {name:'Charachara', ko:'차라차라', nature:'benefic', desc:'움직이는 것과 움직이지 않는 것. 전생에서 만물과 하나였던 카르마'}
+        const spouseKarmaBySign = [
+            '전생에서 전사/리더와의 인연. 강렬하고 독립적인 배우자 카르마. 전생에서 함께 싸웠거나 경쟁했던 영혼.',
+            '전생에서 예술가/부유한 자와의 인연. 물질적으로 풍요로운 결혼 카르마. 전생에서 아름다움을 함께 추구한 영혼.',
+            '전생에서 학자/상인과의 인연. 소통과 지적 교감의 결혼 카르마. 전생에서 함께 공부하거나 교역한 영혼.',
+            '전생에서 가족/보호자와의 인연. 깊은 감정적 유대의 결혼 카르마. 전생에서 서로를 돌보았던 영혼.',
+            '전생에서 왕족/귀족과의 인연. 화려하고 존경받는 결혼 카르마. 전생에서 함께 지배했던 영혼.',
+            '전생에서 치유자/봉사자와의 인연. 봉사와 헌신의 결혼 카르마. 전생에서 함께 타인을 도왔던 영혼.',
+            '전생에서 외교관/예술가와의 인연. 조화롭고 아름다운 결혼 카르마. 전생에서 함께 균형을 추구한 영혼.',
+            '전생에서 수행자/신비주의자와의 인연. 강렬하고 변혁적인 결혼 카르마. 전생에서 생사를 함께한 영혼.',
+            '전생에서 현자/탐험가와의 인연. 자유롭고 확장적인 결혼 카르마. 전생에서 함께 진리를 탐구한 영혼. 외국인 배우자 가능.',
+            '전생에서 관료/건축가와의 인연. 책임감 있고 안정적인 결혼 카르마. 전생에서 함께 질서를 세운 영혼. 늦은 결혼 가능.',
+            '전생에서 혁명가/발명가와의 인연. 독특하고 비전통적인 결혼 카르마. 전생에서 함께 혁신을 추구한 영혼.',
+            '전생에서 영매/예술가와의 인연. 신비롭고 영적인 결혼 카르마. 전생에서 함께 영적 수행을 한 영혼. 꿈에서 먼저 만날 수 있음.'
         ];
 
-        // D60 신(Deity) — 전통 풀이
-        const planetDeityContext = {
-            Sun: '태양은 아트마(영혼)를 나타냅니다. D60 태양의 신은 <strong>전생에서 영혼이 어떤 신성한 에너지 아래 있었는지</strong>를 보여줍니다.',
-            Moon: '달은 마나스(마음)를 나타냅니다. D60 달의 신은 <strong>전생의 감정적 경험과 무의식의 패턴</strong>을 보여줍니다.',
-            Mars: '화성은 용기와 행동력을 나타냅니다. D60 화성의 신은 <strong>전생에서의 전투, 경쟁, 힘의 사용</strong>을 보여줍니다.',
-            Mercury: '수성은 지성과 소통을 나타냅니다. D60 수성의 신은 <strong>전생에서의 학습, 교역, 지적 활동</strong>을 보여줍니다.',
-            Jupiter: '목성은 지혜와 스승을 나타냅니다. D60 목성의 신은 <strong>전생에서의 영적 공덕과 구루의 축복</strong>을 보여줍니다.',
-            Venus: '금성은 사랑과 예술을 나타냅니다. D60 금성의 신은 <strong>전생에서의 사랑, 헌신, 예술적 활동</strong>을 보여줍니다.',
-            Saturn: '토성은 카르마의 심판관입니다. D60 토성의 신은 <strong>전생에서 가장 무거운 업보</strong>를 보여줍니다. 이것이 이번 생의 가장 큰 시련이자 성장 포인트입니다.',
-            Rahu: '라후는 미완의 욕망입니다. D60 라후의 신은 <strong>전생에서 이루지 못해 이번 생에서도 집착하는 것</strong>을 보여줍니다.',
-            Ketu: '케투는 완성된 카르마입니다. D60 케투의 신은 <strong>전생에서 이미 달성한 것 — 이번 생에서는 집착하지 말고 놓아야 할 것</strong>을 보여줍니다.'
-        };
+        let ch4 = '<strong>D60 7궁 (배우자): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7궁주: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
+        ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
-        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 신(Deity) — 행성별 전생 카르마의 전통 풀이</div><div class="interp-text">';
-
-        // 라그나 신
-        const lagnaDegInSign = lagnaSidereal % 30;
-        const lagnaD60Part = Math.floor(lagnaDegInSign / 0.5);
-        const lagnaSignNum = Math.floor(lagnaSidereal / 30);
-        const lagnaD60Idx = (lagnaSignNum % 2 === 0) ? lagnaD60Part : (59 - lagnaD60Part);
-        const lagnaDeity = D60_DEITIES[lagnaD60Idx];
-        if (lagnaDeity) {
-            const lColor = lagnaDeity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            html += '<div style="padding:12px;margin:8px 0;background:rgba(201,168,76,0.08);border-radius:8px;border-left:4px solid ' + lColor + ';">';
-            html += '<strong style="font-size:14px;">⬆ 라그나의 수호신: ' + lagnaDeity.name + ' (' + lagnaDeity.ko + ')</strong> — <span style="color:' + lColor + ';font-weight:700;">' + (lagnaDeity.nature === 'benefic' ? '길신(吉神)' : '흉신(凶神)') + '</span><br>';
-            html += '라그나의 D60 신은 <strong>이번 생 전체의 카르마 색채</strong>를 결정합니다.<br>';
-            html += lagnaDeity.nature === 'benefic' ? '길신이 라그나를 지키고 있어, 전생의 공덕이 이번 생을 보호합니다. 삶에서 자연스럽게 좋은 기회가 찾아옵니다.' : '흉신이 라그나에 있어, 전생의 카르마적 도전이 있습니다. 하지만 이 도전을 극복하면 더 큰 성장이 기다립니다.';
-            html += '<br><span style="color:#888;font-size:12px;">신의 의미: ' + lagnaDeity.desc + '</span></div>';
+        if (d60H7planets.length > 0) {
+            ch4 += '<br><strong>D60 7궁의 행성:</strong><br>';
+            d60H7planets.forEach(p => {
+                const pD = getDeity(p.sidereal);
+                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                ch4 += (p.natural === 'benefic' ? '길성이 7궁에 위치 — 전생에서 배우자와 좋은 카르마를 쌓았으며, 이번 생에서도 배우자에게서 축복을 받습니다.' : '흉성이 7궁에 위치 — 전생에서 배우자와 해결하지 못한 카르마가 있으며, 이번 생에서 이를 정산합니다. 도전이지만 성장의 기회입니다.') + '<br>';
+            });
         }
 
-        // 각 행성의 신 + 전통 풀이 (행성+신 조합별 구체적 해석)
-        // 행성별 영역 설명 (신의 의미와 엮을 때 사용)
-        const planetDomain = {
-            Sun: {area:'자아·권위·아버지', benefic:'전생에서 {deity}의 축복 아래 영혼의 빛을 키웠습니다. 이번 생에서도 자연스러운 권위와 자신감이 빛납니다.', malefic:'전생에서 {deity}의 에너지가 자아에 도전을 주었습니다. 이번 생에서 자존감과 정체성에 대한 시험이 있지만, 이를 통해 진정한 자아를 발견합니다.'},
-            Moon: {area:'감정·마음·어머니', benefic:'전생에서 {deity}의 보호 아래 평화로운 마음을 유지했습니다. 이번 생에서도 감정적 안정감과 직관이 강합니다.', malefic:'전생에서 {deity}의 에너지가 마음에 상처를 남겼습니다. 무의식에 {deityDesc}의 기억이 남아 감정적 패턴으로 나타납니다. 명상과 정서적 치유가 도움됩니다.'},
-            Mars: {area:'에너지·용기·행동력', benefic:'전생에서 {deity}의 축복으로 용기와 힘을 올바르게 사용했습니다. 이번 생에서도 에너지를 건설적으로 쓰는 재능이 있습니다.', malefic:'전생에서 {deity}의 에너지 아래 폭력이나 과도한 힘의 사용이 있었습니다. 이번 생에서 분노 조절과 에너지의 올바른 방향이 과제입니다.'},
-            Mercury: {area:'지성·소통·학습', benefic:'전생에서 {deity}의 축복으로 지혜와 소통 능력을 쌓았습니다. 이번 생에서도 언어, 학습, 비즈니스에 재능이 빛납니다.', malefic:'전생에서 {deity}의 에너지가 지적 영역에 도전을 주었습니다. 거짓 소통이나 지식의 오용에 대한 카르마가 남아, 이번 생에서 진실된 소통을 배웁니다.'},
-            Jupiter: {area:'지혜·행운·스승', benefic:'전생에서 {deity}의 축복으로 큰 지혜와 영적 공덕을 쌓았습니다. 이번 생에서 좋은 스승을 만나고, 지혜와 재물의 행운이 따릅니다.', malefic:'전생에서 {deity}의 에너지가 영적 성장에 도전을 주었습니다. 스승이나 종교에 대한 실망을 겪을 수 있지만, 이를 통해 진정한 지혜를 얻습니다.'},
-            Venus: {area:'사랑·매력·예술', benefic:'전생에서 {deity}의 축복 아래 아름다운 사랑과 예술적 재능을 쌓았습니다. 이번 생에서도 매력적이고 사랑이 풍요로운 삶이 기다립니다.', malefic:'전생에서 {deity}의 에너지가 사랑과 관계에 도전을 주었습니다. 집착이나 쾌락에 대한 카르마가 남아, 이번 생에서 진정한 사랑의 의미를 배웁니다.'},
-            Saturn: {area:'시련·인내·업보', benefic:'전생에서 {deity}의 축복으로 고통을 인내와 봉사로 승화시켰습니다. 이번 생의 토성 시련이 비교적 가벼우며, 어려움을 현명하게 극복합니다. 매우 희귀한 축복입니다!', malefic:'전생에서 {deity}의 에너지가 가장 무거운 업보로 남아있습니다. {deityDesc} — 이 카르마가 이번 생에서 시련의 형태로 나타납니다. 인내, 봉사, 만트라 수행으로 이 업보를 녹여야 합니다.'},
-            Rahu: {area:'욕망·집착·혁신', benefic:'전생에서 {deity}의 축복이 욕망의 방향을 올바르게 이끌었습니다. 이번 생에서 물질적 성취와 혁신을 통해 성장하며, 욕망이 건설적인 방향으로 작용합니다.', malefic:'전생에서 {deity}의 에너지가 욕망의 방향을 왜곡했습니다. {deityDesc} — 이 미완의 카르마가 이번 생에서도 강한 집착으로 나타납니다. 의식적으로 집착을 놓는 연습이 필요합니다.'},
-            Ketu: {area:'해탈·영성·과거', benefic:'전생에서 {deity}의 에너지를 이미 완성했습니다. {deityDesc} — 이 에너지는 이번 생에서 자연스럽게 갖고 있는 재능입니다. 집착하지 말고, 이 재능을 타인을 위해 나누세요.', malefic:'전생에서 {deity}의 에너지와 고통스러운 경험을 했습니다. {deityDesc} — 이 기억이 이번 생에서 본능적 거부감으로 나타날 수 있습니다. 과거를 인정하고 놓아보내는 것이 치유입니다.'}
-        };
+        // 금성 (사랑의 카르마)
+        if (venusD60) {
+            const venD = getDeity(venusD60.sidereal);
+            const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
+            ch4 += '<br><strong>♀ 금성 (사랑의 카라카)</strong> → D60 ' + venH + '궁 (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            ch4 += venD.deity && venD.deity.nature === 'benefic' ?
+                '금성이 길신 <strong>' + venD.deity.ko + '</strong>의 보호 아래 있습니다. 전생에서 사랑을 올바르게 실천했으며, 이번 생에서도 아름다운 사랑이 기다립니다. ' + venD.deity.desc :
+                '금성이 흉신 <strong>' + (venD.deity?venD.deity.ko:'') + '</strong>의 영향 아래 있습니다. 전생에서 사랑에 대한 도전이 있었으며, 이번 생에서 진정한 사랑의 의미를 배우는 것이 과제입니다. ' + (venD.deity?venD.deity.desc:'');
+        }
 
+        // 라후-케투 축 (1-7궁이면 전생 인연)
+        if (rahuD60 && ketuD60) {
+            const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
+            const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
+            if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
+                ch4 += '<br><br>🔥 <strong>라후-케투 축이 D60 1-7궁 라인!</strong> 이것은 배우자와의 <strong>매우 강한 전생 인연</strong>을 나타냅니다. 전생에서 깊은 카르마적 연결이 있었으며, 이번 생에서도 운명적으로 만나게 됩니다.';
+            }
+        }
+
+        // 7궁주의 D60 위치
+        const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
+        if (h7lordPlanet) {
+            const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
+            const h7lD = getDeity(h7lordPlanet.sidereal);
+            ch4 += '<br><br><strong>7궁주 ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + '궁 (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
+            ch4 += '배우자와의 카르마적 연결이 <strong>' + houseThemes[h7lH] + '</strong> 영역을 통해 발현됩니다. ';
+            ch4 += h7lH === 1 ? '배우자가 당신 자신의 성장에 직결됩니다.' : h7lH === 4 ? '가정과 안식처를 통해 배우자를 만납니다.' : h7lH === 9 ? '해외나 종교/교육을 통해 배우자와 인연이 이어집니다.' : h7lH === 10 ? '직업/사회적 활동을 통해 배우자 인연이 이어집니다.' : h7lH === 12 ? '해외나 영적 환경에서 배우자와 만나는 카르마입니다.' : '';
+        }
+        html += subChapter('💍', '배우자 카르마 — 전생의 인연', ch4);
+
+        // ─── 소챕터 5: 직업 카르마 ───
+        const d60H10sign = (dLagnaSign + 9) % 12;
+        const d60H10lord = SIGN_RULERS[d60H10sign];
+        const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
+        const satD60 = dPositions.find(p => p.id === 'Saturn');
+        const careerKarma = ['군사/리더십/스포츠','금융/예술/농업','교육/미디어/상업','간호/부동산/호텔','정치/연예/관리','의료/분석/봉사','법률/외교/디자인','연구/수사/의학','교육/종교/해외','행정/건설/공무원','기술/과학/혁신','예술/영성/병원'][d60H10sign];
+
+        let ch5 = '<strong>D60 10궁 (직업): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10궁주: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
+        ch5 += '전생에서의 직업적 카르마가 <strong>' + careerKarma + '</strong> 방향으로 각인되어 있습니다. 이번 생에서도 이 분야에 자연스러운 끌림이 있습니다.<br>';
+        if (satD60) {
+            const satD = getDeity(satD60.sidereal);
+            const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
+            ch5 += '<br><strong>♄ 토성 (카르마의 주인)</strong> → D60 ' + satH + '궁 (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            ch5 += satD.deity && satD.deity.nature === 'benefic' ?
+                '토성이 길신 아래에 있는 것은 <strong>매우 희귀한 축복</strong>입니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 직업적 시련을 줄여줍니다.' :
+                '토성이 흉신 아래에 있어 직업적 영역에서 <strong>전생의 무거운 카르마</strong>가 있습니다. ' + (satD.deity?satD.deity.desc:'') + '. 인내와 봉사, 만트라(Om Shanaishcharaya Namaha)로 이 업보를 녹이세요.';
+        }
+        if (d60H10planets.length > 0) {
+            ch5 += '<br><br><strong>D60 10궁의 행성:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — 직업적 카르마가 이 행성에 집중되어 있습니다.';
+        }
+        html += subChapter('💼', '직업 카르마 — 전생의 소명', ch5);
+
+        // ─── 소챕터 6: 재물 카르마 ───
+        const d60H2sign = (dLagnaSign + 1) % 12;
+        const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
+        let ch6 = '<strong>D60 2궁 (재물): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>';
+        const wealthKarma = ['자기 힘으로 재물을 모은 전생. 독립적 재테크 본능.','풍요로운 환경에서 살았던 전생. 물질적 안정 추구.','지적 활동으로 부를 쌓은 전생. 사업 수완.','가정에서 재물이 온 전생. 부동산/가족 재산.','권위로 재물을 얻은 전생. 과시적 소비 경향.','봉사로 재물을 모은 전생. 검소한 관리.','파트너십으로 재물을 모은 전생. 동업/결혼 재산.','타인의 재물(유산/보험)과 인연이 깊은 전생.','행운으로 재물이 온 전생. 해외/교육 관련 부.','느리지만 확실하게 모은 전생. 중년 이후 풍요.','혁신으로 재물을 모은 전생. 비전통적 수입.','영적 활동과 재물이 연결된 전생. 기부 성향.'][d60H2sign];
+        ch6 += wealthKarma + '<br>';
+        if (d60H2planets.length > 0) {
+            ch6 += '<br><strong>D60 2궁의 행성:</strong><br>';
+            d60H2planets.forEach(p => {
+                const pD = getDeity(p.sidereal);
+                ch6 += p.symbol + ' ' + p.name + deityTag(pD) + ' — ' + (p.natural === 'benefic' ? '전생에서 재물에 대한 좋은 카르마. 이번 생에서도 풍요.' : '전생에서 재물에 대한 카르마적 도전. 노력으로 극복.') + '<br>';
+            });
+        }
+        html += subChapter('💰', '재물 카르마 — 전생의 부', ch6);
+
+        // ─── 소챕터 7: 행성별 신 목록 ───
+        let ch7 = '';
+        const lagnaD2 = getDeity(lagnaSidereal);
+        if (lagnaD2.deity) {
+            const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            ch7 += '<div style="padding:4px 0;">⬆ 라그나 → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+        }
         positions.forEach(p => {
-            const degInSign = p.sidereal % 30;
-            const d60Part = Math.floor(degInSign / 0.5);
-            const signNum = Math.floor(p.sidereal / 30);
-            const d60Idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
-            const deity = D60_DEITIES[d60Idx];
-            if (deity) {
-                const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                const domain = planetDomain[p.id] || {area:'', benefic:'', malefic:''};
-                const interpTemplate = deity.nature === 'benefic' ? domain.benefic : domain.malefic;
-                const interp = interpTemplate.replace(/\{deity\}/g, deity.ko).replace(/\{deityDesc\}/g, deity.desc);
-
-                html += '<div style="padding:10px;margin:6px 0;background:rgba(201,168,76,0.04);border-radius:8px;border-left:3px solid ' + color + ';">';
-                html += '<strong>' + p.symbol + ' ' + p.name + '</strong> <span style="color:#888;">(' + domain.area + ')</span><br>';
-                html += '수호신: <strong>' + deity.name + ' (' + deity.ko + ')</strong> — <span style="color:' + color + ';font-weight:700;">' + (deity.nature === 'benefic' ? '길신(吉)' : '흉신(凶)') + '</span><br>';
-                html += interp;
-                html += '</div>'
+            const pD = getDeity(p.sidereal);
+            if (pD.deity) {
+                const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+                ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
             }
         });
+        html += subChapter('🕉️', '행성별 수호신 목록', ch7);
 
-        // 종합 카르마 요약
+        // ─── 소챕터 8: 종합 카르마 판단 ───
         const beneficCount = positions.filter(p => {
-            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
-            const signNum = Math.floor(p.sidereal / 30);
-            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
-            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'benefic';
+            const pD = getDeity(p.sidereal);
+            return pD.deity && pD.deity.nature === 'benefic';
         }).length;
         const maleficPlanets = positions.filter(p => {
-            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
-            const signNum = Math.floor(p.sidereal / 30);
-            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
-            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'malefic';
+            const pD = getDeity(p.sidereal);
+            return pD.deity && pD.deity.nature === 'malefic';
         });
 
-        html += '<br><div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:16px;">';
-        html += '<strong style="font-size:15px;">📊 D60 카르마 종합 판단</strong><br><br>';
-        html += '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
-
+        let ch8 = '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
         if (beneficCount >= 7) {
-            html += '🌟 <strong>매우 강한 전생 공덕.</strong> 파라샤라는 이런 차트를 "신들의 축복을 받은 영혼"이라 했습니다. 대부분의 행성이 길신 아래 있어, 이번 생에서 자연스럽게 좋은 결과를 얻습니다. 하지만 공덕에 안주하지 말고 계속 선업을 쌓으세요.';
+            ch8 += '🌟 <strong>매우 강한 전생 공덕.</strong> 파라샤라는 이런 차트를 "신들의 축복을 받은 영혼"이라 했습니다. 대부분의 행성이 길신 아래 있어 이번 생에서 자연스럽게 좋은 결과를 얻습니다.';
         } else if (beneficCount >= 5) {
-            html += '✨ <strong>전생의 공덕이 풍부합니다.</strong> 길신이 우세하여 삶의 많은 영역에서 보호받지만, 일부 흉신이 있는 행성 영역에서는 의식적 노력이 필요합니다.';
-            if (maleficPlanets.length > 0) html += '<br><br>특히 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 카르마적 도전이 있으니, 이 행성의 치유법(만트라, 보석, 자선)을 실천하면 좋습니다.';
+            ch8 += '✨ <strong>전생의 공덕이 풍부합니다.</strong> 길신이 우세하여 삶의 많은 영역에서 보호받습니다.';
+            if (maleficPlanets.length > 0) ch8 += ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 카르마적 도전이 있으니 해당 행성의 만트라와 자선을 실천하세요.';
         } else if (beneficCount >= 3) {
-            html += '⚖️ <strong>전생 카르마의 균형 상태.</strong> 길흉이 비슷하게 섞여 있어, 인생에서 좋은 일과 도전이 교차합니다. 흉신 행성의 영역에서 의식적 성장을 하면, 길신 행성의 축복이 더 강해집니다.';
-            if (maleficPlanets.length > 0) html += '<br><br>가장 주의할 행성: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — 이 행성들의 만트라 수행과 자선이 카르마 해소에 도움됩니다.';
+            ch8 += '⚖️ <strong>전생 카르마의 균형 상태.</strong> 길흉이 섞여 있어 좋은 일과 도전이 교차합니다.';
+            if (maleficPlanets.length > 0) ch8 += '<br>주의할 행성: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
-            html += '🔥 <strong>전생에서 많은 도전을 겪은 영혼.</strong> 하지만 파라샤라는 "가장 무거운 카르마를 가진 영혼이 가장 큰 성장을 한다"고 했습니다. 이번 생은 카르마를 정산하고 영혼을 정화하는 여정입니다.';
-            html += '<br><br>모든 흉신 행성에 대해 만트라 수행, 해당 행성의 보석 착용, 그리고 자선 활동을 실천하세요. 특히 <strong>토성의 만트라(Om Shanaishcharaya Namaha)</strong>가 카르마 해소에 가장 강력합니다.';
+            ch8 += '🔥 <strong>카르마 정산의 생.</strong> 전생에서 많은 도전을 가져왔지만, 파라샤라는 "가장 무거운 카르마를 가진 영혼이 가장 큰 성장을 한다"고 했습니다. 만트라 수행과 자선이 특히 중요합니다.';
         }
-        html += '</div>';
-        html += '</div></div>';
+        html += subChapter('📊', '종합 카르마 판단', ch8);
+
+        // (이전 코드 제거됨 - 신 목록과 해석은 위 소챕터에 통합)
 
     } else if (division === 2) {
         // D2 호라 — 재물·부의 축적
