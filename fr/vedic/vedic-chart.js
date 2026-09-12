@@ -307,7 +307,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', 'Khavedamsa');
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'Akshavedamsa');
     renderNakshatra(moonPos);
-    renderDasha(moonNakshatra, utcDate);
+    renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -721,49 +721,97 @@ function renderNakshatra(moonPos) {
     document.getElementById('nakshatraWrap').innerHTML = html;
 }
 
-function renderDasha(moonNakshatra, birthDate) {
+function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     const nak = NAKSHATRAS[moonNakshatra];
     if (!nak) return;
 
-    // Find starting dasha from nakshatra ruler
     const startRuler = nak.ruler;
     let startIdx = DASHA_ORDER.indexOf(startRuler);
     if (startIdx === -1) startIdx = 0;
 
+    const nakSpan = 360 / 27;
+    const moonInNak = moonSidereal - (moonNakshatra * nakSpan);
+    const elapsedFraction = moonInNak / nakSpan;
+    const firstDashaYears = DASHA_YEARS[startRuler];
+    const remainingYears = firstDashaYears * (1 - elapsedFraction);
+    const remainingDays = remainingYears * 365.25;
+
+    function addDays(date, days) {
+        const d = new Date(date);
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        return d;
+    }
+    function fmtDate(d) {
+        return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0');
+    }
+    function getAge(d) {
+        const diff = d.getTime() - birthDate.getTime();
+        return (diff / (365.25 * 24 * 60 * 60 * 1000)).toFixed(1);
+    }
+
     const now = new Date();
     let currentDate = new Date(birthDate);
 
-    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Qu\'est-ce qu\'un Dasha ?</strong> La vie est divisée en périodes gouvernées par 9 planètes successivement. Pendant la période de chaque planète, l\'énergie de cette planète influence fortement votre vie. La planète marquée <strong style="color:#c9a84c;">Actuel</strong> ci-dessous est celle qui gouverne actuellement votre vie.</div></div>';
-    html += '<div class="dasha-timeline">';
+    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">\xf0\x9f\x92\xa1 <strong>Vimshottari Dasha</strong> \xe2\x80\x94 Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period within it. Calculated from the Moon nakshatra position.<br><br>';
+    html += '\xf0\x9f\x8c\x99 Birth Moon: <strong>' + nak.ko + ' (' + nak.name + ')</strong> \xe2\x80\x94 First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
 
+    const periods = [];
     for (let i = 0; i < 9; i++) {
         const idx = (startIdx + i) % 9;
         const planet = DASHA_ORDER[idx];
-        const years = DASHA_YEARS[planet];
-
+        const fullYears = DASHA_YEARS[planet];
+        const actualDays = (i === 0) ? remainingDays : fullYears * 365.25;
         const startD = new Date(currentDate);
-        const endD = new Date(currentDate);
-        endD.setFullYear(endD.getFullYear() + years);
-
-        const isCurrent = now >= startD && now < endD;
-
-        const startStr = startD.getFullYear() + '.' + (startD.getMonth()+1);
-        const endStr = endD.getFullYear() + '.' + (endD.getMonth()+1);
-
-        html += `<div class="dasha-item ${isCurrent ? 'current' : ''}">
-            <span class="dasha-planet">${DASHA_KO[planet]}</span>
-            <span class="dasha-period">${startStr} ~ ${endStr}</span>
-            <span class="dasha-years">${years} yrs</span>
-            ${isCurrent ? '<span class="dasha-badge">Actuel</span>' : ''}
-        </div>`;
-
+        const endD = addDays(currentDate, actualDays);
+        periods.push({ planet, fullYears, startD, endD, actualDays });
         currentDate = endD;
     }
+
+    html += '<div class="dasha-timeline">';
+
+    periods.forEach((p, pi) => {
+        const isCurrent = now >= p.startD && now < p.endD;
+        const age = getAge(p.startD);
+
+        html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
+        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
+        html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
+        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + ' yrs</span>';
+        if (isCurrent) html += '<span class="dasha-badge">Current</span>';
+        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(age ' + age + ') \xe2\x96\xbc</span>';
+
+        html += '<div class="bhukti-list" style="display:' + (isCurrent ? '' : 'none') + ';margin-top:8px;padding-top:8px;border-top:1px solid #2a2a5a;">';
+
+        const mahaDays = p.actualDays;
+        const mahaYears = p.fullYears;
+        let bhuktiDate = new Date(p.startD);
+        const bhuktiStartIdx = DASHA_ORDER.indexOf(p.planet);
+
+        for (let j = 0; j < 9; j++) {
+            const bIdx = (bhuktiStartIdx + j) % 9;
+            const bPlanet = DASHA_ORDER[bIdx];
+            const bFullDays = (DASHA_YEARS[p.planet] * DASHA_YEARS[bPlanet] / 120) * 365.25;
+            const bDays = bFullDays * (mahaDays / (mahaYears * 365.25));
+            const bStart = new Date(bhuktiDate);
+            const bEnd = addDays(bhuktiDate, bDays);
+            const bCurrent = now >= bStart && now < bEnd;
+            const bAge = getAge(bStart);
+
+            html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
+            html += '<span>' + (bCurrent ? '\xe2\x96\xb6 ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + fmtDate(bStart) + '</span>';
+            html += '<span>(age ' + bAge + ')</span>';
+            html += '</div>';
+
+            bhuktiDate = bEnd;
+        }
+
+        html += '</div></div>';
+    });
 
     html += '</div>';
     document.getElementById('dashaWrap').innerHTML = html;
 }
-
 function renderInterpretation(positions, lagnaSign, moonPos) {
     // Helper: get house number from sign
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
@@ -1821,51 +1869,113 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
 
     } else if (division === 2) {
-        html += '<div class="interp-card"><div class="interp-title">💰 D2 Wealth Analysis</div><div class="interp-text">';
-        html += '<strong>D2 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-        const sunSign = dPositions.find(p => p.id === 'Sun');
-        const moonSign = dPositions.find(p => p.id === 'Moon');
-        if (sunSign) html += '<strong>D2 Sun:</strong> ' + SIGNS[sunSign.dSign] + ' — Sun in Leo (own hora) indicates self-made wealth<br>';
-        if (moonSign) html += '<strong>D2 Moon:</strong> ' + SIGNS[moonSign.dSign] + ' — Moon in Cancer (own hora) indicates wealth through others<br>';
+        // D2 Hora — Wealth accumulation
+        const d2LagnaInterp = ['Self-made wealth. Independent and aggressive investing.','Sensory investment and stable wealth. Real estate, food, art income.','Earning through intellectual activity. Writing, education, business acumen.','Real estate and family income. Property from mother. Watch emotional spending.','Wealth through leadership and authority. Government, gold. Showy spending.','Income through analysis and skills. Medical, accounting, service. Frugal manager.','Wealth through partnership. Law, diplomacy, fashion, art income.','Building wealth through others money (inheritance, insurance, investments). Hidden sources.','Income through education, foreign, religion. Fortune brings wealth.','Systematic effort builds wealth. Slow but sure. Rich after middle age.','Income through technology, innovation, networks. Unconventional sources.','Income through spiritual/artistic activities. Foreign-related wealth. Giving nature.'][dLagnaSign];
+
+        html += '<div class="interp-card"><div class="interp-title">💰 D2 Hora — Wealth Analysis</div><div class="interp-text">';
+        html += '<strong>D2 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d2LagnaInterp + '<br><br>';
+        const sunD2 = dPositions.find(p => p.id === 'Sun');
+        const moonD2 = dPositions.find(p => p.id === 'Moon');
+        if (sunD2) html += '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ' + (sunD2.dSign === 4 ? '🌟 <strong>Sun in own hora (Leo)!</strong> Self-made type. Builds wealth through authority and leadership.' : 'Sun in Moon hora. Income through others help or government/public sector.') + '<br>';
+        if (moonD2) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Moon in own hora (Cancer)!</strong> Abundant life through people and relationships.' : 'Moon in Sun hora. Livelihood through own effort and independent activity.') + '<br>';
+        const d2H2sign = (dLagnaSign + 1) % 12;
+        const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
+        html += '<br><strong>D2 2nd House (Accumulated Wealth) — ' + SIGNS[d2H2sign] + ':</strong><br>';
+        if (d2H2planets.length > 0) {
+            const wealth = {Sun:'Wealth through authority and status',Moon:'Wealth through public activities',Mars:'Property, technology, competitive fields',Mercury:'Business, intellectual activity, communication',Jupiter:'Education, law, religion — abundant wealth',Venus:'Art, fashion, luxury goods',Saturn:'Slow but steady accumulation. Stable after middle age',Rahu:'Unconventional methods, foreign-related',Ketu:'Detached from material. Pursues spiritual values'};
+            d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
+        } else html += 'No planets in 2nd — the 2nd lord position is key to wealth.<br>';
         html += '</div></div>';
 
     } else if (division === 3) {
+        const d3LagnaInterp = ['Independent, leadership among siblings. Brave communication style.','Stable, materially comfortable sibling relationships. Artistic siblings possible.','Intellectual, communicative siblings. Many siblings or lots of conversation.','Emotionally deep sibling bond. Motherly sibling. Protective siblings.','Charismatic, proud siblings. Famous or successful sibling.','Analytical, practical siblings. Medical/education field. Can be critical.','Diplomatic, charming siblings. Social connections through siblings.','Intense, secretive sibling relationships. Deep bonds after conflicts.','Free, philosophical siblings. Siblings abroad. Religion/education related.','Responsible, ambitious siblings. Sense of duty. Siblings few or serious relationship.','Unique, independent siblings. Unconventional sibling relationships.','Spiritual, artistic siblings. Siblings abroad. Emotional connection.'][dLagnaSign];
         const d3_3sign = (dLagnaSign + 2) % 12;
         const d3_3planets = dPositions.filter(p => p.dSign === d3_3sign);
-        html += '<div class="interp-card"><div class="interp-title">👫 D3 Siblings Analysis</div><div class="interp-text">';
-        html += '<strong>D3 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-        html += '<strong>D3 3rd House (Siblings):</strong> ' + SIGNS[d3_3sign] + '<br>';
-        if (d3_3planets.length > 0) html += '<strong>Planets in 3rd:</strong> ' + d3_3planets.map(p => p.name).join(', ') + '<br>';
+
+        html += '<div class="interp-card"><div class="interp-title">👫 D3 Drekkana — Siblings & Courage</div><div class="interp-text">';
+        html += '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
+        html += '<strong>D3 3rd House (Younger Siblings) — ' + SIGNS[d3_3sign] + ':</strong><br>';
+        if (d3_3planets.length > 0) {
+            const bro = {Sun:'Younger sibling has leadership and authority',Moon:'Emotionally close with younger sibling',Mars:'Active, brave younger sibling. Possible conflicts',Mercury:'Intelligent younger sibling with good communication',Jupiter:'Wise younger sibling who brings good fortune',Venus:'Attractive, artistic younger sibling',Saturn:'Difficulties with younger sibling. May have age gap',Rahu:'Unique younger sibling or foreign connection',Ketu:'Distance with younger sibling. Spiritual connection'};
+            d3_3planets.forEach(p => { html += '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
+        } else html += 'No planets in 3rd — check the 3rd lord position.<br>';
         html += '</div></div>';
 
     } else if (division === 4) {
+        const d4LagnaInterp = ['Actively acquires property. Likes building or buying new homes.','Stable, abundant real estate. Land and farms. Luxurious dwelling.','Multiple homes or frequent moves. Prefers intellectual environment.','Home and property are emotionally important. Near water. Property from mother.','Grand, spacious home. Luxurious interior. Prestigious area.','Clean, practical dwelling. Health-focused environment. Multiple small properties.','Beautiful, harmonious home. Interest in interior design. Property with partner.','Property undergoes transformation. Inherited property. Secret places.','Large land and foreign property. Near religious/educational facilities.','Systematic property investment. Old buildings. Slow but sure asset growth.','Unique dwelling style. Modern apartment. Tech-related facilities.','Beautiful home near water. Foreign property. Spiritual space.'][dLagnaSign];
         const d4_4sign = (dLagnaSign + 3) % 12;
-        html += '<div class="interp-card"><div class="interp-title">🏠 D4 Property Analysis</div><div class="interp-text">';
-        html += '<strong>D4 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-        html += '<strong>D4 4th House (Property):</strong> ' + SIGNS[d4_4sign] + '<br>';
+        const d4_4planets = dPositions.filter(p => p.dSign === d4_4sign);
+
+        html += '<div class="interp-card"><div class="interp-title">🏠 D4 Chaturthamsa — Property & Fortune</div><div class="interp-text">';
+        html += '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
+        html += '<strong>D4 4th House (Property) — ' + SIGNS[d4_4sign] + ':</strong><br>';
+        if (d4_4planets.length > 0) {
+            const prop = {Sun:'Government-owned buildings or prestigious dwelling',Moon:'Beautiful home. Near water. Mother influence',Mars:'New construction. Possible property disputes',Mercury:'Commercial property. Multiple ownership',Jupiter:'Spacious, abundant home! Best property fortune',Venus:'Luxurious home. Beautiful interior',Saturn:'Old home. Needs repair. Stable after middle age',Rahu:'Foreign property. Unconventional dwelling',Ketu:'Indifferent to property. Prefers spiritual space'};
+            d4_4planets.forEach(p => { html += '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
+        } else html += 'No planets in 4th — the 4th lord position is key to property.<br>';
         html += '</div></div>';
 
     } else if (division === 24) {
+        const d24LagnaInterp = ['Physical education, military, leadership training.','Music, art, culinary, finance education.','Language, literature, communication, media education.','History, psychology, home science education.','Political science, theater, business education.','Medicine, science, statistics education. Precise learning.','Law, diplomacy, design education. Balanced learning.','Psychology, research, investigation, occult education.','Philosophy, theology, international studies. Study abroad likely.','Business, administration, architecture. Systematic learning.','IT, engineering, aviation, social science. Innovative learning.','Art, music, spirituality, film studies. Intuitive learning.'][dLagnaSign];
         const d24_4sign = (dLagnaSign + 3) % 12;
         const d24_5sign = (dLagnaSign + 4) % 12;
-        html += '<div class="interp-card"><div class="interp-title">📚 D24 Education Analysis</div><div class="interp-text">';
-        html += '<strong>D24 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-        html += '<strong>D24 4th (Basic Education):</strong> ' + SIGNS[d24_4sign] + '<br>';
-        html += '<strong>D24 5th (Higher Education):</strong> ' + SIGNS[d24_5sign] + '<br>';
-        const eduFields = ['Military/Sports','Arts/Music','Commerce/Communication','Home Science/Psychology','Politics/Administration','Medicine/Science','Law/Diplomacy','Research/Occult','Philosophy/Religion','Management/Administration','IT/Engineering','Arts/Spirituality'];
-        html += '<strong>Suited Field:</strong> ' + eduFields[dLagnaSign] + '<br>';
+        const d24_4planets = dPositions.filter(p => p.dSign === d24_4sign);
+        const jupD24 = dPositions.find(p => p.id === 'Jupiter');
+        const merD24 = dPositions.find(p => p.id === 'Mercury');
+
+        html += '<div class="interp-card"><div class="interp-title">📚 D24 Chaturvimsamsa — Education</div><div class="interp-text">';
+        html += '<strong>D24 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d24LagnaInterp + '<br><br>';
+        html += '<strong>D24 4th (Basic Education) — ' + SIGNS[d24_4sign] + ':</strong><br>';
+        if (d24_4planets.length > 0) {
+            const edu4 = {Sun:'Prestigious school. Authoritative education',Moon:'Comfortable learning environment. Strong home education',Mars:'Competitive learning. Strong in sports/tech',Mercury:'Best placement! Outstanding academic ability',Jupiter:'Rich educational environment. Good teachers',Venus:'Art education. Beautiful school',Saturn:'Difficult education but deep knowledge when overcome',Rahu:'Unconventional education. Foreign school',Ketu:'Less interest in formal education. Intuitive learning'};
+            d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
+        } else html += 'No planets in 4th.<br>';
+        if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Wisdom) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>High academic achievement expected!</strong> Graduate school/PhD/study abroad possible.' : 'Growth through learning. Jupiter blessing in house ' + jH + '.') + '<br>'; }
+        if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercury (Learning) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellectual ability!</strong> Talented in math, language, analysis.' : 'Intellectual ability expressed in house ' + mH + '.') + '<br>'; }
         html += '</div></div>';
 
     } else if (division === 30) {
-        html += '<div class="interp-card"><div class="interp-title">⚠️ D30 Misfortune/Disease Analysis</div><div class="interp-text">';
-        html += '<strong>D30 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        const d30LagnaInterp = ['Accidents, burns, headaches. Problems from hasty decisions. Manage anger.','Financial loss, dietary issues, thyroid. Watch overeating and attachment.','Nervous anxiety, insomnia, breathing problems. Avoid excessive worry.','Emotional instability, stomach issues, water-related problems. Control emotions.','Heart problems, pride damage, overwork. Need humility and rest.','Digestive disorders, allergies, perfectionism stress. Need relaxation.','Kidney problems, relationship conflicts, indecisiveness. Need decisiveness.','Secrets, accidents, surgery, sexual issues. Regular checkups important.','Liver problems, overweight, gambling/overspending. Need moderation.','Joint, bone, depression, loneliness. Need calcium and social interaction.','Blood pressure, circulation, unexpected accidents. Regular health checks.','Immune deficiency, addiction, mental health. Need meditation and sleep.'][dLagnaSign];
         const d30_6sign = (dLagnaSign + 5) % 12;
         const d30_8sign = (dLagnaSign + 7) % 12;
-        html += '<strong>D30 6th (Disease):</strong> ' + SIGNS[d30_6sign] + '<br>';
-        html += '<strong>D30 8th (Danger):</strong> ' + SIGNS[d30_8sign] + '<br>';
-        html += 'D30 reveals sources of misfortune and obstacles. Planet placement in 6th, 8th, and 12th houses is important.';
+        const d30_12sign = (dLagnaSign + 11) % 12;
+        const d30_6planets = dPositions.filter(p => p.dSign === d30_6sign);
+        const d30_8planets = dPositions.filter(p => p.dSign === d30_8sign);
+
+        html += '<div class="interp-card"><div class="interp-title">⚠️ D30 Trimsamsa — Misfortune & Disease</div><div class="interp-text">';
+        html += '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d30LagnaInterp + '<br><br>';
+        const diseaseBySign = ['Head, brain, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic disease','Liver, thighs, overweight','Bones, joints, rheumatism','Circulation, blood pressure, ankles','Immune, feet, mental health'];
+        html += '<strong>D30 6th (Disease) — ' + SIGNS[d30_6sign] + ':</strong><br>';
+        html += 'Watch for: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
+        if (d30_6planets.length > 0) {
+            const dis = {Sun:'Eye, heart-related illness',Moon:'Mental health, water-related issues',Mars:'Accidents, surgery, burns',Mercury:'Nervous system, skin problems',Jupiter:'Liver, overweight',Venus:'Kidneys, diabetes, STDs',Saturn:'Chronic illness, joint problems',Rahu:'Unknown cause illness, addiction',Ketu:'Immune deficiency, allergies'};
+            d30_6planets.forEach(p => { html += '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
+        }
+        html += '<br><strong>D30 8th (Danger) — ' + SIGNS[d30_8sign] + ':</strong><br>';
+        if (d30_8planets.length > 0) {
+            d30_8planets.forEach(p => { html += '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Danger/accident caution. Insurance and checkups important.' : 'Protected in crisis.') + '<br>'; });
+        } else html += 'No planets in 8th — low danger risk.<br>';
+        html += '</div></div>';
+
+    } else if (division === 40) {
+        const d40LagnaInterp = ['Independent, strong-willed mother. Leadership inherited from maternal line.','Mother manages wealth well. Material abundance from maternal line.','Intellectual mother with good communication. Language/education talent inherited.','Very deep bond with mother. Sensitivity and intuition inherited.','Mother has authority and dignity. Leadership and honor inherited.','Mother excels at health management. Analytical/service spirit inherited.','Attractive, diplomatic mother. Artistic sense inherited.','Strong mother who went through transformation. Resilience inherited.','Educational, religious mother. Wisdom/philosophy inherited.','Responsible, strict mother. Patience and discipline inherited.','Unique, progressive mother. Innovative thinking inherited.','Spiritual, intuitive mother. Art/spirituality inherited.'][dLagnaSign];
+        const moonD40 = dPositions.find(p => p.id === 'Moon');
+
+        html += '<div class="interp-card"><div class="interp-title">👩 D40 Khavedamsa — Maternal Legacy</div><div class="interp-text">';
+        html += '<strong>D40 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d40LagnaInterp + '<br>';
+        if (moonD40) { const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☽ Moon (Mother karaka) → ' + mH + 'H:</strong> ' + ['','Strong maternal influence on self','Property from mother','Good communication with mother','Deep bond with mother! Best placement','Creative mother','Service-oriented mother','Mother influences relationships','Inheritance from mother','Religious/educational mother','Socially successful mother','Independent mother','Spiritual mother'][mH] + '<br>'; }
+        html += '</div></div>';
+
+    } else if (division === 45) {
+        const d45LagnaInterp = ['Active, action-oriented father. Courage and leadership inherited.','Financially stable father. Material values inherited.','Intellectual, versatile father. Communication/business ability inherited.','Emotional, family-oriented father. Caring instinct inherited.','Authoritative, respected father. Leadership inherited.','Practical, diligent father. Analytical/technical skills inherited.','Diplomatic, refined father. Social ability inherited.','Strong, mysterious father. Resilience/insight inherited.','Scholarly, religious father. Philosophy/morality inherited.','Strict, ambitious father. Patience/discipline inherited.','Creative, innovative father. Tech/scientific thinking inherited.','Spiritual, artistic father. Intuition/creativity inherited.'][dLagnaSign];
+        const sunD45 = dPositions.find(p => p.id === 'Sun');
+
+        html += '<div class="interp-card"><div class="interp-title">👨 D45 Akshavedamsa — Paternal Legacy</div><div class="interp-text">';
+        html += '<strong>D45 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d45LagnaInterp + '<br>';
+        if (sunD45) { const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☉ Sun (Father karaka) → ' + sH + 'H:</strong> ' + ['','Strong paternal influence on self','Property from father','Good communication with father','Family-oriented father','Creative father','Service-oriented father','Father influences relationships','Inheritance from father','Religious/educational father','Socially successful father! Best placement','Independent father','Spiritual father'][sH] + '<br>'; }
         html += '</div></div>';
     }
+
     interpEl.innerHTML = html;
 }
 
