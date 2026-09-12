@@ -913,10 +913,10 @@ function calculateChart() {
     renderPlanetTable(positions, lagnaSign, lagnaSidereal);
     renderD1Chart(positions, lagnaSign);
     renderD9Chart(positions, lagnaSign, lagnaSidereal);
-    renderDivisionalChart(positions, lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', '다샴샤');
-    renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', '삽탐샤');
-    renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', '드와다샴샤');
-    renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', '샤슈티암샤');
+    renderDivisionalChart(positions, lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', 'ダシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', 'サプタムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', 'ドワダシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', 'シャシュティアムシャ');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -2192,18 +2192,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // 직업 성향 by D10 라그나
         const careerBySign = [
-            '리더십, 군사, 스포츠, 기업가',  // 양자리
-            '금융, 예술, 부동산, 요식업',     // 황소
-            '커뮤니케이션, 미디어, 교육, IT',  // 쌍둥이
-            '간호, 부동산, 호텔, 심리상담',    // 게
-            '정치, 연예, 관리직, 행정',        // 사자
-            '의료, 회계, 분석, 연구',          // 처녀
-            '법률, 외교, 디자인, 컨설팅',      // 천칭
-            '수사, 연구, 의학, 보험',          // 전갈
-            '교육, 종교, 해외무역, 출판',      // 사수
-            '행정, 건설, 광업, 공무원',        // 염소
-            'IT, 혁신, NGO, 항공',           // 물병
-            '예술, 병원, 해외, 영성'           // 물고기
+            'リーダーシップ、軍事、スポーツ、起業家',  // 양자리
+            '金融、芸術、不動産、飲食業',     // 황소
+            'コミュニケーション、メディア、教育、IT',  // 쌍둥이
+            '看護、不動産、ホテル、心理カウンセリング',    // 게
+            '政治、芸能、管理職、行政',        // 사자
+            '医療、会計、分析、研究',          // 처녀
+            '法律、外交、デザイン、コンサルティング',      // 천칭
+            '捜査、研究、医学、保険',          // 전갈
+            '教育、宗教、貿易、出版',      // 사수
+            '行政、建設、鉱業、公務員',        // 염소
+            'IT、革新、NGO、航空',           // 물병
+            '芸術、病院、海外、スピリチュアル'           // 물고기
         ];
         html += '<strong>적합 분야:</strong> ' + careerBySign[dLagnaSign];
         html += '</div></div>';
@@ -2224,7 +2224,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (benefics.length > 0) html += '길성이 5궁에 있어 자녀복이 있습니다.<br>';
         if (malefics.length > 0) html += '흉성이 5궁에 있어 자녀 관련 어려움이 있을 수 있습니다.<br>';
-        if (d7_5planets.length === 0) html += '5궁에 행성이 없어 5궁주(지배성)의 위치를 봐야 합니다.';
+        if (d7_5planets.length === 0) html += '5宮に惑星がなく5宮主の位置を見る必要があります。';
         html += '</div></div>';
 
     } else if (division === 12) {
@@ -2256,18 +2256,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // D60 각 사인별 전생 테마
         const pastLifeThemes = [
-            '전사, 지도자 — 전생에 권력을 행사했으며, 이번 생에서도 리더십이 타고남',
-            '예술가, 농부 — 전생에 대지와 자연을 다루었으며, 물질적 안정을 추구함',
-            '학자, 상인 — 전생에 지식과 소통으로 살았으며, 다재다능함이 남아있음',
-            '보호자, 어머니 — 전생에 타인을 돌보았으며, 감정적 깊이가 있음',
-            '왕족, 성직자 — 전생에 높은 지위에 있었으며, 자연스러운 권위가 있음',
-            '치유자, 봉사자 — 전생에 의술이나 봉사에 종사했으며, 분석력이 뛰어남',
-            '외교관, 예술가 — 전생에 조화와 아름다움을 추구했으며, 관계에 능함',
-            '수행자, 연금술사 — 전생에 깊은 변혁을 겪었으며, 신비로운 능력이 있음',
-            '현자, 탐험가 — 전생에 진리를 탐구했으며, 영적 지혜가 남아있음',
-            '관료, 건축가 — 전생에 질서를 세웠으며, 인내와 책임감이 강함',
-            '혁명가, 발명가 — 전생에 시대를 앞서갔으며, 독창적 사고가 있음',
-            '영매, 예술가 — 전생에 영적 세계와 교류했으며, 직관이 매우 강함'
+            '戦士、指導者 — 前世で権力を行使し、今世もリーダーシップが天性',
+            '芸術家、農民 — 前世で大地と自然を扱い、物質的安定を追求',
+            '学者、商人 — 前世で知識と交流で生き、多才多能が残る',
+            '保護者、母親 — 前世で他者を世話し、感情的な深さがある',
+            '王族、聖職者 — 前世で高い地位にあり、自然な権威がある',
+            '治癒者、奉仕者 — 前世で医術や奉仕に従事し、分析力に優れる',
+            '外交官、芸術家 — 前世で調和と美を追求し、関係に長ける',
+            '修行者、錬金術師 — 前世で深い変革を経験し、神秘的な能力がある',
+            '賢者、探検家 — 前世で真理を探求し、霊的知恵が残る',
+            '官僚、建築家 — 前世で秩序を築き、忍耐と責任感が強い',
+            '革命家、発明家 — 前世で時代を先取りし、独創的思考がある',
+            '霊媒、芸術家 — 前世で霊的世界と交流し、直感が非常に強い'
         ];
 
         html += '<div class="interp-card"><div class="interp-title">🔮 D60 전생 카르마 분석</div><div class="interp-text">';
