@@ -1850,20 +1850,52 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             '영매, 예술가 — 전생에 영적 세계와 교류했으며, 직관이 매우 강함'
         ];
 
-        html += '<div class="interp-card"><div class="interp-title">🔮 D60 전생 카르마 분석</div><div class="interp-text">';
-        html += '<strong>D60 라그나:</strong> ' + SIGNS[dLagnaSign] + ' (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')<br>';
-        html += '<strong>전생 테마:</strong> ' + pastLifeThemes[dLagnaSign] + '<br><br>';
+        // 행성별 D60 사인 해석 (전통)
+        const d60PlanetInSign = {
+            Sun: ['전생에서 전사나 왕으로 살았으며, 강한 자아와 지도력이 이번 생에도 남아있습니다. 권위를 세우려는 영혼의 목적이 있습니다.','전생에서 예술가나 부유한 자로 살았으며, 물질적 풍요를 추구하는 영혼입니다. 감각적 아름다움에 끌립니다.','전생에서 학자나 상인으로 살았으며, 지식과 소통이 영혼의 핵심 주제입니다.','전생에서 보호자나 양육자로 살았으며, 타인을 돌보는 것이 영혼의 깊은 본능입니다.','전생에서 왕족이나 성직자로 높은 지위에 있었으며, 이번 생에서도 자연스러운 권위를 지닙니다.','전생에서 치유자나 봉사자로 살았으며, 분석과 봉사가 영혼의 목적입니다.','전생에서 외교관이나 예술가로 조화를 추구했으며, 관계와 균형이 영혼의 과제입니다.','전생에서 수행자나 연금술사로 깊은 변혁을 겪었으며, 비밀과 변혁이 영혼에 각인되어 있습니다.','전생에서 현자나 탐험가로 진리를 추구했으며, 지혜와 모험이 영혼의 방향입니다.','전생에서 관료나 건축가로 질서를 세웠으며, 체계와 책임이 영혼에 새겨져 있습니다.','전생에서 혁명가나 발명가로 시대를 앞서갔으며, 독창적 사고가 영혼의 특성입니다.','전생에서 영매나 예술가로 영적 세계와 교류했으며, 깊은 직관이 영혼에 남아있습니다.'],
+            Moon: ['전생의 감정적 기억이 불같이 강렬합니다. 분노와 열정이 무의식에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 과제입니다.','전생의 감정적 기억이 따뜻하고 안정적입니다. 풍요와 안정 속에서 살았던 기억이 무의식에 남아, 아름다운 것을 찾습니다.','전생의 감정적 기억이 지적이고 다채롭습니다. 여러 경험을 했던 기억이 남아 호기심이 강합니다.','전생의 감정적 기억이 매우 깊습니다. 가정과 돌봄의 기억이 강하게 남아 감수성이 풍부합니다.','전생의 감정적 기억이 자부심과 존엄으로 가득합니다. 인정받고 존경받았던 기억이 남아있습니다.','전생의 감정적 기억이 봉사와 분석에 관련됩니다. 누군가를 도왔던 기억이 남아 세심한 마음을 가집니다.','전생의 감정적 기억이 조화와 관계에 관련됩니다. 아름다운 관계의 기억이 남아 파트너를 찾습니다.','전생의 감정적 기억이 깊고 강렬합니다. 극적인 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습니다.','전생의 감정적 기억이 자유와 탐구에 관련됩니다. 여행하고 배웠던 기억이 남아 확장을 추구합니다.','전생의 감정적 기억이 책임과 인내에 관련됩니다. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집니다.','전생의 감정적 기억이 독특하고 비범합니다. 다른 사람들과 달랐던 기억이 남아 독립적 감성을 가집니다.','전생의 감정적 기억이 영적이고 초월적입니다. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습니다.']
+        };
 
+        html += '<div class="interp-card"><div class="interp-title">🔮 D60 전생 카르마 — 전통 풀이</div><div class="interp-text">';
+        html += '<div style="background:rgba(139,126,200,0.08);border:1px solid rgba(139,126,200,0.2);border-radius:10px;padding:16px;margin-bottom:16px;">';
+        html += '<strong style="font-size:15px;">📜 파라샤라 曰:</strong><br>"샤슈티암샤(D60)는 모든 분할 차트 중 가장 중요하다. 이 차트에서 행성이 길신(吉神)의 분할에 있으면 좋은 결과를, 흉신(凶神)의 분할에 있으면 나쁜 결과를 준다."<br>';
+        html += '<span style="color:#888;font-size:12px;">— 브리핫 파라샤라 호라 샤스트라(BPHS), D60 장(章)</span></div>';
+
+        html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">🪐 D60 라그나 — 당신의 전생 정체성</h4>';
+        html += '<strong>' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')<br>';
+        html += pastLifeThemes[dLagnaSign] + '<br>';
         if (d60_planets_1.length > 0) {
-            html += '<strong>D60 라그나의 행성:</strong> ' + d60_planets_1.map(p => p.name).join(', ') + '<br>';
-            html += '이 행성들은 전생에서 가져온 핵심 카르마 에너지입니다.<br>';
+            html += '<br>' + d60_planets_1.map(p => p.name).join(', ') + '이(가) D60 라그나에 위치 — 전생의 핵심 카르마가 이 행성들에 집중되어 있으며, 이번 생에서도 이 행성의 에너지를 강하게 체험합니다.<br>';
         }
 
-        // 카르마 방향
+        // 태양 (영혼의 목적)
         const sunD60 = dPositions.find(p => p.id === 'Sun');
+        if (sunD60) {
+            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">☉ D60 태양 — 영혼의 궁극적 목적</h4>';
+            html += '<strong>' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong><br>';
+            html += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
+        }
+
+        // 달 (전생의 감정적 기억)
         const moonD60 = dPositions.find(p => p.id === 'Moon');
-        if (sunD60) html += '<br><strong>D60 태양 (' + SIGNS[sunD60.dSign] + '):</strong> 전생의 영혼 목적이 이 사인의 에너지와 연결됩니다.';
-        if (moonD60) html += '<br><strong>D60 달 (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
+        if (moonD60) {
+            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">☽ D60 달 — 전생의 감정적 기억</h4>';
+            html += '<strong>' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong><br>';
+            html += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
+        }
+
+        // 기타 행성 간단 해석
+        const otherD60 = {Mars:'전생에서의 행동 패턴과 용기의 카르마',Mercury:'전생에서의 지적 능력과 소통의 카르마',Jupiter:'전생에서의 지혜와 영적 공덕',Venus:'전생에서의 사랑과 예술적 카르마',Saturn:'전생에서 남은 가장 무거운 업보이자 가장 큰 성장의 열쇠',Rahu:'전생에서 이루지 못한 욕망 — 이번 생의 집착 포인트',Ketu:'전생에서 이미 완성한 것 — 이번 생에서는 놓아야 할 것'};
+        const otherPlanets = dPositions.filter(p => !['Sun','Moon'].includes(p.id));
+        if (otherPlanets.length > 0) {
+            html += '<h4 style="color:#c9a84c;margin:16px 0 8px;">🪐 기타 행성의 전생 카르마</h4>';
+            otherPlanets.forEach(p => {
+                const dH = ((p.dSign - dLagnaSign + 12) % 12) + 1;
+                const houseTheme = ['','자아/존재','재물/가치','소통/학습','가정/안식','창조/사랑','봉사/시련','관계/파트너','변혁/비밀','지혜/종교','사회/직업','소망/이익','해방/초월'][dH];
+                html += '<div style="padding:6px 0;border-bottom:1px solid #1a1a3e;"><strong>' + p.symbol + ' ' + p.name + '</strong> → ' + SIGNS[p.dSign] + ' (' + dH + '궁: ' + houseTheme + ')<br>';
+                html += '<span style="color:#888;font-size:12px;">' + (otherD60[p.id]||'') + '. D60에서 ' + dH + '궁에 위치하여, 이 카르마가 <strong>' + houseTheme + '</strong> 영역에서 발현됩니다.</span></div>';
+            });
+        }
         html += '</div></div>';
 
         // D60 신(Deity) 찾기
@@ -1930,11 +1962,22 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             {name:'Charachara', ko:'차라차라', nature:'benefic', desc:'움직이는 것과 움직이지 않는 것. 전생에서 만물과 하나였던 카르마'}
         ];
 
-        // 각 행성의 D60 신 계산
-        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 신(Deity) — 행성별 전생 카르마의 수호신</div><div class="interp-text">';
-        html += '<strong>파라샤라 호라 샤스트라</strong>에 따르면, 각 행성이 위치한 D60 분할에 따라 고유한 신(Deity)이 배정됩니다. 이 신은 그 행성의 전생 카르마 성질을 나타냅니다.<br><br>';
+        // D60 신(Deity) — 전통 풀이
+        const planetDeityContext = {
+            Sun: '태양은 아트마(영혼)를 나타냅니다. D60 태양의 신은 <strong>전생에서 영혼이 어떤 신성한 에너지 아래 있었는지</strong>를 보여줍니다.',
+            Moon: '달은 마나스(마음)를 나타냅니다. D60 달의 신은 <strong>전생의 감정적 경험과 무의식의 패턴</strong>을 보여줍니다.',
+            Mars: '화성은 용기와 행동력을 나타냅니다. D60 화성의 신은 <strong>전생에서의 전투, 경쟁, 힘의 사용</strong>을 보여줍니다.',
+            Mercury: '수성은 지성과 소통을 나타냅니다. D60 수성의 신은 <strong>전생에서의 학습, 교역, 지적 활동</strong>을 보여줍니다.',
+            Jupiter: '목성은 지혜와 스승을 나타냅니다. D60 목성의 신은 <strong>전생에서의 영적 공덕과 구루의 축복</strong>을 보여줍니다.',
+            Venus: '금성은 사랑과 예술을 나타냅니다. D60 금성의 신은 <strong>전생에서의 사랑, 헌신, 예술적 활동</strong>을 보여줍니다.',
+            Saturn: '토성은 카르마의 심판관입니다. D60 토성의 신은 <strong>전생에서 가장 무거운 업보</strong>를 보여줍니다. 이것이 이번 생의 가장 큰 시련이자 성장 포인트입니다.',
+            Rahu: '라후는 미완의 욕망입니다. D60 라후의 신은 <strong>전생에서 이루지 못해 이번 생에서도 집착하는 것</strong>을 보여줍니다.',
+            Ketu: '케투는 완성된 카르마입니다. D60 케투의 신은 <strong>전생에서 이미 달성한 것 — 이번 생에서는 집착하지 말고 놓아야 할 것</strong>을 보여줍니다.'
+        };
 
-        // 라그나의 D60 신
+        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 신(Deity) — 행성별 전생 카르마의 전통 풀이</div><div class="interp-text">';
+
+        // 라그나 신
         const lagnaDegInSign = lagnaSidereal % 30;
         const lagnaD60Part = Math.floor(lagnaDegInSign / 0.5);
         const lagnaSignNum = Math.floor(lagnaSidereal / 30);
@@ -1942,11 +1985,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const lagnaDeity = D60_DEITIES[lagnaD60Idx];
         if (lagnaDeity) {
             const lColor = lagnaDeity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + lColor + ';">';
-            html += '<strong>⬆ 라그나:</strong> #' + (lagnaD60Idx+1) + ' <strong>' + lagnaDeity.name + '</strong> (' + lagnaDeity.ko + ') — <span style="color:' + lColor + '">' + (lagnaDeity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
-            html += '<span style="color:#888;font-size:12px;">' + lagnaDeity.desc + '</span></div>';
+            html += '<div style="padding:12px;margin:8px 0;background:rgba(201,168,76,0.08);border-radius:8px;border-left:4px solid ' + lColor + ';">';
+            html += '<strong style="font-size:14px;">⬆ 라그나의 수호신: ' + lagnaDeity.name + ' (' + lagnaDeity.ko + ')</strong> — <span style="color:' + lColor + ';font-weight:700;">' + (lagnaDeity.nature === 'benefic' ? '길신(吉神)' : '흉신(凶神)') + '</span><br>';
+            html += '라그나의 D60 신은 <strong>이번 생 전체의 카르마 색채</strong>를 결정합니다.<br>';
+            html += lagnaDeity.nature === 'benefic' ? '길신이 라그나를 지키고 있어, 전생의 공덕이 이번 생을 보호합니다. 삶에서 자연스럽게 좋은 기회가 찾아옵니다.' : '흉신이 라그나에 있어, 전생의 카르마적 도전이 있습니다. 하지만 이 도전을 극복하면 더 큰 성장이 기다립니다.';
+            html += '<br><span style="color:#888;font-size:12px;">신의 의미: ' + lagnaDeity.desc + '</span></div>';
         }
 
+        // 각 행성의 신 + 전통 풀이
         positions.forEach(p => {
             const degInSign = p.sidereal % 30;
             const d60Part = Math.floor(degInSign / 0.5);
@@ -1955,22 +2001,53 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const deity = D60_DEITIES[d60Idx];
             if (deity) {
                 const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + color + ';">';
-                html += '<strong>' + p.symbol + ' ' + p.name + ':</strong> #' + (d60Idx+1) + ' <strong>' + deity.name + '</strong> (' + deity.ko + ') — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
-                html += '<span style="color:#888;font-size:12px;">' + deity.desc + '</span></div>';
+                const dH = ((p.dSign - dLagnaSign + 12) % 12) + 1;
+                html += '<div style="padding:10px;margin:6px 0;background:rgba(201,168,76,0.04);border-radius:8px;border-left:3px solid ' + color + ';">';
+                html += '<strong>' + p.symbol + ' ' + p.name + '의 수호신: ' + deity.name + ' (' + deity.ko + ')</strong> — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
+                html += '<span style="color:#aaa;font-size:12px;">' + (planetDeityContext[p.id]||'') + '</span><br>';
+                if (deity.nature === 'benefic') {
+                    html += '<strong>' + deity.ko + '</strong>이(가) ' + p.name + '을(를) 축복하여, <strong>' + p.name + '이(가) 담당하는 인생 영역에서 전생의 공덕이 빛납니다.</strong> ';
+                    html += p.id === 'Jupiter' ? '특히 목성은 지혜와 재물의 행성이므로, 전생에서 쌓은 지혜가 이번 생에서도 크게 작용합니다.' : p.id === 'Venus' ? '금성의 길신은 전생에서의 아름다운 사랑이 이번 생에서도 이어짐을 나타냅니다.' : p.id === 'Saturn' ? '토성이 길신 아래 있다는 것은 매우 희귀합니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 시련을 줄여줍니다.' : '';
+                } else {
+                    html += '<strong>' + deity.ko + '</strong>이(가) ' + p.name + '에 영향을 주어, <strong>' + p.name + '이(가) 담당하는 인생 영역에서 전생의 카르마적 도전이 있습니다.</strong> ';
+                    html += '이 행성의 영역에서 의식적 노력과 치유가 필요합니다. ';
+                    html += p.id === 'Saturn' ? '토성의 흉신은 전생에서 남은 가장 무거운 짐입니다. 인내와 봉사로 이 카르마를 녹여야 합니다.' : p.id === 'Moon' ? '달의 흉신은 전생의 감정적 상처가 남아있음을 뜻합니다. 명상과 정서적 치유가 도움됩니다.' : p.id === 'Mars' ? '화성의 흉신은 전생에서의 폭력이나 분노의 카르마입니다. 에너지를 건설적으로 사용하세요.' : '';
+                }
+                html += '<br><span style="color:#666;font-size:11px;">신의 의미: ' + deity.desc + '</span></div>';
             }
         });
 
+        // 종합 카르마 요약
         const beneficCount = positions.filter(p => {
             const d60Part = Math.floor((p.sidereal % 30) / 0.5);
             const signNum = Math.floor(p.sidereal / 30);
             const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
             return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'benefic';
         }).length;
-        html += '<br><div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;">';
-        html += '<strong>📊 D60 요약:</strong> 9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br>';
-        html += beneficCount >= 6 ? '전체적으로 <strong>전생의 공덕이 많아</strong> 이번 생에서 축복받은 삶입니다.' : beneficCount >= 4 ? '전생 카르마의 균형이 적당합니다. 좋은 카르마와 도전이 공존합니다.' : '전생에서 가져온 도전이 많지만, 이것은 <strong>이번 생에서의 성장 기회</strong>입니다.';
-        html += '</div>'
+        const maleficPlanets = positions.filter(p => {
+            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
+            const signNum = Math.floor(p.sidereal / 30);
+            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
+            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'malefic';
+        });
+
+        html += '<br><div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:16px;">';
+        html += '<strong style="font-size:15px;">📊 D60 카르마 종합 판단</strong><br><br>';
+        html += '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
+
+        if (beneficCount >= 7) {
+            html += '🌟 <strong>매우 강한 전생 공덕.</strong> 파라샤라는 이런 차트를 "신들의 축복을 받은 영혼"이라 했습니다. 대부분의 행성이 길신 아래 있어, 이번 생에서 자연스럽게 좋은 결과를 얻습니다. 하지만 공덕에 안주하지 말고 계속 선업을 쌓으세요.';
+        } else if (beneficCount >= 5) {
+            html += '✨ <strong>전생의 공덕이 풍부합니다.</strong> 길신이 우세하여 삶의 많은 영역에서 보호받지만, 일부 흉신이 있는 행성 영역에서는 의식적 노력이 필요합니다.';
+            if (maleficPlanets.length > 0) html += '<br><br>특히 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 카르마적 도전이 있으니, 이 행성의 치유법(만트라, 보석, 자선)을 실천하면 좋습니다.';
+        } else if (beneficCount >= 3) {
+            html += '⚖️ <strong>전생 카르마의 균형 상태.</strong> 길흉이 비슷하게 섞여 있어, 인생에서 좋은 일과 도전이 교차합니다. 흉신 행성의 영역에서 의식적 성장을 하면, 길신 행성의 축복이 더 강해집니다.';
+            if (maleficPlanets.length > 0) html += '<br><br>가장 주의할 행성: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — 이 행성들의 만트라 수행과 자선이 카르마 해소에 도움됩니다.';
+        } else {
+            html += '🔥 <strong>전생에서 많은 도전을 겪은 영혼.</strong> 하지만 파라샤라는 "가장 무거운 카르마를 가진 영혼이 가장 큰 성장을 한다"고 했습니다. 이번 생은 카르마를 정산하고 영혼을 정화하는 여정입니다.';
+            html += '<br><br>모든 흉신 행성에 대해 만트라 수행, 해당 행성의 보석 착용, 그리고 자선 활동을 실천하세요. 특히 <strong>토성의 만트라(Om Shanaishcharaya Namaha)</strong>가 카르마 해소에 가장 강력합니다.';
+        }
+        html += '</div>';
         html += '</div></div>';
 
     } else if (division === 2) {
