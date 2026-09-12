@@ -535,7 +535,37 @@
         </div>
         <div id="d9InterpWrap"></div>
 
-<h3 class="section-title">🌙 Nakshatra (Sua Estrela — Sua Natureza Mais Profunda)</h3>
+<h3 class="section-title">💼 D10 Dasamsa Chart (Career · Social Status)</h3>
+        <div class="chart-container">
+            <div class="chart-label">Dasamsa — Divisional chart showing career, profession, and social achievement</div>
+            <div class="chart-grid" id="d10Chart"></div>
+        </div>
+        <div id="d10InterpWrap"></div>
+
+        <h3 class="section-title">👶 D7 Saptamsa Chart (Children · Offspring)</h3>
+        <div class="chart-container">
+            <div class="chart-label">Saptamsa — Divisional chart for children, offspring, and creative ability</div>
+            <div class="chart-grid" id="d7Chart"></div>
+        </div>
+        <div id="d7InterpWrap"></div>
+
+        <h3 class="section-title">👨‍👩‍👧 D12 Dwadasamsa Chart (Parents · Lineage)</h3>
+        <div class="chart-container">
+            <div class="chart-label">Dwadasamsa — Divisional chart for parents, lineage, and hereditary traits</div>
+            <div class="chart-grid" id="d12Chart"></div>
+        </div>
+        <div id="d12InterpWrap"></div>
+
+        <h3 class="section-title">🔮 D60 Shashtiamsa Chart (Past Life Karma)</h3>
+        <div class="chart-container">
+            <div class="chart-label">Shashtiamsa — Past life karma and soul's ultimate purpose. Parashara's most important chart</div>
+            <div class="chart-grid" id="d60Chart"></div>
+        </div>
+        <div id="d60InterpWrap"></div>
+
+        
+
+        <h3 class="section-title">🌙 Nakshatra (Sua Estrela — Sua Natureza Mais Profunda)</h3>
         <div id="nakshatraWrap"></div>
 
         <h3 class="section-title">⏳ Dasha (Fortuna por Periodo de Vida)</h3>
@@ -714,8 +744,8 @@ function initForm() {
         if (h === 10) opt.selected = true;
         hourSel.appendChild(opt);
     });
-    // Minute: 00, 05, 10, ... 55
-    for (let m = 0; m < 60; m += 5) {
+    // Minute: 00, 01, 02, ... 59 (1min)
+    for (let m = 0; m < 60; m += 1) {
         const opt = document.createElement('option');
         opt.value = m; opt.textContent = String(m).padStart(2,'0');
         if (m === 30) opt.selected = true;
@@ -885,6 +915,10 @@ function calculateChart() {
     renderPlanetTable(positions, lagnaSign, lagnaSidereal);
     renderD1Chart(positions, lagnaSign);
     renderD9Chart(positions, lagnaSign, lagnaSidereal);
+    renderDivisionalChart(positions, lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', '다샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', '삽탐샤');
+    renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', '드와다샴샤');
+    renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', '샤슈티암샤');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -2074,5 +2108,195 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
-<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script></body>
+<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');
+// 분할 차트 (Divisional Charts) 계산
+// ═══════════════════════════════════════
+
+function getDivisionalSign(siderealLon, division) {
+    const sign = Math.floor(siderealLon / 30);
+    const degInSign = siderealLon % 30;
+    const partSize = 30 / division;
+    const part = Math.floor(degInSign / partSize);
+
+    if (division === 7) {
+        // D7 (삽탐샤): 홀수 사인은 같은 사인부터, 짝수 사인은 7번째 사인부터
+        const startSign = (sign % 2 === 0) ? sign : (sign + 6) % 12;
+        return (startSign + part) % 12;
+    } else if (division === 10) {
+        // D10 (다샴샤): 홀수 사인은 같은 사인부터, 짝수 사인은 9번째 사인부터
+        const startSign = (sign % 2 === 0) ? sign : (sign + 8) % 12;
+        return (startSign + part) % 12;
+    } else if (division === 12) {
+        // D12 (드와다샴샤): 같은 사인부터 시작
+        return (sign + part) % 12;
+    } else if (division === 60) {
+        // D60 (샤슈티암샤): 같은 사인부터 시작, 60등분
+        return (sign + part) % 12;
+    }
+    return (sign + part) % 12; // fallback
+}
+
+function renderDivisionalChart(positions, lagnaSidereal, division, chartId, interpId, label, koName) {
+    const chartEl = document.getElementById(chartId);
+    const interpEl = document.getElementById(interpId);
+    if (!chartEl) return;
+
+    // 분할 라그나
+    const dLagnaSign = getDivisionalSign(lagnaSidereal, division);
+
+    // 분할 행성 위치
+    const dPositions = positions.map(p => ({
+        ...p,
+        dSign: getDivisionalSign(p.sidereal, division)
+    }));
+
+    // 차트 렌더링
+    chartEl.innerHTML = '';
+    const signPlanets = {};
+    for (let i = 0; i < 12; i++) signPlanets[i] = [];
+    dPositions.forEach(p => { signPlanets[p.dSign].push(p); });
+
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            const cell = document.createElement('div');
+            const signIdx = SI_LAYOUT[row][col];
+            if (signIdx === -1) {
+                cell.className = 'chart-cell empty';
+                cell.innerHTML = '<div style="font-size:11px;color:#444;text-align:center;">' + label + '<br>' + koName + '</div>';
+            } else {
+                cell.className = 'chart-cell';
+                let content = '<div class="sign-label">' + SIGN_SYMBOLS[signIdx] + ' ' + SIGNS[signIdx] + '</div>';
+                if (signIdx === dLagnaSign) content += '<div class="lagna-marker">ASC</div>';
+                signPlanets[signIdx].forEach(p => {
+                    const cls = (p.natural === 'malefic') ? 'planet malefic' : 'planet benefic';
+                    content += '<div class="' + cls + '">' + p.symbol + '</div>';
+                });
+                cell.innerHTML = content;
+            }
+            chartEl.appendChild(cell);
+        }
+    }
+
+    // 해석
+    if (!interpEl) return;
+    const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const RULER_NAMES = {Sun:'태양',Moon:'달',Mars:'화성',Mercury:'수성',Jupiter:'목성',Venus:'금성',Saturn:'토성',Rahu:'라후',Ketu:'케투'};
+
+    let html = '';
+
+    if (division === 10) {
+        // D10 해석: 직업/커리어
+        const d10_1lord = SIGN_RULERS[dLagnaSign];
+        const d10_10sign = (dLagnaSign + 9) % 12;
+        const d10_10lord = SIGN_RULERS[d10_10sign];
+        const d10_10planets = dPositions.filter(p => p.dSign === d10_10sign);
+
+        html += '<div class="interp-card"><div class="interp-title">💼 D10 직업 분석</div><div class="interp-text">';
+        html += '<strong>D10 라그나:</strong> ' + SIGNS[dLagnaSign] + ' (지배성: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
+        html += '<strong>D10 10궁 (직업):</strong> ' + SIGNS[d10_10sign] + ' (지배성: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
+        if (d10_10planets.length > 0) {
+            html += '<strong>10궁의 행성:</strong> ' + d10_10planets.map(p => p.name).join(', ') + '<br>';
+        }
+
+        // 직업 성향 by D10 라그나
+        const careerBySign = [
+            '리더십, 군사, 스포츠, 기업가',  // 양자리
+            '금융, 예술, 부동산, 요식업',     // 황소
+            '커뮤니케이션, 미디어, 교육, IT',  // 쌍둥이
+            '간호, 부동산, 호텔, 심리상담',    // 게
+            '정치, 연예, 관리직, 행정',        // 사자
+            '의료, 회계, 분석, 연구',          // 처녀
+            '법률, 외교, 디자인, 컨설팅',      // 천칭
+            '수사, 연구, 의학, 보험',          // 전갈
+            '교육, 종교, 해외무역, 출판',      // 사수
+            '행정, 건설, 광업, 공무원',        // 염소
+            'IT, 혁신, NGO, 항공',           // 물병
+            '예술, 병원, 해외, 영성'           // 물고기
+        ];
+        html += '<strong>적합 분야:</strong> ' + careerBySign[dLagnaSign];
+        html += '</div></div>';
+
+    } else if (division === 7) {
+        // D7 해석: 자녀
+        const d7_5sign = (dLagnaSign + 4) % 12;
+        const d7_5lord = SIGN_RULERS[d7_5sign];
+        const d7_5planets = dPositions.filter(p => p.dSign === d7_5sign);
+        const benefics = d7_5planets.filter(p => p.natural === 'benefic');
+        const malefics = d7_5planets.filter(p => p.natural === 'malefic');
+
+        html += '<div class="interp-card"><div class="interp-title">👶 D7 자녀 분석</div><div class="interp-text">';
+        html += '<strong>D7 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        html += '<strong>D7 5궁 (자녀):</strong> ' + SIGNS[d7_5sign] + ' (지배성: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
+        if (d7_5planets.length > 0) {
+            html += '<strong>5궁의 행성:</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';
+        }
+        if (benefics.length > 0) html += '길성이 5궁에 있어 자녀복이 있습니다.<br>';
+        if (malefics.length > 0) html += '흉성이 5궁에 있어 자녀 관련 어려움이 있을 수 있습니다.<br>';
+        if (d7_5planets.length === 0) html += '5궁에 행성이 없어 5궁주(지배성)의 위치를 봐야 합니다.';
+        html += '</div></div>';
+
+    } else if (division === 12) {
+        // D12 해석: 부모
+        const d12_4sign = (dLagnaSign + 3) % 12; // 4궁 = 어머니
+        const d12_9sign = (dLagnaSign + 8) % 12; // 9궁 = 아버지
+        const d12_4planets = dPositions.filter(p => p.dSign === d12_4sign);
+        const d12_9planets = dPositions.filter(p => p.dSign === d12_9sign);
+
+        html += '<div class="interp-card"><div class="interp-title">👨‍👩‍👧 D12 부모 분석</div><div class="interp-text">';
+        html += '<strong>D12 라그나:</strong> ' + SIGNS[dLagnaSign] + '<br>';
+        html += '<strong>D12 4궁 (어머니):</strong> ' + SIGNS[d12_4sign];
+        if (d12_4planets.length > 0) html += ' — ' + d12_4planets.map(p => p.name).join(', ');
+        html += '<br>';
+        html += '<strong>D12 9궁 (아버지):</strong> ' + SIGNS[d12_9sign];
+        if (d12_9planets.length > 0) html += ' — ' + d12_9planets.map(p => p.name).join(', ');
+        html += '<br>';
+
+        const moon4 = d12_4planets.find(p => p.id === 'Moon');
+        const sun9 = d12_9planets.find(p => p.id === 'Sun');
+        if (moon4) html += '달이 4궁에 있어 어머니와의 인연이 깊습니다.<br>';
+        if (sun9) html += '태양이 9궁에 있어 아버지와의 인연이 깊습니다.<br>';
+        html += '</div></div>';
+
+    } else if (division === 60) {
+        // D60 해석: 전생 카르마
+        const d60_1lord = SIGN_RULERS[dLagnaSign];
+        const d60_planets_1 = dPositions.filter(p => p.dSign === dLagnaSign);
+
+        // D60 각 사인별 전생 테마
+        const pastLifeThemes = [
+            '전사, 지도자 — 전생에 권력을 행사했으며, 이번 생에서도 리더십이 타고남',
+            '예술가, 농부 — 전생에 대지와 자연을 다루었으며, 물질적 안정을 추구함',
+            '학자, 상인 — 전생에 지식과 소통으로 살았으며, 다재다능함이 남아있음',
+            '보호자, 어머니 — 전생에 타인을 돌보았으며, 감정적 깊이가 있음',
+            '왕족, 성직자 — 전생에 높은 지위에 있었으며, 자연스러운 권위가 있음',
+            '치유자, 봉사자 — 전생에 의술이나 봉사에 종사했으며, 분석력이 뛰어남',
+            '외교관, 예술가 — 전생에 조화와 아름다움을 추구했으며, 관계에 능함',
+            '수행자, 연금술사 — 전생에 깊은 변혁을 겪었으며, 신비로운 능력이 있음',
+            '현자, 탐험가 — 전생에 진리를 탐구했으며, 영적 지혜가 남아있음',
+            '관료, 건축가 — 전생에 질서를 세웠으며, 인내와 책임감이 강함',
+            '혁명가, 발명가 — 전생에 시대를 앞서갔으며, 독창적 사고가 있음',
+            '영매, 예술가 — 전생에 영적 세계와 교류했으며, 직관이 매우 강함'
+        ];
+
+        html += '<div class="interp-card"><div class="interp-title">🔮 D60 전생 카르마 분석</div><div class="interp-text">';
+        html += '<strong>D60 라그나:</strong> ' + SIGNS[dLagnaSign] + ' (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')<br>';
+        html += '<strong>전생 테마:</strong> ' + pastLifeThemes[dLagnaSign] + '<br><br>';
+
+        if (d60_planets_1.length > 0) {
+            html += '<strong>D60 라그나의 행성:</strong> ' + d60_planets_1.map(p => p.name).join(', ') + '<br>';
+            html += '이 행성들은 전생에서 가져온 핵심 카르마 에너지입니다.<br>';
+        }
+
+        // 카르마 방향
+        const sunD60 = dPositions.find(p => p.id === 'Sun');
+        const moonD60 = dPositions.find(p => p.id === 'Moon');
+        if (sunD60) html += '<br><strong>D60 태양 (' + SIGNS[sunD60.dSign] + '):</strong> 전생의 영혼 목적이 이 사인의 에너지와 연결됩니다.';
+        if (moonD60) html += '<br><strong>D60 달 (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
+        html += '</div></div>';
+    }
+
+    interpEl.innerHTML = html;
+}
+
+</script></body>
 </html>
