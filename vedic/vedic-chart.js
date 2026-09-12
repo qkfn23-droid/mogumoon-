@@ -1992,7 +1992,20 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             html += '<br><span style="color:#888;font-size:12px;">신의 의미: ' + lagnaDeity.desc + '</span></div>';
         }
 
-        // 각 행성의 신 + 전통 풀이
+        // 각 행성의 신 + 전통 풀이 (행성+신 조합별 구체적 해석)
+        // 행성별 영역 설명 (신의 의미와 엮을 때 사용)
+        const planetDomain = {
+            Sun: {area:'자아·권위·아버지', benefic:'전생에서 {deity}의 축복 아래 영혼의 빛을 키웠습니다. 이번 생에서도 자연스러운 권위와 자신감이 빛납니다.', malefic:'전생에서 {deity}의 에너지가 자아에 도전을 주었습니다. 이번 생에서 자존감과 정체성에 대한 시험이 있지만, 이를 통해 진정한 자아를 발견합니다.'},
+            Moon: {area:'감정·마음·어머니', benefic:'전생에서 {deity}의 보호 아래 평화로운 마음을 유지했습니다. 이번 생에서도 감정적 안정감과 직관이 강합니다.', malefic:'전생에서 {deity}의 에너지가 마음에 상처를 남겼습니다. 무의식에 {deityDesc}의 기억이 남아 감정적 패턴으로 나타납니다. 명상과 정서적 치유가 도움됩니다.'},
+            Mars: {area:'에너지·용기·행동력', benefic:'전생에서 {deity}의 축복으로 용기와 힘을 올바르게 사용했습니다. 이번 생에서도 에너지를 건설적으로 쓰는 재능이 있습니다.', malefic:'전생에서 {deity}의 에너지 아래 폭력이나 과도한 힘의 사용이 있었습니다. 이번 생에서 분노 조절과 에너지의 올바른 방향이 과제입니다.'},
+            Mercury: {area:'지성·소통·학습', benefic:'전생에서 {deity}의 축복으로 지혜와 소통 능력을 쌓았습니다. 이번 생에서도 언어, 학습, 비즈니스에 재능이 빛납니다.', malefic:'전생에서 {deity}의 에너지가 지적 영역에 도전을 주었습니다. 거짓 소통이나 지식의 오용에 대한 카르마가 남아, 이번 생에서 진실된 소통을 배웁니다.'},
+            Jupiter: {area:'지혜·행운·스승', benefic:'전생에서 {deity}의 축복으로 큰 지혜와 영적 공덕을 쌓았습니다. 이번 생에서 좋은 스승을 만나고, 지혜와 재물의 행운이 따릅니다.', malefic:'전생에서 {deity}의 에너지가 영적 성장에 도전을 주었습니다. 스승이나 종교에 대한 실망을 겪을 수 있지만, 이를 통해 진정한 지혜를 얻습니다.'},
+            Venus: {area:'사랑·매력·예술', benefic:'전생에서 {deity}의 축복 아래 아름다운 사랑과 예술적 재능을 쌓았습니다. 이번 생에서도 매력적이고 사랑이 풍요로운 삶이 기다립니다.', malefic:'전생에서 {deity}의 에너지가 사랑과 관계에 도전을 주었습니다. 집착이나 쾌락에 대한 카르마가 남아, 이번 생에서 진정한 사랑의 의미를 배웁니다.'},
+            Saturn: {area:'시련·인내·업보', benefic:'전생에서 {deity}의 축복으로 고통을 인내와 봉사로 승화시켰습니다. 이번 생의 토성 시련이 비교적 가벼우며, 어려움을 현명하게 극복합니다. 매우 희귀한 축복입니다!', malefic:'전생에서 {deity}의 에너지가 가장 무거운 업보로 남아있습니다. {deityDesc} — 이 카르마가 이번 생에서 시련의 형태로 나타납니다. 인내, 봉사, 만트라 수행으로 이 업보를 녹여야 합니다.'},
+            Rahu: {area:'욕망·집착·혁신', benefic:'전생에서 {deity}의 축복이 욕망의 방향을 올바르게 이끌었습니다. 이번 생에서 물질적 성취와 혁신을 통해 성장하며, 욕망이 건설적인 방향으로 작용합니다.', malefic:'전생에서 {deity}의 에너지가 욕망의 방향을 왜곡했습니다. {deityDesc} — 이 미완의 카르마가 이번 생에서도 강한 집착으로 나타납니다. 의식적으로 집착을 놓는 연습이 필요합니다.'},
+            Ketu: {area:'해탈·영성·과거', benefic:'전생에서 {deity}의 에너지를 이미 완성했습니다. {deityDesc} — 이 에너지는 이번 생에서 자연스럽게 갖고 있는 재능입니다. 집착하지 말고, 이 재능을 타인을 위해 나누세요.', malefic:'전생에서 {deity}의 에너지와 고통스러운 경험을 했습니다. {deityDesc} — 이 기억이 이번 생에서 본능적 거부감으로 나타날 수 있습니다. 과거를 인정하고 놓아보내는 것이 치유입니다.'}
+        };
+
         positions.forEach(p => {
             const degInSign = p.sidereal % 30;
             const d60Part = Math.floor(degInSign / 0.5);
@@ -2001,19 +2014,15 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const deity = D60_DEITIES[d60Idx];
             if (deity) {
                 const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                const dH = ((p.dSign - dLagnaSign + 12) % 12) + 1;
+                const domain = planetDomain[p.id] || {area:'', benefic:'', malefic:''};
+                const interpTemplate = deity.nature === 'benefic' ? domain.benefic : domain.malefic;
+                const interp = interpTemplate.replace(/\{deity\}/g, deity.ko).replace(/\{deityDesc\}/g, deity.desc);
+
                 html += '<div style="padding:10px;margin:6px 0;background:rgba(201,168,76,0.04);border-radius:8px;border-left:3px solid ' + color + ';">';
-                html += '<strong>' + p.symbol + ' ' + p.name + '의 수호신: ' + deity.name + ' (' + deity.ko + ')</strong> — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span><br>';
-                html += '<span style="color:#aaa;font-size:12px;">' + (planetDeityContext[p.id]||'') + '</span><br>';
-                if (deity.nature === 'benefic') {
-                    html += '<strong>' + deity.ko + '</strong>이(가) ' + p.name + '을(를) 축복하여, <strong>' + p.name + '이(가) 담당하는 인생 영역에서 전생의 공덕이 빛납니다.</strong> ';
-                    html += p.id === 'Jupiter' ? '특히 목성은 지혜와 재물의 행성이므로, 전생에서 쌓은 지혜가 이번 생에서도 크게 작용합니다.' : p.id === 'Venus' ? '금성의 길신은 전생에서의 아름다운 사랑이 이번 생에서도 이어짐을 나타냅니다.' : p.id === 'Saturn' ? '토성이 길신 아래 있다는 것은 매우 희귀합니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 시련을 줄여줍니다.' : '';
-                } else {
-                    html += '<strong>' + deity.ko + '</strong>이(가) ' + p.name + '에 영향을 주어, <strong>' + p.name + '이(가) 담당하는 인생 영역에서 전생의 카르마적 도전이 있습니다.</strong> ';
-                    html += '이 행성의 영역에서 의식적 노력과 치유가 필요합니다. ';
-                    html += p.id === 'Saturn' ? '토성의 흉신은 전생에서 남은 가장 무거운 짐입니다. 인내와 봉사로 이 카르마를 녹여야 합니다.' : p.id === 'Moon' ? '달의 흉신은 전생의 감정적 상처가 남아있음을 뜻합니다. 명상과 정서적 치유가 도움됩니다.' : p.id === 'Mars' ? '화성의 흉신은 전생에서의 폭력이나 분노의 카르마입니다. 에너지를 건설적으로 사용하세요.' : '';
-                }
-                html += '<br><span style="color:#666;font-size:11px;">신의 의미: ' + deity.desc + '</span></div>';
+                html += '<strong>' + p.symbol + ' ' + p.name + '</strong> <span style="color:#888;">(' + domain.area + ')</span><br>';
+                html += '수호신: <strong>' + deity.name + ' (' + deity.ko + ')</strong> — <span style="color:' + color + ';font-weight:700;">' + (deity.nature === 'benefic' ? '길신(吉)' : '흉신(凶)') + '</span><br>';
+                html += interp;
+                html += '</div>'
             }
         });
 
