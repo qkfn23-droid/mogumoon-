@@ -495,178 +495,183 @@
     <!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">📚 베딕 점성술 기초 가이드</h3>
-        <div class="interp-card" style="border-left:3px solid #c9a84c;">
-            <div class="interp-text" style="line-height:2;">
-                <strong style="color:#c9a84c;font-size:15px;">🌟 처음 보는 분을 위한 핵심 용어</strong><br><br>
-
-                <strong>🪐 9개 행성 (Graha)</strong> — 당신의 성격과 운명을 결정하는 9가지 힘<br>
-                ☉ <strong>태양</strong> = 자아, 아버지, 권위, 자신감 (당신은 누구인가)<br>
-                ☽ <strong>달</strong> = 감정, 어머니, 마음, 일상 (당신은 어떻게 느끼는가)<br>
-                ♂ <strong>화성</strong> = 에너지, 용기, 행동력, 분노 (당신은 어떻게 싸우는가)<br>
-                ☿ <strong>수성</strong> = 지능, 소통, 학습, 비즈니스 (당신은 어떻게 생각하는가)<br>
-                ♃ <strong>목성</strong> = 행운, 지혜, 재물, 스승 (당신의 축복은 무엇인가) — <em>가장 길한 행성</em><br>
-                ♀ <strong>금성</strong> = 사랑, 매력, 예술, 결혼 (당신은 어떻게 사랑하는가)<br>
-                ♄ <strong>토성</strong> = 시련, 인내, 책임, 업보 (당신의 인생 과제는 무엇인가) — <em>느리지만 가장 강력</em><br>
-                ☊ <strong>라후</strong> = 욕망, 집착, 혁신, 외국 (전생에서 못 이룬 욕망) — <em>실체 없는 그림자 행성</em><br>
-                ☋ <strong>케투</strong> = 해탈, 영성, 분리, 과거 (전생에서 이미 이룬 것) — <em>라후의 반대쪽 그림자</em><br><br>
-
-                <strong>🏛️ 12궁 (하우스)</strong> — 인생의 12가지 영역. 행성이 어떤 궁에 있느냐에 따라 인생의 어떤 분야에 영향을 주는지 결정됩니다.<br>
-                1궁=나 자신 · 2궁=돈/가족 · 3궁=소통/형제 · 4궁=가정/어머니 · 5궁=자녀/연애/창의력 · 6궁=건강/적 · 7궁=배우자/파트너 · 8궁=변혁/죽음/유산 · 9궁=행운/해외/아버지 · 10궁=직업/명성 · 11궁=수입/소망 · 12궁=해외/손실/영성<br><br>
-
-                <strong>⬆ 라그나 (상승궁)</strong> — 당신이 태어난 순간 동쪽 지평선에 떠오르던 별자리. 외부에서 보는 당신의 성격과 외모를 결정합니다. <em>서양 점성술의 태양 별자리보다 베딕에서는 라그나가 더 중요합니다!</em><br><br>
-
-                <strong>🌙 나크샤트라</strong> — 달이 위치한 27개 별자리 구역. 서양의 12별자리보다 더 세밀하게 성격을 분석합니다. 당신의 가장 깊은 본성을 나타냅니다.<br><br>
-
-                <strong>⏳ 다샤 (대운)</strong> — 인생의 시기별 운세. 어떤 행성이 지배하는 시기인지에 따라 그 행성의 에너지가 강해집니다. 총 120년 주기로 9개 행성이 번갈아 지배합니다.<br><br>
-
-                <strong>🔮 요가</strong> — 특별한 행성 조합. 두 개 이상의 행성이 특정 관계를 맺으면 특별한 운명을 만듭니다. (예: 가자케사리 요가 = 달+목성 → 지혜와 명성)
+        <!-- 📚 기초 가이드 (항상 펼침) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 베딕 점성술 기초 가이드</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="interp-card" style="border-left:3px solid #c9a84c;">
+                    <div class="interp-text" style="line-height:2;">
+                        <strong>🪐 9개 행성</strong> — ☉태양=자아 ☽달=감정 ♂화성=에너지 ☿수성=지능 ♃목성=행운 ♀금성=사랑 ♄토성=시련 ☊라후=욕망 ☋케투=해탈<br>
+                        <strong>🏛️ 12궁</strong> — 1궁=나 2궁=돈 3궁=소통 4궁=가정 5궁=자녀 6궁=건강 7궁=배우자 8궁=변혁 9궁=행운 10궁=직업 11궁=수입 12궁=영성<br>
+                        <strong>⬆ 라그나</strong> = 태어난 순간 떠오르던 별자리 (가장 중요!) &nbsp; <strong>🌙 나크샤트라</strong> = 27개 달의 별자리
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 class="section-title">🪐 행성 위치</h3>
-        <div id="planetTableWrap"></div>
-
-        <h3 class="section-title">🏛️ 출생 차트 (당신의 하늘 지도)</h3>
-        <div class="chart-container">
-            <div class="chart-label">남인도식 차트 — 12칸 = 12별자리, 행성 기호가 있는 곳이 태어날 때 그 행성의 위치</div>
-            <div class="chart-grid" id="d1Chart"></div>
+        <!-- 🪐 기본 차트 (항상 펼침) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #c9a84c;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 기본 차트 — 행성 위치 & 출생 차트</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▼</span>
+            </div>
+            <div class="category-content">
+                <h3 class="section-title">🪐 행성 위치</h3>
+                <div id="planetTableWrap"></div>
+                <h3 class="section-title">🏛️ 출생 차트 (D1 라시)</h3>
+                <div class="chart-container">
+                    <div class="chart-label">남인도식 차트 — 12칸 = 12별자리, 행성 기호가 있는 곳이 태어날 때 그 행성의 위치</div>
+                    <div class="chart-grid" id="d1Chart"></div>
+                </div>
+                <h3 class="section-title">🌙 나크샤트라 (당신의 별)</h3>
+                <div id="nakshatraWrap"></div>
+            </div>
         </div>
 
-        <h3 class="section-title">🕉️ D9 나바암샤 차트 (결혼·배우자·사명)</h3>
-        <div class="chart-container">
-            <div class="chart-label">나바암샤(Navamsa) — 결혼운, 배우자 성격, 인생 후반의 사명을 보여주는 가장 중요한 분할 차트</div>
-            <div class="chart-grid" id="d9Chart"></div>
+        <!-- ⏳ 대운 (항상 펼침) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #c9a84c;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ 대운 — 인생의 시기별 운세</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▼</span>
+            </div>
+            <div class="category-content">
+                <div id="dashaWrap"></div>
+            </div>
         </div>
-        <div id="d9InterpWrap"></div>
-        <div id="spouseProfileWrap"></div>
 
-        <h3 class="section-title">💼 D10 다샴샤 차트 (직업·커리어·사회적 지위)</h3>
-        <div class="chart-container">
-            <div class="chart-label">다샴샤(Dasamsa) — 직업, 커리어, 사회적 성취를 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d10Chart"></div>
+        <!-- 📖 종합 해석 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 종합 해석 — 성격·재물·직업·건강·요가</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div id="interpWrap"></div>
+                <h3 class="section-title">🪐 행성별 상세 해석</h3>
+                <div id="planetHouseWrap"></div>
+                <h3 class="section-title">⚖️ 행성 품위 (고양·감쇄·본궁)</h3>
+                <div id="dignityWrap"></div>
+                <h3 class="section-title">🍀 행운의 정보</h3>
+                <div id="luckyWrap"></div>
+                <h3 class="section-title">💎 치유 & 강화 방법</h3>
+                <div id="remedyWrap"></div>
+            </div>
         </div>
-        <div id="d10InterpWrap"></div>
 
-        <h3 class="section-title">👶 D7 삽탐샤 차트 (자녀·후손·창조력)</h3>
-        <div class="chart-container">
-            <div class="chart-label">삽탐샤(Saptamsa) — 자녀운, 후손, 창조적 능력을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d7Chart"></div>
+        <!-- 💍 결혼/배우자 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 결혼 & 배우자 — D9 나바암샤</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div class="chart-container">
+                    <div class="chart-label">나바암샤 — 결혼운, 배우자 성격, 인생의 사명</div>
+                    <div class="chart-grid" id="d9Chart"></div>
+                </div>
+                <div id="d9InterpWrap"></div>
+                <div id="spouseProfileWrap"></div>
+            </div>
         </div>
-        <div id="d7InterpWrap"></div>
 
-        <h3 class="section-title">👨‍👩‍👧 D12 드와다샴샤 차트 (부모·가계·유전)</h3>
-        <div class="chart-container">
-            <div class="chart-label">드와다샴샤(Dwadasamsa) — 부모, 가계, 유전적 특성을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d12Chart"></div>
+        <!-- 💼 직업/재물 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 직업 & 재물 — D10·D2·D4</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">💼 D10 다샴샤 (직업·커리어)</h3>
+                <div class="chart-container"><div class="chart-label">다샴샤 — 직업, 사회적 성취</div><div class="chart-grid" id="d10Chart"></div></div>
+                <div id="d10InterpWrap"></div>
+                <h3 class="section-title">💰 D2 호라 (재물·부)</h3>
+                <div class="chart-container"><div class="chart-label">호라 — 재물운과 부의 축적</div><div class="chart-grid" id="d2Chart"></div></div>
+                <div id="d2InterpWrap"></div>
+                <h3 class="section-title">🏠 D4 차투르탐샤 (재산·부동산)</h3>
+                <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산, 부동산, 행운</div><div class="chart-grid" id="d4Chart"></div></div>
+                <div id="d4InterpWrap"></div>
+            </div>
         </div>
-        <div id="d12InterpWrap"></div>
 
-        <h3 class="section-title">🔮 D60 샤슈티암샤 차트 (전생 카르마)</h3>
-        <div class="chart-container">
-            <div class="chart-label">샤슈티암샤(Shashtiamsa) — 전생의 카르마와 영혼의 궁극적 목적. 파라샤라가 가장 중요하다고 한 차트</div>
-            <div class="chart-grid" id="d60Chart"></div>
+        <!-- 👨‍👩‍👧 가족 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 가족 — D7·D3·D12·D40·D45</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">👶 D7 삽탐샤 (자녀·후손)</h3>
+                <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운, 창조력</div><div class="chart-grid" id="d7Chart"></div></div>
+                <div id="d7InterpWrap"></div>
+                <div id="childrenWrap"></div>
+                <h3 class="section-title">👫 D3 드레카나 (형제·용기)</h3>
+                <div class="chart-container"><div class="chart-label">드레카나 — 형제자매, 용기, 소통</div><div class="chart-grid" id="d3Chart"></div></div>
+                <div id="d3InterpWrap"></div>
+                <h3 class="section-title">👨‍👩‍👧 D12 드와다샴샤 (부모·가계)</h3>
+                <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모, 가계, 유전</div><div class="chart-grid" id="d12Chart"></div></div>
+                <div id="d12InterpWrap"></div>
+                <h3 class="section-title">👩 D40 카베담샤 (모계 유산)</h3>
+                <div class="chart-container"><div class="chart-label">카베담샤 — 어머니 쪽 유산</div><div class="chart-grid" id="d40Chart"></div></div>
+                <div id="d40InterpWrap"></div>
+                <h3 class="section-title">👨 D45 악샤베담샤 (부계 유산)</h3>
+                <div class="chart-container"><div class="chart-label">악샤베담샤 — 아버지 쪽 유산</div><div class="chart-grid" id="d45Chart"></div></div>
+                <div id="d45InterpWrap"></div>
+            </div>
         </div>
-        <div id="d60InterpWrap"></div>
 
-        <h3 class="section-title">💰 D2 호라 차트 (재물·부)</h3>
-        <div class="chart-container">
-            <div class="chart-label">호라(Hora) — 재물운과 부의 축적 방식을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d2Chart"></div>
+        <!-- 🙏 영성/교육/건강 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 영성·교육·건강 — D20·D24·D27·D16</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">📚 D24 차투르빔샴샤 (교육·학문)</h3>
+                <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육, 학문, 지적 성취</div><div class="chart-grid" id="d24Chart"></div></div>
+                <div id="d24InterpWrap"></div>
+                <div id="educationWrap"></div>
+                <h3 class="section-title">🙏 D20 빔샴샤 (영적 수행·종교)</h3>
+                <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행, 종교적 성향</div><div class="chart-grid" id="d20Chart"></div></div>
+                <div id="d20InterpWrap"></div>
+                <h3 class="section-title">💪 D27 삽타빔샴샤 (체력·강점)</h3>
+                <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력, 강점, 약점</div><div class="chart-grid" id="d27Chart"></div></div>
+                <div id="d27InterpWrap"></div>
+                <h3 class="section-title">🚗 D16 쇼다샴샤 (차량·편의·행복)</h3>
+                <div class="chart-container"><div class="chart-label">쇼다샴샤 — 차량, 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div>
+                <div id="d16InterpWrap"></div>
+            </div>
         </div>
-        <div id="d2InterpWrap"></div>
 
-        <h3 class="section-title">👫 D3 드레카나 차트 (형제·용기·소통)</h3>
-        <div class="chart-container">
-            <div class="chart-label">드레카나(Drekkana) — 형제자매, 용기, 소통 능력을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d3Chart"></div>
+        <!-- ⚠️ 주의사항 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ 주의사항 — D30 질병·장애·해외운</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">⚠️ D30 트림샴샤 (불행·질병·장애)</h3>
+                <div class="chart-container"><div class="chart-label">트림샴샤 — 불행, 질병, 장애의 원천</div><div class="chart-grid" id="d30Chart"></div></div>
+                <div id="d30InterpWrap"></div>
+                <h3 class="section-title">✈️ 해외운 & 이주 (9궁·12궁)</h3>
+                <div id="foreignWrap"></div>
+            </div>
         </div>
-        <div id="d3InterpWrap"></div>
 
-        <h3 class="section-title">🏠 D4 차투르탐샤 차트 (재산·부동산·행운)</h3>
-        <div class="chart-container">
-            <div class="chart-label">차투르탐샤(Chaturthamsa) — 재산, 부동산, 전반적 행운을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d4Chart"></div>
+        <!-- 🔮 카르마 (접힘) -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 카르마 — D60 전생·카르마</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">🔮 D60 샤슈티암샤 (전생 카르마)</h3>
+                <div class="chart-container"><div class="chart-label">샤슈티암샤 — 전생의 카르마와 영혼의 궁극적 목적</div><div class="chart-grid" id="d60Chart"></div></div>
+                <div id="d60InterpWrap"></div>
+            </div>
         </div>
-        <div id="d4InterpWrap"></div>
-
-        <h3 class="section-title">🚗 D16 쇼다샴샤 차트 (차량·편의·행복)</h3>
-        <div class="chart-container">
-            <div class="chart-label">쇼다샴샤(Shodasamsa) — 차량, 물질적 편의, 전반적 행복을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d16Chart"></div>
-        </div>
-        <div id="d16InterpWrap"></div>
-
-        <h3 class="section-title">🙏 D20 빔샴샤 차트 (영적 수행·종교)</h3>
-        <div class="chart-container">
-            <div class="chart-label">빔샴샤(Vimsamsa) — 영적 수행, 종교적 성향, 영성 발전을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d20Chart"></div>
-        </div>
-        <div id="d20InterpWrap"></div>
-
-        <h3 class="section-title">📚 D24 차투르빔샴샤 차트 (교육·학문)</h3>
-        <div class="chart-container">
-            <div class="chart-label">차투르빔샴샤(Chaturvimsamsa) — 교육, 학문, 지적 성취를 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d24Chart"></div>
-        </div>
-        <div id="d24InterpWrap"></div>
-
-        <h3 class="section-title">💪 D27 삽타빔샴샤 차트 (체력·강점)</h3>
-        <div class="chart-container">
-            <div class="chart-label">삽타빔샴샤(Saptavimsamsa/Nakshatramsa) — 체력, 강점, 약점을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d27Chart"></div>
-        </div>
-        <div id="d27InterpWrap"></div>
-
-        <h3 class="section-title">⚠️ D30 트림샴샤 차트 (불행·질병·장애)</h3>
-        <div class="chart-container">
-            <div class="chart-label">트림샴샤(Trimsamsa) — 불행, 질병, 장애, 악의 원천을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d30Chart"></div>
-        </div>
-        <div id="d30InterpWrap"></div>
-
-        <h3 class="section-title">👩 D40 카베담샤 차트 (모계 유산)</h3>
-        <div class="chart-container">
-            <div class="chart-label">카베담샤(Khavedamsa) — 어머니 쪽 유산, 모계 영향을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d40Chart"></div>
-        </div>
-        <div id="d40InterpWrap"></div>
-
-        <h3 class="section-title">👨 D45 악샤베담샤 차트 (부계 유산)</h3>
-        <div class="chart-container">
-            <div class="chart-label">악샤베담샤(Akshavedamsa) — 아버지 쪽 유산, 부계 영향을 보여주는 분할 차트</div>
-            <div class="chart-grid" id="d45Chart"></div>
-        </div>
-        <div id="d45InterpWrap"></div>
-        <h3 class="section-title">🌙 나크샤트라 (당신의 별 — 가장 깊은 본성)</h3>
-        <div id="nakshatraWrap"></div>
-
-        <h3 class="section-title">⏳ 대운 (인생의 시기별 운세)</h3>
-        <div id="dashaWrap"></div>
-
-        <h3 class="section-title">📖 종합 해석</h3>
-        <div id="interpWrap"></div>
-
-        <h3 class="section-title">🪐 행성별 상세 해석 (각 행성이 어떤 인생 영역에 영향을 주는지)</h3>
-        <div id="planetHouseWrap"></div>
-
-        <h3 class="section-title">🎓 교육 & 지식 (4궁·5궁)</h3>
-        <div id="educationWrap"></div>
-
-        <h3 class="section-title">👶 자녀운 (5궁)</h3>
-        <div id="childrenWrap"></div>
-
-        <h3 class="section-title">✈️ 해외운 & 이주 (9궁·12궁)</h3>
-        <div id="foreignWrap"></div>
-
-        <h3 class="section-title">⚖️ 행성 품위 (고양·감쇄·본궁)</h3>
-        <div id="dignityWrap"></div>
-
-        <h3 class="section-title">🍀 행운의 정보</h3>
-        <div id="luckyWrap"></div>
-
-        <h3 class="section-title">💎 치유 & 강화 방법</h3>
-        <div id="remedyWrap"></div>
 
     </div>
 </div>
