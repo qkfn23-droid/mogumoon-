@@ -2180,7 +2180,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
     // 해석
     if (!interpEl) return;
     const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
-    const RULER_NAMES = {Sun:'태양',Moon:'달',Mars:'화성',Mercury:'수성',Jupiter:'목성',Venus:'금성',Saturn:'토성',Rahu:'라후',Ketu:'케투'};
+    const RULER_NAMES = {Sun:'Sun',Moon:'Moon',Mars:'Mars',Mercury:'Mercury',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
 
     let html = '';
 
@@ -2290,8 +2290,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // 카르마 방향
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         const moonD60 = dPositions.find(p => p.id === 'Moon');
-        if (sunD60) html += '<br><strong>D60 Sun (' + SIGNS[sunD60.dSign] + '):</strong> 전생의 영혼 목적이 이 사인의 에너지와 연결됩니다.';
-        if (moonD60) html += '<br><strong>D60 Moon (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
+        if (sunD60) html += '<br><strong>D60 Sun (' + SIGNS[sunD60.dSign] + '):</strong> Soul purpose connects with this sign's energy.';
+        if (moonD60) html += '<br><strong>D60 Moon (' + SIGNS[moonD60.dSign] + '):</strong> Emotional memories remain in this sign.';
         html += '</div></div>';
     }
 
