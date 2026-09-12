@@ -1794,7 +1794,6 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (sunD60) html += '<br><strong>D60 태양 (' + SIGNS[sunD60.dSign] + '):</strong> 전생의 영혼 목적이 이 사인의 에너지와 연결됩니다.';
         if (moonD60) html += '<br><strong>D60 달 (' + SIGNS[moonD60.dSign] + '):</strong> 전생의 감정적 기억이 이 사인에 남아있습니다.';
         html += '</div></div>';
-    }
 
     } else if (division === 2) {
         html += '<div class="interp-card"><div class="interp-title">💰 D2 재물 분석</div><div class="interp-text">';
