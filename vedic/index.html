@@ -748,8 +748,8 @@ function initForm() {
         if (h === 10) opt.selected = true;
         hourSel.appendChild(opt);
     });
-    // 분: 00, 05, 10, ... 55
-    for (let m = 0; m < 60; m += 5) {
+    // 분: 00, 01, 02, ... 59 (1분 단위 — D60 정밀도)
+    for (let m = 0; m < 60; m += 1) {
         const opt = document.createElement('option');
         opt.value = m; opt.textContent = String(m).padStart(2,'0') + '분';
         if (m === 30) opt.selected = true;
