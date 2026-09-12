@@ -1706,6 +1706,112 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD60) html += '<br><strong>D60 月（' + SIGNS[moonD60.dSign] + '):</strong> 前世の感情的記憶がこのサインに残っています。';
         html += '</div></div>';
 
+        // D60 Deity Lookup
+        const D60_DEITIES = [
+            {name:'Ghora', ko:'Ghora', nature:'malefic', desc:'Deity of destruction and fear. Dark karma from past life'},
+            {name:'Rakshasa', ko:'Rakshasa', nature:'malefic', desc:'Demonic energy. Past life karma of strong desire and attachment'},
+            {name:'Deva', ko:'Deva', nature:'benefic', desc:'Divine being. Past life merit and blessings remain'},
+            {name:'Kubera', ko:'Kubera', nature:'benefic', desc:'God of wealth. Past life karma of accumulating riches'},
+            {name:'Yaksha', ko:'Yaksha', nature:'benefic', desc:'Nature guardian. Past life harmony with nature'},
+            {name:'Kinnara', ko:'Kinnara', nature:'benefic', desc:'Celestial musician. Past life artistic talent accumulated'},
+            {name:'Bhrashta', ko:'Bhrashta', nature:'malefic', desc:'The fallen one. Past life karma of falling from high position'},
+            {name:'Kulaghna', ko:'Kulaghna', nature:'malefic', desc:'Destroyer of family. Past life family-related karma'},
+            {name:'Garala', ko:'Garala', nature:'malefic', desc:'Poison. Past life karma of toxic actions'},
+            {name:'Vahni', ko:'Vahni', nature:'malefic', desc:'Fire god Agni. Past life karma of anger and destruction'},
+            {name:'Maya', ko:'Maya', nature:'malefic', desc:'Illusion. Past life karma of deception and illusion'},
+            {name:'Purishaka', ko:'Purishaka', nature:'malefic', desc:'Bondage. Past life karma of restraining others'},
+            {name:'Apampathi', ko:'Apampathi', nature:'benefic', desc:'Lord of waters. Past life karma of purification and healing'},
+            {name:'Marut', ko:'Marut', nature:'benefic', desc:'Wind god. Past life karma of freedom and change'},
+            {name:'Kala', ko:'Kala', nature:'malefic', desc:'God of time. Past life karma related to time and death'},
+            {name:'Sarpa', ko:'Sarpa', nature:'malefic', desc:'Serpent. Past life karma of secrets and betrayal'},
+            {name:'Amrita', ko:'Amrita', nature:'benefic', desc:'Nectar of immortality. Past life pursuit of eternal life'},
+            {name:'Indu', ko:'Indu', nature:'benefic', desc:'Moon. Past life accumulation of sensitivity and intuition'},
+            {name:'Mridu', ko:'Mridu', nature:'benefic', desc:'The gentle one. Past life karma of gentleness and compassion'},
+            {name:'Komala', ko:'Komala', nature:'benefic', desc:'The delicate one. Past life karma of art and beauty'},
+            {name:'Heramba', ko:'Heramba', nature:'benefic', desc:'Avatar of Ganesha. Past life karma of overcoming obstacles'},
+            {name:'Brahma', ko:'Brahma', nature:'benefic', desc:'Creator god. Past life karma of creation and knowledge'},
+            {name:'Vishnu', ko:'Vishnu', nature:'benefic', desc:'Preserver god. Past life karma of protection and order'},
+            {name:'Maheshwara', ko:'Maheshwara', nature:'benefic', desc:'Great Lord Shiva. Past life karma of transformation and liberation'},
+            {name:'Deva2', ko:'Devala', nature:'benefic', desc:'Saint. Past life karma of spiritual practice'},
+            {name:'Bala', ko:'Bala', nature:'benefic', desc:'Strength. Past life karma of fortitude and courage'},
+            {name:'Vishwakarma', ko:'Vishwakarma', nature:'benefic', desc:'Cosmic architect. Past life karma of building and creation'},
+            {name:'Tamasa', ko:'Tamasa', nature:'malefic', desc:'Darkness. Past life karma of ignorance and darkness'},
+            {name:'Kanchana', ko:'Kanchana', nature:'benefic', desc:'Gold. Past life karma of purity and value'},
+            {name:'Varaha', ko:'Varaha', nature:'benefic', desc:'Boar avatar of Vishnu. Past life karma of salvation'},
+            {name:'Ramasala', ko:'Ramasala', nature:'benefic', desc:'Abode of Rama. Past life karma of morality and duty'},
+            {name:'Ghrisha', ko:'Ghrisha', nature:'benefic', desc:'The radiant one. Past life karma of wisdom and enlightenment'},
+            {name:'Indra', ko:'Indra', nature:'benefic', desc:'King of gods. Past life karma of leadership and rulership'},
+            {name:'Jala', ko:'Jala', nature:'benefic', desc:'Water. Past life karma of flow and adaptation'},
+            {name:'Vishwa', ko:'Vishwa', nature:'benefic', desc:'Universe. Past life karma of universal love'},
+            {name:'Amara', ko:'Amara', nature:'benefic', desc:'Immortal. Past life pursuit of eternity'},
+            {name:'Bala2', ko:'Bala2', nature:'malefic', desc:'Young strength. Past life immature use of power'},
+            {name:'Pitri', ko:'Pitri', nature:'malefic', desc:'Ancestors. Past life ancestral karma'},
+            {name:'Rudra', ko:'Rudra', nature:'malefic', desc:'Storm god. Past life karma of destructive transformation'},
+            {name:'Varuna', ko:'Varuna', nature:'benefic', desc:'Ocean god. Past life karma of upholding cosmic order'},
+            {name:'Aryama', ko:'Aryama', nature:'benefic', desc:'Sun deity. Past life karma of friendship and contracts'},
+            {name:'Mitra', ko:'Mitra', nature:'benefic', desc:'God of friendship. Past life karma of trust and companionship'},
+            {name:'Agni', ko:'Agni', nature:'malefic', desc:'Fire god. Past life karma of purifying fire'},
+            {name:'Varuna2', ko:'Varuna2', nature:'benefic', desc:'Ocean god. Past life karma of deep wisdom'},
+            {name:'Gauri', ko:'Gauri', nature:'benefic', desc:'Parvati (Shiva consort). Past life karma of devotion and love'},
+            {name:'Mahakala', ko:'Mahakala', nature:'malefic', desc:'Great Time. Past life karma of trying to master time'},
+            {name:'Pitamaha', ko:'Pitamaha', nature:'benefic', desc:'Great Father Brahma. Past life karma as creator'},
+            {name:'Kartikeya', ko:'Kartikeya', nature:'benefic', desc:'War god. Past life karma of righteous battle'},
+            {name:'Yama', ko:'Yama', nature:'malefic', desc:'God of death. Past life karma of judgment and justice'},
+            {name:'Kala2', ko:'Kala2', nature:'malefic', desc:'Time. Past life karma of being chased by time'},
+            {name:'Varuna3', ko:'Varuna3', nature:'benefic', desc:'Ocean god. Past life karma of law and truth'},
+            {name:'Kubera2', ko:'Kubera2', nature:'benefic', desc:'God of wealth. Past life karma of generosity'},
+            {name:'Aditya', ko:'Aditya', nature:'benefic', desc:'Sun god. Past life karma of light and truth'},
+            {name:'Rishi', ko:'Rishi', nature:'benefic', desc:'Sage. Past life karma of wisdom and practice'},
+            {name:'Vasu', ko:'Vasu', nature:'benefic', desc:'Celestial being. Past life karma of governing nature'},
+            {name:'Ashwini', ko:'Ashwini', nature:'benefic', desc:'Twin healers. Past life karma of healing'},
+            {name:'Naga', ko:'Naga', nature:'malefic', desc:'Serpent deity. Past life karma of mystery and secrets'},
+            {name:'Gandharva', ko:'Gandharva', nature:'benefic', desc:'Celestial musician. Past life karma of art and music'},
+            {name:'Prajapati', ko:'Prajapati', nature:'benefic', desc:'Creator. Past life karma of creating life'},
+            {name:'Charachara', ko:'Charachara', nature:'benefic', desc:'Moving and unmoving. Past life karma of oneness with all things'}
+        ];
+
+        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 Deities — Past Life Karma Guardians</div><div class="interp-text">';
+        html += 'According to <strong>Parashara Hora Shastra</strong>, each planet is assigned a unique deity based on its D60 division. This deity represents the past life karmic nature of that planet.<br><br>';
+
+        const lagnaDegInSign = lagnaSidereal % 30;
+        const lagnaD60Part = Math.floor(lagnaDegInSign / 0.5);
+        const lagnaSignNum = Math.floor(lagnaSidereal / 30);
+        const lagnaD60Idx = (lagnaSignNum % 2 === 0) ? lagnaD60Part : (59 - lagnaD60Part);
+        const lagnaDeity = D60_DEITIES[lagnaD60Idx];
+        if (lagnaDeity) {
+            const lColor = lagnaDeity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + lColor + ';">';
+            html += '<strong>⬆ Lagna:</strong> #' + (lagnaD60Idx+1) + ' <strong>' + lagnaDeity.name + '</strong> — <span style="color:' + lColor + '">' + (lagnaDeity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span><br>';
+            html += '<span style="color:#888;font-size:12px;">' + lagnaDeity.desc + '</span></div>';
+        }
+
+        positions.forEach(p => {
+            const degInSign = p.sidereal % 30;
+            const d60Part = Math.floor(degInSign / 0.5);
+            const signNum = Math.floor(p.sidereal / 30);
+            const d60Idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
+            const deity = D60_DEITIES[d60Idx];
+            if (deity) {
+                const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+                html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + color + ';">';
+                html += '<strong>' + p.symbol + ' ' + p.name + ':</strong> #' + (d60Idx+1) + ' <strong>' + deity.name + '</strong> — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span><br>';
+                html += '<span style="color:#888;font-size:12px;">' + deity.desc + '</span></div>';
+            }
+        });
+
+        const beneficCount = positions.filter(p => {
+            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
+            const signNum = Math.floor(p.sidereal / 30);
+            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
+            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'benefic';
+        }).length;
+        html += '<br><div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;">';
+        html += '<strong>📊 D60 Summary:</strong> Out of 9 planets, <strong style="color:#5cb85c">' + beneficCount + ' benefic</strong> and <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placements<br>';
+        html += beneficCount >= 6 ? 'Overall, <strong>abundant past life merit</strong> — a blessed life.' : beneficCount >= 4 ? 'A balanced mix of good karma and challenges coexist.' : 'Many past life challenges, but these are <strong>opportunities for growth in this life</strong>.';
+        html += '</div>';
+        html += '</div></div>';
+
+
     } else if (division === 2) {
         html += '<div class="interp-card"><div class="interp-title">💰 D2 財運分析</div><div class="interp-text">';
         html += '<strong>D2 ラグナ:</strong> ' + SIGNS[dLagnaSign] + '<br>';
