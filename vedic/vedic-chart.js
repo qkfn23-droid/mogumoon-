@@ -219,7 +219,14 @@ function calculateChart() {
     const { year, month, day, hour, minute } = birth;
 
     // Convert local birth time to UTC using city timezone offset
-    const utcDate = new Date(Date.UTC(year, month - 1, day, hour - tz, minute, 0));
+    // Korean DST correction: 1987 (May 10~Oct 11), 1988 (May 8~Oct 9) used UTC+10
+    let effectiveTz = tz;
+    if (tz === 9) {
+        const md = month * 100 + day; // MMDD format for easy comparison
+        if (year === 1987 && md >= 510 && md <= 1011) effectiveTz = 10;
+        if (year === 1988 && md >= 508 && md <= 1009) effectiveTz = 10;
+    }
+    const utcDate = new Date(Date.UTC(year, month - 1, day, hour - effectiveTz, minute, 0));
     const astroDate = Astronomy.MakeTime(utcDate);
     const jd = toJulianDate(utcDate);
     const ayanamsa = getAyanamsa(jd);
