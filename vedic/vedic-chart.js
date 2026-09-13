@@ -640,7 +640,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💍 배우자의 성격' : '💍 D9 7궁 — 배우자의 성격: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '배우자의 핵심 성격을 보여줍니다.' : '나바암샤 7궁이 <strong>' + SIGNS[d9H7Sign] + '</strong>에 있으며, 주인 행성은 <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>입니다.<br><br>이것은 배우자의 핵심 성격을 나타냅니다.'} ${SIGNS[d9H7Sign]}의 에너지를 가진 파트너 — ${careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력'}의 성질을 가진 사람입니다.
+            ${isEasy ? (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력') + '의 성질을 가진 파트너입니다.' : '나바암샤 7궁이 <strong>' + SIGNS[d9H7Sign] + '</strong>에 있으며, 주인 행성은 <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>입니다.<br><br>이것은 배우자의 핵심 성격을 나타냅니다. ' + SIGNS[d9H7Sign] + '의 에너지를 가진 파트너 — ' + (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력') + '의 성질을 가진 사람입니다.'}
             ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? '좋은 에너지! 배우자에게서 축복을 받습니다.' : '도전의 에너지 — 결혼 생활에서 성장의 기회이기도 합니다.').join('<br>') : '<strong>D9 7궁의 행성:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '좋은 에너지! 배우자에게서 이 행성의 축복을 받습니다.' : '도전의 에너지 — 결혼 생활에서 성장의 기회이기도 합니다.'}`).join('<br>')) : ''}
         </div>
     </div>`;
@@ -754,7 +754,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 배우자의 방향 — 6가지 지표 종합 분석</div>
+        <div class="interp-title">${isEasy ? '🧭 배우자가 올 방향' : '🧭 배우자의 방향 — 6가지 지표 종합 분석'}</div>
         <div class="interp-text">
             ${isEasy ? '배우자가 어느 방향에서 올지를 여러 지표로 분석합니다.' : '베딕 점성술에서는 배우자가 어느 방향에서 올지를 여러 지표를 종합하여 분석합니다.'}<br><br>
             ${isEasy ? '' : '<strong>6가지 지표 분석:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7궁주(' + RULER_NAMES[d9H7Ruler] + '):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 방향을 나타냅니다. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
@@ -842,37 +842,37 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 배우자를 만나는 환경 — D1 7궁: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">${isEasy ? '🤝 배우자를 만나는 환경' : '🤝 배우자를 만나는 환경 — D1 7궁: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
-            7궁 사인이 배우자와의 만남의 환경과 방식을 나타냅니다.<br><br>
+            ${isEasy ? '' : '7궁 사인이 배우자와의 만남의 환경과 방식을 나타냅니다.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
-            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>해외 인연 가능성!</strong> 9궁(해외)이나 12궁(해외거주)과 관련된 사인이 7궁에 있어, 배우자가 외국인이거나 해외에서 만날 가능성이 있습니다.' : ''}
+            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>해외 인연 가능성!</strong> 배우자가 외국인이거나 해외에서 만날 가능성이 있습니다.' : ''}
         </div>
     </div>`;
 
     // UL 사인으로 배우자 가문/배경
     html += `<div class="interp-card">
-        <div class="interp-title">🏛️ 배우자의 가문/배경 — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">${isEasy ? '🏛️ 배우자의 가문/배경' : '🏛️ 배우자의 가문/배경 — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
-            우파파다 라그나(UL)는 배우자의 가정환경과 성장 배경을 나타냅니다.<br><br>
+            ${isEasy ? '' : '우파파다 라그나(UL)는 배우자의 가정환경과 성장 배경을 나타냅니다.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
 
     // A7 사인으로 배우자 외적 이미지
     html += `<div class="interp-card">
-        <div class="interp-title">👤 배우자의 첫인상/외적 이미지 — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">${isEasy ? '👤 배우자의 첫인상' : '👤 배우자의 첫인상/외적 이미지 — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
-            다라파다(A7)는 배우자가 세상에 보여주는 외적 이미지, 첫인상을 나타냅니다.<br><br>
+            ${isEasy ? '' : '다라파다(A7)는 배우자가 세상에 보여주는 외적 이미지, 첫인상을 나타냅니다.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
 
     // D9 금성 사인으로 배우자 매력 포인트
     html += `<div class="interp-card">
-        <div class="interp-title">💎 배우자의 매력 포인트 — D9 금성: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">${isEasy ? '💎 배우자의 매력 포인트' : '💎 배우자의 매력 포인트 — D9 금성: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
-            나바암샤의 금성 위치는 배우자의 핵심 매력과 사랑의 스타일을 나타냅니다.<br><br>
+            ${isEasy ? '' : '나바암샤의 금성 위치는 배우자의 핵심 매력과 사랑의 스타일을 나타냅니다.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
