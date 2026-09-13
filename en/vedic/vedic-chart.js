@@ -1253,7 +1253,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 Special Yogas (Planetary Combinations)</div>
+            <div class="interp-title">${isEasy ? '🔮 Your Special Talents' : '🔮 🔮 Special Yogas (Planetary Combinations)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -2104,7 +2104,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 (satD.deity && satD.deity.nature === 'benefic' ? 'This is a very rare blessing! Career challenges are reduced in this life.' : 'There is a heavy career lesson from past lives. Steady effort and helping others is the key.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>very rare blessing!</strong> Merit from patience reduces career trials.' : 'Saturn under malefic — heavy career karma. Dissolve through patience, service, and mantra (Om Shanaishcharaya Namaha).');
         }
-        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planets in D60 10th:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — career karma concentrated here.';
+        if (d60H10planets.length > 0) if (!isEasy) ch5 += '<br><br><strong>Planets in D60 10th:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — career karma concentrated here.';
         html += subChapter('💼', 'Career Karma — Past life calling', ch5);
 
         // Ch6: Wealth Karma

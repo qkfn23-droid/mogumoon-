@@ -2060,7 +2060,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Sehr seltener Segen! Berufliche Herausforderungen sind reduziert.' : 'Schwere Karriere-Lektion. Beständige Anstrengung ist der Schlüssel.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn unter Wohltaeter — <strong>sehr seltener Segen!</strong> Verdienst durch Geduld reduziert berufliche Pruefungen.' : 'Saturn unter Uebel — schweres Berufskarma. Aufloesen durch Geduld, Dienst und Mantra.');
         }
-        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planeten im D60 10.:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Berufskarma hier konzentriert.';
+        if (d60H10planets.length > 0) if (!isEasy) ch5 += '<br><br><strong>Planeten im D60 10.:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Berufskarma hier konzentriert.';
         html += subChapter('💼', 'Berufs-Karma — Berufung aus früherem Leben', ch5);
 
         // Ch6: Wealth Karma

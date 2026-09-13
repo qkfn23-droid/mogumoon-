@@ -1220,7 +1220,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 Special Yogas (Planetary Combinations)</div>
+            <div class="interp-title">${isEasy ? '🔮 Seus Talentos Especiais' : '🔮 🔮 Special Yogas (Planetary Combinations)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -2060,7 +2060,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Bênção muito rara! Desafios profissionais são reduzidos.' : 'Lição pesada sobre carreira. Esforço constante é a chave.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturno sob benefico — <strong>bencao muito rara!</strong> O merito da paciencia reduz provas profissionais.' : 'Saturno sob malefico — karma profissional pesado. Dissolver com paciencia, servico e mantra.');
         }
-        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planetas na D60 casa 10:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — karma profissional concentrado aqui.';
+        if (d60H10planets.length > 0) if (!isEasy) ch5 += '<br><br><strong>Planetas na D60 casa 10:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — karma profissional concentrado aqui.';
         html += subChapter('💼', 'Karma Profissional — Vocação de vida passada', ch5);
 
         // Ch6: Wealth Karma

@@ -1219,7 +1219,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 特別ヨーガ (惑星の組み合わせ)</div>
+            <div class="interp-title">${isEasy ? '🔮 あなたの特別な才能' : '🔮 🔮 特別ヨーガ (惑星の組み合わせ)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -2005,7 +2005,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             : '<strong>D60 7室： ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7室主： ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
         ch4 += spouseKarma[d60H7sign] + '<br>';
         if (d60H7planets.length > 0) {
-            ch4 += '<br><strong>D60 7室の惑星：</strong><br>';
+            if (!isEasy) ch4 += '<br><strong>D60 7室の惑星：</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (!isEasy) ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
@@ -2054,7 +2054,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 (satD.deity && satD.deity.nature === 'benefic' ? 'これは非常にまれな祝福です！今世では仕事の大きな試練が軽減されます。' : '仕事に関して前世からの重い課題があります。地道な努力と他人を助けることが鍵です。') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>非常に稀な祝福！</strong> 忍耐の功徳が職業的試練を減らします。' : '土星が凶神の下 — 重い職業カルマ。忍耐、奉仕、マントラで溶かしましょう。');
         }
-        if (d60H10planets.length > 0) ch5 += '<br><br><strong>D60 10室の惑星：</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — 職業カルマがここに集中。';
+        if (d60H10planets.length > 0) if (!isEasy) ch5 += '<br><br><strong>D60 10室の惑星：</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — 職業カルマがここに集中。';
         html += subChapter('💼', '職業カルマ — 前世の使命', ch5);
 
         // Ch6: Wealth Karma
