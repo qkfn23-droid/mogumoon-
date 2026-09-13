@@ -2008,14 +2008,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch4 += '<br><strong>D60 7室の惑星：</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                if (!isEasy) ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                 ch4 += (p.natural === 'benefic' ? '吉星が7室 — 配偶者と良いカルマ、今生で祝福。' : '凶星が7室 — 配偶者との未解決カルマ、今生で清算。') + '<br>';
             });
         }
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><strong>♀ 金星（愛のカラカ）</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            if (!isEasy) ch4 += '<br><strong>♀ 金星（愛のカラカ）</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
             ch4 += isEasy ?
                 (venD.deity && venD.deity.nature === 'benefic' ? '前世で真心を込めて愛したため、美しい愛が待っています。' : '前世で愛に関して解決できなかった課題があります。本当の愛を学ぶ過程が重要です。') :
                 (venD.deity && venD.deity.nature === 'benefic' ? '金星が吉神の保護下。美しい愛が待っています。' : '金星が凶神の影響下。真の愛の意味を学ぶことが課題。');
@@ -2030,7 +2030,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
         if (h7lordPlanet) {
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><br><strong>7th Lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
+            if (!isEasy) ch4 += '<br><br><strong>7th Lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
             ch4 += '配偶者カルマの発現領域： <strong>' + houseThemes[h7lH] + '</strong> area.';
         }
         html += subChapter('💍', '配偶者カルマ — 前世の縁', ch4);
@@ -2049,7 +2049,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch5 += '<br><strong>♄ 土星（カルマの主）</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ 土星（カルマの主）</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 (satD.deity && satD.deity.nature === 'benefic' ? 'これは非常にまれな祝福です！今世では仕事の大きな試練が軽減されます。' : '仕事に関して前世からの重い課題があります。地道な努力と他人を助けることが鍵です。') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>非常に稀な祝福！</strong> 忍耐の功徳が職業的試練を減らします。' : '土星が凶神の下 — 重い職業カルマ。忍耐、奉仕、マントラで溶かしましょう。');
@@ -2065,7 +2065,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ? '<strong>財カルマ</strong><br><br>'
             : '<strong>D60 2室： ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += '<br><strong>D60 2室の惑星：</strong><br>';
+            if (!isEasy) ch6 += '<br><strong>D60 2室の惑星：</strong><br>';
             d60H2planets.forEach(p => {
                 ch6 += p.symbol + ' ' + p.name + deityTag(getDeity(p.sidereal)) + ' — ' + (p.natural === 'benefic' ? '良い財運カルマ。豊かさ。' : '財運の試練。努力で克服。') + '<br>';
             });

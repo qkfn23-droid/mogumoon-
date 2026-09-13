@@ -2014,14 +2014,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch4 += '<br><strong>Planetas na D60 casa 7:</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                if (!isEasy) ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                 ch4 += (p.natural === 'benefic' ? 'Benefico na casa 7 — bom karma com o conjuge, bencaos nesta vida.' : 'Malefico na casa 7 — karma nao resolvido com o conjuge, resolvendo-se nesta vida.') + '<br>';
             });
         }
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><strong>♀ Vênus (Karaka do Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            if (!isEasy) ch4 += '<br><strong>♀ Vênus (Karaka do Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
             ch4 += isEasy ?
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Você amou sinceramente, um amor bonito te espera.' : 'Há lições de amor não resolvidas. Aprender o amor verdadeiro é importante.') :
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Venus sob protecao benefica. O amor foi bem praticado, belo amor espera.' : 'Venus sob influencia malefica. Aprender o verdadeiro significado do amor e a tarefa.');
@@ -2030,7 +2030,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
-                ch4 += '<br><br>🔥 <strong>Eixo Rahu-Ketu na linha 1-7!</strong> Conexao muito forte de vidas passadas com o conjuge. Destinados a se encontrar.';
+                ch4 += isEasy ? '<br><br>🔥 <strong>Eixo Rahu-Ketu na linha 1-7!</strong>' : '<br><br>🔥 <strong>Eixo Rahu-Ketu na linha 1-7!</strong> Conexao muito forte de vidas passadas com o conjuge. Destinados a se encontrar.';
             }
         }
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
@@ -2055,7 +2055,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch5 += '<br><strong>♄ Saturno (Senhor do Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Senhor do Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Bênção muito rara! Desafios profissionais são reduzidos.' : 'Lição pesada sobre carreira. Esforço constante é a chave.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturno sob benefico — <strong>bencao muito rara!</strong> O merito da paciencia reduz provas profissionais.' : 'Saturno sob malefico — karma profissional pesado. Dissolver com paciencia, servico e mantra.');

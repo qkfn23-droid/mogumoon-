@@ -2014,14 +2014,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch4 += '<br><strong>Planeten im D60 7. Haus:</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                if (!isEasy) ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                 ch4 += (p.natural === 'benefic' ? 'Wohltaeter im 7. — gutes Karma mit Partner, Segen in diesem Leben.' : 'Uebeltaeter im 7. — ungeloestes Karma mit Partner, wird in diesem Leben geloest.') + '<br>';
             });
         }
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><strong>♀ Venus (Liebe-Karaka)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            if (!isEasy) ch4 += '<br><strong>♀ Venus (Liebe-Karaka)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
             ch4 += isEasy ?
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Du hast aufrichtig geliebt, schöne Liebe wartet auf dich.' : 'Es gibt ungelöste Liebeslektionen. Wahre Liebe zu lernen ist wichtig.') :
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Venus unter wohltaetigem Schutz. Liebe wurde richtig praktiziert, schoene Liebe wartet.' : 'Venus unter ueblem Einfluss. Die wahre Bedeutung der Liebe zu lernen ist die Aufgabe.');
@@ -2030,13 +2030,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
-                ch4 += '<br><br>🔥 <strong>Rahu-Ketu-Achse auf 1-7 Linie!</strong> Sehr starke Verbindung aus frueherem Leben mit Partner. Bestimmt sich zu treffen.';
+                ch4 += isEasy ? '<br><br>🔥 <strong>Rahu-Ketu-Achse auf 1-7 Linie!</strong>' : '<br><br>🔥 <strong>Rahu-Ketu-Achse auf 1-7 Linie!</strong> Sehr starke Verbindung aus frueherem Leben mit Partner. Bestimmt sich zu treffen.';
             }
         }
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
         if (h7lordPlanet) {
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><br><strong>7. Herrscher ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
+            if (!isEasy) ch4 += '<br><br><strong>7. Herrscher ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
             ch4 += 'Partner-Karma manifestiert sich durch <strong>' + houseThemes[h7lH] + '</strong> area.';
         }
         html += subChapter('💍', 'Partner-Karma — Verbindung aus früherem Leben', ch4);
@@ -2055,7 +2055,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch5 += '<br><strong>♄ Saturn (Herr des Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturn (Herr des Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Sehr seltener Segen! Berufliche Herausforderungen sind reduziert.' : 'Schwere Karriere-Lektion. Beständige Anstrengung ist der Schlüssel.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn unter Wohltaeter — <strong>sehr seltener Segen!</strong> Verdienst durch Geduld reduziert berufliche Pruefungen.' : 'Saturn unter Uebel — schweres Berufskarma. Aufloesen durch Geduld, Dienst und Mantra.');

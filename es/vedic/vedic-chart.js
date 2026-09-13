@@ -2014,14 +2014,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch4 += '<br><strong>Planetas en D60 casa 7:</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                if (!isEasy) ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                 ch4 += (p.natural === 'benefic' ? 'Benefico en casa 7 — buen karma con la pareja, bendiciones en esta vida.' : 'Malefico en casa 7 — karma sin resolver con la pareja, resolviendose en esta vida.') + '<br>';
             });
         }
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><strong>♀ Venus (Karaka del Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            if (!isEasy) ch4 += '<br><strong>♀ Venus (Karaka del Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
             ch4 += isEasy ?
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Amaste sinceramente en vidas pasadas, un amor hermoso te espera.' : 'Hay lecciones de amor no resueltas. Aprender el amor verdadero es importante.') :
                 (venD.deity && venD.deity.nature === 'benefic' ? 'Venus bajo proteccion benefica. El amor fue bien practicado, un amor hermoso espera.' : 'Venus bajo influencia malefica. Aprender el verdadero significado del amor es la tarea.');
@@ -2030,7 +2030,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
-                ch4 += '<br><br>🔥 <strong>Eje Rahu-Ketu en linea 1-7!</strong> Conexion muy fuerte de vidas pasadas con la pareja. Destinados a encontrarse.';
+                ch4 += isEasy ? '<br><br>🔥 <strong>Eje Rahu-Ketu en linea 1-7!</strong>' : '<br><br>🔥 <strong>Eje Rahu-Ketu en linea 1-7!</strong> Conexion muy fuerte de vidas pasadas con la pareja. Destinados a encontrarse.';
             }
         }
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
@@ -2055,7 +2055,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch5 += '<br><strong>♄ Saturno (Señor del Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Señor del Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Bendición muy rara. Los desafíos profesionales se reducen.' : 'Hay una lección pesada sobre la carrera. El esfuerzo constante es la clave.') :
                 (satD.deity && satD.deity.nature === 'benefic' ? 'Saturno bajo benefico — <strong>bendicion muy rara!</strong> El merito de la paciencia reduce las pruebas profesionales.' : 'Saturno bajo malefico — karma profesional pesado. Disolver con paciencia, servicio y mantra (Om Shanaishcharaya Namaha).');
