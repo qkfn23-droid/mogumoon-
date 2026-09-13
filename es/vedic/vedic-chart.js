@@ -1311,6 +1311,7 @@ const PLANET_IN_HOUSE = {
 
 function renderPlanetHouse(positions, lagnaSign) {
     const isEasy = window.vedicMode === 'easy';
+    const houseArea = ['','Self','Money','Communication','Home','Children','Health','Spouse','Transformation','Fortune','Career','Income','Spirituality'];
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     let html = '';
 

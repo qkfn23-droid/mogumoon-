@@ -1636,7 +1636,7 @@ function renderForeign(positions, lagnaSign) {
         text += 'Domestic residence is more natural.';
     } else {
         h12.forEach(p => {
-            const f12 = { Sun: '해외에서 정체성 찾기. 정부 관련 해외 파견.', Moon: '해외 거주 가능성 높음! 해외에서 감정적 안정.', Mars: '해외에서의 에너지 소모. 해외 투자/부동산.', Mercury: '해외 비즈니스/IT 관련 활동. 해외 교육.', Jupiter: '해외에서의 영적 성장. 자선 활동. 해외 대학.', Venus: '해외에서의 사치와 쾌락. 해외 예술 활동.', Saturn: '해외에서의 고된 노동. 하지만 장기적 정착.', Rahu: '해외 이민 확정적 지표! 서양 문화 적응.', Ketu: '해외에서의 영적 practice. 고독한 해외 생활.' };
+            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: '해외 거주 가능성 높음! 해외에서 감정적 안정.', Mars: '해외에서의 에너지 소모. 해외 투자/부동산.', Mercury: '해외 비즈니스/IT 관련 활동. 해외 교육.', Jupiter: '해외에서의 영적 성장. 자선 활동. 해외 대학.', Venus: '해외에서의 사치와 쾌락. 해외 예술 활동.', Saturn: '해외에서의 고된 노동. 하지만 장기적 정착.', Rahu: '해외 이민 확정적 지표! 서양 문화 적응.', Ketu: '해외에서의 영적 practice. 고독한 해외 생활.' };
             text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
@@ -1773,9 +1773,9 @@ function renderRemedy(positions, lagnaSign) {
         Sun: { gem: '루비 (Ruby)', mantra: 'Om Suryaya Namaha', color: 'Orange/red on Sunday', food: 'Wheat, saffron, sunflower seeds', charity: 'Sunday: donate wheat/copper' },
         Moon: { gem: '진주 (Pearl)', mantra: 'Om Chandraya Namaha', color: 'White/silver on Monday', food: 'Milk, rice, coconut', charity: 'Monday: donate rice/milk' },
         Mars: { gem: 'Red Coral', mantra: 'Om Mangalaya Namaha', color: 'Red on Tuesday', food: 'Lentils, red fruits', charity: 'Tuesday: donate red lentils' },
-        Mercury: { gem: '에메랄드 (Emerald)', mantra: 'Om Budhaya Namaha', color: 'Green on Wednesday', food: 'Green beans, green vegetables', charity: 'Wednesday: donate green vegetables' },
+        Mercury: { gem: 'Emerald', mantra: 'Om Budhaya Namaha', color: 'Green on Wednesday', food: 'Green beans, green vegetables', charity: 'Wednesday: donate green vegetables' },
         Jupiter: { gem: 'Yellow Sapphire', mantra: 'Om Gurave Namaha', color: 'Yellow on Thursday', food: 'Chickpeas, bananas, turmeric', charity: 'Thursday: donate yellow food/books' },
-        Venus: { gem: '다이아몬드 (Diamond)', mantra: 'Om Shukraya Namaha', color: 'White/pastel on Friday', food: 'Milk, cream, fruits', charity: 'Friday: donate white clothes/rice' },
+        Venus: { gem: 'Diamond', mantra: 'Om Shukraya Namaha', color: 'White/pastel on Friday', food: 'Milk, cream, fruits', charity: 'Friday: donate white clothes/rice' },
         Saturn: { gem: '블루 사파이어 (Blue Sapphire)', mantra: 'Om Shanaishcharaya Namaha', color: 'Navy/black on Saturday', food: 'Black beans, sesame', charity: 'Saturday: donate black beans/oil' }
     };
 
@@ -1956,9 +1956,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // Career 성향 by D10 Lagna
         const careerBySign = [
-            'Leadership, Military, Sports, Entrepreneur',  // 양자리
+            'Leadership, Military, Sports, Entrepreneur',  // Aries
             'Finance, Arts, Real Estate, Food Industry',     // 황소
-            'Communication, Media, Education, IT',  // 쌍둥이
+            'Communication, Media, Education, IT',  // Gemini
             'Nursing, Real Estate, Hotels, Counseling',    // Cancer
             'Politics, Entertainment, Management, Administration',        // 사자
             'Medical, Accounting, Analysis, Research',          // 처녀
@@ -1967,7 +1967,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Education, Religion, Foreign Trade, Publishing',      // 사수
             'Administration, Construction, Mining, Civil Service',        // 염소
             'IT, Innovation, NGO, Aviation',           // 물병
-            'Arts, Hospital, Foreign, Spirituality'           // 물고기
+            'Arts, Hospital, Foreign, Spirituality'           // Pisces
         ];
         html += '<strong>적합 분야:</strong> ' + careerBySign[dLagnaSign];
         html += '</div></div>';
@@ -2481,7 +2481,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 16) {
         // D16 Shodashamsha — 차량·comfort·행복
-        const d16LagnaInterp = ['스포츠카, 오토바이 등 역동적인 차량. 운전을 즐김.','고급 차량과 편안한 이동 수단. 럭셔리한 물질적 comfort.','여러 대의 차량 또는 다양한 이동 수단. 기술적 기기 좋아함.','편안한 가정용 차량. 가족과의 여행. 물질적 안정이 행복.','최고급 차량. 과시적 소비. 고급 브랜드 선호.','실용적이고 연비 좋은 차량. health 관련 기기.','세련되고 디자인 좋은 차량. 미적 감각 있는 물건들.','중고차나 상속받은 차량. 보험이 중요. 변혁적 물질 경험.','SUV나 해외 브랜드. 여행용 차량. 모험적 이동 수단.','검소하지만 튼튼한 차량. 실용성 우선. 중년 이후 좋은 차.','전기차나 최신 기술 차량. 독특한 이동 수단.','물 관련 이동(보트). 감성적으로 좋아하는 물건들.'][dLagnaSign];
+        const d16LagnaInterp = ['Sports cars, motorcycles — dynamic vehicles. Enjoys driving.','고급 차량과 편안한 이동 수단. 럭셔리한 물질적 comfort.','여러 대의 차량 또는 다양한 이동 수단. 기술적 기기 좋아함.','편안한 가정용 차량. 가족과의 여행. 물질적 안정이 행복.','최고급 차량. 과시적 소비. 고급 브랜드 선호.','실용적이고 연비 좋은 차량. health 관련 기기.','세련되고 디자인 좋은 차량. 미적 감각 있는 물건들.','중고차나 상속받은 차량. 보험이 중요. 변혁적 물질 경험.','SUV나 해외 브랜드. 여행용 차량. 모험적 이동 수단.','검소하지만 튼튼한 차량. 실용성 우선. 중년 이후 좋은 차.','전기차나 최신 기술 차량. 독특한 이동 수단.','물 관련 이동(보트). 감성적으로 좋아하는 물건들.'][dLagnaSign];
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🚗 차량·comfort·행복 분석' : '🚗 D16 Shodashamsha — 차량·comfort·행복 분석') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D16 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d16LagnaInterp + '<br><br>';
@@ -2629,7 +2629,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<br><strong>' + (isEasy ? 'Hospitalization:' : 'D30 12 house (입원/손실) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
-            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? '입원이나 고립 가능.' : 'Spiritual healing and recovery.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalization possible. Foreign medical.' : 'Spiritual healing and recovery.') + '<br>'; });
+            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalization possible.' : 'Spiritual healing and recovery.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalization possible. Foreign medical.' : 'Spiritual healing and recovery.') + '<br>'; });
         } else html += isEasy ? '입원 위험은 낮아요.<br>' : '12 house no planets — 입원 위험 낮음.<br>';
         html += '</div></div>';
 
