@@ -777,6 +777,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 }
 
 function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
+    const isEasy = window.vedicMode === 'easy';
     let html = '';
     const meetingBySgn = [
         '활동적인 장소, 스포츠, 경쟁적 환경, 리더들의 모임에서 만남. 첫 만남이 강렬하고 전격적.',
