@@ -1,6 +1,75 @@
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
+if (!window.vedicMode) window.vedicMode = 'easy';
+var _lastCalcData = null;
+function recalcMode() {
+    if (!_lastCalcData) return;
+    var d = _lastCalcData;
+    renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
+    renderPlanetHouse(d.positions, d.lagnaSign);
+    renderDignity(d.positions, d.lagnaSign);
+    renderEducation(d.positions, d.lagnaSign);
+    renderChildren(d.positions, d.lagnaSign);
+    renderForeign(d.positions, d.lagnaSign);
+    renderLucky(d.lagnaSign, d.moonPos);
+    renderRemedy(d.positions, d.lagnaSign);
+    renderNakshatra(d.moonPos);
+    renderDasha(d.moonNakshatra, d.utcDate, d.moonPos ? d.moonPos.sidereal : 0);
+    renderD9Chart(d.positions, d.lagnaSign, d.lagnaSidereal);
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', 'Dashamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', 'Saptamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', 'Dwadashamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', 'Shashtiamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 2, 'd2Chart', 'd2InterpWrap', 'D2', 'Hora');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 3, 'd3Chart', 'd3InterpWrap', 'D3', 'Drekkana');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 4, 'd4Chart', 'd4InterpWrap', 'D4', 'Chaturthamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 16, 'd16Chart', 'd16InterpWrap', 'D16', 'Shodashamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 20, 'd20Chart', 'd20InterpWrap', 'D20', 'Vimshamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 24, 'd24Chart', 'd24InterpWrap', 'D24', 'Chaturvimshamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 27, 'd27Chart', 'd27InterpWrap', 'D27', 'Saptavimshamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 30, 'd30Chart', 'd30InterpWrap', 'D30', 'Trimshamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', 'Khavedamsha');
+    renderDivisionalChart(d.positions, d.lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'Akshavedamsha');
+}
+function updateCatHeaders() {
+    var e = window.vedicMode === 'easy';
+    var ids = {
+        catGuide: e ? 'Glossary' : 'Vedic Astrology Beginner\'s Guide',
+        catBasic: e ? 'My Planet Positions' : 'Basic Chart — Planet Positions & Birth Chart',
+        catDasha: e ? 'My Life Periods' : 'Dasha — Life Period Analysis',
+        catInterp: e ? 'My Reading — Personality·Wealth·Career·Health' : 'Interpretation — Personality·Wealth·Career·Health·Yoga',
+        catMarriage: e ? 'My Spouse Details' : 'Marriage & Spouse — D9 Navamsha',
+        catCareer: e ? 'My Career·Wealth Details' : 'Career & Wealth — D10·D2·D4',
+        catFamily: e ? 'My Family' : 'Family — D7·D3·D12·D40·D45',
+        catSpirit: e ? 'Spirituality·Education·Health' : 'Spirituality·Education·Health — D20·D24·D27·D16',
+        catWarn: e ? 'Health Cautions' : 'Cautions — D30 Disease·Foreign',
+        catKarma: e ? 'Past Life Karma' : 'Karma — D60 Past Life·Karma'
+    };
+    for (var id in ids) { var el = document.getElementById(id); if (el) el.textContent = ids[id]; }
+
+    var secs = {
+        secPlanetHouse: e ? '🪐 How Each Planet Affects You' : '🪐 Planet-in-House Analysis',
+        secDignity: e ? '⚖️ Your Strengths & Weaknesses' : '⚖️ Planetary Dignity (Exaltation·Debilitation·Own Sign)',
+        secLucky: e ? '🍀 Lucky Info' : '🍀 Lucky Information',
+        secRemedy: e ? '💎 Ways to Boost Your Luck' : '💎 Remedies & Strengthening',
+        secD10: e ? '💼 Career Details' : '💼 D10 Dashamsha (Career)',
+        secD2: e ? '💰 Wealth Details' : '💰 D2 Hora (Wealth)',
+        secD4: e ? '🏠 Property & Real Estate' : '🏠 D4 Chaturthamsha (Property)',
+        secD7: e ? '👶 Children' : '👶 D7 Saptamsha (Children)',
+        secD3: e ? '👫 Siblings & Courage' : '👫 D3 Drekkana (Siblings)',
+        secD12: e ? '👨‍👩‍👧 Parents' : '👨‍👩‍👧 D12 Dwadashamsha (Parents)',
+        secD40: e ? '👩 Maternal Heritage' : '👩 D40 Khavedamsha (Maternal)',
+        secD45: e ? '👨 Paternal Heritage' : '👨 D45 Akshavedamsha (Paternal)',
+        secD24: e ? '📚 Education' : '📚 D24 Chaturvimshamsha (Education)',
+        secD20: e ? '🙏 Spirituality' : '🙏 D20 Vimshamsha (Spirituality)',
+        secD27: e ? '💪 Physical Strength' : '💪 D27 Saptavimshamsha (Strength)',
+        secD16: e ? '🚗 Vehicles & Comfort' : '🚗 D16 Shodashamsha (Vehicles)',
+        secD30: e ? '⚠️ Health Caution Details' : '⚠️ D30 Trimshamsha (Disease)',
+        secForeign: e ? '✈️ Foreign & Immigration' : '✈️ Foreign & Immigration (9th·12th House)'
+    };
+    for (var sid in secs) { var sel = document.getElementById(sid); if (sel) sel.textContent = secs[sid]; }
+}
 
 // Ayanamsa (Lahiri) - Indian Astronomical Ephemeris official formula
 function getAyanamsa(jd) {
@@ -309,6 +378,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'Akshavedamsa');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
+    _lastCalcData = {positions, lagnaSign, moonPos, lagnaSidereal, moonNakshatra, utcDate};
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -319,6 +389,7 @@ function calculateChart() {
     renderRemedy(positions, lagnaSign);
 
     document.getElementById('resultSection').style.display = 'block';
+    updateCatHeaders();
     document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
 }
 
