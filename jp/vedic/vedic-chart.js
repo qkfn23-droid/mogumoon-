@@ -516,7 +516,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     let html = '';
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🕉️ 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 ラグナ — 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '🕉️ 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 ラグナ — 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}'}</div>
         <div class="interp-text">
             ナヴァムシャ・ラグナは<strong>${SIGNS[d9LagnaSign]}</strong>。これは結婚後、そして人生後半（30代以降）に現れるあなたの本当の姿です。
             ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1とD9のラグナが同じ星座にあります！</strong> これは<strong>バルゴッタマ(Vargottama)</strong> — 非常に強力です。結婚後もあなたの本質は変わらず、内面と外面が一致しています。' : ''}
@@ -525,7 +525,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💍 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7宮 — 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💍 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7宮 — 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}'}</div>
         <div class="interp-text">
             ナヴァムシャ7宮は<strong>${SIGNS[d9H7Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H7Ruler]}</strong>。<br><br>
             これは配偶者の核心的な性格を表します — ${SIGNS[d9H7Sign]}のエネルギーを持つパートナー。
@@ -534,7 +534,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💼 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10宮 — 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💼 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10宮 — 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}'}</div>
         <div class="interp-text">
             ナヴァムシャ10宮は<strong>${SIGNS[d9H10Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H10Ruler]}</strong>。<br><br>
             D1の10宮が「職業」を示すなら、D9の10宮は<strong>人生のより大きな使命(ダルマ)</strong> — 成熟した後に追求する真の天職。<br><br>
@@ -544,7 +544,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👔 配偶者の職業' : '👔 配偶者の職業 — 派生10宮(D9 4宮): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👔 配偶者の職業' : '👔 配偶者の職業 — 派生10宮(D9 4宮): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}'}</div>
         <div class="interp-text">
             <strong>派生ハウスの原理：</strong> 7宮（配偶者）から10番目 = D9の4宮が配偶者の職業/社会活動を表します。<br><br>
             D9 4宮は<strong>${SIGNS[d9H4Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H4Ruler]}</strong>。<br><br>
@@ -619,7 +619,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🧭 Spouse Direction' : '🧭 配偶者の方向 — 6指標分析') + '</div>
+        <div class="interp-title">${isEasy ? '🧭 Spouse Direction' : '🧭 配偶者の方向 — 6指標分析'}</div>
         <div class="interp-text">
             ヴェーダ占星術では複数の指標を組み合わせて配偶者の方向を分析します。<br><br>
             <strong>6つの指標：</strong><br>
@@ -704,7 +704,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 配偶者との出会いの場 ' + (isEasy ? '— 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
+        <div class="interp-title">🤝 配偶者との出会いの場 ${isEasy ? '— 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}'}</div>
         <div class="interp-text">
             7宮の星座が配偶者との出会いの環境と状況を表します。<br><br>
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -713,7 +713,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🏛️ 配偶者の家庭/背景' : '🏛️ 配偶者の家庭/背景 — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '🏛️ 配偶者の家庭/背景' : '🏛️ 配偶者の家庭/背景 — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}'}</div>
         <div class="interp-text">
             ウパパダ・ラグナ(UL)は配偶者の家庭環境と育ちを表します。<br><br>
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -721,7 +721,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👤 配偶者の第一印象' : '👤 配偶者の第一印象 — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👤 配偶者の第一印象' : '👤 配偶者の第一印象 — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}'}</div>
         <div class="interp-text">
             ダラパダ(A7)は配偶者が世界に見せる外的イメージと第一印象を表します。<br><br>
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -729,7 +729,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💎 配偶者の魅力ポイント ' + (isEasy ? '— 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
+        <div class="interp-title">💎 配偶者の魅力ポイント ${isEasy ? '— 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}'}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'ナヴァムシャの金星の位置は配偶者の核心的な魅力と愛のスタイルを表します。<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -898,7 +898,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👤 性格 & 外見' : '👤 性格 & 外見 — ラグナ: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👤 性格 & 外見' : '👤 性格 & 外見 — ラグナ: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}'}</div>
         <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
@@ -935,7 +935,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             '極めて直観的で霊的。夢が鮮明で予知的かもしれません。他人の苦しみに深く共感し、自己と他者の境界が曖昧。芸術、瞑想、霊的修行で安定を見出します。'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">' + (isEasy ? '🌙 あなたの感情スタイル' : '🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}') + '</div>
+            <div class="interp-title">${isEasy ? '🌙 あなたの感情スタイル' : '🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}'}</div>
             <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
@@ -987,7 +987,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💰 私の財運' : '💰 財運') + '</div>
+        <div class="interp-title">${isEasy ? '💰 私の財運' : '💰 財運'}</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1054,7 +1054,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💍 私の配偶者' : '💕 配偶者 & 結婚運 — 7宮: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💍 私の配偶者' : '💕 配偶者 & 結婚運 — 7宮: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}'}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1098,7 +1098,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💼 私の職業' : '💼 職業 & 社会的達成 — 10宮: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💼 私の職業' : '💼 職業 & 社会的達成 — 10宮: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}'}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1124,7 +1124,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🏥 私の健康' : '🏥 健康 — 弱い部位') + '</div>
+        <div class="interp-title">${isEasy ? '🏥 私の健康' : '🏥 健康 — 弱い部位'}</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>6宮に' + h6planets.map(p => p.name).join('、') + 'が位置しており、健康管理に特別な注意が必要です。' : ''}</div>
     </div>`;
 

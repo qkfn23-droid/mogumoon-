@@ -516,7 +516,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     let html = '';
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🕉️ Sie nach der Ehe: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 Lagna — Sie nach der Ehe: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '🕉️ Sie nach der Ehe: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 Lagna — Sie nach der Ehe: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}'}</div>
         <div class="interp-text">
             Navamsa Lagna steht in <strong>${SIGNS[d9LagnaSign]}</strong>. Dies zeigt Ihr wahres Selbst nach der Ehe und in der zweiten Lebenshälfte (ab 30+).
             ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1 und D9 Lagna stehen im gleichen Zeichen!</strong> Dies wird <strong>Vargottama</strong> genannt — äußerst kraftvoll. Ihr Wesen bleibt nach der Ehe unverändert, inneres und äußeres Selbst sind im Einklang.' : ''}
@@ -525,7 +525,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💍 Charakter des Ehepartners: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7. Haus — Charakter des Ehepartners: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💍 Charakter des Ehepartners: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7. Haus — Charakter des Ehepartners: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}'}</div>
         <div class="interp-text">
             Navamsa 7. Haus steht in <strong>${SIGNS[d9H7Sign]}</strong>, regiert von <strong>${RULER_NAMES[d9H7Ruler]}</strong>.<br><br>
             Dies zeigt die Kernpersönlichkeit Ihres Ehepartners — jemand mit der Energie von ${SIGNS[d9H7Sign]}.
@@ -534,7 +534,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💼 Lebensaufgabe (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10. Haus — Lebensaufgabe (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💼 Lebensaufgabe (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10. Haus — Lebensaufgabe (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}'}</div>
         <div class="interp-text">
             Navamsa 10. Haus steht in <strong>${SIGNS[d9H10Sign]}</strong>, regiert von <strong>${RULER_NAMES[d9H10Ruler]}</strong>.<br><br>
             Während das 10. Haus in D1 Ihre Karriere zeigt, offenbart das 10. Haus in D9 Ihre <strong>höhere Lebensaufgabe (Dharma)</strong> — die wahre Berufung, der Sie nach der Reife nachgehen.<br><br>
@@ -544,7 +544,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👔 Karriere des Ehepartners' : '👔 Karriere des Ehepartners — Abgeleitetes 10. Haus (D9 4. Haus): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👔 Karriere des Ehepartners' : '👔 Karriere des Ehepartners — Abgeleitetes 10. Haus (D9 4. Haus): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}'}</div>
         <div class="interp-text">
             <strong>Abgeleitetes Haus-Prinzip:</strong> Das 10. vom 7. (Ehepartner) = D9's 4. Haus zeigt die Karriere/soziale Tätigkeit Ihres Ehepartners.<br><br>
             D9 4. Haus steht in <strong>${SIGNS[d9H4Sign]}</strong>, regiert von <strong>${RULER_NAMES[d9H4Ruler]}</strong>.<br><br>
@@ -619,7 +619,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🧭 Spouse Direction' : '🧭 Richtung des Ehepartners — 6-Indikator-Analyse') + '</div>
+        <div class="interp-title">${isEasy ? '🧭 Spouse Direction' : '🧭 Richtung des Ehepartners — 6-Indikator-Analyse'}</div>
         <div class="interp-text">
             Die vedische Astrologie bestimmt die Richtung des Ehepartners durch Kombination mehrerer Indikatoren.<br><br>
             <strong>6 Indikatoren:</strong><br>
@@ -704,7 +704,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 Wo Sie Ihren Ehepartner treffen ' + (isEasy ? '— 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
+        <div class="interp-title">🤝 Wo Sie Ihren Ehepartner treffen ${isEasy ? '— 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}'}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Das Zeichen des 7. Hauses zeigt das Umfeld und die Umstände, unter denen Sie Ihren Ehepartner kennenlernen.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -713,7 +713,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🏛️ Familienhintergrund des Ehepartners' : '🏛️ Familienhintergrund des Ehepartners — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '🏛️ Familienhintergrund des Ehepartners' : '🏛️ Familienhintergrund des Ehepartners — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}'}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Upapada Lagna (UL) zeigt das familiäre Umfeld und die Erziehung Ihres Ehepartners.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -721,7 +721,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👤 Erster Eindruck des Ehepartners' : '👤 Erster Eindruck des Ehepartners — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👤 Erster Eindruck des Ehepartners' : '👤 Erster Eindruck des Ehepartners — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}'}</div>
         <div class="interp-text">
             Darapada (A7) zeigt, wie Ihr Ehepartner in der Welt erscheint — sein äußeres Bild und erster Eindruck.<br><br>
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -729,7 +729,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💎 Anziehungspunkt des Ehepartners ' + (isEasy ? '— Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
+        <div class="interp-title">💎 Anziehungspunkt des Ehepartners ${isEasy ? '— Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}'}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Venus im Navamsa zeigt den Kerncharme und den Liebesstil Ihres Ehepartners.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -899,7 +899,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '👤 Persönlichkeit & Erscheinung' : '👤 Persönlichkeit & Erscheinung — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}') + '</div>
+        <div class="interp-title">${isEasy ? '👤 Persönlichkeit & Erscheinung' : '👤 Persönlichkeit & Erscheinung — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}'}</div>
         <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
@@ -936,7 +936,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">' + (isEasy ? '🌙 Dein Emotionaler Stil' : '🌙 Inneres Selbst & Emotionen — Mond: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}') + '</div>
+            <div class="interp-title">${isEasy ? '🌙 Dein Emotionaler Stil' : '🌙 Inneres Selbst & Emotionen — Mond: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}'}</div>
             <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
@@ -988,7 +988,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💰 Mein Wohlstand' : '💰 Reichtums-Schicksal') + '</div>
+        <div class="interp-title">${isEasy ? '💰 Mein Wohlstand' : '💰 Reichtums-Schicksal'}</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1055,7 +1055,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💍 Mein Partner' : '💕 Ehepartner & Ehe-Schicksal — 7. Haus: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💍 Mein Partner' : '💕 Ehepartner & Ehe-Schicksal — 7. Haus: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}'}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1099,7 +1099,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '💼 Meine Karriere' : '💼 Karriere & Sozialer Erfolg — 10. Haus: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}') + '</div>
+        <div class="interp-title">${isEasy ? '💼 Meine Karriere' : '💼 Karriere & Sozialer Erfolg — 10. Haus: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}'}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1125,7 +1125,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">' + (isEasy ? '🏥 Meine Gesundheit' : '🏥 Gesundheit — Gefährdete Bereiche') + '</div>
+        <div class="interp-title">${isEasy ? '🏥 Meine Gesundheit' : '🏥 Gesundheit — Gefährdete Bereiche'}</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + isEasy ? '' : h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
     </div>`;
 
