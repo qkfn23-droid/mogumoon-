@@ -877,7 +877,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     let wealthText = `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
     if (h2planets.length === 0) {
-        wealthText += 'No planets in the 2nd house — wealth accumulation is steady but stable without major fluctuations. ';
+        wealthText += 'Sin planetas en la casa 2 — la acumulacion de riqueza es constante y estable sin grandes fluctuaciones. ';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
@@ -897,7 +897,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     wealthText += `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
     if (h11planets.length === 0) {
-        wealthText += 'No planets in the 11th house — income is stable but without major fluctuations.';
+        wealthText += 'Sin planetas en la casa 11 — los ingresos son estables sin grandes fluctuaciones.';
     } else {
         h11planets.forEach(p => {
             const pIncome = {
@@ -1357,7 +1357,7 @@ function renderForeign(positions, lagnaSign) {
 
     let text = '<strong>9th House (Foreign Travel · Fortune · Higher Education):</strong><br>';
     if (h9.length === 0) {
-        text += 'No planets in the 9th house — foreign travel exists but there is no particularly strong connection.';
+        text += 'Sin planetas en la casa 9 — hay viajes al extranjero pero sin conexion particularmente fuerte.';
     } else {
         h9.forEach(p => {
             const f9 = { Sun: 'Father has foreign connections. Government/official overseas trips.', Moon: 'Emotionally enjoys foreign travel. Popularity abroad.', Mars: 'Adventure/challenges abroad. Military/technology-related foreign activities.', Mercury: 'Study abroad/business success! Multilingual abilities.', Jupiter: 'Great fortune abroad! Successful study/immigration. Meeting a foreign teacher.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Hardship then success abroad. Long-term foreign residence.', Rahu: 'Strong indicator of foreign migration! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connections. Spiritual pilgrimage.' };
@@ -1367,7 +1367,7 @@ function renderForeign(positions, lagnaSign) {
 
     text += '<br><strong>12th House (Foreign Settlement · Immigration · Expenses):</strong><br>';
     if (h12.length === 0) {
-        text += 'No planets in the 12th house — domestic residence is more natural than foreign settlement.';
+        text += 'Sin planetas en la casa 12 — la residencia domestica es mas natural que el asentamiento en el extranjero.';
     } else {
         h12.forEach(p => {
             const f12 = { Sun: 'Finding identity abroad. Government-related foreign postings.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT activities. Overseas education.', Jupiter: 'Spiritual growth abroad. Charitable activities. Foreign universities.', Venus: 'Luxury and pleasure abroad. Overseas artistic activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Definitive indicator of foreign immigration! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
@@ -2058,8 +2058,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const edu4 = {Sun:'Escuela prestigiosa. Educacion autoritativa',Moon:'Ambiente de aprendizaje comodo. Fuerte educacion en casa',Mars:'Aprendizaje competitivo. Fuerte en deportes/tecnologia',Mercury:'Mejor posicion! Habilidad academica sobresaliente',Jupiter:'Ambiente educativo rico. Buenos profesores',Venus:'Educacion artistica. Escuela hermosa',Saturn:'Educacion dificil pero conocimiento profundo al superar',Rahu:'Educacion no convencional. Escuela extranjera',Ketu:'Menos interes en educacion formal. Aprendizaje intuitivo'};
             d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
         } else html += 'Sin planetas en casa 4.<br>';
-        if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Sabiduria) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>Se espera alto logro academico!</strong> Posgrado/doctorado/estudios en el extranjero posibles.' : 'Growth through learning. Jupiter blessing in house ' + jH + '.') + '<br>'; }
-        if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Habilidad intelectual sobresaliente!</strong> Talento en matematicas, idiomas, analisis.' : 'Intellectual ability expressed in house ' + mH + '.') + '<br>'; }
+        if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Sabiduria) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>Se espera alto logro academico!</strong> Posgrado/doctorado/estudios en el extranjero posibles.' : 'Crecimiento por aprendizaje. Bendicion de Jupiter en casa ' + jH + '.') + '<br>'; }
+        if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Habilidad intelectual sobresaliente!</strong> Talento en matematicas, idiomas, analisis.' : 'Habilidad intelectual en casa ' + mH + '.') + '<br>'; }
         html += '</div></div>';
 
     } else if (division === 30) {
