@@ -2095,6 +2095,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         function deityTag(d) {
             if (!d.deity) return '';
             const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            if (isEasy) {
+                return ' — <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '좋은 기운이 함께해요 ✨' : '주의가 필요한 기운이에요 ⚡') + '</span>';
+            }
             return ' — 수호신: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span>';
         }
 
@@ -2114,9 +2117,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             : '<strong>D60 라그나: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (지배성: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
-            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나를 수호합니다. ' + lagnaD.deity.desc + ' — 전생의 공덕이 이번 생 전체를 보호하며, 삶에서 자연스럽게 좋은 기회가 찾아옵니다.' :
-                '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나에 영향을 줍니다. ' + lagnaD.deity.desc + ' — 이 카르마적 도전이 이번 생의 성격과 운명에 각인되어 있지만, 극복하면 더 큰 성장이 기다립니다.');
+            ch1 += '<br>' + (isEasy ?
+                (lagnaD.deity.nature === 'benefic' ?
+                    '전생에서 좋은 일을 많이 했기 때문에, 이번 생에서도 자연스럽게 좋은 기회가 찾아옵니다. 당신의 존재 자체가 보호받고 있어요.' :
+                    '전생에서 풀지 못한 숙제가 남아있어요. 이번 생의 성격과 운명에 영향을 주지만, 이걸 극복하면 오히려 더 큰 성장이 기다립니다.') :
+                (lagnaD.deity.nature === 'benefic' ?
+                    '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나를 수호합니다. ' + lagnaD.deity.desc + ' — 전생의 공덕이 이번 생 전체를 보호하며, 삶에서 자연스럽게 좋은 기회가 찾아옵니다.' :
+                    '<strong>' + lagnaD.deity.ko + '</strong>이(가) 라그나에 영향을 줍니다. ' + lagnaD.deity.desc + ' — 이 카르마적 도전이 이번 생의 성격과 운명에 각인되어 있지만, 극복하면 더 큰 성장이 기다립니다.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? '이(가) 전생의 핵심 위치에 있습니다 — 전생의 카르마가 이 행성에 집중되어 있습니다.' : '이(가) D60 라그나에 위치 — 전생의 핵심 카르마가 이 행성에 집중되어 있습니다.');
         html += subChapter('🪐', '영혼의 정체성 — 전생에서 누구였는가', ch1);
@@ -2128,9 +2135,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = (isEasy ? '<strong>태양의 전생 기억</strong>' : '<strong>D60 태양: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
             ch2 += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>' + (sunD.deity.nature === 'benefic' ?
-                    '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 영혼의 목적을 올바르게 추구했으며, 이번 생에서도 자아 실현이 자연스럽게 이루어집니다.' :
-                    '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 자아와 권위에 대한 도전이 있었으며, 이번 생에서 진정한 자아를 찾는 것이 영혼의 과제입니다.');
+                ch2 += '<br>' + (isEasy ?
+                    (sunD.deity.nature === 'benefic' ?
+                        '전생에서 "나는 누구인가"를 올바르게 추구했기 때문에, 이번 생에서도 하고 싶은 일을 찾고 이루는 게 자연스럽게 됩니다. 자신감을 가져도 좋아요!' :
+                        '전생에서 "나는 누구인가"에 대한 혼란이 있었어요. 이번 생에서 진짜 내가 원하는 것, 진짜 나를 찾아가는 과정이 중요한 과제입니다. 하지만 그 과정 자체가 당신을 성장시켜요.') :
+                    (sunD.deity.nature === 'benefic' ?
+                        '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 영혼의 목적을 올바르게 추구했으며, 이번 생에서도 자아 실현이 자연스럽게 이루어집니다.' :
+                        '태양의 수호신 <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. 전생에서 자아와 권위에 대한 도전이 있었으며, 이번 생에서 진정한 자아를 찾는 것이 영혼의 과제입니다.'));
             }
             html += subChapter('☉', '영혼의 목적 — 왜 태어났는가', ch2);
         }
@@ -2142,9 +2153,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = (isEasy ? '<strong>달의 전생 기억</strong>' : '<strong>D60 달: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
             ch3 += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>' + (moonD.deity.nature === 'benefic' ?
-                    '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생에서 마음이 평화로웠으며, 이번 생에서도 감정적 안정감과 강한 직관을 타고났습니다.' :
-                    '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생의 감정적 상처가 무의식에 남아있습니다. 이 패턴을 인식하고 치유하는 것이 이번 생의 감정적 과제입니다. 명상과 물 근처의 휴식이 도움됩니다.');
+                ch3 += '<br>' + (isEasy ?
+                    (moonD.deity.nature === 'benefic' ?
+                        '전생에서 마음이 평온했기 때문에, 이번 생에서도 감정적으로 안정적이고 직관이 강합니다. 느낌이 오면 대부분 맞아요 — 그 감을 믿어도 됩니다.' :
+                        '전생에서 감정적으로 힘든 일을 겪었던 흔적이 마음 깊은 곳에 남아있어요. 이유 없이 불안하거나, 특정 상황에서 감정이 확 올라오는 건 이것 때문일 수 있어요. 명상이나 물가에서 쉬는 게 마음을 치유하는 데 큰 도움이 됩니다.') :
+                    (moonD.deity.nature === 'benefic' ?
+                        '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생에서 마음이 평화로웠으며, 이번 생에서도 감정적 안정감과 강한 직관을 타고났습니다.' :
+                        '달의 수호신 <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. 전생의 감정적 상처가 무의식에 남아있습니다. 이 패턴을 인식하고 치유하는 것이 이번 생의 감정적 과제입니다. 명상과 물 근처의 휴식이 도움됩니다.'));
             }
             html += subChapter('☽', '감정의 기억 — 전생의 무의식 패턴', ch3);
         }
@@ -2194,9 +2209,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ 금성 (사랑의 행성)</strong> → ' + (isEasy ? houseThemes[venH] : 'D60 ' + venH + '궁 (' + houseThemes[venH] + ')') + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                '금성이 길신 <strong>' + venD.deity.ko + '</strong>의 보호 아래 있습니다. 전생에서 사랑을 올바르게 실천했으며, 이번 생에서도 아름다운 사랑이 기다립니다. ' + venD.deity.desc :
-                '금성이 흉신 <strong>' + (venD.deity?venD.deity.ko:'') + '</strong>의 영향 아래 있습니다. 전생에서 사랑에 대한 도전이 있었으며, 이번 생에서 진정한 사랑의 의미를 배우는 것이 과제입니다. ' + (venD.deity?venD.deity.desc:'');
+            ch4 += isEasy ?
+                (venD.deity && venD.deity.nature === 'benefic' ?
+                    '전생에서 사랑을 진심으로 했기 때문에, 이번 생에서도 아름다운 사랑이 기다려요. 사랑의 행성이 좋은 기운의 보호를 받고 있습니다.' :
+                    '전생에서 사랑과 관련해 풀지 못한 과제가 있어요. 이번 생에서 진짜 사랑이 뭔지 배워가는 과정이 중요합니다. 그 과정이 당신을 더 깊은 사람으로 만들어요.') :
+                (venD.deity && venD.deity.nature === 'benefic' ?
+                    '금성이 길신 <strong>' + venD.deity.ko + '</strong>의 보호 아래 있습니다. 전생에서 사랑을 올바르게 실천했으며, 이번 생에서도 아름다운 사랑이 기다립니다. ' + venD.deity.desc :
+                    '금성이 흉신 <strong>' + (venD.deity?venD.deity.ko:'') + '</strong>의 영향 아래 있습니다. 전생에서 사랑에 대한 도전이 있었으며, 이번 생에서 진정한 사랑의 의미를 배우는 것이 과제입니다. ' + (venD.deity?venD.deity.desc:''));
         }
 
         // 라후-케투 축 (1-7궁이면 전생 인연)
@@ -2236,9 +2255,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ 토성 (카르마의 주인)</strong> → ' + (isEasy ? houseThemes[satH] : 'D60 ' + satH + '궁 (' + houseThemes[satH] + ')') + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ?
-                '토성이 길신 아래에 있는 것은 <strong>매우 희귀한 축복</strong>입니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 직업적 시련을 줄여줍니다.' :
-                '토성이 흉신 아래에 있어 직업적 영역에서 <strong>전생의 무거운 카르마</strong>가 있습니다. ' + (satD.deity?satD.deity.desc:'') + '. 인내와 봉사, 만트라(Om Shanaishcharaya Namaha)로 이 업보를 녹이세요.';
+            ch5 += isEasy ?
+                (satD.deity && satD.deity.nature === 'benefic' ?
+                    '이건 <strong>매우 드문 축복</strong>이에요! 전생에서 힘든 일을 참고 견뎌낸 덕분에, 이번 생에서는 직업적으로 큰 시련이 줄어듭니다. 일하면서 겪는 어려움이 남들보다 가벼울 거예요.' :
+                    '직업과 관련해서 전생에서 가져온 <strong>무거운 숙제</strong>가 있어요. 일에서 어려움을 겪을 수 있지만, 꾸준히 노력하고 다른 사람을 돕는 것이 이 숙제를 푸는 열쇠입니다.') :
+                (satD.deity && satD.deity.nature === 'benefic' ?
+                    '토성이 길신 아래에 있는 것은 <strong>매우 희귀한 축복</strong>입니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 직업적 시련을 줄여줍니다.' :
+                    '토성이 흉신 아래에 있어 직업적 영역에서 <strong>전생의 무거운 카르마</strong>가 있습니다. ' + (satD.deity?satD.deity.desc:'') + '. 인내와 봉사, 만트라(Om Shanaishcharaya Namaha)로 이 업보를 녹이세요.');
         }
         if (d60H10planets.length > 0) {
             ch5 += '<br><br><strong>' + (isEasy ? '직업 자리의 행성:' : 'D60 10궁의 행성:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — 직업적 카르마가 이 행성에 집중되어 있습니다.';
@@ -2267,16 +2290,20 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const lagnaD2 = getDeity(lagnaSidereal);
         if (lagnaD2.deity) {
             const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            ch7 += '<div style="padding:4px 0;">⬆ 라그나 → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+            ch7 += isEasy ?
+                '<div style="padding:4px 0;">⬆ 나 자신 → <span style="color:' + lc + ';font-weight:700;">' + (lagnaD2.deity.nature === 'benefic' ? '좋은 기운 ✨' : '주의 기운 ⚡') + '</span></div>' :
+                '<div style="padding:4px 0;">⬆ 라그나 → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
         }
         positions.forEach(p => {
             const pD = getDeity(p.sidereal);
             if (pD.deity) {
                 const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+                ch7 += isEasy ?
+                    '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <span style="color:' + c + ';font-weight:700;">' + (pD.deity.nature === 'benefic' ? '좋은 기운 ✨' : '주의 기운 ⚡') + '</span></div>' :
+                    '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
             }
         });
-        html += subChapter('🕉️', '행성별 수호신 목록', ch7);
+        html += subChapter(isEasy ? '✨' : '🕉️', isEasy ? '행성별 기운 한눈에 보기' : '행성별 수호신 목록', ch7);
 
         // ─── 소챕터 8: 종합 카르마 판단 ───
         const beneficCount = positions.filter(p => {
@@ -2288,17 +2315,29 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return pD.deity && pD.deity.nature === 'malefic';
         });
 
-        let ch8 = '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
+        let ch8 = isEasy ?
+            '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개가 좋은 기운</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개가 주의 기운</strong><br><br>' :
+            '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
         if (beneficCount >= 7) {
-            ch8 += '🌟 <strong>매우 강한 전생 공덕.</strong> 파라샤라는 이런 차트를 "신들의 축복을 받은 영혼"이라 했습니다. 대부분의 행성이 길신 아래 있어 이번 생에서 자연스럽게 좋은 결과를 얻습니다.';
+            ch8 += isEasy ?
+                '🌟 <strong>전생에서 정말 좋은 일을 많이 했어요!</strong> 거의 모든 행성이 좋은 기운 아래 있어서, 이번 생에서 자연스럽게 좋은 결과를 얻습니다. 타고난 행운이 강한 편이에요.' :
+                '🌟 <strong>매우 강한 전생 공덕.</strong> 파라샤라는 이런 차트를 "신들의 축복을 받은 영혼"이라 했습니다. 대부분의 행성이 길신 아래 있어 이번 생에서 자연스럽게 좋은 결과를 얻습니다.';
         } else if (beneficCount >= 5) {
-            ch8 += '✨ <strong>전생의 공덕이 풍부합니다.</strong> 길신이 우세하여 삶의 많은 영역에서 보호받습니다.';
-            if (maleficPlanets.length > 0) ch8 += ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 카르마적 도전이 있으니 해당 행성의 만트라와 자선을 실천하세요.';
+            ch8 += isEasy ?
+                '✨ <strong>전생에서 쌓은 좋은 기운이 풍부해요.</strong> 삶의 많은 영역에서 보호받고 있습니다.' :
+                '✨ <strong>전생의 공덕이 풍부합니다.</strong> 길신이 우세하여 삶의 많은 영역에서 보호받습니다.';
+            if (maleficPlanets.length > 0) ch8 += isEasy ?
+                ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> 관련 영역에서는 조금 더 노력이 필요해요.' :
+                ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 카르마적 도전이 있으니 해당 행성의 만트라와 자선을 실천하세요.';
         } else if (beneficCount >= 3) {
-            ch8 += '⚖️ <strong>전생 카르마의 균형 상태.</strong> 길흉이 섞여 있어 좋은 일과 도전이 교차합니다.';
-            if (maleficPlanets.length > 0) ch8 += '<br>주의할 행성: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
+            ch8 += isEasy ?
+                '⚖️ <strong>좋은 기운과 도전의 기운이 반반이에요.</strong> 인생에서 좋은 일과 힘든 일이 번갈아 찾아옵니다.' :
+                '⚖️ <strong>전생 카르마의 균형 상태.</strong> 길흉이 섞여 있어 좋은 일과 도전이 교차합니다.';
+            if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? '특히 주의할 행성: ' : '주의할 행성: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
-            ch8 += '🔥 <strong>카르마 정산의 생.</strong> 전생에서 많은 도전을 가져왔지만, 파라샤라는 "가장 무거운 카르마를 가진 영혼이 가장 큰 성장을 한다"고 했습니다. 만트라 수행과 자선이 특히 중요합니다.';
+            ch8 += isEasy ?
+                '🔥 <strong>이번 생은 전생의 숙제를 풀러 온 거예요.</strong> 도전이 많지만, 가장 무거운 숙제를 받은 사람이 가장 크게 성장합니다. 꾸준한 노력과 다른 사람을 돕는 것이 특히 중요해요.' :
+                '🔥 <strong>카르마 정산의 생.</strong> 전생에서 많은 도전을 가져왔지만, 파라샤라는 "가장 무거운 카르마를 가진 영혼이 가장 큰 성장을 한다"고 했습니다. 만트라 수행과 자선이 특히 중요합니다.';
         }
         html += subChapter('📊', '종합 카르마 판단', ch8);
 
