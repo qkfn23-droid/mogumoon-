@@ -1541,6 +1541,8 @@ function renderEducation(positions, lagnaSign) {
             const h5p = { Sun: '리더십/정치학 분야 뛰어남', Moon: '예술/심리학 재능', Mars: '공학/기술/체육 재능', Mercury: '수학/언어/비즈니스 천재', Jupiter: '최고의 배치! 학자/교수/연구자', Venus: '예술/디자인/음악 재능', Saturn: '늦은 학업이지만 깊이 있는 연구' };
             text += isEasy ? `${h5p[p.id] || '학업에 영향'}. ` : `${p.name}: ${h5p[p.id] || '학업에 영향'}. `;
         });
+    } else {
+        text += isEasy ? '특별히 강한 학업 에너지는 없지만, 꾸준한 노력으로 좋은 결과를 얻을 수 있어요.' : '5궁에 행성이 없어 5궁주의 위치가 학업의 열쇠입니다.';
     }
 
     document.getElementById('educationWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
