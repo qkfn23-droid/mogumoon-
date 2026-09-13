@@ -1332,7 +1332,7 @@ function renderPlanetHouse(positions, lagnaSign) {
         const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
         html += `<div class="interp-card">
             <div class="interp-title">${isEasy ? (houseArea[house]||'') : p.symbol + ' ' + p.name + ' → ' + house + hSuffix + ' House (' + SIGNS[p.sign] + ')'}</div>
-            <div class="interp-text">${desc}</div>
+            <div class="interp-text">${isEasy ? desc.replace(/^\d+\w{0,4}\s*[宮House Casa Haus Maison]?:?\s*/i, '') : desc}</div>
         </div>`;
     });
 
@@ -2091,7 +2091,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>D2 2e Maison (Richesse Accumulee) — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
             const wealth = {Sun:'Richesse par autorite et statut',Moon:'Richesse par activites publiques',Mars:'Propriete, technologie, domaines competitifs',Mercury:'Affaires, activite intellectuelle, communication',Jupiter:'Education, droit, religion — richesse abondante',Venus:'Art, mode, produits de luxe',Saturn:'Accumulation lente mais constante. Stable apres la quarantaine',Rahu:'Methodes non conventionnelles, liees a letranger',Ketu:'Detache du materiel. Poursuit des valeurs spirituelles'};
-            d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
+            d2H2planets.forEach(p => { html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
         } else html += 'Pas de planetes en 2e — la position du maitre est la cle.<br>';
         html += '</div></div>';
 

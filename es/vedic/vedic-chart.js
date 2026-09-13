@@ -1332,7 +1332,7 @@ function renderPlanetHouse(positions, lagnaSign) {
         const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
         html += `<div class="interp-card">
             <div class="interp-title">${isEasy ? (houseArea[house]||'') : p.symbol + ' ' + p.name + ' → ' + house + hSuffix + ' House (' + SIGNS[p.sign] + ')'}</div>
-            <div class="interp-text">${desc}</div>
+            <div class="interp-text">${isEasy ? desc.replace(/^\d+\w{0,4}\s*[宮House Casa Haus Maison]?:?\s*/i, '') : desc}</div>
         </div>`;
     });
 
@@ -1435,7 +1435,7 @@ function renderForeign(positions, lagnaSign) {
 
     let text = '<strong>9th House (Foreign Travel · Fortune · Higher Education):</strong><br>';
     if (h9.length === 0) {
-        text += 'Sin planetas en la casa 9 — hay viajes al extranjero pero sin conexion particularmente fuerte.';
+        text += isEasy ? '' : 'Sin planetas en la casa 9 — hay viajes al extranjero pero sin conexion particularmente fuerte.';
     } else {
         h9.forEach(p => {
             const f9 = { Sun: 'Father has foreign connections. Government/official overseas trips.', Moon: 'Emotionally enjoys foreign travel. Popularity abroad.', Mars: 'Adventure/challenges abroad. Military/technology-related foreign activities.', Mercury: 'Study abroad/business success! Multilingual abilities.', Jupiter: 'Great fortune abroad! Successful study/immigration. Meeting a foreign teacher.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Hardship then success abroad. Long-term foreign residence.', Rahu: 'Strong indicator of foreign migration! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connections. Spiritual pilgrimage.' };
@@ -1445,7 +1445,7 @@ function renderForeign(positions, lagnaSign) {
 
     text += '<br><strong>12th House (Foreign Settlement · Immigration · Expenses):</strong><br>';
     if (h12.length === 0) {
-        text += 'Sin planetas en la casa 12 — la residencia domestica es mas natural que el asentamiento en el extranjero.';
+        text += isEasy ? '' : 'Sin planetas en la casa 12 — la residencia domestica es mas natural que el asentamiento en el extranjero.';
     } else {
         h12.forEach(p => {
             const f12 = { Sun: 'Finding identity abroad. Government-related foreign postings.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT activities. Overseas education.', Jupiter: 'Spiritual growth abroad. Charitable activities. Foreign universities.', Venus: 'Luxury and pleasure abroad. Overseas artistic activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Definitive indicator of foreign immigration! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
@@ -1780,7 +1780,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (benefics.length > 0) html += 'Benefico en casa 5 — bendecido con hijos.<br>';
         if (malefics.length > 0) html += 'Malefico en casa 5 — desafios con hijos.<br>';
-        if (d7_5planets.length === 0) html += 'Sin planetas en casa 5 — revise la posicion del señor de casa 5.';
+        if (d7_5planets.length === 0) html += isEasy ? '' : 'Sin planetas en casa 5 — revise la posicion del señor de casa 5.';
         html += '</div></div>';
 
     } else if (division === 12) {
@@ -2091,8 +2091,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>D2 Casa 2 (Riqueza Acumulada) — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
             const wealth = {Sun:'Riqueza por autoridad y estatus',Moon:'Riqueza por actividades publicas',Mars:'Propiedad, tecnologia, campos competitivos',Mercury:'Negocios, actividad intelectual, comunicacion',Jupiter:'Educacion, derecho, religion — riqueza abundante',Venus:'Arte, moda, articulos de lujo',Saturn:'Acumulacion lenta pero constante. Estable despues de mediana edad',Rahu:'Metodos no convencionales, relacionados con el extranjero',Ketu:'Desapegado de lo material. Persigue valores espirituales'};
-            d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
-        } else html += 'Sin planetas en casa 2 — la posicion del señor de casa 2 es clave.<br>';
+            d2H2planets.forEach(p => { html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
+        } else html += isEasy ? '' : 'Sin planetas en casa 2 — la posicion del señor de casa 2 es clave.<br>';
         html += '</div></div>';
 
     } else if (division === 3) {
@@ -2106,7 +2106,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (d3_3planets.length > 0) {
             const bro = {Sun:'Hermano menor tiene liderazgo y autoridad',Moon:'Emocionalmente cercano al hermano menor',Mars:'Hermano menor activo y valiente. Posibles conflictos',Mercury:'Hermano menor inteligente con buena comunicacion',Jupiter:'Hermano menor sabio que trae buena fortuna',Venus:'Hermano menor atractivo y artistico',Saturn:'Dificultades con hermano menor. Puede haber diferencia de edad',Rahu:'Hermano menor unico o conexion extranjera',Ketu:'Distancia con hermano menor. Conexion espiritual'};
             d3_3planets.forEach(p => { html += '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
-        } else html += 'Sin planetas en casa 3 — revise la posicion del señor de casa 3.<br>';
+        } else html += isEasy ? '' : 'Sin planetas en casa 3 — revise la posicion del señor de casa 3.<br>';
         html += '</div></div>';
 
     } else if (division === 4) {
@@ -2120,7 +2120,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Edificios del gobierno o vivienda prestigiosa',Moon:'Casa hermosa. Cerca del agua. Influencia de la madre',Mars:'Nueva construccion. Posibles disputas de propiedad',Mercury:'Propiedad comercial. Multiples propiedades',Jupiter:'Casa espaciosa y abundante! Mejor fortuna inmobiliaria',Venus:'Casa lujosa. Interior hermoso',Saturn:'Casa antigua. Necesita reparacion. Estable despues de mediana edad',Rahu:'Propiedad en el extranjero. Vivienda no convencional',Ketu:'Indiferente a la propiedad. Prefiere espacio espiritual'};
             d4_4planets.forEach(p => { html += '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
-        } else html += 'Sin planetas en casa 4 — la posicion del señor de casa 4 es clave.<br>';
+        } else html += isEasy ? '' : 'Sin planetas en casa 4 — la posicion del señor de casa 4 es clave.<br>';
         html += '</div></div>';
 
     } else if (division === 24) {
@@ -2137,7 +2137,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (d24_4planets.length > 0) {
             const edu4 = {Sun:'Escuela prestigiosa. Educacion autoritativa',Moon:'Ambiente de aprendizaje comodo. Fuerte educacion en casa',Mars:'Aprendizaje competitivo. Fuerte en deportes/tecnologia',Mercury:'Mejor posicion! Habilidad academica sobresaliente',Jupiter:'Ambiente educativo rico. Buenos profesores',Venus:'Educacion artistica. Escuela hermosa',Saturn:'Educacion dificil pero conocimiento profundo al superar',Rahu:'Educacion no convencional. Escuela extranjera',Ketu:'Menos interes en educacion formal. Aprendizaje intuitivo'};
             d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
-        } else html += 'Sin planetas en casa 4.<br>';
+        } else html += isEasy ? '' : 'Sin planetas en casa 4.<br>';
         if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Sabiduria) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>Se espera alto logro academico!</strong> Posgrado/doctorado/estudios en el extranjero posibles.' : 'Crecimiento por aprendizaje. Bendicion de Jupiter en casa ' + jH + '.') + '<br>'; }
         if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Habilidad intelectual sobresaliente!</strong> Talento en matematicas, idiomas, analisis.' : 'Habilidad intelectual en casa ' + mH + '.') + '<br>'; }
         html += '</div></div>';
@@ -2162,7 +2162,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>D30 Casa 8 (Peligro) — ' + SIGNS[d30_8sign] + ':</strong><br>';
         if (d30_8planets.length > 0) {
             d30_8planets.forEach(p => { html += '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaucion ante peligro/accidentes. Seguro y chequeos importantes.' : 'Protegido en crisis.') + '<br>'; });
-        } else html += 'Sin planetas en casa 8 — bajo riesgo de peligro.<br>';
+        } else html += isEasy ? '' : 'Sin planetas en casa 8 — bajo riesgo de peligro.<br>';
         html += '</div></div>';
 
     } else if (division === 40) {

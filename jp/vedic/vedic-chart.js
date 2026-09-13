@@ -1330,7 +1330,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 
         html += `<div class="interp-card">
             <div class="interp-title">${p.symbol} ${p.name} → ${house}宮 (${SIGNS[p.sign]})</div>
-            <div class="interp-text">${desc}</div>
+            <div class="interp-text">${isEasy ? desc.replace(/^\d+\w{0,4}\s*[宮House Casa Haus Maison]?:?\s*/i, '') : desc}</div>
         </div>`;
     });
 
@@ -1432,7 +1432,7 @@ function renderForeign(positions, lagnaSign) {
 
     let text = '<strong>9宮 (海外旅行・幸運・高等教育):</strong><br>';
     if (h9.length === 0) {
-        text += '9宮に惑星がなく、海外旅行はありますが特別に強い縁ではありません。';
+        text += isEasy ? '' : '9宮に惑星がなく、海外旅行はありますが特別に強い縁ではありません。';
     } else {
         h9.forEach(p => {
             const f9 = { Sun: '父親が海外関連。政府/公務の海外出張。', Moon: '海外旅行を感情的に楽しむ。海外での大衆人気。', Mars: '海外での冒険/挑戦。軍事/技術関連の海外活動。', Mercury: '海外留学/ビジネスの成功！多言語能力。', Jupiter: '海外で大きな幸運！留学/移民の成功。海外で師匠に出会う。', Venus: '海外でのロマンス。芸術/ファッション関連の海外活動。', Saturn: '海外での苦労の後に成功。長期海外滞在。', Rahu: '海外移住の強力な指標！外国文化に深くはまる。', Ketu: '前世からの海外の縁。霊的巡礼。' };
@@ -1442,7 +1442,7 @@ function renderForeign(positions, lagnaSign) {
 
     text += '<br><strong>12宮 (海外定住・移民・支出):</strong><br>';
     if (h12.length === 0) {
-        text += '12宮に惑星がなく、海外定住よりは国内居住が自然です。';
+        text += isEasy ? '' : '12宮に惑星がなく、海外定住よりは国内居住が自然です。';
     } else {
         h12.forEach(p => {
             const f12 = { Sun: '海外でのアイデンティティ探し。政府関連の海外派遣。', Moon: '海外居住の可能性が高い！海外で感情的安定。', Mars: '海外でのエネルギー消耗。海外投資/不動産。', Mercury: '海外ビジネス/IT関連活動。海外教育。', Jupiter: '海外での霊的成長。慈善活動。海外の大学。', Venus: '海外での贅沢と快楽。海外の芸術活動。', Saturn: '海外での厳しい労働。しかし長期的な定住。', Rahu: '海外移民の確定的指標！西洋文化への適応。', Ketu: '海外での霊的修行。孤独な海外生活。' };
@@ -2085,7 +2085,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>D2 2室（蓄積された財産） — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
             const wealth = {Sun:'権威と地位を通じた財産',Moon:'大衆的活動を通じた財産',Mars:'不動産、技術、競争分野',Mercury:'ビジネス、知的活動、通信',Jupiter:'教育、法律、宗教 — 豊かな財産',Venus:'芸術、ファッション、高級品',Saturn:'ゆっくりだが着実な蓄積。中年以降安定',Rahu:'非伝統的方法、海外関連',Ketu:'物質から離れる。霊的価値を追求'};
-            d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
+            d2H2planets.forEach(p => { html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
         } else html += '2室に惑星なし — 2室主の位置が財運の鍵。<br>';
         html += '</div></div>';
 
