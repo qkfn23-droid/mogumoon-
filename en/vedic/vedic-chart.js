@@ -30,20 +30,20 @@ function updateCatHeaders() {
         secDignity: e ? 'Your Strengths & Weaknesses' : 'Planetary Dignity (Exaltation·Debilitation·Own Sign)',
         secLucky: e ? 'Lucky Info' : 'Lucky Information',
         secRemedy: e ? 'Ways to Boost Your Luck' : 'Remedies & Strengthening',
-        secD10: e ? '💼 Career Details' : '💼 D10 Dashamsha (Career)',
-        secD2: e ? '💰 Wealth Details' : '💰 D2 Hora (Wealth)',
-        secD4: e ? '🏠 Property & Real Estate' : '🏠 D4 Chaturthamsha (Property)',
-        secD7: e ? '👶 Children' : '👶 D7 Saptamsha (Children)',
-        secD3: e ? '👫 Siblings & Courage' : '👫 D3 Drekkana (Siblings)',
-        secD12: e ? '👨‍👩‍👧 Parents' : '👨‍👩‍👧 D12 Dwadashamsha (Parents)',
-        secD40: e ? '👩 Maternal Heritage' : '👩 D40 Khavedamsha (Maternal)',
-        secD45: e ? '👨 Paternal Heritage' : '👨 D45 Akshavedamsha (Paternal)',
-        secD24: e ? '📚 Education' : '📚 D24 Chaturvimshamsha (Education)',
-        secD20: e ? '🙏 Spirituality' : '🙏 D20 Vimshamsha (Spirituality)',
-        secD27: e ? '💪 Physical Strength' : '💪 D27 Saptavimshamsha (Strength)',
-        secD16: e ? '🚗 Vehicles & Comfort' : '🚗 D16 Shodashamsha (Vehicles)',
-        secD30: e ? '⚠️ Health Caution Details' : '⚠️ D30 Trimshamsha (Disease)',
-        secForeign: e ? '✈️ Foreign & Immigration' : '✈️ Foreign & Immigration (9th·12th House)'
+        secD10: e ? 'Career Details' : 'D10 Dashamsha (Career)',
+        secD2: e ? 'Wealth Details' : 'D2 Hora (Wealth)',
+        secD4: e ? 'Property & Real Estate' : 'D4 Chaturthamsha (Property)',
+        secD7: e ? 'Children' : 'D7 Saptamsha (Children)',
+        secD3: e ? 'Siblings & Courage' : 'D3 Drekkana (Siblings)',
+        secD12: e ? 'Parents' : 'D12 Dwadashamsha (Parents)',
+        secD40: e ? 'Maternal Heritage' : 'D40 Khavedamsha (Maternal)',
+        secD45: e ? 'Paternal Heritage' : 'D45 Akshavedamsha (Paternal)',
+        secD24: e ? 'Education' : 'D24 Chaturvimshamsha (Education)',
+        secD20: e ? 'Spirituality' : 'D20 Vimshamsha (Spirituality)',
+        secD27: e ? 'Physical Strength' : 'D27 Saptavimshamsha (Strength)',
+        secD16: e ? 'Vehicles & Comfort' : 'D16 Shodashamsha (Vehicles)',
+        secD30: e ? 'Health Caution Details' : 'D30 Trimshamsha (Disease)',
+        secForeign: e ? 'Foreign & Immigration' : 'Foreign & Immigration (9th·12th House)'
     };
     for (var sid in secs) { var sel = document.getElementById(sid); if (sel) sel.textContent = secs[sid]; }
 }
@@ -2450,7 +2450,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Overall fortune:' : 'D4 10 house (전반적 fortune) — ' + SIGNS[d4_10sign] + ':') + '</strong><br>';
         if (d4_10planets.length > 0) {
             d4_10planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '전반적 fortune이 좋음!<br>' : 'fortune을 위해 effort이 필요하지만 growth의 기회.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefic 10 house position하여 전반적 fortune이 좋음!' : 'Malefic 10 house — fortune을 위해 effort이 필요하지만 growth의 기회.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Overall fortune is good!<br>' : 'Effort needed but growth opportunity.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefic 10 house position하여 전반적 fortune이 좋음!' : 'Malefic 10 house — fortune을 위해 effort이 필요하지만 growth의 기회.') + '<br>';
             });
         } else html += isEasy ? '' : '10 house no planets.<br>';
         html += '</div></div>';
@@ -2467,7 +2467,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Comfort/Happiness:' : 'D16 4 house (comfort/행복) — ' + SIGNS[d16_4sign] + ':') + '</strong><br>';
         if (d16_4planets.length > 0) {
             d16_4planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '물질적 comfort와 행복이 풍부!<br>' : '물질적 comfort를 위해 effort 필요.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '물질적 comfort와 행복이 풍부!<br>' : 'Effort needed for material comfort.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
             });
         } else html += isEasy ? 'Average material comfort.<br>' : '4 house no planets — 4 lord의 position가 행복의 열쇠.<br>';
 
@@ -2532,7 +2532,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Higher Education:' : 'D24 5 house (고등 education/지성) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '고등 education에서 뛰어난 성취!<br>' : '학업에서의 challenge이 growth으로 이어짐.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Outstanding higher education achievement!' : 'Academic challenges lead to growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '고등 education에서 뛰어난 성취!<br>' : 'Academic challenges lead to growth.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Outstanding higher education achievement!' : 'Academic challenges lead to growth.') + '<br>';
             });
         } else html += isEasy ? 'Steady effort brings good results.<br>' : '5 house no planets.<br>';
 
