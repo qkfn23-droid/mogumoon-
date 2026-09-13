@@ -745,7 +745,13 @@ function renderNakshatra(moonPos) {
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
 
-    const html = `
+    const html = isEasy ? `
+        <div class="nakshatra-card">
+            <div class="nakshatra-name">あなたの星: ${nak.ko || nak.name}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}"</div>
+            <div class="nakshatra-detail">${nak.desc}</div>
+        </div>
+    ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
             <div class="nakshatra-meaning">"${nak.meaning}" — 支配星: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
@@ -791,7 +797,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     let currentDate = new Date(birthDate);
 
     let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>ヴィムショータリ・ダシャー</strong> — 人生は9つの惑星が順番に支配する時期に分かれます。 <strong>大運（マハーダシャー）</strong>は大きな時期、<strong>小運（アンタルダシャー/ブクティ）</strong>はその中の細かい時期です。 月のナクシャトラ位置から計算されます。<br><br>';
-    html += '🌙 出生時の月： <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 最初のダシャー： <strong>' + DASHA_KO[startRuler] + '</strong> （残り： ' + remainingYears.toFixed(2) + '年）</div></div>';
+    html += isEasy ? '</div></div>' : '🌙 出生時の月： <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 最初のダシャー： <strong>' + DASHA_KO[startRuler] + '</strong> （残り： ' + remainingYears.toFixed(2) + '年）</div></div>';
 
     const periods = [];
     for (let i = 0; i < 9; i++) {

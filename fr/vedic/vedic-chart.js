@@ -746,7 +746,13 @@ function renderNakshatra(moonPos) {
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
 
-    const html = `
+    const html = isEasy ? `
+        <div class="nakshatra-card">
+            <div class="nakshatra-name">Votre Étoile: ${nak.ko || nak.name}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}"</div>
+            <div class="nakshatra-detail">${nak.desc}</div>
+        </div>
+    ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.name}</div>
             <div class="nakshatra-meaning">"${nak.meaning}" — Planète régnante: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
@@ -792,7 +798,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     let currentDate = new Date(birthDate);
 
     let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — La vie est divisée en périodes gouvernées par 9 planètes. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period within it. Calculé à partir de la position du nakshatra lunaire.<br><br>';
-    html += '🌙 Lune natale: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — Premier Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (restant: ' + remainingYears.toFixed(2) + ' ans)</div></div>';
+    html += isEasy ? '</div></div>' : '🌙 Lune natale: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — Premier Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (restant: ' + remainingYears.toFixed(2) + ' ans)</div></div>';
 
     const periods = [];
     for (let i = 0; i < 9; i++) {

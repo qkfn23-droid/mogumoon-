@@ -746,7 +746,13 @@ function renderNakshatra(moonPos) {
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
 
-    const html = `
+    const html = isEasy ? `
+        <div class="nakshatra-card">
+            <div class="nakshatra-name">Dein Stern: ${nak.ko || nak.name}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}"</div>
+            <div class="nakshatra-detail">${nak.desc}</div>
+        </div>
+    ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.name}</div>
             <div class="nakshatra-meaning">"${nak.meaning}" — Herrscherplanet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
