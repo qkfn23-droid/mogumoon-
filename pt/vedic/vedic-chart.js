@@ -532,7 +532,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👔 Carreira do cônjuge — 10ª derivada (D9 4ª Casa): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '👔 Carreira do cônjuge' : '👔 Carreira do cônjuge — 10ª derivada (D9 4ª Casa): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}') + '</div>
         <div class="interp-text">
             <strong>Princípio da casa derivada:</strong> A 10ª da 7ª (cônjuge) = a 4ª casa do D9 mostra a carreira/atividade social do seu cônjuge.<br><br>
             A 4ª casa do D9 está em <strong>${SIGNS[d9H4Sign]}</strong>, regida por <strong>${RULER_NAMES[d9H4Ruler]}</strong>.<br><br>
@@ -607,7 +607,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 Direção do cônjuge — Análise com 6 indicadores</div>
+        <div class="interp-title">' + (isEasy ? '🧭 Spouse Direction' : '🧭 Direção do cônjuge — Análise com 6 indicadores') + '</div>
         <div class="interp-text">
             A astrologia védica determina a direção do cônjuge combinando múltiplos indicadores.<br><br>
             <strong>6 Indicadores:</strong><br>
@@ -701,7 +701,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏛️ Origem familiar do cônjuge — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">' + (isEasy ? '🏛️ Origem familiar do cônjuge' : '🏛️ Origem familiar do cônjuge — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
         <div class="interp-text">
             O Upapada Lagna (UL) revela o ambiente familiar e a criação do seu cônjuge.<br><br>
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -709,7 +709,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Primeira impressão do cônjuge — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '👤 Primeira impressão do cônjuge' : '👤 Primeira impressão do cônjuge — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
         <div class="interp-text">
             O Darapada (A7) mostra como seu cônjuge aparece para o mundo — sua imagem externa e primeira impressão.<br><br>
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -1874,7 +1874,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return {idx: idx, deity: D60_DEITIES[idx] || null};
         }
         function deityTag(d) {
-            if (!d.deity) return '';
+            if (!d.deity || isEasy) return '';
             const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
             return ' — Divindade: <strong>' + d.deity.name + '</strong> <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benéfico' : 'Maléfico') + '</span>';
         }
@@ -1926,9 +1926,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         // Parashara quote
-        html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
+        if (!isEasy) { html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
         html += '📜 <strong>Parashara disse:</strong> "Shashtiamsa (D60) e a mais importante de todas as cartas divisionais. Planetas em divisoes de divindades beneficas dao bons resultados, maleficas dao maus."<br>';
-        html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>';
+        html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>'; }
 
         // Ch1: Soul Identity
         const lagnaD = getDeity(lagnaSidereal);
@@ -2046,7 +2046,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const pD = getDeity(p.sidereal);
             if (pD.deity) { const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f'; ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong> <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? 'B' : 'M') + '</span></div>'; }
         });
-        html += subChapter('🕉️', 'Lista de Divindades', ch7);
+        if (!isEasy) html += subChapter('🕉️', 'Lista de Divindades', ch7);
 
         // Ch8: Overall Judgment
         const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;

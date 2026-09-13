@@ -532,7 +532,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👔 Carrera del Cónyuge — Casa 10 Derivada (D9 Casa 4): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '👔 Carrera del Cónyuge' : '👔 Carrera del Cónyuge — Casa 10 Derivada (D9 Casa 4): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}') + '</div>
         <div class="interp-text">
             <strong>Principio de casa derivada:</strong> La casa 10 desde la 7 (cónyuge) = la casa 4 del D9 muestra la carrera/actividad social de tu cónyuge.<br><br>
             La casa 4 D9 está en <strong>${SIGNS[d9H4Sign]}</strong>, regida por <strong>${RULER_NAMES[d9H4Ruler]}</strong>.<br><br>
@@ -607,7 +607,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 Dirección del Cónyuge — Análisis de 6 Indicadores</div>
+        <div class="interp-title">' + (isEasy ? '🧭 Spouse Direction' : '🧭 Dirección del Cónyuge — Análisis de 6 Indicadores') + '</div>
         <div class="interp-text">
             La astrología védica determina la dirección del cónyuge combinando múltiples indicadores.<br><br>
             <strong>6 Indicadores:</strong><br>
@@ -701,7 +701,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏛️ Origen Familiar del Cónyuge — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">' + (isEasy ? '🏛️ Origen Familiar del Cónyuge' : '🏛️ Origen Familiar del Cónyuge — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
         <div class="interp-text">
             El Upapada Lagna (UL) revela el entorno familiar y la crianza de tu cónyuge.<br><br>
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -709,7 +709,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Primera Impresión del Cónyuge — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '👤 Primera Impresión del Cónyuge' : '👤 Primera Impresión del Cónyuge — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
         <div class="interp-text">
             El Darapada (A7) muestra cómo aparece tu cónyuge ante el mundo — su imagen externa y primera impresión.<br><br>
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -1874,7 +1874,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return {idx: idx, deity: D60_DEITIES[idx] || null};
         }
         function deityTag(d) {
-            if (!d.deity) return '';
+            if (!d.deity || isEasy) return '';
             const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
             return ' — Deidad: <strong>' + d.deity.name + '</strong> <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benefico' : 'Malefico') + '</span>';
         }
@@ -1926,9 +1926,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         // Parashara quote
-        html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
+        if (!isEasy) { html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
         html += '📜 <strong>Parashara dijo:</strong> "Shashtiamsa (D60) es la mas importante de todas las cartas divisionales. Planetas en divisiones de deidades beneficas dan buenos resultados, divisiones maleficas dan malos resultados."<br>';
-        html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>';
+        html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>'; }
 
         // Ch1: Soul Identity
         const lagnaD = getDeity(lagnaSidereal);
@@ -2046,7 +2046,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const pD = getDeity(p.sidereal);
             if (pD.deity) { const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f'; ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong> <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? 'B' : 'M') + '</span></div>'; }
         });
-        html += subChapter('🕉️', 'Lista de Deidades', ch7);
+        if (!isEasy) html += subChapter('🕉️', 'Lista de Deidades', ch7);
 
         // Ch8: Overall Judgment
         const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;
