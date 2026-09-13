@@ -888,12 +888,27 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // Helper: get house number from sign
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+    const isEasy = window.vedicMode === 'easy';
 
     let html = '';
 
     // ═══════════════════════════════════
     // 1. Personality & Appearance (1st House Lagna)
     // ═══════════════════════════════════
+    const lagnaEasy = [
+        'Action-oriented! Quick to decide with natural leadership qualities. You love new challenges. People often ask you to take the lead. A bit impatient, but incredibly driven.',
+        'You love stability. You enjoy comfort, beauty, and good food. Once you make up your mind, you see it through. Stubborn, but that makes you incredibly reliable.',
+        'Curious about everything! Great communicator and multi-talented. You pick up new information fast and draw people in with your wit. Sometimes scattered, but that\'s part of your charm.',
+        'Warm and emotional. You treasure family and read people\'s feelings well. A natural caregiver who makes everyone feel comfortable. Mood swings happen, but your empathy is your superpower.',
+        'Born leader! You have a big presence and naturally draw attention. Confident and magnetic. You crave recognition, but you\'re equally generous with love and praise.',
+        'Detail-oriented and analytical. You strive for perfection and care about health. Sharp observer who catches what others miss. You worry a bit much, but that means you\'re always prepared.',
+        'You seek harmony. Refined, charming, with excellent artistic taste. A natural peacemaker who hates conflict. Happiest when surrounded by beautiful things.',
+        'You have depth. Strong intuition that cuts through to the truth. Calm on the surface but intense emotions underneath. Life throws big changes at you, and each one makes you stronger.',
+        'Free spirit! You love travel and learning. Positive and philosophical. Interested in different cultures, with a broad worldview. Your humor lights up any room.',
+        'Ambitious. Patient and increasingly attractive with age. Systematically works toward goals. Even if you struggle early on, you\'re the late-bloomer type who eventually gets everything they want.',
+        'Unique. You think differently from everyone else and you\'re innovative. You hate being boxed in and want to change the world in your own way. Talented in tech or science.',
+        'Deeply sensitive. Strong intuition drawn to art and spirituality. Vivid dreams and rich imagination. You empathize deeply with others\' pain. Your inner world is richer than the outer one.'
+    ];
     const lagnaInterp = [
         'Aries Lagna ruled by Mars. Strong willpower and leadership, independent personality. Quick to act with a pioneering spirit. Sharp features with an active impression. Impulsive but courageous, excelling in competition.',
         'Taurus Lagna ruled by Venus. Seeks stability and abundance, loves sensory beauty. Soft appearance with an attractive voice. Values material security with exceptional artistic sense. Stubborn but reliable.',
@@ -910,14 +925,28 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Personality & Appearance — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
-        <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
+        <div class="interp-title">👤 ${isEasy ? 'Your Personality' : 'Personality & Appearance — Lagna: ' + SIGNS[lagnaSign] + ' ' + SIGN_SYMBOLS[lagnaSign]}</div>
+        <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
     // ═══════════════════════════════════
     // 2. Inner Self & Emotions (Moon Sign)
     // ═══════════════════════════════════
     if (moonPos) {
+        const moonEasy = [
+            'There\'s a fiery passion inside you. Emotions rise fast and cool down fast. When you\'re stressed, you need to move your body — exercise or outdoor activities work best.',
+            'You\'re emotionally very stable. You dislike sudden changes and find comfort in the familiar. Good food, music, and beautiful nature heal your soul. Once you give your heart, it rarely changes.',
+            'You process emotions through conversation. Talking things out makes you feel better. You\'re curious about everything and can\'t stand boredom. Your humor can lighten any mood.',
+            'You\'re extremely sensitive and empathetic. You absorb others\' emotions like a sponge. Home is your safe space, and your bond with your mother is strong. Cooking or decorating brings emotional peace.',
+            'Your emotional expression is dramatic and passionate. You deeply need to be loved and recognized. But you give love just as generously. Creative activities — art, writing, music — are your emotional medicine.',
+            'You tend to analyze your emotions. You worry a lot but are great at solving problems practically. Daily routines — morning exercise, healthy meals, organizing — bring emotional stability.',
+            'You find emotional balance in relationships. You feel lonely when alone and stabilize when with close friends or a partner. You deeply hate conflict and find peace in beauty and art.',
+            'Your emotions are as deep and intense as the ocean. You love deeply and never forget betrayal. Your intuition is incredibly strong — you read truth through eyes and actions, not words.',
+            'You\'re emotionally bright and optimistic. You love freedom and hate being constrained. Travel is your best emotional remedy. You process feelings through philosophical thinking.',
+            'You don\'t show emotions easily. Strong sense of responsibility, always putting duty first. You may have been mature beyond your years as a child, but you grow more emotionally open with age.',
+            'You have unique, unpredictable emotional patterns. You love in unconventional ways and see the bigger picture. You find emotional fulfillment in social causes and community activities.',
+            'You\'re extremely intuitive and spiritual. Your dreams are vivid and sometimes feel prophetic. You deeply empathize with others\' pain. Art, meditation, and being near water bring you peace.'
+        ];
         const moonInterp = [
             'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
             'Emotionally very stable, seeking comfort. Dislikes change and finds security in the familiar. Healed by good food, music, and nature. Once you give your heart, it rarely changes.',
@@ -933,8 +962,8 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 Inner Self & Emotions — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
-            <div class="interp-text">${moonInterp[moonPos.sign]}</div>
+            <div class="interp-title">🌙 ${isEasy ? 'Your Emotional Style' : 'Inner Self & Emotions — Moon: ' + SIGNS[moonPos.sign] + ' ' + SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
 
@@ -946,9 +975,9 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
+    let wealthText = isEasy ? '' : `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
     if (h2planets.length === 0) {
-        wealthText += 'No planets in the 2nd house — wealth accumulation is steady but stable without major fluctuations. ';
+        wealthText += isEasy ? 'Wealth accumulation is steady and stable. The type that builds up little by little. ' : 'No planets in the 2nd house — wealth accumulation is steady but stable without major fluctuations. ';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
@@ -962,13 +991,13 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Rahu': 'Earns money through unconventional methods. Sudden wealth from foreign, technology, or innovation sectors.',
                 'Ketu': 'Indifference to wealth. Values spiritual matters over material ones; watch for sudden losses.'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
+            wealthText += isEasy ? `${pWealth[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
         });
     }
 
-    wealthText += `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
     if (h11planets.length === 0) {
-        wealthText += 'No planets in the 11th house — income is stable but without major fluctuations.';
+        wealthText += isEasy ? 'Income is stable but without major fluctuations.' : 'No planets in the 11th house — income is stable but without major fluctuations.';
     } else {
         h11planets.forEach(p => {
             const pIncome = {
@@ -980,12 +1009,12 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Sun': 'Income through authority. Political connections bring wealth.',
                 'Moon': 'Income through public popularity. Fluctuating but steady flow.'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
+            wealthText += isEasy ? `${pIncome[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
         });
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 Wealth Fortune</div>
+        <div class="interp-title">💰 ${isEasy ? 'My Wealth Fortune' : 'Wealth Fortune'}</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1011,29 +1040,29 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'A spiritual and intuitive spouse. Connection with an artist or spiritual practitioner. A dreamy and romantic partner. Watch for idealization.'
     ];
 
-    let spouseText = spouseSign[h7sign];
+    let spouseText = (isEasy ? '' : '<strong>📐 Spouse Appearance & First Impression:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += '<br><br><strong>Planets in the 7th House:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planets in the 7th House:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
                 'Moon': 'An emotional and caring spouse. Marriage life with deep emotional connection.',
-                'Mars': 'Passionate but may have frequent arguments. A strong-willed spouse. Energetic relationship. (Watch for Kuja Dosha)',
+                'Mars': 'Passionate but may have frequent arguments. A strong-willed spouse. Energetic relationship.',
                 'Mercury': 'An intellectual spouse with great conversation. A good relationship as business partners too.',
                 'Jupiter': 'Most blessed placement! A wise and moral spouse. Happy married life. Luck through spouse.',
                 'Venus': 'A very attractive and loving spouse. Romantic married life. May enjoy luxury.',
                 'Saturn': 'Late marriage or spouse with significant age difference. Difficult early on but stable, long-lasting marriage.',
-                'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting. Beware of illusions.',
-                'Ketu': 'Detachment toward spouse. Past-life connection. Strong spiritual bond but distance in worldly relationships.'
+                'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting.',
+                'Ketu': 'Past-life connection. Strong spiritual bond but some distance in worldly relationships.'
             };
-            spouseText += `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
+            spouseText += isEasy ? `<br>${pH7[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
         });
     }
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
         const venusHouseInterp = {
             1: 'Attractive appearance. Enjoys romance and falls in love easily.',
             2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
@@ -1052,7 +1081,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 Spouse & Marriage Fortune — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 My Spouse' : '💕 Spouse & Marriage Fortune — 7th House: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1077,10 +1106,10 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
     ];
 
-    let careerText = `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += '<br><br><strong>Planets in the 10th House:</strong>';
+        careerText += isEasy ? '<br><br>' : '<br><br><strong>Planets in the 10th House:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
                 'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
@@ -1091,12 +1120,12 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Venus': ' Art, entertainment, fashion, beauty, diplomacy. Success in creative fields.',
                 'Saturn': ' Slow but certain success. Systematic organizations, architecture, civil service. Shines after middle age.'
             };
-            careerText += `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
+            careerText += isEasy ? `<br>${pCareer[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
         });
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 Career & Social Achievement — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 My Career' : '💼 Career & Social Achievement — 10th House: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1122,8 +1151,8 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 Health — Vulnerable Areas</div>
-        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
+        <div class="interp-title">${isEasy ? '🏥 My Health' : '🏥 Health — Vulnerable Areas'}</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? isEasy ? '<br><br>Special attention to health management is needed.' : '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
     </div>`;
 
     // ═══════════════════════════════════
