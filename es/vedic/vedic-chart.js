@@ -1820,18 +1820,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const houseThemes = ['','Yo','Riqueza/Valores','Comunicacion','Hogar/Paz','Creacion/Amor','Servicio/Pruebas','Relaciones','Transformacion','Sabiduria/Religion','Carrera/Sociedad','Deseos/Ganancias','Liberacion'];
 
         const pastLifeThemes = [
-            'Warrior, Leader — Wielded power, natural leadership and decisiveness imprinted on the soul.',
-            'Artist, Farmer — Worked with nature, deep instinct for stability and material beauty.',
-            'Scholar, Merchant — Lived by knowledge, versatility and curiosity remain. Natural talent for language.',
-            'Protector, Nurturer — Cared for others, deep sensitivity and maternal instinct. Strong home karma.',
-            'Royalty, Priest — Held high status, natural authority and dignity. Standing on stage is soul instinct.',
-            'Healer, Server — Practiced medicine or service, excellent analytical skills. Helping others is soul duty.',
-            'Diplomat, Artist — Pursued harmony and beauty, skilled in relationships. Partnership is core theme.',
-            'Practitioner, Alchemist — Underwent deep transformation, strong attraction to secrets and mystery.',
-            'Sage, Explorer — Sought truth, spiritual wisdom and adventurousness remain. Higher learning karma.',
-            'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
-            'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
-            'Medium, Artist — Communed with spiritual world, extremely strong intuition. Closest to liberation.'
+            'Guerrero, Lider — Ejercio poder, liderazgo natural y determinacion grabados en el alma.',
+            'Artista, Agricultor — Trabajo con la naturaleza, instinto profundo de estabilidad y belleza material.',
+            'Erudito, Comerciante — Vivio del conocimiento, versatilidad y curiosidad permanecen.',
+            'Protector, Cuidador — Cuidaba a otros, sensibilidad profunda e instinto maternal.',
+            'Realeza, Sacerdote — Tenia alto estatus, autoridad y dignidad naturales.',
+            'Sanador, Servidor — Practicaba medicina o servicio, excelentes habilidades analiticas.',
+            'Diplomatico, Artista — Persiguio armonia y belleza, habil en relaciones.',
+            'Practicante, Alquimista — Sufrio transformacion profunda, fuerte atraccion por secretos y misterio.',
+            'Sabio, Explorador — Busco la verdad, sabiduria espiritual y aventura permanecen.',
+            'Oficial, Arquitecto — Construyo orden, fuerte paciencia y responsabilidad.',
+            'Oficial, Guardian — Construyo orden social, espiritu organizativo. Regido por Saturno.',
+            'Medium, Artista — Comunico con el mundo espiritual, intuicion extremadamente fuerte.'
         ];
 
         const d60SunInterp = [
@@ -1912,7 +1912,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const rahuD60 = dPositions.find(p => p.id === 'Rahu');
         const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
-        const spouseKarma = ['Warrior/leader connection. Intense, independent spouse karma.','Artist/wealthy connection. Materially abundant marriage karma.','Scholar/merchant connection. Communication and intellectual rapport.','Family/protector connection. Deep emotional bond karma.','Royalty/nobility connection. Splendid, respected marriage.','Healer/server connection. Service and devotion karma.','Diplomat/artist connection. Harmonious, beautiful marriage.','Practitioner/mystic connection. Intense, transformative karma.','Sage/explorer connection. Free, expansive karma. Foreign spouse possible.','Official/architect connection. Responsible, stable. Late marriage possible.','Official/military connection. Saturn-ruled, disciplined spouse. Age difference possible.','Medium/artist connection. Mysterious, spiritual karma. May meet in dreams.'];
+        const spouseKarma = ['Conexion guerrero/lider. Karma de pareja intenso e independiente.','Conexion artista/rico. Karma matrimonial materialmente abundante.','Conexion erudito/comerciante. Comunicacion y rapport intelectual.','Conexion familia/protector. Karma de vinculo emocional profundo.','Conexion realeza/nobleza. Matrimonio esplendido y respetado.','Conexion sanador/servidor. Karma de servicio y devocion.','Conexion diplomatico/artista. Matrimonio armonioso y hermoso.','Conexion practicante/mistico. Karma intenso y transformador.','Conexion sabio/explorador. Karma libre y expansivo. Pareja extranjera posible.','Conexion oficial/arquitecto. Responsable y estable. Matrimonio tardio posible.','Conexion oficial/militar. Regido por Saturno, pareja disciplinada.','Conexion medium/artista. Karma misterioso y espiritual. Puede encontrarse en sueños.'];
 
         let ch4 = '<strong>D60 Casa 7: ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (Señor de casa 7: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
         ch4 += spouseKarma[d60H7sign] + '<br>';
@@ -1950,7 +1950,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H10lord = SIGN_RULERS[d60H10sign];
         const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
         const satD60 = dPositions.find(p => p.id === 'Saturn');
-        const careerKarma = ['Military/Leadership/Sports','Finance/Art/Agriculture','Education/Media/Commerce','Nursing/Real Estate/Hotels','Politics/Entertainment/Management','Medical/Analysis/Service','Law/Diplomacy/Design','Research/Investigation/Medicine','Education/Religion/Foreign','Administration/Construction/Civil Service','Technology/Science/Innovation','Art/Spirituality/Hospital'][d60H10sign];
+        const careerKarma = ['Militar/Liderazgo/Deportes','Finanzas/Arte/Agricultura','Educacion/Medios/Comercio','Enfermeria/Inmobiliaria/Hoteles','Politica/Entretenimiento/Gestion','Medico/Analisis/Servicio','Derecho/Diplomacia/Diseño','Investigacion/Medicina','Educacion/Religion/Extranjero','Administracion/Construccion/Servicio Civil','Tecnologia/Ciencia/Innovacion','Arte/Espiritualidad/Hospital'][d60H10sign];
 
         let ch5 = '<strong>D60 Casa 10: ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (Señor de casa 10: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
         ch5 += 'Karma profesional de vidas pasadas orientado hacia <strong>' + careerKarma + '</strong>. Atraccion natural hacia este campo.<br>';
@@ -1966,7 +1966,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Ch6: Wealth Karma
         const d60H2sign = (dLagnaSign + 1) % 12;
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
-        const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
+        const wealthKarma = ['Instinto de riqueza por esfuerzo propio.','Entorno abundante en vida pasada.','Construccion intelectual de riqueza.','Riqueza familiar/inmobiliaria.','Riqueza por autoridad.','Riqueza por servicio. Frugal.','Riqueza por asociacion.','Riqueza ajena (herencia).','La fortuna trae riqueza. Extranjero.','Lento pero seguro. Rico despues de mediana edad.','Riqueza por innovacion. No convencional.','Actividad espiritual y riqueza. Generoso.'][d60H2sign];
         let ch6 = '<strong>D60 Casa 2: ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
             ch6 += '<br><strong>Planetas en D60 casa 2:</strong><br>';
