@@ -1835,32 +1835,32 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         const d60SunInterp = [
-            'Lived as warrior or king, strong ego and leadership remain. Soul purpose to establish authority.',
-            'Lived as artist or wealthy person, soul pursues material abundance. Drawn to sensory beauty.',
-            'Lived as scholar or merchant, knowledge and communication are core soul themes.',
-            'Lived as protector or nurturer, caring for others is a deep soul instinct.',
-            'Held high status as royalty or priest, natural authority remains in this life.',
-            'Lived as healer or server, analysis and service are the soul purpose.',
-            'Pursued harmony as diplomat or artist, relationships and balance are the soul task.',
-            'Underwent deep transformation as practitioner, secrets imprinted on the soul.',
-            'Sought truth as sage or explorer, wisdom and adventure are the soul direction.',
-            'Built order as official, systems and responsibility engraved on the soul.',
-            'Was ahead of times as innovator, original thinking is a soul trait.',
-            'Communed with spiritual world, deep intuition remains in the soul.'
+            'Vivio como guerrero o rey, fuerte ego y liderazgo permanecen. Proposito del alma: establecer autoridad.',
+            'Vivio como artista o persona rica, el alma persigue abundancia material. Atraido por la belleza sensorial.',
+            'Vivio como erudito o comerciante, conocimiento y comunicacion son temas centrales del alma.',
+            'Vivio como protector o cuidador, cuidar a otros es un instinto profundo del alma.',
+            'Tenia alto estatus como realeza o sacerdote, la autoridad natural permanece.',
+            'Vivio como sanador o servidor, analisis y servicio son el proposito del alma.',
+            'Persiguio la armonia como diplomatico o artista, relaciones y equilibrio son la tarea del alma.',
+            'Sufrio transformacion profunda como practicante, secretos grabados en el alma.',
+            'Busco la verdad como sabio o explorador, sabiduria y aventura son la direccion del alma.',
+            'Construyo orden como oficial, sistemas y responsabilidad grabados en el alma.',
+            'Estaba adelantado a su tiempo como innovador, pensamiento original es rasgo del alma.',
+            'Se comunico con el mundo espiritual, intuicion profunda permanece en el alma.'
         ];
         const d60MoonInterp = [
-            'Intensely fiery emotional memory. Anger and passion imprinted, mastering emotions is the task.',
-            'Warm, stable emotional memory. Memories of abundance remain, seeking beautiful things.',
-            'Intellectual, colorful emotional memory. Many experiences, strong curiosity.',
-            'Very deep emotional memory. Strong home and care memories, rich sensitivity.',
-            'Pride and dignity fill emotional memory. Memories of recognition and respect remain.',
-            'Service and analysis in emotional memory. Helping memories remain, caring heart.',
-            'Harmony and relationships in emotional memory. Beautiful relationship memories, seeking partner.',
-            'Deep, intense emotional memory. Dramatic change memories, emotional depth like ocean.',
-            'Freedom and exploration in emotional memory. Travel and learning memories, pursuing expansion.',
-            'Responsibility and patience in emotional memory. Heavy burden memories, mature emotions.',
-            'Unique, extraordinary emotional memory. Being different memories, independent sensibility.',
-            'Spiritual, transcendent emotional memory. Vivid dreams, deep spiritual connection.'
+            'Memoria emocional intensamente ardiente. Ira y pasion grabadas, dominar emociones es la tarea.',
+            'Memoria emocional calida y estable. Recuerdos de abundancia permanecen, buscando cosas bellas.',
+            'Memoria emocional intelectual y colorida. Muchas experiencias, fuerte curiosidad.',
+            'Memoria emocional muy profunda. Fuertes recuerdos de hogar y cuidado, rica sensibilidad.',
+            'Orgullo y dignidad llenan la memoria emocional. Recuerdos de reconocimiento permanecen.',
+            'Servicio y analisis en la memoria emocional. Recuerdos de ayuda permanecen.',
+            'Armonia y relaciones en la memoria emocional. Hermosos recuerdos de relaciones.',
+            'Memoria emocional profunda e intensa. Recuerdos de cambios dramaticos, profundidad como el oceano.',
+            'Libertad y exploracion en la memoria emocional. Recuerdos de viaje y aprendizaje.',
+            'Responsabilidad y paciencia en la memoria emocional. Recuerdos de cargas pesadas.',
+            'Memoria emocional unica y extraordinaria. Recuerdos de ser diferente, sensibilidad independiente.',
+            'Memoria emocional espiritual y trascendente. Sueños vividos, conexion espiritual profunda.'
         ];
 
         // Parashara quote

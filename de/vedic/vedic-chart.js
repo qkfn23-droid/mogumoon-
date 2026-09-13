@@ -1835,32 +1835,32 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         const d60SunInterp = [
-            'Lived as warrior or king, strong ego and leadership remain. Soul purpose to establish authority.',
-            'Lived as artist or wealthy person, soul pursues material abundance. Drawn to sensory beauty.',
-            'Lived as scholar or merchant, knowledge and communication are core soul themes.',
-            'Lived as protector or nurturer, caring for others is a deep soul instinct.',
-            'Held high status as royalty or priest, natural authority remains in this life.',
-            'Lived as healer or server, analysis and service are the soul purpose.',
-            'Pursued harmony as diplomat or artist, relationships and balance are the soul task.',
-            'Underwent deep transformation as practitioner, secrets imprinted on the soul.',
-            'Sought truth as sage or explorer, wisdom and adventure are the soul direction.',
-            'Built order as official, systems and responsibility engraved on the soul.',
-            'Was ahead of times as innovator, original thinking is a soul trait.',
-            'Communed with spiritual world, deep intuition remains in the soul.'
+            'Lebte als Krieger oder Koenig, starkes Ego und Fuehrung bleiben. Seelenzweck: Autoritaet aufbauen.',
+            'Lebte als Kuenstler oder Wohlhabender, Seele verfolgt materiellen Ueberfluss.',
+            'Lebte als Gelehrter oder Haendler, Wissen und Kommunikation sind Kernthemen der Seele.',
+            'Lebte als Beschuetzer, fuer andere sorgen ist ein tiefer Seeleninstinkt.',
+            'Hatte hohen Status als Koenig oder Priester, natuerliche Autoritaet bleibt.',
+            'Lebte als Heiler oder Diener, Analyse und Dienst sind der Seelenzweck.',
+            'Verfolgte Harmonie als Diplomat, Beziehungen und Balance sind die Seelenaufgabe.',
+            'Durchlief tiefe Transformation als Praktiker, Geheimnisse in der Seele eingepraegt.',
+            'Suchte Wahrheit als Weiser, Weisheit und Abenteuer sind die Seelenrichtung.',
+            'Baute Ordnung als Beamter, Systeme und Verantwortung in der Seele eingraviert.',
+            'War der Zeit voraus als Innovator, originelles Denken ist ein Seelenmerkmal.',
+            'Kommunizierte mit der geistigen Welt, tiefe Intuition bleibt in der Seele.'
         ];
         const d60MoonInterp = [
-            'Intensely fiery emotional memory. Anger and passion imprinted, mastering emotions is the task.',
-            'Warm, stable emotional memory. Memories of abundance remain, seeking beautiful things.',
-            'Intellectual, colorful emotional memory. Many experiences, strong curiosity.',
-            'Very deep emotional memory. Strong home and care memories, rich sensitivity.',
-            'Pride and dignity fill emotional memory. Memories of recognition and respect remain.',
-            'Service and analysis in emotional memory. Helping memories remain, caring heart.',
-            'Harmony and relationships in emotional memory. Beautiful relationship memories, seeking partner.',
-            'Deep, intense emotional memory. Dramatic change memories, emotional depth like ocean.',
-            'Freedom and exploration in emotional memory. Travel and learning memories, pursuing expansion.',
-            'Responsibility and patience in emotional memory. Heavy burden memories, mature emotions.',
-            'Unique, extraordinary emotional memory. Being different memories, independent sensibility.',
-            'Spiritual, transcendent emotional memory. Vivid dreams, deep spiritual connection.'
+            'Intensiv feurige emotionale Erinnerung. Wut und Leidenschaft eingepraegt, Emotionen meistern ist die Aufgabe.',
+            'Warme, stabile emotionale Erinnerung. Erinnerungen an Ueberfluss bleiben, sucht schoene Dinge.',
+            'Intellektuelle, farbenfrohe emotionale Erinnerung. Viele Erfahrungen, starke Neugier.',
+            'Sehr tiefe emotionale Erinnerung. Starke Heim- und Fuersorge-Erinnerungen.',
+            'Stolz und Wuerde fuellen die emotionale Erinnerung. Erinnerungen an Anerkennung bleiben.',
+            'Dienst und Analyse in der emotionalen Erinnerung. Fuersorgliches Herz.',
+            'Harmonie und Beziehungen in der emotionalen Erinnerung. Sucht Partner.',
+            'Tiefe, intensive emotionale Erinnerung. Emotionale Tiefe wie der Ozean.',
+            'Freiheit und Erforschung in der emotionalen Erinnerung. Verfolgt Expansion.',
+            'Verantwortung und Geduld in der emotionalen Erinnerung. Reife Emotionen.',
+            'Einzigartige, aussergewoehnliche emotionale Erinnerung. Unabhaengige Sensibilitaet.',
+            'Spirituelle, transzendente emotionale Erinnerung. Lebhafte Traeume, tiefe spirituelle Verbindung.'
         ];
 
         // Parashara quote
@@ -1887,7 +1887,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Sonne: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Soul purpose was rightly pursued, self-realization comes naturally.' : 'Challenges to ego and authority in past life, finding true self is the task.');
+                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Seelenzweck wurde richtig verfolgt, Selbstverwirklichung kommt natuerlich.' : 'Herausforderungen an Ego und Autoritaet, das wahre Selbst finden ist die Aufgabe.');
             }
             html += subChapter('☉', 'Seelenzweck — Warum du geboren wurdest', ch2);
         }
@@ -1899,7 +1899,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Mond: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Mind was peaceful in past life, emotional stability and intuition are innate.' : 'Emotional wounds remain in subconscious. Meditation and rest near water help.');
+                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Geist war friedlich, emotionale Stabilitaet und Intuition sind angeboren.' : 'Emotionale Wunden bleiben im Unterbewusstsein. Meditation und Ruhe am Wasser helfen.');
             }
             html += subChapter('☽', 'Emotionale Erinnerung — Unterbewusste Muster', ch3);
         }

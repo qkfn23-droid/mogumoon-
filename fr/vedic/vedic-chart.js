@@ -1835,32 +1835,32 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         const d60SunInterp = [
-            'Lived as warrior or king, strong ego and leadership remain. Soul purpose to establish authority.',
-            'Lived as artist or wealthy person, soul pursues material abundance. Drawn to sensory beauty.',
-            'Lived as scholar or merchant, knowledge and communication are core soul themes.',
-            'Lived as protector or nurturer, caring for others is a deep soul instinct.',
-            'Held high status as royalty or priest, natural authority remains in this life.',
-            'Lived as healer or server, analysis and service are the soul purpose.',
-            'Pursued harmony as diplomat or artist, relationships and balance are the soul task.',
-            'Underwent deep transformation as practitioner, secrets imprinted on the soul.',
-            'Sought truth as sage or explorer, wisdom and adventure are the soul direction.',
-            'Built order as official, systems and responsibility engraved on the soul.',
-            'Was ahead of times as innovator, original thinking is a soul trait.',
-            'Communed with spiritual world, deep intuition remains in the soul.'
+            'A vecu comme guerrier ou roi, ego fort et leadership demeurent. But de lame: etablir lautorite.',
+            'A vecu comme artiste ou riche, lame poursuit labondance materielle.',
+            'A vecu comme erudit ou marchand, savoir et communication sont les themes centraux de lame.',
+            'A vecu comme protecteur, prendre soin des autres est un instinct profond de lame.',
+            'Avait un statut eleve, lautorite naturelle demeure dans cette vie.',
+            'A vecu comme guerisseur, analyse et service sont le but de lame.',
+            'A poursuivi lharmonie, relations et equilibre sont la tache de lame.',
+            'A subi une transformation profonde, secrets graves dans lame.',
+            'A cherche la verite, sagesse et aventure sont la direction de lame.',
+            'A construit lordre, systemes et responsabilite graves dans lame.',
+            'Etait en avance sur son temps, pensee originale est un trait de lame.',
+            'A commune avec le monde spirituel, intuition profonde demeure dans lame.'
         ];
         const d60MoonInterp = [
-            'Intensely fiery emotional memory. Anger and passion imprinted, mastering emotions is the task.',
-            'Warm, stable emotional memory. Memories of abundance remain, seeking beautiful things.',
-            'Intellectual, colorful emotional memory. Many experiences, strong curiosity.',
-            'Very deep emotional memory. Strong home and care memories, rich sensitivity.',
-            'Pride and dignity fill emotional memory. Memories of recognition and respect remain.',
-            'Service and analysis in emotional memory. Helping memories remain, caring heart.',
-            'Harmony and relationships in emotional memory. Beautiful relationship memories, seeking partner.',
-            'Deep, intense emotional memory. Dramatic change memories, emotional depth like ocean.',
-            'Freedom and exploration in emotional memory. Travel and learning memories, pursuing expansion.',
-            'Responsibility and patience in emotional memory. Heavy burden memories, mature emotions.',
-            'Unique, extraordinary emotional memory. Being different memories, independent sensibility.',
-            'Spiritual, transcendent emotional memory. Vivid dreams, deep spiritual connection.'
+            'Memoire emotionnelle intensement ardente. Colere et passion gravees, maitriser les emotions est la tache.',
+            'Memoire emotionnelle chaude et stable. Souvenirs dabondance demeurent.',
+            'Memoire emotionnelle intellectuelle et coloree. Nombreuses experiences, forte curiosite.',
+            'Memoire emotionnelle tres profonde. Forts souvenirs de foyer et de soins.',
+            'Fierte et dignite remplissent la memoire emotionnelle.',
+            'Service et analyse dans la memoire emotionnelle. Coeur bienveillant.',
+            'Harmonie et relations dans la memoire emotionnelle. Cherche un partenaire.',
+            'Memoire emotionnelle profonde et intense. Profondeur comme locean.',
+            'Liberte et exploration dans la memoire emotionnelle. Poursuit lexpansion.',
+            'Responsabilite et patience dans la memoire emotionnelle. Emotions matures.',
+            'Memoire emotionnelle unique et extraordinaire. Sensibilite independante.',
+            'Memoire emotionnelle spirituelle et transcendante. Reves vivaces, connexion spirituelle profonde.'
         ];
 
         // Parashara quote
@@ -1887,7 +1887,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Soleil: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Soul purpose was rightly pursued, self-realization comes naturally.' : 'Challenges to ego and authority in past life, finding true self is the task.');
+                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Le but de lame a ete justement poursuivi, la realisation de soi vient naturellement.' : 'Defis a lego et lautorite, trouver le vrai soi est la tache.');
             }
             html += subChapter('☉', 'But de lÂme — Pourquoi vous êtes né', ch2);
         }
@@ -1899,7 +1899,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Lune: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Mind was peaceful in past life, emotional stability and intuition are innate.' : 'Emotional wounds remain in subconscious. Meditation and rest near water help.');
+                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Lesprit etait paisible, stabilite emotionnelle et intuition sont innees.' : 'Blessures emotionnelles restent dans le subconscient. Meditation et repos pres de leau aident.');
             }
             html += subChapter('☽', 'Mémoire Émotionnelle — Schémas inconscients', ch3);
         }
