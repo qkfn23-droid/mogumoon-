@@ -128,7 +128,7 @@ function renderEasyMode(positions, lagnaSign, moonPos) {
                 var endD = new Date(cd.getTime()+days*86400000);
                 if (now>=cd && now<endD) {
                     var dashaDesc = {Ketu:'霊的成長と分離の時期。物質より内面に集中しましょう。',Venus:'愛と豊かさの時期！恋愛、結婚、芸術活動が活発です。',Sun:'自我発見とリーダーシップの時期。自信が強まります。',Moon:'感情と家庭の時期。家族関係が重要になります。',Mars:'行動とエネルギーの時期。新しいことを始めるのに最適です。',Rahu:'変化と革新の時期。予想外のチャンスが訪れます。',Jupiter:'幸運と成長の時期！教育、結婚、昇進など良いことが多いです。',Saturn:'忍耐と試練の時期。遅いが確実な成長をします。',Mercury:'知的活動の時期。勉強、ビジネス、コミュニケーションに有利です。'};
-                    html += '<div class="interp-card"><div class="interp-title">⏳ 今の運勢時期</div><div class="interp-text">현재 <strong style="color:#c9a84c;">' + DASHA_KO[planet] + '</strong>의 시기입니다.<br><br>' + (dashaDesc[planet]||'') + '</div></div>';
+                    html += '<div class="interp-card"><div class="interp-title">⏳ 今の運勢時期</div><div class="interp-text">現在 <strong style="color:#c9a84c;">' + DASHA_KO[planet] + '</strong>의 시기입니다.<br><br>' + (dashaDesc[planet]||'') + '</div></div>';
                     break;
                 }
                 cd = endD;
@@ -772,9 +772,9 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '🧭 配偶者が来る方向' : '🧭 配偶者の方向 — 6指標総合分析'}</div>
         <div class="interp-text">
             ${isEasy ? '配偶者がどの方向から来るかを複数の指標で分析します。' : 'ヴェーダ占星術では配偶者がどの方向から来るかを複数の指標を総合して分析します。'}<br><br>
-            ${isEasy ? '' : '<strong>6指標分析:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7궁주(' + RULER_NAMES[d9H7Ruler] + '):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 방향을 나타냅니다. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
+            ${isEasy ? '' : '<strong>6指標分析:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7궁주(' + RULER_NAMES[d9H7Ruler] + '):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 方向을 나타냅니다. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">🧭 総合結論: ${agreement >= 4 ? '圧倒的に強い' : agreement >= 3 ? '非常に強い' : agreement >= 2 ? '強い' : ''} ${primaryDir} 방향</strong><br><br>
+                <strong style="font-size:16px;">🧭 総合結論: ${agreement >= 4 ? '圧倒的に強い' : agreement >= 3 ? '非常に強い' : agreement >= 2 ? '強い' : ''} ${primaryDir} 方向</strong><br><br>
                 6つの指標中 <strong>${agreement}つ</strong>が <strong>${primaryDir}</strong>を示しています。
                 ${agreement >= 4 ? '<br>4つ以上の指標が一致！ <strong>非常に高い確率</strong>로 ' + primaryDir + ' 方向から配偶者と出会う可能性があります。この方向の都市、職場、旅行先に注目してください。' : ''}
                 ${agreement === 3 ? '<br>3つの指標一致 — <strong>高い確率</strong>로 ' + primaryDir + ' 方向です。' : ''}
@@ -904,16 +904,16 @@ function renderNakshatra(moonPos) {
 
     const html = isEasy ? `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">당신의 별: ${nak.ko}</div>
+            <div class="nakshatra-name">あなたの星: ${nak.ko}</div>
             <div class="nakshatra-meaning">"${nak.meaning}"</div>
             <div class="nakshatra-detail">${nak.desc}</div>
         </div>
     ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
-            <div class="nakshatra-meaning">"${nak.meaning}" — 지배행성: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}" — 支配星: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
             <div class="nakshatra-detail">
-                신성: ${nak.deity}<br><br>
+                守護神: ${nak.deity}<br><br>
                 ${nak.desc}
             </div>
         </div>
@@ -993,7 +993,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '年</span>';
         if (isCurrent) html += '<span class="dasha-badge">현재</span>';
-        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + '세) ▼</span>';
+        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + ') ▼</span>';
 
         // Antardasha (Bhukti) - sub-periods within this mahadasha
         html += '<div class="bhukti-list" style="display:' + (isCurrent ? '' : 'none') + ';margin-top:8px;padding-top:8px;border-top:1px solid #2a2a5a;">';
@@ -1121,7 +1121,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = isEasy ? '' : `<strong>2궁 (축적된 재산):</strong> ${SIGNS[h2sign]}에 위치. `;
+    let wealthText = isEasy ? '' : `<strong>2宮（蓄積された財産）:</strong> ${SIGNS[h2sign]}に位置。`;
     if (h2planets.length === 0) {
         wealthText += isEasy ? '財の蓄積は着実で安定的です。大きな変動なく着実に貯まるタイプです。' : '2宮に惑星がなく、財の蓄積は着実ですが特別な変動なく安定的です。';
     } else {
@@ -1141,7 +1141,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         });
     }
 
-    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11궁 (수입과 이익):</strong> ${SIGNS[h11sign]}에 위치. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11宮（収入と利益）:</strong> ${SIGNS[h11sign]}に位置。`;
     if (h11planets.length === 0) {
         wealthText += isEasy ? '収入は安定的ですが大きな変動はありません。' : '11宮に惑星がなく、収入は安定的ですが大きな変動はありません。';
     } else {
@@ -1223,7 +1223,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += isEasy ? '<br><br>' : `<br><br><strong>금성 위치 (${venusHouse}궁):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>金星の位置（${venusHouse}宮）:</strong> `;
         const venusHouseInterp = {
             1: '魅力的な外見。恋愛を楽しみ、すぐに恋に落ちます。',
             2: '配偶者を通じて財が入ります。美しい声と食通。',
@@ -1267,7 +1267,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         '芸術、映画、音楽、医療、海外、霊的分野、NGO関連職。'
     ];
 
-    let careerText = isEasy ? careerSign[h10sign] : `10궁은 ${SIGNS[h10sign]}에 위치. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `10宮は${SIGNS[h10sign]}に位置。${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
         careerText += isEasy ? '<br><br>' : '<br><br><strong>10궁의 행성:</strong>';
@@ -1401,7 +1401,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += isEasy ? `<strong>⚠️ 결혼 시 주의사항</strong>` : `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — 화성이 ${marsH}궁에 위치하여 결혼 생활에 도전이 있을 수 있습니다. 배우자 선택 시 상대의 차트도 확인하는 것이 좋습니다. 28세 이후 결혼이 유리할 수 있습니다.<br><br>`;
+            yogaText += isEasy ? `<strong>⚠️ 결혼 시 주의사항</strong>` : `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — 火星が${marsH}宮に位置しており、結婚生活に挑戦がある可能性があります。配偶者選択時に相手のチャートも確認することをお勧めします。28歳以降の結婚が有利かもしれません。<br><br>`;
         }
     }
 
@@ -1519,7 +1519,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 
         html += `<div class="interp-card">
             <div class="interp-title">${isEasy ? (houseArea[house]||'') : p.symbol + ' ' + p.name + ' → ' + house + '宮（' + SIGNS[p.sign] + ')'}</div>
-            <div class="interp-text">${isEasy ? desc.replace(/^\d+궁:\s*/, '') : desc}</div>
+            <div class="interp-text">${isEasy ? desc.replace(/^\d+宮[：:]?\s*/, '') : desc}</div>
         </div>`;
     });
 
@@ -1539,7 +1539,7 @@ function renderEducation(positions, lagnaSign) {
     const h5sign = (lagnaSign + 4) % 12;
 
     const isEasy = window.vedicMode === 'easy';
-    let text = isEasy ? '<strong>기초 교육:</strong> ' : `<strong>4궁 (기초 교육·학위):</strong> ${SIGNS[h4sign]}. `;
+    let text = isEasy ? '<strong>기초 교육:</strong> ' : `<strong>4宮（基礎教育・学位）:</strong> ${SIGNS[h4sign]}。`;
     const eduSign4 = ['活動的な学習、体育/軍事教育', '美術/音楽/料理教育', '言語/文学/コミュニケーション', '家庭教育重視、歴史学', '演劇/リーダーシップ/政治学', '科学/医学/分析学', '法学/外交/デザイン', '心理学/研究/調査', '哲学/神学/国際学', '経営/行政/建築', 'IT/科学技術/航空', '芸術/映画/音楽/霊性'];
     text += eduSign4[h4sign] + 'に適しています。';
     if (h4.length > 0 && !isEasy) text += '4宮の' + h4.map(p => p.name).join(', ') + 'が教育に影響。';
@@ -1550,7 +1550,7 @@ function renderEducation(positions, lagnaSign) {
         if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/해외 유학 가능성.' : '<br><br>🎓 <strong>목성이 ' + jH + '궁에 위치하여 높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/해외 유학 가능성.';
     }
 
-    text += isEasy ? '<br><br><strong>고등교육:</strong> ' : `<br><br><strong>5궁 (고등교육·지성·창의력):</strong> ${SIGNS[h5sign]}. `;
+    text += isEasy ? '<br><br><strong>고등교육:</strong> ' : `<br><br><strong>5宮（高等教育・知性・創造力）:</strong> ${SIGNS[h5sign]}。`;
     if (h5.length > 0) {
         h5.forEach(p => {
             const h5p = { Sun: '리더십/정치학 분야 뛰어남', Moon: '예술/심리학 재능', Mars: '공학/기술/체육 재능', Mercury: '수학/언어/비즈니스 천재', Jupiter: '최고의 배치! 학자/교수/연구자', Venus: '예술/디자인/음악 재능', Saturn: '늦은 학업이지만 깊이 있는 연구' };
@@ -1755,7 +1755,7 @@ function renderLucky(lagnaSign, moonPos) {
             <strong>🔢 행운의 숫자:</strong> ${d.number}<br>
             <strong>📅 행운의 요일:</strong> ${d.day}<br>
             <strong>💎 행운의 보석:</strong> ${d.gem}<br>
-            <strong>🧭 행운의 방향:</strong> ${d.dir}<br>
+            <strong>🧭 행운의 方向:</strong> ${d.dir}<br>
             <strong>🪐 라그나 지배 행성:</strong> ${['화성','금성','수성','달','태양','수성','금성','화성','목성','토성','토성','목성'][lagnaSign]}
         </div>
     </div>`;
@@ -2545,7 +2545,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '📚 교육·학문 분석' : '📚 D24 차투르빔샴샤 — 교육·학문 분석') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D24 라그나: ' + SIGNS[dLagnaSign] + '</strong><br>') + d24LagnaInterp + '<br><br>';
 
-        html += '<strong>' + (isEasy ? '기초 교육:' : 'D24 4궁 (기초 교육) — ' + SIGNS[d24_4sign] + ':') + '</strong><br>';
+        html += '<strong>' + (isEasy ? '基礎教育:' : 'D24 4궁 (기초 교육) — ' + SIGNS[d24_4sign] + ':') + '</strong><br>';
         if (d24_4planets.length > 0) {
             d24_4planets.forEach(p => {
                 const edu4 = {Sun:'名門校。権威ある教育',Moon:'快適な学習環境。家庭教育の影響大',Mars:'競争的学習。体育/技術に強い',Mercury:'最高の配置！優れた学業能力',Jupiter:'豊かな教育環境。良い教師',Venus:'芸術教育。美しい学校',Saturn:'困難な教育だが克服すれば深い学識',Rahu:'非伝統的教育。外国の学校',Ketu:'正規教育への関心薄い。直感的学習'};
@@ -2553,7 +2553,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             });
         } else html += isEasy ? '안정적인 교육 환경에서 꾸준히 성장하는 타입이에요.<br>' : '4궁에 행성 없음.<br>';
 
-        html += '<br><strong>' + (isEasy ? '고등교육:' : 'D24 5궁 (고등 교육/지성) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? '高等教育:' : 'D24 5궁 (고등 교육/지성) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
                 html += isEasy ? (p.natural === 'benefic' ? '고등 교육에서 뛰어난 성취!<br>' : '학업에서의 도전이 성장으로 이어짐.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? '고등 교육에서 뛰어난 성취!' : '학업에서의 도전이 성장으로 이어짐.') + '<br>';
