@@ -1507,26 +1507,26 @@ function renderDignity(positions, lagnaSign) {
             dignity = 'Exaltado';
             emoji = '🟢';
             color = '#5cb85c';
-            simpleDesc = `<strong>${p.name} is at maximum power!</strong> The "${role}" energy is maximized in the <strong>${house}${hSuffix} house (${area})</strong> area, bringing great blessings. Innate talents shine and good results come naturally.`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> ¡Recibiste la mayor bendición en esta área! Tus talentos innatos brillan y los buenos resultados llegan naturalmente.` : `<strong>${p.name} is at maximum power!</strong> The "${role}" energy is maximized in the <strong>${house}${hSuffix} house (${area})</strong> area, bringing great blessings. Innate talents shine and good results come naturally.`;
         } else if (p.sign === DEBI[p.id]) {
             dignity = 'Debilitado';
             emoji = '🔴';
             color = '#d9534f';
-            simpleDesc = `<strong>${p.name} is in a weakened state.</strong> The "${role}" energy is weakened in the <strong>${house}${hSuffix} house (${area})</strong> area. You may experience difficulties in this field, but conscious effort to overcome them can become a great opportunity for growth. See the remedies below.`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> Puedes experimentar desafíos en esta área. Pero el esfuerzo consciente puede convertirlo en una gran oportunidad de crecimiento.` : `<strong>${p.name} is in a weakened state.</strong> The "${role}" energy is weakened in the <strong>${house}${hSuffix} house (${area})</strong> area. You may experience difficulties in this field, but conscious effort to overcome them can become a great opportunity for growth. See the remedies below.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = 'Signo Propio';
             emoji = '🟡';
             color = '#c9a84c';
-            simpleDesc = `<strong>${p.name} is at home!</strong> The "${role}" energy stably exerts its power in the <strong>${house}${hSuffix} house (${area})</strong> area. Good results come naturally.`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> Esta área funciona establemente a tu favor. Los buenos resultados llegan naturalmente.` : `<strong>${p.name} is at home!</strong> The "${role}" energy stably exerts its power in the <strong>${house}${hSuffix} house (${area})</strong> area. Good results come naturally.`;
         } else {
             dignity = 'Neutro';
             emoji = '⚪';
             color = '#999';
-            simpleDesc = `${p.name}'s "${role}" energy exerts average influence in the <strong>${house}${hSuffix} house (${area})</strong> area. Results vary depending on relationships with other planets.`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> Influencia promedio en esta área. Ni particularmente fuerte ni débil.` : `${p.name}'s "${role}" energy exerts average influence in the <strong>${house}${hSuffix} house (${area})</strong> area. Results vary depending on relationships with other planets.`;
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
                 <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
                 ${simpleDesc}

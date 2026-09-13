@@ -1512,7 +1512,7 @@ function renderDignity(positions, lagnaSign) {
             dignity = 'Geschwächt';
             emoji = '🔴';
             color = '#d9534f';
-            simpleDesc = `<strong>${p.name} ist in geschwächtem Zustand.</strong> Die "${role}"-Energie ist im Bereich des <strong>${house}. Hauses (${area})</strong> geschwächt. Sie können in diesem Bereich Schwierigkeiten erleben, aber bewusste Anstrengung kann zu einer großen Wachstumschance werden. Siehe die Heilmittel unten.`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> Du könntest Herausforderungen in diesem Bereich erleben. Aber bewusste Anstrengung kann dies in eine große Wachstumschance verwandeln.` : `<strong>${p.name} ist in geschwächtem Zustand.</strong> Die "${role}"-Energie ist im Bereich des <strong>${house}. Hauses (${area})</strong> geschwächt. Sie können in diesem Bereich Schwierigkeiten erleben, aber bewusste Anstrengung kann zu einer großen Wachstumschance werden. Siehe die Heilmittel unten.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = 'Eigenes Zeichen';
             emoji = '🟡';
@@ -1526,7 +1526,7 @@ function renderDignity(positions, lagnaSign) {
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
                 <span style="color:#666;font-size:12px;">Regiert: ${role} │ Position: ${house}. Haus = ${area}</span><br><br>
                 ${simpleDesc}

@@ -1507,23 +1507,23 @@ function renderDignity(positions, lagnaSign) {
             dignity = '減衰 (Debilitated)';
             emoji = '🔴';
             color = '#d9534f';
-            simpleDesc = `<strong>${p.name}が弱い状態。</strong>「${role}」のエネルギーが弱まった状態で<strong>${house}宮(${area})</strong>の領域にあります。この分野で困難を感じるかもしれませんが、意識的な努力で克服すればむしろ大きな成長の機会になります。下記の癒し法を参考にしてください。`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> この分野で困難を感じるかもしれません。でも意識的に努力すれば、むしろ大きな成長のチャンスになります。下の改善方法を参考にしてください。` : `<strong>${p.name}が弱い状態。</strong>「${role}」のエネルギーが弱まった状態で<strong>${house}宮(${area})</strong>の領域にあります。この分野で困難を感じるかもしれませんが、意識的な努力で克服すればむしろ大きな成長の機会になります。下記の癒し法を参考にしてください。`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = '本宮 (Own Sign)';
             emoji = '🟡';
             color = '#c9a84c';
-            simpleDesc = `<strong>${p.name}が自分の家に！</strong>「${role}」のエネルギーが安定的に<strong>${house}宮(${area})</strong>の領域で力を発揮します。自然と良い結果を生み出します。`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> この分野で安定的に力を発揮します。自然に良い結果が生まれます。` : `<strong>${p.name}が自分の家に！</strong>「${role}」のエネルギーが安定的に<strong>${house}宮(${area})</strong>の領域で力を発揮します。自然と良い結果を生み出します。`;
         } else {
             dignity = '中立';
             emoji = '⚪';
             color = '#999';
-            simpleDesc = `${p.name}の「${role}」のエネルギーが<strong>${house}宮(${area})</strong>の領域で普通の影響力を発揮します。他の惑星との関係によって結果が異なります。`;
+            simpleDesc = isEasy ? `<strong>${area}</strong> この分野で普通の影響力です。特に強くも弱くもありません。` : `${p.name}の「${role}」のエネルギーが<strong>${house}宮(${area})</strong>の領域で普通の影響力を発揮します。他の惑星との関係によって結果が異なります。`;
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}宮(${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}宮(${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">担当: ${role} │ 位置: ${house}宮 = ${area}</span><br><br>
+                ${isEasy ? '' : '<span style="color:#666;font-size:12px;">担当: ${role} │ 位置: ${house}宮 = ${area}</span>'}<br><br>
                 ${simpleDesc}
             </div>
         </div>`;
