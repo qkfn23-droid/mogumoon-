@@ -1726,147 +1726,211 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 60) {
-        // D60 해석: 전생 카르마
+        // D60 interpretation: Past life karma (sub-chapter structure)
         const d60_1lord = SIGN_RULERS[dLagnaSign];
         const d60_planets_1 = dPositions.filter(p => p.dSign === dLagnaSign);
 
-        // D60 각 사인별 전생 테마
+        // Sub-chapter accordion helper
+        function subChapter(icon, title, content) {
+            return '<div style="margin:8px 0;border:1px solid #2a2a5a;border-radius:8px;overflow:hidden;">' +
+                '<div onclick="var c=this.nextElementSibling;c.style.display=c.style.display===\'none\'?\'\':\'none\';this.querySelector(\'.sc-arrow\').textContent=c.style.display===\'none\'?\'▶\':\'▼\'" style="cursor:pointer;padding:12px 14px;background:linear-gradient(135deg,#12122a,#1a1a3e);">' +
+                '<span style="font-size:15px;font-weight:700;color:#c9a84c;">' + icon + ' ' + title + '</span>' +
+                '<span class="sc-arrow" style="float:right;color:#666;">▶</span></div>' +
+                '<div style="display:none;padding:14px;">' + content + '</div></div>';
+        }
+
+        // Deity calculation helper
+        function getDeity(siderealLon) {
+            const deg = siderealLon % 30;
+            const part = Math.floor(deg / 0.5);
+            const sn = Math.floor(siderealLon / 30);
+            const idx = (sn % 2 === 0) ? part : (59 - part);
+            return {idx: idx, deity: D60_DEITIES[idx] || null};
+        }
+        function deityTag(d) {
+            if (!d.deity) return '';
+            const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+            return ' — Deity: <strong>' + d.deity.name + '</strong> <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span>';
+        }
+
+        const houseThemes = ['','Self/Being','Wealth/Values','Communication','Home/Peace','Creation/Love','Service/Trials','Relationships','Transformation','Wisdom/Religion','Career/Society','Wishes/Gains','Liberation'];
+
         const pastLifeThemes = [
-            'Warrior, Leader — wielded power in past life, natural leadership in this life',
-            'Artist, Farmer — worked with earth and nature, seeks material stability',
-            'Scholar, Merchant — lived by knowledge and communication, versatility remains',
-            'Protector, Mother — cared for others, emotional depth remains',
-            'Royalty, Priest — held high status, natural authority remains',
-            'Healer, Server — practiced medicine or service, analytical skill remains',
-            'Diplomat, Artist — pursued harmony and beauty, skilled in relationships',
-            'Practitioner, Alchemist — underwent deep transformation, mysterious abilities',
-            'Sage, Explorer — sought truth, spiritual wisdom remains',
-            'Official, Architect — built order, strong patience and responsibility',
-            'Revolutionary, Inventor — ahead of the times, original thinking',
-            'Medium, Artist — communed with spiritual world, very strong intuition'
+            'Warrior, Leader — Wielded power, natural leadership and decisiveness imprinted on the soul.',
+            'Artist, Farmer — Worked with nature, deep instinct for stability and material beauty.',
+            'Scholar, Merchant — Lived by knowledge, versatility and curiosity remain. Natural talent for language.',
+            'Protector, Nurturer — Cared for others, deep sensitivity and maternal instinct. Strong home karma.',
+            'Royalty, Priest — Held high status, natural authority and dignity. Standing on stage is soul instinct.',
+            'Healer, Server — Practiced medicine or service, excellent analytical skills. Helping others is soul duty.',
+            'Diplomat, Artist — Pursued harmony and beauty, skilled in relationships. Partnership is core theme.',
+            'Practitioner, Alchemist — Underwent deep transformation, strong attraction to secrets and mystery.',
+            'Sage, Explorer — Sought truth, spiritual wisdom and adventurousness remain. Higher learning karma.',
+            'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
+            'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
+            'Medium, Artist — Communed with spiritual world, extremely strong intuition. Closest to liberation.'
         ];
 
-        html += '<div class="interp-card"><div class="interp-title">🔮 D60 Past Life Karma</div><div class="interp-text">';
-        html += '<strong>D60 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (Ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')<br>';
-        html += '<strong>Past Life Theme:</strong> ' + pastLifeThemes[dLagnaSign] + '<br><br>';
+        const d60SunInterp = [
+            'Lived as warrior or king, strong ego and leadership remain. Soul purpose to establish authority.',
+            'Lived as artist or wealthy person, soul pursues material abundance. Drawn to sensory beauty.',
+            'Lived as scholar or merchant, knowledge and communication are core soul themes.',
+            'Lived as protector or nurturer, caring for others is a deep soul instinct.',
+            'Held high status as royalty or priest, natural authority remains in this life.',
+            'Lived as healer or server, analysis and service are the soul purpose.',
+            'Pursued harmony as diplomat or artist, relationships and balance are the soul task.',
+            'Underwent deep transformation as practitioner, secrets imprinted on the soul.',
+            'Sought truth as sage or explorer, wisdom and adventure are the soul direction.',
+            'Built order as official, systems and responsibility engraved on the soul.',
+            'Was ahead of times as innovator, original thinking is a soul trait.',
+            'Communed with spiritual world, deep intuition remains in the soul.'
+        ];
+        const d60MoonInterp = [
+            'Intensely fiery emotional memory. Anger and passion imprinted, mastering emotions is the task.',
+            'Warm, stable emotional memory. Memories of abundance remain, seeking beautiful things.',
+            'Intellectual, colorful emotional memory. Many experiences, strong curiosity.',
+            'Very deep emotional memory. Strong home and care memories, rich sensitivity.',
+            'Pride and dignity fill emotional memory. Memories of recognition and respect remain.',
+            'Service and analysis in emotional memory. Helping memories remain, caring heart.',
+            'Harmony and relationships in emotional memory. Beautiful relationship memories, seeking partner.',
+            'Deep, intense emotional memory. Dramatic change memories, emotional depth like ocean.',
+            'Freedom and exploration in emotional memory. Travel and learning memories, pursuing expansion.',
+            'Responsibility and patience in emotional memory. Heavy burden memories, mature emotions.',
+            'Unique, extraordinary emotional memory. Being different memories, independent sensibility.',
+            'Spiritual, transcendent emotional memory. Vivid dreams, deep spiritual connection.'
+        ];
 
-        if (d60_planets_1.length > 0) {
-            html += '<strong>Planets in D60 Lagna:</strong> ' + d60_planets_1.map(p => p.name).join(', ') + '<br>';
-            html += 'Core karmic energy from past lives.<br>';
+        // Parashara quote
+        html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
+        html += '📜 <strong>Parashara said:</strong> "Shashtiamsa (D60) is the most important of all divisional charts. Planets in benefic deity divisions give good results, malefic divisions give bad results."<br>';
+        html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>';
+
+        // Ch1: Soul Identity
+        const lagnaD = getDeity(lagnaSidereal);
+        let ch1 = '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (Ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
+        ch1 += pastLifeThemes[dLagnaSign] + '<br>';
+        if (lagnaD.deity) {
+            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
+                '<strong>' + lagnaD.deity.name + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects this life, good opportunities naturally come.' :
+                '<strong>' + lagnaD.deity.name + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted on personality, but overcoming it leads to greater growth.');
         }
+        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' in D60 Lagna — core karma concentrated in these planets.';
+        html += subChapter('🪐', 'Soul Identity — Who you were', ch1);
 
-        // 카르마 방향
+        // Ch2: Soul Purpose (Sun)
         const sunD60 = dPositions.find(p => p.id === 'Sun');
-        const moonD60 = dPositions.find(p => p.id === 'Moon');
-        if (sunD60) html += '<br><strong>D60 Sun (' + SIGNS[sunD60.dSign] + '):</strong> Soul purpose connects with this sign energy.';
-        if (moonD60) html += '<br><strong>D60 Moon (' + SIGNS[moonD60.dSign] + '):</strong> Emotional memories remain in this sign.';
-        html += '</div></div>';
-
-        // D60 Deity Lookup
-        const D60_DEITIES = [
-            {name:'Ghora', ko:'Ghora', nature:'malefic', desc:'Deity of destruction and fear. Dark karma from past life'},
-            {name:'Rakshasa', ko:'Rakshasa', nature:'malefic', desc:'Demonic energy. Past life karma of strong desire and attachment'},
-            {name:'Deva', ko:'Deva', nature:'benefic', desc:'Divine being. Past life merit and blessings remain'},
-            {name:'Kubera', ko:'Kubera', nature:'benefic', desc:'God of wealth. Past life karma of accumulating riches'},
-            {name:'Yaksha', ko:'Yaksha', nature:'benefic', desc:'Nature guardian. Past life harmony with nature'},
-            {name:'Kinnara', ko:'Kinnara', nature:'benefic', desc:'Celestial musician. Past life artistic talent accumulated'},
-            {name:'Bhrashta', ko:'Bhrashta', nature:'malefic', desc:'The fallen one. Past life karma of falling from high position'},
-            {name:'Kulaghna', ko:'Kulaghna', nature:'malefic', desc:'Destroyer of family. Past life family-related karma'},
-            {name:'Garala', ko:'Garala', nature:'malefic', desc:'Poison. Past life karma of toxic actions'},
-            {name:'Vahni', ko:'Vahni', nature:'malefic', desc:'Fire god Agni. Past life karma of anger and destruction'},
-            {name:'Maya', ko:'Maya', nature:'malefic', desc:'Illusion. Past life karma of deception and illusion'},
-            {name:'Purishaka', ko:'Purishaka', nature:'malefic', desc:'Bondage. Past life karma of restraining others'},
-            {name:'Apampathi', ko:'Apampathi', nature:'benefic', desc:'Lord of waters. Past life karma of purification and healing'},
-            {name:'Marut', ko:'Marut', nature:'benefic', desc:'Wind god. Past life karma of freedom and change'},
-            {name:'Kala', ko:'Kala', nature:'malefic', desc:'God of time. Past life karma related to time and death'},
-            {name:'Sarpa', ko:'Sarpa', nature:'malefic', desc:'Serpent. Past life karma of secrets and betrayal'},
-            {name:'Amrita', ko:'Amrita', nature:'benefic', desc:'Nectar of immortality. Past life pursuit of eternal life'},
-            {name:'Indu', ko:'Indu', nature:'benefic', desc:'Moon. Past life accumulation of sensitivity and intuition'},
-            {name:'Mridu', ko:'Mridu', nature:'benefic', desc:'The gentle one. Past life karma of gentleness and compassion'},
-            {name:'Komala', ko:'Komala', nature:'benefic', desc:'The delicate one. Past life karma of art and beauty'},
-            {name:'Heramba', ko:'Heramba', nature:'benefic', desc:'Avatar of Ganesha. Past life karma of overcoming obstacles'},
-            {name:'Brahma', ko:'Brahma', nature:'benefic', desc:'Creator god. Past life karma of creation and knowledge'},
-            {name:'Vishnu', ko:'Vishnu', nature:'benefic', desc:'Preserver god. Past life karma of protection and order'},
-            {name:'Maheshwara', ko:'Maheshwara', nature:'benefic', desc:'Great Lord Shiva. Past life karma of transformation and liberation'},
-            {name:'Deva2', ko:'Devala', nature:'benefic', desc:'Saint. Past life karma of spiritual practice'},
-            {name:'Bala', ko:'Bala', nature:'benefic', desc:'Strength. Past life karma of fortitude and courage'},
-            {name:'Vishwakarma', ko:'Vishwakarma', nature:'benefic', desc:'Cosmic architect. Past life karma of building and creation'},
-            {name:'Tamasa', ko:'Tamasa', nature:'malefic', desc:'Darkness. Past life karma of ignorance and darkness'},
-            {name:'Kanchana', ko:'Kanchana', nature:'benefic', desc:'Gold. Past life karma of purity and value'},
-            {name:'Varaha', ko:'Varaha', nature:'benefic', desc:'Boar avatar of Vishnu. Past life karma of salvation'},
-            {name:'Ramasala', ko:'Ramasala', nature:'benefic', desc:'Abode of Rama. Past life karma of morality and duty'},
-            {name:'Ghrisha', ko:'Ghrisha', nature:'benefic', desc:'The radiant one. Past life karma of wisdom and enlightenment'},
-            {name:'Indra', ko:'Indra', nature:'benefic', desc:'King of gods. Past life karma of leadership and rulership'},
-            {name:'Jala', ko:'Jala', nature:'benefic', desc:'Water. Past life karma of flow and adaptation'},
-            {name:'Vishwa', ko:'Vishwa', nature:'benefic', desc:'Universe. Past life karma of universal love'},
-            {name:'Amara', ko:'Amara', nature:'benefic', desc:'Immortal. Past life pursuit of eternity'},
-            {name:'Bala2', ko:'Bala2', nature:'malefic', desc:'Young strength. Past life immature use of power'},
-            {name:'Pitri', ko:'Pitri', nature:'malefic', desc:'Ancestors. Past life ancestral karma'},
-            {name:'Rudra', ko:'Rudra', nature:'malefic', desc:'Storm god. Past life karma of destructive transformation'},
-            {name:'Varuna', ko:'Varuna', nature:'benefic', desc:'Ocean god. Past life karma of upholding cosmic order'},
-            {name:'Aryama', ko:'Aryama', nature:'benefic', desc:'Sun deity. Past life karma of friendship and contracts'},
-            {name:'Mitra', ko:'Mitra', nature:'benefic', desc:'God of friendship. Past life karma of trust and companionship'},
-            {name:'Agni', ko:'Agni', nature:'malefic', desc:'Fire god. Past life karma of purifying fire'},
-            {name:'Varuna2', ko:'Varuna2', nature:'benefic', desc:'Ocean god. Past life karma of deep wisdom'},
-            {name:'Gauri', ko:'Gauri', nature:'benefic', desc:'Parvati (Shiva consort). Past life karma of devotion and love'},
-            {name:'Mahakala', ko:'Mahakala', nature:'malefic', desc:'Great Time. Past life karma of trying to master time'},
-            {name:'Pitamaha', ko:'Pitamaha', nature:'benefic', desc:'Great Father Brahma. Past life karma as creator'},
-            {name:'Kartikeya', ko:'Kartikeya', nature:'benefic', desc:'War god. Past life karma of righteous battle'},
-            {name:'Yama', ko:'Yama', nature:'malefic', desc:'God of death. Past life karma of judgment and justice'},
-            {name:'Kala2', ko:'Kala2', nature:'malefic', desc:'Time. Past life karma of being chased by time'},
-            {name:'Varuna3', ko:'Varuna3', nature:'benefic', desc:'Ocean god. Past life karma of law and truth'},
-            {name:'Kubera2', ko:'Kubera2', nature:'benefic', desc:'God of wealth. Past life karma of generosity'},
-            {name:'Aditya', ko:'Aditya', nature:'benefic', desc:'Sun god. Past life karma of light and truth'},
-            {name:'Rishi', ko:'Rishi', nature:'benefic', desc:'Sage. Past life karma of wisdom and practice'},
-            {name:'Vasu', ko:'Vasu', nature:'benefic', desc:'Celestial being. Past life karma of governing nature'},
-            {name:'Ashwini', ko:'Ashwini', nature:'benefic', desc:'Twin healers. Past life karma of healing'},
-            {name:'Naga', ko:'Naga', nature:'malefic', desc:'Serpent deity. Past life karma of mystery and secrets'},
-            {name:'Gandharva', ko:'Gandharva', nature:'benefic', desc:'Celestial musician. Past life karma of art and music'},
-            {name:'Prajapati', ko:'Prajapati', nature:'benefic', desc:'Creator. Past life karma of creating life'},
-            {name:'Charachara', ko:'Charachara', nature:'benefic', desc:'Moving and unmoving. Past life karma of oneness with all things'}
-        ];
-
-        html += '<div class="interp-card"><div class="interp-title">🕉️ D60 Deities — Past Life Karma Guardians</div><div class="interp-text">';
-        html += 'According to <strong>Parashara Hora Shastra</strong>, each planet is assigned a unique deity based on its D60 division. This deity represents the past life karmic nature of that planet.<br><br>';
-
-        const lagnaDegInSign = lagnaSidereal % 30;
-        const lagnaD60Part = Math.floor(lagnaDegInSign / 0.5);
-        const lagnaSignNum = Math.floor(lagnaSidereal / 30);
-        const lagnaD60Idx = (lagnaSignNum % 2 === 0) ? lagnaD60Part : (59 - lagnaD60Part);
-        const lagnaDeity = D60_DEITIES[lagnaD60Idx];
-        if (lagnaDeity) {
-            const lColor = lagnaDeity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + lColor + ';">';
-            html += '<strong>⬆ Lagna:</strong> #' + (lagnaD60Idx+1) + ' <strong>' + lagnaDeity.name + '</strong> — <span style="color:' + lColor + '">' + (lagnaDeity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span><br>';
-            html += '<span style="color:#888;font-size:12px;">' + lagnaDeity.desc + '</span></div>';
+        if (sunD60) {
+            const sunD = getDeity(sunD60.sidereal);
+            let ch2 = '<strong>D60 Sun: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
+            ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
+            if (sunD.deity) {
+                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Soul purpose was rightly pursued, self-realization comes naturally.' : 'Challenges to ego and authority in past life, finding true self is the task.');
+            }
+            html += subChapter('☉', 'Soul Purpose — Why you were born', ch2);
         }
 
-        positions.forEach(p => {
-            const degInSign = p.sidereal % 30;
-            const d60Part = Math.floor(degInSign / 0.5);
-            const signNum = Math.floor(p.sidereal / 30);
-            const d60Idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
-            const deity = D60_DEITIES[d60Idx];
-            if (deity) {
-                const color = deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                html += '<div style="padding:8px;margin:4px 0;background:rgba(201,168,76,0.05);border-radius:6px;border-left:3px solid ' + color + ';">';
-                html += '<strong>' + p.symbol + ' ' + p.name + ':</strong> #' + (d60Idx+1) + ' <strong>' + deity.name + '</strong> — <span style="color:' + color + '">' + (deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span><br>';
-                html += '<span style="color:#888;font-size:12px;">' + deity.desc + '</span></div>';
+        // Ch3: Emotional Memory (Moon)
+        const moonD60 = dPositions.find(p => p.id === 'Moon');
+        if (moonD60) {
+            const moonD = getDeity(moonD60.sidereal);
+            let ch3 = '<strong>D60 Moon: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
+            ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
+            if (moonD.deity) {
+                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Mind was peaceful in past life, emotional stability and intuition are innate.' : 'Emotional wounds remain in subconscious. Meditation and rest near water help.');
             }
+            html += subChapter('☽', 'Emotional Memory — Subconscious patterns', ch3);
+        }
+
+        // Ch4: Spouse Karma
+        const d60H7sign = (dLagnaSign + 6) % 12;
+        const d60H7lord = SIGN_RULERS[d60H7sign];
+        const d60H7planets = dPositions.filter(p => p.dSign === d60H7sign);
+        const venusD60 = dPositions.find(p => p.id === 'Venus');
+        const rahuD60 = dPositions.find(p => p.id === 'Rahu');
+        const ketuD60 = dPositions.find(p => p.id === 'Ketu');
+
+        const spouseKarma = ['Warrior/leader connection. Intense, independent spouse karma.','Artist/wealthy connection. Materially abundant marriage karma.','Scholar/merchant connection. Communication and intellectual rapport.','Family/protector connection. Deep emotional bond karma.','Royalty/nobility connection. Splendid, respected marriage.','Healer/server connection. Service and devotion karma.','Diplomat/artist connection. Harmonious, beautiful marriage.','Practitioner/mystic connection. Intense, transformative karma.','Sage/explorer connection. Free, expansive karma. Foreign spouse possible.','Official/architect connection. Responsible, stable. Late marriage possible.','Official/military connection. Saturn-ruled, disciplined spouse. Age difference possible.','Medium/artist connection. Mysterious, spiritual karma. May meet in dreams.'];
+
+        let ch4 = '<strong>D60 7th House: ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7th Lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
+        ch4 += spouseKarma[d60H7sign] + '<br>';
+        if (d60H7planets.length > 0) {
+            ch4 += '<br><strong>Planets in D60 7th:</strong><br>';
+            d60H7planets.forEach(p => {
+                const pD = getDeity(p.sidereal);
+                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                ch4 += (p.natural === 'benefic' ? 'Benefic in 7th — good karma with spouse, blessings in this life.' : 'Malefic in 7th — unresolved karma with spouse, settling in this life.') + '<br>';
+            });
+        }
+        if (venusD60) {
+            const venD = getDeity(venusD60.sidereal);
+            const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
+            ch4 += '<br><strong>♀ Venus (Love Karaka)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus under benefic protection. Love was rightly practiced, beautiful love awaits.' : 'Venus under malefic influence. Learning the true meaning of love is the task.';
+        }
+        if (rahuD60 && ketuD60) {
+            const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
+            const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
+            if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
+                ch4 += '<br><br>🔥 <strong>Rahu-Ketu axis on 1-7 line!</strong> Very strong past life connection with spouse. Destined to meet.';
+            }
+        }
+        const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
+        if (h7lordPlanet) {
+            const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
+            ch4 += '<br><br><strong>7th Lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
+            ch4 += 'Spouse karma manifests through <strong>' + houseThemes[h7lH] + '</strong> area.';
+        }
+        html += subChapter('💍', 'Spouse Karma — Past life connection', ch4);
+
+        // Ch5: Career Karma
+        const d60H10sign = (dLagnaSign + 9) % 12;
+        const d60H10lord = SIGN_RULERS[d60H10sign];
+        const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
+        const satD60 = dPositions.find(p => p.id === 'Saturn');
+        const careerKarma = ['Military/Leadership/Sports','Finance/Art/Agriculture','Education/Media/Commerce','Nursing/Real Estate/Hotels','Politics/Entertainment/Management','Medical/Analysis/Service','Law/Diplomacy/Design','Research/Investigation/Medicine','Education/Religion/Foreign','Administration/Construction/Civil Service','Technology/Science/Innovation','Art/Spirituality/Hospital'][d60H10sign];
+
+        let ch5 = '<strong>D60 10th House: ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10th Lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
+        ch5 += 'Past life career karma oriented toward <strong>' + careerKarma + '</strong>. Natural attraction to this field.<br>';
+        if (satD60) {
+            const satD = getDeity(satD60.sidereal);
+            const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
+            ch5 += '<br><strong>♄ Saturn (Lord of Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>very rare blessing!</strong> Merit from patience reduces career trials.' : 'Saturn under malefic — heavy career karma. Dissolve through patience, service, and mantra (Om Shanaishcharaya Namaha).';
+        }
+        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planets in D60 10th:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — career karma concentrated here.';
+        html += subChapter('💼', 'Career Karma — Past life calling', ch5);
+
+        // Ch6: Wealth Karma
+        const d60H2sign = (dLagnaSign + 1) % 12;
+        const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
+        const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
+        let ch6 = '<strong>D60 2nd House: ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
+        if (d60H2planets.length > 0) {
+            ch6 += '<br><strong>Planets in D60 2nd:</strong><br>';
+            d60H2planets.forEach(p => {
+                ch6 += p.symbol + ' ' + p.name + deityTag(getDeity(p.sidereal)) + ' — ' + (p.natural === 'benefic' ? 'Good wealth karma. Abundance.' : 'Wealth challenge. Overcome through effort.') + '<br>';
+            });
+        }
+        html += subChapter('💰', 'Wealth Karma — Past life fortune', ch6);
+
+        // Ch7: Deity List (compact)
+        let ch7 = '';
+        const lagnaD2 = getDeity(lagnaSidereal);
+        if (lagnaD2.deity) { const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f'; ch7 += '<div style="padding:4px 0;">⬆ Lagna → <strong>' + lagnaD2.deity.name + '</strong> <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? 'B' : 'M') + '</span></div>'; }
+        positions.forEach(p => {
+            const pD = getDeity(p.sidereal);
+            if (pD.deity) { const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f'; ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong> <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? 'B' : 'M') + '</span></div>'; }
         });
+        html += subChapter('🕉️', 'Deity List', ch7);
 
-        const beneficCount = positions.filter(p => {
-            const d60Part = Math.floor((p.sidereal % 30) / 0.5);
-            const signNum = Math.floor(p.sidereal / 30);
-            const idx = (signNum % 2 === 0) ? d60Part : (59 - d60Part);
-            return D60_DEITIES[idx] && D60_DEITIES[idx].nature === 'benefic';
-        }).length;
-        html += '<br><div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;">';
-        html += '<strong>📊 D60 Summary:</strong> Out of 9 planets, <strong style="color:#5cb85c">' + beneficCount + ' benefic</strong> and <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placements<br>';
-        html += beneficCount >= 6 ? 'Overall, <strong>abundant past life merit</strong> — a blessed life.' : beneficCount >= 4 ? 'A balanced mix of good karma and challenges coexist.' : 'Many past life challenges, but these are <strong>opportunities for growth in this life</strong>.';
-        html += '</div>';
-        html += '</div></div>';
-
+        // Ch8: Overall Judgment
+        const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;
+        const maleficPlanets = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'malefic'; });
+        let ch8 = 'Out of 9 planets: <strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong><br><br>';
+        if (beneficCount >= 7) ch8 += '🌟 <strong>Very strong past life merit.</strong> Parashara called this "a soul blessed by the gods." Most planets under benefic deities.';
+        else if (beneficCount >= 5) { ch8 += '✨ <strong>Abundant past life merit.</strong> Benefic predominate, protection in many areas.'; if (maleficPlanets.length > 0) ch8 += ' Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — practice mantras and charity.'; }
+        else if (beneficCount >= 3) { ch8 += '⚖️ <strong>Balanced karma.</strong> Good events and challenges alternate.'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
+        else ch8 += '🔥 <strong>Life of karmic settlement.</strong> Parashara said "the heaviest karma leads to greatest growth." Mantras and charity are vital.';
+        html += subChapter('📊', 'Overall Karma Judgment', ch8);
 
     } else if (division === 2) {
         // D2 Hora — Wealth accumulation
