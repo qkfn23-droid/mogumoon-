@@ -1953,9 +1953,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch1 = '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (Herrscher: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
-            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.name + '</strong> schuetzt den Lagna. ' + lagnaD.deity.desc + ' — Verdienste aus frueheren Leben schuetzen dieses Leben, gute Gelegenheiten kommen natuerlich.' :
-                '<strong>' + lagnaD.deity.name + '</strong> beeinflusst den Lagna. ' + lagnaD.deity.desc + ' — Karmische Herausforderung in der Persoenlichkeit, aber Ueberwindung fuehrt zu grösserem Wachstum.');
+            ch1 += '<br>' + (isEasy ?
+                (lagnaD.deity.nature === 'benefic' ? 'Du hast in früheren Leben viel Gutes getan, gute Gelegenheiten kommen natürlich. Deine Existenz ist geschützt.' : 'Es gibt ungelöste Lektionen aus früheren Leben. Sie beeinflussen dich, aber ihre Überwindung führt zu Wachstum.') :
+                (lagnaD.deity.nature === 'benefic' ?
+                    '<strong>' + lagnaD.deity.name + '</strong> schuetzt den Lagna. ' + lagnaD.deity.desc + ' — Verdienste aus frueheren Leben schuetzen dieses Leben, gute Gelegenheiten kommen natuerlich.' :
+                    '<strong>' + lagnaD.deity.name + '</strong> beeinflusst den Lagna. ' + lagnaD.deity.desc + ' — Karmische Herausforderung in der Persoenlichkeit, aber Ueberwindung fuehrt zu grösserem Wachstum.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' im D60 Lagna — Kernkarma in diesen Planeten konzentriert.';
         html += subChapter('🪐', 'Seelenidentität — Wer du warst', ch1);
@@ -1967,8 +1969,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Sonne: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Sonnen-Gottheit <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Seelenzweck wurde richtig verfolgt, Selbstverwirklichung kommt natuerlich.' : 'Herausforderungen an Ego und Autoritaet, das wahre Selbst finden ist die Aufgabe.');
-            }
+            ch2 += '<br>' + (isEasy ?
+                (sunD.deity.nature === 'benefic' ? 'Du hast deinen wahren Zweck gut verfolgt, Selbstverwirklichung kommt natürlich. Sei selbstbewusst!' : 'Es gab Verwirrung über wer du bist. Dein wahres Ich zu finden ist eine wichtige Reise.') :
+                (sunD.deity.nature === 'benefic' ?
+                    'Seelenzweck wurde richtig verfolgt, Selbstverwirklichung kommt natuerlich.' :
+                    'Herausforderungen an Ego und Autoritaet, das wahre Selbst finden ist die Aufgabe.'));
+        }
             html += subChapter('☉', 'Seelenzweck — Warum du geboren wurdest', ch2);
         }
 
@@ -1979,8 +1985,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Mond: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Mond-Gottheit <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Geist war friedlich, emotionale Stabilitaet und Intuition sind angeboren.' : 'Emotionale Wunden bleiben im Unterbewusstsein. Meditation und Ruhe am Wasser helfen.');
-            }
+            ch3 += '<br>' + (isEasy ?
+                (moonD.deity.nature === 'benefic' ? 'Dein Geist war friedlich, du bist emotional stabil mit starker Intuition.' : 'Es gibt Spuren emotionaler Schwierigkeiten. Meditation und Wasser in der Nähe hilft bei der Heilung.') :
+                (moonD.deity.nature === 'benefic' ?
+                    'Geist war friedlich, emotionale Stabilitaet und Intuition sind angeboren.' :
+                    'Emotionale Wunden bleiben im Unterbewusstsein. Meditation und Ruhe am Wasser helfen.'));
+        }
             html += subChapter('☽', 'Emotionale Erinnerung — Unterbewusste Muster', ch3);
         }
 
@@ -2008,7 +2018,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ Venus (Liebe-Karaka)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus unter wohltaetigem Schutz. Liebe wurde richtig praktiziert, schoene Liebe wartet.' : 'Venus unter ueblem Einfluss. Die wahre Bedeutung der Liebe zu lernen ist die Aufgabe.';
+            ch4 += isEasy ?
+                (venD.deity && venD.deity.nature === 'benefic' ? 'Du hast aufrichtig geliebt, schöne Liebe wartet auf dich.' : 'Es gibt ungelöste Liebeslektionen. Wahre Liebe zu lernen ist wichtig.') :
+                (venD.deity && venD.deity.nature === 'benefic' ? 'Venus unter wohltaetigem Schutz. Liebe wurde richtig praktiziert, schoene Liebe wartet.' : 'Venus unter ueblem Einfluss. Die wahre Bedeutung der Liebe zu lernen ist die Aufgabe.');
         }
         if (rahuD60 && ketuD60) {
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2038,7 +2050,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ Saturn (Herr des Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn unter Wohltaeter — <strong>sehr seltener Segen!</strong> Verdienst durch Geduld reduziert berufliche Pruefungen.' : 'Saturn unter Uebel — schweres Berufskarma. Aufloesen durch Geduld, Dienst und Mantra.';
+            ch5 += isEasy ?
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Sehr seltener Segen! Berufliche Herausforderungen sind reduziert.' : 'Schwere Karriere-Lektion. Beständige Anstrengung ist der Schlüssel.') :
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn unter Wohltaeter — <strong>sehr seltener Segen!</strong> Verdienst durch Geduld reduziert berufliche Pruefungen.' : 'Saturn unter Uebel — schweres Berufskarma. Aufloesen durch Geduld, Dienst und Mantra.');
         }
         if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planeten im D60 10.:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Berufskarma hier konzentriert.';
         html += subChapter('💼', 'Berufs-Karma — Berufung aus früherem Leben', ch5);

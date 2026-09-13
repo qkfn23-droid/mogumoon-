@@ -1997,9 +1997,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch1 = '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (Ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
-            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.name + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects this life, good opportunities naturally come.' :
-                '<strong>' + lagnaD.deity.name + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted on personality, but overcoming it leads to greater growth.');
+            ch1 += '<br>' + (isEasy ?
+                (lagnaD.deity.nature === 'benefic' ? 'You did many good things in past lives, so good opportunities naturally come to you. Your very existence is protected.' : 'There are unresolved lessons from past lives affecting your personality, but overcoming them leads to even greater growth.') :
+                (lagnaD.deity.nature === 'benefic' ?
+                    '<strong>' + lagnaD.deity.name + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects this life, good opportunities naturally come.' :
+                    '<strong>' + lagnaD.deity.name + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted on personality, but overcoming it leads to greater growth.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' in D60 Lagna — core karma concentrated in these planets.';
         html += subChapter('🪐', 'Soul Identity — Who you were', ch1);
@@ -2011,8 +2013,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Sun: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'Soul purpose was rightly pursued, self-realization comes naturally.' : 'Challenges to ego and authority in past life, finding true self is the task.');
-            }
+            ch2 += '<br>' + (isEasy ?
+                (sunD.deity.nature === 'benefic' ? 'You pursued your true purpose well in past lives, so self-realization comes naturally. Be confident!' : 'There was confusion about who you are in past lives. Finding your true self is an important journey that will make you grow.') :
+                (sunD.deity.nature === 'benefic' ?
+                    'Soul purpose was rightly pursued, self-realization comes naturally.' :
+                    'Challenges to ego and authority in past life, finding true self is the task.'));
+        }
             html += subChapter('☉', 'Soul Purpose — Why you were born', ch2);
         }
 
@@ -2023,8 +2029,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Moon: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'Mind was peaceful in past life, emotional stability and intuition are innate.' : 'Emotional wounds remain in subconscious. Meditation and rest near water help.');
-            }
+            ch3 += '<br>' + (isEasy ?
+                (moonD.deity.nature === 'benefic' ? 'Your mind was peaceful in past lives, so you are emotionally stable with strong intuition. Trust your gut feelings.' : 'There are traces of emotional hardship from past lives deep in your heart. Meditation and being near water greatly helps healing.') :
+                (moonD.deity.nature === 'benefic' ?
+                    'Mind was peaceful in past life, emotional stability and intuition are innate.' :
+                    'Emotional wounds remain in subconscious. Meditation and rest near water help.'));
+        }
             html += subChapter('☽', 'Emotional Memory — Subconscious patterns', ch3);
         }
 
@@ -2052,7 +2062,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ Venus (Love Karaka)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus under benefic protection. Love was rightly practiced, beautiful love awaits.' : 'Venus under malefic influence. Learning the true meaning of love is the task.';
+            ch4 += isEasy ?
+                (venD.deity && venD.deity.nature === 'benefic' ? 'You loved sincerely in past lives, so beautiful love awaits you.' : 'There are unresolved love lessons from past lives. Learning what true love means is important.') :
+                (venD.deity && venD.deity.nature === 'benefic' ? 'Venus under benefic protection. Love was rightly practiced, beautiful love awaits.' : 'Venus under malefic influence. Learning the true meaning of love is the task.');
         }
         if (rahuD60 && ketuD60) {
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2082,7 +2094,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ Saturn (Lord of Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>very rare blessing!</strong> Merit from patience reduces career trials.' : 'Saturn under malefic — heavy career karma. Dissolve through patience, service, and mantra (Om Shanaishcharaya Namaha).';
+            ch5 += isEasy ?
+                (satD.deity && satD.deity.nature === 'benefic' ? 'This is a very rare blessing! Career challenges are reduced in this life.' : 'There is a heavy career lesson from past lives. Steady effort and helping others is the key.') :
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>very rare blessing!</strong> Merit from patience reduces career trials.' : 'Saturn under malefic — heavy career karma. Dissolve through patience, service, and mantra (Om Shanaishcharaya Namaha).');
         }
         if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planets in D60 10th:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — career karma concentrated here.';
         html += subChapter('💼', 'Career Karma — Past life calling', ch5);

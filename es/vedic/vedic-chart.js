@@ -1953,9 +1953,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch1 = '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (Regente: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
-            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.name + '</strong> protege el Lagna. ' + lagnaD.deity.desc + ' — El merito de vidas pasadas protege esta vida, las oportunidades llegan naturalmente.' :
-                '<strong>' + lagnaD.deity.name + '</strong> influye en el Lagna. ' + lagnaD.deity.desc + ' — Desafio karmico grabado en la personalidad, pero superarlo lleva a mayor crecimiento.');
+            ch1 += '<br>' + (isEasy ?
+                (lagnaD.deity.nature === 'benefic' ? 'Hiciste muchas cosas buenas en vidas pasadas, las buenas oportunidades llegan naturalmente. Tu existencia está protegida.' : 'Hay lecciones no resueltas de vidas pasadas que afectan tu personalidad, pero superarlas lleva a mayor crecimiento.') :
+                (lagnaD.deity.nature === 'benefic' ?
+                    '<strong>' + lagnaD.deity.name + '</strong> protege el Lagna. ' + lagnaD.deity.desc + ' — El merito de vidas pasadas protege esta vida, las oportunidades llegan naturalmente.' :
+                    '<strong>' + lagnaD.deity.name + '</strong> influye en el Lagna. ' + lagnaD.deity.desc + ' — Desafio karmico grabado en la personalidad, pero superarlo lleva a mayor crecimiento.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' en D60 Lagna — karma central concentrado en estos planetas.';
         html += subChapter('🪐', 'Identidad del Alma — Quien fuiste', ch1);
@@ -1967,8 +1969,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Sol: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Deidad solar <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'El proposito del alma fue correctamente perseguido, la autorrealizacion llega naturalmente.' : 'Desafios al ego y autoridad en vidas pasadas, encontrar el verdadero yo es la tarea.');
-            }
+            ch2 += '<br>' + (isEasy ?
+                (sunD.deity.nature === 'benefic' ? 'Perseguiste bien tu propósito en vidas pasadas, la autorrealización viene naturalmente. ¡Ten confianza!' : 'Hubo confusión sobre quién eres en vidas pasadas. Encontrar tu verdadero yo es un viaje importante.') :
+                (sunD.deity.nature === 'benefic' ?
+                    'El proposito del alma fue correctamente perseguido, la autorrealizacion llega naturalmente.' :
+                    'Desafios al ego y autoridad en vidas pasadas, encontrar el verdadero yo es la tarea.'));
+        }
             html += subChapter('☉', 'Proposito del Alma — Por que naciste', ch2);
         }
 
@@ -1979,8 +1985,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Luna: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Deidad lunar <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'La mente fue pacifica en vidas pasadas, estabilidad emocional e intuicion son innatas.' : 'Heridas emocionales permanecen en el subconsciente. Meditacion y descanso cerca del agua ayudan.');
-            }
+            ch3 += '<br>' + (isEasy ?
+                (moonD.deity.nature === 'benefic' ? 'Tu mente fue pacífica en vidas pasadas, eres emocionalmente estable con fuerte intuición.' : 'Hay rastros de dificultades emocionales de vidas pasadas. La meditación y estar cerca del agua ayuda mucho.') :
+                (moonD.deity.nature === 'benefic' ?
+                    'La mente fue pacifica en vidas pasadas, estabilidad emocional e intuicion son innatas.' :
+                    'Heridas emocionales permanecen en el subconsciente. Meditacion y descanso cerca del agua ayudan.'));
+        }
             html += subChapter('☽', 'Memoria Emocional — Patrones inconscientes', ch3);
         }
 
@@ -2008,7 +2018,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ Venus (Karaka del Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus bajo proteccion benefica. El amor fue bien practicado, un amor hermoso espera.' : 'Venus bajo influencia malefica. Aprender el verdadero significado del amor es la tarea.';
+            ch4 += isEasy ?
+                (venD.deity && venD.deity.nature === 'benefic' ? 'Amaste sinceramente en vidas pasadas, un amor hermoso te espera.' : 'Hay lecciones de amor no resueltas. Aprender el amor verdadero es importante.') :
+                (venD.deity && venD.deity.nature === 'benefic' ? 'Venus bajo proteccion benefica. El amor fue bien practicado, un amor hermoso espera.' : 'Venus bajo influencia malefica. Aprender el verdadero significado del amor es la tarea.');
         }
         if (rahuD60 && ketuD60) {
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2038,7 +2050,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ Saturno (Señor del Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturno bajo benefico — <strong>bendicion muy rara!</strong> El merito de la paciencia reduce las pruebas profesionales.' : 'Saturno bajo malefico — karma profesional pesado. Disolver con paciencia, servicio y mantra (Om Shanaishcharaya Namaha).';
+            ch5 += isEasy ?
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Bendición muy rara. Los desafíos profesionales se reducen.' : 'Hay una lección pesada sobre la carrera. El esfuerzo constante es la clave.') :
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Saturno bajo benefico — <strong>bendicion muy rara!</strong> El merito de la paciencia reduce las pruebas profesionales.' : 'Saturno bajo malefico — karma profesional pesado. Disolver con paciencia, servicio y mantra (Om Shanaishcharaya Namaha).');
         }
         if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planetas en D60 casa 10:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — karma profesional concentrado aqui.';
         html += subChapter('💼', 'Karma Profesional — Vocacion pasada', ch5);

@@ -1947,9 +1947,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch1 = '<strong>D60 ラグナ： ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (支配星： ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
-            ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.name + '</strong> がラグナを守護。 ' + lagnaD.deity.desc + ' — 前世の功徳が今生を守護。自然に良い機会が訪れます。' :
-                '<strong>' + lagnaD.deity.name + '</strong> がラグナに影響。 ' + lagnaD.deity.desc + ' — カルマ的試練が性格に刻まれていますが、克服すれば大きな成長があります。');
+            ch1 += '<br>' + (isEasy ?
+                (lagnaD.deity.nature === 'benefic' ? '前世で多くの善行を積んだため、今世でも自然と良い機会が訪れます。あなたの存在そのものが守られています。' : '前世から解決していない課題が残っています。性格に影響していますが、乗り越えれば更に大きな成長が待っています。') :
+                (lagnaD.deity.nature === 'benefic' ?
+                    '<strong>' + lagnaD.deity.name + '</strong> がラグナを守護。 ' + lagnaD.deity.desc + ' — 前世の功徳が今生を守護。自然に良い機会が訪れます。' :
+                    '<strong>' + lagnaD.deity.name + '</strong> がラグナに影響。 ' + lagnaD.deity.desc + ' — カルマ的試練が性格に刻まれていますが、克服すれば大きな成長があります。'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' がD60ラグナに位置 — 核心カルマがこれらの惑星に集中。';
         html += subChapter('🪐', '魂の正体 — 前世での姿', ch1);
@@ -1961,8 +1963,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 太陽： ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>太陽の守護神 <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? '魂の目的を正しく追求、自己実現が自然に訪れます。' : '前世で自我と権威への試練、真の自己を見つけることが課題。');
-            }
+            ch2 += '<br>' + (isEasy ?
+                (sunD.deity.nature === 'benefic' ? '前世で自分の目的を正しく追求したため、自己実現が自然にできます。自信を持って大丈夫！' : '前世で自分が誰かについて混乱がありました。本当の自分を見つけていく過程が重要な課題です。') :
+                (sunD.deity.nature === 'benefic' ?
+                    '魂の目的を正しく追求、自己実現が自然に訪れます。' :
+                    '前世で自我と権威への試練、真の自己を見つけることが課題。'));
+        }
             html += subChapter('☉', '魂の目的 — なぜ生まれたのか', ch2);
         }
 
@@ -1973,8 +1979,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 月： ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>月の守護神 <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? '前世で心が平和、感情的安定と直感が生まれつき。' : '感情的な傷が無意識に残存。瞑想と水辺の休息が助けになります。');
-            }
+            ch3 += '<br>' + (isEasy ?
+                (moonD.deity.nature === 'benefic' ? '前世で心が穏やかだったため、感情的に安定していて直感が強いです。感覚を信じて大丈夫。' : '前世の感情的な辛い経験の痕跡が心の奥に残っています。瞑想や水辺での休息が癒しに役立ちます。') :
+                (moonD.deity.nature === 'benefic' ?
+                    '前世で心が平和、感情的安定と直感が生まれつき。' :
+                    '感情的な傷が無意識に残存。瞑想と水辺の休息が助けになります。'));
+        }
             html += subChapter('☽', '感情の記憶 — 無意識のパターン', ch3);
         }
 
@@ -2002,7 +2012,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ 金星（愛のカラカ）</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ? '金星が吉神の保護下。美しい愛が待っています。' : '金星が凶神の影響下。真の愛の意味を学ぶことが課題。';
+            ch4 += isEasy ?
+                (venD.deity && venD.deity.nature === 'benefic' ? '前世で真心を込めて愛したため、美しい愛が待っています。' : '前世で愛に関して解決できなかった課題があります。本当の愛を学ぶ過程が重要です。') :
+                (venD.deity && venD.deity.nature === 'benefic' ? '金星が吉神の保護下。美しい愛が待っています。' : '金星が凶神の影響下。真の愛の意味を学ぶことが課題。');
         }
         if (rahuD60 && ketuD60) {
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2032,7 +2044,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ 土星（カルマの主）</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>非常に稀な祝福！</strong> 忍耐の功徳が職業的試練を減らします。' : '土星が凶神の下 — 重い職業カルマ。忍耐、奉仕、マントラで溶かしましょう。';
+            ch5 += isEasy ?
+                (satD.deity && satD.deity.nature === 'benefic' ? 'これは非常にまれな祝福です！今世では仕事の大きな試練が軽減されます。' : '仕事に関して前世からの重い課題があります。地道な努力と他人を助けることが鍵です。') :
+                (satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>非常に稀な祝福！</strong> 忍耐の功徳が職業的試練を減らします。' : '土星が凶神の下 — 重い職業カルマ。忍耐、奉仕、マントラで溶かしましょう。');
         }
         if (d60H10planets.length > 0) ch5 += '<br><br><strong>D60 10室の惑星：</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — 職業カルマがここに集中。';
         html += subChapter('💼', '職業カルマ — 前世の使命', ch5);
