@@ -2093,11 +2093,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return {idx: idx, deity: D60_DEITIES[idx] || null};
         }
         function deityTag(d) {
-            if (!d.deity) return '';
+            if (!d.deity || isEasy) return '';
             const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            if (isEasy) {
-                return ' — <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '좋은 기운이 함께해요 ✨' : '주의가 필요한 기운이에요 ⚡') + '</span>';
-            }
             return ' — 수호신: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '길(吉)' : '흉(凶)') + '</span>';
         }
 
@@ -2197,10 +2194,16 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch4 += '<br><strong>' + (isEasy ? '배우자 자리의 행성:' : 'D60 7궁의 행성:') + '</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
-                ch4 += (p.natural === 'benefic'
-                ? (isEasy ? '좋은 행성이 배우자 자리에 있어요 — 전생에서 배우자와 좋은 인연을 맺었으며, 이번 생에서도 배우자에게서 축복을 받습니다.' : '길성이 7궁에 위치 — 전생에서 배우자와 좋은 카르마를 쌓았으며, 이번 생에서도 배우자에게서 축복을 받습니다.')
-                : (isEasy ? '도전의 행성이 배우자 자리에 있어요 — 전생에서 배우자와 해결하지 못한 과제가 있으며, 이번 생에서 이를 풀어갑니다. 도전이지만 성장의 기회입니다.' : '흉성이 7궁에 위치 — 전생에서 배우자와 해결하지 못한 카르마가 있으며, 이번 생에서 이를 정산합니다. 도전이지만 성장의 기회입니다.')) + '<br>';
+                if (isEasy) {
+                    ch4 += (p.natural === 'benefic'
+                        ? '전생에서 배우자와 좋은 인연을 맺었으며, 이번 생에서도 배우자에게서 축복을 받습니다.'
+                        : '전생에서 배우자와 해결하지 못한 과제가 있으며, 이번 생에서 이를 풀어갑니다. 도전이지만 성장의 기회입니다.') + '<br>';
+                } else {
+                    ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
+                    ch4 += (p.natural === 'benefic'
+                        ? '길성이 7궁에 위치 — 전생에서 배우자와 좋은 카르마를 쌓았으며, 이번 생에서도 배우자에게서 축복을 받습니다.'
+                        : '흉성이 7궁에 위치 — 전생에서 배우자와 해결하지 못한 카르마가 있으며, 이번 생에서 이를 정산합니다. 도전이지만 성장의 기회입니다.') + '<br>';
+                }
             });
         }
 
@@ -2208,14 +2211,16 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><strong>♀ 금성 (사랑의 행성)</strong> → ' + (isEasy ? houseThemes[venH] : 'D60 ' + venH + '궁 (' + houseThemes[venH] + ')') + deityTag(venD) + '<br>';
-            ch4 += isEasy ?
-                (venD.deity && venD.deity.nature === 'benefic' ?
-                    '전생에서 사랑을 진심으로 했기 때문에, 이번 생에서도 아름다운 사랑이 기다려요. 사랑의 행성이 좋은 기운의 보호를 받고 있습니다.' :
-                    '전생에서 사랑과 관련해 풀지 못한 과제가 있어요. 이번 생에서 진짜 사랑이 뭔지 배워가는 과정이 중요합니다. 그 과정이 당신을 더 깊은 사람으로 만들어요.') :
-                (venD.deity && venD.deity.nature === 'benefic' ?
+            if (isEasy) {
+                ch4 += '<br>' + (venD.deity && venD.deity.nature === 'benefic' ?
+                    '전생에서 사랑을 진심으로 했기 때문에, 이번 생에서도 아름다운 사랑이 기다려요.' :
+                    '전생에서 사랑과 관련해 풀지 못한 과제가 있어요. 이번 생에서 진짜 사랑이 뭔지 배워가는 과정이 중요합니다. 그 과정이 당신을 더 깊은 사람으로 만들어요.');
+            } else {
+                ch4 += '<br><strong>♀ 금성 (사랑의 행성)</strong> → D60 ' + venH + '궁 (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+                ch4 += venD.deity && venD.deity.nature === 'benefic' ?
                     '금성이 길신 <strong>' + venD.deity.ko + '</strong>의 보호 아래 있습니다. 전생에서 사랑을 올바르게 실천했으며, 이번 생에서도 아름다운 사랑이 기다립니다. ' + venD.deity.desc :
-                    '금성이 흉신 <strong>' + (venD.deity?venD.deity.ko:'') + '</strong>의 영향 아래 있습니다. 전생에서 사랑에 대한 도전이 있었으며, 이번 생에서 진정한 사랑의 의미를 배우는 것이 과제입니다. ' + (venD.deity?venD.deity.desc:''));
+                    '금성이 흉신 <strong>' + (venD.deity?venD.deity.ko:'') + '</strong>의 영향 아래 있습니다. 전생에서 사랑에 대한 도전이 있었으며, 이번 생에서 진정한 사랑의 의미를 배우는 것이 과제입니다. ' + (venD.deity?venD.deity.desc:'');
+            }
         }
 
         // 라후-케투 축 (1-7궁이면 전생 인연)
@@ -2234,9 +2239,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (h7lordPlanet) {
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
             const h7lD = getDeity(h7lordPlanet.sidereal);
-            ch4 += '<br><br><strong>' + (isEasy ? '배우자 운명의 행성 ' : '7궁주 ') + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → ' + (isEasy ? houseThemes[h7lH] : 'D60 ' + h7lH + '궁 (' + houseThemes[h7lH] + ')') + deityTag(h7lD) + '<br>';
-            ch4 += '배우자와의 카르마적 연결이 <strong>' + houseThemes[h7lH] + '</strong> 영역을 통해 발현됩니다. ';
-            ch4 += h7lH === 1 ? '배우자가 당신 자신의 성장에 직결됩니다.' : h7lH === 4 ? '가정과 안식처를 통해 배우자를 만납니다.' : h7lH === 9 ? '해외나 종교/교육을 통해 배우자와 인연이 이어집니다.' : h7lH === 10 ? '직업/사회적 활동을 통해 배우자 인연이 이어집니다.' : h7lH === 12 ? '해외나 영적 환경에서 배우자와 만나는 카르마입니다.' : '';
+            if (isEasy) {
+                const h7lDesc = h7lH === 1 ? '배우자가 당신 자신의 성장에 직결됩니다.' : h7lH === 4 ? '가정과 안식처를 통해 배우자를 만나게 됩니다.' : h7lH === 9 ? '해외나 교육을 통해 배우자와 인연이 이어집니다.' : h7lH === 10 ? '직업이나 사회적 활동을 통해 배우자 인연이 이어집니다.' : h7lH === 12 ? '해외나 영적인 환경에서 배우자와 만나게 됩니다.' : '';
+                if (h7lDesc) ch4 += '<br><br>' + h7lDesc;
+            } else {
+                ch4 += '<br><br><strong>7궁주 ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + '궁 (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
+                ch4 += '배우자와의 카르마적 연결이 <strong>' + houseThemes[h7lH] + '</strong> 영역을 통해 발현됩니다. ';
+                ch4 += h7lH === 1 ? '배우자가 당신 자신의 성장에 직결됩니다.' : h7lH === 4 ? '가정과 안식처를 통해 배우자를 만납니다.' : h7lH === 9 ? '해외나 종교/교육을 통해 배우자와 인연이 이어집니다.' : h7lH === 10 ? '직업/사회적 활동을 통해 배우자 인연이 이어집니다.' : h7lH === 12 ? '해외나 영적 환경에서 배우자와 만나는 카르마입니다.' : '';
+            }
         }
         html += subChapter('💍', '배우자 카르마 — 전생의 인연', ch4);
 
@@ -2254,11 +2264,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            ch5 += '<br><strong>♄ 토성 (카르마의 주인)</strong> → ' + (isEasy ? houseThemes[satH] : 'D60 ' + satH + '궁 (' + houseThemes[satH] + ')') + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ 토성 (카르마의 주인)</strong> → D60 ' + satH + '궁 (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
-                (satD.deity && satD.deity.nature === 'benefic' ?
+                ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
                     '이건 <strong>매우 드문 축복</strong>이에요! 전생에서 힘든 일을 참고 견뎌낸 덕분에, 이번 생에서는 직업적으로 큰 시련이 줄어듭니다. 일하면서 겪는 어려움이 남들보다 가벼울 거예요.' :
-                    '직업과 관련해서 전생에서 가져온 <strong>무거운 숙제</strong>가 있어요. 일에서 어려움을 겪을 수 있지만, 꾸준히 노력하고 다른 사람을 돕는 것이 이 숙제를 푸는 열쇠입니다.') :
+                    '직업과 관련해서 전생에서 가져온 <strong>무거운 숙제</strong>가 있어요. 일에서 어려움을 겪을 수 있지만, 꾸준히 노력하고 다른 사람을 돕는 것이 이 숙제를 푸는 열쇠입니다.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
                     '토성이 길신 아래에 있는 것은 <strong>매우 희귀한 축복</strong>입니다! 전생에서 고통을 인내로 승화시킨 공덕이 이번 생의 직업적 시련을 줄여줍니다.' :
                     '토성이 흉신 아래에 있어 직업적 영역에서 <strong>전생의 무거운 카르마</strong>가 있습니다. ' + (satD.deity?satD.deity.desc:'') + '. 인내와 봉사, 만트라(Om Shanaishcharaya Namaha)로 이 업보를 녹이세요.');
@@ -2285,25 +2295,23 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         html += subChapter('💰', '재물 카르마 — 전생의 부', ch6);
 
-        // ─── 소챕터 7: 행성별 신 목록 ───
-        let ch7 = '';
-        const lagnaD2 = getDeity(lagnaSidereal);
-        if (lagnaD2.deity) {
-            const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            ch7 += isEasy ?
-                '<div style="padding:4px 0;">⬆ 나 자신 → <span style="color:' + lc + ';font-weight:700;">' + (lagnaD2.deity.nature === 'benefic' ? '좋은 기운 ✨' : '주의 기운 ⚡') + '</span></div>' :
-                '<div style="padding:4px 0;">⬆ 라그나 → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
-        }
-        positions.forEach(p => {
-            const pD = getDeity(p.sidereal);
-            if (pD.deity) {
-                const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                ch7 += isEasy ?
-                    '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <span style="color:' + c + ';font-weight:700;">' + (pD.deity.nature === 'benefic' ? '좋은 기운 ✨' : '주의 기운 ⚡') + '</span></div>' :
-                    '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+        // ─── 소챕터 7: 행성별 신 목록 (전문가 모드만) ───
+        if (!isEasy) {
+            let ch7 = '';
+            const lagnaD2 = getDeity(lagnaSidereal);
+            if (lagnaD2.deity) {
+                const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+                ch7 += '<div style="padding:4px 0;">⬆ 라그나 → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
             }
-        });
-        html += subChapter(isEasy ? '✨' : '🕉️', isEasy ? '행성별 기운 한눈에 보기' : '행성별 수호신 목록', ch7);
+            positions.forEach(p => {
+                const pD = getDeity(p.sidereal);
+                if (pD.deity) {
+                    const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
+                    ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+                }
+            });
+            html += subChapter('🕉️', '행성별 수호신 목록', ch7);
+        }
 
         // ─── 소챕터 8: 종합 카르마 판단 ───
         const beneficCount = positions.filter(p => {
