@@ -1187,18 +1187,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     const spouseAppearance = [
-        '날카로운 이목구비, 강한 인상. 운동선수 같은 탄탄한 체형이나 근육질. 눈빛이 강렬하고 에너지가 넘치는 appearance. 붉은 계열 옷이 잘 어울리며, 활동적이고 역동적인 분위기.',
-        '부드럽고 매력적인 appearance. 풍만한 체형에 감각적인 입술. 피부가 좋고 자연스러운 아름다움. 목소리가 좋으며 전체적으로 따뜻하고 편안한 인상. 브랜드 옷을 즐김.',
-        '젊어 보이는 appearance에 밝은 인상. 날씬하고 키가 큰 편. 말을 잘하며 표정이 풍부하고 눈이 반짝임. 유행에 민감하고 스타일리시한 패션 감각.',
-        '둥근 얼굴에 부드러운 인상. 살짝 통통하거나 곡선미가 있는 체형. 피부가 희고 눈이 큼. 모성적 분위기. 편안한 옷차림을 선호하며 집에서 더 매력적.',
-        '당당한 체격에 카리스마 넘치는 appearance. 풍성한 머리카락이 특징. 눈에 띄는 존재감이 있으며 옷을 잘 입음. 화려한 액세서리를 좋아하며 어디서든 시선을 끄는 타입.',
-        '단정하고 깔끔한 appearance. 마른 편이며 비율이 좋음. 지적인 인상에 안경이 잘 어울림. 미니멀한 패션을 선호하며 청결함이 매력 포인트. 디테일에 신경 쓰는 스타일.',
-        '균형 잡힌 appearance에 세련된 인상. 대칭적인 얼굴형. 미소가 매력적이고 사교적인 분위기. 패션 감각이 뛰어나고 항상 잘 차려입음. 보조개가 있을 수 있음.',
-        '날카롭고 신비로운 appearance. 깊은 눈빛이 강한 인상을 남김. 마른 편이며 날카로운 이목구비. 전체적으로 어두운 톤의 옷을 선호. 카리스마 있는 분위기에 숨겨진 섹시함.',
-        '키가 크고 체격이 좋음. 밝고 개방적인 인상. 이국적인 매력이 있거나 외국인 같은 분위기. 캐주얼하고 자유로운 옷차림. 웃는 얼굴이 매력적이며 스포티한 스타일.',
-        '진지하고 성숙한 appearance. 마른 편이며 뼈대가 뚜렷함. 나이보다 어른스러워 보이며 시간이 갈수록 매력이 늘어남. 정장이 잘 어울리며 클래식한 스타일. 턱선이 뚜렷.',
-        '독특하고 비범한 appearance. 개성 있는 패션 스타일. 키가 크거나 눈에 띄는 특징이 있음. 평범하지 않은 매력. 미래적이고 실험적인 스타일을 좋아함.',
-        '부드럽고 몽환적인 appearance. 큰 눈에 꿈꾸는 듯한 표정. 살짝 통통한 편이며 피부가 투명함. 파스텔 톤이 잘 어울리며 예술가 분위기. 신비로운 매력.'
+        'Sharp features, strong impression. Athletic build. Intense eyes full of energy. Red tones suit well. Active, dynamic vibe.',
+        'Soft, attractive appearance. Full figure with sensual lips. Good skin with natural beauty. Warm, comfortable impression.',
+        'Youthful appearance, bright impression. Slim and tall. Expressive face with sparkling eyes. Trendy and stylish.',
+        'Round face, soft impression. Slightly curvy figure. Fair skin with large eyes. Motherly vibe. More attractive at home.',
+        'Dignified build with charismatic appearance. Rich hair is a feature. Commanding presence, well-dressed. Draws attention everywhere.',
+        'Neat, clean appearance. Lean with good proportions. Intellectual impression. Minimal fashion, cleanliness is charm.',
+        'Balanced appearance, refined impression. Symmetrical face. Charming smile, social vibe. Always well-dressed. May have dimples.',
+        'Sharp, mysterious appearance. Deep eyes leave strong impression. Lean with sharp features. Prefers dark tones. Hidden sexiness.',
+        'Tall with good build. Bright, open impression. Exotic charm. Casual, free clothing. Attractive smile, sporty style.',
+        'Serious, mature appearance. Lean with defined bone structure. Looks older than age but grows more attractive over time. Classic suit style.',
+        'Unique, extraordinary appearance. Distinctive fashion. Tall or with notable features. Unconventional charm. Futuristic style.',
+        'Soft, dreamy appearance. Large eyes with dreamy expression. Slightly plump with translucent skin. Pastel tones suit. Mystical charm.'
     ];
 
     let spouseText = (isEasy ? '' : '<strong>📐 spouse Appearance & First Impression:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 spouse 성격:</strong><br>') + spouseSign[h7sign];
@@ -2205,18 +2205,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
         const spouseKarmaBySign = [
-            'In past lives, 전사/리더와의 인연. 강렬하고 독립적인 spouse karma. In past lives, 함께 싸웠거나 경쟁했던 soul.',
-            'In past lives, 예술가/부유한 자와의 인연. 물질적으로 풍요로운 결혼 karma. In past lives, 아름다움을 함께 추구한 soul.',
-            'In past lives, 학자/상인과의 인연. 소통과 지적 교감의 결혼 karma. In past lives, 함께 공부하거나 교역한 soul.',
-            'In past lives, 가족/보호자와의 인연. 깊은 감정적 유대의 결혼 karma. In past lives, 서로를 돌보았던 soul.',
-            'In past lives, 왕족/귀족과의 인연. 화려하고 존경받는 결혼 karma. In past lives, 함께 지배했던 soul.',
+            'Past life warrior/leader connection. Intense, independent spouse karma. Souls who fought or competed together.',
+            'Past life artist/wealthy connection. Materially abundant marriage karma. Souls who pursued beauty together.',
+            'Past life scholar/merchant connection. Intellectual marriage karma. Souls who studied or traded together.',
+            'Past life family/protector connection. Deep emotional bond marriage karma. Souls who cared for each other.',
+            'Past life royalty/nobility connection. Splendid, respected marriage karma. Souls who ruled together.',
             'In past lives, 치유자/봉Leo와의 인연. service와 헌신의 결혼 karma. In past lives, 함께 타인을 도왔던 soul.',
-            'In past lives, 외교관/예술가와의 인연. 조화롭고 아름다운 결혼 karma. In past lives, 함께 균형을 추구한 soul.',
-            'In past lives, practice자/신비주의자와의 인연. 강렬하고 변혁적인 결혼 karma. In past lives, 생사를 함께한 soul.',
-            'In past lives, 현자/탐험가와의 인연. 자유롭고 확장적인 결혼 karma. In past lives, 함께 진리를 탐구한 soul. 외국인 spouse 가능.',
-            'In past lives, 관료/건축가와의 인연. 책임감 있고 안정적인 결혼 karma. In past lives, 함께 질서를 세운 soul. 늦은 결혼 가능.',
+            'Past life diplomat/artist connection. Harmonious, beautiful marriage karma. Souls who sought balance together.',
+            'Past life practitioner/mystic connection. Intense, transformative marriage karma. Souls who shared life and death.',
+            'Past life sage/explorer connection. Free, expansive marriage karma. Foreign spouse possible.',
+            'Past life official/architect connection. Responsible, stable marriage karma. Late marriage possible.',
             'In past lives, 관료/군인/체계적 career인과의 인연. Saturn이 지배하는 사인으로, 책임감 있고 규율적인 spouse karma. In past lives, 함께 사회적 의무를 practice한 soul. 결혼이 다소 늦거나 나이 차이가 있을 수 있음.',
-            'In past lives, 영매/예술가와의 인연. 신비롭고 영적인 결혼 karma. In past lives, 함께 영적 practice을 한 soul. 꿈에서 먼저 만날 수 있음.'
+            'Past life medium/artist connection. Mystical, spiritual marriage karma. May meet first in dreams.'
         ];
 
         let ch4 = (isEasy
@@ -2505,7 +2505,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 20) {
         // D20 Vimshamsha — 영적 practice·종교
-        const d20LagnaInterp = ['행동적 영성. karma 요가. 활동적 service를 통한 practice.','자연과 감각을 통한 영성. mantra practice. 사원/절에서의 명상.','지적 영성. 경전 연구. 명상보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 요가(헌신). Mother 같은 신성에 끌림.','왕도의 영성. 리더로서의 영적 실천. Sun 숭배.','service의 영성. 세바(service)를 통한 practice. health과 치유 관련 영성.','조화의 영성. 예술과 미를 통한 신성 체험. 탄트라.','깊은 변혁의 영성. 탄트라, 쿤Moon리니. 죽음과 재생의 practice.','구도자의 영성. 순례 여행. 스승을 찾아 떠남. 철학적 practice.','전통적 영성. 체계적 practice. karma 요가. 인내의 practice.','혁신적 영성. 비전통적 practice법. 인류를 위한 service.','초월적 영성. 명상, 꿈, 직관. 신비 체험. 해탈 추구.'][dLagnaSign];
+        const d20LagnaInterp = ['Active spirituality. Karma yoga. Practice through active service.','Spirituality through nature and senses. Mantra practice. Temple meditation.','지적 영성. 경전 연구. 명상보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 요가(헌신). Mother 같은 신성에 끌림.','Royal spirituality. Spiritual practice as leader. Sun worship.','service의 영성. 세바(service)를 통한 practice. health과 치유 관련 영성.','Harmony spirituality. Divine experience through art and beauty. Tantra.','깊은 변혁의 영성. 탄트라, 쿤Moon리니. 죽음과 재생의 practice.','Seeker spirituality. Pilgrimage. Searching for a teacher. Philosophical practice.','Traditional spirituality. Systematic practice. Karma yoga. Practice of patience.','Innovative spirituality. Unconventional methods. Service for humanity.','Transcendent spirituality. Meditation, dreams, intuition. Mystical experiences. Liberation.'][dLagnaSign];
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🙏 영적 practice·종교 분석' : '🙏 D20 Vimshamsha — 영적 practice·종교 분석') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D20 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d20LagnaInterp + '<br><br>';
