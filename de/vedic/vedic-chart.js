@@ -917,7 +917,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
+    let wealthText = isEasy ? '' : `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
     if (h2planets.length === 0) {
         wealthText += 'Keine Planeten im 2. Haus — Wohlstandsansammlung ist stetig und stabil. ';
     } else {
@@ -933,11 +933,11 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Rahu': 'Earns money through unconventional methods. Sudden wealth from foreign, technology, or innovation sectors.',
                 'Ketu': 'Indifference to wealth. Values spiritual matters over material ones; watch for sudden losses.'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
+            wealthText += isEasy ? `${pWealth[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
         });
     }
 
-    wealthText += `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
     if (h11planets.length === 0) {
         wealthText += 'Keine Planeten im 11. Haus — Einkommen ist stabil ohne grosse Schwankungen.';
     } else {
@@ -951,7 +951,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Sun': 'Income through authority. Political connections bring wealth.',
                 'Moon': 'Income through public popularity. Fluctuating but steady flow.'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
+            wealthText += isEasy ? `${pIncome[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
         });
     }
 
@@ -998,7 +998,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting. Beware of illusions.',
                 'Ketu': 'Detachment toward spouse. Past-life connection. Strong spiritual bond but distance in worldly relationships.'
             };
-            spouseText += `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
+            spouseText += isEasy ? `<br>${pH7[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
         });
     }
 
@@ -1062,7 +1062,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Venus': ' Art, entertainment, fashion, beauty, diplomacy. Success in creative fields.',
                 'Saturn': ' Slow but certain success. Systematic organizations, architecture, civil service. Shines after middle age.'
             };
-            careerText += `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
+            careerText += isEasy ? `<br>${pCareer[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
         });
     }
 
@@ -1094,7 +1094,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     html += `<div class="interp-card">
         <div class="interp-title">🏥 Gesundheit — Gefährdete Bereiche</div>
-        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + isEasy ? '' : h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
     </div>`;
 
     // ═══════════════════════════════════
@@ -1336,7 +1336,7 @@ function renderEducation(positions, lagnaSign) {
     if (h5.length > 0) {
         h5.forEach(p => {
             const h5p = { Sun: 'Excels in leadership/political science', Moon: 'Talent in art/psychology', Mars: 'Talent in engineering/technology/physical education', Mercury: 'Genius in math/languages/business', Jupiter: 'The best placement! Scholar/professor/researcher', Venus: 'Talent in art/design/music', Saturn: 'Late academic start but deep research' };
-            text += `${p.name}: ${h5p[p.id] || 'Influences academics'}. `;
+            text += `${isEasy ? "" : p.name + ": "}${h5p[p.id] || 'Influences academics'}. `;
         });
     }
 
@@ -1377,7 +1377,7 @@ function renderChildren(positions, lagnaSign) {
         text += '<br><br><strong>Planets in the 5th House:</strong><br>';
         h5.forEach(p => {
             const ch = { Sun: 'Connection with sons. Children have leader qualities.', Moon: 'Connection with daughters. Strong emotional bond with children.', Mars: 'Active children. May be somewhat difficult to manage.', Mercury: 'Very smart children! Excellent academics.', Jupiter: 'Blessed children! Dutiful and devoted. Fortune through children.', Venus: 'Beautiful and artistic children. Connection with daughters.', Saturn: 'Children may come late or be few. But responsible children.' };
-            text += `${p.symbol} ${p.name}: ${ch[p.id] || ''}<br>`;
+            text += `${ch[p.id] || ''}<br>`;
         });
     }
 
@@ -1407,7 +1407,7 @@ function renderForeign(positions, lagnaSign) {
     } else {
         h9.forEach(p => {
             const f9 = { Sun: 'Father has foreign connections. Government/official overseas trips.', Moon: 'Emotionally enjoys foreign travel. Popularity abroad.', Mars: 'Adventure/challenges abroad. Military/technology-related foreign activities.', Mercury: 'Study abroad/business success! Multilingual abilities.', Jupiter: 'Great fortune abroad! Successful study/immigration. Meeting a foreign teacher.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Hardship then success abroad. Long-term foreign residence.', Rahu: 'Strong indicator of foreign migration! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connections. Spiritual pilgrimage.' };
-            text += `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
+            text += isEasy ? `${f9[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
 
@@ -1417,7 +1417,7 @@ function renderForeign(positions, lagnaSign) {
     } else {
         h12.forEach(p => {
             const f12 = { Sun: 'Finding identity abroad. Government-related foreign postings.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT activities. Overseas education.', Jupiter: 'Spiritual growth abroad. Charitable activities. Foreign universities.', Venus: 'Luxury and pleasure abroad. Overseas artistic activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Definitive indicator of foreign immigration! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
-            text += `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
+            text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
 

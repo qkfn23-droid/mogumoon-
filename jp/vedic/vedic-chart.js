@@ -916,7 +916,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = `<strong>2宮 (蓄積された財産):</strong> ${SIGNS[h2sign]}に位置。`;
+    let wealthText = isEasy ? '' : `<strong>2宮 (蓄積された財産):</strong> ${SIGNS[h2sign]}に位置。`;
     if (h2planets.length === 0) {
         wealthText += '2宮に惑星がなく、財産の蓄積は着実ですが特別な変動なく安定的です。';
     } else {
@@ -932,11 +932,11 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Rahu': '非伝統的な方法でお金を稼ぎます。外国、技術、革新分野で突然の財。',
                 'Ketu': '財に対する無関心。霊的な価値を物質より重視し、突然の損失に注意。'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
+            wealthText += isEasy ? `${pWealth[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
         });
     }
 
-    wealthText += `<br><br><strong>11宮 (収入と利益):</strong> ${SIGNS[h11sign]}に位置。`;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11宮 (収入と利益):</strong> ${SIGNS[h11sign]}に位置。`;
     if (h11planets.length === 0) {
         wealthText += '11宮に惑星がなく、収入は安定的ですが大きく変動しません。';
     } else {
@@ -950,7 +950,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Sun': '権威を通じた収入。政治的な繋がりが財をもたらします。',
                 'Moon': '大衆的な人気を通じた収入。変動はあるが着実な流れ。'
             };
-            wealthText += `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
+            wealthText += isEasy ? `${pIncome[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
         });
     }
 
@@ -997,7 +997,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Rahu': '非伝統的な結婚。外国人や異なる背景の配偶者。突然の出会い。幻想に注意。',
                 'Ketu': '配偶者への超然さ。前世の縁。霊的な繋がりは強いが世俗的な関係では距離感。'
             };
-            spouseText += `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
+            spouseText += isEasy ? `<br>${pH7[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
         });
     }
 
@@ -1061,7 +1061,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                 'Venus': ' 芸術、エンターテインメント、ファッション、ビューティー、外交。創造的な分野で成功。',
                 'Saturn': ' 遅いが確実な成功。体系的組織、建築、公務員。中年以降輝く。'
             };
-            careerText += `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
+            careerText += isEasy ? `<br>${pCareer[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
         });
     }
 
@@ -1333,7 +1333,7 @@ function renderEducation(positions, lagnaSign) {
     if (h5.length > 0) {
         h5.forEach(p => {
             const h5p = { Sun: 'リーダーシップ/政治学分野に優れる', Moon: '芸術/心理学の才能', Mars: '工学/技術/体育の才能', Mercury: '数学/言語/ビジネスの天才', Jupiter: '最高の配置！学者/教授/研究者', Venus: '芸術/デザイン/音楽の才能', Saturn: '遅い学業だが深みのある研究' };
-            text += `${p.name}: ${h5p[p.id] || '学業に影響'}。`;
+            text += `${isEasy ? "" : p.name + ": "}${h5p[p.id] || '学業に影響'}。`;
         });
     }
 
@@ -1374,7 +1374,7 @@ function renderChildren(positions, lagnaSign) {
         text += '<br><br><strong>5宮の惑星:</strong><br>';
         h5.forEach(p => {
             const ch = { Sun: '息子との縁。子供がリーダーの気質。', Moon: '娘との縁。子供との感情的な絆が強い。', Mars: '活動的な子供。やや扱いにくいかもしれません。', Mercury: '非常に賢い子供！学業優秀。', Jupiter: '福のある子供！親孝行。子供を通じた幸運。', Venus: '美しく芸術的な子供。娘との縁。', Saturn: '子供が遅いか少ないかもしれません。しかし責任感のある子供。' };
-            text += `${p.symbol} ${p.name}: ${ch[p.id] || ''}<br>`;
+            text += `${ch[p.id] || ''}<br>`;
         });
     }
 
@@ -1404,7 +1404,7 @@ function renderForeign(positions, lagnaSign) {
     } else {
         h9.forEach(p => {
             const f9 = { Sun: '父親が海外関連。政府/公務の海外出張。', Moon: '海外旅行を感情的に楽しむ。海外での大衆人気。', Mars: '海外での冒険/挑戦。軍事/技術関連の海外活動。', Mercury: '海外留学/ビジネスの成功！多言語能力。', Jupiter: '海外で大きな幸運！留学/移民の成功。海外で師匠に出会う。', Venus: '海外でのロマンス。芸術/ファッション関連の海外活動。', Saturn: '海外での苦労の後に成功。長期海外滞在。', Rahu: '海外移住の強力な指標！外国文化に深くはまる。', Ketu: '前世からの海外の縁。霊的巡礼。' };
-            text += `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
+            text += isEasy ? `${f9[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
 
@@ -1414,7 +1414,7 @@ function renderForeign(positions, lagnaSign) {
     } else {
         h12.forEach(p => {
             const f12 = { Sun: '海外でのアイデンティティ探し。政府関連の海外派遣。', Moon: '海外居住の可能性が高い！海外で感情的安定。', Mars: '海外でのエネルギー消耗。海外投資/不動産。', Mercury: '海外ビジネス/IT関連活動。海外教育。', Jupiter: '海外での霊的成長。慈善活動。海外の大学。', Venus: '海外での贅沢と快楽。海外の芸術活動。', Saturn: '海外での厳しい労働。しかし長期的な定住。', Rahu: '海外移民の確定的指標！西洋文化への適応。', Ketu: '海外での霊的修行。孤独な海外生活。' };
-            text += `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
+            text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
 
