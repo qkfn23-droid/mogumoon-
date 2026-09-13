@@ -1944,7 +1944,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // Ch1: Soul Identity
         const lagnaD = getDeity(lagnaSidereal);
-        let ch1 = '<strong>D60 ラグナ： ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (支配星： ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
+        let ch1 = isEasy
+            ? '<strong>前世の正体</strong>' + deityTag(lagnaD) + '<br><br>'
+            : '<strong>D60 ラグナ： ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (支配星： ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
             ch1 += '<br>' + (isEasy ?
@@ -1960,7 +1962,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         if (sunD60) {
             const sunD = getDeity(sunD60.sidereal);
-            let ch2 = '<strong>D60 太陽： ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
+            let ch2 = (isEasy ? '<strong>魂の目的</strong>' : '<strong>D60 太陽： ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>') + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
             ch2 += '<br>' + (isEasy ?
@@ -1976,7 +1978,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (moonD60) {
             const moonD = getDeity(moonD60.sidereal);
-            let ch3 = '<strong>D60 月： ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
+            let ch3 = (isEasy ? '<strong>感情の記憶</strong>' : '<strong>D60 月： ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>') + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
             ch3 += '<br>' + (isEasy ?
@@ -1998,7 +2000,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         const spouseKarma = ['戦士/指導者との縁。強烈で独立的な配偶者カルマ。','芸術家/富裕者との縁。物質的に豊かな結婚カルマ。','学者/商人との縁。コミュニケーションと知的交感。','家族/保護者との縁。深い感情的絆のカルマ。','王族/貴族との縁。華麗で尊敬される結婚。','治癒者/奉仕者との縁。奉仕と献身のカルマ。','外交官/芸術家との縁。調和のとれた美しい結婚。','修行者/神秘主義者との縁。強烈で変革的なカルマ。','賢者/探検家との縁。自由で拡大的なカルマ。外国人配偶者の可能性。','官僚/建築家との縁。責任感のある安定した結婚。晩婚の可能性。','官僚/軍人との縁。土星支配、規律ある配偶者。年齢差の可能性。','霊媒/芸術家との縁。神秘的で霊的なカルマ。夢で先に出会う可能性。'];
 
-        let ch4 = '<strong>D60 7室： ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7室主： ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
+        let ch4 = isEasy
+            ? '<strong>配偶者カルマ</strong><br><br>'
+            : '<strong>D60 7室： ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7室主： ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
         ch4 += spouseKarma[d60H7sign] + '<br>';
         if (d60H7planets.length > 0) {
             ch4 += '<br><strong>D60 7室の惑星：</strong><br>';
@@ -2038,7 +2042,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const satD60 = dPositions.find(p => p.id === 'Saturn');
         const careerKarma = ['軍事/リーダーシップ/スポーツ','金融/芸術/農業','教育/メディア/商業','看護/不動産/ホテル','政治/エンターテインメント/管理','医療/分析/奉仕','法律/外交/デザイン','研究/調査/医学','教育/宗教/海外','行政/建設/公務員','技術/科学/革新','芸術/霊性/病院'][d60H10sign];
 
-        let ch5 = '<strong>D60 10室： ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10室主： ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
+        let ch5 = isEasy
+            ? '<strong>職業カルマ</strong><br><br>'
+            : '<strong>D60 10室： ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10室主： ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
         ch5 += '前世の職業カルマの方向： <strong>' + careerKarma + '</strong>。この分野に自然な引力。<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
@@ -2055,7 +2061,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H2sign = (dLagnaSign + 1) % 12;
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
         const wealthKarma = ['自力型の財運本能。','豊かな環境の前世。','知的な富の構築。','家族/不動産の財。','権威を通じた財。','奉仕を通じた財。倹約。','パートナーシップの財。','他者の財（遺産）。','幸運がもたらす財。海外。','遅いが確実。中年以降裕福。','革新の財。非伝統的。','霊的活動と財。寄付の傾向。'][d60H2sign];
-        let ch6 = '<strong>D60 2室： ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
+        let ch6 = isEasy
+            ? '<strong>財カルマ</strong><br><br>'
+            : '<strong>D60 2室： ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
             ch6 += '<br><strong>D60 2室の惑星：</strong><br>';
             d60H2planets.forEach(p => {
@@ -2077,10 +2085,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Ch8: Overall Judgment
         const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;
         const maleficPlanets = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'malefic'; });
-        let ch8 = '9惑星中： <strong style="color:#5cb85c">' + beneficCount + '吉</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '凶</strong><br><br>';
-        if (beneficCount >= 7) ch8 += '🌟 <strong>非常に強い前世の功徳。</strong> パラシャラはこれを「神々に祝福された魂」と呼びました。 ほとんどの惑星が吉神の下。';
-        else if (beneficCount >= 5) { ch8 += '✨ <strong>前世の功徳が豊富。</strong> 吉神が優勢、多くの領域で保護。'; if (maleficPlanets.length > 0) ch8 += ' 注意： <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — マントラと慈善を実践。'; }
-        else if (beneficCount >= 3) { ch8 += '⚖️ <strong>カルマの均衡。</strong> 良い出来事と試練が交互に。'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
+        let ch8 = isEasy ?
+            '9 planets: <strong style="color:#5cb85c">' + beneficCount + ' 良いエネルギー</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' 注意エネルギー</strong><br><br>' :
+            '9惑星中： <strong style="color:#5cb85c">' + beneficCount + '吉</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '凶</strong><br><br>';
+        if (beneficCount >= 7) ch8 += isEasy ?
+                '🌟 <strong>前世で本当にたくさんの善行を積みました！</strong>ほぼすべてのエネルギーが良い状態で、今世で自然と良い結果を得ます。' :
+                '🌟 <strong>非常に強い前世の功徳。</strong> パラシャラはこれを「神々に祝福された魂」と呼びました。 ほとんどの惑星が吉神の下。';
+        else if (beneficCount >= 5) { ch8 += isEasy ?
+                '✨ <strong>前世からの良いエネルギーが豊富です。</strong>人生の多くの領域で守られています。' :
+                '✨ <strong>前世の功徳が豊富。</strong> 吉神が優勢、多くの領域で保護。'; if (maleficPlanets.length > 0) ch8 += ' 注意： <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — マントラと慈善を実践。'; }
+        else if (beneficCount >= 3) { ch8 += isEasy ?
+                '⚖️ <strong>良いエネルギーと挑戦のエネルギーが半々です。</strong>人生で良いことと困難が交互に訪れます。' :
+                '⚖️ <strong>カルマの均衡。</strong> 良い出来事と試練が交互に。'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
         else ch8 += '🔥 <strong>カルマ清算の人生。</strong> パラシャラは「最も重いカルマが最大の成長をもたらす」と言いました。 マントラと慈善が重要。';
         html += subChapter('📊', '総合カルマ判定', ch8);
 
