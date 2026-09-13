@@ -1,6 +1,27 @@
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
+if (!window.vedicMode) window.vedicMode = 'easy';
+var _lastCalcData = null;
+function recalcMode() {
+    if (!_lastCalcData) return;
+    var d = _lastCalcData;
+    renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
+    renderPlanetHouse(d.positions, d.lagnaSign);
+    renderDignity(d.positions, d.lagnaSign);
+    renderEducation(d.positions, d.lagnaSign);
+    renderChildren(d.positions, d.lagnaSign);
+    renderForeign(d.positions, d.lagnaSign);
+    renderLucky(d.lagnaSign, d.moonPos);
+    renderRemedy(d.positions, d.lagnaSign);
+    renderNakshatra(d.moonPos);
+    renderDasha(d.moonNakshatra, d.utcDate, d.moonPos ? d.moonPos.sidereal : 0);
+    renderD9Chart(d.positions, d.lagnaSign, d.lagnaSidereal);
+}
+function updateCatHeaders() {
+    var e = window.vedicMode === 'easy';
+    // Category headers updated dynamically
+}
 
 // Ayanamsa (Lahiri) - approximate
 function getAyanamsa(jd) {
@@ -309,6 +330,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'Akshavedamsa');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
+    _lastCalcData = {positions, lagnaSign, moonPos, lagnaSidereal, moonNakshatra, utcDate};
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -319,6 +341,7 @@ function calculateChart() {
     renderRemedy(positions, lagnaSign);
 
     document.getElementById('resultSection').style.display = 'block';
+    updateCatHeaders();
     document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -433,6 +456,7 @@ function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
 }
 
 function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'Sonne',Moon:'Mond',Mars:'Mars',Mercury:'Merkur',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
 
@@ -705,6 +729,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
 
 function renderNakshatra(moonPos) {
+    const isEasy = window.vedicMode === 'easy';
     if (!moonPos) return;
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
@@ -723,6 +748,7 @@ function renderNakshatra(moonPos) {
 }
 
 function renderDasha(moonNakshatra, birthDate, moonSidereal) {
+    const isEasy = window.vedicMode === 'easy';
     const nak = NAKSHATRAS[moonNakshatra];
     if (!nak) return;
 
@@ -775,7 +801,8 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         const age = getAge(p.startD);
 
         html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
-        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
+        const dashaEasyDesc = {Ketu:'Innere Reflexion und spirituelles Wachstum',Venus:'Liebe, Schönheit und Fülle',Sun:'Selbstvertrauen und Führung strahlen',Moon:'Emotionen und Zuhause stehen im Mittelpunkt',Mars:'Herausforderungen und Tatkraft',Rahu:'Große Veränderungen und neue Chancen',Jupiter:'Glück und Wachstum kommen',Saturn:'Geduld bringt große Belohnungen',Mercury:'Lernen, Kommunikation und Geschäft gedeihen'};
+        html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + ' Jahre</span>';
         if (isCurrent) html += '<span class="dasha-badge">Current</span>';
@@ -799,7 +826,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
             const bAge = getAge(bStart);
 
             html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
-            html += '<span>' + (bCurrent ? '▶ ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + (bCurrent ? '▶ ' : '  ') + (isEasy ? dashaEasyDesc[bPlanet] : DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet]) + '</span>';
             html += '<span>' + fmtDate(bStart) + '</span>';
             html += '<span>(age ' + bAge + ')</span>';
             html += '</div>';
@@ -814,6 +841,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     document.getElementById('dashaWrap').innerHTML = html;
 }
 function renderInterpretation(positions, lagnaSign, moonPos) {
+    const isEasy = window.vedicMode === 'easy';
     // Helper: get house number from sign
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
@@ -823,6 +851,20 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // ═══════════════════════════════════
     // 1. Persönlichkeit & Erscheinung (1. Haus Lagna)
     // ═══════════════════════════════════
+    const lagnaEasy = [
+        'Tatmensch! Schnelle Entscheidungen und Führungsqualitäten. Du liebst neue Herausforderungen. Etwas ungeduldig, aber unglaublich motiviert.',
+        'Du liebst Stabilität. Genießt Komfort und Schönheit. Wenn du dich entscheidest, ziehst du es durch. Stur, aber zuverlässig.',
+        'Unendlich neugierig! Großartiger Kommunikator und vielseitig begabt. Manchmal zerstreut, aber das ist Teil deines Charmes.',
+        'Warm und emotional. Du schätzt Familie und liest Emotionen gut. Ein natürlicher Fürsorger, der allen ein Gefühl von Geborgenheit gibt.',
+        'Geborener Anführer! Große Präsenz, die natürlich Aufmerksamkeit anzieht. Selbstbewusst und magnetisch. Großzügig mit Liebe.',
+        'Detailorientiert und analytisch. Strebst nach Perfektion. Scharfer Beobachter. Du sorgst dich viel, aber bist immer vorbereitet.',
+        'Du suchst Harmonie. Raffiniert und charmant mit ausgezeichnetem künstlerischen Geschmack. Am glücklichsten umgeben von schönen Dingen.',
+        'Tiefgründig. Starke Intuition, die zur Wahrheit durchdringt. Äußerlich ruhig, aber innerlich intensive Emotionen.',
+        'Freier Geist! Du liebst Reisen und Lernen. Positiv und philosophisch. Dein Humor erhellt jeden Raum.',
+        'Ehrgeizig. Geduldig und mit zunehmendem Alter attraktiver. Arbeitest systematisch auf deine Ziele hin. Spätentwickler-Typ.',
+        'Einzigartig. Du denkst anders als alle anderen. Du hasst Schubladen und willst die Welt auf deine Weise verändern.',
+        'Tief empfindsam. Starke Intuition, angezogen von Kunst und Spiritualität. Lebhafte Träume. Deine innere Welt ist reicher als die äußere.'
+    ];
     const lagnaInterp = [
         'Widder-Lagna, regiert von Mars. Starker Wille und Führungsqualität, unabhängige Persönlichkeit. Schnelles Handeln mit Pioniergeist. Scharfe Gesichtszüge mit aktivem Eindruck. Impulsiv aber mutig, herausragend im Wettbewerb.',
         'Stier-Lagna, regiert von Venus. Sucht Stabilität und Überfluss, liebt sinnliche Schönheit. Sanftes Erscheinungsbild mit attraktiver Stimme. Schätzt materielle Sicherheit mit außergewöhnlichem Kunstsinn. Stur aber zuverlässig.',
@@ -1245,6 +1287,7 @@ const PLANET_IN_HOUSE = {
 };
 
 function renderPlanetHouse(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     let html = '';
 
@@ -1268,6 +1311,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 // Education & Knowledge
 // ═══════════════════════════════════════════════════
 function renderEducation(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1303,6 +1347,7 @@ function renderEducation(positions, lagnaSign) {
 // Children Fortune
 // ═══════════════════════════════════════════════════
 function renderChildren(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1348,6 +1393,7 @@ function renderChildren(positions, lagnaSign) {
 // Foreign Fortune & Migration
 // ═══════════════════════════════════════════════════
 function renderForeign(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1388,6 +1434,7 @@ function renderForeign(positions, lagnaSign) {
 // Planetary Dignity
 // ═══════════════════════════════════════════════════
 function renderDignity(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     const houseArea = {1:'Selbst',2:'Geld/Familie',3:'Kommunikation/Geschwister',4:'Zuhause/Mutter',5:'Kinder/Romantik',6:'Gesundheit/Feinde',7:'Ehepartner',8:'Transformation/Erbschaft',9:'Glück/Ausland',10:'Karriere/Ruhm',11:'Einkommen/Wünsche',12:'Ausland/Spiritualität'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
@@ -1650,6 +1697,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
     const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'Sonne',Moon:'Mond',Mars:'Mars',Mercury:'Merkur',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
 
+    const isEasy = window.vedicMode === 'easy';
     let html = '';
 
     if (division === 10) {

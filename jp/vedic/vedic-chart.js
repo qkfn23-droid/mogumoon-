@@ -1,6 +1,27 @@
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
+if (!window.vedicMode) window.vedicMode = 'easy';
+var _lastCalcData = null;
+function recalcMode() {
+    if (!_lastCalcData) return;
+    var d = _lastCalcData;
+    renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
+    renderPlanetHouse(d.positions, d.lagnaSign);
+    renderDignity(d.positions, d.lagnaSign);
+    renderEducation(d.positions, d.lagnaSign);
+    renderChildren(d.positions, d.lagnaSign);
+    renderForeign(d.positions, d.lagnaSign);
+    renderLucky(d.lagnaSign, d.moonPos);
+    renderRemedy(d.positions, d.lagnaSign);
+    renderNakshatra(d.moonPos);
+    renderDasha(d.moonNakshatra, d.utcDate, d.moonPos ? d.moonPos.sidereal : 0);
+    renderD9Chart(d.positions, d.lagnaSign, d.lagnaSidereal);
+}
+function updateCatHeaders() {
+    var e = window.vedicMode === 'easy';
+    // Category headers updated dynamically
+}
 
 // Ayanamsa (Lahiri) - approximate
 function getAyanamsa(jd) {
@@ -309,6 +330,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'アクシャヴェダムシャ');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
+    _lastCalcData = {positions, lagnaSign, moonPos, lagnaSidereal, moonNakshatra, utcDate};
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -319,6 +341,7 @@ function calculateChart() {
     renderRemedy(positions, lagnaSign);
 
     document.getElementById('resultSection').style.display = 'block';
+    updateCatHeaders();
     document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -433,6 +456,7 @@ function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
 }
 
 function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'太陽',Moon:'月',Mars:'火星',Mercury:'水星',Jupiter:'木星',Venus:'金星',Saturn:'土星',Rahu:'ラーフ',Ketu:'ケートゥ'};
 
@@ -704,6 +728,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 }
 
 function renderNakshatra(moonPos) {
+    const isEasy = window.vedicMode === 'easy';
     if (!moonPos) return;
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
@@ -722,6 +747,7 @@ function renderNakshatra(moonPos) {
 }
 
 function renderDasha(moonNakshatra, birthDate, moonSidereal) {
+    const isEasy = window.vedicMode === 'easy';
     const nak = NAKSHATRAS[moonNakshatra];
     if (!nak) return;
 
@@ -774,7 +800,8 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         const age = getAge(p.startD);
 
         html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
-        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
+        const dashaEasyDesc = {Ketu:'内面の省察と霊的成長の時期',Venus:'愛・美・豊かさの時期',Sun:'自信とリーダーシップが輝く時期',Moon:'感情と家庭が中心の時期',Mars:'挑戦と行動力の時期',Rahu:'大きな変化と新しいチャンスの時期',Jupiter:'幸運と成長が訪れる時期',Saturn:'忍耐すれば大きな成果が得られる時期',Mercury:'勉強・コミュニケーション・ビジネスが順調な時期'};
+        html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '年</span>';
         if (isCurrent) html += '<span class="dasha-badge">現在</span>';
@@ -798,7 +825,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
             const bAge = getAge(bStart);
 
             html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
-            html += '<span>' + (bCurrent ? '▶ ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + (bCurrent ? '▶ ' : '  ') + (isEasy ? dashaEasyDesc[bPlanet] : DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet]) + '</span>';
             html += '<span>' + fmtDate(bStart) + '</span>';
             html += '<span>(' + bAge + ')</span>';
             html += '</div>';
@@ -813,6 +840,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     document.getElementById('dashaWrap').innerHTML = html;
 }
 function renderInterpretation(positions, lagnaSign, moonPos) {
+    const isEasy = window.vedicMode === 'easy';
     // Helper: get house number from sign
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
@@ -822,6 +850,20 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // ═══════════════════════════════════
     // 1. 性格 & 外見 (1宮 ラグナ)
     // ═══════════════════════════════════
+    const lagnaEasy = [
+        '行動派！決断力があり、リーダーの資質があります。新しい挑戦が大好き。少し短気かもしれませんが、その分推進力がすごいです。',
+        '安定が大好き。快適で美しいもの、美味しいものが好き。一度決めたら最後まで貫くタイプ。頑固だけど信頼できる人です。',
+        '好奇心旺盛！話し上手で多才。新しい情報をすぐ吸収し、ウィットのある会話で人を引きつけます。散漫に見えることもありますが、それが魅力です。',
+        '感性的で温かい人。家族を大切にし、人の気持ちをよく読みます。誰かの世話をするのが天職。一緒にいると安心する存在です。',
+        '生まれながらのリーダー！存在感が大きく、注目を集めます。認められたい気持ちが強いですが、その分愛情も惜しみなく注ぐ人です。',
+        '細かくて分析的。完璧を目指し、健康に関心があります。他人が見逃すものを見つける鋭い観察力の持ち主です。',
+        '調和を求めます。洗練されて魅力的、芸術的センスが抜群。美しいものに囲まれている時が一番幸せな人です。',
+        '深みがあります。直感が強く、本質を見抜きます。表面は穏やかでも内面には激しい感情が流れています。',
+        '自由な魂！旅行と学びを愛し、ポジティブ。異文化に興味があり、ユーモアのセンスで周りを明るくします。',
+        '野心的。忍耐力が強く、年を重ねるほど魅力が増します。大器晩成型で、最終的に望むものを手に入れます。',
+        'ユニーク。みんなと違う考え方をし、革新的。型にはまるのが嫌いで、テクノロジーや科学に才能があります。',
+        '感受性が豊か。直感が強く、芸術やスピリチュアルなものに惹かれます。内面の世界が外の世界より豊かな人です。'
+    ];
     const lagnaInterp = [
         '火星が支配する牡羊座ラグナ。強い意志とリーダーシップ、独立的な性格。行動が速く開拓者精神が強い。体格は鋭い目鼻立ちに活動的な印象。せっかちだが勇敢で、競争で頭角を現します。',
         '金星が支配する牡牛座ラグナ。安定と豊かさを追求し、感覚的な美しさを愛します。柔らかい外見に魅力的な声。物質的な安定を重視し、芸術的感覚に優れています。頑固だが信頼できる人。',
@@ -1244,6 +1286,7 @@ const PLANET_IN_HOUSE = {
 };
 
 function renderPlanetHouse(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     let html = '';
 
@@ -1266,6 +1309,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 // 教育 & 知識
 // ═══════════════════════════════════════════════════
 function renderEducation(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1300,6 +1344,7 @@ function renderEducation(positions, lagnaSign) {
 // 子供運
 // ═══════════════════════════════════════════════════
 function renderChildren(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1345,6 +1390,7 @@ function renderChildren(positions, lagnaSign) {
 // 海外運 & 移住
 // ═══════════════════════════════════════════════════
 function renderForeign(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
 
@@ -1384,6 +1430,7 @@ function renderForeign(positions, lagnaSign) {
 // 惑星の品位
 // ═══════════════════════════════════════════════════
 function renderDignity(positions, lagnaSign) {
+    const isEasy = window.vedicMode === 'easy';
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     const houseArea = {1:'自分自身',2:'お金・家族',3:'コミュニケーション・兄弟',4:'家庭・母親',5:'子供・恋愛',6:'健康・敵',7:'配偶者',8:'変革・遺産',9:'幸運・海外',10:'職業・名声',11:'収入・願望',12:'海外・霊性'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
@@ -1644,6 +1691,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
     const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'太陽',Moon:'月',Mars:'火星',Mercury:'水星',Jupiter:'木星',Venus:'金星',Saturn:'土星',Rahu:'ラーフ',Ketu:'ケートゥ'};
 
+    const isEasy = window.vedicMode === 'easy';
     let html = '';
 
     if (division === 10) {
