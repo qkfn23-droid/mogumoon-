@@ -665,7 +665,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💍 配偶者の性格' : '💍 D9 7宮 — 配偶者の性格: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '独特な魅力') + 'の性質を持つパートナーです。' : 'ナヴァムシャ7宮は<strong>' + SIGNS[d9H7Sign] + '</strong>、支配星は<strong>' + RULER_NAMES[d9H7Ruler] + '</strong>。<br><br>これは配偶者の核心的な性格を表します。' + SIGNS[d9H7Sign] + 'のエネルギーを持つパートナー — ' + (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '独特な魅力') + 'の性質を持つ人です。'}
+            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || '独特な魅力') + 'の性質を持つパートナーです。' : 'ナヴァムシャ7宮は<strong>' + SIGNS[d9H7Sign] + '</strong>、支配星は<strong>' + RULER_NAMES[d9H7Ruler] + '</strong>。<br><br>これは配偶者の核心的な性格を表します。' + SIGNS[d9H7Sign] + 'のエネルギーを持つパートナー — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || '独特な魅力') + 'の性質を持つ人です。'}
             ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? '良いエネルギー！配偶者から祝福を受けます。' : '挑戦のエネルギー — 結婚生活での成長の機会でもあります。').join('<br>') : '<strong>D9 7宮の惑星:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '良いエネルギー！配偶者からこの惑星の祝福を受けます。' : '挑戦のエネルギー — 結婚生活での成長の機会でもあります。'}`).join('<br>')) : ''}
         </div>
     </div>`;

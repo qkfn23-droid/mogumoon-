@@ -664,7 +664,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💍 Spouse Character' : '💍 D9 7th House — Spouse Character: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || 'unique charm') + ' quality partner.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || 'unique charm') + ' qualities.'}
+            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' quality partner.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' qualities.'}
             ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.').join('<br>') : '<strong>Planets in D9 7th:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! Blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.'}`).join('<br>')) : ''}
         </div>
     </div>`;
