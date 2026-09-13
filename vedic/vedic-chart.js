@@ -3,7 +3,82 @@
 // ============================================================
 if (!window.vedicMode) window.vedicMode = 'easy';
 var _lastCalcData = null;
-function recalcMode() { if (_lastCalcData) { renderInterpretation(_lastCalcData.positions, _lastCalcData.lagnaSign, _lastCalcData.moonPos); } }
+function recalcMode() {
+    if (!_lastCalcData) return;
+    var d = _lastCalcData;
+    if (window.vedicMode === 'easy') {
+        renderEasyMode(d.positions, d.lagnaSign, d.moonPos);
+    } else {
+        renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
+    }
+}
+function renderEasyMode(positions, lagnaSign, moonPos) {
+    function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    var html = '';
+    // 성격
+    var personality = ['행동파! 결단력이 빠르고 리더 기질이 있어요. 새로운 도전을 좋아합니다.','안정을 사랑해요. 편안하고 아름다운 것을 좋아하며, 한번 마음먹으면 끝까지 가는 타입.','호기심 대왕! 말을 잘하고 다재다능해요. 여러 가지를 동시에 하는 걸 좋아합니다.','감성적이고 따뜻해요. 가족을 소중히 여기고, 사람들의 마음을 잘 읽어요.','타고난 리더! 존재감이 크고 창작 활동에 재능이 있어요.','꼼꼼하고 분석적이에요. 완벽을 추구하며 건강에 관심이 많습니다.','조화를 추구해요. 세련되고 매력적이며, 예술적 감각이 뛰어납니다.','깊이가 있어요. 직관이 강하고 본질을 꿰뚫어 봐요.','자유로운 영혼! 여행과 배움을 사랑하며, 긍정적이에요.','야망이 있어요. 인내심이 강하고 나이 들수록 매력이 늘어납니다.','독특해요. 남들과 다른 생각을 하며 혁신적이에요.','감수성이 풍부해요. 직관이 강하고 예술이나 영적인 것에 끌려요.'][lagnaSign];
+    html += '<div class="interp-card"><div class="interp-title">👤 내 성격</div><div class="interp-text">' + personality + '</div></div>';
+
+    // 감정
+    if (moonPos) {
+        var emotion = ['열정적이고 즉흥적! 화가 빨리 나지만 금세 풀려요.','감정적으로 안정적이에요. 한번 마음을 주면 변하지 않아요.','대화로 마음을 정리해요. 지루한 건 못 참아요.','감수성이 풍부해요. 다른 사람 감정을 잘 느끼고 가정에서 편안해요.','사랑받고 싶은 마음이 강해요. 창작이 치유가 돼요.','꼼꼼하고 걱정이 많아요. 루틴에서 안정감을 찾아요.','누군가와 함께일 때 안정돼요. 아름다운 것에서 평화를 찾아요.','감정이 깊고 강렬해요. 상대의 진심을 본능적으로 알아요.','자유를 사랑해요. 여행이 최고의 치유제!','감정을 잘 안 드러내요. 나이 들수록 성숙해져요.','독특한 방식으로 사랑해요. 큰 그림을 보는 타입.','직관이 매우 강해요. 꿈이 선명하고 예술에서 안정을 찾아요.'][moonPos.sign];
+        html += '<div class="interp-card"><div class="interp-title">🌙 내 감정 스타일</div><div class="interp-text">' + emotion + '</div></div>';
+    }
+
+    // 재물
+    var wealth = ['자기 힘으로 돈을 버는 타입. 공격적인 재테크에 재능!','안정적으로 돈을 모아요. 부동산이나 예술 관련 수입이 유력.','머리로 돈을 벌어요. 글쓰기, 교육, IT 분야에서 수입.','가족이나 부동산을 통해 재물이 와요. 감정적 소비에 주의!','리더십과 권위로 돈을 벌어요. 정부/공공기관과 인연.','분석력과 기술로 돈을 벌어요. 의료, 회계, 서비스업 적합.','파트너십으로 돈을 벌어요. 법률, 외교, 패션 분야.','다른 사람의 돈(유산, 투자)으로 부를 축적하는 타입.','교육이나 해외를 통해 돈이 들어와요. 행운이 따라요.','느리지만 확실하게 돈을 모아요. 중년 이후 부유해져요.','기술이나 혁신으로 돈을 벌어요. 비전통적 방법.','예술이나 영적 활동으로 수입이 생겨요. 기부 성향.'][lagnaSign];
+    html += '<div class="interp-card"><div class="interp-title">💰 내 재물운</div><div class="interp-text">' + wealth + '</div></div>';
+
+    // 배우자
+    var spouse = ['에너지 넘치고 독립적인 배우자. 활동적이고 직접적인 타입.','아름답고 감각적인 배우자. 안정적이고 충성스러운 타입.','말을 잘하고 똑똑한 배우자. 유머감각이 있고 대화가 잘 통해요.','따뜻하고 가정적인 배우자. 엄마처럼 돌봐주는 타입.','카리스마 있고 당당한 배우자. 사회적으로 주목받는 사람.','꼼꼼하고 실용적인 배우자. 건강에 관심 많고 봉사적.','매력적이고 세련된 배우자. 예술적 감각이 뛰어나요.','강렬하고 신비로운 배우자. 깊은 감정의 소유자.','자유롭고 밝은 배우자. 외국인이거나 문화가 다를 수 있어요.','진지하고 야망 있는 배우자. 결혼이 다소 늦을 수 있어요.','독특하고 독립적인 배우자. 비전통적 만남 가능.','영적이고 꿈꾸는 듯한 배우자. 예술가와 인연.'][(lagnaSign+6)%12];
+    // 7궁 행성 추가 정보
+    var h7p = positions.filter(function(p){return houseOf(p.sign)===7;});
+    var spouseExtra = '';
+    h7p.forEach(function(p) {
+        var desc = {Sun:'사회적 지위 높은 배우자.',Moon:'감성적이고 돌봐주는 배우자.',Mars:'열정적이지만 다툼 가능. 강한 배우자.',Mercury:'대화가 잘 통하는 지적인 배우자.',Jupiter:'현명하고 도덕적인 배우자! 최고의 결혼운.',Venus:'매우 매력적이고 사랑이 넘치는 배우자.',Saturn:'결혼이 늦지만 오래가는 관계. 나이 차이 가능.',Rahu:'비전통적 결혼. 외국인 배우자 가능.',Ketu:'전생의 인연. 영적 연결이 강한 배우자.'};
+        if (desc[p.id]) spouseExtra += '<br>✦ ' + desc[p.id];
+    });
+    html += '<div class="interp-card"><div class="interp-title">💍 내 배우자</div><div class="interp-text">' + spouse + spouseExtra + '</div></div>';
+
+    // 직업
+    var career = ['리더, 군인, 운동선수, 사업가에 적합!','금융, 요리, 농업, 패션, 부동산 분야.','미디어, 글쓰기, 교육, IT, 마케팅.','의료, 간호, 호텔, 요리, 심리상담.','정치, 연예, 경영, 정부기관.','의료, 회계, 분석, 컨설팅.','법률, 외교, 패션, 인테리어.','연구, 조사, 보험, 의학, 심리학.','교육, 법률, 종교, 출판, 여행.','경영, 공무원, 건축, 대기업.','기술, IT, 과학, 항공, 사회사업.','예술, 영화, 음악, 의료, 해외, 영적 분야.'][(lagnaSign+9)%12];
+    html += '<div class="interp-card"><div class="interp-title">💼 내 직업</div><div class="interp-text">' + career + '</div></div>';
+
+    // 건강
+    var health = ['머리, 얼굴 주의. 두통, 열병에 조심! 규칙적 운동 필수.','목, 갑상선 주의. 과식과 당뇨 조심.','폐, 팔, 신경계 주의. 호흡 명상이 도움.','위장, 가슴 주의. 감정 스트레스가 건강에 직결.','심장, 등 주의. 과로 조심! 휴식 필수.','소화기, 장, 피부 주의. 식이요법이 중요.','신장, 허리 주의. 수분 충분히 섭취.','생식기 건강 주의. 정기 검진 중요.','간, 허벅지 주의. 야외 활동이 건강에 좋아요. 과체중 조심.','뼈, 관절, 무릎 주의. 칼슘 챙기세요.','발목, 순환계 주의. 혈압 관리하세요.','발, 면역 주의. 충분한 수면이 가장 중요!'][lagnaSign];
+    html += '<div class="interp-card"><div class="interp-title">🏥 내 건강</div><div class="interp-text">' + health + '</div></div>';
+
+    // 현재 대운 간단 요약
+    if (moonPos) {
+        var nak = NAKSHATRAS[moonPos.nakshatra];
+        if (nak) {
+            var startRuler = nak.ruler;
+            var startIdx = DASHA_ORDER.indexOf(startRuler);
+            if (startIdx === -1) startIdx = 0;
+            var now = new Date();
+            var bd = new Date(Date.UTC(parseInt(document.getElementById('birthYear').value),parseInt(document.getElementById('birthMonth').value)-1,parseInt(document.getElementById('birthDay').value)));
+            var cd = new Date(bd);
+            var nakSpan = 360/27;
+            var moonInNak = moonPos.sidereal - (moonPos.nakshatra * nakSpan);
+            var elapsed = moonInNak / nakSpan;
+            var remDays = DASHA_YEARS[startRuler] * (1-elapsed) * 365.25;
+            for (var i=0;i<9;i++) {
+                var idx = (startIdx+i)%9;
+                var planet = DASHA_ORDER[idx];
+                var days = (i===0) ? remDays : DASHA_YEARS[planet]*365.25;
+                var endD = new Date(cd.getTime()+days*86400000);
+                if (now>=cd && now<endD) {
+                    var dashaDesc = {Ketu:'영적 성장과 분리의 시기. 물질보다 내면에 집중하세요.',Venus:'사랑과 풍요의 시기! 연애, 결혼, 예술 활동이 활발해요.',Sun:'자아 발견과 리더십의 시기. 자신감이 강해져요.',Moon:'감정과 가정의 시기. 가족관계가 중요해져요.',Mars:'행동과 에너지의 시기. 새로운 일을 시작하기 좋아요.',Rahu:'변화와 혁신의 시기. 예상치 못한 기회가 와요.',Jupiter:'행운과 성장의 시기! 교육, 결혼, 승진 등 좋은 일이 많아요.',Saturn:'인내와 시련의 시기. 느리지만 확실한 성장을 해요.',Mercury:'지적 활동의 시기. 공부, 사업, 소통에 유리해요.'};
+                    html += '<div class="interp-card"><div class="interp-title">⏳ 지금 내 운세 시기</div><div class="interp-text">현재 <strong style="color:#c9a84c;">' + DASHA_KO[planet] + '</strong>의 시기입니다.<br><br>' + (dashaDesc[planet]||'') + '</div></div>';
+                    break;
+                }
+                cd = endD;
+            }
+        }
+    }
+
+    document.getElementById('easyInterpWrap').innerHTML = html;
+}
 
 // Ayanamsa (Lahiri) - Indian Astronomical Ephemeris official formula
 function getAyanamsa(jd) {
@@ -318,7 +393,11 @@ function calculateChart() {
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
     _lastCalcData = {positions, lagnaSign, moonPos};
-    renderInterpretation(positions, lagnaSign, moonPos);
+    if (window.vedicMode === 'easy') {
+        renderEasyMode(positions, lagnaSign, moonPos);
+    } else {
+        renderInterpretation(positions, lagnaSign, moonPos);
+    }
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
     renderChildren(positions, lagnaSign);
