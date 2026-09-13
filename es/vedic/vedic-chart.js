@@ -1940,7 +1940,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);
         if (h7lordPlanet) {
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
-            ch4 += '<br><br><strong>7th Lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
+            ch4 += '<br><br><strong>Senor de la 7a ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
             ch4 += 'El karma de pareja se manifiesta a traves de <strong>' + houseThemes[h7lH] + '</strong> area.';
         }
         html += subChapter('💍', 'Karma de Pareja — Conexion de vida pasada', ch4);
@@ -1989,7 +1989,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Ch8: Overall Judgment
         const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;
         const maleficPlanets = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'malefic'; });
-        let ch8 = 'De 9 planetas: <strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong><br><br>';
+        let ch8 = 'De 9 planetas: <strong style="color:#5cb85c">' + beneficCount + ' benefico</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefico</strong><br><br>';
         if (beneficCount >= 7) ch8 += '🌟 <strong>Merito muy fuerte de vidas pasadas.</strong> Parashara llamo esto "un alma bendecida por los dioses." La mayoria de planetas bajo deidades beneficas.';
         else if (beneficCount >= 5) { ch8 += '✨ <strong>Merito abundante de vidas pasadas.</strong> Beneficos predominan, proteccion en muchas areas.'; if (maleficPlanets.length > 0) ch8 += ' Atencion: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — practicar mantras y caridad.'; }
         else if (beneficCount >= 3) { ch8 += '⚖️ <strong>Karma equilibrado.</strong> Buenos eventos y desafios se alternan.'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
