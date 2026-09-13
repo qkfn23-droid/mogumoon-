@@ -1661,7 +1661,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">💼 D10 Karriereanalyse</div><div class="interp-text">';
         html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (Herrscher: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
-        html += '<strong>D10 10th House (Career):</strong> ' + SIGNS[d10_10sign] + ' (Herrscher: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
+        html += '<strong>D10 10. Haus (Karriere):</strong> ' + SIGNS[d10_10sign] + ' (Herrscher: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         if (d10_10planets.length > 0) {
             html += '<strong>Planeten im 10.:</strong> ' + d10_10planets.map(p => p.name).join(', ') + '<br>';
         }
@@ -2004,13 +2004,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D2 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d2LagnaInterp + '<br><br>';
         const sunD2 = dPositions.find(p => p.id === 'Sun');
         const moonD2 = dPositions.find(p => p.id === 'Moon');
-        if (sunD2) html += '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ' + (sunD2.dSign === 4 ? '🌟 <strong>Sun in own hora (Leo)!</strong> Self-made type. Builds wealth through authority and leadership.' : 'Sun in Moon hora. Income through others help or government/public sector.') + '<br>';
-        if (moonD2) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Moon in own hora (Cancer)!</strong> Abundant life through people and relationships.' : 'Moon in Sun hora. Livelihood through own effort and independent activity.') + '<br>';
+        if (sunD2) html += '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ' + (sunD2.dSign === 4 ? '🌟 <strong>Sonne in eigener Hora (Loewe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autoritaet und Fuehrung.' : 'Sonne in Mond-Hora. Einkommen durch Hilfe anderer oder oeffentlichen Sektor.') + '<br>';
+        if (moonD2) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Mond in eigener Hora (Krebs)!</strong> Reichhaltiges Leben durch Menschen und Beziehungen.' : 'Mond in Sonnen-Hora. Lebensunterhalt durch eigene Anstrengung.') + '<br>';
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
         html += '<br><strong>D2 2nd House (Accumulated Wealth) — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
-            const wealth = {Sun:'Wealth through authority and status',Moon:'Wealth through public activities',Mars:'Property, technology, competitive fields',Mercury:'Business, intellectual activity, communication',Jupiter:'Education, law, religion — abundant wealth',Venus:'Art, fashion, luxury goods',Saturn:'Slow but steady accumulation. Stable after middle age',Rahu:'Unconventional methods, foreign-related',Ketu:'Detached from material. Pursues spiritual values'};
+            const wealth = {Sun:'Wohlstand durch Autoritaet und Status',Moon:'Wohlstand durch oeffentliche Aktivitaeten',Mars:'Eigentum, Technologie, Wettbewerbsfelder',Mercury:'Geschaeft, intellektuelle Aktivitaet, Kommunikation',Jupiter:'Bildung, Recht, Religion — reichlicher Wohlstand',Venus:'Kunst, Mode, Luxusgueter',Saturn:'Langsame aber stetige Ansammlung. Stabil nach der Lebensmitte',Rahu:'Unkonventionelle Methoden, auslandsbezogen',Ketu:'Von Materiellem losgeloest. Verfolgt spirituelle Werte'};
             d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
         } else html += 'No planets in 2nd — the 2nd lord position is key to wealth.<br>';
         html += '</div></div>';
@@ -2072,7 +2072,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">⚠️ D30 Trimsamsa — Unglück & Krankheit</div><div class="interp-text">';
         html += '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d30LagnaInterp + '<br><br>';
-        const diseaseBySign = ['Head, brain, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic disease','Liver, thighs, overweight','Bones, joints, rheumatism','Circulation, blood pressure, ankles','Immune, feet, mental health'];
+        const diseaseBySign = ['Kopf, Gehirn, Fieber, Entzuendung','Hals, Schilddruese, Diabetes','Lunge, Nerven, Angst','Stomach, water retention','Herz, Ruecken, Blutdruck','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic disease','Liver, thighs, overweight','Knochen, Gelenke, Rheuma','Circulation, blood pressure, ankles','Immunsystem, Fuesse, psychische Gesundheit'];
         html += '<strong>D30 6th (Disease) — ' + SIGNS[d30_6sign] + ':</strong><br>';
         html += 'Achtung: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
@@ -2081,7 +2081,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         html += '<br><strong>D30 8th (Danger) — ' + SIGNS[d30_8sign] + ':</strong><br>';
         if (d30_8planets.length > 0) {
-            d30_8planets.forEach(p => { html += '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Danger/accident caution. Insurance and checkups important.' : 'Protected in crisis.') + '<br>'; });
+            d30_8planets.forEach(p => { html += '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Gefahr/Unfallvorsicht. Versicherung und Checkups wichtig.' : 'In Krisen geschuetzt.') + '<br>'; });
         } else html += 'No planets in 8th — low danger risk.<br>';
         html += '</div></div>';
 

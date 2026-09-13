@@ -2024,7 +2024,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
         html += '<strong>D3 Casa 3 (Hermanos Menores) — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
-            const bro = {Sun:'Younger sibling has leadership and authority',Moon:'Emotionally close with younger sibling',Mars:'Active, brave younger sibling. Possible conflicts',Mercury:'Intelligent younger sibling with good communication',Jupiter:'Wise younger sibling who brings good fortune',Venus:'Attractive, artistic younger sibling',Saturn:'Difficulties with younger sibling. May have age gap',Rahu:'Unique younger sibling or foreign connection',Ketu:'Distance with younger sibling. Spiritual connection'};
+            const bro = {Sun:'Hermano menor tiene liderazgo y autoridad',Moon:'Emocionalmente cercano al hermano menor',Mars:'Hermano menor activo y valiente. Posibles conflictos',Mercury:'Hermano menor inteligente con buena comunicacion',Jupiter:'Hermano menor sabio que trae buena fortuna',Venus:'Hermano menor atractivo y artistico',Saturn:'Dificultades con hermano menor. Puede haber diferencia de edad',Rahu:'Hermano menor unico o conexion extranjera',Ketu:'Distancia con hermano menor. Conexion espiritual'};
             d3_3planets.forEach(p => { html += '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += 'Sin planetas en casa 3 — revise la posicion del señor de casa 3.<br>';
         html += '</div></div>';
@@ -2038,7 +2038,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
         html += '<strong>D4 Casa 4 (Propiedad) — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
-            const prop = {Sun:'Government-owned buildings or prestigious dwelling',Moon:'Beautiful home. Near water. Mother influence',Mars:'New construction. Possible property disputes',Mercury:'Commercial property. Multiple ownership',Jupiter:'Spacious, abundant home! Best property fortune',Venus:'Luxurious home. Beautiful interior',Saturn:'Old home. Needs repair. Stable after middle age',Rahu:'Foreign property. Unconventional dwelling',Ketu:'Indifferent to property. Prefers spiritual space'};
+            const prop = {Sun:'Edificios del gobierno o vivienda prestigiosa',Moon:'Casa hermosa. Cerca del agua. Influencia de la madre',Mars:'Nueva construccion. Posibles disputas de propiedad',Mercury:'Propiedad comercial. Multiples propiedades',Jupiter:'Casa espaciosa y abundante! Mejor fortuna inmobiliaria',Venus:'Casa lujosa. Interior hermoso',Saturn:'Casa antigua. Necesita reparacion. Estable despues de mediana edad',Rahu:'Propiedad en el extranjero. Vivienda no convencional',Ketu:'Indiferente a la propiedad. Prefiere espacio espiritual'};
             d4_4planets.forEach(p => { html += '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
         } else html += 'Sin planetas en casa 4 — la posicion del señor de casa 4 es clave.<br>';
         html += '</div></div>';
@@ -2055,7 +2055,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D24 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d24LagnaInterp + '<br><br>';
         html += '<strong>D24 Casa 4 (Educacion Basica) — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
-            const edu4 = {Sun:'Prestigious school. Authoritative education',Moon:'Comfortable learning environment. Strong home education',Mars:'Competitive learning. Strong in sports/tech',Mercury:'Best placement! Outstanding academic ability',Jupiter:'Rich educational environment. Good teachers',Venus:'Art education. Beautiful school',Saturn:'Difficult education but deep knowledge when overcome',Rahu:'Unconventional education. Foreign school',Ketu:'Less interest in formal education. Intuitive learning'};
+            const edu4 = {Sun:'Escuela prestigiosa. Educacion autoritativa',Moon:'Ambiente de aprendizaje comodo. Fuerte educacion en casa',Mars:'Aprendizaje competitivo. Fuerte en deportes/tecnologia',Mercury:'Mejor posicion! Habilidad academica sobresaliente',Jupiter:'Ambiente educativo rico. Buenos profesores',Venus:'Educacion artistica. Escuela hermosa',Saturn:'Educacion dificil pero conocimiento profundo al superar',Rahu:'Educacion no convencional. Escuela extranjera',Ketu:'Menos interes en educacion formal. Aprendizaje intuitivo'};
             d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
         } else html += 'Sin planetas en casa 4.<br>';
         if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Sabiduria) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>Se espera alto logro academico!</strong> Posgrado/doctorado/estudios en el extranjero posibles.' : 'Growth through learning. Jupiter blessing in house ' + jH + '.') + '<br>'; }
