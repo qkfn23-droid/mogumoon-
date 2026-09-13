@@ -377,8 +377,8 @@
 <body>
 
 <header>
-    <div class="speech-bubble">점성술 세계에 어서와 ✨</div>
-    <div class="mascot" onclick="document.getElementById('ghostGuide').style.display=document.getElementById('ghostGuide').style.display==='flex'?'none':'flex'" style="cursor:pointer;">
+    <div class="speech-bubble">나한테 물어봐! 뭐든 추천해줄게 👻</div>
+    <div class="mascot" onclick="var gc=document.getElementById('ghostChat');gc.style.display=gc.style.display==='none'?'block':'none'" style="cursor:pointer;">
         <span class="star">✦</span>
         <span class="star">✧</span>
         <span class="star">⋆</span>
@@ -610,87 +610,111 @@
         🛠️ MOGU Tools — 95+ 무료 온라인 도구 →
     </a>
 </div>
-<!-- Ghost Guide Popup -->
-<div id="ghostGuide" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);" onclick="if(event.target===this)this.style.display='none'">
-<div id="ghostGuideInner" style="background:#12122a;border:1px solid #c9a84c;border-radius:16px;padding:24px;max-width:360px;width:90%;max-height:80vh;overflow-y:auto;position:relative;">
-<div id="ghostPage1">
-<div style="text-align:center;font-size:40px;margin-bottom:8px;">👻</div>
-<div style="text-align:center;color:#c9a84c;font-size:18px;font-weight:700;margin-bottom:16px;">뭐가 궁금해?</div>
-<div id="ghostBtns" style="display:flex;flex-direction:column;gap:8px;">
-<button onclick="ghostShow('love')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">💍 연애 / 배우자운</button>
-<button onclick="ghostShow('personality')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">🔮 내 성격 / 운명</button>
-<button onclick="ghostShow('fortune')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">📅 올해 / 오늘 운세</button>
-<button onclick="ghostShow('career')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">💼 직업 / 재물운</button>
-<button onclick="ghostShow('compat')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">💑 궁합</button>
-<button onclick="ghostShow('karma')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">🔮 전생 / 카르마</button>
-<button onclick="ghostShow('dream')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">🌿 꿈 해석</button>
-<button onclick="ghostShow('quick')" style="padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;color:#e0d8cc;font-size:14px;cursor:pointer;text-align:left;">🃏 빠른 답 / 타로</button>
+<!-- Ghost Chat -->
+<div id="ghostChat" style="display:none;position:fixed;bottom:80px;right:20px;width:340px;max-height:500px;background:#0d0d20;border:1px solid #c9a84c;border-radius:16px;z-index:9998;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+<div style="background:linear-gradient(135deg,#1a1a3e,#12122a);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a2a5a;">
+<span style="font-size:28px;">👻</span><div><strong style="color:#c9a84c;font-size:15px;">모구</strong><br><span style="color:#666;font-size:11px;">뭐든 물어봐!</span></div>
+<span onclick="document.getElementById('ghostChat').style.display='none'" style="margin-left:auto;color:#666;cursor:pointer;font-size:18px;">✕</span>
+</div>
+<div id="gcMessages" style="padding:12px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">안녕! 나는 <strong style="color:#c9a84c;">모구</strong>야 👻<br>뭐가 궁금해? 편하게 말해봐~</div>
+</div>
+<div style="padding:8px;border-top:1px solid #2a2a5a;display:flex;gap:6px;">
+<input id="gcInput" type="text" placeholder="예: 배우자운 보고싶어" style="flex:1;padding:10px 12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')ghostSend()">
+<button onclick="ghostSend()" style="padding:8px 14px;background:#c9a84c;border:none;border-radius:8px;color:#0a0a1a;font-weight:700;cursor:pointer;font-size:13px;">보내기</button>
 </div>
 </div>
-<div id="ghostPage2" style="display:none;">
-<div style="text-align:center;font-size:30px;margin-bottom:8px;">👻</div>
-<div id="ghostAnswer" style="color:#e0d8cc;font-size:14px;line-height:1.8;"></div>
-<button onclick="document.getElementById('ghostPage1').style.display='';document.getElementById('ghostPage2').style.display='none'" style="margin-top:16px;padding:10px 20px;background:#1a1a3e;border:1px solid #c9a84c;border-radius:8px;color:#c9a84c;font-size:13px;cursor:pointer;width:100%;">← 다른 것도 궁금해</button>
-</div>
-</div>
-</div>
+<button id="ghostBtn" onclick="var gc=document.getElementById('ghostChat');gc.style.display=gc.style.display==='none'?'block':'none'" style="position:fixed;bottom:20px;right:74px;width:44px;height:44px;border-radius:50%;border:none;font-size:22px;cursor:pointer;background:#1a1a3e;border:2px solid #c9a84c;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9998;">👻</button>
 <script>
-function ghostShow(topic) {
-    const data = {
-        love: {title:'💍 연애/배우자운이 궁금하구나!', items:[
-            {icon:'🕉️',name:'베딕 점성술',desc:'배우자 외모, 성격, 만나는 시기, 방향까지 가장 상세하게!',url:'vedic/',badge:'⭐추천'},
-            {icon:'☯️',name:'사주팔자',desc:'배우자운, 결혼 시기, 궁합',url:'saju/'},
-            {icon:'💜',name:'자미두수',desc:'결혼궁 상세 분석, 배우자 성격',url:'ziwei/'},
-            {icon:'💑',name:'생년월일 궁합',desc:'두 사람의 궁합을 바로 체크!',url:'compatibility/'},
-        ]},
-        personality: {title:'🔮 내 성격과 운명이 궁금하구나!', items:[
-            {icon:'🕉️',name:'베딕 점성술',desc:'라그나(상승궁)로 보는 성격, 외모, 재능',url:'vedic/',badge:'⭐추천'},
-            {icon:'☯️',name:'사주팔자',desc:'타고난 오행과 십신으로 보는 운명',url:'saju/'},
-            {icon:'🔢',name:'수비학',desc:'생년월일 숫자로 보는 운명과 재능',url:'numerology/'},
-            {icon:'🧿',name:'오라 색상 테스트',desc:'10가지 질문으로 보는 내 에너지 색',url:'aura/'},
-        ]},
-        fortune: {title:'📅 운세가 궁금하구나!', items:[
-            {icon:'✨',name:'오늘의 운세',desc:'매일 바뀌는 타로 + 별자리 + 행운의 숫자',url:'daily/',badge:'⭐매일 업데이트'},
-            {icon:'🕉️',name:'베딕 대운(다샤)',desc:'지금 어떤 행성이 지배하는 시기인지',url:'vedic/'},
-            {icon:'🌕',name:'문 페이즈',desc:'오늘의 달 위상과 적합한 활동',url:'moon/'},
-            {icon:'📊',name:'바이오리듬',desc:'오늘의 신체·감성·지성 컨디션',url:'biorhythm/'},
-        ]},
-        career: {title:'💼 직업/재물운이 궁금하구나!', items:[
-            {icon:'🕉️',name:'베딕 점성술',desc:'D10 직업 차트 + D2 재물 차트로 상세 분석',url:'vedic/',badge:'⭐추천'},
-            {icon:'☯️',name:'사주팔자',desc:'재물운, 적합 직업, 대운 분석',url:'saju/'},
-            {icon:'💜',name:'자미두수',desc:'관록궁(직업)과 재백궁(재물) 분석',url:'ziwei/'},
-        ]},
-        compat: {title:'💑 궁합이 궁금하구나!', items:[
-            {icon:'💑',name:'생년월일 궁합',desc:'두 사람 생년월일로 연애·우정·운명 궁합',url:'compatibility/',badge:'⭐추천'},
-            {icon:'💕',name:'별자리 궁합',desc:'12별자리 연애·우정 궁합',url:'zodiac-match/'},
-            {icon:'🐾',name:'영혼 동물 궁합',desc:'수호 동물끼리 궁합 체크',url:'spirit-animal/'},
-        ]},
-        karma: {title:'🔮 전생/카르마가 궁금하구나!', items:[
-            {icon:'🕉️',name:'베딕 D60 차트',desc:'60신으로 보는 전생 카르마, 배우자 전생 인연',url:'vedic/',badge:'⭐추천'},
-            {icon:'🏛️',name:'전생 테스트',desc:'전생 직업, 시대, 트라우마, 재능',url:'past-life/'},
-            {icon:'🏛️',name:'헬레니즘 점성술',desc:'그리스 신화로 보는 운명의 수호 행성',url:'hellenistic/'},
-        ]},
-        dream: {title:'🌿 꿈 해석이 궁금하구나!', items:[
-            {icon:'🌿',name:'꿈 해몽',desc:'꿈 상징 사전, 키워드 검색, 심리 분석',url:'dream/',badge:'⭐바로 가기'},
-        ]},
-        quick: {title:'🃏 빠른 답이 필요하구나!', items:[
-            {icon:'🃏',name:'타로 카드',desc:'1장/3장/5장 뽑기, 오늘의 조언',url:'tarot/',badge:'⭐추천'},
-            {icon:'🔮',name:'수정구',desc:'마법의 수정구에게 질문하기',url:'crystal-ball/'},
-            {icon:'📖',name:'주역',desc:'3000년 지혜로 지금 고민에 답을',url:'iching/'},
-        ]},
-    };
-    const d = data[topic];
-    let html = '<div style="color:#c9a84c;font-size:16px;font-weight:700;margin-bottom:14px;">' + d.title + '</div>';
-    d.items.forEach(item => {
-        html += '<a href="' + item.url + '" style="display:block;padding:12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:10px;margin-bottom:8px;text-decoration:none;color:#e0d8cc;">';
-        html += '<div style="display:flex;align-items:center;gap:10px;">';
-        html += '<span style="font-size:24px;">' + item.icon + '</span>';
-        html += '<div><strong style="color:#c9a84c;">' + item.name + '</strong>' + (item.badge ? ' <span style="font-size:10px;background:#c9a84c;color:#0a0a1a;padding:2px 6px;border-radius:4px;font-weight:700;">' + item.badge + '</span>' : '') + '<br><span style="font-size:12px;color:#888;">' + item.desc + '</span></div>';
-        html += '</div></a>';
-    });
-    document.getElementById('ghostAnswer').innerHTML = html;
-    document.getElementById('ghostPage1').style.display = 'none';
-    document.getElementById('ghostPage2').style.display = '';
+var gcData = {
+    love: {msg:'오! 연애/배우자운이 궁금하구나! 이런 도구들을 추천해 👻', items:[
+        {icon:'🕉️',name:'베딕 점성술',desc:'배우자 외모, 성격, 만나는 시기, 방향까지!',url:'vedic/',badge:'⭐추천'},
+        {icon:'☯️',name:'사주팔자',desc:'배우자운, 결혼 시기',url:'saju/'},
+        {icon:'💜',name:'자미두수',desc:'결혼궁 상세 분석',url:'ziwei/'},
+        {icon:'💑',name:'생년월일 궁합',desc:'두 사람 궁합 체크',url:'compatibility/'},
+    ]},
+    personality: {msg:'성격과 운명이 궁금하구나! 여기 추천! 👻', items:[
+        {icon:'🕉️',name:'베딕 점성술',desc:'라그나로 보는 성격, 외모, 재능',url:'vedic/',badge:'⭐추천'},
+        {icon:'☯️',name:'사주팔자',desc:'오행과 십신으로 보는 운명',url:'saju/'},
+        {icon:'🔢',name:'수비학',desc:'생년월일 숫자로 보는 운명',url:'numerology/'},
+        {icon:'🧿',name:'오라 색상 테스트',desc:'내 에너지 색 알아보기',url:'aura/'},
+    ]},
+    fortune: {msg:'운세가 궁금하구나! 이거 해봐 👻', items:[
+        {icon:'✨',name:'오늘의 운세',desc:'매일 바뀌는 타로+별자리+행운의 숫자',url:'daily/',badge:'⭐매일 업데이트'},
+        {icon:'🕉️',name:'베딕 대운',desc:'지금 어떤 행성이 지배하는 시기?',url:'vedic/'},
+        {icon:'🌕',name:'문 페이즈',desc:'오늘의 달+적합한 활동',url:'moon/'},
+        {icon:'📊',name:'바이오리듬',desc:'오늘의 컨디션 체크',url:'biorhythm/'},
+    ]},
+    career: {msg:'직업/재물운! 여기서 볼 수 있어 👻', items:[
+        {icon:'🕉️',name:'베딕 점성술',desc:'직업 차트+재물 차트 상세 분석',url:'vedic/',badge:'⭐추천'},
+        {icon:'☯️',name:'사주팔자',desc:'재물운, 적합 직업, 대운',url:'saju/'},
+        {icon:'💜',name:'자미두수',desc:'관록궁+재백궁 분석',url:'ziwei/'},
+    ]},
+    compat: {msg:'궁합! 여기서 확인해봐 👻', items:[
+        {icon:'💑',name:'생년월일 궁합',desc:'연애·우정·운명 궁합',url:'compatibility/',badge:'⭐추천'},
+        {icon:'💕',name:'별자리 궁합',desc:'12별자리 궁합',url:'zodiac-match/'},
+        {icon:'🐾',name:'영혼 동물 궁합',desc:'수호 동물 궁합',url:'spirit-animal/'},
+    ]},
+    karma: {msg:'전생이 궁금해?! 여기 추천 👻', items:[
+        {icon:'🕉️',name:'베딕 D60',desc:'60신으로 보는 전생 카르마',url:'vedic/',badge:'⭐추천'},
+        {icon:'🏛️',name:'전생 테스트',desc:'전생 직업, 시대, 재능',url:'past-life/'},
+        {icon:'🏛️',name:'헬레니즘',desc:'수호 행성과 운명',url:'hellenistic/'},
+    ]},
+    dream: {msg:'꿈 해석! 바로 여기 👻', items:[
+        {icon:'🌿',name:'꿈 해몽',desc:'꿈 상징 사전+키워드 검색',url:'dream/',badge:'⭐바로 가기'},
+    ]},
+    quick: {msg:'빠른 답이 필요하구나! 👻', items:[
+        {icon:'🃏',name:'타로 카드',desc:'오늘의 조언, 연애, 방향',url:'tarot/',badge:'⭐추천'},
+        {icon:'🔮',name:'수정구',desc:'수정구에게 질문하기',url:'crystal-ball/'},
+        {icon:'📖',name:'주역',desc:'3000년 지혜의 답',url:'iching/'},
+    ]},
+};
+var gcKeywords = {
+    love: ['배우자','연애','결혼','남편','아내','사랑','짝','인연','남자','여자','소개팅','커플','연인','데이트','배필'],
+    personality: ['성격','운명','나','자신','외모','재능','적성','기질','내가 누구'],
+    fortune: ['운세','올해','오늘','내일','이번달','신년','운','행운','흉','길'],
+    career: ['직업','재물','돈','취업','이직','사업','승진','월급','재테크','투자','부자'],
+    compat: ['궁합','맞는','어울리','합이','찰떡','상성'],
+    karma: ['전생','카르마','업보','윤회','전세','과거 생'],
+    dream: ['꿈','해몽','악몽','꿈에서','꿈을'],
+    quick: ['타로','답','조언','빨리','수정구','점','뽑기','질문','고민'],
+};
+function ghostSend() {
+    var input = document.getElementById('gcInput');
+    var msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    var box = document.getElementById('gcMessages');
+    // User bubble
+    box.innerHTML += '<div style="background:#c9a84c;padding:10px 14px;border-radius:12px 12px 4px 12px;color:#0a0a1a;font-size:13px;max-width:85%;align-self:flex-end;font-weight:600;">' + msg + '</div>';
+    // Find topic
+    var topic = null;
+    var maxScore = 0;
+    for (var key in gcKeywords) {
+        var score = 0;
+        gcKeywords[key].forEach(function(kw) { if (msg.indexOf(kw) >= 0) score++; });
+        if (score > maxScore) { maxScore = score; topic = key; }
+    }
+    // Ghost reply
+    setTimeout(function() {
+        var reply = '';
+        if (topic && gcData[topic]) {
+            var d = gcData[topic];
+            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">' + d.msg;
+            d.items.forEach(function(item) {
+                reply += '<a href="' + item.url + '" style="display:block;margin-top:8px;padding:8px 10px;background:#0d0d20;border:1px solid #2a2a5a;border-radius:8px;text-decoration:none;color:#e0d8cc;">';
+                reply += '<span style="font-size:16px;">' + item.icon + '</span> <strong style="color:#c9a84c;">' + item.name + '</strong>';
+                if (item.badge) reply += ' <span style="font-size:9px;background:#c9a84c;color:#0a0a1a;padding:1px 5px;border-radius:3px;">' + item.badge + '</span>';
+                reply += '<br><span style="font-size:11px;color:#888;">' + item.desc + '</span></a>';
+            });
+            reply += '</div>';
+        } else {
+            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">음... 잘 모르겠어 😅<br>이런 키워드로 물어봐:<br><br>💍 <strong>배우자, 연애, 결혼</strong><br>🔮 <strong>성격, 운명, 나</strong><br>📅 <strong>운세, 올해, 오늘</strong><br>💼 <strong>직업, 돈, 재물</strong><br>💑 <strong>궁합</strong><br>🔮 <strong>전생, 카르마</strong><br>🌿 <strong>꿈</strong><br>🃏 <strong>타로, 조언</strong></div>';
+        }
+        box.innerHTML += reply;
+        box.scrollTop = box.scrollHeight;
+    }, 500);
+    box.scrollTop = box.scrollHeight;
 }
 </script>
 <footer>
