@@ -1472,7 +1472,7 @@ function renderPlanetHouse(positions, lagnaSign) {
         if (!desc) return;
 
         html += `<div class="interp-card">
-            <div class="interp-title">${p.symbol} ${p.name} → ${house}궁 (${SIGNS[p.sign]})</div>
+            <div class="interp-title">${p.symbol} ${p.name} ${isEasy ? '— ' + (houseArea[house]||'') : '→ ' + house + '궁 (' + SIGNS[p.sign] + ')'}</div>
             <div class="interp-text">${desc}</div>
         </div>`;
     });
@@ -1660,9 +1660,9 @@ function renderDignity(positions, lagnaSign) {
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}궁(${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-title">${emoji} ${p.symbol} ${p.name} ${isEasy ? '— ' + area + ' — ' : '— ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → ' + house + '궁(' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('고양') ? '매우 강함!' : dignity.includes('감쇄') ? '약한 상태' : dignity.includes('본궁') ? '강함' : '보통') : dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">담당: ${role} │ 위치: ${house}궁 = ${area}</span><br><br>
+                ${isEasy ? '' : '<span style="color:#666;font-size:12px;">담당: ' + role + ' │ 위치: ' + house + '궁 = ' + area + '</span><br><br>'}
                 ${simpleDesc}
             </div>
         </div>`;
@@ -2020,6 +2020,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // 소챕터 아코디언 헬퍼
         function subChapter(icon, title, content) {
+            if (window.vedicMode === 'easy') {
+                return '<div style="margin:8px 0;"><h4 style="color:#c9a84c;margin:12px 0 6px;">' + icon + ' ' + title + '</h4><div style="padding:0 0 10px;color:#999;font-size:13px;line-height:1.7;">' + content + '</div></div>';
+            }
             return '<div style="margin:8px 0;border:1px solid #2a2a5a;border-radius:8px;overflow:hidden;">' +
                 '<div onclick="var c=this.nextElementSibling;c.style.display=c.style.display===\'none\'?\'\':\'none\';this.querySelector(\'.sc-arrow\').textContent=c.style.display===\'none\'?\'▶\':\'▼\'" style="cursor:pointer;padding:12px 14px;background:linear-gradient(135deg,#12122a,#1a1a3e);">' +
                 '<span style="font-size:15px;font-weight:700;color:#c9a84c;">' + icon + ' ' + title + '</span>' +
