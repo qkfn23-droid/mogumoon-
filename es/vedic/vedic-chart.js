@@ -1,6 +1,7 @@
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
+var isEasy = false;
 if (!window.vedicMode) window.vedicMode = 'easy';
 var _lastCalcData = null;
 function recalcMode() {
