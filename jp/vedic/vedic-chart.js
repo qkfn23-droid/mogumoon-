@@ -1016,7 +1016,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let spouseText = spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += '<br><br><strong>7宮の惑星:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>7宮の惑星:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': '配偶者が社会的に認められている人。やや支配的かもしれないが尊敬できるパートナー。',
@@ -1035,7 +1035,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += `<br><br><strong>金星の位置 (${venusHouse}宮):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>金星の位置 (${venusHouse}宮):</strong> `;
         const venusHouseInterp = {
             1: '魅力的な外見。恋愛を楽しみ、すぐに恋に落ちます。',
             2: '配偶者を通じて財が入ります。美しい声と食通。',
@@ -1082,7 +1082,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let careerText = isEasy ? careerSign[h10sign] : `10宮は${SIGNS[h10sign]}に位置。${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += '<br><br><strong>10宮の惑星:</strong>';
+        careerText += isEasy ? '<br><br>' : '<br><br><strong>10宮の惑星:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
                 'Sun': ' 政府、リーダーシップ、権威ある職位。社会的に注目されるキャリア。',

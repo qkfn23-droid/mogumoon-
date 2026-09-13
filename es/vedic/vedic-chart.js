@@ -1017,7 +1017,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let spouseText = spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += '<br><br><strong>Planets in the 7th House:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planets in the 7th House:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
@@ -1036,7 +1036,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
         const venusHouseInterp = {
             1: 'Attractive appearance. Enjoys romance and falls in love easily.',
             2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
@@ -1083,7 +1083,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let careerText = isEasy ? careerSign[h10sign] : `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += '<br><br><strong>Planets in the 10th House:</strong>';
+        careerText += isEasy ? '<br><br>' : '<br><br><strong>Planets in the 10th House:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
                 'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
@@ -1331,7 +1331,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 
         const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
         html += `<div class="interp-card">
-            <div class="interp-title">${p.symbol} ${p.name} → ${house}${hSuffix} House (${SIGNS[p.sign]})</div>
+            <div class="interp-title">${isEasy ? (houseArea[house]||'') : p.symbol + ' ' + p.name + ' → ' + house + hSuffix + ' House (' + SIGNS[p.sign] + ')'}</div>
             <div class="interp-text">${desc}</div>
         </div>`;
     });
