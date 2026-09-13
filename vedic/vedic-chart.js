@@ -1463,6 +1463,8 @@ const PLANET_IN_HOUSE = {
 
 function renderPlanetHouse(positions, lagnaSign) {
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
+    const isEasy = window.vedicMode === 'easy';
+    const houseArea = ['','나 자신','돈·가족','소통','가정','자녀·연애','건강','배우자','변혁','행운·해외','직업','수입','해외·영성'];
     let html = '';
 
     positions.forEach(p => {
@@ -1603,6 +1605,7 @@ function renderForeign(positions, lagnaSign) {
 // ═══════════════════════════════════════════════════
 function renderDignity(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
+    const isEasy = window.vedicMode === 'easy';
     const houseArea = {1:'나 자신',2:'돈·가족',3:'소통·형제',4:'가정·어머니',5:'자녀·연애',6:'건강·적',7:'배우자',8:'변혁·유산',9:'행운·해외',10:'직업·명성',11:'수입·소망',12:'해외·영성'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
