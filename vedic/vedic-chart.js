@@ -6,11 +6,7 @@ var _lastCalcData = null;
 function recalcMode() {
     if (!_lastCalcData) return;
     var d = _lastCalcData;
-    if (window.vedicMode === 'easy') {
-        renderEasyMode(d.positions, d.lagnaSign, d.moonPos);
-    } else {
-        renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
-    }
+    renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
 }
 function renderEasyMode(positions, lagnaSign, moonPos) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
@@ -393,11 +389,7 @@ function calculateChart() {
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
     _lastCalcData = {positions, lagnaSign, moonPos};
-    if (window.vedicMode === 'easy') {
-        renderEasyMode(positions, lagnaSign, moonPos);
-    } else {
-        renderInterpretation(positions, lagnaSign, moonPos);
-    }
+    renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
     renderChildren(positions, lagnaSign);
@@ -1063,28 +1055,12 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // ═══════════════════════════════════
     // 3. 💰 재물운 (2궁, 11궁 분석)
     // ═══════════════════════════════════
-    if (isEasy) {
-        const wealthEasy = ['자기 힘으로 돈을 버는 타입. 공격적인 재테크에 재능이 있어요.','안정적으로 돈을 모으는 타입. 부동산이나 예술 관련 수입이 유력해요.','머리로 돈을 버는 타입. 글쓰기, 교육, IT 분야에서 수입이 생겨요.','가족을 통해 재물이 오거나 부동산으로 돈을 모아요. 감정적 소비에 주의.','리더십과 권위로 돈을 벌어요. 정부나 공공기관과 인연이 있어요.','분석력과 기술로 돈을 벌어요. 의료, 회계, 서비스업에 적합해요.','파트너십을 통해 돈을 벌어요. 법률, 외교, 패션, 예술 분야.','다른 사람의 돈(유산, 투자)으로 부를 축적하는 타입이에요.','교육이나 해외를 통해 돈이 들어와요. 행운으로 재물이 생길 수 있어요.','느리지만 확실하게 돈을 모아요. 중년 이후에 부유해지는 타입.','기술이나 혁신으로 돈을 벌어요. 비전통적인 방법으로 수입이 생겨요.','예술이나 영적 활동을 통해 돈이 들어와요. 기부하는 성향이 있어요.'][lagnaSign];
-        html += '<div class="interp-card"><div class="interp-title">💰 당신의 재물운</div><div class="interp-text">' + wealthEasy + '</div></div>';
-
-        const spouseEasy = ['에너지 넘치고 독립적인 배우자. 활동적이고 직접적인 타입.','아름답고 감각적인 배우자. 안정적이고 충성스러운 타입.','말을 잘하고 똑똑한 배우자. 유머감각이 있고 대화가 잘 통해요.','따뜻하고 가정적인 배우자. 엄마처럼 돌봐주는 타입.','카리스마 있고 당당한 배우자. 사회적으로 주목받는 사람.','꼼꼼하고 실용적인 배우자. 건강에 관심 많고 봉사적인 타입.','매력적이고 세련된 배우자. 예술적 감각이 뛰어나요.','강렬하고 신비로운 배우자. 깊은 감정의 소유자.','자유롭고 밝은 배우자. 외국인이거나 문화가 다를 수 있어요.','진지하고 야망 있는 배우자. 결혼이 다소 늦을 수 있어요.','독특하고 독립적인 배우자. 비전통적인 만남이 가능해요.','영적이고 꿈꾸는 듯한 배우자. 예술가나 영적 종사자와 인연.'][(lagnaSign+6)%12];
-        html += '<div class="interp-card"><div class="interp-title">💍 당신의 배우자</div><div class="interp-text">' + spouseEasy + '</div></div>';
-
-        const careerEasy = ['리더, 군인, 운동선수, 사업가에 적합해요.','금융, 요리, 농업, 패션, 부동산 분야에 적합해요.','미디어, 글쓰기, 교육, IT, 마케팅에 적합해요.','의료, 간호, 호텔, 요리, 심리상담에 적합해요.','정치, 연예, 경영, 정부기관에서 빛나요.','의료, 회계, 분석, 컨설팅에 적합해요.','법률, 외교, 패션, 인테리어에 적합해요.','연구, 조사, 보험, 의학, 심리학에 적합해요.','교육, 법률, 종교, 출판, 여행에 적합해요.','경영, 공무원, 건축, 정치에 적합해요.','기술, IT, 과학, 항공, 사회사업에 적합해요.','예술, 영화, 음악, 의료, 해외, 영적 분야에 적합해요.'][(lagnaSign+9)%12];
-        html += '<div class="interp-card"><div class="interp-title">💼 당신에게 맞는 직업</div><div class="interp-text">' + careerEasy + '</div></div>';
-
-        const healthEasy = ['머리, 얼굴 관련 주의. 두통, 열병에 주의하세요. 운동을 규칙적으로!','목, 갑상선 주의. 과식과 당뇨에 주의하세요.','폐, 팔, 어깨, 신경계 주의. 불안하면 호흡 명상을 해보세요.','위장, 가슴 주의. 감정 스트레스가 건강에 직결돼요.','심장, 등, 척추 주의. 과로하지 마세요.','소화기, 장, 피부 주의. 식이요법이 중요해요.','신장, 허리, 피부 주의. 수분을 충분히 섭취하세요.','생식기 건강 주의. 정기 검진이 중요해요.','간, 허벅지 주의. 야외 활동이 건강에 좋아요. 과체중 주의.','뼈, 관절, 무릎 주의. 칼슘 섭취를 챙기세요.','발목, 순환계 주의. 혈압을 관리하세요.','발, 면역 주의. 충분한 수면이 가장 중요해요.'][lagnaSign];
-        html += '<div class="interp-card"><div class="interp-title">🏥 건강에서 주의할 점</div><div class="interp-text">' + healthEasy + '</div></div>';
-
-        document.getElementById('interpWrap').innerHTML = html;
-        return;
-    }
     const h2planets = planetsInHouse(2);
     const h11planets = planetsInHouse(11);
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = `<strong>2궁 (축적된 재산):</strong> ${SIGNS[h2sign]}에 위치. `;
+    let wealthText = isEasy ? '' : `<strong>2궁 (축적된 재산):</strong> ${SIGNS[h2sign]}에 위치. `;
     if (h2planets.length === 0) {
         wealthText += '2궁에 행성이 없어 재물 축적은 꾸준하지만 특별한 변동 없이 안정적입니다. ';
     } else {
@@ -1104,7 +1080,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         });
     }
 
-    wealthText += `<br><br><strong>11궁 (수입과 이익):</strong> ${SIGNS[h11sign]}에 위치. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11궁 (수입과 이익):</strong> ${SIGNS[h11sign]}에 위치. `;
     if (h11planets.length === 0) {
         wealthText += '11궁에 행성이 없어 수입은 안정적이지만 크게 변동하지 않습니다.';
     } else {
@@ -1123,7 +1099,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 재물운</div>
+        <div class="interp-title">💰 ${isEasy ? '내 재물운' : '재물운'}</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1164,10 +1140,10 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         '부드럽고 몽환적인 외모. 큰 눈에 꿈꾸는 듯한 표정. 살짝 통통한 편이며 피부가 투명함. 파스텔 톤이 잘 어울리며 예술가 분위기. 신비로운 매력.'
     ];
 
-    let spouseText = '<strong>📐 배우자 외모 & 첫인상:</strong><br>' + spouseAppearance[h7sign] + '<br><br><strong>📋 배우자 성격:</strong><br>' + spouseSign[h7sign];
+    let spouseText = (isEasy ? '' : '<strong>📐 배우자 외모 & 첫인상:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : '<br><br><strong>📋 배우자 성격:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += '<br><br><strong>7궁의 행성:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>7궁의 행성:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': '배우자가 사회적으로 인정받는 사람. 다소 지배적일 수 있으나 존경스러운 파트너.',
@@ -1186,7 +1162,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += `<br><br><strong>금성 위치 (${venusHouse}궁):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>금성 위치 (${venusHouse}궁):</strong> `;
         const venusHouseInterp = {
             1: '매력적인 외모. 연애를 즐기며 쉽게 사랑에 빠집니다.',
             2: '배우자를 통해 재물이 들어옵니다. 아름다운 목소리와 식도락.',
@@ -1205,7 +1181,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 배우자 & 결혼운 — 7궁: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 내 배우자' : '💕 배우자 & 결혼운 — 7궁: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1230,10 +1206,10 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         '예술, 영화, 음악, 의료, 해외, 영적 분야, NGO 관련 직종.'
     ];
 
-    let careerText = `10궁은 ${SIGNS[h10sign]}에 위치. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `10궁은 ${SIGNS[h10sign]}에 위치. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += '<br><br><strong>10궁의 행성:</strong>';
+        careerText += isEasy ? '<br><br>' : '<br><br><strong>10궁의 행성:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
                 'Sun': ' 정부, 리더십, 권위 있는 직위. 사회적으로 주목받는 커리어.',
@@ -1249,7 +1225,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 직업 & 사회적 성취 — 10궁: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 내 직업' : '💼 직업 & 사회적 성취 — 10궁: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1275,7 +1251,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 건강 — 취약 부위</div>
+        <div class="interp-title">${isEasy ? '🏥 내 건강' : '🏥 건강 — 취약 부위'}</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>6궁에 ' + h6planets.map(p => p.name).join(', ') + '이(가) 위치하여 건강 관리에 특별한 주의가 필요합니다.' : ''}</div>
     </div>`;
 
@@ -1323,7 +1299,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                     'Venus': '사랑과 풍요의 시기! 연애, 결혼, 예술 활동이 활발해집니다. 물질적 풍요를 누리며 사치를 즐기게 됩니다. 새 차, 새 집, 보석 등을 얻을 수 있습니다. 미적 감각이 발달하고 사교 활동이 활발해집니다. 20년의 가장 긴 주기.'
                 };
                 html += `<div class="interp-card">
-                    <div class="interp-title">⏳ 현재 대운: ${DASHA_KO[currentDasha]} 다샤</div>
+                    <div class="interp-title">${isEasy ? '⏳ 지금 내 운세 시기: ' + DASHA_KO[currentDasha] : '⏳ 현재 대운: ' + DASHA_KO[currentDasha] + ' 다샤'}</div>
                     <div class="interp-text">${dashaInterp[currentDasha]}</div>
                 </div>`;
             }
@@ -1370,7 +1346,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 특별 요가 (행성 조합)</div>
+            <div class="interp-title">${isEasy ? '🔮 당신의 특별한 재능' : '🔮 특별 요가 (행성 조합)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
