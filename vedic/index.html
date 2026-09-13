@@ -497,14 +497,14 @@
 
         <!-- Mode Toggle -->
         <div style="display:flex;justify-content:center;gap:8px;margin-bottom:20px;">
-            <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode()" style="padding:10px 20px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">쉬운 해석</button>
-            <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode()" style="padding:10px 20px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">전문가 해석</button>
+            <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders()" style="padding:10px 20px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">쉬운 해석</button>
+            <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders()" style="padding:10px 20px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">전문가 해석</button>
         </div>
 
         <!-- 📚 기초 가이드 (항상 펼침) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 베딕 점성술 기초 가이드</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 <span id="catGuide">베딕 점성술 기초 가이드</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -521,7 +521,7 @@
         <!-- 🪐 기본 차트 (항상 펼침) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 기본 차트 — 행성 위치 & 출생 차트</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 <span id="catBasic">기본 차트 — 행성 위치 & 출생 차트</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -540,7 +540,7 @@
         <!-- ⏳ 대운 (항상 펼침) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ 대운 — 인생의 시기별 운세</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ <span id="catDasha">대운 — 인생의 시기별 운세</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -551,7 +551,7 @@
         <!-- 📖 종합 해석 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 종합 해석 — 성격·재물·직업·건강·요가</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 <span id="catInterp">종합 해석 — 성격·재물·직업·건강·요가</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -570,7 +570,7 @@
         <!-- 💍 결혼/배우자 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 결혼 & 배우자 — D9 나바암샤</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 <span id="catMarriage">결혼 & 배우자 — D9 나바암샤</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -586,7 +586,7 @@
         <!-- 💼 직업/재물 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 직업 & 재물 — D10·D2·D4</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 <span id="catCareer">직업 & 재물 — D10·D2·D4</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -605,7 +605,7 @@
         <!-- 👨‍👩‍👧 가족 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 가족 — D7·D3·D12·D40·D45</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 <span id="catFamily">가족 — D7·D3·D12·D40·D45</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -631,7 +631,7 @@
         <!-- 🙏 영성/교육/건강 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 영성·교육·건강 — D20·D24·D27·D16</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 <span id="catSpirit">영성·교육·건강 — D20·D24·D27·D16</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -654,7 +654,7 @@
         <!-- ⚠️ 주의사항 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ 주의사항 — D30 질병·장애·해외운</span>
+                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ <span id="catWarn">주의사항 — D30 질병·장애·해외운</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -669,7 +669,7 @@
         <!-- 🔮 카르마 (접힘) -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 카르마 — D60 전생·카르마</span>
+                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 <span id="catKarma">카르마 — D60 전생·카르마</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">

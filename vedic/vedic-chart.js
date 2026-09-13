@@ -8,6 +8,22 @@ function recalcMode() {
     var d = _lastCalcData;
     renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
 }
+function updateCatHeaders() {
+    var e = window.vedicMode === 'easy';
+    var ids = {
+        catGuide: e ? '용어 설명' : '베딕 점성술 기초 가이드',
+        catBasic: e ? '내 행성 위치' : '기본 차트 — 행성 위치 & 출생 차트',
+        catDasha: e ? '내 운세 시기' : '대운 — 인생의 시기별 운세',
+        catInterp: e ? '내 해석 — 성격·재물·직업·건강' : '종합 해석 — 성격·재물·직업·건강·요가',
+        catMarriage: e ? '내 배우자 상세' : '결혼 & 배우자 — D9 나바암샤',
+        catCareer: e ? '내 직업·재물 상세' : '직업 & 재물 — D10·D2·D4',
+        catFamily: e ? '내 가족' : '가족 — D7·D3·D12·D40·D45',
+        catSpirit: e ? '영성·교육·건강' : '영성·교육·건강 — D20·D24·D27·D16',
+        catWarn: e ? '건강 주의사항' : '주의사항 — D30 질병·장애·해외운',
+        catKarma: e ? '전생 카르마' : '카르마 — D60 전생·카르마'
+    };
+    for (var id in ids) { var el = document.getElementById(id); if (el) el.textContent = ids[id]; }
+}
 function renderEasyMode(positions, lagnaSign, moonPos) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     var html = '';
