@@ -2105,7 +2105,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D3 Casa 3 (Hermanos Menores) — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
             const bro = {Sun:'Hermano menor tiene liderazgo y autoridad',Moon:'Emocionalmente cercano al hermano menor',Mars:'Hermano menor activo y valiente. Posibles conflictos',Mercury:'Hermano menor inteligente con buena comunicacion',Jupiter:'Hermano menor sabio que trae buena fortuna',Venus:'Hermano menor atractivo y artistico',Saturn:'Dificultades con hermano menor. Puede haber diferencia de edad',Rahu:'Hermano menor unico o conexion extranjera',Ketu:'Distancia con hermano menor. Conexion espiritual'};
-            d3_3planets.forEach(p => { html += '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
+            d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : 'Sin planetas en casa 3 — revise la posicion del señor de casa 3.<br>';
         html += '</div></div>';
 
@@ -2119,7 +2119,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D4 Casa 4 (Propiedad) — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Edificios del gobierno o vivienda prestigiosa',Moon:'Casa hermosa. Cerca del agua. Influencia de la madre',Mars:'Nueva construccion. Posibles disputas de propiedad',Mercury:'Propiedad comercial. Multiples propiedades',Jupiter:'Casa espaciosa y abundante! Mejor fortuna inmobiliaria',Venus:'Casa lujosa. Interior hermoso',Saturn:'Casa antigua. Necesita reparacion. Estable despues de mediana edad',Rahu:'Propiedad en el extranjero. Vivienda no convencional',Ketu:'Indiferente a la propiedad. Prefiere espacio espiritual'};
-            d4_4planets.forEach(p => { html += '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
+            d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : 'Sin planetas en casa 4 — la posicion del señor de casa 4 es clave.<br>';
         html += '</div></div>';
 
@@ -2136,7 +2136,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D24 Casa 4 (Educacion Basica) — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
             const edu4 = {Sun:'Escuela prestigiosa. Educacion autoritativa',Moon:'Ambiente de aprendizaje comodo. Fuerte educacion en casa',Mars:'Aprendizaje competitivo. Fuerte en deportes/tecnologia',Mercury:'Mejor posicion! Habilidad academica sobresaliente',Jupiter:'Ambiente educativo rico. Buenos profesores',Venus:'Educacion artistica. Escuela hermosa',Saturn:'Educacion dificil pero conocimiento profundo al superar',Rahu:'Educacion no convencional. Escuela extranjera',Ketu:'Menos interes en educacion formal. Aprendizaje intuitivo'};
-            d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
+            d24_4planets.forEach(p => { html += isEasy ? (edu4[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : 'Sin planetas en casa 4.<br>';
         if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Sabiduria) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>Se espera alto logro academico!</strong> Posgrado/doctorado/estudios en el extranjero posibles.' : 'Crecimiento por aprendizaje. Bendicion de Jupiter en casa ' + jH + '.') + '<br>'; }
         if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Habilidad intelectual sobresaliente!</strong> Talento en matematicas, idiomas, analisis.' : 'Habilidad intelectual en casa ' + mH + '.') + '<br>'; }
@@ -2157,11 +2157,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += 'Atencion: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
             const dis = {Sun:'Enfermedades oculares y cardiacas',Moon:'Salud mental, problemas relacionados con agua',Mars:'Accidentes, cirugia, quemaduras',Mercury:'Sistema nervioso, problemas de piel',Jupiter:'Higado, sobrepeso',Venus:'Riñones, diabetes, ETS',Saturn:'Enfermedad cronica, problemas articulares',Rahu:'Enfermedad de causa desconocida, adiccion',Ketu:'Deficiencia inmunologica, alergias'};
-            d30_6planets.forEach(p => { html += '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
+            d30_6planets.forEach(p => { html += isEasy ? (dis[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
         }
         html += '<br><strong>D30 Casa 8 (Peligro) — ' + SIGNS[d30_8sign] + ':</strong><br>';
         if (d30_8planets.length > 0) {
-            d30_8planets.forEach(p => { html += '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaucion ante peligro/accidentes. Seguro y chequeos importantes.' : 'Protegido en crisis.') + '<br>'; });
+            d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Precaucion ante peligro/accidentes. Seguro y chequeos importantes.' : 'Protegido en crisis.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaucion ante peligro/accidentes. Seguro y chequeos importantes.' : 'Protegido en crisis.') + '<br>'; });
         } else html += isEasy ? '' : 'Sin planetas en casa 8 — bajo riesgo de peligro.<br>';
         html += '</div></div>';
 
