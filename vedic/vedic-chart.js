@@ -1062,7 +1062,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     let wealthText = isEasy ? '' : `<strong>2궁 (축적된 재산):</strong> ${SIGNS[h2sign]}에 위치. `;
     if (h2planets.length === 0) {
-        wealthText += '2궁에 행성이 없어 재물 축적은 꾸준하지만 특별한 변동 없이 안정적입니다. ';
+        wealthText += isEasy ? '재물 축적은 꾸준하고 안정적입니다. 큰 변동 없이 차곡차곡 모이는 타입이에요. ' : '2궁에 행성이 없어 재물 축적은 꾸준하지만 특별한 변동 없이 안정적입니다. ';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
@@ -1082,7 +1082,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     wealthText += isEasy ? '<br><br>' : `<br><br><strong>11궁 (수입과 이익):</strong> ${SIGNS[h11sign]}에 위치. `;
     if (h11planets.length === 0) {
-        wealthText += '11궁에 행성이 없어 수입은 안정적이지만 크게 변동하지 않습니다.';
+        wealthText += isEasy ? '수입은 안정적이지만 큰 변동은 없어요.' : '11궁에 행성이 없어 수입은 안정적이지만 크게 변동하지 않습니다.';
     } else {
         h11planets.forEach(p => {
             const pIncome = {
@@ -1140,7 +1140,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         '부드럽고 몽환적인 외모. 큰 눈에 꿈꾸는 듯한 표정. 살짝 통통한 편이며 피부가 투명함. 파스텔 톤이 잘 어울리며 예술가 분위기. 신비로운 매력.'
     ];
 
-    let spouseText = (isEasy ? '' : '<strong>📐 배우자 외모 & 첫인상:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : '<br><br><strong>📋 배우자 성격:</strong><br>') + spouseSign[h7sign];
+    let spouseText = (isEasy ? '' : '<strong>📐 배우자 외모 & 첫인상:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 배우자 성격:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
         spouseText += isEasy ? '<br><br>' : '<br><br><strong>7궁의 행성:</strong> ';
@@ -1252,7 +1252,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🏥 내 건강' : '🏥 건강 — 취약 부위'}</div>
-        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>6궁에 ' + h6planets.map(p => p.name).join(', ') + '이(가) 위치하여 건강 관리에 특별한 주의가 필요합니다.' : ''}</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? isEasy ? '<br><br>' + h6planets.map(p => p.name).join(', ') + '의 영향으로 건강 관리에 특별한 주의가 필요합니다.' : '<br><br>6궁에 ' + h6planets.map(p => p.name).join(', ') + '이(가) 위치하여 건강 관리에 특별한 주의가 필요합니다.' : ''}</div>
     </div>`;
 
     // ═══════════════════════════════════
@@ -1320,7 +1320,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const jupH = houseOf(jupiter.sign);
         const diff = Math.abs(moonH - jupH);
         if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
-            yogaText += '<strong>🐘 가자케사리 요가 (Gajakesari)</strong> — 달과 목성이 켄드라 관계! 지혜, 명성, 풍요의 조합. 사회적으로 존경받고 지적 능력이 뛰어납니다. 좋은 교육과 자녀 운.<br><br>';
+            yogaText += isEasy ? '<strong>🐘 지혜와 명성의 축복</strong>' : '<strong>🐘 가자케사리 요가 (Gajakesari)</strong> — 달과 목성이 켄드라 관계! 지혜, 명성, 풍요의 조합. 사회적으로 존경받고 지적 능력이 뛰어납니다. 좋은 교육과 자녀 운.<br><br>';
         }
     }
 
@@ -1328,19 +1328,19 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const sun = positions.find(p => p.id === 'Sun');
     const mercury = positions.find(p => p.id === 'Mercury');
     if (sun && mercury && sun.sign === mercury.sign) {
-        yogaText += '<strong>📚 부다-아디티야 요가</strong> — 태양과 수성이 같은 별자리! 뛰어난 지성과 소통 능력. 교육, 글쓰기, 비즈니스에서 성공. 권위 있는 지적 리더.<br><br>';
+        yogaText += isEasy ? '<strong>📚 뛰어난 지성의 축복</strong>' : '<strong>📚 부다-아디티야 요가</strong> — 태양과 수성이 같은 별자리! 뛰어난 지성과 소통 능력. 교육, 글쓰기, 비즈니스에서 성공. 권위 있는 지적 리더.<br><br>';
     }
 
     // Chandra-Mangala Yoga
     if (moonPos && mars && moonPos.sign === mars.sign) {
-        yogaText += '<strong>🔥 찬드라-망갈라 요가</strong> — 달과 화성이 같은 별자리! 강한 의지와 재물 축적 능력. 사업에서 성공하며 대담한 결정을 내립니다.<br><br>';
+        yogaText += isEasy ? '<strong>🔥 강한 의지와 재물의 축복</strong>' : '<strong>🔥 찬드라-망갈라 요가</strong> — 달과 화성이 같은 별자리! 강한 의지와 재물 축적 능력. 사업에서 성공하며 대담한 결정을 내립니다.<br><br>';
     }
 
     // Kuja Dosha (Manglik)
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — 화성이 ${marsH}궁에 위치하여 결혼 생활에 도전이 있을 수 있습니다. 배우자 선택 시 상대의 차트도 확인하는 것이 좋습니다. 28세 이후 결혼이 유리할 수 있습니다.<br><br>`;
+            yogaText += isEasy ? `<strong>⚠️ 결혼 시 주의사항</strong>` : `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — 화성이 ${marsH}궁에 위치하여 결혼 생활에 도전이 있을 수 있습니다. 배우자 선택 시 상대의 차트도 확인하는 것이 좋습니다. 28세 이후 결혼이 유리할 수 있습니다.<br><br>`;
         }
     }
 
