@@ -260,13 +260,13 @@ function calculateChart() {
         const rahuSidereal = ((rahuTropical - ayanamsa) % 360 + 360) % 360;
         const ketuSidereal = (rahuSidereal + 180) % 360;
         positions.push({
-            id: 'Rahu', name: 'Rahu', symbol: '☊', natural: 'malefic',
+            id: 'Rahu', name: 'ラーフ', symbol: '☊', natural: 'malefic',
             sidereal: rahuSidereal, sign: Math.floor(rahuSidereal / 30),
             degree: rahuSidereal % 30, nakshatra: Math.floor(rahuSidereal / (360/27)),
             nakshatraPada: Math.floor((rahuSidereal % (360/27)) / (360/108)) + 1
         });
         positions.push({
-            id: 'Ketu', name: 'Ketu', symbol: '☋', natural: 'malefic',
+            id: 'Ketu', name: 'ケートゥ', symbol: '☋', natural: 'malefic',
             sidereal: ketuSidereal, sign: Math.floor(ketuSidereal / 30),
             degree: ketuSidereal % 30, nakshatra: Math.floor(ketuSidereal / (360/27)),
             nakshatraPada: Math.floor((ketuSidereal % (360/27)) / (360/108)) + 1
@@ -331,7 +331,7 @@ function renderPlanetTable(positions, lagnaSign, lagnaSidereal) {
     const lagnaDeg = lagnaSidereal % 30;
     const lagnaNakIdx = Math.floor(lagnaSidereal / (360/27));
     const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {ko:'-'};
-    html += `<tr><td>⬆ ASC</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
+    html += `<tr><td>⬆ ラグナ（上昇宮）</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
 
     positions.forEach(p => {
         const house = ((p.sign - lagnaSign + 12) % 12) + 1;
@@ -369,7 +369,7 @@ function renderD1Chart(positions, lagnaSign) {
 
             if (signIdx === -1) {
                 cell.className = 'chart-cell empty';
-                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#c9a84c;font-size:10px;">D1<br>Rasi</div>' : '';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#c9a84c;font-size:10px;">D1<br>ラシ</div>' : '';
             } else {
                 cell.className = 'chart-cell';
                 const house = ((signIdx - lagnaSign + 12) % 12) + 1;
@@ -415,7 +415,7 @@ function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
             const signIdx = SI_LAYOUT[row][col];
             if (signIdx === -1) {
                 cell.className = 'chart-cell empty';
-                cell.innerHTML = '<div style="font-size:11px;color:#444;text-align:center;">D9<br>Navamsa</div>';
+                cell.innerHTML = '<div style="font-size:11px;color:#444;text-align:center;">D9<br>ナヴァムシャ</div>';
             } else {
                 cell.className = 'chart-cell';
                 let content = `<div class="sign-label">${SIGN_SYMBOLS[signIdx]} ${SIGNS[signIdx]}</div>`;
@@ -710,8 +710,8 @@ function renderNakshatra(moonPos) {
 
     const html = `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">${nak.name}</div>
-            <div class="nakshatra-meaning">"${nak.meaning}" — Ruling Planet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
+            <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
+            <div class="nakshatra-meaning">"${nak.meaning}" — 支配星: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
             <div class="nakshatra-detail">
                 守護神： ${nak.deity}<br><br>
                 ${nak.desc}
