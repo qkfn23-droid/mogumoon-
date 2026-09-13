@@ -8,16 +8,6 @@ function recalcMode() {
     if (!_lastCalcData) return;
     var d = _lastCalcData;
     renderInterpretation(d.positions, d.lagnaSign, d.moonPos);
-    renderPlanetHouse(d.positions, d.lagnaSign);
-    renderDignity(d.positions, d.lagnaSign);
-    renderEducation(d.positions, d.lagnaSign);
-    renderChildren(d.positions, d.lagnaSign);
-    renderForeign(d.positions, d.lagnaSign);
-    renderLucky(d.lagnaSign, d.moonPos);
-    renderRemedy(d.positions, d.lagnaSign);
-    renderNakshatra(d.moonPos);
-    renderDasha(d.moonNakshatra, d.utcDate, d.moonPos ? d.moonPos.sidereal : 0);
-    renderD9Chart(d.positions, d.lagnaSign, d.lagnaSidereal);
 }
 function updateCatHeaders() {
     var e = window.vedicMode === 'easy';
