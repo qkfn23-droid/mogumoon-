@@ -26,10 +26,10 @@ function updateCatHeaders() {
     for (var id in ids) { var el = document.getElementById(id); if (el) el.textContent = ids[id]; }
 
     var secs = {
-        secPlanetHouse: e ? '🪐 How Each Planet Affects You' : '🪐 Planet-in-House Analysis',
-        secDignity: e ? '⚖️ Your Strengths & Weaknesses' : '⚖️ Planetary Dignity (Exaltation·Debilitation·Own Sign)',
-        secLucky: e ? '🍀 Lucky Info' : '🍀 Lucky Information',
-        secRemedy: e ? '💎 Ways to Boost Your Luck' : '💎 Remedies & Strengthening',
+        secPlanetHouse: e ? 'How Each Planet Affects You' : 'Planet-in-House Analysis',
+        secDignity: e ? 'Your Strengths & Weaknesses' : 'Planetary Dignity (Exaltation·Debilitation·Own Sign)',
+        secLucky: e ? 'Lucky Info' : 'Lucky Information',
+        secRemedy: e ? 'Ways to Boost Your Luck' : 'Remedies & Strengthening',
         secD10: e ? '💼 Career Details' : '💼 D10 Dashamsha (Career)',
         secD2: e ? '💰 Wealth Details' : '💰 D2 Hora (Wealth)',
         secD4: e ? '🏠 Property & Real Estate' : '🏠 D4 Chaturthamsha (Property)',
@@ -1602,7 +1602,7 @@ function renderForeign(positions, lagnaSign) {
         text += 'Foreign travel exists but not a strong connection.';
     } else {
         h9.forEach(p => {
-            const f9 = { Sun: 'Father has foreign connections. Government overseas trips.', Moon: 'Enjoys foreign travel emotionally. Popularity abroad.', Mars: 'foreign에서의 adventure/challenge. 군사/technology related foreign 활동.', Mercury: 'foreign study abroad/business 성공! 다국어 ability.', Jupiter: 'foreign에서 큰 fortune! study abroad/이민 성공. foreign 스승 만남.', Venus: 'foreign에서의 로맨스. art/fashion related foreign 활동.', Saturn: 'foreign에서의 고생 후 성공. 장기 foreign 체류.', Rahu: 'Strong foreign migration indicator! Deeply immersed in foreign culture.', Ketu: '전생에서의 foreign connection. 영적 pilgrimage.' };
+            const f9 = { Sun: 'Father has foreign connections. Government overseas trips.', Moon: 'Enjoys foreign travel emotionally. Popularity abroad.', Mars: 'foreign에서의 adventure/challenge. 군사/technology related foreign 활동.', Mercury: 'foreign study abroad/business 성공! 다국어 ability.', Jupiter: 'foreign에서 큰 fortune! study abroad/이민 성공. foreign 스승 만남.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'foreign에서의 고생 후 성공. 장기 foreign 체류.', Rahu: 'Strong foreign migration indicator! Deeply immersed in foreign culture.', Ketu: '전생에서의 foreign connection. 영적 pilgrimage.' };
             text += isEasy ? `${f9[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
@@ -1612,7 +1612,7 @@ function renderForeign(positions, lagnaSign) {
         text += 'Domestic residence is more natural.';
     } else {
         h12.forEach(p => {
-            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'foreign에서의 에너지 소모. foreign investment/real estate.', Mercury: 'Foreign business/IT. Overseas education.', Jupiter: 'foreignSpiritual growth abroad. Charity. Foreign university.', Venus: 'foreign에서의 사치와 쾌락. foreign art 활동.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'foreign 이민 확정적 지표! 서양 culture 적응.', Ketu: 'foreign에서의 영적 practice. 고독한 foreign 생활.' };
+            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'foreign에서의 에너지 소모. foreign investment/real estate.', Mercury: 'Foreign business/IT. Overseas education.', Jupiter: 'foreignSpiritual growth abroad. Charity. Foreign university.', Venus: 'foreign에서의 사치와 쾌락. foreign art 활동.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'foreign 이민 확정적 지표! 서양 culture 적응.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
             text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
@@ -2090,8 +2090,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // 행성별 D60 사인 해석 (전통)
         const d60PlanetInSign = {
-            Sun: ['In past lives, 전사나 왕으로 살았으며, 강한 자아와 지도력이 이번 생에도 남아exists. 권위를 세우려는 soul의 purpose이 exists.','In past lives, art가나 부유한 자로 살았으며, 물질적 abundance를 추구하는 soul입. sense적 아름다움에 끌립.','In past lives, 학자나 상인으로 살았으며, 지식과 소통이 soul의 핵심 주제입.','In past lives, 보호자나 양육자로 살았으며, 타인을 돌보는 것이 soul의 깊은 본능입.','In past lives, 왕족이나 성직자로 높은 지위에 있었으며, 이번 생에서도 자연스러운 권위를 지닙.','In past lives, healing자나 봉Leo로 살았으며, analysis과 service가 soul의 purpose입.','In past lives, diplomacy관이나 art가로 harmony를 추구했으며, 관계와 balance이 soul의 task.','In past lives, practice자나 연금술사로 깊은 transformation을 겪었으며, 비밀과 transformation이 soul에 각인되어 exists.','In past lives, 현자나 탐험가로 진리를 추구했으며, 지혜와 adventure이 soul의 direction입.','In past lives, 관료나 architecture가로 질서를 세웠으며, 체계와 책임이 soul에 새겨져 exists.','In past lives, 혁명가나 발명가로 시대를 앞서갔으며, 독창적 accident가 soul의 특성입.','In past lives, 영매나 art가로 영적 세계와 교류했으며, 깊은 intuition이 soul에 남아exists.'],
-            Moon: ['Past life 감정적 기억이 불같이 강렬합. 분노와 passion이 unconscious에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 task.','Past life 감정적 기억이 따뜻하고 stable입. abundance와 stability 속에서 살았던 기억이 unconscious에 남아, 아름다운 것을 찾습.','Past life 감정적 기억이 intellectual이고 다채롭습. 여러 experience을 했던 기억이 남아 호기심이 강합.','Past life 감정적 기억이 매우 깊습. home과 돌봄의 기억이 강하게 남아 감Mercury이 풍부합.','Past life 감정적 기억이 자부심과 존엄으로 가득합. 인정받고 존경받았던 기억이 남아exists.','Past life 감정적 기억이 service와 analysis에 relatedbecomes. 누군가를 도왔던 기억이 남아 세심한 마음을 가집.','Past life 감정적 기억이 harmony와 관계에 relatedbecomes. 아름다운 관계의 기억이 남아 partner를 찾습.','Past life 감정적 기억이 깊고 강렬합. 극 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습.','Past life 감정적 기억이 자유와 탐구에 relatedbecomes. travel하고 배웠던 기억이 남아 확장을 추구합.','Past life 감정적 기억이 책임과 patience에 relatedbecomes. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집.','Past life 감정적 기억이 독특하고 비범합. 다른 사람들과 Moon랐던 기억이 남아 independent 감성을 가집.','Past life 감정적 기억이 영적이고 초월적입. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습.']
+            Sun: ['In past lives, 전사나 왕으로 살았으며, 강한 자아와 지도력이 이번 생에도 남아exists. 권위를 세우려는 soul의 purpose이 exists.','In past lives, art가나 부유한 자로 살았으며, 물질적 abundance를 추구하는 soul입. sense적 아름다움에 끌립.','In past lives, 학자나 상인으로 살았으며, 지식과 소통이 soul의 핵심 주제입.','In past lives, 보호자나 양육자로 살았으며, 타인을 돌보는 것이 soul의 깊은 본능입.','In past lives, 왕족이나 성직자로 높은 지위에 있었으며, 이번 생에서도 자연스러운 권위를 지닙.','In past lives, healing자나 봉Leo로 살았으며, analysis과 service가 soul의 purpose입.','In past lives, diplomacy관이나 art가로 harmony를 추구했으며, 관계와 balance이 soul의 task.','In past lives, practice자나 연금술사로 깊은 transformation을 겪었으며, 비밀과 transformation이 soul에 각인되어 exists.','In past lives, 현자나 탐험가로 진리를 추구했으며, 지혜와 adventure이 soul의 direction입.','In past lives, 관료나 architecture가로 질서를 세웠으며, 체계와 책임이 soul에 새겨져 exists.','In past lives, 혁명가나 발명가로 시대를 앞서갔으며, 독창적 accident가 soul의 특성입.','In past lives, a medium or artist who communed with the spiritual world. Deep intuition remains in the soul.'],
+            Moon: ['Past life 감정적 기억이 불같이 강렬합. 분노와 passion이 unconscious에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 task.','Past life emotional memories are warm and stable. Memories of abundance remain in the unconscious, seeking beauty.','Past life 감정적 기억이 intellectual이고 다채롭습. 여러 experience을 했던 기억이 남아 호기심이 강합.','Past life 감정적 기억이 매우 깊습. home과 돌봄의 기억이 강하게 남아 감Mercury이 풍부합.','Past life 감정적 기억이 자부심과 존엄으로 가득합. 인정받고 존경받았던 기억이 남아exists.','Past life 감정적 기억이 service와 analysis에 relatedbecomes. 누군가를 도왔던 기억이 남아 세심한 마음을 가집.','Past life 감정적 기억이 harmony와 관계에 relatedbecomes. 아름다운 관계의 기억이 남아 partner를 찾습.','Past life 감정적 기억이 깊고 강렬합. 극 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습.','Past life 감정적 기억이 자유와 탐구에 relatedbecomes. travel하고 배웠던 기억이 남아 확장을 추구합.','Past life 감정적 기억이 책임과 patience에 relatedbecomes. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집.','Past life 감정적 기억이 독특하고 비범합. 다른 사람들과 Moon랐던 기억이 남아 independent 감성을 가집.','Past life 감정적 기억이 영적이고 초월적입. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습.']
         };
 
         // 신 계산 헬퍼
@@ -2375,14 +2375,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD2) {
             const sunInOwn = sunD2.dSign === 4; // Leo
-            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>자Mercury가형!</strong> 권위와 leader십으로 스스로 부를 만듦.' : '🌟 <strong>Sun이 자기 Hora(Leo)!</strong> 자Mercury가형. 권위와 leader십으로 스스로 부를 만듦.') : (isEasy ? '타인의 도움이나 government/공공 부문을 통한 수입.' : 'Sun이 Moon의 Hora. 타인의 도움이나 government/공공 부문을 통한 수입.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>Self-made!</strong> Builds wealth through authority and leadership.' : '🌟 <strong>Sun이 자기 Hora(Leo)!</strong> 자Mercury가형. 권위와 leader십으로 스스로 부를 만듦.') : (isEasy ? '타인의 도움이나 government/공공 부문을 통한 수입.' : 'Sun이 Moon의 Hora. 타인의 도움이나 government/공공 부문을 통한 수입.')) + '<br>';
         }
         if (moonD2) {
             const moonInOwn = moonD2.dSign === 3; // Cancer
             html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Abundant life through public relations!</strong>' : '🌟 <strong>Moon이 자기 Hora(게)!</strong> 대중과 관계를 통해 풍족한 삶.') : (isEasy ? '자기 effort과 independent 활동으로 생계.' : 'Moon이 Sun의 Hora. 자기 effort과 independent 활동으로 생계.')) + '<br>';
         }
-        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? '자기 ability으로 큰 부를 쌓을 수 있어요.' : '타인과 관계를 통한 abundance.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — 자기 ability으로 큰 부.' : 'Moon Hora — 타인과 관계를 통한 abundance.')) + '<br>';
-        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'art/사치품으로 자Mercury가.' : 'spouse나 partner를 통한 wealth.') : 'Venus이 ' + (venD2.dSign === 4 ? 'Sun Hora — art/사치품으로 자Mercury가.' : 'Moon Hora — spouse나 partner를 통한 wealth.')) + '<br>';
+        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? '자기 ability으로 큰 부를 쌓을 수 있어요.' : 'Abundance through relationships with others.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — 자기 ability으로 큰 부.' : 'Moon Hora — 타인과 관계를 통한 abundance.')) + '<br>';
+        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'art/사치품으로 자Mercury가.' : 'Wealth through spouse or partner.') : 'Venus이 ' + (venD2.dSign === 4 ? 'Sun Hora — art/사치품으로 자Mercury가.' : 'Moon Hora — spouse나 partner를 통한 wealth.')) + '<br>';
 
         // D2 2궁(축적된 부) 분석
         const d2H2sign = (dLagnaSign + 1) % 12;
@@ -2390,7 +2390,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Accumulated wealth:' : 'D2 2 house (accumulated 부) — ' + SIGNS[d2H2sign] + ':') + '</strong><br>';
         if (d2H2planets.length > 0) {
             d2H2planets.forEach(p => {
-                const wealth = {Sun:'권위와 지위를 통한 wealth 축적',Moon:'대중적 활동을 통한 유동적 wealth',Mars:'real estate·technology·경쟁 field의 wealth',Mercury:'business·intellectual 활동·통신 field의 wealth',Jupiter:'education·religion·law field의 풍족한 wealth',Venus:'art·fashion·사치품 related wealth',Saturn:'느리지만 꾸준한 wealth 축적. 중년 이후 stability',Rahu:'비traditional 방법·외국 related wealth',Ketu:'물질에 초연. 영적 가치 추구'};
+                const wealth = {Sun:'Wealth through authority and status',Moon:'대중적 활동을 통한 유동적 wealth',Mars:'real estate·technology·경쟁 field의 wealth',Mercury:'business·intellectual 활동·통신 field의 wealth',Jupiter:'education·religion·law field의 풍족한 wealth',Venus:'art·fashion·사치품 related wealth',Saturn:'Slow but steady wealth. Stable after middle age',Rahu:'비traditional 방법·외국 related wealth',Ketu:'물질에 초연. 영적 가치 추구'};
                 html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>';
             });
         } else {
@@ -2413,7 +2413,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<strong>' + (isEasy ? 'Younger siblings:' : 'D3 3 house (younger) — ' + SIGNS[d3_3sign] + ':') + '</strong><br>';
         if (d3_3planets.length > 0) {
-            const bro = {Sun:'younger이 leader십 있고 권위적',Moon:'younger과 감정 가까움',Mars:'younger이 active이고 용감. 다툼 가능',Mercury:'younger이 intellectual이고 소통 ability 좋음',Jupiter:'younger이 현명하고 fortune 가져옴',Venus:'younger이 charm적이고 art적',Saturn:'younger과 관계에 어려움. 나이 차이 클 수 있음',Rahu:'younger이 독특하거나 외국 related',Ketu:'younger과 거리감. 영적 연결'};
+            const bro = {Sun:'younger이 leader십 있고 권위적',Moon:'younger과 감정 가까움',Mars:'Active and brave younger sibling. Arguments possible',Mercury:'younger이 intellectual이고 소통 ability 좋음',Jupiter:'younger이 현명하고 fortune 가져옴',Venus:'younger이 charm적이고 art적',Saturn:'younger과 관계에 어려움. 나이 차이 클 수 있음',Rahu:'younger이 독특하거나 외국 related',Ketu:'younger과 거리감. 영적 연결'};
             d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : '3 house no planets — 3 lord의 position를 확인하세요.<br>';
 
@@ -2443,7 +2443,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<strong>' + (isEasy ? 'Property/Home:' : 'D4 4 house (real estate/home) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
         if (d4_4planets.length > 0) {
-            const prop = {Sun:'government 소유 건물이나 권위 있는 주거',Moon:'아름다운 집. 물 근처. Mother의 influence',Mars:'새 집 architecture. real estate 분쟁 가능',Mercury:'business용 real estate. 여러 채 소유',Jupiter:'넓고 풍족한 집! Best real estate 운',Venus:'럭셔리한 집. 아름다운 인테리어',Saturn:'오래된 집. 수리 필요. 중년 이후 stability',Rahu:'foreign real estate. 비traditional 주거',Ketu:'real estate에 무관심. 영적 공liver 선호'};
+            const prop = {Sun:'government 소유 건물이나 권위 있는 주거',Moon:'아름다운 집. 물 근처. Mother의 influence',Mars:'새 집 architecture. real estate 분쟁 가능',Mercury:'Commercial real estate. Multiple properties',Jupiter:'넓고 풍족한 집! Best real estate 운',Venus:'럭셔리한 집. 아름다운 인테리어',Saturn:'오래된 집. 수리 필요. 중년 이후 stability',Rahu:'foreign real estate. 비traditional 주거',Ketu:'real estate에 무관심. 영적 공liver 선호'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
         } else html += isEasy ? 'Stable real estate fortune.<br>' : '4 house no planets — 4 lord의 position가 real estate의 열쇠.<br>';
 
@@ -2481,7 +2481,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 20) {
         // D20 Vimshamsha — 영적 practice·종교
-        const d20LagnaInterp = ['Active spirituality. Karma yoga. Practice through active service.','Spirituality through nature and senses. Mantra practice. Temple meditation.','intellectual 영성. 경전 research. meditation보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 yoga(헌신). Mother 같은 신성에 끌림.','Royal spirituality. Spiritual practice as leader. Sun worship.','service의 영성. 세바(service)를 통한 practice. health과 healing related 영성.','Harmony spirituality. Divine experience through art and beauty. Tantra.','깊은 transformation의 영성. tantra, 쿤Moon리니. 죽음과 재생의 practice.','Seeker spirituality. Pilgrimage. Searching for a teacher. Philosophical practice.','Traditional spirituality. Systematic practice. Karma yoga. Practice of patience.','Innovative spirituality. Unconventional methods. Service for humanity.','Transcendent spirituality. Meditation, dreams, intuition. Mystical experiences. Liberation.'][dLagnaSign];
+        const d20LagnaInterp = ['Active spirituality. Karma yoga. Practice through active service.','Spirituality through nature and senses. Mantra practice. Temple meditation.','intellectual 영성. 경전 research. meditation보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 yoga(헌신). Mother 같은 신성에 끌림.','Royal spirituality. Spiritual practice as leader. Sun worship.','service의 영성. 세바(service)를 통한 practice. health과 healing related 영성.','Harmony spirituality. Divine experience through art and beauty. Tantra.','Deep transformative spirituality. Tantra, Kundalini. Death and rebirth practice.','Seeker spirituality. Pilgrimage. Searching for a teacher. Philosophical practice.','Traditional spirituality. Systematic practice. Karma yoga. Practice of patience.','Innovative spirituality. Unconventional methods. Service for humanity.','Transcendent spirituality. Meditation, dreams, intuition. Mystical experiences. Liberation.'][dLagnaSign];
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🙏 Spirituality' : '🙏 D20 Vimshamsha — Spirituality') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D20 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d20LagnaInterp + '<br><br>';
@@ -2538,7 +2538,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (지혜) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>높은 학업 성취 기대!</strong> 대학원/박사/foreign study abroad 가능.' : (isEasy ? '학업을 통한 growth이 기대becomes.' : '학업을 통한 growth. Jupiter의 blessing이 ' + jH + ' house 영역에서 나타남.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (지혜) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>높은 학업 성취 기대!</strong> 대학원/박사/foreign study abroad 가능.' : (isEasy ? 'Growth through academics expected.' : '학업을 통한 growth. Jupiter의 blessing이 ' + jH + ' house 영역에서 나타남.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2548,7 +2548,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 27) {
         // D27 삽타Vimshamsha — 체력·강점·약점
-        const d27LagnaInterp = ['강한 체력과 에너지. 운동 ability 탁월. 머리/얼굴이 강점.','지구력과 patience력이 강점. 목/성대가 Strong. 근력 좋음.','민첩성과 반사 신경이 강점. 손/팔이 능숙. 신경계 관리 필요.','감정적 회복력이 강점. 가슴/위장 관리 필요. 수영에 talent.','heart과 spine가 Strong. charisma 있는 체격. 과로 주의.','digestion력과 analysis력이 강점. 장/skin 관리 필요. yoga suitable.','balance감과 harmony로운 체형. kidney/허리 관리 필요. 댄스 suitable.','회복력과 저항력이 강점. 생식기 health 관리. 극한 sports 가능.','허벅지와 liver이 Strong. 야외 운동 suitable. 과weight 주의.','bone와 joint이 Strong. patience력 최고. 나이 들수록 health해짐.','순환계와 발목이 주의점. 독특한 운동법 선호. innovative health법.','immunity력과 intuition이 강점. 발/림프 관리 필요. 수중 운동 suitable.'][dLagnaSign];
+        const d27LagnaInterp = ['강한 체력과 에너지. 운동 ability 탁월. 머리/얼굴이 강점.','지구력과 patience력이 강점. 목/성대가 Strong. 근력 좋음.','민첩성과 반사 신경이 강점. 손/팔이 능숙. 신경계 관리 필요.','감정적 회복력이 강점. 가슴/위장 관리 필요. 수영에 talent.','heart과 spine가 Strong. charisma 있는 체격. 과로 주의.','digestion력과 analysis력이 강점. 장/skin 관리 필요. yoga suitable.','Balanced, harmonious physique. Watch kidneys/back. Dancing suits you.','회복력과 저항력이 강점. 생식기 health 관리. 극한 sports 가능.','허벅지와 liver이 Strong. 야외 운동 suitable. 과weight 주의.','bone와 joint이 Strong. patience력 최고. 나이 들수록 health해짐.','순환계와 발목이 주의점. 독특한 운동법 선호. innovative health법.','immunity력과 intuition이 강점. 발/림프 관리 필요. 수중 운동 suitable.'][dLagnaSign];
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💪 Physical Strength Analysis' : '💪 D27 삽타Vimshamsha — 체력·강점·약점 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D27 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d27LagnaInterp + '<br><br>';
@@ -2558,7 +2558,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const satD27 = dPositions.find(p => p.id === 'Saturn');
         if (marsD27) {
             const mH = ((marsD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>♂ Mars (에너지) → ' + mH + 'th:</strong> ') + ([,'Strong physique and will!','Can earn through physical strength','용기와 adventure심 Strong','home에서 운동하는 타입','sports talent!','disease을 이기는 immunity력','spouse와 함께 운동','위기에서 살아남는 힘','adventure/탐험 field Strong','career적 체력 활용','목표 Moon성 에너지','foreign에서 체력 활동'][mH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>♂ Mars (에너지) → ' + mH + 'th:</strong> ') + ([,'Strong physique and will!','Can earn through physical strength','용기와 adventure심 Strong','home에서 운동하는 타입','sports talent!','disease을 이기는 immunity력','spouse와 함께 운동','위기에서 살아남는 힘','Strong in adventure/exploration','career적 체력 활용','목표 Moon성 에너지','foreign에서 체력 활동'][mH] || '') + '<br>';
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
