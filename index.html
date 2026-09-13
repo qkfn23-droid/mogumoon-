@@ -624,7 +624,10 @@
 <button onclick="ghostSend()" style="padding:8px 14px;background:#c9a84c;border:none;border-radius:8px;color:#0a0a1a;font-weight:700;cursor:pointer;font-size:13px;">보내기</button>
 </div>
 </div>
-<button id="ghostBtn" onclick="var gc=document.getElementById('ghostChat');gc.style.display=gc.style.display==='none'?'block':'none'" style="position:fixed;bottom:20px;right:74px;width:44px;height:44px;border-radius:50%;border:none;font-size:22px;cursor:pointer;background:#1a1a3e;border:2px solid #c9a84c;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9998;">👻</button>
+<div style="position:fixed;bottom:16px;right:70px;z-index:9998;display:flex;align-items:center;gap:8px;">
+<div id="ghostLabel" style="background:#1a1a3e;border:1px solid #c9a84c;border-radius:10px;padding:6px 12px;color:#c9a84c;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.3);">뭐 볼지 모르겠지? 👆</div>
+<button onclick="var gc=document.getElementById('ghostChat');gc.style.display=gc.style.display==='none'?'block':'none';document.getElementById('ghostLabel').style.display='none'" style="width:48px;height:48px;border-radius:50%;border:2px solid #c9a84c;font-size:22px;cursor:pointer;background:#1a1a3e;box-shadow:0 2px 8px rgba(0,0,0,0.3);">👻</button>
+</div>
 <script>
 var gcData = {
     love: {msg:'오! 연애/배우자운이 궁금하구나! 이런 도구들을 추천해 👻', items:[
