@@ -1,6 +1,9 @@
 // ============================================================
 // VEDIC ASTROLOGY ENGINE
 // ============================================================
+if (!window.vedicMode) window.vedicMode = 'easy';
+var _lastCalcData = null;
+function recalcMode() { if (_lastCalcData) { renderInterpretation(_lastCalcData.positions, _lastCalcData.lagnaSign, _lastCalcData.moonPos); } }
 
 // Ayanamsa (Lahiri) - Indian Astronomical Ephemeris official formula
 function getAyanamsa(jd) {
@@ -314,6 +317,7 @@ function calculateChart() {
     renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', '악샤베담샤');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
+    _lastCalcData = {positions, lagnaSign, moonPos};
     renderInterpretation(positions, lagnaSign, moonPos);
     renderPlanetHouse(positions, lagnaSign);
     renderEducation(positions, lagnaSign);
@@ -898,12 +902,27 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // Helper: get house number from sign
     function houseOf(signIdx) { return ((signIdx - lagnaSign + 12) % 12) + 1; }
     function planetsInHouse(h) { return positions.filter(p => houseOf(p.sign) === h); }
+    const isEasy = window.vedicMode === 'easy';
 
     let html = '';
 
     // ═══════════════════════════════════
     // 1. 성격 & 외모 (1궁 라그나)
     // ═══════════════════════════════════
+    const lagnaEasy = [
+        '당신은 행동파입니다. 결단력이 빠르고 리더 기질이 있어요. 새로운 것에 도전하는 걸 좋아합니다.',
+        '당신은 안정을 사랑합니다. 편안한 것, 아름다운 것, 맛있는 것을 좋아해요. 한번 마음먹으면 끝까지 가는 타입.',
+        '당신은 호기심 대왕입니다. 말을 잘하고 다재다능해요. 여러 가지를 동시에 하는 걸 좋아합니다.',
+        '당신은 감성적이고 따뜻합니다. 가족과 가정을 소중히 여기고, 사람들의 마음을 잘 읽어요.',
+        '당신은 타고난 리더입니다. 존재감이 크고 사람들의 주목을 받아요. 창작 활동에 재능이 있습니다.',
+        '당신은 꼼꼼하고 분석적입니다. 완벽을 추구하며 세심한 관찰력을 가졌어요. 건강에 관심이 많습니다.',
+        '당신은 조화를 추구합니다. 세련되고 매력적이며, 사람들과의 관계에서 빛나요. 예술적 감각이 뛰어납니다.',
+        '당신은 깊이가 있습니다. 직관이 강하고 본질을 꿰뚫어 봐요. 인생에서 큰 변화를 여러 번 겪습니다.',
+        '당신은 자유로운 영혼입니다. 여행과 배움을 사랑하며, 긍정적이고 철학적이에요.',
+        '당신은 야망이 있습니다. 인내심이 강하고 목표를 향해 꾸준히 나아가요. 나이 들수록 매력이 늘어납니다.',
+        '당신은 독특합니다. 남들과 다른 생각을 하며, 혁신적이에요. 기술이나 과학에 관심이 많습니다.',
+        '당신은 감수성이 풍부합니다. 꿈이 많고 직관이 강해요. 예술이나 영적인 것에 끌립니다.'
+    ];
     const lagnaInterp = [
         '화성이 지배하는 양자리 라그나. 강한 의지와 리더십, 독립적 성격. 행동이 빠르고 개척자 정신이 강합니다. 체격은 날카로운 이목구비에 활동적인 인상. 성급하지만 용감하며, 경쟁에서 두각을 나타냅니다.',
         '금성이 지배하는 황소자리 라그나. 안정과 풍요를 추구하며 감각적인 아름다움을 사랑합니다. 부드러운 외모에 매력적인 목소리. 물질적 안정을 중시하며 예술적 감각이 뛰어납니다. 고집이 세지만 신뢰할 수 있는 사람.',
@@ -920,14 +939,28 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 성격 & 외모 — 라그나: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
-        <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
+        <div class="interp-title">👤 ${isEasy ? '당신의 성격' : '성격 & 외모 — 라그나: ' + SIGNS[lagnaSign] + ' ' + SIGN_SYMBOLS[lagnaSign]}</div>
+        <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
     // ═══════════════════════════════════
     // 2. 내면 & 감정 (달 별자리)
     // ═══════════════════════════════════
     if (moonPos) {
+        const moonEasy = [
+            '당신은 열정적이고 즉흥적입니다. 화가 빨리 나지만 금세 풀려요. 운동으로 스트레스를 풀면 좋습니다.',
+            '당신은 감정적으로 안정적입니다. 편안한 것을 좋아하고, 한번 마음을 주면 쉽게 변하지 않아요.',
+            '당신은 대화로 마음을 정리합니다. 호기심이 많고 지루한 건 못 참아요.',
+            '당신은 감수성이 매우 풍부합니다. 다른 사람의 감정을 잘 느끼고, 가정에서 편안함을 느껴요.',
+            '당신은 사랑받고 싶은 마음이 강합니다. 창작 활동을 하면 마음이 치유돼요. 로맨틱한 타입.',
+            '당신은 꼼꼼하고 걱정이 많습니다. 일상의 루틴에서 안정감을 찾고, 건강에 관심이 많아요.',
+            '당신은 누군가와 함께일 때 안정됩니다. 갈등을 싫어하고, 아름다운 것에서 평화를 찾아요.',
+            '당신은 감정이 깊고 강렬합니다. 직관이 강해서 상대의 진심을 본능적으로 알아요.',
+            '당신은 자유를 사랑합니다. 여행이 최고의 치유제이고, 긍정적인 에너지가 넘쳐요.',
+            '당신은 감정을 잘 드러내지 않습니다. 책임감이 강하고, 나이 들수록 감정적으로 성숙해져요.',
+            '당신은 독특한 방식으로 사랑합니다. 큰 그림을 보는 타입이고, 독립적이에요.',
+            '당신은 직관이 매우 강합니다. 꿈이 선명하고, 예술이나 명상에서 안정을 찾아요.'
+        ];
         const moonInterp = [
             '내면에 불같은 열정이 있습니다. 감정이 즉흥적이고 빠르게 변합니다. 화가 빨리 나지만 금세 풀리며, 독립적인 감정 생활을 원합니다. 스트레스를 운동으로 해소하면 좋습니다.',
             '감정적으로 매우 안정적이며 편안함을 추구합니다. 변화를 싫어하고 익숙한 것에서 안정감을 느낍니다. 좋은 음식, 음악, 자연에서 치유됩니다. 한번 마음을 주면 쉽게 변하지 않습니다.',
@@ -943,14 +976,30 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             '극도로 직관적이고 영적입니다. 꿈이 선명하고 예지적일 수 있습니다. 타인의 고통에 깊이 공감하며 자기와 타인의 경계가 모호합니다. 예술, 명상, 영적 수행에서 안정을 찾습니다.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 내면 & 감정 — 달: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
-            <div class="interp-text">${moonInterp[moonPos.sign]}</div>
+            <div class="interp-title">🌙 ${isEasy ? '당신의 감정 스타일' : '내면 & 감정 — 달: ' + SIGNS[moonPos.sign] + ' ' + SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
 
     // ═══════════════════════════════════
     // 3. 💰 재물운 (2궁, 11궁 분석)
     // ═══════════════════════════════════
+    if (isEasy) {
+        const wealthEasy = ['자기 힘으로 돈을 버는 타입. 공격적인 재테크에 재능이 있어요.','안정적으로 돈을 모으는 타입. 부동산이나 예술 관련 수입이 유력해요.','머리로 돈을 버는 타입. 글쓰기, 교육, IT 분야에서 수입이 생겨요.','가족을 통해 재물이 오거나 부동산으로 돈을 모아요. 감정적 소비에 주의.','리더십과 권위로 돈을 벌어요. 정부나 공공기관과 인연이 있어요.','분석력과 기술로 돈을 벌어요. 의료, 회계, 서비스업에 적합해요.','파트너십을 통해 돈을 벌어요. 법률, 외교, 패션, 예술 분야.','다른 사람의 돈(유산, 투자)으로 부를 축적하는 타입이에요.','교육이나 해외를 통해 돈이 들어와요. 행운으로 재물이 생길 수 있어요.','느리지만 확실하게 돈을 모아요. 중년 이후에 부유해지는 타입.','기술이나 혁신으로 돈을 벌어요. 비전통적인 방법으로 수입이 생겨요.','예술이나 영적 활동을 통해 돈이 들어와요. 기부하는 성향이 있어요.'][lagnaSign];
+        html += '<div class="interp-card"><div class="interp-title">💰 당신의 재물운</div><div class="interp-text">' + wealthEasy + '</div></div>';
+
+        const spouseEasy = ['에너지 넘치고 독립적인 배우자. 활동적이고 직접적인 타입.','아름답고 감각적인 배우자. 안정적이고 충성스러운 타입.','말을 잘하고 똑똑한 배우자. 유머감각이 있고 대화가 잘 통해요.','따뜻하고 가정적인 배우자. 엄마처럼 돌봐주는 타입.','카리스마 있고 당당한 배우자. 사회적으로 주목받는 사람.','꼼꼼하고 실용적인 배우자. 건강에 관심 많고 봉사적인 타입.','매력적이고 세련된 배우자. 예술적 감각이 뛰어나요.','강렬하고 신비로운 배우자. 깊은 감정의 소유자.','자유롭고 밝은 배우자. 외국인이거나 문화가 다를 수 있어요.','진지하고 야망 있는 배우자. 결혼이 다소 늦을 수 있어요.','독특하고 독립적인 배우자. 비전통적인 만남이 가능해요.','영적이고 꿈꾸는 듯한 배우자. 예술가나 영적 종사자와 인연.'][(lagnaSign+6)%12];
+        html += '<div class="interp-card"><div class="interp-title">💍 당신의 배우자</div><div class="interp-text">' + spouseEasy + '</div></div>';
+
+        const careerEasy = ['리더, 군인, 운동선수, 사업가에 적합해요.','금융, 요리, 농업, 패션, 부동산 분야에 적합해요.','미디어, 글쓰기, 교육, IT, 마케팅에 적합해요.','의료, 간호, 호텔, 요리, 심리상담에 적합해요.','정치, 연예, 경영, 정부기관에서 빛나요.','의료, 회계, 분석, 컨설팅에 적합해요.','법률, 외교, 패션, 인테리어에 적합해요.','연구, 조사, 보험, 의학, 심리학에 적합해요.','교육, 법률, 종교, 출판, 여행에 적합해요.','경영, 공무원, 건축, 정치에 적합해요.','기술, IT, 과학, 항공, 사회사업에 적합해요.','예술, 영화, 음악, 의료, 해외, 영적 분야에 적합해요.'][(lagnaSign+9)%12];
+        html += '<div class="interp-card"><div class="interp-title">💼 당신에게 맞는 직업</div><div class="interp-text">' + careerEasy + '</div></div>';
+
+        const healthEasy = ['머리, 얼굴 관련 주의. 두통, 열병에 주의하세요. 운동을 규칙적으로!','목, 갑상선 주의. 과식과 당뇨에 주의하세요.','폐, 팔, 어깨, 신경계 주의. 불안하면 호흡 명상을 해보세요.','위장, 가슴 주의. 감정 스트레스가 건강에 직결돼요.','심장, 등, 척추 주의. 과로하지 마세요.','소화기, 장, 피부 주의. 식이요법이 중요해요.','신장, 허리, 피부 주의. 수분을 충분히 섭취하세요.','생식기 건강 주의. 정기 검진이 중요해요.','간, 허벅지 주의. 야외 활동이 건강에 좋아요. 과체중 주의.','뼈, 관절, 무릎 주의. 칼슘 섭취를 챙기세요.','발목, 순환계 주의. 혈압을 관리하세요.','발, 면역 주의. 충분한 수면이 가장 중요해요.'][lagnaSign];
+        html += '<div class="interp-card"><div class="interp-title">🏥 건강에서 주의할 점</div><div class="interp-text">' + healthEasy + '</div></div>';
+
+        document.getElementById('interpWrap').innerHTML = html;
+        return;
+    }
     const h2planets = planetsInHouse(2);
     const h11planets = planetsInHouse(11);
     const h2sign = (lagnaSign + 1) % 12;
