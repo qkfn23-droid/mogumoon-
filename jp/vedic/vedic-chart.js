@@ -731,7 +731,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">💎 配偶者の魅力ポイント ' + (isEasy ? '— 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
         <div class="interp-text">
-            ナヴァムシャの金星の位置は配偶者の核心的な魅力と愛のスタイルを表します。<br><br>
+            ${isEasy ? '' : 'ナヴァムシャの金星の位置は配偶者の核心的な魅力と愛のスタイルを表します。<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;

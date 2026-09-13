@@ -706,7 +706,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">🤝 Wo Sie Ihren Ehepartner treffen ' + (isEasy ? '— 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7. Haus: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
         <div class="interp-text">
-            Das Zeichen des 7. Hauses zeigt das Umfeld und die Umstände, unter denen Sie Ihren Ehepartner kennenlernen.<br><br>
+            ${isEasy ? '' : 'Das Zeichen des 7. Hauses zeigt das Umfeld und die Umstände, unter denen Sie Ihren Ehepartner kennenlernen.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
             ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Möglichkeit eines ausländischen Ehepartners!</strong> Zeichen im Zusammenhang mit dem 9. (Ausland) oder 12. Haus (Auslandsaufenthalt) stehen im 7., was darauf hindeutet, dass der Ehepartner Ausländer sein könnte oder Sie sich im Ausland treffen.' : ''}
         </div>
@@ -715,7 +715,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">' + (isEasy ? '🏛️ Familienhintergrund des Ehepartners' : '🏛️ Familienhintergrund des Ehepartners — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
         <div class="interp-text">
-            Upapada Lagna (UL) zeigt das familiäre Umfeld und die Erziehung Ihres Ehepartners.<br><br>
+            ${isEasy ? '' : 'Upapada Lagna (UL) zeigt das familiäre Umfeld und die Erziehung Ihres Ehepartners.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
@@ -731,7 +731,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">💎 Anziehungspunkt des Ehepartners ' + (isEasy ? '— Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
         <div class="interp-text">
-            Venus im Navamsa zeigt den Kerncharme und den Liebesstil Ihres Ehepartners.<br><br>
+            ${isEasy ? '' : 'Venus im Navamsa zeigt den Kerncharme und den Liebesstil Ihres Ehepartners.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
@@ -1528,7 +1528,7 @@ function renderDignity(positions, lagnaSign) {
         html += `<div class="interp-card">
             <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">Regiert: ${role} │ Position: ${house}. Haus = ${area}</span><br><br>
+                ${isEasy ? '' : `<span style="color:#666;font-size:12px;">Regiert: ${role} │ Position: ${house}. Haus = ${area}</span><br><br>`}
                 ${simpleDesc}
             </div>
         </div>`;

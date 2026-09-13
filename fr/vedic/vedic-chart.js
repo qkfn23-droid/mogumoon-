@@ -706,7 +706,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">🤝 Où vous rencontrez votre conjoint ' + (isEasy ? '— 7e : ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7e : ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
         <div class="interp-text">
-            Le signe de la 7e maison révèle l'environnement et les circonstances de la rencontre avec votre conjoint.<br><br>
+            ${isEasy ? '' : 'Le signe de la 7e maison révèle l\'environnement et les circonstances de la rencontre avec votre conjoint.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
             ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Possibilité de conjoint étranger !</strong> Des signes liés à la 9e (étranger) ou la 12e maison (résidence étrangère) sont dans la 7e, suggérant que le conjoint peut être étranger ou que vous pourriez vous rencontrer à l\'étranger.' : ''}
         </div>
@@ -715,7 +715,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">' + (isEasy ? '🏛️ Origine familiale du conjoint' : '🏛️ Origine familiale du conjoint — UL : ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
         <div class="interp-text">
-            L'Upapada Lagna (UL) révèle l'environnement familial et l'éducation de votre conjoint.<br><br>
+            L'${isEasy ? '' : 'Upapada Lagna (UL) révèle l\'environnement familial et l\'éducation de votre conjoint.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
@@ -723,7 +723,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">' + (isEasy ? '👤 Première impression du conjoint' : '👤 Première impression du conjoint — A7 : ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
         <div class="interp-text">
-            Le Darapada (A7) montre comment votre conjoint apparaît au monde — son image externe et première impression.<br><br>
+            Le ${isEasy ? '' : 'Darapada (A7) montre comment votre conjoint apparaît au monde — son image externe et première impression.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
@@ -1528,7 +1528,7 @@ function renderDignity(positions, lagnaSign) {
         html += `<div class="interp-card">
             <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
+                ${isEasy ? '' : `<span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>`}
                 ${simpleDesc}
             </div>
         </div>`;

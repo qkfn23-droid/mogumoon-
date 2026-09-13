@@ -706,7 +706,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">🤝 Onde você conhece seu cônjuge ' + (isEasy ? '— 7ª: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7ª: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
         <div class="interp-text">
-            O signo da 7ª casa revela o ambiente e as circunstâncias do encontro com seu cônjuge.<br><br>
+            ${isEasy ? '' : 'O signo da 7ª casa revela o ambiente e as circunstâncias do encontro com seu cônjuge.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
             ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Possibilidade de cônjuge estrangeiro!</strong> Signos relacionados à 9ª (exterior) ou 12ª casa (residência no estrangeiro) estão na 7ª, sugerindo que o cônjuge pode ser estrangeiro ou que vocês podem se conhecer no exterior.' : ''}
         </div>
@@ -715,7 +715,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">' + (isEasy ? '🏛️ Origem familiar do cônjuge' : '🏛️ Origem familiar do cônjuge — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}') + '</div>
         <div class="interp-text">
-            O Upapada Lagna (UL) revela o ambiente familiar e a criação do seu cônjuge.<br><br>
+            O ${isEasy ? '' : 'Upapada Lagna (UL) revela o ambiente familiar e a criação do seu cônjuge.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
@@ -723,7 +723,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">' + (isEasy ? '👤 Primeira impressão do cônjuge' : '👤 Primeira impressão do cônjuge — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}') + '</div>
         <div class="interp-text">
-            O Darapada (A7) mostra como seu cônjuge aparece para o mundo — sua imagem externa e primeira impressão.<br><br>
+            O ${isEasy ? '' : 'Darapada (A7) mostra como seu cônjuge aparece para o mundo — sua imagem externa e primeira impressão.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
@@ -1528,7 +1528,7 @@ function renderDignity(positions, lagnaSign) {
         html += `<div class="interp-card">
             <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
+                ${isEasy ? '' : `<span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>`}
                 ${simpleDesc}
             </div>
         </div>`;
