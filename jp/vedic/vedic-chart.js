@@ -504,7 +504,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     let html = '';
 
     html += `<div class="interp-card">
-        <div class="interp-title">🕉️ D9 ラグナ — 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">' + (isEasy ? '🕉️ 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 ラグナ — 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}') + '</div>
         <div class="interp-text">
             ナヴァムシャ・ラグナは<strong>${SIGNS[d9LagnaSign]}</strong>。これは結婚後、そして人生後半（30代以降）に現れるあなたの本当の姿です。
             ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1とD9のラグナが同じ星座にあります！</strong> これは<strong>バルゴッタマ(Vargottama)</strong> — 非常に強力です。結婚後もあなたの本質は変わらず、内面と外面が一致しています。' : ''}
@@ -513,7 +513,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💍 D9 7宮 — 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💍 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7宮 — 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}') + '</div>
         <div class="interp-text">
             ナヴァムシャ7宮は<strong>${SIGNS[d9H7Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H7Ruler]}</strong>。<br><br>
             これは配偶者の核心的な性格を表します — ${SIGNS[d9H7Sign]}のエネルギーを持つパートナー。
@@ -522,7 +522,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 D9 10宮 — 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💼 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10宮 — 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}') + '</div>
         <div class="interp-text">
             ナヴァムシャ10宮は<strong>${SIGNS[d9H10Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H10Ruler]}</strong>。<br><br>
             D1の10宮が「職業」を示すなら、D9の10宮は<strong>人生のより大きな使命(ダルマ)</strong> — 成熟した後に追求する真の天職。<br><br>
@@ -692,7 +692,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 配偶者との出会いの場 — D1 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">🤝 配偶者との出会いの場 ' + (isEasy ? '— 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
         <div class="interp-text">
             7宮の星座が配偶者との出会いの環境と状況を表します。<br><br>
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -717,7 +717,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💎 配偶者の魅力ポイント — D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">💎 配偶者の魅力ポイント ' + (isEasy ? '— 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
         <div class="interp-text">
             ナヴァムシャの金星の位置は配偶者の核心的な魅力と愛のスタイルを表します。<br><br>
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -888,6 +888,20 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // 2. 内面 & 感情 (月の星座)
     // ═══════════════════════════════════
     if (moonPos) {
+        const moonEasy = [
+        '心の奥に炎のような情熱があります。感情が素早く上がって素早く冷めます。ストレスを感じたら体を動かすのが一番。運動やアウトドアが効果的です。',
+        '感情的にとても安定しています。急な変化を嫌い、慣れ親しんだものに安心感を覚えます。美味しい食べ物、音楽、美しい自然で心が癒されます。',
+        '感情を理性的に処理します。気分が悪い時は誰かと話すと心が整理されます。好奇心旺盛で退屈が苦手。軽いユーモアで雰囲気を変える才能があります。',
+        '極度に感受性が豊かです。他人の感情をスポンジのように吸収します。家庭で安心感を感じ、母親との絆が強いです。料理やインテリアで心が安定します。',
+        '感情表現が華やかで情熱的。愛され認められたい気持ちが強いですが、その分愛情も惜しみなく注ぎます。創作活動が感情的な治癒薬になります。',
+        '感情を分析して整理する傾向があります。心配性ですが問題解決能力が優れています。日常のルーティンで感情的な安定を見つけます。',
+        '関係の中で感情のバランスを見つけます。一人だと寂しさを感じ、パートナーや親しい友人と一緒にいると安定します。美しいものと芸術で心の平和を見つけます。',
+        '感情は海のように深く激しいです。深く愛し、裏切りは絶対に忘れません。直感が非常に強く、言葉より目や行動から真実を読み取ります。',
+        '感情的に明るく楽観的。自由を愛し束縛を嫌います。旅行が最高の癒し。哲学的な思考で感情を昇華させます。',
+        '感情をあまり表に出しません。責任感が強く義務を優先します。年を重ねるほど感情的に成熟し、自分を楽に表現できるようになります。',
+        'ユニークで予測不能な感情パターン。独立的で自由な感情生活を望みます。社会活動で感情的な満足を見つけます。',
+        '極度に直感的でスピリチュアル。夢が鮮明で時に未来を予感します。芸術、瞑想、水辺で心の安定を見つけます。内面の世界が外の世界より豊かです。'
+    ];
         const moonInterp = [
             '内面に炎のような情熱があります。感情が即興的で素早く変わります。怒りやすいがすぐ収まり、独立した感情生活を望みます。ストレスは運動で解消すると良いでしょう。',
             '感情的に非常に安定しており、快適さを追求します。変化を嫌い、馴染みのあるものに安心感を得ます。美味しい食事、音楽、自然で癒されます。一度心を開くと簡単には変わりません。',
@@ -904,7 +918,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         ];
         html += `<div class="interp-card">
             <div class="interp-title">🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
-            <div class="interp-text">${moonInterp[moonPos.sign]}</div>
+            <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
 
@@ -1701,7 +1715,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d10_10lord = SIGN_RULERS[d10_10sign];
         const d10_10planets = dPositions.filter(p => p.dSign === d10_10sign);
 
-        html += '<div class="interp-card"><div class="interp-title">💼 D10 職業分析</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💼 職業分析' : '💼 D10 職業分析') + '</div><div class="interp-text">';
         html += '<strong>D10 ラグナ：</strong> ' + SIGNS[dLagnaSign] + ' (支配星： ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
         html += '<strong>D10 10室（職業）：</strong> ' + SIGNS[d10_10sign] + ' (支配星： ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         if (d10_10planets.length > 0) {
@@ -1734,7 +1748,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const benefics = d7_5planets.filter(p => p.natural === 'benefic');
         const malefics = d7_5planets.filter(p => p.natural === 'malefic');
 
-        html += '<div class="interp-card"><div class="interp-title">👶 D7 子供分析</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 子供分析' : '👶 D7 子供分析') + '</div><div class="interp-text">';
         html += '<strong>D7 ラグナ：</strong> ' + SIGNS[dLagnaSign] + '<br>';
         html += '<strong>D7 5室（子供）：</strong> ' + SIGNS[d7_5sign] + ' (支配星： ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
         if (d7_5planets.length > 0) {
@@ -1752,7 +1766,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d12_4planets = dPositions.filter(p => p.dSign === d12_4sign);
         const d12_9planets = dPositions.filter(p => p.dSign === d12_9sign);
 
-        html += '<div class="interp-card"><div class="interp-title">👨‍👩‍👧 D12 両親分析</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨‍👩‍👧 両親分析' : '👨‍👩‍👧 D12 両親分析') + '</div><div class="interp-text">';
         html += '<strong>D12 ラグナ：</strong> ' + SIGNS[dLagnaSign] + '<br>';
         html += '<strong>D12 4室（母）：</strong> ' + SIGNS[d12_4sign];
         if (d12_4planets.length > 0) html += ' — ' + d12_4planets.map(p => p.name).join(', ');
@@ -2042,7 +2056,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // D2 Hora — Wealth accumulation
         const d2LagnaInterp = ['自力で財を築く。独立的で積極的な投資。','感覚的投資と安定した財運。不動産、飲食、芸術収入。','知的活動で稼ぐ。執筆、教育、ビジネスセンス。','不動産と家族収入。母からの財産。感情的支出に注意。','リーダーシップと権威で財を築く。政府、金関連。見栄の支出。','分析力と技術で収入。医療、会計、サービス業。倹約家。','パートナーシップで財を築く。法律、外交、ファッション。','他人のお金（遺産、保険、投資）で富を築く。隠れた財源。','教育、海外、宗教を通じた収入。幸運が財をもたらす。','体系的な努力で財を築く。遅いが確実。中年以降裕福。','技術、革新、ネットワークで収入。非伝統的な財源。','霊的・芸術的活動で収入。海外関連の財。寄付の傾向。'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">💰 D2 ホーラ — 財運分析</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💰 財運分析' : '💰 D2 ホーラ — 財運分析') + '</div><div class="interp-text">';
         html += '<strong>D2 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d2LagnaInterp + '<br><br>';
         const sunD2 = dPositions.find(p => p.id === 'Sun');
         const moonD2 = dPositions.find(p => p.id === 'Moon');
@@ -2062,7 +2076,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d3_3sign = (dLagnaSign + 2) % 12;
         const d3_3planets = dPositions.filter(p => p.dSign === d3_3sign);
 
-        html += '<div class="interp-card"><div class="interp-title">👫 D3 ドレッカナ — 兄弟姉妹と勇気</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 兄弟姉妹と勇気' : '👫 D3 ドレッカナ — 兄弟姉妹と勇気') + '</div><div class="interp-text">';
         html += '<strong>D3 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
         html += '<strong>D3 3室（弟妹） — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
@@ -2076,7 +2090,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d4_4sign = (dLagnaSign + 3) % 12;
         const d4_4planets = dPositions.filter(p => p.dSign === d4_4sign);
 
-        html += '<div class="interp-card"><div class="interp-title">🏠 D4 チャトゥルタムシャ — 不動産と幸運</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 不動産と幸運' : '🏠 D4 チャトゥルタムシャ — 不動産と幸運') + '</div><div class="interp-text">';
         html += '<strong>D4 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
         html += '<strong>D4 4室（不動産） — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
@@ -2093,7 +2107,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const jupD24 = dPositions.find(p => p.id === 'Jupiter');
         const merD24 = dPositions.find(p => p.id === 'Mercury');
 
-        html += '<div class="interp-card"><div class="interp-title">📚 D24 チャトゥルヴィムシャムシャ — 教育</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '📚 教育' : '📚 D24 チャトゥルヴィムシャムシャ — 教育') + '</div><div class="interp-text">';
         html += '<strong>D24 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d24LagnaInterp + '<br><br>';
         html += '<strong>D24 4室（基礎教育） — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
@@ -2112,7 +2126,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d30_6planets = dPositions.filter(p => p.dSign === d30_6sign);
         const d30_8planets = dPositions.filter(p => p.dSign === d30_8sign);
 
-        html += '<div class="interp-card"><div class="interp-title">⚠️ D30 トリムシャムシャ — 不運と疾病</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '⚠️ 不運と疾病' : '⚠️ D30 トリムシャムシャ — 不運と疾病') + '</div><div class="interp-text">';
         html += '<strong>D30 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d30LagnaInterp + '<br><br>';
         const diseaseBySign = ['頭、脳、発熱、炎症','首、甲状腺、糖尿病','肺、神経、不安','胃、水分貯留','心臓、背中、血圧','消化器、腸、皮膚','腎臓、腰、泌尿器','生殖器、慢性疾患','肝臓、太もも、過体重','骨、関節、リウマチ','循環、血圧、足首','免疫、足、メンタルヘルス'];
         html += '<strong>D30 6室（疾病） — ' + SIGNS[d30_6sign] + ':</strong><br>';
@@ -2131,7 +2145,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d40LagnaInterp = ['独立的で意志の強い母。母系からリーダーシップを受け継ぐ。','母が財を上手に管理。母系から物質的豊かさ。','知的でコミュニケーション上手な母。言語/教育の才能を受け継ぐ。','母との非常に深い絆。感受性と直感を受け継ぐ。','権威と尊厳のある母。リーダーシップと名誉を受け継ぐ。','母が健康管理に優れる。分析力/奉仕精神を受け継ぐ。','魅力的で外交的な母。芸術的感覚を受け継ぐ。','変革を経た強い母。回復力を受け継ぐ。','教育的で宗教的な母。知恵/哲学を受け継ぐ。','責任感のある厳格な母。忍耐と規律を受け継ぐ。','ユニークで進歩的な母。革新的思考を受け継ぐ。','霊的で直感的な母。芸術/霊性を受け継ぐ。'][dLagnaSign];
         const moonD40 = dPositions.find(p => p.id === 'Moon');
 
-        html += '<div class="interp-card"><div class="interp-title">👩 D40 カヴェダムシャ — 母系の遺産</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👩 母系の遺産' : '👩 D40 カヴェダムシャ — 母系の遺産') + '</div><div class="interp-text">';
         html += '<strong>D40 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d40LagnaInterp + '<br>';
         if (moonD40) { const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☽ 月（母のカラカ） → ' + mH + '室：</strong> ' + ['','母が自分に強い影響','母からの財産','母とのコミュニケーション良好','母との深い絆！最高の配置','創造的な母','奉仕的な母','母が人間関係に影響','母からの遺産','宗教的・教育的な母','社会的に成功した母','独立的な母','霊的な母'][mH] + '<br>'; }
         html += '</div></div>';
@@ -2140,7 +2154,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d45LagnaInterp = ['活動的で行動指向の父。勇気とリーダーシップを受け継ぐ。','経済的に安定した父。物質的価値観を受け継ぐ。','知的で多才な父。コミュニケーション/ビジネス能力を受け継ぐ。','感情的で家庭的な父。世話の本能を受け継ぐ。','権威があり尊敬される父。リーダーシップを受け継ぐ。','実用的で勤勉な父。分析力/技術力を受け継ぐ。','外交的で洗練された父。社交能力を受け継ぐ。','強くて神秘的な父。回復力/洞察力を受け継ぐ。','学問的で宗教的な父。哲学/道徳を受け継ぐ。','厳格で野心のある父。忍耐/規律を受け継ぐ。','創造的で革新的な父。技術/科学的思考を受け継ぐ。','霊的で芸術的な父。直感/創造性を受け継ぐ。'][dLagnaSign];
         const sunD45 = dPositions.find(p => p.id === 'Sun');
 
-        html += '<div class="interp-card"><div class="interp-title">👨 D45 アクシャヴェダムシャ — 父系の遺産</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨 父系の遺産' : '👨 D45 アクシャヴェダムシャ — 父系の遺産') + '</div><div class="interp-text">';
         html += '<strong>D45 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d45LagnaInterp + '<br>';
         if (sunD45) { const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☉ 太陽（父のカラカ） → ' + sH + '室：</strong> ' + ['','父が自分に強い影響','父からの財産','父とのコミュニケーション良好','家庭的な父','創造的な父','奉仕的な父','父が人間関係に影響','父からの遺産','宗教的・教育的な父','社会的に成功した父！最高の配置','独立的な父','霊的な父'][sH] + '<br>'; }
         html += '</div></div>';

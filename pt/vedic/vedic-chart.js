@@ -504,7 +504,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     let html = '';
 
     html += `<div class="interp-card">
-        <div class="interp-title">🕉️ D9 Lagna — Você após o casamento: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">' + (isEasy ? '🕉️ Você após o casamento: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}' : '🕉️ D9 Lagna — Você após o casamento: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}') + '</div>
         <div class="interp-text">
             O Navamsa Lagna está em <strong>${SIGNS[d9LagnaSign]}</strong>. Isso revela o seu verdadeiro eu após o casamento e na segunda metade da vida (após os 30 anos).
             ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1 e D9 Lagna estão no mesmo signo!</strong> Isso se chama <strong>Vargottama</strong> — extremamente poderoso. Sua essência permanece inalterada após o casamento, o eu interior e exterior estão alinhados.' : ''}
@@ -513,7 +513,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💍 D9 7ª Casa — Caráter do cônjuge: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💍 Caráter do cônjuge: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}' : '💍 D9 7ª Casa — Caráter do cônjuge: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}') + '</div>
         <div class="interp-text">
             A 7ª casa do Navamsa está em <strong>${SIGNS[d9H7Sign]}</strong>, regida por <strong>${RULER_NAMES[d9H7Ruler]}</strong>.<br><br>
             Isso revela a personalidade central do seu cônjuge — alguém com a energia de ${SIGNS[d9H7Sign]}.
@@ -522,7 +522,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 D9 10ª Casa — Propósito de vida (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💼 Propósito de vida (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}' : '💼 D9 10ª Casa — Propósito de vida (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}') + '</div>
         <div class="interp-text">
             A 10ª casa do Navamsa está em <strong>${SIGNS[d9H10Sign]}</strong>, regida por <strong>${RULER_NAMES[d9H10Ruler]}</strong>.<br><br>
             Enquanto a 10ª do D1 mostra sua carreira, a 10ª do D9 revela seu <strong>propósito de vida maior (Dharma)</strong> — a verdadeira vocação que você segue após a maturidade.<br><br>
@@ -692,7 +692,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 Onde você conhece seu cônjuge — D1 7ª: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">🤝 Onde você conhece seu cônjuge ' + (isEasy ? '— 7ª: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}' : '— D1 7ª: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}') + '</div>
         <div class="interp-text">
             O signo da 7ª casa revela o ambiente e as circunstâncias do encontro com seu cônjuge.<br><br>
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -717,7 +717,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💎 Ponto de atração do cônjuge — D9 Vênus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">💎 Ponto de atração do cônjuge ' + (isEasy ? '— Vênus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}' : '— D9 Vênus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}') + '</div>
         <div class="interp-text">
             Vênus no Navamsa revela o charme central e o estilo amoroso do seu cônjuge.<br><br>
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -889,6 +889,20 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // 2. Inner Self & Emotions (Moon Sign)
     // ═══════════════════════════════════
     if (moonPos) {
+        const moonEasy = [
+        'Uma paixão ardente queima dentro de você. Emoções sobem rápido e descem rápido. Quando estressado/a, precisa se mover — exercício funciona melhor.',
+        'Emocionalmente muito estável. Não gosta de mudanças bruscas. Boa comida, música e natureza te curam. Uma vez que dá seu coração, raramente muda.',
+        'Processa emoções conversando. Falar ajuda a organizar os sentimentos. Curioso/a e não suporta tédio. Seu humor pode aliviar qualquer ambiente.',
+        'Extremamente sensível e empático/a. Absorve as emoções dos outros como uma esponja. O lar é seu refúgio. Cozinhar ou decorar traz paz emocional.',
+        'Expressão emocional dramática e apaixonada. Precisa profundamente ser amado/a. Mas dá amor com a mesma generosidade. Atividades criativas são sua medicina.',
+        'Analisa e organiza suas emoções. Preocupa-se muito mas resolve problemas praticamente. Rotinas diárias trazem estabilidade emocional.',
+        'Encontra equilíbrio emocional nos relacionamentos. Sozinho/a se sente vazio/a. Odeia conflitos profundamente. Arte e beleza trazem paz.',
+        'Suas emoções são tão profundas e intensas quanto o oceano. Ama profundamente e nunca esquece traição. Sua intuição é incrivelmente forte.',
+        'Emocionalmente brilhante e otimista. Ama liberdade e odeia restrições. Viajar é seu melhor remédio emocional.',
+        'Não mostra emoções facilmente. Forte senso de responsabilidade. Com a idade, torna-se mais aberto/a emocionalmente.',
+        'Padrões emocionais únicos e imprevisíveis. Ama de maneiras não convencionais. Atividades sociais trazem satisfação emocional.',
+        'Extremamente intuitivo/a e espiritual. Sonhos vívidos às vezes proféticos. Arte, meditação e água trazem paz.'
+    ];
         const moonInterp = [
             'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
             'Emotionally very stable, seeking comfort. Dislikes change and finds security in the familiar. Healed by good food, music, and nature. Once you give your heart, it rarely changes.',
@@ -905,7 +919,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         ];
         html += `<div class="interp-card">
             <div class="interp-title">🌙 Inner Self & Emotions — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
-            <div class="interp-text">${moonInterp[moonPos.sign]}</div>
+            <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
 
@@ -1707,7 +1721,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d10_10lord = SIGN_RULERS[d10_10sign];
         const d10_10planets = dPositions.filter(p => p.dSign === d10_10sign);
 
-        html += '<div class="interp-card"><div class="interp-title">💼 D10 Análise de Carreira</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💼 Análise de Carreira' : '💼 D10 Análise de Carreira') + '</div><div class="interp-text">';
         html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (Regente: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
         html += '<strong>D10 Casa 10 (Carreira):</strong> ' + SIGNS[d10_10sign] + ' (Regente: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         if (d10_10planets.length > 0) {
@@ -1740,7 +1754,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const benefics = d7_5planets.filter(p => p.natural === 'benefic');
         const malefics = d7_5planets.filter(p => p.natural === 'malefic');
 
-        html += '<div class="interp-card"><div class="interp-title">👶 D7 Análise de Filhos</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 Análise de Filhos' : '👶 D7 Análise de Filhos') + '</div><div class="interp-text">';
         html += '<strong>D7 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
         html += '<strong>D7 Casa 5 (Filhos):</strong> ' + SIGNS[d7_5sign] + ' (Regente: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
         if (d7_5planets.length > 0) {
@@ -1758,7 +1772,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d12_4planets = dPositions.filter(p => p.dSign === d12_4sign);
         const d12_9planets = dPositions.filter(p => p.dSign === d12_9sign);
 
-        html += '<div class="interp-card"><div class="interp-title">👨‍👩‍👧 D12 Análise de Pais</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨‍👩‍👧 Análise de Pais' : '👨‍👩‍👧 D12 Análise de Pais') + '</div><div class="interp-text">';
         html += '<strong>D12 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
         html += '<strong>D12 Casa 4 (Mae):</strong> ' + SIGNS[d12_4sign];
         if (d12_4planets.length > 0) html += ' — ' + d12_4planets.map(p => p.name).join(', ');
@@ -2048,7 +2062,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // D2 Hora — Wealth accumulation
         const d2LagnaInterp = ['Riqueza por esforco proprio. Investimento independente e agressivo.','Investimento sensorial e riqueza estavel. Imoveis, gastronomia, arte.','Ganho por atividade intelectual. Escrita, educacao, visao empresarial.','Renda imobiliaria e familiar. Propriedade da mae. Cuidado com gastos emocionais.','Riqueza por lideranca e autoridade. Governo, ouro. Gastos ostensivos.','Renda por analise e habilidades. Medico, contabilidade. Administrador frugal.','Riqueza por parceria. Direito, diplomacia, moda, arte.','Riqueza com dinheiro alheio (heranca, seguros). Fontes ocultas.','Renda por educacao, exterior, religiao. A fortuna traz riqueza.','Esforco sistematico constroi riqueza. Lento mas seguro. Rico apos meia-idade.','Renda por tecnologia, inovacao, redes. Fontes nao convencionais.','Renda por atividades espirituais/artisticas. Riqueza relacionada ao exterior.'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">💰 D2 Hora — Análise de Riqueza</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💰 Análise de Riqueza' : '💰 D2 Hora — Análise de Riqueza') + '</div><div class="interp-text">';
         html += '<strong>D2 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d2LagnaInterp + '<br><br>';
         const sunD2 = dPositions.find(p => p.id === 'Sun');
         const moonD2 = dPositions.find(p => p.id === 'Moon');
@@ -2068,7 +2082,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d3_3sign = (dLagnaSign + 2) % 12;
         const d3_3planets = dPositions.filter(p => p.dSign === d3_3sign);
 
-        html += '<div class="interp-card"><div class="interp-title">👫 D3 Drekkana — Irmãos e Coragem</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 Irmãos e Coragem' : '👫 D3 Drekkana — Irmãos e Coragem') + '</div><div class="interp-text">';
         html += '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
         html += '<strong>D3 Casa 3 (Irmaos Menores) — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
@@ -2082,7 +2096,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d4_4sign = (dLagnaSign + 3) % 12;
         const d4_4planets = dPositions.filter(p => p.dSign === d4_4sign);
 
-        html += '<div class="interp-card"><div class="interp-title">🏠 D4 Chaturthamsa — Propriedade e Fortuna</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 Propriedade e Fortuna' : '🏠 D4 Chaturthamsa — Propriedade e Fortuna') + '</div><div class="interp-text">';
         html += '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
         html += '<strong>D4 Casa 4 (Propriedade) — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
@@ -2099,7 +2113,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const jupD24 = dPositions.find(p => p.id === 'Jupiter');
         const merD24 = dPositions.find(p => p.id === 'Mercury');
 
-        html += '<div class="interp-card"><div class="interp-title">📚 D24 Chaturvimsamsa — Educação</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '📚 Educação' : '📚 D24 Chaturvimsamsa — Educação') + '</div><div class="interp-text">';
         html += '<strong>D24 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d24LagnaInterp + '<br><br>';
         html += '<strong>D24 Casa 4 (Educacao Basica) — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
@@ -2118,7 +2132,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d30_6planets = dPositions.filter(p => p.dSign === d30_6sign);
         const d30_8planets = dPositions.filter(p => p.dSign === d30_8sign);
 
-        html += '<div class="interp-card"><div class="interp-title">⚠️ D30 Trimsamsa — Infortúnio e Doença</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '⚠️ Infortúnio e Doença' : '⚠️ D30 Trimsamsa — Infortúnio e Doença') + '</div><div class="interp-text">';
         html += '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d30LagnaInterp + '<br><br>';
         const diseaseBySign = ['Cabeca, cerebro, febre, inflamacao','Pescoco, tireoide, diabetes','Pulmoes, nervos, ansiedade','Estomago, retencao de liquidos','Coracao, costas, pressao arterial','Digestivo, intestinos, pele','Rins, lombar, urinario','Reprodutivo, doenca cronica','Figado, coxas, sobrepeso','Ossos, articulacoes, reumatismo','Circulacao, pressao arterial, tornozelos','Imune, pes, saude mental'];
         html += '<strong>D30 Casa 6 (Doenca) — ' + SIGNS[d30_6sign] + ':</strong><br>';
@@ -2137,7 +2151,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d40LagnaInterp = ['Mae independente e determinada. Lideranca herdada da linha materna.','Mae administra bem a riqueza. Abundancia material da linha materna.','Mae intelectual com boa comunicacao. Talento em idiomas herdado.','Vinculo muito profundo com a mae. Sensibilidade e intuicao herdadas.','Mae com autoridade e dignidade. Lideranca e honra herdadas.','Mae excelente em gestao de saude. Espirito analitico herdado.','Mae atraente e diplomatica. Senso artistico herdado.','Mae forte que passou por transformacao. Resiliencia herdada.','Mae educativa e religiosa. Sabedoria herdada.','Mae responsavel e rigorosa. Paciencia e disciplina herdadas.','Mae unica e progressista. Pensamento inovador herdado.','Mae espiritual e intuitiva. Arte/espiritualidade herdados.'][dLagnaSign];
         const moonD40 = dPositions.find(p => p.id === 'Moon');
 
-        html += '<div class="interp-card"><div class="interp-title">👩 D40 Khavedamsa — Herança Materna</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👩 Herança Materna' : '👩 D40 Khavedamsa — Herança Materna') + '</div><div class="interp-text">';
         html += '<strong>D40 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d40LagnaInterp + '<br>';
         if (moonD40) { const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☽ Lua (Karaka da Mãe) → ' + mH + 'H:</strong> ' + ['','Forte influência materna','Propriedade da mãe','Boa comunicação com a mãe','Vínculo profundo com a mãe! Melhor posição','Mãe criativa','Mãe orientada ao serviço','Mãe influencia relacionamentos','Herança da mãe','Mãe religiosa/educativa','Mãe socialmente bem-sucedida','Mãe independente','Mãe espiritual'][mH] + '<br>'; }
         html += '</div></div>';
@@ -2146,7 +2160,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d45LagnaInterp = ['Pai ativo e orientado a acao. Coragem e lideranca herdados.','Pai financeiramente estavel. Valores materiais herdados.','Pai intelectual e versatil. Habilidade de comunicacao herdada.','Pai emocional e familiar. Instinto de cuidado herdado.','Pai autoritativo e respeitado. Lideranca herdada.','Pai pratico e diligente. Habilidades analiticas herdadas.','Pai diplomatico e refinado. Habilidade social herdada.','Pai forte e misterioso. Resiliencia herdada.','Pai academico e religioso. Filosofia herdada.','Pai rigoroso e ambicioso. Paciencia e disciplina herdadas.','Pai criativo e inovador. Pensamento cientifico herdado.','Pai espiritual e artistico. Intuicao e criatividade herdadas.'][dLagnaSign];
         const sunD45 = dPositions.find(p => p.id === 'Sun');
 
-        html += '<div class="interp-card"><div class="interp-title">👨 D45 Akshavedamsa — Herança Paterna</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨 Herança Paterna' : '👨 D45 Akshavedamsa — Herança Paterna') + '</div><div class="interp-text">';
         html += '<strong>D45 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d45LagnaInterp + '<br>';
         if (sunD45) { const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☉ Sol (Karaka do Pai) → ' + sH + 'H:</strong> ' + ['','Forte influência paterna','Propriedade do pai','Boa comunicação com o pai','Pai orientado à família','Pai criativo','Pai orientado ao serviço','Pai influencia relacionamentos','Herança do pai','Pai religioso/educativo','Pai socialmente bem-sucedido! Melhor posição','Pai independente','Pai espiritual'][sH] + '<br>'; }
         html += '</div></div>';
