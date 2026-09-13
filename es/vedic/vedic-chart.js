@@ -899,8 +899,8 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Personalidad y Apariencia — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
-        <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
+        <div class="interp-title">' + (isEasy ? '👤 Personalidad y Apariencia' : '👤 Personalidad y Apariencia — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}') + '</div>
+        <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
     // ═══════════════════════════════════
@@ -936,7 +936,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 Yo Interior y Emociones — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-title">' + (isEasy ? '🌙 Tu Estilo Emocional' : '🌙 Yo Interior y Emociones — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}') + '</div>
             <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
@@ -988,7 +988,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 Fortuna de Riqueza</div>
+        <div class="interp-title">' + (isEasy ? '💰 Mi Fortuna' : '💰 Fortuna de Riqueza') + '</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1055,7 +1055,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 Fortuna del Conyuge y Matrimonio — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💍 Mi Pareja' : '💕 Fortuna del Conyuge y Matrimonio — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}') + '</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1080,7 +1080,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
     ];
 
-    let careerText = `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
         careerText += '<br><br><strong>Planets in the 10th House:</strong>';
@@ -1099,7 +1099,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 Carrera y Logro Social — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💼 Mi Carrera' : '💼 Carrera y Logro Social — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}') + '</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1125,7 +1125,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 Salud — Areas Vulnerables</div>
+        <div class="interp-title">' + (isEasy ? '🏥 Mi Salud' : '🏥 Salud — Areas Vulnerables') + '</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + isEasy ? '' : h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
     </div>`;
 

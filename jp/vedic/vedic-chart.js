@@ -898,8 +898,8 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 性格 & 外見 — ラグナ: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
-        <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
+        <div class="interp-title">' + (isEasy ? '👤 性格 & 外見' : '👤 性格 & 外見 — ラグナ: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}') + '</div>
+        <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
     // ═══════════════════════════════════
@@ -935,7 +935,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             '極めて直観的で霊的。夢が鮮明で予知的かもしれません。他人の苦しみに深く共感し、自己と他者の境界が曖昧。芸術、瞑想、霊的修行で安定を見出します。'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-title">' + (isEasy ? '🌙 あなたの感情スタイル' : '🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}') + '</div>
             <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
@@ -987,7 +987,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 財運</div>
+        <div class="interp-title">' + (isEasy ? '💰 私の財運' : '💰 財運') + '</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1054,7 +1054,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 配偶者 & 結婚運 — 7宮: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💍 私の配偶者' : '💕 配偶者 & 結婚運 — 7宮: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}') + '</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1079,7 +1079,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         '芸術、映画、音楽、医療、海外、霊的分野、NGO関連職。'
     ];
 
-    let careerText = `10宮は${SIGNS[h10sign]}に位置。${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `10宮は${SIGNS[h10sign]}に位置。${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
         careerText += '<br><br><strong>10宮の惑星:</strong>';
@@ -1098,7 +1098,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 職業 & 社会的達成 — 10宮: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">' + (isEasy ? '💼 私の職業' : '💼 職業 & 社会的達成 — 10宮: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}') + '</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1124,7 +1124,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 健康 — 弱い部位</div>
+        <div class="interp-title">' + (isEasy ? '🏥 私の健康' : '🏥 健康 — 弱い部位') + '</div>
         <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>6宮に' + h6planets.map(p => p.name).join('、') + 'が位置しており、健康管理に特別な注意が必要です。' : ''}</div>
     </div>`;
 
