@@ -1194,7 +1194,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const jupH = houseOf(jupiter.sign);
         const diff = Math.abs(moonH - jupH);
         if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
-            yogaText += '<strong>🐘 Gajakesari Yoga</strong> — Moon and Jupiter in Kendra relationship! A combination of wisdom, fame, and abundance. Socially respected with exceptional intellectual abilities. Good education and children fortune.<br><br>';
+            yogaText += isEasy ? '<strong>📚 Segen außergewöhnlicher Intelligenz</strong>' : '<strong>🐘 Gajakesari Yoga</strong> — Moon and Jupiter in Kendra relationship! A combination of wisdom, fame, and abundance. Socially respected with exceptional intellectual abilities. Good education and children fortune.<br><br>';
         }
     }
 
@@ -1202,7 +1202,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const sun = positions.find(p => p.id === 'Sun');
     const mercury = positions.find(p => p.id === 'Mercury');
     if (sun && mercury && sun.sign === mercury.sign) {
-        yogaText += '<strong>📚 Budha-Aditya Yoga</strong> — Sun and Mercury in the same sign! Outstanding intellect and communication skills. Success in education, writing, and business. An authoritative intellectual leader.<br><br>';
+        yogaText += isEasy ? '<strong>📚 Segen außergewöhnlicher Intelligenz</strong>' : '<strong>📚 Budha-Aditya Yoga</strong> — Sun and Mercury in the same sign! Outstanding intellect and communication skills. Success in education, writing, and business. An authoritative intellectual leader.<br><br>';
     }
 
     // Chandra-Mangala Yoga
@@ -2114,8 +2114,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D2 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d2LagnaInterp + '<br><br>';
         const sunD2 = dPositions.find(p => p.id === 'Sun');
         const moonD2 = dPositions.find(p => p.id === 'Moon');
-        if (sunD2) html += '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ' + (sunD2.dSign === 4 ? '🌟 <strong>Sonne in eigener Hora (Loewe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autoritaet und Fuehrung.' : 'Sonne in Mond-Hora. Einkommen durch Hilfe anderer oder oeffentlichen Sektor.') + '<br>';
-        if (moonD2) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Mond in eigener Hora (Krebs)!</strong> Reichhaltiges Leben durch Menschen und Beziehungen.' : 'Mond in Sonnen-Hora. Lebensunterhalt durch eigene Anstrengung.') + '<br>';
+        if (sunD2) if (!isEasy) html += '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ' + (sunD2.dSign === 4 ? '🌟 <strong>Sonne in eigener Hora (Loewe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autoritaet und Fuehrung.' : 'Sonne in Mond-Hora. Einkommen durch Hilfe anderer oder oeffentlichen Sektor.') + '<br>';
+        if (moonD2) if (!isEasy) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Mond in eigener Hora (Krebs)!</strong> Reichhaltiges Leben durch Menschen und Beziehungen.' : 'Mond in Sonnen-Hora. Lebensunterhalt durch eigene Anstrengung.') + '<br>';
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
         html += '<br><strong>D2 2. Haus (Angesammelter Wohlstand) — ' + SIGNS[d2H2sign] + ':</strong><br>';
