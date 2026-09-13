@@ -948,7 +948,9 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     let html = isEasy ?
         '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 인생은 시기별로 다른 에너지가 흐릅니다. 아래에서 지금 당신이 어떤 시기에 있는지, 앞으로 어떤 시기가 오는지 확인하세요.<br><br>' :
         '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — 인생은 9개 행성이 차례로 지배하는 시기로 나뉩니다. <strong>대운(Mahadasha)</strong>은 큰 시기, <strong>소대운(Antardasha/Bhukti)</strong>은 대운 안의 세부 시기입니다. 달의 나크샤트라 위치로 계산됩니다.<br><br>';
-    html += '🌙 출생 시 달: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 첫 대운: <strong>' + DASHA_KO[startRuler] + '</strong> (잔여: ' + remainingYears.toFixed(2) + '년)</div></div>';
+    html += isEasy ?
+        '</div></div>' :
+        '🌙 출생 시 달: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 첫 대운: <strong>' + DASHA_KO[startRuler] + '</strong> (잔여: ' + remainingYears.toFixed(2) + '년)</div></div>';
 
     // Build all mahadasha periods with correct first period
     const periods = [];
@@ -970,7 +972,8 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         const age = getAge(p.startD);
 
         html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
-        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
+        const dashaEasyDesc = {Ketu:'내면 성찰과 영적 성장의 시기',Venus:'사랑·아름다움·풍요의 시기',Sun:'자신감과 리더십이 빛나는 시기',Moon:'감정과 가정이 중심이 되는 시기',Mars:'도전과 행동력이 넘치는 시기',Rahu:'큰 변화와 새로운 기회의 시기',Jupiter:'행운과 성장이 찾아오는 시기',Saturn:'인내하면 큰 성과를 얻는 시기',Mercury:'공부·소통·사업이 잘 되는 시기'};
+        html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '년</span>';
         if (isCurrent) html += '<span class="dasha-badge">현재</span>';
@@ -996,7 +999,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
             const bAge = getAge(bStart);
 
             html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
-            html += '<span>' + (bCurrent ? '▶ ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + (bCurrent ? '▶ ' : '  ') + (isEasy ? dashaEasyDesc[bPlanet] : DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet]) + '</span>';
             html += '<span>' + fmtDate(bStart) + '</span>';
             html += '<span>(' + bAge + '세)</span>';
             html += '</div>';
@@ -1500,7 +1503,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 
         html += `<div class="interp-card">
             <div class="interp-title">${isEasy ? (houseArea[house]||'') : p.symbol + ' ' + p.name + ' → ' + house + '궁 (' + SIGNS[p.sign] + ')'}</div>
-            <div class="interp-text">${desc}</div>
+            <div class="interp-text">${isEasy ? desc.replace(/^\d+궁:\s*/, '') : desc}</div>
         </div>`;
     });
 
@@ -1670,28 +1673,28 @@ function renderDignity(positions, lagnaSign) {
             emoji = '🟢';
             color = '#5cb85c';
             simpleDesc = isEasy
-                ? `<strong>${p.name}이(가) 최강!</strong> "${role}" 에너지가 극대화된 상태로 <strong>${area}</strong> 영역에서 큰 축복을 받았습니다. 타고난 재능이 빛나며 자연스럽게 좋은 결과를 얻습니다.`
+                ? `<strong>${area}</strong> 영역에서 최고의 축복을 받았어요! 이 분야에서 타고난 재능이 빛나며 자연스럽게 좋은 결과를 얻습니다.`
                 : `<strong>${p.name}이(가) 최강!</strong> "${role}" 에너지가 극대화된 상태로 <strong>${house}궁(${area})</strong> 영역에서 큰 축복을 받았습니다. 타고난 재능이 빛나며 자연스럽게 좋은 결과를 얻습니다.`;
         } else if (p.sign === DEBI[p.id]) {
             dignity = '감쇄 (Debilitated)';
             emoji = '🔴';
             color = '#d9534f';
             simpleDesc = isEasy
-                ? `<strong>${p.name}이(가) 약한 상태.</strong> "${role}" 에너지가 약해진 채로 <strong>${area}</strong> 영역에 있습니다. 이 분야에서 어려움을 느낄 수 있지만, 의식적 노력으로 극복하면 오히려 큰 성장의 기회가 됩니다. 아래 치유법을 참고하세요.`
+                ? `<strong>${area}</strong> 영역에서 어려움을 느낄 수 있어요. 하지만 의식적으로 노력하면 오히려 큰 성장의 기회가 됩니다. 아래 치유법을 참고하세요.`
                 : `<strong>${p.name}이(가) 약한 상태.</strong> "${role}" 에너지가 약해진 채로 <strong>${house}궁(${area})</strong> 영역에 있습니다. 이 분야에서 어려움을 느낄 수 있지만, 의식적 노력으로 극복하면 오히려 큰 성장의 기회가 됩니다. 아래 치유법을 참고하세요.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = '본궁 (Own Sign)';
             emoji = '🟡';
             color = '#c9a84c';
             simpleDesc = isEasy
-                ? `<strong>${p.name}이(가) 자기 집에!</strong> "${role}" 에너지가 안정적으로 <strong>${area}</strong> 영역에서 힘을 발휘합니다. 자연스럽게 좋은 결과를 만들어냅니다.`
+                ? `<strong>${area}</strong> 영역에서 안정적으로 힘을 발휘해요. 자연스럽게 좋은 결과를 만들어냅니다.`
                 : `<strong>${p.name}이(가) 자기 집에!</strong> "${role}" 에너지가 안정적으로 <strong>${house}궁(${area})</strong> 영역에서 힘을 발휘합니다. 자연스럽게 좋은 결과를 만들어냅니다.`;
         } else {
             dignity = '중립';
             emoji = '⚪';
             color = '#999';
             simpleDesc = isEasy
-                ? `${p.name}의 "${role}" 에너지가 <strong>${area}</strong> 영역에서 보통의 영향력을 발휘합니다. 다른 행성과의 관계에 따라 결과가 달라집니다.`
+                ? `<strong>${area}</strong> 영역에서 보통의 영향력이에요. 특별히 강하지도 약하지도 않습니다.`
                 : `${p.name}의 "${role}" 에너지가 <strong>${house}궁(${area})</strong> 영역에서 보통의 영향력을 발휘합니다. 다른 행성과의 관계에 따라 결과가 달라집니다.`;
         }
 
