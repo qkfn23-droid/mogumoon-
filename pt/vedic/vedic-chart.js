@@ -1781,7 +1781,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             {name:'Pitri',nature:'malefic',desc:'Ancestors. Ancestral karma'},
             {name:'Rudra',nature:'malefic',desc:'Storm god. Destructive transformation'},
             {name:'Varuna',nature:'benefic',desc:'Ocean god. Cosmic order'},
-            {name:'Aryama',nature:'benefic',desc:'Sun deity. Friendship and contracts'},
+            {name:'Aryama',nature:'benefic',desc:'Divindade solar. Friendship and contracts'},
             {name:'Mitra',nature:'benefic',desc:'God of friendship. Trust and companionship'},
             {name:'Agni',nature:'malefic',desc:'Fire god. Purifying fire'},
             {name:'Varuna2',nature:'benefic',desc:'Ocean god. Deep wisdom'},
@@ -1817,7 +1817,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return ' — Divindade: <strong>' + d.deity.name + '</strong> <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benéfico' : 'Maléfico') + '</span>';
         }
 
-        const houseThemes = ['','Self/Being','Wealth/Values','Communication','Home/Peace','Creation/Love','Service/Trials','Relationships','Transformation','Wisdom/Religion','Career/Society','Wishes/Gains','Liberation'];
+        const houseThemes = ['','Eu','Riqueza','Comunicacao','Lar','Criacao','Servico','Relacoes','Transformacao','Sabedoria','Carreira','Desejos','Libertacao'];
 
         const pastLifeThemes = [
             'Guerreiro, Lider — Exerceu poder, lideranca natural e determinacao gravadas na alma.',
@@ -1865,7 +1865,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // Parashara quote
         html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
-        html += '📜 <strong>Parashara disse:</strong> "Shashtiamsa (D60) is the most important of all divisional charts. Planets in benefic deity divisions give good results, malefic divisions give bad results."<br>';
+        html += '📜 <strong>Parashara disse:</strong> "Shashtiamsa (D60) e a mais importante de todas as cartas divisionais. Planetas em divisoes de divindades beneficas dao bons resultados, maleficas dao maus."<br>';
         html += '<span style="color:#666;">— Brihat Parashara Hora Shastra (BPHS)</span></div></div>';
 
         // Ch1: Soul Identity
@@ -1874,10 +1874,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
             ch1 += '<br>' + (lagnaD.deity.nature === 'benefic' ?
-                '<strong>' + lagnaD.deity.name + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects this life, good opportunities naturally come.' :
-                '<strong>' + lagnaD.deity.name + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted on personality, but overcoming it leads to greater growth.');
+                '<strong>' + lagnaD.deity.name + '</strong> protege o Lagna. ' + lagnaD.deity.desc + ' — O merito de vidas passadas protege esta vida, oportunidades vem naturalmente.' :
+                '<strong>' + lagnaD.deity.name + '</strong> influencia o Lagna. ' + lagnaD.deity.desc + ' — Desafio carmico gravado na personalidade, mas supera-lo leva a maior crescimento.');
         }
-        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' in D60 Lagna — core karma concentrated in these planets.';
+        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + ' no D60 Lagna — karma central concentrado nestes planetas.';
         html += subChapter('🪐', 'Identidade da Alma — Quem você foi', ch1);
 
         // Ch2: Soul Purpose (Sun)
@@ -1887,7 +1887,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch2 = '<strong>D60 Sol: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>' + deityTag(sunD) + '<br><br>';
             ch2 += (d60SunInterp[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
-                ch2 += '<br>Sun deity <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'O proposito da alma foi justamente perseguido, a autorrealizacao vem naturalmente.' : 'Desafios ao ego e autoridade, encontrar o verdadeiro eu e a tarefa.');
+                ch2 += '<br>Divindade solar <strong>' + sunD.deity.name + '</strong>: ' + sunD.deity.desc + '. ' + (sunD.deity.nature === 'benefic' ? 'O proposito da alma foi justamente perseguido, a autorrealizacao vem naturalmente.' : 'Desafios ao ego e autoridade, encontrar o verdadeiro eu e a tarefa.');
             }
             html += subChapter('☉', 'Propósito da Alma — Por que você nasceu', ch2);
         }
@@ -1899,7 +1899,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             let ch3 = '<strong>D60 Lua: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>' + deityTag(moonD) + '<br><br>';
             ch3 += (d60MoonInterp[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
-                ch3 += '<br>Moon deity <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'A mente era pacifica, estabilidade emocional e intuicao sao inatas.' : 'Feridas emocionais permanecem no subconsciente. Meditacao e descanso perto da agua ajudam.');
+                ch3 += '<br>Divindade lunar <strong>' + moonD.deity.name + '</strong>: ' + moonD.deity.desc + '. ' + (moonD.deity.nature === 'benefic' ? 'A mente era pacifica, estabilidade emocional e intuicao sao inatas.' : 'Feridas emocionais permanecem no subconsciente. Meditacao e descanso perto da agua ajudam.');
             }
             html += subChapter('☽', 'Memória Emocional — Padrões inconscientes', ch3);
         }
@@ -1914,21 +1914,21 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         const spouseKarma = ['Warrior/leader connection. Intense, independent spouse karma.','Artist/wealthy connection. Materially abundant marriage karma.','Scholar/merchant connection. Communication and intellectual rapport.','Family/protector connection. Deep emotional bond karma.','Royalty/nobility connection. Splendid, respected marriage.','Healer/server connection. Service and devotion karma.','Diplomat/artist connection. Harmonious, beautiful marriage.','Practitioner/mystic connection. Intense, transformative karma.','Sage/explorer connection. Free, expansive karma. Foreign spouse possible.','Official/architect connection. Responsible, stable. Late marriage possible.','Official/military connection. Saturn-ruled, disciplined spouse. Age difference possible.','Medium/artist connection. Mysterious, spiritual karma. May meet in dreams.'];
 
-        let ch4 = '<strong>D60 7th House: ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7th Lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
+        let ch4 = '<strong>D60 Casa 7: ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (Senhor da casa 7: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
         ch4 += spouseKarma[d60H7sign] + '<br>';
         if (d60H7planets.length > 0) {
-            ch4 += '<br><strong>Planets in D60 7th:</strong><br>';
+            ch4 += '<br><strong>Planetas na D60 casa 7:</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
-                ch4 += (p.natural === 'benefic' ? 'Benefic in 7th — good karma with spouse, blessings in this life.' : 'Malefic in 7th — unresolved karma with spouse, settling in this life.') + '<br>';
+                ch4 += (p.natural === 'benefic' ? 'Benefico na casa 7 — bom karma com o conjuge, bencaos nesta vida.' : 'Malefico na casa 7 — karma nao resolvido com o conjuge, resolvendo-se nesta vida.') + '<br>';
             });
         }
         if (venusD60) {
             const venD = getDeity(venusD60.sidereal);
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><strong>♀ Vênus (Karaka do Amor)</strong> → D60 ' + venH + 'H (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
-            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus under benefic protection. Love was rightly practiced, beautiful love awaits.' : 'Venus under malefic influence. Learning the true meaning of love is the task.';
+            ch4 += venD.deity && venD.deity.nature === 'benefic' ? 'Venus sob protecao benefica. O amor foi bem praticado, belo amor espera.' : 'Venus sob influencia malefica. Aprender o verdadeiro significado do amor e a tarefa.';
         }
         if (rahuD60 && ketuD60) {
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -1941,7 +1941,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (h7lordPlanet) {
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
             ch4 += '<br><br><strong>7th Lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + 'H (' + houseThemes[h7lH] + ')' + deityTag(getDeity(h7lordPlanet.sidereal)) + '<br>';
-            ch4 += 'Spouse karma manifests through <strong>' + houseThemes[h7lH] + '</strong> area.';
+            ch4 += 'O karma do conjuge se manifesta atraves de <strong>' + houseThemes[h7lH] + '</strong> area.';
         }
         html += subChapter('💍', 'Karma do Cônjuge — Conexão de vida passada', ch4);
 
@@ -1952,26 +1952,26 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const satD60 = dPositions.find(p => p.id === 'Saturn');
         const careerKarma = ['Militar/Lideranca/Esportes','Financas/Arte/Agricultura','Educacao/Midia/Comercio','Nursing/Real Estate/Hotels','Politics/Entertainment/Management','Medical/Analysis/Service','Law/Diplomacy/Design','Research/Investigation/Medicine','Education/Religion/Foreign','Administration/Construction/Civil Service','Tecnologia/Ciencia/Inovacao','Art/Spirituality/Hospital'][d60H10sign];
 
-        let ch5 = '<strong>D60 10th House: ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10th Lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
-        ch5 += 'Past life career karma oriented toward <strong>' + careerKarma + '</strong>. Natural attraction to this field.<br>';
+        let ch5 = '<strong>D60 Casa 10: ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (Senhor da casa 10: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
+        ch5 += 'Karma profissional de vidas passadas orientado para <strong>' + careerKarma + '</strong>. Atracao natural por este campo.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
             ch5 += '<br><strong>♄ Saturno (Senhor do Karma)</strong> → D60 ' + satH + 'H (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
-            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>very rare blessing!</strong> Merit from patience reduces career trials.' : 'Saturn under malefic — heavy career karma. Dissolve through patience, service, and mantra (Om Shanaishcharaya Namaha).';
+            ch5 += satD.deity && satD.deity.nature === 'benefic' ? 'Saturn under benefic — <strong>bencao muito rara!</strong> O merito da paciencia reduz provas profissionais.' : 'Saturno sob malefico — karma profissional pesado. Dissolver com paciencia, servico e mantra.';
         }
-        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planets in D60 10th:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — career karma concentrated here.';
+        if (d60H10planets.length > 0) ch5 += '<br><br><strong>Planetas na D60 casa 10:</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — karma profissional concentrado aqui.';
         html += subChapter('💼', 'Karma Profissional — Vocação de vida passada', ch5);
 
         // Ch6: Wealth Karma
         const d60H2sign = (dLagnaSign + 1) % 12;
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
         const wealthKarma = ['Instinto de riqueza por esforco proprio.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
-        let ch6 = '<strong>D60 2nd House: ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
+        let ch6 = '<strong>D60 Casa 2: ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += '<br><strong>Planets in D60 2nd:</strong><br>';
+            ch6 += '<br><strong>Planetas na D60 casa 2:</strong><br>';
             d60H2planets.forEach(p => {
-                ch6 += p.symbol + ' ' + p.name + deityTag(getDeity(p.sidereal)) + ' — ' + (p.natural === 'benefic' ? 'Good wealth karma. Abundance.' : 'Wealth challenge. Overcome through effort.') + '<br>';
+                ch6 += p.symbol + ' ' + p.name + deityTag(getDeity(p.sidereal)) + ' — ' + (p.natural === 'benefic' ? 'Bom karma de riqueza. Abundancia.' : 'Desafio de riqueza. Superar com esforco.') + '<br>';
             });
         }
         html += subChapter('💰', 'Karma de Riqueza — Fortuna de vida passada', ch6);
@@ -1990,9 +1990,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const beneficCount = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'benefic'; }).length;
         const maleficPlanets = positions.filter(p => { const pD = getDeity(p.sidereal); return pD.deity && pD.deity.nature === 'malefic'; });
         let ch8 = 'De 9 planetas: <strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong><br><br>';
-        if (beneficCount >= 7) ch8 += '🌟 <strong>Very strong past life merit.</strong> Parashara called this "a soul blessed by the gods." Most planets under benefic deities.';
-        else if (beneficCount >= 5) { ch8 += '✨ <strong>Abundant past life merit.</strong> Benefic predominate, protection in many areas.'; if (maleficPlanets.length > 0) ch8 += ' Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — practice mantras and charity.'; }
-        else if (beneficCount >= 3) { ch8 += '⚖️ <strong>Balanced karma.</strong> Good events and challenges alternate.'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
+        if (beneficCount >= 7) ch8 += '🌟 <strong>Merito muito forte de vidas passadas.</strong> Parashara called this "a soul blessed by the gods." Most planets under benefic deities.';
+        else if (beneficCount >= 5) { ch8 += '✨ <strong>Merito abundante de vidas passadas.</strong> Benefic predominate, protection in many areas.'; if (maleficPlanets.length > 0) ch8 += ' Atencao: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> — practice mantras and charity.'; }
+        else if (beneficCount >= 3) { ch8 += '⚖️ <strong>Karma equilibrado.</strong> Good events and challenges alternate.'; if (maleficPlanets.length > 0) ch8 += '<br>Watch: <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>'; }
         else ch8 += '🔥 <strong>Life of karmic settlement.</strong> Parashara said "the heaviest karma leads to greatest growth." Mantras e caridade são vitais.';
         html += subChapter('📊', 'Julgamento Cármico Geral', ch8);
 
