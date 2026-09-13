@@ -1817,50 +1817,50 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return ' — 守護神： <strong>' + d.deity.name + '</strong> <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? '吉' : '凶') + '</span>';
         }
 
-        const houseThemes = ['','Self/Being','Wealth/Values','Communication','Home/Peace','Creation/Love','Service/Trials','Relationships','Transformation','Wisdom/Religion','Career/Society','Wishes/Gains','Liberation'];
+        const houseThemes = ['','自己','財/価値','コミュニケーション','家庭/安らぎ','創造/愛','奉仕/試練','関係','変革','知恵/宗教','職業/社会','願望/利益','解放'];
 
         const pastLifeThemes = [
-            'Warrior, Leader — Wielded power, natural leadership and decisiveness imprinted on the soul.',
-            'Artist, Farmer — Worked with nature, deep instinct for stability and material beauty.',
-            'Scholar, Merchant — Lived by knowledge, versatility and curiosity remain. Natural talent for language.',
-            'Protector, Nurturer — Cared for others, deep sensitivity and maternal instinct. Strong home karma.',
-            'Royalty, Priest — Held high status, natural authority and dignity. Standing on stage is soul instinct.',
-            'Healer, Server — Practiced medicine or service, excellent analytical skills. Helping others is soul duty.',
-            'Diplomat, Artist — Pursued harmony and beauty, skilled in relationships. Partnership is core theme.',
-            'Practitioner, Alchemist — Underwent deep transformation, strong attraction to secrets and mystery.',
-            'Sage, Explorer — Sought truth, spiritual wisdom and adventurousness remain. Higher learning karma.',
-            'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
-            'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
-            'Medium, Artist — Communed with spiritual world, extremely strong intuition. Closest to liberation.'
+            '戦士、指導者 — 権力を行使した前世。リーダーシップと決断力が魂に刻まれています。',
+            '芸術家、農夫 — 自然と共に生きた前世。安定と物質的美への深い本能。',
+            '学者、商人 — 知識で生きた前世。多才さと好奇心が残る。言語の才能。',
+            '保護者、養育者 — 他者を世話した前世。深い感受性と母性本能。家庭のカルマ。',
+            '王族、聖職者 — 高い地位にいた前世。自然な権威と尊厳。舞台に立つのが魂の本能。',
+            '治癒者、奉仕者 — 医術や奉仕に従事した前世。優れた分析力。他者を助けるのが魂の本分。',
+            '外交官、芸術家 — 調和と美を追求した前世。関係に長ける。パートナーシップが核心テーマ。',
+            '修行者、錬金術師 — 深い変革を経た前世。秘密と神秘への強い引力。',
+            '賢者、探検家 — 真理を追求した前世。霊的知恵と冒険心が残る。高等教育のカルマ。',
+            '官僚、建築家 — 秩序を築いた前世。強い忍耐と責任感。規律が魂に刻まれる。',
+            '官僚、秩序の守護者 — 社会秩序を築いた前世。組織力と奉仕精神。土星の支配。',
+            '霊媒、芸術家 — 霊的世界と交流した前世。極めて強い直感。解脱に最も近い魂。'
         ];
 
         const d60SunInterp = [
-            'Lived as warrior or king, strong ego and leadership remain. Soul purpose to establish authority.',
-            'Lived as artist or wealthy person, soul pursues material abundance. Drawn to sensory beauty.',
-            'Lived as scholar or merchant, knowledge and communication are core soul themes.',
-            'Lived as protector or nurturer, caring for others is a deep soul instinct.',
-            'Held high status as royalty or priest, natural authority remains in this life.',
-            'Lived as healer or server, analysis and service are the soul purpose.',
-            'Pursued harmony as diplomat or artist, relationships and balance are the soul task.',
-            'Underwent deep transformation as practitioner, secrets imprinted on the soul.',
-            'Sought truth as sage or explorer, wisdom and adventure are the soul direction.',
-            'Built order as official, systems and responsibility engraved on the soul.',
-            'Was ahead of times as innovator, original thinking is a soul trait.',
-            'Communed with spiritual world, deep intuition remains in the soul.'
+            '戦士か王として生きた前世。強い自我とリーダーシップが残る。権威を確立する魂の目的。',
+            '芸術家か富裕者として生きた前世。物質的豊かさを追求する魂。感覚的な美に惹かれる。',
+            '学者か商人として生きた前世。知識とコミュニケーションが魂の核心テーマ。',
+            '保護者か養育者として生きた前世。他者を世話するのが深い魂の本能。',
+            '王族か聖職者として高い地位にいた前世。自然な権威が今生にも残る。',
+            '治癒者か奉仕者として生きた前世。分析と奉仕が魂の目的。',
+            '外交官か芸術家として調和を追求。関係と均衡が魂の課題。',
+            '修行者として深い変革を経験。秘密が魂に刻まれている。',
+            '賢者か探検家として真理を追求。知恵と冒険が魂の方向。',
+            '官僚として秩序を築いた。体系と責任が魂に刻まれている。',
+            '革新者として時代を先取り。独創的思考が魂の特性。',
+            '霊的世界と交流。深い直感が魂に残る。'
         ];
         const d60MoonInterp = [
-            'Intensely fiery emotional memory. Anger and passion imprinted, mastering emotions is the task.',
-            'Warm, stable emotional memory. Memories of abundance remain, seeking beautiful things.',
-            'Intellectual, colorful emotional memory. Many experiences, strong curiosity.',
-            'Very deep emotional memory. Strong home and care memories, rich sensitivity.',
-            'Pride and dignity fill emotional memory. Memories of recognition and respect remain.',
-            'Service and analysis in emotional memory. Helping memories remain, caring heart.',
-            'Harmony and relationships in emotional memory. Beautiful relationship memories, seeking partner.',
-            'Deep, intense emotional memory. Dramatic change memories, emotional depth like ocean.',
-            'Freedom and exploration in emotional memory. Travel and learning memories, pursuing expansion.',
-            'Responsibility and patience in emotional memory. Heavy burden memories, mature emotions.',
-            'Unique, extraordinary emotional memory. Being different memories, independent sensibility.',
-            'Spiritual, transcendent emotional memory. Vivid dreams, deep spiritual connection.'
+            '激しく燃える感情的記憶。怒りと情熱が刻まれ、感情を制御することが課題。',
+            '温かく安定した感情的記憶。豊かさの記憶が残り、美しいものを求める。',
+            '知的で多彩な感情的記憶。多くの経験、強い好奇心。',
+            '非常に深い感情的記憶。家庭と世話の強い記憶、豊かな感受性。',
+            '誇りと尊厳で満ちた感情的記憶。認められ尊敬された記憶が残る。',
+            '奉仕と分析の感情的記憶。助けた記憶が残り、思いやりの心。',
+            '調和と関係の感情的記憶。美しい関係の記憶、パートナーを求める。',
+            '深く強烈な感情的記憶。劇的な変化の記憶、海のような感情の深さ。',
+            '自由と探求の感情的記憶。旅と学びの記憶、拡大を追求。',
+            '責任と忍耐の感情的記憶。重い荷の記憶、成熟した感情。',
+            'ユニークで非凡な感情的記憶。異なっていた記憶、独立した感性。',
+            '霊的で超越的な感情的記憶。鮮明な夢、深い霊的つながり。'
         ];
 
         // Parashara quote
@@ -1912,7 +1912,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const rahuD60 = dPositions.find(p => p.id === 'Rahu');
         const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
-        const spouseKarma = ['Warrior/leader connection. Intense, independent spouse karma.','Artist/wealthy connection. Materially abundant marriage karma.','Scholar/merchant connection. Communication and intellectual rapport.','Family/protector connection. Deep emotional bond karma.','Royalty/nobility connection. Splendid, respected marriage.','Healer/server connection. Service and devotion karma.','Diplomat/artist connection. Harmonious, beautiful marriage.','Practitioner/mystic connection. Intense, transformative karma.','Sage/explorer connection. Free, expansive karma. Foreign spouse possible.','Official/architect connection. Responsible, stable. Late marriage possible.','Official/military connection. Saturn-ruled, disciplined spouse. Age difference possible.','Medium/artist connection. Mysterious, spiritual karma. May meet in dreams.'];
+        const spouseKarma = ['戦士/指導者との縁。強烈で独立的な配偶者カルマ。','芸術家/富裕者との縁。物質的に豊かな結婚カルマ。','学者/商人との縁。コミュニケーションと知的交感。','家族/保護者との縁。深い感情的絆のカルマ。','王族/貴族との縁。華麗で尊敬される結婚。','治癒者/奉仕者との縁。奉仕と献身のカルマ。','外交官/芸術家との縁。調和のとれた美しい結婚。','修行者/神秘主義者との縁。強烈で変革的なカルマ。','賢者/探検家との縁。自由で拡大的なカルマ。外国人配偶者の可能性。','官僚/建築家との縁。責任感のある安定した結婚。晩婚の可能性。','官僚/軍人との縁。土星支配、規律ある配偶者。年齢差の可能性。','霊媒/芸術家との縁。神秘的で霊的なカルマ。夢で先に出会う可能性。'];
 
         let ch4 = '<strong>D60 7室： ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7室主： ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>';
         ch4 += spouseKarma[d60H7sign] + '<br>';
@@ -1950,7 +1950,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H10lord = SIGN_RULERS[d60H10sign];
         const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
         const satD60 = dPositions.find(p => p.id === 'Saturn');
-        const careerKarma = ['Military/Leadership/Sports','Finance/Art/Agriculture','Education/Media/Commerce','Nursing/Real Estate/Hotels','Politics/Entertainment/Management','Medical/Analysis/Service','Law/Diplomacy/Design','Research/Investigation/Medicine','Education/Religion/Foreign','Administration/Construction/Civil Service','Technology/Science/Innovation','Art/Spirituality/Hospital'][d60H10sign];
+        const careerKarma = ['軍事/リーダーシップ/スポーツ','金融/芸術/農業','教育/メディア/商業','看護/不動産/ホテル','政治/エンターテインメント/管理','医療/分析/奉仕','法律/外交/デザイン','研究/調査/医学','教育/宗教/海外','行政/建設/公務員','技術/科学/革新','芸術/霊性/病院'][d60H10sign];
 
         let ch5 = '<strong>D60 10室： ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10室主： ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>';
         ch5 += '前世の職業カルマの方向： <strong>' + careerKarma + '</strong>。この分野に自然な引力。<br>';
@@ -1966,7 +1966,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Ch6: Wealth Karma
         const d60H2sign = (dLagnaSign + 1) % 12;
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
-        const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
+        const wealthKarma = ['自力型の財運本能。','豊かな環境の前世。','知的な富の構築。','家族/不動産の財。','権威を通じた財。','奉仕を通じた財。倹約。','パートナーシップの財。','他者の財（遺産）。','幸運がもたらす財。海外。','遅いが確実。中年以降裕福。','革新の財。非伝統的。','霊的活動と財。寄付の傾向。'][d60H2sign];
         let ch6 = '<strong>D60 2室： ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>' + wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
             ch6 += '<br><strong>D60 2室の惑星：</strong><br>';
