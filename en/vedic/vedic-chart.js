@@ -475,7 +475,7 @@ function renderPlanetTable(positions, lagnaSign, lagnaSidereal) {
     const lagnaDeg = lagnaSidereal % 30;
     const lagnaNakIdx = Math.floor(lagnaSidereal / (360/27));
     const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {ko:'-'};
-    html += `<tr><td>⬆ Lagna (상승궁)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
+    html += `<tr><td>⬆ Lagna (Ascendant)</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
 
     positions.forEach(p => {
         const house = ((p.sign - lagnaSign + 12) % 12) + 1;
@@ -513,7 +513,7 @@ function renderD1Chart(positions, lagnaSign) {
 
             if (signIdx === -1) {
                 cell.className = 'chart-cell empty';
-                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#c9a84c;font-size:10px;">D1<br>라시</div>' : '';
+                cell.innerHTML = row === 1 && col === 1 ? '<div style="color:#c9a84c;font-size:10px;">D1<br>Rasi</div>' : '';
             } else {
                 cell.className = 'chart-cell';
                 const house = ((signIdx - lagnaSign + 12) % 12) + 1;
@@ -654,8 +654,8 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🕉️ You After Marriage' : '🕉️ D9 Lagna — You After Marriage: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'This reveals your true self after marriage and in the second half of life (after 30s).' : 'Navamsa Lagna is in <strong>' + SIGNS[d9LagnaSign] + '</strong>에 있습. This is 결혼 후, 그리고 인생 후반(30대 이후)에 드러나는 Your 진짜 모습입.'}
-            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>특별한 표시!</strong> Your 본질이 결혼 후에도 변하지 않으며, 내면과 외면이 일치하는 사람입.' : '<br><br><strong>D1 and D9 Lagna in same sign!</strong> Called <strong>Vargottama</strong> — very powerful. Your essence remains unchanged after marriage.') : ''}
+            ${isEasy ? 'This reveals your true self after marriage and in the second half of life (after 30s).' : 'Navamsa Lagna is in <strong>' + SIGNS[d9LagnaSign] + '</strong>에 exists. This is marriage 후, 그리고 인생 후반(30대 이후)에 드러나는 Your 진짜 모습입.'}
+            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>특별한 표시!</strong> Your 본질이 marriage 후에도 변하지 않으며, 내면과 외면이 일치하는 사람입.' : '<br><br><strong>D1 and D9 Lagna in same sign!</strong> Called <strong>Vargottama</strong> — very powerful. Your essence remains unchanged after marriage.') : ''}
             ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'There are energies that strongly influence your personality after marriage.' : '<strong>Planets in D9 1st:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — strongly influence your personality after marriage.') : ''}
         </div>
     </div>`;
@@ -674,7 +674,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '💼 Life Purpose' : '💼 D9 10th House — Life Purpose (Dharma): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
             ${isEasy ? 'The true calling you pursue after maturity.' : 'Navamsa 10th house is in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
-            <strong>사명의 방향:</strong> ${careerBySgn[d9H10Sign]}
+            <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
             ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planets in D9 10th:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
         </div>
     </div>`;
@@ -685,7 +685,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? '' : '<strong>Derived house:</strong> 10th from 7th (spouse) = D9 4th house shows spouse career.<br><br>D9 4th is in <strong>' + SIGNS[d9H4Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
             <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `spouse가 ${planetCareer[p.id] || 'specialized field'} 분야에서 활동할 가능성`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: spouse가 ${planetCareer[p.id] || 'specialized field'} 분야에서 활동할 가능성`).join('<br>')) : ''}
+            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -772,14 +772,14 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '🧭 Where Your Spouse Comes From' : '🧭 Spouse Direction — 6-Indicator Analysis'}</div>
         <div class="interp-text">
             ${isEasy ? 'Analysis of which direction your spouse may come from.' : 'Vedic astrology determines spouse direction by combining multiple indicators.'}<br><br>
-            ${isEasy ? '' : '<strong>6 Indicators:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 Lagna(UL):</strong> 12 house 아루다 파다. spouse의 가문/배경과 결혼의 환경을 나타냅. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7 house 아루다 파다. spouse의 사회적 이미지와 외적 인상을 나타냅. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7 lord(' + RULER_NAMES[d9H7Ruler] + '):</strong> Navamsa 7 house 주인이 가는 사인이 spouse의 실질적 방향을 나타냅. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> spouse의 karaka(상징 행성). Venus의 Navamsa position가 spouse 에너지의 근원지입. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
+            ${isEasy ? '' : '<strong>6 Indicators:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 Lagna(UL):</strong> 12 house 아루다 파다. spouse의 가문/배경과 marriage의 environment을 indicates. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7 house 아루다 파다. spouse의 society적 이미지와 외적 인상을 indicates. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7 lord(' + RULER_NAMES[d9H7Ruler] + '):</strong> Navamsa 7 house 주인이 가는 사인이 spouse의 실질적 direction을 indicates. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> spouse의 karaka(상징 행성). Venus의 Navamsa position가 spouse 에너지의 근원지입. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? '강한' : ''} ${primaryDir} 방향</strong><br><br>
-                Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong>을 가리키고 있습.
-                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>매우 높은 확률</strong>로 ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
-                ${agreement === 3 ? '<br>3 indicators — <strong>높은 확률</strong>로 ' + primaryDir + ' direction.' : ''}
+                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? '강한' : ''} ${primaryDir} direction</strong><br><br>
+                Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
+                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
+                ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favored but other possibilities exist.' : ''}
-                ${agreement <= 1 ? '<br>지표가 분산되어 있어 특정 방향보다는 다양한 경로에서 만남이 올 수 있습. 열린 마음으로 인연을 기다리세요.' : ''}
+                ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
             </div>
         </div>
@@ -860,9 +860,9 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🤝 Meeting Environment' : '🤝 Meeting Environment — D1 7th: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '7 house 사인이 spouse와의 만남의 환경과 방식을 나타냅.<br><br>'}
+            ${isEasy ? '' : '7th house sign reveals meeting environment.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
-            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>해외 인연 가능성!</strong> spouse가 외국인이거나 해외에서 만날 가능성이 있습.' : ''}
+            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>foreign connection possibility!</strong> spouse가 foreigner이거나 foreign에서 만날 possibility이 exists.' : ''}
         </div>
     </div>`;
 
@@ -870,7 +870,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🏛️ Spouse Family Background' : '🏛️ Spouse Background — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '우파파다 Lagna(UL)는 spouse의 가정환경과 성장 배경을 나타냅.<br><br>'}
+            ${isEasy ? '' : 'Upapada Lagna (UL) reveals spouse family background.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
@@ -879,7 +879,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '👤 Spouse First Impression' : '👤 Spouse First Impression — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '다라파다(A7)는 spouse가 세상에 보여주는 외적 이미지, first impression을 나타냅.<br><br>'}
+            ${isEasy ? '' : 'Darapada (A7) shows spouse first impression.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
@@ -888,7 +888,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💎 Spouse Attraction Point' : '💎 Spouse Attraction — D9 Venus: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Navamsa의 Venus position는 spouse의 핵심 매력과 사랑의 스타일을 나타냅.<br><br>'}
+            ${isEasy ? '' : 'Venus in Navamsa reveals spouse charm and love style.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
@@ -904,7 +904,7 @@ function renderNakshatra(moonPos) {
 
     const html = isEasy ? `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">Your 별: ${nak.ko}</div>
+            <div class="nakshatra-name">Your Star: ${nak.ko}</div>
             <div class="nakshatra-meaning">"${nak.meaning}"</div>
             <div class="nakshatra-detail">${nak.desc}</div>
         </div>
@@ -913,7 +913,7 @@ function renderNakshatra(moonPos) {
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
             <div class="nakshatra-meaning">"${nak.meaning}" — Ruling Planet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
             <div class="nakshatra-detail">
-                신성: ${nak.deity}<br><br>
+                Deity: ${nak.deity}<br><br>
                 ${nak.desc}
             </div>
         </div>
@@ -962,8 +962,8 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
 
     const isEasy = window.vedicMode === 'easy';
     let html = isEasy ?
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 인생은 시기별로 다른 에너지가 흐릅. 아래에서 지금 당신이 어떤 시기에 있는지, 앞으로 어떤 시기가 오는지 확인하세요.<br><br>' :
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period. Calculated from Moon nakshatra position.<br><br>';
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 Life flows with different energies. Check your current period.<br><br>' :
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period. Calculated from Moon nakshatra position.<br><br>';
     html += isEasy ?
         '</div></div>' :
         '🌙 Birth Moon: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
@@ -993,7 +993,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + ' yrs</span>';
         if (isCurrent) html += '<span class="dasha-badge">Current</span>';
-        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + '세) ▼</span>';
+        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + ') ▼</span>';
 
         // Antardasha (Bhukti) - sub-periods within this mahadasha
         html += '<div class="bhukti-list" style="display:' + (isCurrent ? '' : 'none') + ';margin-top:8px;padding-top:8px;border-top:1px solid #2a2a5a;">';
@@ -1121,9 +1121,9 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = isEasy ? '' : `<strong>2 house (축적된 재산):</strong> ${SIGNS[h2sign]}에 position. `;
+    let wealthText = isEasy ? '' : `<strong>2nd House (Accumulated Wealth):</strong> ${SIGNS[h2sign]}. `;
     if (h2planets.length === 0) {
-        wealthText += isEasy ? 'Wealth accumulation is steady and stable. 큰 변동 없이 차곡차곡 모이는 타입이에요. ' : 'No planets in 2nd — steady wealth accumulation. ';
+        wealthText += isEasy ? 'Wealth accumulation is steady and stable. Builds up steadily without major fluctuations. ' : 'No planets in 2nd — steady wealth accumulation. ';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
@@ -1141,7 +1141,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         });
     }
 
-    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11 house (수입과 이익):</strong> ${SIGNS[h11sign]}에 position. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11th House (Income & Gains):</strong> ${SIGNS[h11sign]}. `;
     if (h11planets.length === 0) {
         wealthText += isEasy ? 'Income is stable but without major fluctuations.' : 'No planets in 11th — stable income without major changes.';
     } else {
@@ -1201,10 +1201,10 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'Soft, dreamy appearance. Large eyes with dreamy expression. Slightly plump with translucent skin. Pastel tones suit. Mystical charm.'
     ];
 
-    let spouseText = (isEasy ? '' : '<strong>📐 spouse Appearance & First Impression:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 spouse 성격:</strong><br>') + spouseSign[h7sign];
+    let spouseText = (isEasy ? '' : '<strong>📐 Spouse Appearance:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 spouse Personality:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += isEasy ? '<br><br>' : '<br><br><strong>7 house 행성:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planets in 7th:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
@@ -1223,7 +1223,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += isEasy ? '<br><br>' : `<br><br><strong>Venus position (${venusHouse}궁):</strong> `;
+        spouseText += isEasy ? '<br><br>' : `<br><br><strong>Venus Position (${venusHouse}th):</strong> `;
         const venusHouseInterp = {
             1: 'Attractive appearance. Enjoys romance and falls in love easily.',
             2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
@@ -1242,7 +1242,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 My Spouse' : '💕 spouse & Marriage Fortune — 7궁: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 My Spouse' : '💕 Spouse & Marriage — 7th House: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1267,7 +1267,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
     ];
 
-    let careerText = isEasy ? careerSign[h10sign] : `10th house is in ${SIGNS[h10sign]}에 position. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
         careerText += isEasy ? '<br><br>' : '<br><br><strong>10 house 행성:</strong>';
@@ -1286,7 +1286,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💼 My Career' : '💼 career & 사회적 성취 — 10궁: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 My Career' : '💼 career & society적 성취 — 10궁: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1381,7 +1381,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const jupH = houseOf(jupiter.sign);
         const diff = Math.abs(moonH - jupH);
         if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
-            yogaText += isEasy ? '<strong>🐘 지혜와 명성의 축복</strong>' : '<strong>🐘 가자케사리 요가 (Gajakesari)</strong> — Moon과 Jupiter이 켄드라 관계! 지혜, 명성, 풍요의 조합. 사회적으로 존경받고 지적 능력이 뛰어납. 좋은 교육과 children 운.<br><br>';
+            yogaText += isEasy ? '<strong>🐘 지혜와 명성의 blessing</strong>' : '<strong>🐘 가자케사리 yoga (Gajakesari)</strong> — Moon과 Jupiter이 켄드라 관계! 지혜, 명성, abundance의 조합. society적으로 존경받고 intellectual ability이 뛰어납. 좋은 education과 children 운.<br><br>';
         }
     }
 
@@ -1389,25 +1389,25 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const sun = positions.find(p => p.id === 'Sun');
     const mercury = positions.find(p => p.id === 'Mercury');
     if (sun && mercury && sun.sign === mercury.sign) {
-        yogaText += isEasy ? '<strong>📚 뛰어난 지성의 축복</strong>' : '<strong>📚 부다-아디티야 요가</strong> — Sun과 Mercury이 같은 별자리! 뛰어난 지성과 소통 능력. 교육, 글쓰기, 비즈니스에서 성공. 권위 있는 지적 리더.<br><br>';
+        yogaText += isEasy ? '<strong>📚 뛰어난 지성의 blessing</strong>' : '<strong>📚 부다-아디티야 yoga</strong> — Sun과 Mercury이 같은 별자리! 뛰어난 지성과 소통 ability. education, 글쓰기, 비즈니스에서 성공. 권위 있는 intellectual 리더.<br><br>';
     }
 
     // Chandra-Mangala Yoga
     if (moonPos && mars && moonPos.sign === mars.sign) {
-        yogaText += isEasy ? '<strong>🔥 강한 의지와 wealth의 축복</strong>' : '<strong>🔥 찬드라-망갈라 요가</strong> — Moon과 Mars이 같은 별자리! 강한 의지와 wealth 축적 능력. 사업에서 성공하며 대담한 결정을 내립.<br><br>';
+        yogaText += isEasy ? '<strong>🔥 강한 의지와 wealth의 blessing</strong>' : '<strong>🔥 찬드라-망갈라 yoga</strong> — Moon과 Mars이 같은 별자리! 강한 의지와 wealth 축적 ability. business에서 성공하며 대담한 결정을 내립.<br><br>';
     }
 
     // Kuja Dosha (Manglik)
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += isEasy ? `<strong>⚠️ 결혼 시 주의사항</strong>` : `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — Mars이 ${marsH} house position하여 결혼 생활에 도전이 있을 수 있습. spouse 선택 시 상대의 차트도 확인하는 것이 좋습. 28세 이후 결혼이 유리할 수 있습.<br><br>`;
+            yogaText += isEasy ? `<strong>⚠️ marriage 시 주의사항</strong>` : `<strong>⚠️ 쿠자 도샤 (망갈리크)</strong> — Mars이 ${marsH} house position하여 marriage 생활에 challenge이 있을 수 exists. spouse 선택 시 상대의 차트도 확인하는 것이 좋습. 28세 이후 marriage이 유리할 수 exists.<br><br>`;
         }
     }
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">${isEasy ? '🔮 Your 특별한 재능' : '🔮 특별 요가 (행성 조합)'}</div>
+            <div class="interp-title">${isEasy ? '🔮 Your 특별한 talent' : '🔮 특별 yoga (행성 조합)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -1539,7 +1539,7 @@ function renderEducation(positions, lagnaSign) {
     const h5sign = (lagnaSign + 4) % 12;
 
     const isEasy = window.vedicMode === 'easy';
-    let text = isEasy ? '<strong>기초 교육:</strong> ' : `<strong>4 house (기초 교육·학위):</strong> ${SIGNS[h4sign]}. `;
+    let text = isEasy ? '<strong>기초 education:</strong> ' : `<strong>4 house (기초 education·학위):</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
     text += eduSign4[h4sign] + ' suited. ';
     if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influences education. ';
@@ -1547,13 +1547,13 @@ function renderEducation(positions, lagnaSign) {
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/해외 유학 가능성.' : '<br><br>🎓 <strong>Jupiter이 ' + jH + ' house position하여 높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/해외 유학 가능성.';
+        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/foreign 유학 possibility.' : '<br><br>🎓 <strong>Jupiter이 ' + jH + ' house position하여 높은 학업 성취가 기대됩니다!</strong> 대학원/박사과정/foreign 유학 possibility.';
     }
 
     text += isEasy ? '<br><br><strong>Higher education:</strong> ' : `<br><br><strong>5 house (Higher Education)::</strong> ${SIGNS[h5sign]}. `;
     if (h5.length > 0) {
         h5.forEach(p => {
-            const h5p = { Sun: '리더십/정치학 분야 뛰어남', Moon: '예술/심리학 재능', Mars: '공학/기술/체육 재능', Mercury: '수학/언어/비즈니스 천재', Jupiter: 'Best placement! 학자/교수/연구자', Venus: '예술/디자인/음악 재능', Saturn: '늦은 학업이지만 깊이 있는 연구' };
+            const h5p = { Sun: '리더십/politics학 field 뛰어남', Moon: 'art/psychology talent', Mars: '공학/technology/체육 talent', Mercury: '수학/언어/비즈니스 천재', Jupiter: 'Best placement! 학자/교수/research자', Venus: 'art/design/music talent', Saturn: '늦은 학업이지만 깊이 있는 research' };
             text += isEasy ? `${h5p[p.id] || 'influences academics'}. ` : `${p.name}: ${h5p[p.id] || 'influences academics'}. `;
         });
     } else {
@@ -1603,7 +1603,7 @@ function renderChildren(positions, lagnaSign) {
 
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if (jH === 5) text += isEasy ? '<br>🌟 <strong>Best children운! children가 큰 행운을 가져옵.</strong>' : '<br>🌟 <strong>Jupiter이 5궁! Best children운. children가 큰 행운을 가져옵.</strong>';
+        if (jH === 5) text += isEasy ? '<br>🌟 <strong>Best children운! children가 큰 fortune을 가져옵.</strong>' : '<br>🌟 <strong>Jupiter이 5궁! Best children운. children가 큰 fortune을 가져옵.</strong>';
     }
 
     document.getElementById('childrenWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
@@ -1621,29 +1621,29 @@ function renderForeign(positions, lagnaSign) {
     const rahu = positions.find(p => p.id === 'Rahu');
 
     const isEasy = window.vedicMode === 'easy';
-    let text = isEasy ? '<strong>해외 여행·행운:</strong><br>' : '<strong>9 house (해외 여행·행운·Higher education):</strong><br>';
+    let text = isEasy ? '<strong>foreign travel·fortune:</strong><br>' : '<strong>9 house (foreign travel·fortune·Higher education):</strong><br>';
     if (h9.length === 0) {
         text += 'Foreign travel exists but not a strong connection.';
     } else {
         h9.forEach(p => {
-            const f9 = { Sun: 'Father가 해외 관련. 정부/공무 해외 출장.', Moon: '해외 여행을 감정적으로 즐김. 해외 대중 인기.', Mars: '해외에서의 모험/도전. 군사/기술 관련 해외 활동.', Mercury: '해외 유학/비즈니스 성공! 다국어 능력.', Jupiter: '해외에서 큰 행운! 유학/이민 성공. 해외 스승 만남.', Venus: '해외에서의 로맨스. 예술/패션 관련 해외 활동.', Saturn: '해외에서의 고생 후 성공. 장기 해외 체류.', Rahu: '해외 이주 강력한 지표! 외국 문화에 깊이 빠짐.', Ketu: '전생에서의 해외 인연. 영적 순례.' };
+            const f9 = { Sun: 'Father가 foreign related. government/공무 foreign 출장.', Moon: 'foreign travel을 감정적으로 즐김. foreign 대중 인기.', Mars: 'foreign에서의 adventure/challenge. 군사/technology related foreign 활동.', Mercury: 'foreign 유학/비즈니스 성공! 다국어 ability.', Jupiter: 'foreign에서 큰 fortune! 유학/이민 성공. foreign 스승 만남.', Venus: 'foreign에서의 로맨스. art/fashion related foreign 활동.', Saturn: 'foreign에서의 고생 후 성공. 장기 foreign 체류.', Rahu: 'foreign migration 강력한 지표! 외국 culture에 깊이 빠짐.', Ketu: '전생에서의 foreign connection. 영적 pilgrimage.' };
             text += isEasy ? `${f9[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
 
-    text += isEasy ? '<br><strong>해외 정착·이민:</strong><br>' : '<br><strong>12 house (해외 정착·이민·지출):</strong><br>';
+    text += isEasy ? '<br><strong>foreign settlement·이민:</strong><br>' : '<br><strong>12 house (foreign settlement·이민·지출):</strong><br>';
     if (h12.length === 0) {
         text += 'Domestic residence is more natural.';
     } else {
         h12.forEach(p => {
-            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: '해외 거주 가능성 높음! 해외에서 감정적 안정.', Mars: '해외에서의 에너지 소모. 해외 투자/부동산.', Mercury: '해외 비즈니스/IT 관련 활동. 해외 교육.', Jupiter: '해외에서의 영적 성장. 자선 활동. 해외 대학.', Venus: '해외에서의 사치와 쾌락. 해외 예술 활동.', Saturn: '해외에서의 고된 노동. 하지만 장기적 정착.', Rahu: '해외 이민 확정적 지표! 서양 문화 적응.', Ketu: '해외에서의 영적 practice. 고독한 해외 생활.' };
+            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: 'foreign 거주 possibility 높음! foreign에서 감정적 stability.', Mars: 'foreign에서의 에너지 소모. foreign investment/real estate.', Mercury: 'foreign 비즈니스/IT related 활동. foreign education.', Jupiter: 'foreign에서의 영적 growth. charity 활동. foreign 대학.', Venus: 'foreign에서의 사치와 쾌락. foreign art 활동.', Saturn: 'foreign에서의 고된 노동. 하지만 장기적 settlement.', Rahu: 'foreign 이민 확정적 지표! 서양 culture 적응.', Ketu: 'foreign에서의 영적 practice. 고독한 foreign 생활.' };
             text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
 
     if (rahu) {
         const rH = houseOf(rahu.sign);
-        if ([9, 12, 7].includes(rH)) text += isEasy ? '<br>✈️ <strong>해외 이주/장기 체류 가능성이 매우 높습니다!</strong>' : '<br>✈️ <strong>Rahu가 ' + rH + ' house position하여 해외 이주/장기 체류 가능성이 매우 높습니다!</strong>';
+        if ([9, 12, 7].includes(rH)) text += isEasy ? '<br>✈️ <strong>foreign migration/장기 체류 possibility이 매우 높습니다!</strong>' : '<br>✈️ <strong>Rahu가 ' + rH + ' house position하여 foreign migration/장기 체류 possibility이 매우 높습니다!</strong>';
     }
 
     document.getElementById('foreignWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
@@ -1674,8 +1674,8 @@ function renderDignity(positions, lagnaSign) {
     let html = `<div class="interp-card" style="margin-bottom:16px;">
         <div class="interp-text">
             ${isEasy ?
-            '<strong>💡 쉽게 이해하기:</strong> 각 행성이 Your 인생에서 얼마나 힘을 잘 발휘하는지 보여드릴게요.<br><br>🟢 <strong>매우 강함</strong> = Best 컨디션! 큰 행운과 성과.<br>🟡 <strong>강함</strong> = 안정적으로 좋은 결과.<br>⚪ <strong>보통</strong> = 특별히 강하지도 약하지도 않음.<br>🔴 <strong>약한 상태</strong> = 어려움이 있지만 노력으로 극복 가능.' :
-            '<strong>💡 쉽게 이해하기:</strong> Planetary dignity means how well a planet exerts its power.<br><br>🟢 <strong>Exalted</strong> = Best 컨디션! 이 행성이 담당하는 인생 영역에서 큰 행운과 성과.<br>🟡 <strong>본궁</strong> = 자기 집에 있는 것처럼 편안. 안정적으로 좋은 결과.<br>⚪ <strong>중립</strong> = 보통. 특별히 강하지도 약하지도 않음.<br>🔴 <strong>Debilitated</strong> = 힘이 약한 상태. 이 영역에서 어려움이 있지만 노력으로 극복 가능.'}
+            '<strong>💡 쉽게 이해하기:</strong> 각 행성이 Your 인생에서 얼마나 힘을 잘 발휘하는지 보여드릴게요.<br><br>🟢 <strong>매우 강함</strong> = Best 컨디션! 큰 fortune과 성과.<br>🟡 <strong>강함</strong> = stable으로 좋은 결과.<br>⚪ <strong>보통</strong> = 특별히 강하지도 약하지도 않음.<br>🔴 <strong>약한 상태</strong> = 어려움이 있지만 effort으로 overcome 가능.' :
+            '<strong>💡 쉽게 이해하기:</strong> Planetary dignity means how well a planet exerts its power.<br><br>🟢 <strong>Exalted</strong> = Best 컨디션! 이 행성이 담당하는 인생 영역에서 큰 fortune과 성과.<br>🟡 <strong>본궁</strong> = 자기 집에 있는 것처럼 편안. stable으로 좋은 결과.<br>⚪ <strong>중립</strong> = 보통. 특별히 강하지도 약하지도 않음.<br>🔴 <strong>Debilitated</strong> = 힘이 약한 상태. 이 영역에서 어려움이 있지만 effort으로 overcome 가능.'}
         </div>
     </div>`;
 
@@ -1692,29 +1692,29 @@ function renderDignity(positions, lagnaSign) {
             emoji = '🟢';
             color = '#5cb85c';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> 영역에서 Best 축복을 받았어요! 이 분야에서 타고난 재능이 빛나며 자연스럽게 좋은 결과를 얻습.`
-                : `<strong>${p.name} 최강!</strong> "${role}" 에너지가 극대화된 상태로 <strong>${house}(${area})</strong> 영역에서 큰 축복을 받았습. 타고난 재능이 빛나며 자연스럽게 좋은 결과를 얻습.`;
+                ? `<strong>${area}</strong> 영역에서 Best blessing을 받았어요! 이 field에서 타고난 talent이 빛나며 자연스럽게 좋은 결과를 얻습.`
+                : `<strong>${p.name} 최강!</strong> "${role}" 에너지가 극conversation된 상태로 <strong>${house}(${area})</strong> 영역에서 큰 blessing을 받았습. 타고난 talent이 빛나며 자연스럽게 좋은 결과를 얻습.`;
         } else if (p.sign === DEBI[p.id]) {
             dignity = 'Debilitated';
             emoji = '🔴';
             color = '#d9534f';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> 영역에서 어려움을 느낄 수 있어요. 하지만 의식적으로 노력하면 오히려 큰 성장의 기회가 됩. 아래 치유법을 참고하세요.`
-                : `<strong>${p.name} 약한 상태.</strong> "${role}" 에너지가 약해진 채로 <strong>${house}(${area})</strong> 영역에 있습. 이 분야에서 어려움을 느낄 수 있지만, 의식적 노력으로 극복하면 오히려 큰 성장의 기회가 됩. 아래 치유법을 참고하세요.`;
+                ? `<strong>${area}</strong> 영역에서 어려움을 느낄 수 있어요. 하지만 의식적으로 effort하면 오히려 큰 growth의 기회가 becomes. 아래 healing법을 참고하세요.`
+                : `<strong>${p.name} 약한 상태.</strong> "${role}" 에너지가 약해진 채로 <strong>${house}(${area})</strong> 영역에 exists. 이 field에서 어려움을 느낄 수 있지만, 의식적 effort으로 overcome하면 오히려 큰 growth의 기회가 becomes. 아래 healing법을 참고하세요.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = 'Own Sign';
             emoji = '🟡';
             color = '#c9a84c';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> 영역에서 안정적으로 힘을 발휘해요. 자연스럽게 좋은 결과를 만들어냅.`
-                : `<strong>${p.name} 자기 집에!</strong> "${role}" 에너지가 안정적으로 <strong>${house}(${area})</strong> 영역에서 힘을 발휘합. 자연스럽게 좋은 결과를 만들어냅.`;
+                ? `<strong>${area}</strong> 영역에서 stable으로 힘을 발휘해요. 자연스럽게 좋은 결과를 만들어냅.`
+                : `<strong>${p.name} 자기 집에!</strong> "${role}" 에너지가 stable으로 <strong>${house}(${area})</strong> 영역에서 힘을 발휘합. 자연스럽게 좋은 결과를 만들어냅.`;
         } else {
             dignity = 'Neutral';
             emoji = '⚪';
             color = '#999';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> 영역에서 보통의 영향력이에요. 특별히 강하지도 약하지도 않습.`
-                : `${p.name}의 "${role}" 에너지가 <strong>${house}(${area})</strong> 영역에서 보통의 영향력을 발휘합. Results vary depending on other planets.`;
+                ? `<strong>${area}</strong> 영역에서 보통의 influence력이에요. 특별히 강하지도 약하지도 not.`
+                : `${p.name}의 "${role}" 에너지가 <strong>${house}(${area})</strong> 영역에서 보통의 influence력을 발휘합. Results vary depending on other planets.`;
         }
 
         html += `<div class="interp-card">
@@ -1802,7 +1802,7 @@ function renderRemedy(positions, lagnaSign) {
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">모든 행성이 양호한 position에 있습니다! 특별한 치유가 필요하지 않습. 행운의 보석은 Lagna 지배 행성의 보석을 착용하면 좋습.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">모든 행성이 양호한 position에 있습니다! 특별한 healing가 필요하지 not. fortune의 보석은 Lagna 지배 행성의 보석을 착용하면 좋습.</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;
@@ -1943,9 +1943,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d10_10lord = SIGN_RULERS[d10_10sign];
         const d10_10planets = dPositions.filter(p => p.dSign === d10_10sign);
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💼 career 상세 분석' : '💼 D10 career 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💼 career 상세 analysis' : '💼 D10 career analysis') + '</div><div class="interp-text">';
         if (isEasy) {
-            html += '<strong>Your career 성향:</strong><br>';
+            html += '<strong>Your career tendency:</strong><br>';
         } else {
             html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (ruler: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
             html += '<strong>D10 10 house (career):</strong> ' + SIGNS[d10_10sign] + ' (ruler: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
@@ -1969,7 +1969,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'IT, Innovation, NGO, Aviation',           // 물병
             'Arts, Hospital, Foreign, Spirituality'           // Pisces
         ];
-        html += '<strong>적합 분야:</strong> ' + careerBySign[dLagnaSign];
+        html += '<strong>suitable field:</strong> ' + careerBySign[dLagnaSign];
         html += '</div></div>';
 
     } else if (division === 7) {
@@ -1980,7 +1980,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const benefics = d7_5planets.filter(p => p.natural === 'benefic');
         const malefics = d7_5planets.filter(p => p.natural === 'malefic');
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 children 분석' : '👶 D7 children 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 children analysis' : '👶 D7 children analysis') + '</div><div class="interp-text">';
         if (!isEasy) {
             if (!isEasy) html += '<strong>D7 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
             html += '<strong>D7 5 house (children):</strong> ' + SIGNS[d7_5sign] + ' (ruler: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
@@ -1989,7 +1989,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             if (!isEasy) html += '<strong>5 house 행성:</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';
         }
         if (benefics.length > 0) html += (isEasy ? 'Benefic planets — blessed with children.' : 'Benefic 5 house 있어 blessed with children.') + '<br>';
-        if (malefics.length > 0) html += (isEasy ? '도전의 행성이 children position 있어 children 관련 difficulties possible.' : 'Malefic 5 house 있어 children 관련 difficulties possible.') + '<br>';
+        if (malefics.length > 0) html += (isEasy ? 'challenge의 행성이 children position 있어 children related difficulties possible.' : 'Malefic 5 house 있어 children related difficulties possible.') + '<br>';
         if (d7_5planets.length === 0) html += isEasy ? 'children position no planets — 다른 요소를 종합적으로 봐야 합.' : '5 house no planets — 5 lord(ruler)의 position를 봐야 합.';
         html += '</div></div>';
 
@@ -2000,7 +2000,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d12_4planets = dPositions.filter(p => p.dSign === d12_4sign);
         const d12_9planets = dPositions.filter(p => p.dSign === d12_9sign);
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨‍👩‍👧 부모 분석' : '👨‍👩‍👧 D12 부모 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨‍👩‍👧 부모 analysis' : '👨‍👩‍👧 D12 부모 analysis') + '</div><div class="interp-text">';
         if (!isEasy) {
             if (!isEasy) html += '<strong>D12 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
         }
@@ -2013,8 +2013,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         const moon4 = d12_4planets.find(p => p.id === 'Moon');
         const sun9 = d12_9planets.find(p => p.id === 'Sun');
-        if (moon4) html += (isEasy ? 'Moon이 Mother position 있어 Mother와의 인연이 깊습.' : 'Moon이 4 house 있어 Mother와의 인연이 깊습.') + '<br>';
-        if (sun9) html += (isEasy ? 'Sun이 Father position 있어 Father와의 인연이 깊습.' : 'Sun이 9 house 있어 Father와의 인연이 깊습.') + '<br>';
+        if (moon4) html += (isEasy ? 'Moon이 Mother position 있어 Mother와의 connection이 깊습.' : 'Moon이 4 house 있어 Mother와의 connection이 깊습.') + '<br>';
+        if (sun9) html += (isEasy ? 'Sun이 Father position 있어 Father와의 connection이 깊습.' : 'Sun이 9 house 있어 Father와의 connection이 깊습.') + '<br>';
         html += '</div></div>';
 
     } else if (division === 60) {
@@ -2114,8 +2114,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // 행성별 D60 사인 해석 (전통)
         const d60PlanetInSign = {
-            Sun: ['In past lives, 전사나 왕으로 살았으며, 강한 자아와 지도력이 이번 생에도 남아있습. 권위를 세우려는 soul의 목적이 있습.','In past lives, 예술가나 부유한 자로 살았으며, 물질적 풍요를 추구하는 soul입. 감각적 아름다움에 끌립.','In past lives, 학자나 상인으로 살았으며, 지식과 소통이 soul의 핵심 주제입.','In past lives, 보호자나 양육자로 살았으며, 타인을 돌보는 것이 soul의 깊은 본능입.','In past lives, 왕족이나 성직자로 높은 지위에 있었으며, 이번 생에서도 자연스러운 권위를 지닙.','In past lives, 치유자나 봉Leo로 살았으며, 분석과 service가 soul의 목적입.','In past lives, 외교관이나 예술가로 조화를 추구했으며, 관계와 균형이 soul의 task.','In past lives, practice자나 연금술사로 깊은 변혁을 겪었으며, 비밀과 변혁이 soul에 각인되어 있습.','In past lives, 현자나 탐험가로 진리를 추구했으며, 지혜와 모험이 soul의 방향입.','In past lives, 관료나 건축가로 질서를 세웠으며, 체계와 책임이 soul에 새겨져 있습.','In past lives, 혁명가나 발명가로 시대를 앞서갔으며, 독창적 사고가 soul의 특성입.','In past lives, 영매나 예술가로 영적 세계와 교류했으며, 깊은 직관이 soul에 남아있습.'],
-            Moon: ['Past life 감정적 기억이 불같이 강렬합. 분노와 열정이 무의식에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 task.','Past life 감정적 기억이 따뜻하고 안정적입. 풍요와 안정 속에서 살았던 기억이 무의식에 남아, 아름다운 것을 찾습.','Past life 감정적 기억이 지적이고 다채롭습. 여러 경험을 했던 기억이 남아 호기심이 강합.','Past life 감정적 기억이 매우 깊습. 가정과 돌봄의 기억이 강하게 남아 감Mercury이 풍부합.','Past life 감정적 기억이 자부심과 존엄으로 가득합. 인정받고 존경받았던 기억이 남아있습.','Past life 감정적 기억이 service와 분석에 관련됩. 누군가를 도왔던 기억이 남아 세심한 마음을 가집.','Past life 감정적 기억이 조화와 관계에 관련됩. 아름다운 관계의 기억이 남아 파트너를 찾습.','Past life 감정적 기억이 깊고 강렬합. 극적인 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습.','Past life 감정적 기억이 자유와 탐구에 관련됩. 여행하고 배웠던 기억이 남아 확장을 추구합.','Past life 감정적 기억이 책임과 인내에 관련됩. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집.','Past life 감정적 기억이 독특하고 비범합. 다른 사람들과 Moon랐던 기억이 남아 독립적 감성을 가집.','Past life 감정적 기억이 영적이고 초월적입. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습.']
+            Sun: ['In past lives, 전사나 왕으로 살았으며, 강한 자아와 지도력이 이번 생에도 남아exists. 권위를 세우려는 soul의 purpose이 exists.','In past lives, art가나 부유한 자로 살았으며, 물질적 abundance를 추구하는 soul입. sense적 아름다움에 끌립.','In past lives, 학자나 상인으로 살았으며, 지식과 소통이 soul의 핵심 주제입.','In past lives, 보호자나 양육자로 살았으며, 타인을 돌보는 것이 soul의 깊은 본능입.','In past lives, 왕족이나 성직자로 높은 지위에 있었으며, 이번 생에서도 자연스러운 권위를 지닙.','In past lives, healing자나 봉Leo로 살았으며, analysis과 service가 soul의 purpose입.','In past lives, diplomacy관이나 art가로 harmony를 추구했으며, 관계와 balance이 soul의 task.','In past lives, practice자나 연금술사로 깊은 transformation을 겪었으며, 비밀과 transformation이 soul에 각인되어 exists.','In past lives, 현자나 탐험가로 진리를 추구했으며, 지혜와 adventure이 soul의 direction입.','In past lives, 관료나 architecture가로 질서를 세웠으며, 체계와 책임이 soul에 새겨져 exists.','In past lives, 혁명가나 발명가로 시대를 앞서갔으며, 독창적 accident가 soul의 특성입.','In past lives, 영매나 art가로 영적 세계와 교류했으며, 깊은 intuition이 soul에 남아exists.'],
+            Moon: ['Past life 감정적 기억이 불같이 강렬합. 분노와 passion이 unconscious에 각인되어 있으며, 이번 생에서 감정을 다스리는 것이 task.','Past life 감정적 기억이 따뜻하고 stable입. abundance와 stability 속에서 살았던 기억이 unconscious에 남아, 아름다운 것을 찾습.','Past life 감정적 기억이 intellectual이고 다채롭습. 여러 experience을 했던 기억이 남아 호기심이 강합.','Past life 감정적 기억이 매우 깊습. home과 돌봄의 기억이 강하게 남아 감Mercury이 풍부합.','Past life 감정적 기억이 자부심과 존엄으로 가득합. 인정받고 존경받았던 기억이 남아exists.','Past life 감정적 기억이 service와 analysis에 relatedbecomes. 누군가를 도왔던 기억이 남아 세심한 마음을 가집.','Past life 감정적 기억이 harmony와 관계에 relatedbecomes. 아름다운 관계의 기억이 남아 partner를 찾습.','Past life 감정적 기억이 깊고 강렬합. 극적인 변화를 겪었던 기억이 남아 감정의 깊이가 바다와 같습.','Past life 감정적 기억이 자유와 탐구에 relatedbecomes. travel하고 배웠던 기억이 남아 확장을 추구합.','Past life 감정적 기억이 책임과 patience에 relatedbecomes. 무거운 짐을 졌던 기억이 남아 성숙한 감정을 가집.','Past life 감정적 기억이 독특하고 비범합. 다른 사람들과 Moon랐던 기억이 남아 independent 감성을 가집.','Past life 감정적 기억이 영적이고 초월적입. 꿈과 비전이 선명하며, 영적 세계와의 연결이 깊습.']
         };
 
         // 신 계산 헬퍼
@@ -2144,7 +2144,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // ─── 소챕터 1: soul의 정체성 ───
         const lagnaD = getDeity(lagnaSidereal);
         let ch1 = isEasy
-            ? '<strong>Past life 정체성</strong>' + deityTag(lagnaD) + '<br><br>'
+            ? '<strong>Past life identity</strong>' + deityTag(lagnaD) + '<br><br>'
             : '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
@@ -2156,7 +2156,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects — good opportunities come naturally.' :
                     '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted, but overcoming leads to growth.'));
         }
-        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' Past life 핵심 position에 있습니다 — Past life karma가 이 행성에 집중되어 있습.' : ' D60 Lagna에 position — Core past-life karma concentrated in these planets.');
+        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' Past life 핵심 position에 있습니다 — Past life karma가 이 행성에 집중되어 exists.' : ' D60 Lagna에 position — Core past-life karma concentrated in these planets.');
         html += subChapter('🪐', 'Soul Identity — Who Were You in Past Lives', ch1);
 
         // ─── 소챕터 2: soul의 목적 ───
@@ -2210,22 +2210,22 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Past life scholar/merchant connection. Intellectual marriage karma. Souls who studied or traded together.',
             'Past life family/protector connection. Deep emotional bond marriage karma. Souls who cared for each other.',
             'Past life royalty/nobility connection. Splendid, respected marriage karma. Souls who ruled together.',
-            'In past lives, 치유자/봉Leo와의 인연. service와 헌신의 결혼 karma. In past lives, 함께 타인을 도왔던 soul.',
+            'In past lives, healing자/봉Leo와의 connection. service와 헌신의 marriage karma. In past lives, 함께 타인을 도왔던 soul.',
             'Past life diplomat/artist connection. Harmonious, beautiful marriage karma. Souls who sought balance together.',
             'Past life practitioner/mystic connection. Intense, transformative marriage karma. Souls who shared life and death.',
             'Past life sage/explorer connection. Free, expansive marriage karma. Foreign spouse possible.',
             'Past life official/architect connection. Responsible, stable marriage karma. Late marriage possible.',
-            'In past lives, 관료/군인/체계적 career인과의 인연. Saturn이 지배하는 사인으로, 책임감 있고 규율적인 spouse karma. In past lives, 함께 사회적 의무를 practice한 soul. 결혼이 다소 늦거나 나이 차이가 있을 수 있음.',
+            'In past lives, 관료/군인/systematic career인과의 connection. Saturn이 지배하는 사인으로, 책임감 있고 규율적인 spouse karma. In past lives, 함께 society적 의무를 practice한 soul. marriage이 다소 늦거나 나이 차이가 있을 수 있음.',
             'Past life medium/artist connection. Mystical, spiritual marriage karma. May meet first in dreams.'
         ];
 
         let ch4 = (isEasy
-            ? '<strong>spouse와의 전생 인연</strong><br><br>'
+            ? '<strong>spouse와의 전생 connection</strong><br><br>'
             : '<strong>D60 7 house (spouse): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
         if (d60H7planets.length > 0) {
-            ch4 += '<br><strong>' + (isEasy ? 'Planets in spouse position:' : 'D60 7 house 행성:') + '</strong><br>';
+            ch4 += '<br><strong>' + (isEasy ? 'Planets in spouse position:' : 'D60 Planets in 7th:') + '</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (isEasy) {
@@ -2235,8 +2235,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 } else {
                     ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                     ch4 += (p.natural === 'benefic'
-                        ? 'Benefic 7 house position — In past lives, spouse와 좋은 karma를 쌓았으며, 이번 생에서도 spouse에게서 축복을 받습.'
-                        : 'Malefic 7 house position — In past lives, spouse와 해결하지 못한 karma가 있으며, 이번 생에서 이를 정산합. 도전이지만 성장의 기회입.') + '<br>';
+                        ? 'Benefic 7 house position — In past lives, spouse와 좋은 karma를 쌓았으며, 이번 생에서도 spouse에게서 blessing을 받습.'
+                        : 'Malefic 7 house position — In past lives, spouse와 해결하지 못한 karma가 있으며, 이번 생에서 이를 정산합. challenge이지만 growth의 기회입.') + '<br>';
                 }
             });
         }
@@ -2263,7 +2263,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
                 ch4 += isEasy
-                    ? '<br><br>🔥 <strong>very strong past-life connection!</strong> spouse와 In past lives, 깊은 연결이 있었으며, 이번 생에서도 운명적으로 만나게 됩.'
+                    ? '<br><br>🔥 <strong>very strong past-life connection!</strong> spouse와 In past lives, 깊은 연결이 있었으며, 이번 생에서도 destiny적으로 만나게 becomes.'
                     : '<br><br>🔥 <strong>Rahu-Ketu axis D60 1-7 line!</strong> This is spouse와의 <strong>very strong past-life connection</strong> with your spouse. Destined to meet in this life.';
             }
         }
@@ -2289,7 +2289,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H10lord = SIGN_RULERS[d60H10sign];
         const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
         const satD60 = dPositions.find(p => p.id === 'Saturn');
-        const careerKarma = ['군사/리더십/스포츠','금융/예술/농업','교육/미디어/상업','간호/부동산/호텔','정치/연예/관리','의료/분석/service','법률/외교/디자인','연구/수사/의학','교육/종교/해외','행정/건설/공무원','기술/과학/혁신','예술/영성/병원'][d60H10sign];
+        const careerKarma = ['군사/리더십/sports','금융/art/agriculture','education/미디어/상업','nursing/real estate/hospitality','politics/entertainment/관리','medical/analysis/service','law/diplomacy/design','research/수사/의학','education/religion/foreign','행정/건설/civil servant','technology/science/혁신','art/영성/병원'][d60H10sign];
 
         let ch5 = (isEasy
             ? '<strong>Past life career karma</strong><br><br>'
@@ -2304,8 +2304,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'This is a <strong>very rare blessing</strong>! Past life patience reduces career challenges in this life.' :
                     'Heavy career lesson from past lives. Steady effort and helping others is the key.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
-                    'Saturn under benefic  is a <strong>매우 희귀한 축복</strong>입니다! Past life patience reduces career  trials are reduced.' :
-                    'Saturn under malefic 아래에 있어 career적 영역에서 <strong>heavy past-life karma</strong>가 있습. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
+                    'Saturn under benefic  is a <strong>매우 희귀한 blessing</strong>입니다! Past life patience reduces career  trials are reduced.' :
+                    'Saturn under malefic 아래에 있어 career적 영역에서 <strong>heavy past-life karma</strong>가 exists. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
         }
         if (d60H10planets.length > 0) {
             ch5 += '<br><br><strong>' + (isEasy ? 'Career planets:' : 'D60 10 house 행성:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Career karma concentrated in these planets.';
@@ -2362,23 +2362,23 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             '9개 행성 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> placement<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
-                '🌟 <strong>In past lives, 정말 좋은 일을 많이 했어요!</strong> 거의 모든 행성이 좋은 기운 아래 있어서, 이번 생에서 자연스럽게 좋은 결과를 얻습. 타고난 행운이 강한 편이에요.' :
+                '🌟 <strong>In past lives, 정말 좋은 일을 많이 했어요!</strong> 거의 모든 행성이 좋은 기운 아래 있어서, 이번 생에서 자연스럽게 좋은 결과를 얻습. 타고난 fortune이 강한 편이에요.' :
                 '🌟 <strong>매우 강한 전생 merit.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
-                '✨ <strong>In past lives, 쌓은 좋은 기운이 풍부해요.</strong> 삶의 많은 영역에서 보호받고 있습.' :
+                '✨ <strong>In past lives, 쌓은 좋은 기운이 풍부해요.</strong> 삶의 많은 영역에서 보호받고 exists.' :
                 '✨ <strong>Abundant past life merit.</strong> Benefics dominate — protected in many areas.';
             if (maleficPlanets.length > 0) ch8 += isEasy ?
                 ' However, some areas need more effort.' :
-                ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 karma적 도전이 있으니 해당 행성의 mantra와 자선을 실천하세요.';
+                ' 다만 <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>의 영역에서 karma적 challenge이 있으니 해당 행성의 mantra와 charity을 실천하세요.';
         } else if (beneficCount >= 3) {
             ch8 += isEasy ?
-                '⚖️ <strong>좋은 기운과 도전의 기운이 반반이에요.</strong> 인생에서 좋은 일과 힘든 일이 번갈아 찾아옵.' :
+                '⚖️ <strong>좋은 기운과 challenge의 기운이 반반이에요.</strong> 인생에서 좋은 일과 힘든 일이 번갈아 찾아옵.' :
                 '⚖️ <strong>Karma in balance.</strong> Mixed fortune — good and challenges alternate.';
             if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planets to watch: ' : 'Planets to watch: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
             ch8 += isEasy ?
-                '🔥 <strong>이번 생은 Past life 숙제를 풀러 온 거예요.</strong> 도전이 많지만, 가장 무거운 숙제를 받은 사람이 가장 크게 성장합. 꾸준한 노력과 다른 사람을 돕는 것이 특히 중요해요.' :
+                '🔥 <strong>이번 생은 Past life lesson를 풀러 온 거예요.</strong> challenge이 많지만, 가장 무거운 lesson를 받은 사람이 가장 크게 growth합. 꾸준한 effort과 다른 사람을 돕는 것이 특히 중요해요.' :
                 '🔥 <strong>A life of karma settlement.</strong> Many challenges from past lives, but Parasara said "the soul with heaviest karma grows the most". Mantra practice and charity are especially important.';
         }
         html += subChapter('📊', 'Overall Karma Assessment', ch8);
@@ -2389,7 +2389,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // D2 Hora — wealth·부의 축적
         const d2LagnaInterp = ['Self-made wealth. Independent and aggressive investing.','Sensory investment and stable wealth. Real estate, food, art income.','Earning through intellectual activity. Writing, education, business acumen.','Real estate and family income. Property from mother. Watch emotional spending.','Wealth through leadership and authority. Government, gold. Showy spending.','Income through analysis and skills. Medical, accounting, service. Frugal manager.','Wealth through partnership. Law, diplomacy, fashion, art income.','Building wealth through others money (inheritance, insurance, investments). Hidden sources.','Income through education, foreign, religion. Fortune brings wealth.','Systematic effort builds wealth. Slow but sure. Rich after middle age.','Income through technology, innovation, networks. Unconventional sources.','Income through spiritual/artistic activities. Foreign-related wealth. Giving nature.'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💰 wealth과 부의 상세 분석' : '💰 D2 Hora — wealth과 부의 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💰 wealth과 부의 상세 analysis' : '💰 D2 Hora — wealth과 부의 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D2 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d2LagnaInterp + '<br><br>';
 
         const sunD2 = dPositions.find(p => p.id === 'Sun');
@@ -2399,22 +2399,22 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD2) {
             const sunInOwn = sunD2.dSign === 4; // Leo
-            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>자Mercury가형!</strong> 권위와 리더십으로 스스로 부를 만듦.' : '🌟 <strong>Sun이 자기 Hora(Leo)!</strong> 자Mercury가형. 권위와 리더십으로 스스로 부를 만듦.') : (isEasy ? '타인의 도움이나 정부/공공 부문을 통한 수입.' : 'Sun이 Moon의 Hora. 타인의 도움이나 정부/공공 부문을 통한 수입.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>자Mercury가형!</strong> 권위와 리더십으로 스스로 부를 만듦.' : '🌟 <strong>Sun이 자기 Hora(Leo)!</strong> 자Mercury가형. 권위와 리더십으로 스스로 부를 만듦.') : (isEasy ? '타인의 도움이나 government/공공 부문을 통한 수입.' : 'Sun이 Moon의 Hora. 타인의 도움이나 government/공공 부문을 통한 수입.')) + '<br>';
         }
         if (moonD2) {
             const moonInOwn = moonD2.dSign === 3; // Cancer
-            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>대중과 관계를 통해 풍족한 삶!</strong>' : '🌟 <strong>Moon이 자기 Hora(게)!</strong> 대중과 관계를 통해 풍족한 삶.') : (isEasy ? '자기 노력과 독립적 활동으로 생계.' : 'Moon이 Sun의 Hora. 자기 노력과 독립적 활동으로 생계.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>대중과 관계를 통해 풍족한 삶!</strong>' : '🌟 <strong>Moon이 자기 Hora(게)!</strong> 대중과 관계를 통해 풍족한 삶.') : (isEasy ? '자기 effort과 independent 활동으로 생계.' : 'Moon이 Sun의 Hora. 자기 effort과 independent 활동으로 생계.')) + '<br>';
         }
-        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? '자기 능력으로 큰 부를 쌓을 수 있어요.' : '타인과 관계를 통한 풍요.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — 자기 능력으로 큰 부.' : 'Moon Hora — 타인과 관계를 통한 풍요.')) + '<br>';
-        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? '예술/사치품으로 자Mercury가.' : 'spouse나 파트너를 통한 wealth.') : 'Venus이 ' + (venD2.dSign === 4 ? 'Sun Hora — 예술/사치품으로 자Mercury가.' : 'Moon Hora — spouse나 파트너를 통한 wealth.')) + '<br>';
+        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? '자기 ability으로 큰 부를 쌓을 수 있어요.' : '타인과 관계를 통한 abundance.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — 자기 ability으로 큰 부.' : 'Moon Hora — 타인과 관계를 통한 abundance.')) + '<br>';
+        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'art/사치품으로 자Mercury가.' : 'spouse나 partner를 통한 wealth.') : 'Venus이 ' + (venD2.dSign === 4 ? 'Sun Hora — art/사치품으로 자Mercury가.' : 'Moon Hora — spouse나 partner를 통한 wealth.')) + '<br>';
 
         // D2 2궁(축적된 부) 분석
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
-        html += '<br><strong>' + (isEasy ? 'Accumulated wealth:' : 'D2 2 house (축적된 부) — ' + SIGNS[d2H2sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Accumulated wealth:' : 'D2 2 house (accumulated 부) — ' + SIGNS[d2H2sign] + ':') + '</strong><br>';
         if (d2H2planets.length > 0) {
             d2H2planets.forEach(p => {
-                const wealth = {Sun:'권위와 지위를 통한 재산 축적',Moon:'대중적 활동을 통한 유동적 재산',Mars:'부동산·기술·경쟁 분야의 재산',Mercury:'사업·지적 활동·통신 분야의 재산',Jupiter:'교육·종교·법률 분야의 풍족한 재산',Venus:'예술·패션·사치품 관련 재산',Saturn:'느리지만 꾸준한 재산 축적. 중년 이후 안정',Rahu:'비전통적 방법·외국 관련 재산',Ketu:'물질에 초연. 영적 가치 추구'};
+                const wealth = {Sun:'권위와 지위를 통한 wealth 축적',Moon:'대중적 활동을 통한 유동적 wealth',Mars:'real estate·technology·경쟁 field의 wealth',Mercury:'business·intellectual 활동·통신 field의 wealth',Jupiter:'education·religion·law field의 풍족한 wealth',Venus:'art·fashion·사치품 related wealth',Saturn:'느리지만 꾸준한 wealth 축적. 중년 이후 stability',Rahu:'비traditional 방법·외국 related wealth',Ketu:'물질에 초연. 영적 가치 추구'};
                 html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>';
             });
         } else {
@@ -2432,18 +2432,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d3_11planets = dPositions.filter(p => p.dSign === d3_11sign);
         const marsD3 = dPositions.find(p => p.id === 'Mars');
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 sibling·용기·소통 분석' : '👫 D3 Drekkana — sibling·용기·소통 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 sibling·용기·소통 analysis' : '👫 D3 Drekkana — sibling·용기·소통 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d3LagnaInterp + '<br><br>';
 
         html += '<strong>' + (isEasy ? 'Younger siblings:' : 'D3 3 house (younger) — ' + SIGNS[d3_3sign] + ':') + '</strong><br>';
         if (d3_3planets.length > 0) {
-            const bro = {Sun:'younger이 리더십 있고 권위적',Moon:'younger과 감정적으로 가까움',Mars:'younger이 활동적이고 용감. 다툼 가능',Mercury:'younger이 지적이고 소통 능력 좋음',Jupiter:'younger이 현명하고 행운 가져옴',Venus:'younger이 매력적이고 예술적',Saturn:'younger과 관계에 어려움. 나이 차이 클 수 있음',Rahu:'younger이 독특하거나 외국 관련',Ketu:'younger과 거리감. 영적 연결'};
+            const bro = {Sun:'younger이 리더십 있고 권위적',Moon:'younger과 감정적으로 가까움',Mars:'younger이 active이고 용감. 다툼 가능',Mercury:'younger이 intellectual이고 소통 ability 좋음',Jupiter:'younger이 현명하고 fortune 가져옴',Venus:'younger이 charm적이고 art적',Saturn:'younger과 관계에 어려움. 나이 차이 클 수 있음',Rahu:'younger이 독특하거나 외국 related',Ketu:'younger과 거리감. 영적 연결'};
             d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : '3 house no planets — 3 lord의 position를 확인하세요.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Older siblings:' : 'D3 11 house (형/sister) — ' + SIGNS[d3_11sign] + ':') + '</strong><br>';
         if (d3_11planets.length > 0) {
-            d3_11planets.forEach(p => { html += isEasy ? '형/sister와의 관계에 영향이 있습.<br>' : '• ' + p.name + ' 11 house position하여 형/sister와의 관계에 영향.<br>'; });
+            d3_11planets.forEach(p => { html += isEasy ? '형/sister와의 관계에 influence이 exists.<br>' : '• ' + p.name + ' 11 house position하여 형/sister와의 관계에 influence.<br>'; });
         } else html += isEasy ? '' : '11 house no planets.<br>';
 
         if (marsD3) {
@@ -2465,25 +2465,25 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 Property & Fortune Analysis' : '🏠 D4 Chaturthamsha — Property & Fortune Analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d4LagnaInterp + '<br><br>';
 
-        html += '<strong>' + (isEasy ? 'Property/Home:' : 'D4 4 house (부동산/가정) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
+        html += '<strong>' + (isEasy ? 'Property/Home:' : 'D4 4 house (real estate/home) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
         if (d4_4planets.length > 0) {
-            const prop = {Sun:'정부 소유 건물이나 권위 있는 주거',Moon:'아름다운 집. 물 근처. Mother의 영향',Mars:'새 집 건축. 부동산 분쟁 가능',Mercury:'사업용 부동산. 여러 채 소유',Jupiter:'넓고 풍족한 집! Best 부동산 운',Venus:'럭셔리한 집. 아름다운 인테리어',Saturn:'오래된 집. 수리 필요. 중년 이후 안정',Rahu:'해외 부동산. 비전통적 주거',Ketu:'부동산에 무관심. 영적 공간 선호'};
+            const prop = {Sun:'government 소유 건물이나 권위 있는 주거',Moon:'아름다운 집. 물 근처. Mother의 influence',Mars:'새 집 architecture. real estate 분쟁 가능',Mercury:'business용 real estate. 여러 채 소유',Jupiter:'넓고 풍족한 집! Best real estate 운',Venus:'럭셔리한 집. 아름다운 인테리어',Saturn:'오래된 집. 수리 필요. 중년 이후 stability',Rahu:'foreign real estate. 비traditional 주거',Ketu:'real estate에 무관심. 영적 공liver 선호'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
-        } else html += isEasy ? '안정적인 부동산 운이에요.<br>' : '4 house no planets — 4 lord의 position가 부동산의 열쇠.<br>';
+        } else html += isEasy ? 'stable인 real estate 운이에요.<br>' : '4 house no planets — 4 lord의 position가 real estate의 열쇠.<br>';
 
-        html += '<br><strong>' + (isEasy ? 'Overall fortune:' : 'D4 10 house (전반적 행운) — ' + SIGNS[d4_10sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Overall fortune:' : 'D4 10 house (전반적 fortune) — ' + SIGNS[d4_10sign] + ':') + '</strong><br>';
         if (d4_10planets.length > 0) {
             d4_10planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '전반적 행운이 좋음!<br>' : '행운을 위해 노력이 필요하지만 성장의 기회.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefic 10 house position하여 전반적 행운이 좋음!' : 'Malefic 10 house — 행운을 위해 노력이 필요하지만 성장의 기회.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '전반적 fortune이 좋음!<br>' : 'fortune을 위해 effort이 필요하지만 growth의 기회.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefic 10 house position하여 전반적 fortune이 좋음!' : 'Malefic 10 house — fortune을 위해 effort이 필요하지만 growth의 기회.') + '<br>';
             });
         } else html += isEasy ? '' : '10 house no planets.<br>';
         html += '</div></div>';
 
     } else if (division === 16) {
         // D16 Shodashamsha — 차량·comfort·행복
-        const d16LagnaInterp = ['Sports cars, motorcycles — dynamic vehicles. Enjoys driving.','고급 차량과 편안한 이동 수단. 럭셔리한 물질적 comfort.','여러 대의 차량 또는 다양한 이동 수단. 기술적 기기 좋아함.','편안한 가정용 차량. 가족과의 여행. 물질적 안정이 행복.','최고급 차량. 과시적 소비. 고급 브랜드 선호.','실용적이고 연비 좋은 차량. health 관련 기기.','세련되고 디자인 좋은 차량. 미적 감각 있는 물건들.','중고차나 상속받은 차량. 보험이 중요. 변혁적 물질 경험.','SUV나 해외 브랜드. 여행용 차량. 모험적 이동 수단.','검소하지만 튼튼한 차량. 실용성 우선. 중년 이후 좋은 차.','전기차나 최신 기술 차량. 독특한 이동 수단.','물 관련 이동(보트). 감성적으로 좋아하는 물건들.'][dLagnaSign];
+        const d16LagnaInterp = ['Sports cars, motorcycles — dynamic vehicles. Enjoys driving.','고급 차량과 편안한 이동 수단. 럭셔리한 물질적 comfort.','Multiple vehicles or various transport. Likes tech gadgets.','Comfortable family vehicle. Traveling with family. Material stability is happiness.','Top luxury vehicles. Flashy spending. Prefers premium brands.','practical이고 연비 좋은 차량. health related 기기.','Refined, well-designed vehicle. Aesthetically pleasing items.','Used or inherited vehicle. Insurance important. Transformative material experience.','SUV or foreign brands. Travel vehicle. Adventurous transport.','Simple but sturdy vehicle. Practicality first. Better car after middle age.','Electric or latest tech vehicle. Unique transport.','Water-related transport (boat). Emotionally favorite items.'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🚗 차량·comfort·행복 분석' : '🚗 D16 Shodashamsha — 차량·comfort·행복 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🚗 차량·comfort·행복 analysis' : '🚗 D16 Shodashamsha — 차량·comfort·행복 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D16 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d16LagnaInterp + '<br><br>';
 
         const d16_4sign = (dLagnaSign + 3) % 12;
@@ -2491,7 +2491,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Comfort/Happiness:' : 'D16 4 house (comfort/행복) — ' + SIGNS[d16_4sign] + ':') + '</strong><br>';
         if (d16_4planets.length > 0) {
             d16_4planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '물질적 comfort와 행복이 풍부!<br>' : '물질적 comfort를 위해 노력 필요.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '물질적 comfort와 행복이 풍부!<br>' : '물질적 comfort를 위해 effort 필요.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
             });
         } else html += isEasy ? '물질적 comfort는 보통이에요.<br>' : '4 house no planets — 4 lord의 position가 행복의 열쇠.<br>';
 
@@ -2505,9 +2505,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 20) {
         // D20 Vimshamsha — 영적 practice·종교
-        const d20LagnaInterp = ['Active spirituality. Karma yoga. Practice through active service.','Spirituality through nature and senses. Mantra practice. Temple meditation.','지적 영성. 경전 연구. 명상보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 요가(헌신). Mother 같은 신성에 끌림.','Royal spirituality. Spiritual practice as leader. Sun worship.','service의 영성. 세바(service)를 통한 practice. health과 치유 관련 영성.','Harmony spirituality. Divine experience through art and beauty. Tantra.','깊은 변혁의 영성. 탄트라, 쿤Moon리니. 죽음과 재생의 practice.','Seeker spirituality. Pilgrimage. Searching for a teacher. Philosophical practice.','Traditional spirituality. Systematic practice. Karma yoga. Practice of patience.','Innovative spirituality. Unconventional methods. Service for humanity.','Transcendent spirituality. Meditation, dreams, intuition. Mystical experiences. Liberation.'][dLagnaSign];
+        const d20LagnaInterp = ['Active spirituality. Karma yoga. Practice through active service.','Spirituality through nature and senses. Mantra practice. Temple meditation.','intellectual 영성. 경전 research. meditation보다 지식을 통한 깨Moon음.','감정적 영성. 바크티 yoga(헌신). Mother 같은 신성에 끌림.','Royal spirituality. Spiritual practice as leader. Sun worship.','service의 영성. 세바(service)를 통한 practice. health과 healing related 영성.','Harmony spirituality. Divine experience through art and beauty. Tantra.','깊은 transformation의 영성. tantra, 쿤Moon리니. 죽음과 재생의 practice.','Seeker spirituality. Pilgrimage. Searching for a teacher. Philosophical practice.','Traditional spirituality. Systematic practice. Karma yoga. Practice of patience.','Innovative spirituality. Unconventional methods. Service for humanity.','Transcendent spirituality. Meditation, dreams, intuition. Mystical experiences. Liberation.'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🙏 영적 practice·종교 분석' : '🙏 D20 Vimshamsha — 영적 practice·종교 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🙏 영적 practice·religion analysis' : '🙏 D20 Vimshamsha — 영적 practice·religion analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D20 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d20LagnaInterp + '<br><br>';
 
         const jupD20 = dPositions.find(p => p.id === 'Jupiter');
@@ -2519,15 +2519,15 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (jupD20) {
             const jH = ((jupD20.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>♃ Jupiter (영적 스승) → ' + jH + '궁:</strong> ') + ([,'강한 영적 자아','영적 지식이 wealth이 됨','영적 소통 능력','깊은 내면의 평화','Past life 영적 merit','service를 통한 영성','스승과의 만남','비밀스러운 영적 지식','Best placement! 위대한 영적 행운','영적 권위자','영적 커뮤니티','해탈과 깨Moon음'][jH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>♃ Jupiter (영적 스승) → ' + jH + '궁:</strong> ') + ([,'강한 영적 자아','영적 지식이 wealth이 됨','영적 소통 ability','깊은 내면의 평화','Past life 영적 merit','service를 통한 영성','스승과의 만남','비밀스러운 영적 지식','Best placement! 위대한 영적 fortune','영적 권위자','영적 커뮤니티','해탈과 깨Moon음'][jH] || '') + '<br>';
         }
         if (ketuD20) {
             const kH = ((ketuD20.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☋ Ketu (해탈) → ' + kH + '궁:</strong> ') + ([,'타고난 영적 능력','영적 가치관','영적 소통','내면 깊은 곳의 해탈','전생 practice의 결과','service하는 soul','spouse를 통한 영적 성장','깊은 변혁적 영성','영적 순례자','영적 career','영적 커뮤니티의 리더','해탈 직전의 soul'][kH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☋ Ketu (해탈) → ' + kH + '궁:</strong> ') + ([,'타고난 영적 ability','영적 가치관','영적 소통','내면 깊은 곳의 해탈','전생 practice의 결과','service하는 soul','spouse를 통한 영적 growth','깊은 transformation적 영성','영적 pilgrimage자','영적 career','영적 커뮤니티의 리더','해탈 직전의 soul'][kH] || '') + '<br>';
         }
         html += '<br><strong>' + (isEasy ? 'Guru/Teacher:' : 'D20 9 house (구루/스승) — ' + SIGNS[d20_9sign] + ':') + '</strong><br>';
         if (d20_9planets.length > 0) {
-            d20_9planets.forEach(p => { html += isEasy ? '영적 스승과의 인연이 강함.<br>' : '• ' + p.name + ': 영적 스승과의 인연이 강함.<br>'; });
+            d20_9planets.forEach(p => { html += isEasy ? '영적 스승과의 connection이 강함.<br>' : '• ' + p.name + ': 영적 스승과의 connection이 강함.<br>'; });
         } else html += isEasy ? '영적 스승을 적극적으로 찾아보면 좋아요.<br>' : '9 house no planets — 스승을 적극적으로 찾아야 함.<br>';
         html += '</div></div>';
 
@@ -2542,39 +2542,39 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const jupD24 = dPositions.find(p => p.id === 'Jupiter');
         const merD24 = dPositions.find(p => p.id === 'Mercury');
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '📚 교육·학문 분석' : '📚 D24 차투르Vimshamsha — 교육·학문 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '📚 education·학문 analysis' : '📚 D24 차투르Vimshamsha — education·학문 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D24 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d24LagnaInterp + '<br><br>';
 
-        html += '<strong>' + (isEasy ? 'Basic Education:' : 'D24 4 house (기초 교육) — ' + SIGNS[d24_4sign] + ':') + '</strong><br>';
+        html += '<strong>' + (isEasy ? 'Basic Education:' : 'D24 4 house (기초 education) — ' + SIGNS[d24_4sign] + ':') + '</strong><br>';
         if (d24_4planets.length > 0) {
             d24_4planets.forEach(p => {
-                const edu4 = {Sun:'명문 학교. 권위 있는 교육',Moon:'편안한 학습 환경. 가정 교육 영향 큼',Mars:'경쟁적 학습. 체육/기술 교육 강함',Mercury:'Best placement! 뛰어난 학업 능력',Jupiter:'풍부한 교육 환경. 좋은 스승',Venus:'예술 교육. 아름다운 학교',Saturn:'어려운 교육 환경이지만 극복하면 깊은 학식',Rahu:'비전통적 교육. 외국 학교',Ketu:'교육에 관심 적음. 직관적 학습'};
+                const edu4 = {Sun:'명문 학교. 권위 있는 education',Moon:'편안한 학습 environment. home education influence 큼',Mars:'경쟁적 학습. 체육/technology education 강함',Mercury:'Best placement! 뛰어난 학업 ability',Jupiter:'풍부한 education environment. 좋은 스승',Venus:'art education. 아름다운 학교',Saturn:'어려운 education environment이지만 overcome하면 깊은 학식',Rahu:'비traditional education. 외국 학교',Ketu:'education에 관심 적음. intuition적 학습'};
                 html += isEasy ? (edu4[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>';
             });
-        } else html += isEasy ? '안정적인 교육 환경에서 Steadily 성장하는 타입이에요.<br>' : '4 house no planets.<br>';
+        } else html += isEasy ? 'stable인 education environment에서 Steadily growth하는 타입이에요.<br>' : '4 house no planets.<br>';
 
-        html += '<br><strong>' + (isEasy ? 'Higher Education:' : 'D24 5 house (고등 교육/지성) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Higher Education:' : 'D24 5 house (고등 education/지성) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '고등 교육에서 뛰어난 성취!<br>' : '학업에서의 도전이 성장으로 이어짐.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Outstanding higher education achievement!' : 'Academic challenges lead to growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '고등 education에서 뛰어난 성취!<br>' : '학업에서의 challenge이 growth으로 이어짐.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Outstanding higher education achievement!' : 'Academic challenges lead to growth.') + '<br>';
             });
-        } else html += isEasy ? '꾸준한 노력으로 좋은 결과를 얻을 수 있어요.<br>' : '5 house no planets.<br>';
+        } else html += isEasy ? '꾸준한 effort으로 좋은 결과를 얻을 수 있어요.<br>' : '5 house no planets.<br>';
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (지혜) → ' + jH + '궁:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>높은 학업 성취 기대!</strong> 대학원/박사/해외 유학 가능.' : (isEasy ? '학업을 통한 성장이 기대됩.' : '학업을 통한 성장. Jupiter의 축복이 ' + jH + ' house 영역에서 나타남.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (지혜) → ' + jH + '궁:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>높은 학업 성취 기대!</strong> 대학원/박사/foreign 유학 가능.' : (isEasy ? '학업을 통한 growth이 기대becomes.' : '학업을 통한 growth. Jupiter의 blessing이 ' + jH + ' house 영역에서 나타남.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercury (학습) → ' + mH + '궁:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>뛰어난 지적 능력!</strong> 수학, 언어, 분석에 재능.' : (isEasy ? '지적 능력이 잘 발휘됩.' : '지적 능력이 ' + mH + ' house 영역에서 발휘됨.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercury (학습) → ' + mH + '궁:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>뛰어난 intellectual ability!</strong> 수학, 언어, analysis에 talent.' : (isEasy ? 'intellectual ability이 잘 발휘becomes.' : 'intellectual ability이 ' + mH + ' house 영역에서 발휘됨.')) + '<br>';
         }
         html += '</div></div>';
 
     } else if (division === 27) {
         // D27 삽타Vimshamsha — 체력·강점·약점
-        const d27LagnaInterp = ['강한 체력과 에너지. 운동 능력 탁월. 머리/얼굴이 강점.','지구력과 인내력이 강점. 목/성대가 강함. 근력 좋음.','민첩성과 반사 신경이 강점. 손/팔이 능숙. 신경계 관리 필요.','감정적 회복력이 강점. 가슴/위장 관리 필요. 수영에 재능.','심장과 척추가 강함. 카리스마 있는 체격. 과로 주의.','소화력과 분석력이 강점. 장/피부 관리 필요. 요가 적합.','균형감과 조화로운 체형. 신장/허리 관리 필요. 댄스 적합.','회복력과 저항력이 강점. 생식기 health 관리. 극한 스포츠 가능.','허벅지와 간이 강함. 야외 운동 적합. 과체중 주의.','뼈와 관절이 강함. 인내력 최고. 나이 들수록 health해짐.','순환계와 발목이 주의점. 독특한 운동법 선호. 혁신적 health법.','면역력과 직관이 강점. 발/림프 관리 필요. 수중 운동 적합.'][dLagnaSign];
+        const d27LagnaInterp = ['강한 체력과 에너지. 운동 ability 탁월. 머리/얼굴이 강점.','지구력과 patience력이 강점. 목/성대가 강함. 근력 좋음.','민첩성과 반사 신경이 강점. 손/팔이 능숙. 신경계 관리 필요.','감정적 회복력이 강점. 가슴/위장 관리 필요. 수영에 talent.','heart과 spine가 강함. charisma 있는 체격. 과로 주의.','digestion력과 analysis력이 강점. 장/skin 관리 필요. yoga suitable.','balance감과 harmony로운 체형. kidney/허리 관리 필요. 댄스 suitable.','회복력과 저항력이 강점. 생식기 health 관리. 극한 sports 가능.','허벅지와 liver이 강함. 야외 운동 suitable. 과weight 주의.','bone와 joint이 강함. patience력 최고. 나이 들수록 health해짐.','순환계와 발목이 주의점. 독특한 운동법 선호. innovative health법.','immunity력과 intuition이 강점. 발/림프 관리 필요. 수중 운동 suitable.'][dLagnaSign];
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💪 체력·강점·약점 분석' : '💪 D27 삽타Vimshamsha — 체력·강점·약점 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '💪 체력·강점·약점 analysis' : '💪 D27 삽타Vimshamsha — 체력·강점·약점 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D27 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d27LagnaInterp + '<br><br>';
 
         const marsD27 = dPositions.find(p => p.id === 'Mars');
@@ -2582,11 +2582,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const satD27 = dPositions.find(p => p.id === 'Saturn');
         if (marsD27) {
             const mH = ((marsD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>♂ Mars (에너지) → ' + mH + '궁:</strong> ') + ([,'강한 체력과 의지!','체력으로 돈을 벌 수 있음','용기와 모험심 강함','가정에서 운동하는 타입','스포츠 재능!','질병을 이기는 면역력','spouse와 함께 운동','위기에서 살아남는 힘','모험/탐험 분야 강함','career적 체력 활용','목표 Moon성 에너지','해외에서 체력 활동'][mH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>♂ Mars (에너지) → ' + mH + '궁:</strong> ') + ([,'강한 체력과 의지!','체력으로 돈을 벌 수 있음','용기와 adventure심 강함','home에서 운동하는 타입','sports talent!','disease을 이기는 immunity력','spouse와 함께 운동','위기에서 살아남는 힘','adventure/탐험 field 강함','career적 체력 활용','목표 Moon성 에너지','foreign에서 체력 활동'][mH] || '') + '<br>';
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Sun (활력) → ' + sH + '궁:</strong> ') + (isEasy ? 'Source of vitality: ' : '활력의 원천이 ' + sH + ' house 영역. ') + ([,'자아에서 에너지','wealth 활동에서 활력','소통에서 에너지','가정에서 안정','창작에서 활력','service에서 에너지','관계에서 활력','변혁에서 에너지','여행에서 활력','career에서 에너지','사회에서 활력','영적 practice에서 에너지'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sun (활력) → ' + sH + '궁:</strong> ') + (isEasy ? 'Source of vitality: ' : '활력의 원천이 ' + sH + ' house 영역. ') + ([,'자아에서 에너지','wealth 활동에서 활력','소통에서 에너지','home에서 stability','창작에서 활력','service에서 에너지','관계에서 활력','transformation에서 에너지','travel에서 활력','career에서 에너지','society에서 활력','영적 practice에서 에너지'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석
@@ -2611,26 +2611,26 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d30_8planets = dPositions.filter(p => p.dSign === d30_8sign);
         const d30_12planets = dPositions.filter(p => p.dSign === d30_12sign);
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '⚠️ health 주의사항 상세' : '⚠️ D30 Trimshamsha — 불행·질병·장애 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '⚠️ health 주의사항 상세' : '⚠️ D30 Trimshamsha — 불행·disease·장애 analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d30LagnaInterp + '<br><br>';
 
-        html += '<strong>' + (isEasy ? 'Disease caution:' : 'D30 6 house (질병/적) — ' + SIGNS[d30_6sign] + ':') + '</strong><br>';
+        html += '<strong>' + (isEasy ? 'Disease caution:' : 'D30 6 house (disease/적) — ' + SIGNS[d30_6sign] + ':') + '</strong><br>';
         const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immune, feet, mental health'];
         html += 'Watch for: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
-            const dis = {Sun:'눈, 심장 관련 질환 주의',Moon:'정신 health, 수분 관련 문제',Mars:'사고, 수술, 화상 주의',Mercury:'신경계, 피부 문제',Jupiter:'간, 과체중 주의',Venus:'신장, 당뇨, 성병 주의',Saturn:'만성 질환, 관절 문제',Rahu:'원인불명 질환, 중독',Ketu:'면역 저하, 알레르기'};
+            const dis = {Sun:'눈, heart related disease 주의',Moon:'정신 health, 수분 related 문제',Mars:'accident, surgery, 화상 주의',Mercury:'신경계, skin 문제',Jupiter:'liver, 과weight 주의',Venus:'kidney, diabetes, 성병 주의',Saturn:'만성 disease, joint 문제',Rahu:'원인불명 disease, 중독',Ketu:'immunity 저하, allergy'};
             d30_6planets.forEach(p => { html += isEasy ? (dis[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
         }
 
-        html += '<br><strong>' + (isEasy ? 'Danger/Surgery:' : 'D30 8 house (위험/수술) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Danger/Surgery:' : 'D30 8 house (danger/surgery) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
         if (d30_8planets.length > 0) {
             d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>'; });
-        } else html += isEasy ? '큰 위험은 적어요.<br>' : '8 house no planets — 큰 위험은 적음.<br>';
+        } else html += isEasy ? '큰 danger은 적어요.<br>' : '8 house no planets — 큰 danger은 적음.<br>';
 
-        html += '<br><strong>' + (isEasy ? 'Hospitalization:' : 'D30 12 house (입원/손실) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Hospitalization:' : 'D30 12 house (hospitalization/손실) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
             d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalization possible.' : 'Spiritual healing and recovery.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalization possible. Foreign medical.' : 'Spiritual healing and recovery.') + '<br>'; });
-        } else html += isEasy ? '입원 위험은 낮아요.<br>' : '12 house no planets — 입원 위험 낮음.<br>';
+        } else html += isEasy ? 'hospitalization danger은 낮아요.<br>' : '12 house no planets — hospitalization danger 낮음.<br>';
         html += '</div></div>';
 
     } else if (division === 40) {
@@ -2641,7 +2641,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d40_4planets = dPositions.filter(p => p.dSign === d40_4sign);
         const moonD40 = dPositions.find(p => p.id === 'Moon');
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👩 Mother 쪽 유산 분석' : '👩 D40 Khavedamsha — 모계 유산 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👩 Mother 쪽 heritage analysis' : '👩 D40 Khavedamsha — 모계 heritage analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D40 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d40LagnaInterp + '<br><br>';
 
         if (moonD40) {
@@ -2651,10 +2651,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             html += '<br>';
         }
 
-        html += '<br><strong>' + (isEasy ? 'Maternal family:' : 'D40 4 house (모계 가정) — ' + SIGNS[d40_4sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Maternal family:' : 'D40 4 house (모계 home) — ' + SIGNS[d40_4sign] + ':') + '</strong><br>';
         if (d40_4planets.length > 0) {
-            d40_4planets.forEach(p => { html += isEasy ? 'Mother 쪽 가정에서 강하게 유전된 에너지가 있습.<br>' : '• ' + p.name + ': 모계 가정에서 이 행성의 에너지가 강하게 유전됨.<br>'; });
-        } else html += isEasy ? 'Mother 쪽에서 안정적인 유산이 있어요.<br>' : '4 house no planets — 4 lord의 position가 모계 유산의 열쇠.<br>';
+            d40_4planets.forEach(p => { html += isEasy ? 'Mother 쪽 home에서 강하게 유전된 에너지가 exists.<br>' : '• ' + p.name + ': 모계 home에서 이 행성의 에너지가 강하게 유전됨.<br>'; });
+        } else html += isEasy ? 'Mother 쪽에서 stable인 heritage이 있어요.<br>' : '4 house no planets — 4 lord의 position가 모계 heritage의 열쇠.<br>';
         html += '</div></div>';
 
     } else if (division === 45) {
@@ -2665,20 +2665,20 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d45_9planets = dPositions.filter(p => p.dSign === d45_9sign);
         const sunD45 = dPositions.find(p => p.id === 'Sun');
 
-        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨 Father 쪽 유산 분석' : '👨 D45 Akshavedamsha — 부계 유산 분석') + '</div><div class="interp-text">';
+        html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👨 Father 쪽 heritage analysis' : '👨 D45 Akshavedamsha — 부계 heritage analysis') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D45 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d45LagnaInterp + '<br><br>';
 
         if (sunD45) {
             const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1;
             if (!isEasy) html += '<strong>☉ Sun (Father karaka):</strong> ';
-            html += [,'Father has strong influence','Wealth from father','Good communication with father','Father is family-oriented','Father is creative','Father is service-oriented','Father influences relationships','Inheritance from father','Father is religious/educational','Father가 사회적으로 성공! Best placement','Father is independent','Father is spiritual'][sH] || '';
+            html += [,'Father has strong influence','Wealth from father','Good communication with father','Father is family-oriented','Father is creative','Father is service-oriented','Father influences relationships','Inheritance from father','Father is religious/educational','Father가 society적으로 성공! Best placement','Father is independent','Father is spiritual'][sH] || '';
             html += '<br>';
         }
 
-        html += '<br><strong>' + (isEasy ? 'Paternal family:' : 'D45 9 house (부계 가정/Father) — ' + SIGNS[d45_9sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Paternal family:' : 'D45 9 house (부계 home/Father) — ' + SIGNS[d45_9sign] + ':') + '</strong><br>';
         if (d45_9planets.length > 0) {
-            d45_9planets.forEach(p => { html += isEasy ? 'Father 쪽 가정에서 강하게 유전된 에너지가 있습.<br>' : '• ' + p.name + ': 부계에서 이 행성의 에너지가 강하게 유전됨.<br>'; });
-        } else html += isEasy ? 'Father 쪽에서 안정적인 유산이 있어요.<br>' : '9 house no planets — 9 lord의 position가 부계 유산의 열쇠.<br>';
+            d45_9planets.forEach(p => { html += isEasy ? 'Father 쪽 home에서 강하게 유전된 에너지가 exists.<br>' : '• ' + p.name + ': 부계에서 이 행성의 에너지가 강하게 유전됨.<br>'; });
+        } else html += isEasy ? 'Father 쪽에서 stable인 heritage이 있어요.<br>' : '9 house no planets — 9 lord의 position가 부계 heritage의 열쇠.<br>';
         html += '</div></div>';
     }
 
