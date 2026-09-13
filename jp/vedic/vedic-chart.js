@@ -530,14 +530,14 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 6. Spouse Direction — 6 Indicator Combined Analysis
     const DIRECTIONS = {
-        0:'East', 1:'South', 2:'West', 3:'North',
-        4:'East', 5:'South', 6:'West', 7:'North',
-        8:'East', 9:'South', 10:'West', 11:'North'
+        0:'東', 1:'南', 2:'西', 3:'北',
+        4:'東', 5:'南', 6:'西', 7:'北',
+        8:'東', 9:'南', 10:'西', 11:'北'
     };
     const DIR_DETAIL = {
-        0:'East (Aries — fire)',1:'South (Taurus — earth)',2:'West (Gemini — air)',3:'North (Cancer — water)',
-        4:'East (Leo — fire)',5:'South (Virgo — earth)',6:'West (Libra — air)',7:'North (Scorpio — water)',
-        8:'East (Sagittarius — fire)',9:'South (Capricorn — earth)',10:'West (Aquarius — air)',11:'North (Pisces — water)'
+        0:'東（牡羊座 — 火）',1:'南（牡牛座 — 土）',2:'西（双子座 — 風）',3:'北（蟹座 — 水）',
+        4:'東（獅子座 — 火）',5:'南（乙女座 — 土）',6:'西（天秤座 — 風）',7:'北（蠍座 — 水）',
+        8:'東（射手座 — 火）',9:'南（山羊座 — 土）',10:'西（水瓶座 — 風）',11:'北（魚座 — 水）'
     };
 
     function calcArudha(houseNum, lagnaS, pos) {
@@ -2038,7 +2038,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 24) {
-        const d24LagnaInterp = ['Physical education, military, leadership training.','Music, art, culinary, finance education.','Language, literature, communication, media education.','History, psychology, home science education.','Political science, theater, business education.','Medicine, science, statistics education. Precise learning.','Law, diplomacy, design education. Balanced learning.','Psychology, research, investigation, occult education.','Philosophy, theology, international studies. Study abroad likely.','Business, administration, architecture. Systematic learning.','IT, engineering, aviation, social science. Innovative learning.','Art, music, spirituality, film studies. Intuitive learning.'][dLagnaSign];
+        const d24LagnaInterp = ['体育、軍事、リーダーシップ教育。','音楽、芸術、料理、金融教育。','言語、文学、コミュニケーション、メディア教育。','歴史、心理学、家政学教育。','政治学、演劇、経営学教育。','医学、科学、統計学教育。精密な学習。','法学、外交、デザイン教育。','心理学、研究、調査、オカルト教育。','哲学、神学、国際学。留学の可能性。','経営、行政、建築。体系的学習。','IT、工学、航空、社会科学。革新的学習。','芸術、音楽、霊性、映画学。直感的学習。'][dLagnaSign];
         const d24_4sign = (dLagnaSign + 3) % 12;
         const d24_5sign = (dLagnaSign + 4) % 12;
         const d24_4planets = dPositions.filter(p => p.dSign === d24_4sign);
@@ -2049,7 +2049,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D24 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d24LagnaInterp + '<br><br>';
         html += '<strong>D24 4室（基礎教育） — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
-            const edu4 = {Sun:'Prestigious school. Authoritative education',Moon:'Comfortable learning environment. Strong home education',Mars:'Competitive learning. Strong in sports/tech',Mercury:'Best placement! Outstanding academic ability',Jupiter:'Rich educational environment. Good teachers',Venus:'Art education. Beautiful school',Saturn:'Difficult education but deep knowledge when overcome',Rahu:'Unconventional education. Foreign school',Ketu:'Less interest in formal education. Intuitive learning'};
+            const edu4 = {Sun:'名門校。権威ある教育',Moon:'快適な学習環境。家庭教育の影響大',Mars:'競争的学習。体育/技術に強い',Mercury:'最高の配置！優れた学業能力',Jupiter:'豊かな教育環境。良い教師',Venus:'芸術教育。美しい学校',Saturn:'困難な教育だが克服すれば深い学識',Rahu:'非伝統的教育。外国の学校',Ketu:'正規教育への関心薄い。直感的学習'};
             d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
         } else html += '4室に惑星なし。<br>';
         if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ 木星（知恵） → ' + jH + '室：</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>高い学業成就が期待されます！</strong> 大学院・博士・留学の可能性。' : '学びを通じた成長。木星の祝福が' + jH + '.') + '<br>'; }
@@ -2057,7 +2057,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 30) {
-        const d30LagnaInterp = ['Accidents, burns, headaches. Problems from hasty decisions. Manage anger.','Financial loss, dietary issues, thyroid. Watch overeating and attachment.','Nervous anxiety, insomnia, breathing problems. Avoid excessive worry.','Emotional instability, stomach issues, water-related problems. Control emotions.','Heart problems, pride damage, overwork. Need humility and rest.','Digestive disorders, allergies, perfectionism stress. Need relaxation.','Kidney problems, relationship conflicts, indecisiveness. Need decisiveness.','Secrets, accidents, surgery, sexual issues. Regular checkups important.','Liver problems, overweight, gambling/overspending. Need moderation.','Joint, bone, depression, loneliness. Need calcium and social interaction.','Blood pressure, circulation, unexpected accidents. Regular health checks.','Immune deficiency, addiction, mental health. Need meditation and sleep.'][dLagnaSign];
+        const d30LagnaInterp = ['事故、火傷、頭痛。性急な決定からの問題。怒りの管理。','経済的損失、食事問題、甲状腺。過食と執着に注意。','神経不安、不眠、呼吸問題。過度の心配を避ける。','感情的不安定、胃の問題、水関連の問題。感情制御。','心臓問題、自尊心の損傷、過労。謙虚さと休息が必要。','消化障害、アレルギー、完璧主義のストレス。リラックスが必要。','腎臓問題、関係の葛藤、優柔不断。決断力が必要。','秘密、事故、手術、性的問題。定期検診が重要。','肝臓問題、過体重、ギャンブル/浪費。節制が必要。','関節、骨、うつ、孤独。カルシウムと社交が必要。','血圧、循環、予期しない事故。定期健康診断。','免疫低下、依存症、メンタルヘルス。瞑想と睡眠が必要。'][dLagnaSign];
         const d30_6sign = (dLagnaSign + 5) % 12;
         const d30_8sign = (dLagnaSign + 7) % 12;
         const d30_12sign = (dLagnaSign + 11) % 12;
@@ -2066,11 +2066,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">⚠️ D30 トリムシャムシャ — 不運と疾病</div><div class="interp-text">';
         html += '<strong>D30 ラグナ： ' + SIGNS[dLagnaSign] + '</strong><br>' + d30LagnaInterp + '<br><br>';
-        const diseaseBySign = ['Head, brain, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic disease','Liver, thighs, overweight','Bones, joints, rheumatism','Circulation, blood pressure, ankles','Immune, feet, mental health'];
+        const diseaseBySign = ['頭、脳、発熱、炎症','首、甲状腺、糖尿病','肺、神経、不安','胃、水分貯留','心臓、背中、血圧','消化器、腸、皮膚','腎臓、腰、泌尿器','生殖器、慢性疾患','肝臓、太もも、過体重','骨、関節、リウマチ','循環、血圧、足首','免疫、足、メンタルヘルス'];
         html += '<strong>D30 6室（疾病） — ' + SIGNS[d30_6sign] + ':</strong><br>';
         html += '注意すべき点： <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
-            const dis = {Sun:'Eye, heart-related illness',Moon:'Mental health, water-related issues',Mars:'Accidents, surgery, burns',Mercury:'Nervous system, skin problems',Jupiter:'Liver, overweight',Venus:'Kidneys, diabetes, STDs',Saturn:'Chronic illness, joint problems',Rahu:'Unknown cause illness, addiction',Ketu:'Immune deficiency, allergies'};
+            const dis = {Sun:'目、心臓関連の疾患',Moon:'メンタルヘルス、水関連の問題',Mars:'事故、手術、火傷',Mercury:'神経系、皮膚問題',Jupiter:'肝臓、過体重',Venus:'腎臓、糖尿病、性病',Saturn:'慢性疾患、関節問題',Rahu:'原因不明の疾患、依存症',Ketu:'免疫低下、アレルギー'};
             d30_6planets.forEach(p => { html += '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
         }
         html += '<br><strong>D30 8室（危険） — ' + SIGNS[d30_8sign] + ':</strong><br>';
@@ -2080,7 +2080,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 40) {
-        const d40LagnaInterp = ['Independent, strong-willed mother. Leadership inherited from maternal line.','Mother manages wealth well. Material abundance from maternal line.','Intellectual mother with good communication. Language/education talent inherited.','Very deep bond with mother. Sensitivity and intuition inherited.','Mother has authority and dignity. Leadership and honor inherited.','Mother excels at health management. Analytical/service spirit inherited.','Attractive, diplomatic mother. Artistic sense inherited.','Strong mother who went through transformation. Resilience inherited.','Educational, religious mother. Wisdom/philosophy inherited.','Responsible, strict mother. Patience and discipline inherited.','Unique, progressive mother. Innovative thinking inherited.','Spiritual, intuitive mother. Art/spirituality inherited.'][dLagnaSign];
+        const d40LagnaInterp = ['独立的で意志の強い母。母系からリーダーシップを受け継ぐ。','母が財を上手に管理。母系から物質的豊かさ。','知的でコミュニケーション上手な母。言語/教育の才能を受け継ぐ。','母との非常に深い絆。感受性と直感を受け継ぐ。','権威と尊厳のある母。リーダーシップと名誉を受け継ぐ。','母が健康管理に優れる。分析力/奉仕精神を受け継ぐ。','魅力的で外交的な母。芸術的感覚を受け継ぐ。','変革を経た強い母。回復力を受け継ぐ。','教育的で宗教的な母。知恵/哲学を受け継ぐ。','責任感のある厳格な母。忍耐と規律を受け継ぐ。','ユニークで進歩的な母。革新的思考を受け継ぐ。','霊的で直感的な母。芸術/霊性を受け継ぐ。'][dLagnaSign];
         const moonD40 = dPositions.find(p => p.id === 'Moon');
 
         html += '<div class="interp-card"><div class="interp-title">👩 D40 カヴェダムシャ — 母系の遺産</div><div class="interp-text">';
@@ -2089,7 +2089,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '</div></div>';
 
     } else if (division === 45) {
-        const d45LagnaInterp = ['Active, action-oriented father. Courage and leadership inherited.','Financially stable father. Material values inherited.','Intellectual, versatile father. Communication/business ability inherited.','Emotional, family-oriented father. Caring instinct inherited.','Authoritative, respected father. Leadership inherited.','Practical, diligent father. Analytical/technical skills inherited.','Diplomatic, refined father. Social ability inherited.','Strong, mysterious father. Resilience/insight inherited.','Scholarly, religious father. Philosophy/morality inherited.','Strict, ambitious father. Patience/discipline inherited.','Creative, innovative father. Tech/scientific thinking inherited.','Spiritual, artistic father. Intuition/creativity inherited.'][dLagnaSign];
+        const d45LagnaInterp = ['活動的で行動指向の父。勇気とリーダーシップを受け継ぐ。','経済的に安定した父。物質的価値観を受け継ぐ。','知的で多才な父。コミュニケーション/ビジネス能力を受け継ぐ。','感情的で家庭的な父。世話の本能を受け継ぐ。','権威があり尊敬される父。リーダーシップを受け継ぐ。','実用的で勤勉な父。分析力/技術力を受け継ぐ。','外交的で洗練された父。社交能力を受け継ぐ。','強くて神秘的な父。回復力/洞察力を受け継ぐ。','学問的で宗教的な父。哲学/道徳を受け継ぐ。','厳格で野心のある父。忍耐/規律を受け継ぐ。','創造的で革新的な父。技術/科学的思考を受け継ぐ。','霊的で芸術的な父。直感/創造性を受け継ぐ。'][dLagnaSign];
         const sunD45 = dPositions.find(p => p.id === 'Sun');
 
         html += '<div class="interp-card"><div class="interp-title">👨 D45 アクシャヴェダムシャ — 父系の遺産</div><div class="interp-text">';
