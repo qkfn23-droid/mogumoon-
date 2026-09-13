@@ -2586,7 +2586,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Sun (활력) → ' + sH + '궁:</strong> ') + (isEasy ? '활력의 원천: ' : '활력의 원천이 ' + sH + ' house 영역. ') + ([,'자아에서 에너지','wealth 활동에서 활력','소통에서 에너지','가정에서 안정','창작에서 활력','service에서 에너지','관계에서 활력','변혁에서 에너지','여행에서 활력','career에서 에너지','사회에서 활력','영적 practice에서 에너지'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sun (활력) → ' + sH + '궁:</strong> ') + (isEasy ? 'Source of vitality: ' : '활력의 원천이 ' + sH + ' house 영역. ') + ([,'자아에서 에너지','wealth 활동에서 활력','소통에서 에너지','가정에서 안정','창작에서 활력','service에서 에너지','관계에서 활력','변혁에서 에너지','여행에서 활력','career에서 에너지','사회에서 활력','영적 practice에서 에너지'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석
@@ -2594,7 +2594,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d27_6planets = dPositions.filter(p => p.dSign === d27_6sign);
         html += '<br><strong>' + (isEasy ? 'Weakness:' : 'D27 6 house (약점/취약점) — ' + SIGNS[d27_6sign] + ':') + '</strong><br>';
         const bodyParts = ['Head/Brain','Neck/Thyroid','Lungs/Arms','Stomach/Chest','Heart/Back','Digestive/Intestines','Kidneys/Lower back','Reproductive','Liver/Thighs','Bones/Joints','Ankles/Circulatory','Feet/Immune'];
-        html += '취약 부위: <strong>' + bodyParts[d27_6sign] + '</strong> — 이 부위의 health 관리에 주의하세요.<br>';
+        html += 'Vulnerable area: <strong>' + bodyParts[d27_6sign] + '</strong> — 이 부위의 health 관리에 주의하세요.<br>';
         if (d27_6planets.length > 0) {
             d27_6planets.forEach(p => { html += isEasy ? '이 부위에 특별한 주의가 필요합.<br>' : '• ' + p.name + ' 6 house position하여 이 부위에 특별한 주의가 필요합.<br>'; });
         }
