@@ -2118,7 +2118,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD2) if (!isEasy) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Lune dans sa propre hora (Cancer)!</strong> Vie abondante a travers les gens et les relations.' : 'Lune en hora de Soleil. Subsistance par effort personnel.') + '<br>';
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
-        html += '<br><strong>D2 2e Maison (Richesse Accumulee) — ' + SIGNS[d2H2sign] + ':</strong><br>';
+        html += isEasy ? '<br><strong>Richesse Accumulee:</strong><br>' : '<br><strong>D2 2e Maison (Richesse Accumulee) — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
             const wealth = {Sun:'Richesse par autorite et statut',Moon:'Richesse par activites publiques',Mars:'Propriete, technologie, domaines competitifs',Mercury:'Affaires, activite intellectuelle, communication',Jupiter:'Education, droit, religion — richesse abondante',Venus:'Art, mode, produits de luxe',Saturn:'Accumulation lente mais constante. Stable apres la quarantaine',Rahu:'Methodes non conventionnelles, liees a letranger',Ketu:'Detache du materiel. Poursuit des valeurs spirituelles'};
             d2H2planets.forEach(p => { html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
@@ -2132,7 +2132,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 Fratrie et Courage' : '👫 D3 Drekkana — Fratrie et Courage') + '</div><div class="interp-text">';
         html += '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
-        html += '<strong>D3 3e Maison (Cadets) — ' + SIGNS[d3_3sign] + ':</strong><br>';
+        html += isEasy ? '<strong>Cadets:</strong><br>' : '<strong>D3 3e Maison (Cadets) — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
             const bro = {Sun:'Younger sibling has leadership and authority',Moon:'Emotionally close with younger sibling',Mars:'Active, brave younger sibling. Possible conflicts',Mercury:'Intelligent younger sibling with good communication',Jupiter:'Wise younger sibling who brings good fortune',Venus:'Attractive, artistic younger sibling',Saturn:'Difficulties with younger sibling. May have age gap',Rahu:'Unique younger sibling or foreign connection',Ketu:'Distance with younger sibling. Spiritual connection'};
             d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
@@ -2146,7 +2146,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 Propriété et Fortune' : '🏠 D4 Chaturthamsa — Propriété et Fortune') + '</div><div class="interp-text">';
         html += '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
-        html += '<strong>D4 4e Maison (Propriete) — ' + SIGNS[d4_4sign] + ':</strong><br>';
+        html += isEasy ? '<strong>Propriete:</strong><br>' : '<strong>D4 4e Maison (Propriete) — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Government-owned buildings or prestigious dwelling',Moon:'Beautiful home. Near water. Mother influence',Mars:'New construction. Possible property disputes',Mercury:'Commercial property. Multiple ownership',Jupiter:'Spacious, abundant home! Best property fortune',Venus:'Luxurious home. Beautiful interior',Saturn:'Old home. Needs repair. Stable after middle age',Rahu:'Foreign property. Unconventional dwelling',Ketu:'Indifferent to property. Prefers spiritual space'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });

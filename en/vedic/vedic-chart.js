@@ -2162,10 +2162,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD2) if (!isEasy) html += '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ' + (moonD2.dSign === 3 ? '🌟 <strong>Moon in own hora (Cancer)!</strong> Abundant life through people and relationships.' : 'Moon in Sun hora. Livelihood through own effort and independent activity.') + '<br>';
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
-        html += '<br><strong>D2 2nd House (Accumulated Wealth) — ' + SIGNS[d2H2sign] + ':</strong><br>';
+        html += isEasy ? '<br><strong>Accumulated Wealth:</strong><br>' : '<br><strong>D2 2nd House (Accumulated Wealth) — ' + SIGNS[d2H2sign] + ':</strong><br>';
         if (d2H2planets.length > 0) {
             const wealth = {Sun:'Wealth through authority and status',Moon:'Wealth through public activities',Mars:'Property, technology, competitive fields',Mercury:'Business, intellectual activity, communication',Jupiter:'Education, law, religion — abundant wealth',Venus:'Art, fashion, luxury goods',Saturn:'Slow but steady accumulation. Stable after middle age',Rahu:'Unconventional methods, foreign-related',Ketu:'Detached from material. Pursues spiritual values'};
-            d2H2planets.forEach(p => { html += '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
+            d2H2planets.forEach(p => { html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>'; });
         } else html += 'No planets in 2nd — the 2nd lord position is key to wealth.<br>';
         html += '</div></div>';
 
@@ -2176,10 +2176,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👫 Siblings & Courage' : '👫 D3 Drekkana — Siblings & Courage') + '</div><div class="interp-text">';
         html += '<strong>D3 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d3LagnaInterp + '<br><br>';
-        html += '<strong>D3 3rd House (Younger Siblings) — ' + SIGNS[d3_3sign] + ':</strong><br>';
+        html += isEasy ? '<strong>Younger Siblings:</strong><br>' : '<strong>D3 3rd House (Younger Siblings) — ' + SIGNS[d3_3sign] + ':</strong><br>';
         if (d3_3planets.length > 0) {
             const bro = {Sun:'Younger sibling has leadership and authority',Moon:'Emotionally close with younger sibling',Mars:'Active, brave younger sibling. Possible conflicts',Mercury:'Intelligent younger sibling with good communication',Jupiter:'Wise younger sibling who brings good fortune',Venus:'Attractive, artistic younger sibling',Saturn:'Difficulties with younger sibling. May have age gap',Rahu:'Unique younger sibling or foreign connection',Ketu:'Distance with younger sibling. Spiritual connection'};
-            d3_3planets.forEach(p => { html += '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
+            d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += 'No planets in 3rd — check the 3rd lord position.<br>';
         html += '</div></div>';
 
@@ -2190,10 +2190,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 Property & Fortune' : '🏠 D4 Chaturthamsa — Property & Fortune') + '</div><div class="interp-text">';
         html += '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d4LagnaInterp + '<br><br>';
-        html += '<strong>D4 4th House (Property) — ' + SIGNS[d4_4sign] + ':</strong><br>';
+        html += isEasy ? '<strong>Property:</strong><br>' : '<strong>D4 4th House (Property) — ' + SIGNS[d4_4sign] + ':</strong><br>';
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Government-owned buildings or prestigious dwelling',Moon:'Beautiful home. Near water. Mother influence',Mars:'New construction. Possible property disputes',Mercury:'Commercial property. Multiple ownership',Jupiter:'Spacious, abundant home! Best property fortune',Venus:'Luxurious home. Beautiful interior',Saturn:'Old home. Needs repair. Stable after middle age',Rahu:'Foreign property. Unconventional dwelling',Ketu:'Indifferent to property. Prefers spiritual space'};
-            d4_4planets.forEach(p => { html += '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
+            d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
         } else html += 'No planets in 4th — the 4th lord position is key to property.<br>';
         html += '</div></div>';
 
@@ -2210,7 +2210,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>D24 4th (Basic Education) — ' + SIGNS[d24_4sign] + ':</strong><br>';
         if (d24_4planets.length > 0) {
             const edu4 = {Sun:'Prestigious school. Authoritative education',Moon:'Comfortable learning environment. Strong home education',Mars:'Competitive learning. Strong in sports/tech',Mercury:'Best placement! Outstanding academic ability',Jupiter:'Rich educational environment. Good teachers',Venus:'Art education. Beautiful school',Saturn:'Difficult education but deep knowledge when overcome',Rahu:'Unconventional education. Foreign school',Ketu:'Less interest in formal education. Intuitive learning'};
-            d24_4planets.forEach(p => { html += '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
+            d24_4planets.forEach(p => { html += isEasy ? (edu4[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>'; });
         } else html += 'No planets in 4th.<br>';
         if (jupD24) { const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>♃ Jupiter (Wisdom) → ' + jH + 'H:</strong> ' + ([1,4,5,9].includes(jH) ? '🎓 <strong>High academic achievement expected!</strong> Graduate school/PhD/study abroad possible.' : 'Growth through learning. Jupiter blessing in house ' + jH + '.') + '<br>'; }
         if (merD24) { const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1; html += '<strong>☿ Mercury (Learning) → ' + mH + 'H:</strong> ' + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellectual ability!</strong> Talented in math, language, analysis.' : 'Intellectual ability expressed in house ' + mH + '.') + '<br>'; }
@@ -2231,7 +2231,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += 'Watch for: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
             const dis = {Sun:'Eye, heart-related illness',Moon:'Mental health, water-related issues',Mars:'Accidents, surgery, burns',Mercury:'Nervous system, skin problems',Jupiter:'Liver, overweight',Venus:'Kidneys, diabetes, STDs',Saturn:'Chronic illness, joint problems',Rahu:'Unknown cause illness, addiction',Ketu:'Immune deficiency, allergies'};
-            d30_6planets.forEach(p => { html += '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
+            d30_6planets.forEach(p => { html += isEasy ? (dis[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
         }
         html += '<br><strong>D30 8th (Danger) — ' + SIGNS[d30_8sign] + ':</strong><br>';
         if (d30_8planets.length > 0) {
