@@ -963,7 +963,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     const isEasy = window.vedicMode === 'easy';
     let html = isEasy ?
         '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 인생은 시기별로 다른 에너지가 흐릅니다. 아래에서 지금 당신이 어떤 시기에 있는지, 앞으로 어떤 시기가 오는지 확인하세요.<br><br>' :
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — 人生は9つの惑星が順番に支配する時期に分かれます. <strong>大運(Mahadasha)</strong>は大きな時期、 <strong>小運(Antardasha/Bhukti)</strong>はその中の細かい時期です。 月のナクシャトラ位置から計算されます。<br><br>';
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>ヴィムショータリ・ダシャー(Vimshottari Dasha)</strong> — 人生は9つの惑星が順番に支配する時期に分かれます. <strong>大運(Mahadasha)</strong>は大きな時期、 <strong>小運(Antardasha/Bhukti)</strong>はその中の細かい時期です。 月のナクシャトラ位置から計算されます。<br><br>';
     html += isEasy ?
         '</div></div>' :
         '🌙 出生時の月: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 最初のダシャー: <strong>' + DASHA_KO[startRuler] + '</strong> (残余: ' + remainingYears.toFixed(2) + '年)</div></div>';
@@ -1741,11 +1741,11 @@ function renderLucky(lagnaSign, moonPos) {
         { color: '金、オレンジ', number: '1, 4', day: '日曜日', gem: 'ルビー', dir: '東' },
         { color: '緑、黄緑', number: '5, 3', day: '水曜日', gem: 'エメラルド', dir: '南' },
         { color: '白、パステル', number: '6, 2', day: '金曜日', gem: 'ダイヤモンド', dir: '西' },
-        { color: '빨간색, 진홍색', number: '9, 1', day: '火曜日', gem: '산호', dir: '南' },
-        { color: '노란색, 금색', number: '3, 9', day: '木曜日', gem: '노란 사파이어', dir: '北東' },
-        { color: '남색, 검정', number: '8, 4', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
-        { color: '남색, 보라', number: '4, 8', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
-        { color: '노란색, 금색', number: '3, 7', day: '木曜日', gem: '노란 사파이어', dir: '北東' }
+        { color: '赤、深紅', number: '9, 1', day: '火曜日', gem: 'サンゴ', dir: '南' },
+        { color: '黄色、金色', number: '3, 9', day: '木曜日', gem: 'イエローサファイア', dir: '北東' },
+        { color: '紺、黒', number: '8, 4', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
+        { color: '紺、紫', number: '4, 8', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
+        { color: '黄色、金色', number: '3, 7', day: '木曜日', gem: 'イエローサファイア', dir: '北東' }
     ];
 
     const d = luckyData[lagnaSign];
