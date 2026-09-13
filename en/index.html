@@ -610,7 +610,7 @@
 <span onclick="document.getElementById('ghostChat').style.display='none';document.getElementById('ghostLabel').style.display=''" style="margin-left:auto;color:#666;cursor:pointer;font-size:18px;">✕</span>
 </div>
 <div id="gcMessages" style="padding:12px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
-<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hi! I'm <strong style="color:#c9a84c;">Mogu</strong>~<br>What are you curious about? Tap a button or type below~</div>
+<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hi! Im <strong style="color:#c9a84c;">Mogu</strong>~<br>What are you curious about? Tap a button or type below~</div>
 <div style="display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;">
 <button onclick="document.getElementById('gcInput').value='love fortune';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💍 Love/Spouse</button>
 <button onclick="document.getElementById('gcInput').value='my personality';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Personality</button>
@@ -648,8 +648,8 @@ var gcData = {
     fortune: {msg:'Curious about fortune! Try these 👻', items:[
         {icon:'✨',name:'Daily Fortune',desc:'Daily tarot + horoscope + lucky numbers',url:'daily/',badge:'⭐Daily'},
         {icon:'🕉️',name:'Vedic Dasha',desc:'Which planet rules your current period?',url:'vedic/'},
-        {icon:'🌕',name:'Moon Phase',desc:'Today's moon + suitable activities',url:'moon/'},
-        {icon:'📊',name:'Biorhythm',desc:'Check today's condition',url:'biorhythm/'},
+        {icon:'🌕',name:'Moon Phase',desc:'Todays moon + suitable activities',url:'moon/'},
+        {icon:'📊',name:'Biorhythm',desc:'Check todays condition',url:'biorhythm/'},
     ]},
     career: {msg:'Career/wealth fortune! Check here 👻', items:[
         {icon:'🕉️',name:'Vedic Astrology',desc:'Career chart + wealth chart analysis',url:'vedic/',badge:'⭐Pick'},
@@ -670,7 +670,7 @@ var gcData = {
         {icon:'🌿',name:'Dream Dictionary',desc:'Dream symbols + keyword search',url:'dream/',badge:'⭐Go'},
     ]},
     quick: {msg:'Need a quick answer! 👻', items:[
-        {icon:'🃏',name:'Tarot Cards',desc:'Today's advice, love, direction',url:'tarot/',badge:'⭐Pick'},
+        {icon:'🃏',name:'Tarot Cards',desc:'Todays advice, love, direction',url:'tarot/',badge:'⭐Pick'},
         {icon:'🔮',name:'Crystal Ball',desc:'Crystal Ball에게 질문하기',url:'crystal-ball/'},
         {icon:'📖',name:'I Ching',desc:'3000 years of wisdom',url:'iching/'},
     ]},
@@ -715,7 +715,7 @@ function ghostSend() {
             });
             reply += '</div>';
         } else {
-            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hmm... I'm not sure 😅<br>Try these keywords:<br><br>💍 <strong>spouse, love, marriage</strong><br>🔮 <strong>personality, destiny, myself</strong><br>📅 <strong>fortune, today, this year</strong><br>💼 <strong>career, money, wealth</strong><br>💑 <strong>compatibility</strong><br>🔮 <strong>past life, karma</strong><br>🌿 <strong>dream</strong><br>🃏 <strong>tarot, advice</strong></div>';
+            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hmm... Im not sure 😅<br>Try these keywords:<br><br>💍 <strong>spouse, love, marriage</strong><br>🔮 <strong>personality, destiny, myself</strong><br>📅 <strong>fortune, today, this year</strong><br>💼 <strong>career, money, wealth</strong><br>💑 <strong>compatibility</strong><br>🔮 <strong>past life, karma</strong><br>🌿 <strong>dream</strong><br>🃏 <strong>tarot, advice</strong></div>';
         }
         box.innerHTML += reply;
         box.scrollTop = box.scrollHeight;
