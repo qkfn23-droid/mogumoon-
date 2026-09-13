@@ -2091,7 +2091,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">👩 D40 Khavedamsa — Héritage Maternel</div><div class="interp-text">';
         html += '<strong>D40 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d40LagnaInterp + '<br>';
-        if (moonD40) { const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☽ Lune (Karaka de la Mère) → ' + mH + 'H:</strong> ' + ['','Strong maternal influence on self','Property from mother','Good communication with mother','Deep bond with mother! Best placement','Creative mother','Service-oriented mother','Mother influences relationships','Inheritance from mother','Religious/educational mother','Socially successful mother','Independent mother','Spiritual mother'][mH] + '<br>'; }
+        if (moonD40) { const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☽ Lune (Karaka de la Mère) → ' + mH + 'H:</strong> ' + ['','Forte influence maternelle','Propriété de la mère','Bonne communication avec la mère','Lien profond avec la mère! Meilleur placement','Mère créative','Mère orientée service','La mère influence les relations','Héritage de la mère','Mère religieuse/éducative','Mère socialement réussie','Mère indépendante','Mère spirituelle'][mH] + '<br>'; }
         html += '</div></div>';
 
     } else if (division === 45) {
@@ -2100,7 +2100,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<div class="interp-card"><div class="interp-title">👨 D45 Akshavedamsa — Héritage Paternel</div><div class="interp-text">';
         html += '<strong>D45 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>' + d45LagnaInterp + '<br>';
-        if (sunD45) { const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☉ Soleil (Karaka du Père) → ' + sH + 'H:</strong> ' + ['','Strong paternal influence on self','Property from father','Good communication with father','Family-oriented father','Creative father','Service-oriented father','Father influences relationships','Inheritance from father','Religious/educational father','Socially successful father! Best placement','Independent father','Spiritual father'][sH] + '<br>'; }
+        if (sunD45) { const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1; html += '<br><strong>☉ Soleil (Karaka du Père) → ' + sH + 'H:</strong> ' + ['','Forte influence paternelle','Propriété du père','Bonne communication avec le père','Père orienté famille','Père créatif','Père orienté service','Le père influence les relations','Héritage du père','Père religieux/éducatif','Père socialement réussi! Meilleur','Père indépendant','Père spirituel'][sH] + '<br>'; }
         html += '</div></div>';
     }
 
