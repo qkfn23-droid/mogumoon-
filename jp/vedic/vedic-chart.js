@@ -324,26 +324,26 @@ function calculateChart() {
 
 function renderPlanetTable(positions, lagnaSign, lagnaSidereal) {
     let html = '<table class="planet-table"><thead><tr>';
-    html += '<th>Planet</th><th>Sign</th><th>Degree</th><th>Nakshatra</th><th>House</th>';
+    html += '<th>惑星</th><th>星座</th><th>度数</th><th>ナクシャトラ</th><th>ハウス</th>';
     html += '</tr></thead><tbody>';
 
-    // Add Lagna first with exact degree
+    // Add Lagna first
     const lagnaDeg = lagnaSidereal % 30;
     const lagnaNakIdx = Math.floor(lagnaSidereal / (360/27));
-    const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {name:"-"};
-    html += `<tr><td>⬆ ASC</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.name}</td><td>1</td></tr>`;
+    const lagnaNak = NAKSHATRAS[lagnaNakIdx] || {ko:'-'};
+    html += `<tr><td>⬆ ASC</td><td>${SIGN_SYMBOLS[lagnaSign]} ${SIGNS[lagnaSign]}</td><td>${lagnaDeg.toFixed(1)}°</td><td>${lagnaNak.ko}</td><td>1</td></tr>`;
 
     positions.forEach(p => {
         const house = ((p.sign - lagnaSign + 12) % 12) + 1;
         const nak = NAKSHATRAS[p.nakshatra] || { ko: '-', name: '-' };
-        const roleMap = { Sun:'自我・権威', Moon:'感情・心', Mars:'エネルギー・勇気', Mercury:'知性・コミュニケーション', Jupiter:'Luck/Wisdom', Venus:'愛・魅力', Saturn:'忍耐・責任', Rahu:'欲望・革新', Ketu:'霊性・解脱' };
-        const houseArea = ['','Self','Money/Family','Communication','Home','Children/Romance','Health','Spouse','Transformation','Luck/Foreign','Career','Income','Foreign/Spirituality'];
+        const roleMap = { Sun:'自我・権威', Moon:'感情・心', Mars:'エネルギー・勇気', Mercury:'知性・コミュニケーション', Jupiter:'幸運・知恵', Venus:'愛・魅力', Saturn:'忍耐・責任', Rahu:'欲望・革新', Ketu:'霊性・解脱' };
+        const houseArea = ['','自分自身','お金・家族','コミュニケーション','家庭','子供・恋愛','健康','配偶者','変革','幸運・海外','職業','収入','海外・霊性'];
         html += `<tr>
             <td>${p.symbol} ${p.name}<br><span style="color:#666;font-size:10px;">${roleMap[p.id]||''}</span></td>
             <td>${SIGN_SYMBOLS[p.sign]} ${SIGNS[p.sign]}</td>
             <td>${p.degree.toFixed(1)}°</td>
-            <td>${nak.name}</td>
-            <td>${house}${house===1?'st':house===2?'nd':house===3?'rd':'th'}<br><span style="color:#666;font-size:10px;">${houseArea[house]||''}</span></td>
+            <td>${nak.ko}</td>
+            <td>${house}宮<br><span style="color:#666;font-size:10px;">${houseArea[house]||''}</span></td>
         </tr>`;
     });
 
@@ -451,79 +451,79 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d9H1Planets = d9PlanetsInHouse(1);
 
     const careerBySgn = [
-        'Leadership, military, sports, entrepreneurship (fire pioneer)',
-        'Finance, agriculture, arts, real estate, food (stability & material)',
-        'Communication, media, writing, teaching, marketing (intellectual)',
-        'Nursing, caregiving, cooking, hospitality, counseling (emotional care)',
-        'Politics, entertainment, leadership, creativity (shining stage)',
-        'Medicine, accounting, analysis, editing, health/wellness (precise service)',
-        'Law, diplomacy, design, fashion, mediation (balance & beauty)',
-        'Research, investigation, medicine, occult, psychology (depth & transformation)',
-        'Education, travel, philosophy, religion, publishing (expansion & exploration)',
-        'Government, construction, management, CEO, organizational leader (system & authority)',
-        'Technology, IT, invention, social activism, science (innovation)',
-        'Arts, spirituality, healing, music, charity (transcendence & service)'
+        'リーダーシップ、軍事、スポーツ、起業（火の開拓者）',
+        '金融、農業、芸術、不動産、食品（安定と物質）',
+        '通信、メディア、執筆、教育、マーケティング（知的）',
+        '看護、介護、料理、接客、カウンセリング（感情的ケア）',
+        '政治、エンターテインメント、リーダーシップ、創造性（輝くステージ）',
+        '医療、会計、分析、編集、健康・ウェルネス（精密なサービス）',
+        '法律、外交、デザイン、ファッション、調停（バランスと美）',
+        '研究、調査、医療、オカルト、心理学（深さと変容）',
+        '教育、旅行、哲学、宗教、出版（拡張と探求）',
+        '政府、建設、経営、CEO、組織のリーダー（システムと権威）',
+        'テクノロジー、IT、発明、社会活動、科学（革新）',
+        '芸術、スピリチュアリティ、ヒーリング、音楽、慈善活動（超越と奉仕）'
     ];
 
     const planetCareer = {
-        Sun: 'Government official, politician, doctor, CEO — authoritative positions',
-        Moon: 'Nurse, counselor, chef, hospitality — caregiving/emotional roles',
-        Mars: 'Military, police, surgeon, engineer, athlete',
-        Mercury: 'Writer, teacher, programmer, accountant, merchant',
-        Jupiter: 'Professor, judge, religious leader, consultant, senior professional',
-        Venus: 'Designer, actor, musician, fashion, beauty industry',
-        Saturn: 'Construction, mining, agriculture, management, craftsman',
-        Rahu: 'IT, foreign-related, unconventional careers, research',
-        Ketu: 'Spirituality, alternative medicine, research, ascetic'
+        Sun: '政府官僚、政治家、医師、CEO — 権威ある職業',
+        Moon: '看護師、カウンセラー、シェフ、接客業 — 介護・感情的な役割',
+        Mars: '軍隊、警察、外科医、エンジニア、アスリート',
+        Mercury: '作家、教師、プログラマー、会計士、商人',
+        Jupiter: '教授、判事、宗教的指導者、コンサルタント、上級専門家',
+        Venus: 'デザイナー、俳優、音楽家、ファッション、美容業界',
+        Saturn: '建設、鉱業、農業、経営、職人',
+        Rahu: 'IT、海外関連、非従来型のキャリア、研究',
+        Ketu: 'スピリチュアリティ、代替医療、研究、修行者'
     };
 
     let html = '';
 
     html += `<div class="interp-card">
-        <div class="interp-title">🕉️ D9 Lagna — You After Marriage: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">🕉️ D9 ラグナ — 結婚後のあなた: ${SIGNS[d9LagnaSign]} ${SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
-            Navamsa Lagna is in <strong>${SIGNS[d9LagnaSign]}</strong>. This reveals your true self after marriage and in the second half of life (after 30s).
-            ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1 and D9 Lagna are in the same sign!</strong> This is called <strong>Vargottama</strong> — extremely powerful. Your essence remains unchanged after marriage, inner and outer self are aligned.' : ''}
-            ${d9H1Planets.length > 0 ? '<br><br><strong>Planets in D9 1st house:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — These planets strongly influence your personality after marriage.' : ''}
+            ナヴァムシャ・ラグナは<strong>${SIGNS[d9LagnaSign]}</strong>。これは結婚後、そして人生後半（30代以降）に現れるあなたの本当の姿です。
+            ${d9LagnaSign === d1LagnaSign ? '<br><br><strong>D1とD9のラグナが同じ星座にあります！</strong> これは<strong>バルゴッタマ(Vargottama)</strong> — 非常に強力です。結婚後もあなたの本質は変わらず、内面と外面が一致しています。' : ''}
+            ${d9H1Planets.length > 0 ? '<br><br><strong>D9 1宮の惑星:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — これらの惑星が結婚後のあなたの性格に強く影響を与えます。' : ''}
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💍 D9 7th House — Spouse Character: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">💍 D9 7宮 — 配偶者の性格: ${SIGNS[d9H7Sign]} ${SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            Navamsa 7th house is in <strong>${SIGNS[d9H7Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H7Ruler]}</strong>.<br><br>
-            This reveals your spouse's core personality — someone with the energy of ${SIGNS[d9H7Sign]}.
-            ${d9H7Planets.length > 0 ? '<br><br><strong>Planets in D9 7th house:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! You receive positive energy from your spouse.' : 'Malefic — challenges in marriage, but also opportunities for growth.'}`).join('<br>') : '<br><br>No planets in 7th house — the position of the 7th lord matters more.'}
+            ナヴァムシャ7宮は<strong>${SIGNS[d9H7Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H7Ruler]}</strong>。<br><br>
+            これは配偶者の核心的な性格を表します — ${SIGNS[d9H7Sign]}のエネルギーを持つパートナー。
+            ${d9H7Planets.length > 0 ? '<br><br><strong>D9 7宮の惑星:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '吉星！配偶者から良いエネルギーを受けます。' : '凶星 — 結婚生活での挑戦がありますが、成長の機会でもあります。'}`).join('<br>') : '<br><br>7宮に惑星がありません — 7宮の支配星の位置がより重要です。'}
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 D9 10th House — Life Purpose (Dharma): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-title">💼 D9 10宮 — 人生の使命(ダルマ): ${SIGNS[d9H10Sign]} ${SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
-            Navamsa 10th house is in <strong>${SIGNS[d9H10Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H10Ruler]}</strong>.<br><br>
-            While D1's 10th shows your career, D9's 10th reveals your <strong>greater life purpose (Dharma)</strong> — the true calling you pursue after maturity.<br><br>
-            <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
-            ${d9H10Planets.length > 0 ? '<br><br><strong>Planets in D9 10th house:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'Unique career energy'}`).join('<br>') : ''}
+            ナヴァムシャ10宮は<strong>${SIGNS[d9H10Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H10Ruler]}</strong>。<br><br>
+            D1の10宮が「職業」を示すなら、D9の10宮は<strong>人生のより大きな使命(ダルマ)</strong> — 成熟した後に追求する真の天職。<br><br>
+            <strong>使命の方向：</strong> ${careerBySgn[d9H10Sign]}
+            ${d9H10Planets.length > 0 ? '<br><br><strong>D9 10宮の惑星:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || '独自のキャリアエネルギー'}`).join('<br>') : ''}
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👔 Spouse Career — Derived 10th (D9 4th House): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-title">👔 配偶者の職業 — 派生10宮(D9 4宮): ${SIGNS[d9H4Sign]} ${SIGN_SYMBOLS[d9H4Sign]}</div>
         <div class="interp-text">
-            <strong>Derived house principle:</strong> The 10th from 7th (spouse) = D9's 4th house shows your spouse's career/social activity.<br><br>
-            D9 4th house is in <strong>${SIGNS[d9H4Sign]}</strong>, ruled by <strong>${RULER_NAMES[d9H4Ruler]}</strong>.<br><br>
-            <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br><strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>') : ''}
+            <strong>派生ハウスの原理：</strong> 7宮（配偶者）から10番目 = D9の4宮が配偶者の職業/社会活動を表します。<br><br>
+            D9 4宮は<strong>${SIGNS[d9H4Sign]}</strong>、支配星は<strong>${RULER_NAMES[d9H4Ruler]}</strong>。<br><br>
+            <strong>配偶者の職業傾向：</strong> ${careerBySgn[d9H4Sign]}
+            ${d9H4Planets.length > 0 ? '<br><br><strong>D9 4宮（配偶者の10宮）の惑星:</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: 配偶者の仕事の可能性：${planetCareer[p.id] || '専門分野'}`).join('<br>') : ''}
         </div>
     </div>`;
 
     const vargottamaPlanets = d9Positions.filter(p => p.sign === p.d9Sign);
     if (vargottamaPlanets.length > 0) {
         html += `<div class="interp-card">
-            <div class="interp-title">⭐ Vargottama Planets — Exceptionally Strong</div>
+            <div class="interp-title">⭐ バルゴッタマ惑星 — 特別に強い惑星</div>
             <div class="interp-text">
-                Planets in the same sign in both D1 and D9 are called <strong>Vargottama</strong>. These are very powerful, their energy acts consistently throughout life.<br><br>
-                ${vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In ${SIGNS[p.sign]} in both D1 and D9 — exceptionally strong energy!`).join('<br>')}
+                D1とD9の両方で同じ星座にある惑星を<strong>バルゴッタマ(Vargottama)</strong>と呼びます。これらは非常に強力で、人生を通じて一貫したエネルギーを発揮します。<br><br>
+                ${vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: ${SIGNS[p.sign]}にD1とD9の両方に位置 — 特別に強いエネルギー！`).join('<br>')}
             </div>
         </div>`;
     }
@@ -565,12 +565,12 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const venusD9Sign = venusD9 ? venusD9.d9Sign : 0;
 
     const dirSources = [
-        {name:'D1 7th House', sign: d1H7Sign, desc:'出生チャートの配偶者ハウス'},
-        {name:'D9 7th House', sign: d9H7Sign, desc:'ナヴァムシャの配偶者ハウス'},
-        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'D9 7室主の位置'},
-        {name:'D9 Venus', sign: venusD9Sign, desc:'ナヴァムシャの配偶者カラカ'},
-        {name:'Upapada (UL)', sign: ulSign, desc:'12th Arudha — spouse background'},
-        {name:'Darapada (A7)', sign: a7Sign, desc:'7th Arudha — spouse social image'}
+        {name:'D1 7宮', sign: d1H7Sign, desc:'出生図の配偶者ハウス'},
+        {name:'D9 7宮', sign: d9H7Sign, desc:'ナヴァムシャの配偶者ハウス'},
+        {name:'D9 7宮主', sign: d9H7RulerSign, desc:'D9 7宮主の位置'},
+        {name:'D9 金星', sign: venusD9Sign, desc:'ナヴァムシャの配偶者カラカ'},
+        {name:'ウパパダ(UL)', sign: ulSign, desc:'12宮アルダ — 配偶者の背景'},
+        {name:'ダラパダ(A7)', sign: a7Sign, desc:'7宮アルダ — 配偶者の社会的イメージ'}
     ];
 
     const dirCount = {};
@@ -583,126 +583,125 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🧭 Spouse Direction — 6-Indicator Analysis</div>
+        <div class="interp-title">🧭 配偶者の方向 — 6指標分析</div>
         <div class="interp-text">
-            Vedic astrology determines spouse direction by combining multiple indicators.<br><br>
-            <strong>6 Indicators:</strong><br>
+            ヴェーダ占星術では複数の指標を組み合わせて配偶者の方向を分析します。<br><br>
+            <strong>6つの指標：</strong><br>
             ${dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>')}
             <br><br>
-            <strong>🧿 Upapada Lagna (UL):</strong> Arudha of 12th — spouse family/background → <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong><br>
-            <strong>🎯 Darapada (A7):</strong> Arudha of 7th — spouse social image → <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong><br>
-            <strong>💍 D9 7th Lord (${RULER_NAMES[d9H7Ruler]}):</strong> Where the Navamsa 7th lord sits → <strong>${SIGNS[d9H7RulerSign]} ${SIGN_SYMBOLS[d9H7RulerSign]}</strong><br>
-            <strong>♀ D9 Venus:</strong> Spouse karaka in Navamsa → <strong>${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</strong><br><br>
+            <strong>🧿 ウパパダ・ラグナ(UL):</strong> 12宮のアルダパダ — 配偶者の家庭/背景 → <strong>${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</strong><br>
+            <strong>🎯 ダラパダ(A7):</strong> 7宮のアルダパダ — 配偶者の社会的イメージ → <strong>${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</strong><br>
+            <strong>💍 D9 7宮主 (${RULER_NAMES[d9H7Ruler]}):</strong> ナヴァムシャ7宮主の位置 → <strong>${SIGNS[d9H7RulerSign]} ${SIGN_SYMBOLS[d9H7RulerSign]}</strong><br>
+            <strong>♀ D9 金星:</strong> ナヴァムシャの配偶者カラカ → <strong>${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</strong><br><br>
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
-                <strong>${agreement}</strong> out of 6 indicators point to <strong>${primaryDir}</strong>.
-                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong> of meeting spouse from the ' + primaryDir + '. Pay attention to cities, workplaces, or travels in this direction.' : ''}
-                ${agreement === 3 ? '<br>3 indicators agree — <strong>high probability</strong> of ' + primaryDir + ' direction.' : ''}
-                ${agreement === 2 ? '<br>2 indicators agree — ' + primaryDir + ' is favored but other possibilities exist.' : ''}
-                ${agreement <= 1 ? '<br>Indicators are spread — spouse may come from various directions. Keep an open mind.' : ''}
-                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally indicated: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong>.' : ''}
+                <strong style="font-size:16px;">🧭 結論： ${agreement >= 4 ? '圧倒的に強い' : agreement >= 3 ? '非常に強い' : agreement >= 2 ? '強い' : ''}${primaryDir}方向</strong><br><br>
+                6つの指標中<strong>${agreement}</strong>つの指標が<strong>${primaryDir}</strong>を示しています。
+                ${agreement >= 4 ? '<br>4つ以上の指標が一致！非常に高い確率で' + primaryDir + 'の方向から配偶者と出会います。この方向の都市、職場、旅行先に注目してください。' : ''}
+                ${agreement === 3 ? '<br>3つの指標が一致 — 高い確率で' + primaryDir + '方向。' : ''}
+                ${agreement === 2 ? '<br>2つの指標が一致 — ' + primaryDir + 'が有力ですが他の可能性もあります。' : ''}
+                ${agreement <= 1 ? '<br>指標が分散しています — 配偶者は様々な方向から来る可能性があります。' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 2つの方向が均等に示されています：<strong>' + sortedDirs[0][0] + '</strong>と<strong>' + sortedDirs[1][0] + '</strong>。' : ''}
             </div>
         </div>
     </div>`;
 
     const meetingBySgn = [
-        "Active places, sports, competitive environments, leadership gatherings. Intense and sudden first meeting.",
-        "Workplace, financial institutions, restaurants, nature. Slowly building trust.",
-        "SNS, school, seminars, while traveling, blind dates. Relationship starts with conversation.",
-        "Family introductions, neighborhood gatherings, childhood friends. Starts in comfortable settings.",
-        "Parties, concerts, creative gatherings, glamorous venues. Dramatic first encounter.",
-        "Workplace, hospital, health-related, volunteer activities. Meeting starts from practical needs.",
-        "Blind dates, matchmaking, legal/diplomatic events, art exhibitions. Elegant and refined meeting.",
-        "Crisis situations, deep conversations, secret places, research labs. Fated and intense attraction.",
-        "Abroad, university, religious/philosophical gatherings, while traveling. Connection from far away. May be different culture.",
-        "Workplace, business events, official functions. Meeting related to social status.",
-        "Online, hobby clubs, social movements, friend of a friend. Unique and unconventional meeting.",
-        "Spiritual gatherings, abroad, arts/music, hospital, hints in dreams. Mystical and fated meeting."
+        "活動的な場所、スポーツ、競争環境、リーダーシップの集まり。激しく突然の出会い。",
+        "職場、金融機関、レストラン、自然の中。ゆっくり信頼を築く出会い。",
+        "SNS、学校、セミナー、旅行中、合コン。会話から始まる関係。",
+        "家族の紹介、近所の集まり、幼馴染。居心地の良い環境からのスタート。",
+        "パーティー、コンサート、クリエイティブな集まり、華やかな場所。劇的な出会い。",
+        "職場、病院、健康関連、ボランティア活動。実際的なニーズからの出会い。",
+        "合コン、マッチング、法律・外交イベント、美術展。上品で洗練された出会い。",
+        "危機的状況、深い会話、秘密の場所、研究室。運命的で強烈な引き合い。",
+        "海外、大学、宗教・哲学的な集まり、旅行中。遠い地からの縁。異文化の可能性。",
+        "職場、ビジネスイベント、公式な場。社会的地位に関連した出会い。",
+        "オンライン、趣味のクラブ、社会運動、友人の友人。ユニークで型破りな出会い。",
+        "スピリチュアルな集まり、海外、芸術・音楽、病院、夢のヒント。神秘的で運命的な出会い。"
     ];
 
     const backgroundBySgn = [
-        "Independent, self-made family. Strong leadership heritage.",
-        "Financially stable family. Traditional values. Possibly wealthy background.",
-        "Intellectual, communicative family. Emphasis on education.",
-        "Warm, family-oriented household. Strong mother figure.",
-        "Prestigious, proud family. Social status and reputation.",
-        "Practical, hardworking family. Health/medical/education background.",
-        "Balanced, dignified family. Arts/law/diplomacy background.",
-        "Family with secrets or transformations. Deep family history.",
-        "Scholarly, religious/philosophical family. Possible foreign background.",
-        "Strict, traditional family. Socially respected. Emphasis on responsibility.",
-        "Free-spirited, unique family structure. Progressive thinking.",
-        "Spiritual or artistic family. Possible foreign background. Rich sensitivity."
+        "独立心旺盛な自力で立った家族。強いリーダーシップの遺産。",
+        "財政的に安定した家族。伝統的な価値観。裕福な背景の可能性。",
+        "知的でコミュニケーション豊かな家族。教育を重視。",
+        "温かく家族思いの家庭。強い母親像。",
+        "名声があり誇り高い家族。社会的地位と評判。",
+        "実践的で勤勉な家族。健康・医療・教育の背景。",
+        "バランスが取れた品位ある家族。芸術・法律・外交の背景。",
+        "秘密や変容のある家族。深い家族の歴史。",
+        "学術的、宗教・哲学的な家族。海外の背景の可能性。",
+        "厳格で伝統的な家族。社会的に尊敬されている。責任感を重視。",
+        "自由奔放でユニークな家族構成。進歩的な考え方。",
+        "スピリチュアルまたは芸術的な家族。海外の背景の可能性。豊かな感受性。"
     ];
 
     const imageBySgn = [
-        "Energetic, confident first impression. Sporty or strong image.",
-        "Calm, reliable first impression. Refined and dignified image.",
-        "Bright, talkative first impression. Intellectual and witty image.",
-        "Warm, nurturing first impression. Soft and caring image.",
-        "Glamorous, charismatic first impression. Confident image.",
-        "Neat, tidy first impression. Meticulous and professional image.",
-        "Elegant, charming first impression. Balanced and sophisticated image.",
-        "Mysterious, intense first impression. Deep and charismatic image.",
-        "Free-spirited, vibrant first impression. Positive and adventurous image.",
-        "Serious, mature first impression. Responsible and reliable image.",
-        "Unique, individualistic first impression. Trendy and original image.",
-        "Dreamy, mystical first impression. Artistic and emotional image."
+        "エネルギッシュで自信ある第一印象。スポーティーまたは力強いイメージ。",
+        "穏やかで信頼できる第一印象。洗練されて品位あるイメージ。",
+        "明るく話し好きな第一印象。知的で機知に富んだイメージ。",
+        "温かく包容力のある第一印象。柔らかく思いやりのあるイメージ。",
+        "華やかでカリスマ的な第一印象。自信あるイメージ。",
+        "こぎれいで整然とした第一印象。几帳面でプロフェッショナルなイメージ。",
+        "上品で魅力的な第一印象。バランスが取れて洗練されたイメージ。",
+        "神秘的で強烈な第一印象。深みとカリスマのあるイメージ。",
+        "自由奔放で活気ある第一印象。ポジティブで冒険好きなイメージ。",
+        "真剣で成熟した第一印象。責任感があり信頼できるイメージ。",
+        "ユニークで個性的な第一印象。トレンディーでオリジナルなイメージ。",
+        "夢見がちで神秘的な第一印象。芸術的で感情豊かなイメージ。"
     ];
 
     const attractBySgn = [
-        "Strong energy and confidence. Proactive and protective nature is attractive.",
-        "Stability and sensual charm. Enjoying good food, scents, and textures.",
-        "Wit and conversation skills. Intellectual stimulation is the attraction.",
-        "Devoted care and emotion. Feeling at home together is the charm.",
-        "Shining presence and generosity. Feeling special together is attractive.",
-        "Delicate consideration and perfectionism. Attention to detail is charming.",
-        "Elegance and harmonious personality. The world becomes beautiful together.",
-        "Intense gaze and depth. Soul-piercing focus is the attraction.",
-        "Free spirit and humor. Adventures begin when you are together.",
-        "Solid trustworthiness and maturity. Rock-solid stability is attractive.",
-        "Unique individuality and progressive thinking. Freshness never seen before.",
-        "Mystical sensitivity and spiritual depth. Dream-like romance is the charm."
+        "強いエネルギーと自信。積極的で守護する性質が魅力的。",
+        "安定感と感覚的な魅力。美食、香り、質感を楽しむ。",
+        "機知と会話力。知的刺激が魅力のポイント。",
+        "献身的なケアと感情。一緒にいると家にいるような安心感が魅力。",
+        "輝く存在感と寛大さ。一緒にいると特別な気分になれる魅力。",
+        "繊細な気配りと完璧主義。細部への注意が魅力的。",
+        "上品さと調和的な人柄。一緒にいると世界が美しくなる。",
+        "強烈な眼差しと深み。魂を貫くような集中力が魅力。",
+        "自由な精神とユーモア。一緒にいると冒険が始まる。",
+        "確固たる信頼性と成熟さ。揺るぎない安定感が魅力的。",
+        "独自の個性と進歩的な思考。今まで見たことのない新鮮さ。",
+        "神秘的な感受性とスピリチュアルな深み。夢のようなロマンスが魅力。"
     ];
 
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🤝 Where You Meet Your Spouse — D1 7th: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">🤝 配偶者との出会いの場 — D1 7宮: ${SIGNS[d1H7ForMeeting]} ${SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
-            The 7th house sign reveals the environment and circumstances of meeting your spouse.<br><br>
+            7宮の星座が配偶者との出会いの環境と状況を表します。<br><br>
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
-            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Foreign spouse possibility!</strong> Signs related to 9th (abroad) or 12th house (foreign residence) are in the 7th, suggesting spouse may be a foreigner or you may meet abroad.' : ''}
+            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>海外の配偶者の可能性！</strong> 9宮（海外）または12宮（海外居住）に関連する星座が7宮にあり、配偶者が外国人または海外での出会いが示唆されます。' : ''}
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏛️ Spouse Family Background — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">🏛️ 配偶者の家庭/背景 — UL: ${SIGNS[ulSign]} ${SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
-            Upapada Lagna (UL) reveals your spouse's family environment and upbringing.<br><br>
+            ウパパダ・ラグナ(UL)は配偶者の家庭環境と育ちを表します。<br><br>
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Spouse First Impression — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">👤 配偶者の第一印象 — A7: ${SIGNS[a7Sign]} ${SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
-            Darapada (A7) shows how your spouse appears to the world — their external image and first impression.<br><br>
+            ダラパダ(A7)は配偶者が世界に見せる外的イメージと第一印象を表します。<br><br>
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
 
     html += `<div class="interp-card">
-        <div class="interp-title">💎 Spouse Attraction Point — D9 Venus: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">💎 配偶者の魅力ポイント — D9 金星: ${SIGNS[venusD9Sign]} ${SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
-            Venus in Navamsa reveals your spouse's core charm and love style.<br><br>
+            ナヴァムシャの金星の位置は配偶者の核心的な魅力と愛のスタイルを表します。<br><br>
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
 
     document.getElementById('d9InterpWrap').innerHTML = html;
 }
-
 
 function renderNakshatra(moonPos) {
     if (!moonPos) return;
@@ -821,140 +820,140 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let html = '';
 
     // ═══════════════════════════════════
-    // 1. Personality & Appearance (1st House Lagna)
+    // 1. 性格 & 外見 (1宮 ラグナ)
     // ═══════════════════════════════════
     const lagnaInterp = [
-        'Aries Lagna ruled by Mars. Strong willpower and leadership, independent personality. Quick to act with a pioneering spirit. Sharp features with an active impression. Impulsive but courageous, excelling in competition.',
-        'Taurus Lagna ruled by Venus. Seeks stability and abundance, loves sensory beauty. Soft appearance with an attractive voice. Values material security with exceptional artistic sense. Stubborn but reliable.',
-        'Gemini Lagna ruled by Mercury. Intellectually curious with outstanding communication skills. Youthful appearance with an agile build. Versatile but can be scattered, talented in writing and languages.',
-        'Cancer Lagna ruled by the Moon. Rich in sensitivity and highly intuitive. Round face with a soft impression. Devoted to home and family with strong protective instincts. Emotional ups and downs but deeply empathetic.',
-        'Leo Lagna ruled by the Sun. Overflowing with charisma and creative energy. Dignified build with a commanding presence. Natural-born leader who enjoys the spotlight. High self-esteem but generous heart.',
-        'Virgo Lagna ruled by Mercury. Analytical and perfectionist. Neat appearance with an intellectual impression. Excellent attention to detail and practical abilities, with interest in health and hygiene.',
-        'Libra Lagna ruled by Venus. Seeks balance and harmony, diplomatically skilled. Well-proportioned appearance with a refined impression. Excels in relationships and partnerships with superb aesthetic sense.',
-        'Scorpio Lagna ruled by Mars. Intense intuition and transformative power. Sharp eyes with a mysterious impression. Penetrates to the essence with deep insight, keeps secrets well. Experiences dramatic life changes multiple times.',
-        'Sagittarius Lagna ruled by Jupiter. A philosopher seeking freedom and truth. Large build with a bright impression. Optimistic and values moral principles. Deep connections with travel and higher education.',
-        'Capricorn Lagna ruled by Saturn. Strong ambition and patience. Lean build with a serious impression. Systematically works toward goals, the type who grows younger with age. Values social status and achievement.',
-        'Aquarius Lagna ruled by Saturn. Innovative and original. Unique appearance with an intellectual impression. Values humanitarian ideals with unconventional thinking. Talented in technology and science.',
-        'Pisces Lagna ruled by Jupiter. Spiritual and intuitive. Soft appearance with a dreamy impression. Extremely gifted artistic sensitivity with interest in transcendent worlds. Self-sacrificing tendency.'
+        '火星が支配する牡羊座ラグナ。強い意志とリーダーシップ、独立的な性格。行動が速く開拓者精神が強い。体格は鋭い目鼻立ちに活動的な印象。せっかちだが勇敢で、競争で頭角を現します。',
+        '金星が支配する牡牛座ラグナ。安定と豊かさを追求し、感覚的な美しさを愛します。柔らかい外見に魅力的な声。物質的な安定を重視し、芸術的感覚に優れています。頑固だが信頼できる人。',
+        '水星が支配する双子座ラグナ。知的好奇心が旺盛でコミュニケーション能力が卓越。若く見える外見にすばしっこい体型。多才だが散漫になりやすく、文章や言語に才能があります。',
+        '月が支配する蟹座ラグナ。感受性が豊かで直観的。丸い顔に柔らかい印象。家庭と家族に献身的で保護本能が強い。感情の起伏はあるが深い共感能力の持ち主。',
+        '太陽が支配する獅子座ラグナ。カリスマと創造的エネルギーにあふれています。堂々とした体格に存在感のある外見。リーダーシップが天賦であり、注目されることを楽しみます。自尊心が高いが寛大な心。',
+        '水星が支配する乙女座ラグナ。分析的で完璧を追求します。端正な外見に知的な印象。細かい観察力と実用的な能力に優れ、健康と衛生に関心が高い。',
+        '金星が支配する天秤座ラグナ。バランスと調和を追求し外交的。均整の取れた外見に洗練された印象。対人関係とパートナーシップに優れ、芸術と美への感覚が卓越。',
+        '火星が支配する蠍座ラグナ。強烈な直観と変革の力。鋭い眼差しに神秘的な印象。深い洞察力で本質を見抜き、秘密を守ります。劇的な人生の変化を何度も経験します。',
+        '木星が支配する射手座ラグナ。自由と真理を追求する哲学者。大きな体格に明るい印象。楽観的で道徳的価値を重視します。旅行と高等教育に縁が深い。',
+        '土星が支配する山羊座ラグナ。野心と忍耐力が強い。痩せた体型に真面目な印象。体系的に目標に向かって進み、年齢を重ねるほど若返るタイプ。社会的地位と達成を重視します。',
+        '土星が支配する水瓶座ラグナ。革新的で独創的。独特な外見に知的な印象。人道主義的な価値を重視し、型にはまらない思考方式。テクノロジーと科学に才能があります。',
+        '木星が支配する魚座ラグナ。霊的で直観的。柔らかい外見に夢見るような印象。芸術的感受性が極めて優れ、超越的な世界に関心が高い。自己犠牲的な傾向。'
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 Personality & Appearance — Lagna: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
+        <div class="interp-title">👤 性格 & 外見 — ラグナ: ${SIGNS[lagnaSign]} ${SIGN_SYMBOLS[lagnaSign]}</div>
         <div class="interp-text">${lagnaInterp[lagnaSign]}</div>
     </div>`;
 
     // ═══════════════════════════════════
-    // 2. Inner Self & Emotions (Moon Sign)
+    // 2. 内面 & 感情 (月の星座)
     // ═══════════════════════════════════
     if (moonPos) {
         const moonInterp = [
-            'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
-            'Emotionally very stable, seeking comfort. Dislikes change and finds security in the familiar. Healed by good food, music, and nature. Once you give your heart, it rarely changes.',
-            'Processes emotions rationally and organizes feelings through conversation. Curious with many simultaneous interests. Seeks variety over emotional depth and cannot tolerate boredom.',
-            'Moon in its own sign (domicile). Extremely rich in sensitivity, absorbing others\' emotions like a sponge. Strong maternal instincts, finding stability at home. Emotions may fluctuate with the Moon\'s cycle.',
-            'Dramatic and passionate emotional expression. Strong need to be recognized and loved; deeply hurt when ignored. Creative activities serve as emotional healing. Romantic and generous heart.',
-            'Tendency to analyze and organize emotions. Worries a lot and is perfectionist but resolves things practically. May have health concerns, finding stability in daily routines.',
-            'Finds emotional balance within relationships. Feels anxious alone and stabilizes when with a partner. Extremely averse to conflict and discord, finding inner peace in art and beauty.',
-            'Emotions are as deep and intense as the ocean. Loves deeply and hates deeply; never forgives betrayal. Very strong intuition, instinctively reading others\' true intentions. Emotional energy of transformation and rebirth.',
-            'Emotionally optimistic and freedom-loving. Dislikes being constrained and seeks new experiences. Sublimating emotions through philosophical thought, with travel as the best remedy.',
-            'Controls emotions well and doesn\'t show them outwardly. Strong sense of responsibility, prioritizing duty over feelings. May have had emotional difficulties in childhood, but grows emotionally mature with age.',
-            'Unique and unpredictable emotional patterns. Independent, loving in unconventional ways. Pursues universal love for humanity and social causes, seeing the bigger picture over personal emotions.',
-            'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
+            '内面に炎のような情熱があります。感情が即興的で素早く変わります。怒りやすいがすぐ収まり、独立した感情生活を望みます。ストレスは運動で解消すると良いでしょう。',
+            '感情的に非常に安定しており、快適さを追求します。変化を嫌い、馴染みのあるものに安心感を得ます。美味しい食事、音楽、自然で癒されます。一度心を開くと簡単には変わりません。',
+            '感情を理性的に処理し、会話を通じて心を整理します。好奇心が多く複数の関心事を同時に追求します。感情的な深さより多様性を追求し、退屈に耐えられません。',
+            '月の本宮（本来の居場所）。感受性が極めて豊かで他人の感情をスポンジのように吸収します。母性本能が強く家庭で安心を感じます。月の周期に応じて感情が変わることがあります。',
+            '感情表現がドラマチックで情熱的。認められ愛されたい欲求が強く、無視されると深く傷つきます。創造的な活動が感情的な癒しになります。ロマンチックで寛大な心。',
+            '感情を分析し整理する傾向があります。心配性で完璧主義的ですが実用的に解決します。健康への心配があり、日常のルーティンに安心感を見出します。',
+            '関係の中で感情のバランスを見つけます。一人でいると不安で、パートナーと一緒にいると安定します。対立と不和を極度に嫌い、芸術と美しさに心の平和を見出します。',
+            '感情が海のように深く激しい。愛も憎しみも深く、裏切りは絶対に許しません。直観が非常に強く、相手の本心を本能的に把握します。変革と再生の感情エネルギー。',
+            '感情的に楽観的で自由を愛します。束縛を嫌い新しい経験を追求します。哲学的思考を通じて感情を昇華させ、旅行が最高の癒しです。',
+            '感情をよくコントロールし表に出しません。責任感が強く感情より義務を優先します。幼少期に感情的困難があったかもしれませんが、年齢を重ねるほど感情的に成熟します。',
+            '独特で予測不可能な感情パターン。独立的で一般的でない方法で愛します。社会的大義と人類への普遍的な愛を追求し、個人的感情より大きな絵を見ます。',
+            '極めて直観的で霊的。夢が鮮明で予知的かもしれません。他人の苦しみに深く共感し、自己と他者の境界が曖昧。芸術、瞑想、霊的修行で安定を見出します。'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 Inner Self & Emotions — Moon: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-title">🌙 内面 & 感情 — 月: ${SIGNS[moonPos.sign]} ${SIGN_SYMBOLS[moonPos.sign]}</div>
             <div class="interp-text">${moonInterp[moonPos.sign]}</div>
         </div>`;
     }
 
     // ═══════════════════════════════════
-    // 3. 💰 Wealth Fortune (2nd & 11th House Analysis)
+    // 3. 💰 財運 (2宮, 11宮 分析)
     // ═══════════════════════════════════
     const h2planets = planetsInHouse(2);
     const h11planets = planetsInHouse(11);
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = `<strong>2nd House (Accumulated Wealth):</strong> Located in ${SIGNS[h2sign]}. `;
+    let wealthText = `<strong>2宮 (蓄積された財産):</strong> ${SIGNS[h2sign]}に位置。`;
     if (h2planets.length === 0) {
-        wealthText += 'No planets in the 2nd house — wealth accumulation is steady but stable without major fluctuations. ';
+        wealthText += '2宮に惑星がなく、財産の蓄積は着実ですが特別な変動なく安定的です。';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
-                'Sun': 'Income through authority and status. Potential earnings from government or public sectors.',
-                'Moon': 'Fluctuating financial situation. Income possible in public-facing businesses or food & beverage industries.',
-                'Mars': 'Aggressive investment tendencies. Income from real estate, technology, or military-related fields.',
-                'Mercury': 'Earning money through intellectual abilities. Wealth from writing, education, communications, and IT.',
-                'Jupiter': 'Most auspicious placement! Abundant wealth fortune. Great income from education, law, or religious fields.',
-                'Venus': 'Accumulates wealth through luxury goods, art, entertainment, and fashion. Abundant dining life.',
-                'Saturn': 'Slowly and steadily accumulates wealth. Difficulties early on but stabilizes after middle age.',
-                'Rahu': 'Earns money through unconventional methods. Sudden wealth from foreign, technology, or innovation sectors.',
-                'Ketu': 'Indifference to wealth. Values spiritual matters over material ones; watch for sudden losses.'
+                'Sun': '権威と地位を通じた収入。政府や公共部門で財を得る可能性があります。',
+                'Moon': '流動的な財政状況。大衆に関連する事業や飲食分野で収入の可能性。',
+                'Mars': '積極的な資産運用の傾向。不動産、技術、軍事関連分野で収入。',
+                'Mercury': '知的能力でお金を稼ぎます。文筆、教育、通信、IT分野で財を成す。',
+                'Jupiter': '最も吉兆な配置！豊かな財運。教育、法律、宗教分野で大きな収入。',
+                'Venus': '贅沢品、芸術、エンターテインメント、ファッションで財を築きます。豊かな食生活。',
+                'Saturn': 'ゆっくりと着実に財を築きます。初期に困難がありますが中年以降安定。',
+                'Rahu': '非伝統的な方法でお金を稼ぎます。外国、技術、革新分野で突然の財。',
+                'Ketu': '財に対する無関心。霊的な価値を物質より重視し、突然の損失に注意。'
             };
             wealthText += `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
         });
     }
 
-    wealthText += `<br><br><strong>11th House (Income & Gains):</strong> Located in ${SIGNS[h11sign]}. `;
+    wealthText += `<br><br><strong>11宮 (収入と利益):</strong> ${SIGNS[h11sign]}に位置。`;
     if (h11planets.length === 0) {
-        wealthText += 'No planets in the 11th house — income is stable but without major fluctuations.';
+        wealthText += '11宮に惑星がなく、収入は安定的ですが大きく変動しません。';
     } else {
         h11planets.forEach(p => {
             const pIncome = {
-                'Jupiter': 'Large income and abundant profits! Social networks bring wealth.',
-                'Venus': 'Income through art, socializing, and fashion. Female friends are helpful.',
-                'Saturn': 'Steady and stable income but slow growth. Good retirement security.',
-                'Mars': 'Income through competition. Profits from technology, real estate, and sports.',
-                'Mercury': 'Income through intellectual networks. Entrepreneurial aptitude.',
-                'Sun': 'Income through authority. Political connections bring wealth.',
-                'Moon': 'Income through public popularity. Fluctuating but steady flow.'
+                'Jupiter': '大きな収入と豊かな利益！社会的ネットワークが財をもたらします。',
+                'Venus': '芸術、社交、ファッションを通じた収入。女性の友人が助けになります。',
+                'Saturn': '着実で安定した収入ですが成長は遅い。老後の保障が良い。',
+                'Mars': '競争を通じた収入。技術、不動産、スポーツ関連の利益。',
+                'Mercury': '知的ネットワークを通じた収入。事業家の気質。',
+                'Sun': '権威を通じた収入。政治的な繋がりが財をもたらします。',
+                'Moon': '大衆的な人気を通じた収入。変動はあるが着実な流れ。'
             };
             wealthText += `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
         });
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 Wealth Fortune</div>
+        <div class="interp-title">💰 財運</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
     // ═══════════════════════════════════
-    // 4. 💕 Spouse & Marriage Fortune (7th House Analysis)
+    // 4. 💕 配偶者 & 結婚運 (7宮 分析)
     // ═══════════════════════════════════
     const h7sign = (lagnaSign + 6) % 12;
     const h7planets = planetsInHouse(7);
     const venus = positions.find(p => p.id === 'Venus');
 
     const spouseSign = [
-        'An independent and energetic spouse. Destined for someone with strong willpower and leadership. An active and direct partner.',
-        'A beautiful and artistic spouse. Destined for someone materially stable. A sensual and loyal partner.',
-        'An intelligent spouse with good communication skills. Destined for someone you can converse with well. A humorous and versatile partner.',
-        'An emotional and domestic spouse. Destined for someone nurturing. A partner with motherly warmth.',
-        'A charismatic and dignified spouse. Destined for someone socially prominent. A partner with high self-esteem but generous nature.',
-        'A meticulous and practical spouse. Destined for someone interested in health and wellness. An analytical and service-oriented partner.',
-        'An attractive and refined spouse. Destined for someone diplomatic with good sense of balance. A partner with excellent artistic taste.',
-        'An intense and mysterious spouse. Destined for someone with deep emotions. A transformative and passionate partner. May have many secrets.',
-        'A free-spirited and optimistic spouse. Possible connection with a foreigner or someone from another culture. A philosophical and adventurous partner.',
-        'A serious and ambitious spouse. May have an age difference. A responsible and socially successful partner. Marriage may come late.',
-        'A unique and independent spouse. Unconventional meeting or relationship. An intellectual and innovative partner. A free-form marriage.',
-        'A spiritual and intuitive spouse. Connection with an artist or spiritual practitioner. A dreamy and romantic partner. Watch for idealization.'
+        '配偶者が独立的でエネルギーにあふれた性格。強い意志とリーダーシップを持つ人との縁。活動的で直接的なパートナー。',
+        '美しく芸術的な配偶者。物質的に安定した人との縁。感覚的で忠実なパートナー。',
+        '知的でコミュニケーション能力の高い配偶者。会話が弾む人との縁。ユーモアセンスがあり多才なパートナー。',
+        '感性的で家庭的な配偶者。面倒見の良い性格の人との縁。母親のような温かさを持つパートナー。',
+        'カリスマがあり堂々とした配偶者。社会的に注目される人との縁。自尊心は高いが寛大なパートナー。',
+        '几帳面で実用的な配偶者。健康とウェルネスに関心の多い人との縁。分析的で奉仕的なパートナー。',
+        '魅力的で洗練された配偶者。外交的でバランス感覚の良い人との縁。芸術的感覚に優れたパートナー。',
+        '強烈で神秘的な配偶者。深い感情を持つ人との縁。変革的で情熱的なパートナー。秘密が多いかもしれません。',
+        '自由で楽観的な配偶者。外国人や異文化圏の人との縁の可能性。哲学的で冒険好きなパートナー。',
+        '真面目で野心のある配偶者。年齢差があるかもしれません。責任感が強く社会的に成功したパートナー。結婚が遅れることも。',
+        '独特で独立的な配偶者。非伝統的な出会いや関係。知的で革新的なパートナー。自由な結婚形態。',
+        '霊的で直観的な配偶者。芸術家や霊的従事者との縁。夢見るようなロマンチックなパートナー。理想化の傾向に注意。'
     ];
 
     let spouseText = spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += '<br><br><strong>Planets in the 7th House:</strong> ';
+        spouseText += '<br><br><strong>7宮の惑星:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
-                'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
-                'Moon': 'An emotional and caring spouse. Marriage life with deep emotional connection.',
-                'Mars': 'Passionate but may have frequent arguments. A strong-willed spouse. Energetic relationship. (Watch for Kuja Dosha)',
-                'Mercury': 'An intellectual spouse with great conversation. A good relationship as business partners too.',
-                'Jupiter': 'Most blessed placement! A wise and moral spouse. Happy married life. Luck through spouse.',
-                'Venus': 'A very attractive and loving spouse. Romantic married life. May enjoy luxury.',
-                'Saturn': 'Late marriage or spouse with significant age difference. Difficult early on but stable, long-lasting marriage.',
-                'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting. Beware of illusions.',
-                'Ketu': 'Detachment toward spouse. Past-life connection. Strong spiritual bond but distance in worldly relationships.'
+                'Sun': '配偶者が社会的に認められている人。やや支配的かもしれないが尊敬できるパートナー。',
+                'Moon': '感性的で面倒見の良い配偶者。感情的な交流が深い結婚生活。',
+                'Mars': '情熱的だが争いが多いかもしれません。強い性格の配偶者。エネルギーあふれる関係。（クジャ・ドーシャに注意）',
+                'Mercury': '知的で会話が弾む配偶者。ビジネスパートナーとしても良い関係。',
+                'Jupiter': '最も祝福された配置！賢明で道徳的な配偶者。幸せな結婚生活。配偶者を通じた幸運。',
+                'Venus': '非常に魅力的で愛にあふれた配偶者。ロマンチックな結婚生活。贅沢を好むかもしれません。',
+                'Saturn': '結婚が遅れるか年齢差の大きい配偶者。初期の困難の後、安定して長続きする結婚。',
+                'Rahu': '非伝統的な結婚。外国人や異なる背景の配偶者。突然の出会い。幻想に注意。',
+                'Ketu': '配偶者への超然さ。前世の縁。霊的な繋がりは強いが世俗的な関係では距離感。'
             };
             spouseText += `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
         });
@@ -962,101 +961,101 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     if (venus) {
         const venusHouse = houseOf(venus.sign);
-        spouseText += `<br><br><strong>Venus Position (${venusHouse}${venusHouse===1?'st':venusHouse===2?'nd':venusHouse===3?'rd':'th'} House):</strong> `;
+        spouseText += `<br><br><strong>金星の位置 (${venusHouse}宮):</strong> `;
         const venusHouseInterp = {
-            1: 'Attractive appearance. Enjoys romance and falls in love easily.',
-            2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
-            3: 'Artistic communication skills. Pleasant relationships with siblings.',
-            4: 'Happiness at home with a beautiful residence. Strong influence from mother.',
-            5: 'A life rich in romance. Good relationship with children. Joy in creative work.',
-            6: 'Service-oriented attitude in romance. Possibility of workplace romance.',
-            7: 'Very attractive spouse. A strong indicator of happy married life.',
-            8: 'Deep and transformative love. Secret romance. Spouse\'s wealth.',
-            9: 'Romance abroad. Connection with a teacher or mentor. Philosophical love.',
-            10: 'Socially recognized marriage. Meeting through career.',
-            11: 'From friends to lovers. Finding connections through social activities.',
-            12: 'Secret romance. Foreign connections. Spiritual love.'
+            1: '魅力的な外見。恋愛を楽しみ、すぐに恋に落ちます。',
+            2: '配偶者を通じて財が入ります。美しい声と食通。',
+            3: '芸術的なコミュニケーション能力。兄弟姉妹との楽しい関係。',
+            4: '家庭での幸福と美しい住居。母親の影響が大きい。',
+            5: 'ロマンスが豊かな人生。子供との良い関係。創作活動に喜び。',
+            6: '恋愛で奉仕的な態度。職場でのロマンスの可能性。',
+            7: '配偶者が非常に魅力的。幸せな結婚生活の強力な指標。',
+            8: '深く変革的な愛。秘密の恋愛。配偶者の財産。',
+            9: '海外でのロマンス。師匠やメンターとの縁。哲学的な愛。',
+            10: '社会的に認められた結婚。職業を通じた出会い。',
+            11: '友人から恋人へ。社交活動で縁を見つける。',
+            12: '秘密の恋愛。海外での縁。霊的な愛。'
         };
         spouseText += venusHouseInterp[venusHouse] || '';
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💕 Spouse & Marriage Fortune — 7th House: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">💕 配偶者 & 結婚運 — 7宮: ${SIGNS[h7sign]} ${SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
     // ═══════════════════════════════════
-    // 5. 💼 Career & Social Achievement (10th House Analysis)
+    // 5. 💼 職業 & 社会的達成 (10宮 分析)
     // ═══════════════════════════════════
     const h10sign = (lagnaSign + 9) % 12;
     const h10planets = planetsInHouse(10);
 
     const careerSign = [
-        'Suited for military, police, sports, surgery, corporate management, leadership roles.',
-        'Finance, food industry, agriculture, fashion, real estate, art, banking fields.',
-        'Media, writing, education, communications, IT, marketing, translation fields.',
-        'Medical, nursing, hospitality, maritime, real estate, food & beverage fields.',
-        'Politics, entertainment, management, government agencies, leadership positions, gold-related fields.',
-        'Medical, accounting, analysis, consulting, healthcare, quality control fields.',
-        'Law, diplomacy, fashion, interior design, counseling, event planning fields.',
-        'Research, investigation, insurance, medicine, psychology, taxation, mining fields.',
-        'Education, law, religion, publishing, travel, international trade fields.',
-        'Management, civil service, architecture, civil engineering, politics, large corporations.',
-        'Technology, science, IT, aviation, aerospace, social work, innovation fields.',
-        'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
+        '軍隊、警察、スポーツ、外科、企業経営、リーダーシップ職に適しています。',
+        '金融、飲食業、農業、ファッション、不動産、芸術、銀行関連職。',
+        'メディア、文筆、教育、通信、IT、マーケティング、翻訳関連職。',
+        '医療、看護、ホテル業、海洋、不動産、飲食関連職。',
+        '政治、芸能、経営、政府機関、リーダーシップポジション、金関連職。',
+        '医療、会計、分析、コンサルティング、健康管理、品質管理職。',
+        '法律、外交、ファッション、インテリア、カウンセリング、イベント企画職。',
+        '研究、調査、保険、医学、心理学、税務、鉱業関連職。',
+        '教育、法律、宗教、出版、旅行、国際貿易関連職。',
+        '経営、公務員、建築、土木、政治、大企業関連職。',
+        '技術、科学、IT、航空、宇宙、社会福祉、イノベーション分野。',
+        '芸術、映画、音楽、医療、海外、霊的分野、NGO関連職。'
     ];
 
-    let careerText = `The 10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
+    let careerText = `10宮は${SIGNS[h10sign]}に位置。${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += '<br><br><strong>Planets in the 10th House:</strong>';
+        careerText += '<br><br><strong>10宮の惑星:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
-                'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
-                'Moon': ' Public-facing career. Caring, hospitality, food & beverage, emotion-related fields.',
-                'Mars': ' Technology, engineering, military, surgery, sports. Success in competitive fields.',
-                'Mercury': ' Business, communication, IT, education. Success through intellectual abilities.',
-                'Jupiter': ' Education, law, religion, consulting. A respected career. One of the best placements.',
-                'Venus': ' Art, entertainment, fashion, beauty, diplomacy. Success in creative fields.',
-                'Saturn': ' Slow but certain success. Systematic organizations, architecture, civil service. Shines after middle age.'
+                'Sun': ' 政府、リーダーシップ、権威ある職位。社会的に注目されるキャリア。',
+                'Moon': ' 大衆に関連する職業。ケアリング、ホテル、飲食、感情関連職。',
+                'Mars': ' 技術、エンジニアリング、軍事、外科、スポーツ。競争的な分野で成功。',
+                'Mercury': ' ビジネス、コミュニケーション、IT、教育。知的能力で成功。',
+                'Jupiter': ' 教育、法律、宗教、コンサルティング。尊敬される職業。最も良い配置の一つ。',
+                'Venus': ' 芸術、エンターテインメント、ファッション、ビューティー、外交。創造的な分野で成功。',
+                'Saturn': ' 遅いが確実な成功。体系的組織、建築、公務員。中年以降輝く。'
             };
             careerText += `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
         });
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💼 Career & Social Achievement — 10th House: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">💼 職業 & 社会的達成 — 10宮: ${SIGNS[h10sign]} ${SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
     // ═══════════════════════════════════
-    // 6. 🏥 Health (6th House + Lagna Analysis)
+    // 6. 🏥 健康 (6宮 + ラグナ 分析)
     // ═══════════════════════════════════
     const h6sign = (lagnaSign + 5) % 12;
     const h6planets = planetsInHouse(6);
 
     const healthByLagna = [
-        'Watch for head, brain, and face-related conditions. Prone to headaches, fevers, and inflammation. Regular exercise is essential.',
-        'Watch for neck, thyroid, and jaw issues. Prone to overeating and diabetes. Take care of vocal cords and throat health.',
-        'Watch for lungs, arms, shoulders, and nervous system. Anxiety and sleep issues possible. Breathing meditation helps.',
-        'Watch for stomach, chest, and breast-related issues. Digestive disorders and water retention. Emotional stress directly affects health.',
-        'Watch for heart, back, and spine issues. Cardiovascular health management is essential. Beware of overwork.',
-        'Watch for digestive system, intestines, and skin. Indigestion and allergies. Diet is important.',
-        'Watch for kidneys, lower back, and skin. Adequate hydration and balanced lifestyle essential.',
-        'Watch for reproductive and excretory systems. Possibility of chronic conditions. Regular checkups are important.',
-        'Watch for liver, thighs, and hips. Tendency toward being overweight. Outdoor activities are good for health.',
-        'Watch for bones, joints, knees, and skin. Rheumatism and arthritis. Calcium intake is important.',
-        'Watch for ankles, calves, and circulatory system. Blood pressure management. Unusual health issues possible.',
-        'Watch for feet, lymphatic system, and immunity. Unexplained conditions possible. Adequate sleep is key.'
+        '頭、脳、顔に関連する疾患に注意。頭痛、発熱、炎症の傾向。規則的な運動が必須。',
+        '首、甲状腺、顎に関連する注意。過食と糖尿の傾向。声帯と首の健康管理。',
+        '肺、腕、肩、神経系に注意。不安と睡眠の問題の可能性。呼吸瞑想が有効。',
+        '胃腸、胸、乳房に関連する注意。消化障害と水分貯留。感情的ストレスが健康に直結。',
+        '心臓、背中、脊椎に関連する注意。心血管の健康管理が必須。過労に注意。',
+        '消化器系、腸、皮膚に関連する注意。消化不良とアレルギー。食事療法が重要。',
+        '腎臓、腰、皮膚に関連する注意。水分摂取とバランスの取れた生活が必須。',
+        '生殖器、排泄器系に関連する注意。慢性疾患の可能性。定期検診が重要。',
+        '肝臓、太もも、臀部に関連する注意。過体重の傾向。アウトドア活動が健康に良い。',
+        '骨、関節、膝、皮膚に関連する注意。リウマチ、関節炎。カルシウム摂取が重要。',
+        '足首、ふくらはぎ、循環器系に関連する注意。血圧管理。独特な健康問題の可能性。',
+        '足、リンパ系、免疫に関連する注意。原因不明の疾患の可能性。十分な睡眠が鍵。'
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">🏥 Health — Vulnerable Areas</div>
-        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>' + h6planets.map(p => p.name).join(', ') + ' in the 6th house requires special attention to health management.' : ''}</div>
+        <div class="interp-title">🏥 健康 — 弱い部位</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? '<br><br>6宮に' + h6planets.map(p => p.name).join('、') + 'が位置しており、健康管理に特別な注意が必要です。' : ''}</div>
     </div>`;
 
     // ═══════════════════════════════════
-    // 7. ⏳ Current Dasha Interpretation
+    // 7. ⏳ 現在の大運解釈
     // ═══════════════════════════════════
     if (moonPos) {
         const nak = NAKSHATRAS[moonPos.nakshatra];
@@ -1088,18 +1087,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
             if (currentDasha) {
                 const dashaInterp = {
-                    'Sun': 'A period of self-discovery and authority. A time to exercise leadership and receive social recognition. Relationships with government or authority figures become important. Changes may occur in your relationship with your father. Watch your heart and eye health. This period strengthens your self-esteem and identity.',
-                    'Moon': 'A period of emotions and inner life. Home and relationship with mother become important. Real estate matters may arise, and public relations become active. Emotional fluctuations are large but intuition strengthens. Possibility of travel and relocation.',
-                    'Mars': 'A period of action and energy. A great time to courageously start new ventures. Real estate transactions, surgeries, and technology-related activities become active. Changes in sibling relationships. Watch for disputes, accidents, and burns. Good results in exercise and competition.',
-                    'Rahu': 'A period of rapid change and innovation. Unexpected opportunities and challenges come. Foreign-related activities become active, with potential advancement in technology and innovation fields. Material desires intensify — be careful not to get lost in illusions. You will have unique experiences. An 18-year long cycle.',
-                    'Jupiter': 'A period of luck and growth! A time when good things in life — education, marriage, childbirth, promotions — are more likely to happen. Spiritual growth and wisdom deepen. You will meet a teacher or mentor. Activities related to law, education, and religion are favorable.',
-                    'Saturn': 'A period of patience and trials. Growth is slow but certain. Responsibilities grow heavier with experiences of limitation and structure. Watch your health, especially bones and joints. A 19-year long cycle where true abilities are tested. When it ends, you discover a stronger self.',
-                    'Mercury': 'A period of intellectual activity and business. Favorable for learning, communication, writing, and business ventures. A great time to learn new skills. Relationships with siblings and friends become active. Watch nervous system health. You will find yourself juggling multiple things simultaneously.',
-                    'Ketu': 'A period of spiritual awakening and detachment. You become more detached from the material world with deepening spiritual interests. You may experience sudden changes and losses, but these lead to spiritual growth. Intuition becomes very strong — an excellent time for meditation and spiritual practice.',
-                    'Venus': 'A period of love and abundance! Romance, marriage, and artistic activities become active. You enjoy material prosperity and indulge in luxury. You may acquire a new car, new home, or jewelry. Aesthetic sense develops and social activities flourish. The longest cycle at 20 years.'
+                    'Sun': '自我発見と権威の時期。リーダーシップを発揮し社会的な認知を受ける時期です。政府や権威者との関係が重要になります。父親との関係に変化が生じる可能性があります。健康では心臓と目に注意してください。この時期に自尊心とアイデンティティが強化されます。',
+                    'Moon': '感情と内面の時期。家庭と母親との関係が重要になります。不動産関連のことが生じる可能性があり、大衆との関係が活発になります。感情的な変動は大きいですが直観が強まる時期。旅行と引越しの可能性。',
+                    'Mars': '行動とエネルギーの時期。勇敢に新しいことを始めるのに良い時です。不動産の売買、手術、技術関連の活動が活発になります。兄弟との関係の変化。ただし紛争、事故、火傷に注意してください。運動と競争で良い結果。',
+                    'Rahu': '急変と革新の時期。予想外の機会と挑戦が訪れます。外国関連の仕事が活発になり、技術と革新の分野で発展の可能性。物質的な欲望が強くなりますが幻想に陥らないよう注意。独特な経験をすることになります。18年の長い周期。',
+                    'Jupiter': '幸運と成長の時期！教育、結婚、出産、昇進など人生の良いことが起きやすい時。霊的な成長と知恵が深まります。師匠やメンターに出会います。法律、教育、宗教関連の活動が有利です。',
+                    'Saturn': '忍耐と試練の時期。遅いが確実な成長をします。責任が重くなり制限と構造化を経験します。健康、特に骨と関節に注意。19年の長い周期で、真の実力が試される時期。終われば強くなった自分を発見します。',
+                    'Mercury': '知的活動とビジネスの時期。学習、コミュニケーション、文筆、事業に有利です。新しい技術を学ぶのに良い時。兄弟、友人との関係が活発になります。神経系の健康に注意。複数のことを同時に手がけることになります。',
+                    'Ketu': '霊的覚醒と分離の時期。物質世界から超然とし霊的な関心が深まります。突然の変化と喪失を経験するかもしれませんが、それが霊的成長につながります。直観が非常に強まり、瞑想と修行に良い時期。',
+                    'Venus': '愛と豊穣の時期！恋愛、結婚、芸術活動が活発になります。物質的な豊かさを享受し贅沢を楽しみます。新車、新居、宝石などを得るかもしれません。美的感覚が発達し社交活動が活発になります。20年の最も長い周期。'
                 };
                 html += `<div class="interp-card">
-                    <div class="interp-title">⏳ Current Dasha: ${DASHA_KO[currentDasha]} Dasha</div>
+                    <div class="interp-title">⏳ 現在の大運: ${DASHA_KO[currentDasha]} ダシャー</div>
                     <div class="interp-text">${dashaInterp[currentDasha]}</div>
                 </div>`;
             }
@@ -1107,7 +1106,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     // ═══════════════════════════════════
-    // 8. 🔮 Special Yogas (Planetary Combinations)
+    // 8. 🔮 特別ヨーガ (惑星の組み合わせ)
     // ═══════════════════════════════════
     let yogaText = '';
     const jupiter = positions.find(p => p.id === 'Jupiter');
@@ -1120,7 +1119,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const jupH = houseOf(jupiter.sign);
         const diff = Math.abs(moonH - jupH);
         if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
-            yogaText += '<strong>🐘 Gajakesari Yoga</strong> — Moon and Jupiter in Kendra relationship! A combination of wisdom, fame, and abundance. Socially respected with exceptional intellectual abilities. Good education and children fortune.<br><br>';
+            yogaText += '<strong>🐘 ガジャケーサリー・ヨーガ (Gajakesari)</strong> — 月と木星がケンドラ関係！知恵、名声、豊穣の組み合わせ。社会的に尊敬され知的能力に優れています。良い教育と子供運。<br><br>';
         }
     }
 
@@ -1128,25 +1127,25 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const sun = positions.find(p => p.id === 'Sun');
     const mercury = positions.find(p => p.id === 'Mercury');
     if (sun && mercury && sun.sign === mercury.sign) {
-        yogaText += '<strong>📚 Budha-Aditya Yoga</strong> — Sun and Mercury in the same sign! Outstanding intellect and communication skills. Success in education, writing, and business. An authoritative intellectual leader.<br><br>';
+        yogaText += '<strong>📚 ブダ・アーディティヤ・ヨーガ</strong> — 太陽と水星が同じ星座！優れた知性とコミュニケーション能力。教育、文筆、ビジネスで成功。権威ある知的リーダー。<br><br>';
     }
 
     // Chandra-Mangala Yoga
     if (moonPos && mars && moonPos.sign === mars.sign) {
-        yogaText += '<strong>🔥 Chandra-Mangala Yoga</strong> — Moon and Mars in the same sign! Strong willpower and wealth accumulation ability. Succeeds in business and makes bold decisions.<br><br>';
+        yogaText += '<strong>🔥 チャンドラ・マンガラ・ヨーガ</strong> — 月と火星が同じ星座！強い意志と財の蓄積能力。事業で成功し大胆な決断を下します。<br><br>';
     }
 
     // Kuja Dosha (Manglik)
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Mars is positioned in the ${marsH}${marsH===1?'st':marsH===2?'nd':marsH===3?'rd':'th'} house, which may bring challenges in married life. It is advisable to check your partner's chart as well when choosing a spouse. Marriage after age 28 may be more favorable.<br><br>`;
+            yogaText += `<strong>⚠️ クジャ・ドーシャ（マンガリク）</strong> — 火星が${marsH}宮に位置しており、結婚生活に挑戦があるかもしれません。配偶者選びの際、相手のチャートも確認することをお勧めします。28歳以降の結婚が有利かもしれません。<br><br>`;
         }
     }
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">🔮 Special Yogas (Planetary Combinations)</div>
+            <div class="interp-title">🔮 特別ヨーガ (惑星の組み合わせ)</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -1155,92 +1154,92 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 }
 
 // ═══════════════════════════════════════════════════
-// Planet in House Detailed Interpretations
+// 惑星別ハウス詳細解釈
 // ═══════════════════════════════════════════════════
 const PLANET_IN_HOUSE = {
     Sun: [
-        '1st House: Strong self and leadership. Healthy and vital. High self-esteem and independent. Connection with government/authority.',
-        '2nd House: Values family honor. Income through authority. Inheritance from father. Watch eye health.',
-        '3rd House: Courageous and decisive. Leader among siblings. Authority in writing/communication. Many short trips.',
-        '4th House: Tension in parental relationships. Ownership of real estate/vehicles. Inner restlessness. May leave hometown.',
-        '5th House: Outstanding creative talent. Good relationship with children. Investment/speculation abilities. Romantic love.',
-        '6th House: Power to defeat enemies. Health management abilities. Victory in legal disputes. Suited for service/medical fields.',
-        '7th House: Spouse with high social status. Leading role in partnerships. Social growth after marriage.',
-        '8th House: Watch longevity. Benefits from inheritance/insurance. Secret power. Experience of spiritual transformation.',
-        '9th House: Father is a respected figure. Success in law/religion/higher education. Many overseas trips. Good fortune.',
-        '10th House: The best placement! Social success and fame. Leader in government/public sector. Success like father.',
-        '11th House: Large income and social network. High-status friends. Excellent goal achievement abilities.',
-        '12th House: Success overseas. Spiritual pursuits. Distance from father. Tendency to enjoy solitude. Watch eye health.'
+        '1宮: 強い自我とリーダーシップ。健康で活力にあふれる。自尊心が高く独立的。政府/権威との縁。',
+        '2宮: 家門の名誉を重視。権威を通じた収入。父親からの財産。目の健康に注意。',
+        '3宮: 勇敢で決断力がある。兄弟の中のリーダー。文筆/コミュニケーションで権威。短い旅行が多い。',
+        '4宮: 親との関係に緊張。不動産/車の所有。内面の不安感。故郷を離れることも。',
+        '5宮: 創造的才能が優れている。子供との良い関係。投資/投機の能力。ロマンチックな恋。',
+        '6宮: 敵に勝つ力。健康管理能力。法的紛争で勝利。奉仕/医療分野に適している。',
+        '7宮: 配偶者の社会的地位が高い。パートナーシップで主導権。結婚後の社会的成長。',
+        '8宮: 寿命に注意。遺産/保険関連の利益。秘密の権力。霊的変革の経験。',
+        '9宮: 父親が尊敬される人物。法律/宗教/高等教育で成功。海外旅行が多い。幸運。',
+        '10宮: 最高の配置！社会的成功と名声。政府/公共分野のリーダー。父親のように成功。',
+        '11宮: 大きな収入と社会的ネットワーク。上流層の友人。目標達成能力に優れる。',
+        '12宮: 海外での成功。霊的追求。父親との距離。孤独を楽しむ傾向。目の健康に注意。'
     ],
     Moon: [
-        '1st House: Attractive appearance. Emotional and changeable personality. Popular with the public. Health influenced by Moon cycles.',
-        '2nd House: Comfortable family environment. Good diet. Sweet-spoken. Strong family bonds.',
-        '3rd House: Creative communication skills. Loves to travel. Emotional bond with siblings. Artistic hobbies.',
-        '4th House: The best placement! Happy home. Strong bond with mother. Good real estate fortune. Emotional stability.',
-        '5th House: Deep love for children. Romantic personality. Intuitive investment ability. Joy in creative activities.',
-        '6th House: Health issues from emotional stress. Victory over enemies. Service spirit. Watch for digestive disorders.',
-        '7th House: Attractive spouse. Emotionally deep marriage. Tendency to depend on partner. Public relations.',
-        '8th House: Emotional turmoil and transformation. Very strong intuition. Possible inheritance. Long life but emotional crises.',
-        '9th House: Spiritual and philosophical. Mother is religious. Travel/residence abroad. Lucky journeys.',
-        '10th House: Public popularity and social success. Hospitality/food & beverage/caring fields. Success through mother\'s influence.',
-        '11th House: Many friends and sociable. Steady income. Ability to fulfill wishes. Help from female friends.',
-        '12th House: Possible residence abroad. Sleep problems. Spiritual inclinations. Distance from mother. Enjoys solitude.'
+        '1宮: 魅力的な外見。感情的で変化の多い性格。大衆に人気。健康が月の周期に影響。',
+        '2宮: 豊かな家庭環境。良い食生活。甘い話し方。家族との絆が強い。',
+        '3宮: 創造的なコミュニケーション能力。旅行が好き。兄弟姉妹との感情的な絆。芸術的な趣味。',
+        '4宮: 最高の配置！幸せな家庭。母親との強い絆。不動産運が良い。感情的安定。',
+        '5宮: 子供への愛が深い。ロマンチックな性格。直感的な投資能力。創作活動に喜び。',
+        '6宮: 感情的ストレスによる健康問題。敵に勝利。奉仕精神。消化障害に注意。',
+        '7宮: 魅力的な配偶者。感情的に深い結婚。パートナーに依存的な傾向。大衆との関係。',
+        '8宮: 感情的な混乱と変革。直観が非常に強い。遺産/相続の可能性。寿命は長いが感情的な危機。',
+        '9宮: 霊的で哲学的。母親が宗教的。海外旅行/居住。幸運な旅行。',
+        '10宮: 大衆的な人気と社会的成功。ホテル/飲食/ケアリング分野。母親の影響で成功。',
+        '11宮: 友人が多く社交的。着実な収入。願望達成能力。女性の友人の助け。',
+        '12宮: 海外居住の可能性。睡眠の問題。霊的傾向。母親との距離。孤独を楽しむ。'
     ],
     Mars: [
-        '1st House: Strong physique and willpower. Possible scars/wounds. Impulsive but brave. Leadership and competitiveness.',
-        '2nd House: Harsh speech. Dietary issues. Family disputes. But ability to accumulate wealth.',
-        '3rd House: The best placement! Courage and adventurous spirit. Strong bond with siblings. Athletic/sports talent.',
-        '4th House: Domestic conflicts. Real estate disputes. Tension with mother. But profits from real estate investments.',
-        '5th House: Passionate romance. Active children. Speculative investments. Talent in sports/competition.',
-        '6th House: Power to crush enemies! Physical strength to overcome illness. Suited for military/police/medical. Strong immunity.',
-        '7th House: Kuja Dosha — Passion and conflict coexist in marriage. Strong spouse. Marriage after 28 recommended.',
-        '8th House: Watch for accidents/surgery. But the power to survive crises. Insurance/inheritance benefits. Interest in tantra.',
-        '9th House: Conflict with father. Strong opinions about religion. Legal disputes. Foreign activities.',
-        '10th House: Outstanding career performance! Military/engineering/surgery/police. A brave leader in society.',
-        '11th House: Large income! Strong goal achievement. Help from siblings. Real estate profits.',
-        '12th House: High spending overseas. Sleep issues. Strong sexual energy. Secret activities.'
+        '1宮: 強い体力と意志。傷/傷跡の可能性。せっかちだが勇敢。リーダーシップと競争心。',
+        '2宮: 荒い言葉遣い。食習慣の問題。家族との争い。しかし財の蓄積能力。',
+        '3宮: 最高の配置！勇気と冒険心。兄弟との強い絆。運動/スポーツの才能。',
+        '4宮: 家庭内の対立。不動産関連の紛争。母親との緊張。しかし不動産投資の利益。',
+        '5宮: 情熱的な恋愛。子供が活動的。投機的な投資。スポーツ/競争分野の才能。',
+        '6宮: 敵を撃破する力！病気に勝つ体力。軍隊/警察/医療に適している。強い免疫力。',
+        '7宮: クジャ・ドーシャ — 結婚生活に情熱と対立が共存。強い配偶者。28歳以降の結婚推奨。',
+        '8宮: 事故/手術に注意。しかし危機を生き抜く力。保険/遺産の利益。タントラへの関心。',
+        '9宮: 父親との対立。宗教への強い意見。法的紛争。海外での活動。',
+        '10宮: 優れた職業成果！軍隊/エンジニアリング/外科/警察。社会で勇敢なリーダー。',
+        '11宮: 大きな収入！目標達成能力が強い。兄弟からの助け。不動産の利益。',
+        '12宮: 海外での支出が多い。睡眠の問題。性的エネルギーが強い。秘密の活動。'
     ],
     Jupiter: [
-        '1st House: Blessed placement! Wise and generous personality. Large build and healthy. A respected figure.',
-        '2nd House: Abundant wealth! Large family. Income through education. Eloquent speaker. Good diet.',
-        '3rd House: Successful siblings. Writing related to religion/education. Short pilgrimages.',
-        '4th House: One of the best placements! Spacious home. Academic achievement. Wise mother. Inner peace.',
-        '5th House: Outstanding intellect and creativity! Good children fortune. Wise investments. Spiritual practice. Merit from past lives.',
-        '6th House: Easily defeats enemies. Legal victories. Service spirit. Healthy but watch weight management.',
-        '7th House: A wise and moral spouse! Happy marriage. Successful business partnerships.',
-        '8th House: Longevity! Inheritance. Depth of spiritual knowledge. Interest in astrology/mysticism. Spouse\'s wealth.',
-        '9th House: The most powerful placement! Great fortune. Teacher\'s blessings. Overseas travel. Success in law/religion/philosophy.',
-        '10th House: Social fame and respect! Leader in education/law/religious fields. Moral authority. Best career fortune.',
-        '11th House: Great income and profits! Wish fulfillment. Influential connections. Social success.',
-        '12th House: Fortune overseas. Spiritual liberation. Heavenly pleasures. Donations and charity. Meditation practice.'
+        '1宮: 祝福された配置！知恵深く寛大な性格。体格が大きく健康。尊敬される人物。',
+        '2宮: 豊かな財産！大きな家門。教育を通じた収入。雄弁家。良い食生活。',
+        '3宮: 兄弟姉妹が成功的。宗教/教育関連の文筆。短い巡礼旅行。',
+        '4宮: 最高の配置の一つ！広い家。学問的成果。母親が知恵深い。内面の平和。',
+        '5宮: 優れた知性と創造力！良い子供運。賢明な投資。霊的修行。前世の功徳。',
+        '6宮: 敵に簡単に勝つ。法的勝利。奉仕精神。健康だが体重管理に注意。',
+        '7宮: 賢明で道徳的な配偶者！幸せな結婚。ビジネスパートナーシップの成功。',
+        '8宮: 長寿！遺産相続。霊的知識の深さ。占星術/神秘学への関心。配偶者の財産。',
+        '9宮: 最も強力な配置！偉大な幸運。師匠の祝福。海外旅行。法律/宗教/哲学の成功。',
+        '10宮: 社会的名声と尊敬！教育/法律/宗教分野のリーダー。道徳的権威。最高の職業運。',
+        '11宮: 大きな収入と利益！願望成就。影響力のある人脈。社会的成功。',
+        '12宮: 海外での幸運。霊的解放。天国の快楽。寄付と慈善。瞑想修行。'
     ],
     Venus: [
-        '1st House: Very attractive appearance! Artistic talent. Enjoys luxury. Sociable and popular.',
-        '2nd House: Abundant wealth! Fine food and luxury goods. Sweet voice. Family harmony.',
-        '3rd House: Artistic communication. Beautiful writing. Good relationship with sisters/female siblings.',
-        '4th House: Beautiful home and vehicles! Luxurious lifestyle. Mother is beautiful and artistic.',
-        '5th House: Romantic love! Art/entertainment talent. Beautiful children. Joy in creation.',
-        '6th House: Difficulties in romance. Health-related beauty. Victory over enemies through charm.',
-        '7th House: The best placement! Very attractive spouse. Happy marriage. Successful business partnerships.',
-        '8th House: Deep and transformative love. Spouse\'s wealth. Secret romance. Longevity.',
-        '9th House: Romance abroad. Artistic travels. Beautiful relationship with teachers.',
-        '10th House: Success in art/fashion/entertainment! Socially attractive. Help from women.',
-        '11th House: Income through social networks! Help from female friends. Wish fulfillment.',
-        '12th House: Love abroad. Secret romance. Bedroom pleasures. Artistic inspiration.'
+        '1宮: 非常に魅力的な外見！芸術的才能。贅沢を楽しむ。社交的で人気者。',
+        '2宮: 豊かな財産！美味しい食事と贅沢品。甘い声。家族の調和。',
+        '3宮: 芸術的なコミュニケーション。美しい文章。妹/女性の兄弟との良い関係。',
+        '4宮: 美しい家と車！ラグジュアリーな生活。母親が美しく芸術的。',
+        '5宮: ロマンチックな恋！芸術/エンターテインメントの才能。美しい子供。創作の喜び。',
+        '6宮: 恋愛での困難。健康関連の美容。敵に魅力で勝利。',
+        '7宮: 最高の配置！非常に魅力的な配偶者。幸せな結婚。ビジネスパートナーシップの成功。',
+        '8宮: 深く変革的な愛。配偶者の財産。秘密のロマンス。長寿。',
+        '9宮: 海外でのロマンス。芸術的な旅行。師匠との美しい関係。',
+        '10宮: 芸術/ファッション/エンターテインメント分野の成功！社会的に魅力的。女性の助け。',
+        '11宮: 社交的ネットワークを通じた収入！女性の友人の助け。願望成就。',
+        '12宮: 海外での愛。秘密の恋愛。寝室の楽しみ。芸術的インスピレーション。'
     ],
     Saturn: [
-        '1st House: Lean build. Serious and responsible. Childhood difficulties. Shines with age. Longevity.',
-        '2nd House: Slow wealth accumulation. Frugal lifestyle. Heavy speech. Distance from family. Stability after middle age.',
-        '3rd House: Excellent placement! Strong will and patience. Responsibility for siblings. Systematic communication.',
-        '4th House: Difficulties with mother. Strict home environment. Old houses/buildings. Inner solitude.',
-        '5th House: Children come late or few. Cautious investments. Academic struggles and overcoming. Spiritual practice.',
-        '6th House: Defeats enemies through patience! Chronic but manageable conditions. Success in service fields. Good placement.',
-        '7th House: Late marriage. Older spouse. Difficult early on but stable marriage. Caution with business partners.',
-        '8th House: Longevity! Watch for chronic conditions. Delays in inheritance matters. Secret research. Interest in tantra/yoga.',
-        '9th House: Difficult relationship with father. Serious approach to religion. Late overseas travel.',
-        '10th House: Great placement! Slow but certain social success. Leader in large corporations/government. Best career fortune.',
-        '11th House: Steady income growth! Older friends. Achieving goals through patience. Organizational profits.',
-        '12th House: Difficulties and growth overseas. Sleep issues. Spiritual practice. Preference for solitary work.'
+        '1宮: 痩せた体型。真面目で責任感が強い。幼少期の困難。年齢を重ねるほど輝く。長寿。',
+        '2宮: 財の蓄積が遅い。質素な生活。言葉が重い。家族との距離。中年以降安定。',
+        '3宮: 優れた配置！強い意志と忍耐。兄弟への責任。体系的なコミュニケーション。',
+        '4宮: 母親との困難。家庭環境が厳格。古い家/建物。内面の孤独。',
+        '5宮: 子供が遅いか少ない。慎重な投資。学業での困難と克服。霊的修行。',
+        '6宮: 敵を忍耐で制す！慢性疾患だが管理可能。奉仕分野での成功。良い配置。',
+        '7宮: 結婚が遅い。年上の配偶者。初期の困難の後、安定した結婚。ビジネスパートナーに注意。',
+        '8宮: 長寿！慢性疾患に注意。遺産関連の遅延。秘密の研究。タントラ/ヨーガへの関心。',
+        '9宮: 父親との困難な関係。宗教への真剣なアプローチ。遅い海外旅行。',
+        '10宮: 偉大な配置！遅いが確実な社会的成功。大企業/政府のリーダー。最高の職業運。',
+        '11宮: 着実な収入成長！年上の友人。目標を忍耐で達成。組織での利益。',
+        '12宮: 海外での困難と成長。睡眠の問題。霊的修行。孤独な作業を好む。'
     ]
 };
 
@@ -1254,9 +1253,8 @@ function renderPlanetHouse(positions, lagnaSign) {
         const desc = PLANET_IN_HOUSE[p.id][house - 1];
         if (!desc) return;
 
-        const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
         html += `<div class="interp-card">
-            <div class="interp-title">${p.symbol} ${p.name} → ${house}${hSuffix} House (${SIGNS[p.sign]})</div>
+            <div class="interp-title">${p.symbol} ${p.name} → ${house}宮 (${SIGNS[p.sign]})</div>
             <div class="interp-text">${desc}</div>
         </div>`;
     });
@@ -1265,7 +1263,7 @@ function renderPlanetHouse(positions, lagnaSign) {
 }
 
 // ═══════════════════════════════════════════════════
-// Education & Knowledge
+// 教育 & 知識
 // ═══════════════════════════════════════════════════
 function renderEducation(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
@@ -1276,23 +1274,22 @@ function renderEducation(positions, lagnaSign) {
     const h4sign = (lagnaSign + 3) % 12;
     const h5sign = (lagnaSign + 4) % 12;
 
-    let text = `<strong>4th House (Basic Education & Degrees):</strong> ${SIGNS[h4sign]}. `;
-    const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
-    text += 'Suited for ' + eduSign4[h4sign] + '. ';
-    if (h4.length > 0) text += h4.map(p => p.name).join(', ') + ' in the 4th house influences education. ';
+    let text = `<strong>4宮 (基礎教育・学位):</strong> ${SIGNS[h4sign]}。`;
+    const eduSign4 = ['活動的な学習、体育/軍事教育', '美術/音楽/料理教育', '言語/文学/コミュニケーション', '家庭教育重視、歴史学', '演劇/リーダーシップ/政治学', '科学/医学/分析学', '法学/外交/デザイン', '心理学/研究/調査', '哲学/神学/国際学', '経営/行政/建築', 'IT/科学技術/航空', '芸術/映画/音楽/霊性'];
+    text += eduSign4[h4sign] + 'に適しています。';
+    if (h4.length > 0) text += '4宮の' + h4.map(p => p.name).join('、') + 'が教育に影響。';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        const jSuffix = jH===1?'st':jH===2?'nd':jH===3?'rd':'th';
-        if ([1,4,5,9].includes(jH)) text += `<br><br>🎓 <strong>Jupiter in the ${jH}${jSuffix} house indicates high academic achievement!</strong> Potential for graduate school/PhD/study abroad.`;
+        if ([1,4,5,9].includes(jH)) text += '<br><br>🎓 <strong>木星が' + jH + '宮に位置しており、高い学業成就が期待されます！</strong> 大学院/博士課程/海外留学の可能性。';
     }
 
-    text += `<br><br><strong>5th House (Higher Education & Intellect & Creativity):</strong> ${SIGNS[h5sign]}. `;
+    text += `<br><br><strong>5宮 (高等教育・知性・創造力):</strong> ${SIGNS[h5sign]}。`;
     if (h5.length > 0) {
         h5.forEach(p => {
-            const h5p = { Sun: 'Excels in leadership/political science', Moon: 'Talent in art/psychology', Mars: 'Talent in engineering/technology/physical education', Mercury: 'Genius in math/languages/business', Jupiter: 'The best placement! Scholar/professor/researcher', Venus: 'Talent in art/design/music', Saturn: 'Late academic start but deep research' };
-            text += `${p.name}: ${h5p[p.id] || 'Influences academics'}. `;
+            const h5p = { Sun: 'リーダーシップ/政治学分野に優れる', Moon: '芸術/心理学の才能', Mars: '工学/技術/体育の才能', Mercury: '数学/言語/ビジネスの天才', Jupiter: '最高の配置！学者/教授/研究者', Venus: '芸術/デザイン/音楽の才能', Saturn: '遅い学業だが深みのある研究' };
+            text += `${p.name}: ${h5p[p.id] || '学業に影響'}。`;
         });
     }
 
@@ -1300,7 +1297,7 @@ function renderEducation(positions, lagnaSign) {
 }
 
 // ═══════════════════════════════════════════════════
-// Children Fortune
+// 子供運
 // ═══════════════════════════════════════════════════
 function renderChildren(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
@@ -1310,42 +1307,42 @@ function renderChildren(positions, lagnaSign) {
     const h5sign = (lagnaSign + 4) % 12;
     const jupiter = positions.find(p => p.id === 'Jupiter');
 
-    let text = `<strong>5th House (Children & Creativity):</strong> Located in ${SIGNS[h5sign]}.<br><br>`;
+    let text = `<strong>5宮 (子供・創造力):</strong> ${SIGNS[h5sign]}に位置。<br><br>`;
 
     const childSign = [
-        'Active and independent children. Talented in sports/leadership. Gains independence early.',
-        'Calm and artistic children. Talented in music/art. Materially well-off children.',
-        'Smart and quick-speaking children. Excellent academics. Possibility of twins.',
-        'Sensitive and gentle children. Special bond with mother. Domestic children.',
-        'Charismatic and creative children. Leader qualities. Talent in entertainment/art.',
-        'Meticulous and analytical children. Talent in medicine/science. Health care is important.',
-        'Charming and sociable children. Talent in art/diplomacy. Excellent sense of balance.',
-        'Intense and intuitive children. Research/exploration spirit. May have many secrets.',
-        'Free-spirited and adventurous children. Possible study/travel abroad. Philosophical tendencies.',
-        'Serious and ambitious children. Matures early. Achievement-oriented.',
-        'Unique and innovative children. Talented in technology/science. Independent personality.',
-        'Artistic and spiritual children. Rich imagination. Talented in music/painting.'
+        '活発で独立的な子供。スポーツ/リーダーシップに才能。早く独立。',
+        '穏やかで芸術的な子供。音楽/美術に才能。物質的に豊かな子供。',
+        '賢くて話が早い子供。学業優秀。双子の可能性。',
+        '感性的で優しい子供。母親と特別な絆。家庭的な子供。',
+        'カリスマがあり創造的な子供。リーダーの気質。芸能/芸術の才能。',
+        '几帳面で分析的な子供。医学/科学の才能。健康管理が重要。',
+        '魅力的で社交的な子供。芸術/外交の才能。バランス感覚に優れる。',
+        '強烈で直観的な子供。研究/探究精神。秘密が多いかもしれません。',
+        '自由で冒険的な子供。海外留学/旅行の可能性。哲学的な傾向。',
+        '真面目で野心のある子供。早く成熟する。社会的達成志向。',
+        '独特で革新的な子供。技術/科学に才能。独立的な性格。',
+        '芸術的で霊的な子供。想像力豊か。音楽/絵の才能。'
     ];
     text += childSign[h5sign];
 
     if (h5.length > 0) {
-        text += '<br><br><strong>Planets in the 5th House:</strong><br>';
+        text += '<br><br><strong>5宮の惑星:</strong><br>';
         h5.forEach(p => {
-            const ch = { Sun: 'Connection with sons. Children have leader qualities.', Moon: 'Connection with daughters. Strong emotional bond with children.', Mars: 'Active children. May be somewhat difficult to manage.', Mercury: 'Very smart children! Excellent academics.', Jupiter: 'Blessed children! Dutiful and devoted. Fortune through children.', Venus: 'Beautiful and artistic children. Connection with daughters.', Saturn: 'Children may come late or be few. But responsible children.' };
+            const ch = { Sun: '息子との縁。子供がリーダーの気質。', Moon: '娘との縁。子供との感情的な絆が強い。', Mars: '活動的な子供。やや扱いにくいかもしれません。', Mercury: '非常に賢い子供！学業優秀。', Jupiter: '福のある子供！親孝行。子供を通じた幸運。', Venus: '美しく芸術的な子供。娘との縁。', Saturn: '子供が遅いか少ないかもしれません。しかし責任感のある子供。' };
             text += `${p.symbol} ${p.name}: ${ch[p.id] || ''}<br>`;
         });
     }
 
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if (jH === 5) text += '<br>🌟 <strong>Jupiter in the 5th house! Best children fortune. Children bring great luck.</strong>';
+        if (jH === 5) text += '<br>🌟 <strong>木星が5宮！最高の子供運。子供が大きな幸運をもたらします。</strong>';
     }
 
     document.getElementById('childrenWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
 }
 
 // ═══════════════════════════════════════════════════
-// Foreign Fortune & Migration
+// 海外運 & 移住
 // ═══════════════════════════════════════════════════
 function renderForeign(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
@@ -1355,63 +1352,62 @@ function renderForeign(positions, lagnaSign) {
     const h12 = planetsInHouse(12);
     const rahu = positions.find(p => p.id === 'Rahu');
 
-    let text = '<strong>9th House (Foreign Travel · Fortune · Higher Education):</strong><br>';
+    let text = '<strong>9宮 (海外旅行・幸運・高等教育):</strong><br>';
     if (h9.length === 0) {
-        text += 'No planets in the 9th house — foreign travel exists but there is no particularly strong connection.';
+        text += '9宮に惑星がなく、海外旅行はありますが特別に強い縁ではありません。';
     } else {
         h9.forEach(p => {
-            const f9 = { Sun: 'Father has foreign connections. Government/official overseas trips.', Moon: 'Emotionally enjoys foreign travel. Popularity abroad.', Mars: 'Adventure/challenges abroad. Military/technology-related foreign activities.', Mercury: 'Study abroad/business success! Multilingual abilities.', Jupiter: 'Great fortune abroad! Successful study/immigration. Meeting a foreign teacher.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Hardship then success abroad. Long-term foreign residence.', Rahu: 'Strong indicator of foreign migration! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connections. Spiritual pilgrimage.' };
+            const f9 = { Sun: '父親が海外関連。政府/公務の海外出張。', Moon: '海外旅行を感情的に楽しむ。海外での大衆人気。', Mars: '海外での冒険/挑戦。軍事/技術関連の海外活動。', Mercury: '海外留学/ビジネスの成功！多言語能力。', Jupiter: '海外で大きな幸運！留学/移民の成功。海外で師匠に出会う。', Venus: '海外でのロマンス。芸術/ファッション関連の海外活動。', Saturn: '海外での苦労の後に成功。長期海外滞在。', Rahu: '海外移住の強力な指標！外国文化に深くはまる。', Ketu: '前世からの海外の縁。霊的巡礼。' };
             text += `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
 
-    text += '<br><strong>12th House (Foreign Settlement · Immigration · Expenses):</strong><br>';
+    text += '<br><strong>12宮 (海外定住・移民・支出):</strong><br>';
     if (h12.length === 0) {
-        text += 'No planets in the 12th house — domestic residence is more natural than foreign settlement.';
+        text += '12宮に惑星がなく、海外定住よりは国内居住が自然です。';
     } else {
         h12.forEach(p => {
-            const f12 = { Sun: 'Finding identity abroad. Government-related foreign postings.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT activities. Overseas education.', Jupiter: 'Spiritual growth abroad. Charitable activities. Foreign universities.', Venus: 'Luxury and pleasure abroad. Overseas artistic activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Definitive indicator of foreign immigration! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
+            const f12 = { Sun: '海外でのアイデンティティ探し。政府関連の海外派遣。', Moon: '海外居住の可能性が高い！海外で感情的安定。', Mars: '海外でのエネルギー消耗。海外投資/不動産。', Mercury: '海外ビジネス/IT関連活動。海外教育。', Jupiter: '海外での霊的成長。慈善活動。海外の大学。', Venus: '海外での贅沢と快楽。海外の芸術活動。', Saturn: '海外での厳しい労働。しかし長期的な定住。', Rahu: '海外移民の確定的指標！西洋文化への適応。', Ketu: '海外での霊的修行。孤独な海外生活。' };
             text += `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
 
     if (rahu) {
         const rH = houseOf(rahu.sign);
-        const rSuffix = rH===1?'st':rH===2?'nd':rH===3?'rd':'th';
-        if ([9, 12, 7].includes(rH)) text += `<br>✈️ <strong>Rahu in the ${rH}${rSuffix} house indicates a very high possibility of foreign migration/long-term residence!</strong>`;
+        if ([9, 12, 7].includes(rH)) text += '<br>✈️ <strong>ラーフが' + rH + '宮に位置しており、海外移住/長期滞在の可能性が非常に高いです！</strong>';
     }
 
     document.getElementById('foreignWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
 }
 
 // ═══════════════════════════════════════════════════
-// Planetary Dignity
+// 惑星の品位
 // ═══════════════════════════════════════════════════
 function renderDignity(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
-    const houseArea = {1:'Self',2:'Money/Family',3:'Communication/Siblings',4:'Home/Mother',5:'Children/Romance',6:'Health/Enemies',7:'Spouse',8:'Transformation/Inheritance',9:'Luck/Foreign',10:'Career/Fame',11:'Income/Wishes',12:'Foreign/Spirituality'};
+    const houseArea = {1:'自分自身',2:'お金・家族',3:'コミュニケーション・兄弟',4:'家庭・母親',5:'子供・恋愛',6:'健康・敵',7:'配偶者',8:'変革・遺産',9:'幸運・海外',10:'職業・名声',11:'収入・願望',12:'海外・霊性'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
     const OWN = { Sun: [4], Moon: [3], Mars: [0,7], Mercury: [2,5], Jupiter: [8,11], Venus: [1,6], Saturn: [9,10] };
 
-    // Easy explanation
+    // わかりやすい説明
     const planetRole = {
-        Sun: 'Self/Confidence/Father/Authority',
-        Moon: 'Emotions/Mind/Mother/Daily life',
-        Mars: 'Energy/Courage/Action/Competition',
-        Mercury: 'Intelligence/Communication/Learning/Business',
-        Jupiter: 'Luck/Wisdom/Wealth/Marriage',
-        Venus: 'Love/Charm/Art/Pleasure',
-        Saturn: 'Patience/Trials/Responsibility/Effort'
+        Sun: '自我・自信・父親・権威',
+        Moon: '感情・心・母親・日常',
+        Mars: 'エネルギー・勇気・行動力・競争',
+        Mercury: '知性・コミュニケーション・学習・ビジネス',
+        Jupiter: '幸運・知恵・財産・結婚',
+        Venus: '愛・魅力・芸術・快楽',
+        Saturn: '忍耐・試練・責任・努力'
     };
 
     let html = `<div class="interp-card" style="margin-bottom:16px;">
         <div class="interp-text">
-            <strong>💡 Easy to understand:</strong> A planet's "dignity" refers to how well it can exert its power.<br><br>
-            🟢 <strong>Exalted</strong> = Peak condition! Great fortune and results in the life area this planet governs.<br>
-            🟡 <strong>Own Sign</strong> = Comfortable as if at home. Stable and good results.<br>
-            ⚪ <strong>Neutral</strong> = Average. Neither particularly strong nor weak.<br>
-            🔴 <strong>Debilitated</strong> = Weakened state. Difficulties in this area, but can be overcome with effort.
+            <strong>💡 わかりやすく理解する:</strong> 惑星の「品位」とは、その惑星がどれだけ力を発揮できるかを意味します。<br><br>
+            🟢 <strong>高揚</strong> = 最高のコンディション！この惑星が担当する人生の領域で大きな幸運と成果。<br>
+            🟡 <strong>本宮</strong> = 自分の家にいるように快適。安定的に良い結果。<br>
+            ⚪ <strong>中立</strong> = 普通。特に強くも弱くもない。<br>
+            🔴 <strong>減衰</strong> = 力が弱い状態。この領域で困難がありますが努力で克服可能。
         </div>
     </div>`;
 
@@ -1421,35 +1417,34 @@ function renderDignity(positions, lagnaSign) {
         const role = planetRole[p.id];
 
         const house = houseOf(p.sign);
-        const hSuffix = house===1?'st':house===2?'nd':house===3?'rd':'th';
         const area = houseArea[house] || '';
 
         if (p.sign === EXALT[p.id]) {
-            dignity = 'Exalted';
+            dignity = '高揚 (Exalted)';
             emoji = '🟢';
             color = '#5cb85c';
-            simpleDesc = `<strong>${p.name} is at maximum power!</strong> The "${role}" energy is maximized in the <strong>${house}${hSuffix} house (${area})</strong> area, bringing great blessings. Innate talents shine and good results come naturally.`;
+            simpleDesc = `<strong>${p.name}が最強！</strong>「${role}」のエネルギーが最大化された状態で<strong>${house}宮(${area})</strong>の領域で大きな祝福を受けています。生まれ持った才能が輝き、自然と良い結果を得ます。`;
         } else if (p.sign === DEBI[p.id]) {
-            dignity = 'Debilitated';
+            dignity = '減衰 (Debilitated)';
             emoji = '🔴';
             color = '#d9534f';
-            simpleDesc = `<strong>${p.name} is in a weakened state.</strong> The "${role}" energy is weakened in the <strong>${house}${hSuffix} house (${area})</strong> area. You may experience difficulties in this field, but conscious effort to overcome them can become a great opportunity for growth. See the remedies below.`;
+            simpleDesc = `<strong>${p.name}が弱い状態。</strong>「${role}」のエネルギーが弱まった状態で<strong>${house}宮(${area})</strong>の領域にあります。この分野で困難を感じるかもしれませんが、意識的な努力で克服すればむしろ大きな成長の機会になります。下記の癒し法を参考にしてください。`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
-            dignity = 'Own Sign';
+            dignity = '本宮 (Own Sign)';
             emoji = '🟡';
             color = '#c9a84c';
-            simpleDesc = `<strong>${p.name} is at home!</strong> The "${role}" energy stably exerts its power in the <strong>${house}${hSuffix} house (${area})</strong> area. Good results come naturally.`;
+            simpleDesc = `<strong>${p.name}が自分の家に！</strong>「${role}」のエネルギーが安定的に<strong>${house}宮(${area})</strong>の領域で力を発揮します。自然と良い結果を生み出します。`;
         } else {
-            dignity = 'Neutral';
+            dignity = '中立';
             emoji = '⚪';
             color = '#999';
-            simpleDesc = `${p.name}'s "${role}" energy exerts average influence in the <strong>${house}${hSuffix} house (${area})</strong> area. Results vary depending on relationships with other planets.`;
+            simpleDesc = `${p.name}の「${role}」のエネルギーが<strong>${house}宮(${area})</strong>の領域で普通の影響力を発揮します。他の惑星との関係によって結果が異なります。`;
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}${hSuffix} House (${area}) — <span style="color:${color}">${dignity}</span></div>
+            <div class="interp-title">${emoji} ${p.symbol} ${p.name} — ${SIGNS[p.sign]} ${SIGN_SYMBOLS[p.sign]} → ${house}宮(${area}) — <span style="color:${color}">${dignity}</span></div>
             <div class="interp-text">
-                <span style="color:#666;font-size:12px;">Governs: ${role} │ Position: ${house}${hSuffix} House = ${area}</span><br><br>
+                <span style="color:#666;font-size:12px;">担当: ${role} │ 位置: ${house}宮 = ${area}</span><br><br>
                 ${simpleDesc}
             </div>
         </div>`;
@@ -1459,54 +1454,53 @@ function renderDignity(positions, lagnaSign) {
 }
 
 // ═══════════════════════════════════════════════════
-// Lucky Information
+// ラッキー情報
 // ═══════════════════════════════════════════════════
 function renderLucky(lagnaSign, moonPos) {
     const luckyData = [
-        { color: 'Red, Orange', number: '1, 9', day: 'Tuesday', gem: 'Red Coral', dir: 'East' },
-        { color: 'White, Pink', number: '2, 6', day: 'Friday', gem: 'Diamond', dir: 'Southeast' },
-        { color: 'Green', number: '3, 5', day: 'Wednesday', gem: 'Emerald', dir: 'North' },
-        { color: 'White, Silver', number: '2, 7', day: 'Monday', gem: 'Pearl', dir: 'Northwest' },
-        { color: 'Gold, Orange', number: '1, 4', day: 'Sunday', gem: 'Ruby', dir: 'East' },
-        { color: 'Green, Light Green', number: '5, 3', day: 'Wednesday', gem: 'Emerald', dir: 'South' },
-        { color: 'White, Pastel', number: '6, 2', day: 'Friday', gem: 'Diamond', dir: 'West' },
-        { color: 'Red, Crimson', number: '9, 1', day: 'Tuesday', gem: 'Red Coral', dir: 'South' },
-        { color: 'Yellow, Gold', number: '3, 9', day: 'Thursday', gem: 'Yellow Sapphire', dir: 'Northeast' },
-        { color: 'Navy, Black', number: '8, 4', day: 'Saturday', gem: 'Blue Sapphire', dir: 'West' },
-        { color: 'Navy, Purple', number: '4, 8', day: 'Saturday', gem: 'Blue Sapphire', dir: 'West' },
-        { color: 'Yellow, Gold', number: '3, 7', day: 'Thursday', gem: 'Yellow Sapphire', dir: 'Northeast' }
+        { color: '赤、オレンジ', number: '1, 9', day: '火曜日', gem: 'サンゴ (Red Coral)', dir: '東' },
+        { color: '白、ピンク', number: '2, 6', day: '金曜日', gem: 'ダイヤモンド', dir: '南東' },
+        { color: '緑', number: '3, 5', day: '水曜日', gem: 'エメラルド', dir: '北' },
+        { color: '白、銀', number: '2, 7', day: '月曜日', gem: 'パール', dir: '北西' },
+        { color: '金、オレンジ', number: '1, 4', day: '日曜日', gem: 'ルビー', dir: '東' },
+        { color: '緑、黄緑', number: '5, 3', day: '水曜日', gem: 'エメラルド', dir: '南' },
+        { color: '白、パステル', number: '6, 2', day: '金曜日', gem: 'ダイヤモンド', dir: '西' },
+        { color: '赤、深紅', number: '9, 1', day: '火曜日', gem: 'サンゴ', dir: '南' },
+        { color: '黄、金', number: '3, 9', day: '木曜日', gem: 'イエローサファイア', dir: '北東' },
+        { color: '紺、黒', number: '8, 4', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
+        { color: '紺、紫', number: '4, 8', day: '土曜日', gem: 'ブルーサファイア', dir: '西' },
+        { color: '黄、金', number: '3, 7', day: '木曜日', gem: 'イエローサファイア', dir: '北東' }
     ];
 
     const d = luckyData[lagnaSign];
-    const lagnaRulers = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const html = `<div class="interp-card">
         <div class="interp-text">
-            <strong>🎨 Lucky Color:</strong> ${d.color}<br>
-            <strong>🔢 Lucky Number:</strong> ${d.number}<br>
-            <strong>📅 Lucky Day:</strong> ${d.day}<br>
-            <strong>💎 Lucky Gemstone:</strong> ${d.gem}<br>
-            <strong>🧭 Lucky Direction:</strong> ${d.dir}<br>
-            <strong>🪐 Lagna Ruling Planet:</strong> ${lagnaRulers[lagnaSign]}
+            <strong>🎨 ラッキーカラー:</strong> ${d.color}<br>
+            <strong>🔢 ラッキーナンバー:</strong> ${d.number}<br>
+            <strong>📅 ラッキー曜日:</strong> ${d.day}<br>
+            <strong>💎 ラッキージェム:</strong> ${d.gem}<br>
+            <strong>🧭 ラッキー方角:</strong> ${d.dir}<br>
+            <strong>🪐 ラグナ支配惑星:</strong> ${['火星','金星','水星','月','太陽','水星','金星','火星','木星','土星','土星','木星'][lagnaSign]}
         </div>
     </div>`;
     document.getElementById('luckyWrap').innerHTML = html;
 }
 
 // ═══════════════════════════════════════════════════
-// Remedies & Strengthening Methods
+// 癒し & 強化方法
 // ═══════════════════════════════════════════════════
 function renderRemedy(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
 
     const remedies = {
-        Sun: { gem: 'Ruby', mantra: 'Om Suryaya Namaha', color: 'Wear orange/red on Sundays', food: 'Wheat, saffron, sunflower seeds', charity: 'Donate wheat/copper on Sundays' },
-        Moon: { gem: 'Pearl', mantra: 'Om Chandraya Namaha', color: 'Wear white/silver on Mondays', food: 'Milk, rice, coconut', charity: 'Donate rice/milk on Mondays' },
-        Mars: { gem: 'Red Coral', mantra: 'Om Mangalaya Namaha', color: 'Wear red on Tuesdays', food: 'Lentils, red fruits', charity: 'Donate red lentils on Tuesdays' },
-        Mercury: { gem: 'Emerald', mantra: 'Om Budhaya Namaha', color: 'Wear green on Wednesdays', food: 'Mung beans, green vegetables', charity: 'Donate green vegetables on Wednesdays' },
-        Jupiter: { gem: 'Yellow Sapphire', mantra: 'Om Gurave Namaha', color: 'Wear yellow on Thursdays', food: 'Chickpeas, bananas, turmeric', charity: 'Donate yellow food/books on Thursdays' },
-        Venus: { gem: 'Diamond', mantra: 'Om Shukraya Namaha', color: 'Wear white/pastel on Fridays', food: 'Milk, cream, fruits', charity: 'Donate white clothes/rice on Fridays' },
-        Saturn: { gem: 'Blue Sapphire', mantra: 'Om Shanaishcharaya Namaha', color: 'Wear navy/black on Saturdays', food: 'Black beans, sesame seeds', charity: 'Donate black beans/oil on Saturdays' }
+        Sun: { gem: 'ルビー (Ruby)', mantra: 'Om Suryaya Namaha', color: 'オレンジ/赤を日曜日に着用', food: '小麦、サフラン、ひまわりの種', charity: '日曜日に小麦/銅を寄付' },
+        Moon: { gem: 'パール (Pearl)', mantra: 'Om Chandraya Namaha', color: '白/銀を月曜日に着用', food: '牛乳、米、ココナッツ', charity: '月曜日に米/牛乳を寄付' },
+        Mars: { gem: 'サンゴ (Red Coral)', mantra: 'Om Mangalaya Namaha', color: '赤を火曜日に着用', food: 'レンズ豆、赤い果物', charity: '火曜日に赤いレンズ豆を寄付' },
+        Mercury: { gem: 'エメラルド (Emerald)', mantra: 'Om Budhaya Namaha', color: '緑を水曜日に着用', food: '緑豆、緑の野菜', charity: '水曜日に緑の野菜を寄付' },
+        Jupiter: { gem: 'イエローサファイア (Yellow Sapphire)', mantra: 'Om Gurave Namaha', color: '黄を木曜日に着用', food: 'ひよこ豆、バナナ、ターメリック', charity: '木曜日に黄色い食べ物/本を寄付' },
+        Venus: { gem: 'ダイヤモンド (Diamond)', mantra: 'Om Shukraya Namaha', color: '白/パステルを金曜日に着用', food: '牛乳、クリーム、果物', charity: '金曜日に白い服/米を寄付' },
+        Saturn: { gem: 'ブルーサファイア (Blue Sapphire)', mantra: 'Om Shanaishcharaya Namaha', color: '紺/黒を土曜日に着用', food: '黒豆、ゴマ', charity: '土曜日に黒豆/油を寄付' }
     };
 
     let html = '';
@@ -1519,20 +1513,20 @@ function renderRemedy(positions, lagnaSign) {
 
         if (isWeak) {
             html += `<div class="interp-card">
-                <div class="interp-title">${p.symbol} ${p.name} Strengthening Methods ${isDebi ? '(Debilitated — Especially Important!)' : '(Weak Position)'}</div>
+                <div class="interp-title">${p.symbol} ${p.name} 強化方法 ${isDebi ? '(減衰状態 — 特に重要！)' : '(弱い位置)'}</div>
                 <div class="interp-text">
-                    <strong>💎 Gemstone:</strong> ${r.gem} (Recommended to wear on ring finger)<br>
-                    <strong>🙏 Mantra:</strong> "${r.mantra}" (Chant 108 times daily)<br>
-                    <strong>🎨 Color:</strong> ${r.color}<br>
-                    <strong>🍽️ Food:</strong> ${r.food}<br>
-                    <strong>🤝 Charity:</strong> ${r.charity}
+                    <strong>💎 宝石:</strong> ${r.gem} (薬指に着用推奨)<br>
+                    <strong>🙏 マントラ:</strong> "${r.mantra}" (108回毎日唱える)<br>
+                    <strong>🎨 色:</strong> ${r.color}<br>
+                    <strong>🍽️ 食べ物:</strong> ${r.food}<br>
+                    <strong>🤝 慈善:</strong> ${r.charity}
                 </div>
             </div>`;
         }
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">All planets are in favorable positions! No special remedies are needed. For your lucky gemstone, wearing the gemstone of your Lagna ruling planet is recommended.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">すべての惑星が良好な位置にあります！特別な癒しは必要ありません。ラッキージェムはラグナ支配惑星の宝石を着用すると良いでしょう。</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;
