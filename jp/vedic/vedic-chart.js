@@ -2279,7 +2279,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><br><strong>7궁주 ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + '宮（' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
                 ch4 += '配偶者とのカルマ的繋がりが<strong>' + houseThemes[h7lH] + '</strong>領域を通じて発現されます。';
-                ch4 += h7lH === 1 ? '配偶者があなた自身の成長に直結します。' : h7lH === 4 ? '가정과 안식처를 통해 배우자를 만납니다.' : h7lH === 9 ? '海外や宗教/教育を通じて配偶者と縁が続きます。' : h7lH === 10 ? '職業/社会活動を通じて配偶者の縁が続きます。' : h7lH === 12 ? '海外や霊的環境で配偶者と出会うカルマです。' : '';
+                ch4 += h7lH === 1 ? '配偶者があなた自身の成長に直結します。' : h7lH === 4 ? '家庭と安息処を通じて配偶者と出会います。' : h7lH === 9 ? '海外や宗教/教育を通じて配偶者と縁が続きます。' : h7lH === 10 ? '職業/社会活動を通じて配偶者の縁が続きます。' : h7lH === 12 ? '海外や霊的環境で配偶者と出会うカルマです。' : '';
             }
         }
         html += subChapter('💍', '配偶者カルマ — 前世の縁', ch4);
@@ -2358,8 +2358,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         });
 
         let ch8 = isEasy ?
-            '9つの惑星中<strong style="color:#5cb85c">' + beneficCount + '개가 좋은 기운</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개가 주의 기운</strong><br><br>' :
-            '9つの惑星中<strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
+            '9つの惑星中<strong style="color:#5cb85c">' + beneficCount + 'つ良いエネルギー</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개가 주의 기운</strong><br><br>' :
+            '9つの惑星中<strong style="color:#5cb85c">' + beneficCount + 'つ吉神</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> 배치<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
                 '🌟 <strong>전생에서 정말 좋은 일을 많이 했어요!</strong> 거의 모든 행성이 좋은 기운 아래 있어서, 이번 생에서 자연스럽게 좋은 결과를 얻습니다. 타고난 행운이 강한 편이에요.' :
@@ -2505,7 +2505,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     } else if (division === 20) {
         // D20 빔샴샤 — 영적 수행·종교
-        const d20LagnaInterp = ['행동적 영성. 카르마 요가. 활동적 봉사를 통한 수행.','자연과 감각을 통한 영성. 만트라 수행. 사원/절에서의 명상.','지적 영성. 경전 연구. 명상보다 지식을 통한 깨달음.','감정적 영성. 바크티 요가(헌신). 어머니 같은 신성에 끌림.','왕도의 영성. 리더로서의 영적 실천. 태양 숭배.','봉사의 영성. 세바(봉사)를 통한 수행. 건강과 치유 관련 영성.','조화의 영성. 예술과 미를 통한 신성 체험. 탄트라.','깊은 변혁의 영성. 탄트라, 쿤달리니. 죽음과 재생의 수행.','구도자의 영성. 순례 여행. 스승을 찾아 떠남. 철학적 수행.','전통적 영성. 체계적 수행. 카르마 요가. 인내의 수행.','혁신적 영성. 비전통적 수행법. 인류를 위한 봉사.','초월적 영성. 명상, 꿈, 직관. 신비 체험. 해탈 추구.'][dLagnaSign];
+        const d20LagnaInterp = ['行動的な霊性。カルマ・ヨーガ。活動的な奉仕を通じた修行。','自然と感覚を通じた霊性。マントラ修行。寺院での瞑想。','知的な霊性。経典研究。瞑想より知識を通じた悟り。','感情的な霊性。バクティ・ヨーガ（献身）。母性的な神性に惹かれる。','王道の霊性。リーダーとしての霊的実践。太陽崇拝。','奉仕の霊性。セーヴァ（奉仕）を通じた修行。健康と治癒関連の霊性。','調和の霊性。芸術と美を通じた神性体験。タントラ。','深い変革の霊性。タントラ、クンダリニー。死と再生の修行。','求道者の霊性。巡礼の旅。師匠を探す旅。哲学的修行。','伝統的な霊性。体系的修行。カルマ・ヨーガ。忍耐の修行。','革新的な霊性。非伝統的修行法。人類のための奉仕。','超越的な霊性。瞑想、夢、直感。神秘体験。解脱追求。'][dLagnaSign];
 
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🙏 霊的修行・宗教分析' : '🙏 D20 ヴィムシャムシャ — 霊的修行・宗教分析') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D20 라그나: ' + SIGNS[dLagnaSign] + '</strong><br>') + d20LagnaInterp + '<br><br>';
