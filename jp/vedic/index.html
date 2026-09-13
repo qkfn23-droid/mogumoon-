@@ -486,181 +486,163 @@
         <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 命盤生成</button>
     </div>
 
-    <!-- Results -->
+<!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">📚 ヴェーダ占星術 基礎ガイド</h3>
-        <div class="interp-card" style="border-left:3px solid #c9a84c;">
-            <div class="interp-text" style="line-height:2;">
-                <strong style="color:#c9a84c;font-size:15px;">🌟 初めての方のための重要用語</strong><br><br>
-
-                <strong>🪐 9つの惑星 (グラハ)</strong> — あなたの性格と運命を決定する9つの力<br>
-                ☉ <strong>太陽</strong> = 自我、父親、権威、自信 (あなたは誰か)<br>
-                ☽ <strong>月</strong> = 感情、母親、心、日常 (あなたはどう感じるか)<br>
-                ♂ <strong>火星</strong> = エネルギー、勇気、行動力、怒り (あなたはどう戦うか)<br>
-                ☿ <strong>水星</strong> = 知性、コミュニケーション、学習、ビジネス (あなたはどう考えるか)<br>
-                ♃ <strong>木星</strong> = 幸運、知恵、財産、師匠 (あなたの祝福は何か) — <em>最も吉兆な惑星</em><br>
-                ♀ <strong>金星</strong> = 愛、魅力、芸術、結婚 (あなたはどう愛するか)<br>
-                ♄ <strong>土星</strong> = 試練、忍耐、責任、業 (あなたの人生の課題は何か) — <em>遅いが最も強力</em><br>
-                ☊ <strong>ラーフ</strong> = 欲望、執着、革新、外国 (前世で果たせなかった欲望) — <em>実体のない影の惑星</em><br>
-                ☋ <strong>ケートゥ</strong> = 解脱、霊性、分離、過去 (前世で既に達成したこと) — <em>ラーフの反対側の影</em><br><br>
-
-                <strong>🏛️ 12宮 (ハウス)</strong> — 人生の12の領域。惑星がどの宮にあるかによって、人生のどの分野に影響を与えるかが決まります。<br>
-                1宮=自分自身 · 2宮=お金/家族 · 3宮=コミュニケーション/兄弟 · 4宮=家庭/母親 · 5宮=子供/恋愛/創造力 · 6宮=健康/敵 · 7宮=配偶者/パートナー · 8宮=変革/死/遺産 · 9宮=幸運/海外/父親 · 10宮=職業/名声 · 11宮=収入/願望 · 12宮=海外/損失/霊性<br><br>
-
-                <strong>⬆ ラグナ (アセンダント)</strong> — あなたが生まれた瞬間、東の地平線に昇っていた星座。外部から見たあなたの性格と外見を決定します。<em>西洋占星術の太陽星座よりも、ヴェーダ占星術ではラグナがより重要です！</em><br><br>
-
-                <strong>🌙 ナクシャトラ</strong> — 月が位置する27の星座区域。西洋の12星座よりもさらに細かく性格を分析します。あなたの最も深い本質を表します。<br><br>
-
-                <strong>⏳ ダシャー (大運)</strong> — 人生の時期別運勢。どの惑星が支配する時期かによって、その惑星のエネルギーが強まります。合計120年周期で9つの惑星が交代で支配します。<br><br>
-
-                <strong>🔮 ヨーガ</strong> — 特別な惑星の組み合わせ。2つ以上の惑星が特定の関係を結ぶと、特別な運命を作り出します。(例: ガジャケーサリー・ヨーガ = 月+木星 → 知恵と名声)
+        <!-- Guide -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 Vedic Astrology Guide</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div class="interp-card" style="border-left:3px solid #c9a84c;">
+                    <div class="interp-text" style="line-height:2;">
+                        <strong>🪐 9 Planets</strong> — ☉Sun=Self ☽Moon=Emotions ♂Mars=Energy ☿Mercury=Intelligence ♃Jupiter=Luck ♀Venus=Love ♄Saturn=Trials ☊Rahu=Desire ☋Ketu=Liberation<br>
+                        <strong>🏛️ 12 Houses</strong> — 1st=Self 2nd=Money 3rd=Communication 4th=Home 5th=Children 6th=Health 7th=Spouse 8th=Transformation 9th=Luck 10th=Career 11th=Income 12th=Spirituality<br>
+                        <strong>⬆ Lagna</strong> = Rising sign at birth (most important!) &nbsp; <strong>🌙 Nakshatra</strong> = 27 lunar mansions
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 class="section-title">🪐 惑星の位置</h3>
-        <div id="planetTableWrap"></div>
-
-        <h3 class="section-title">🏛️ 出生チャート (あなたの天空図)</h3>
-        <div class="chart-container">
-            <div class="chart-label">南インド式チャート — 12マス = 12星座、惑星記号のある場所が出生時のその惑星の位置</div>
-            <div class="chart-grid" id="d1Chart"></div>
+        <!-- Basic Chart -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 Basic Chart — Planets & Birth Chart</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">🪐 Planetary Positions</h3>
+                <div id="planetTableWrap"></div>
+                <h3 class="section-title">🏛️ Birth Chart (D1 Rasi)</h3>
+                <div class="chart-container"><div class="chart-label">South Indian Style — 12 cells = 12 signs</div><div class="chart-grid" id="d1Chart"></div></div>
+                <h3 class="section-title">🌙 Nakshatra</h3>
+                <div id="nakshatraWrap"></div>
+            </div>
         </div>
 
-        <h3 class="section-title">🕉️ D9 ナヴァムシャ・チャート (結婚・配偶者・使命)</h3>
-        <div class="chart-container">
-            <div class="chart-label">ナヴァムシャ — 結婚運、配偶者の性格、人生後半の使命を示す最も重要な分割チャート</div>
-            <div class="chart-grid" id="d9Chart"></div>
+        <!-- Dasha -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ Dasha — Life Period Fortune</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div id="dashaWrap"></div>
+            </div>
         </div>
-        <div id="d9InterpWrap"></div>
 
-        <h3 class="section-title">💼 D10 ダシャムシャ（職業・キャリア・社会的地位）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ダシャムシャ — 職業、キャリア、社会的達成を示す分割チャート</div>
-            <div class="chart-grid" id="d10Chart"></div>
+        <!-- Comprehensive -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 Interpretation — Personality · Wealth · Career · Health</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div id="interpWrap"></div>
+                <h3 class="section-title">🪐 Planet-by-Planet Interpretation</h3>
+                <div id="planetHouseWrap"></div>
+                <h3 class="section-title">⚖️ Planetary Dignity</h3>
+                <div id="dignityWrap"></div>
+                <h3 class="section-title">🍀 Lucky Information</h3>
+                <div id="luckyWrap"></div>
+                <h3 class="section-title">💎 Remedies</h3>
+                <div id="remedyWrap"></div>
+            </div>
         </div>
-        <div id="d10InterpWrap"></div>
 
-        <h3 class="section-title">👶 D7 サプタムシャ（子女・子孫・創造力）</h3>
-        <div class="chart-container">
-            <div class="chart-label">サプタムシャ — 子女運、子孫、創造的能力を示す分割チャート</div>
-            <div class="chart-grid" id="d7Chart"></div>
+        <!-- Marriage -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 Marriage & Spouse — D9 Navamsa</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div class="chart-container"><div class="chart-label">Navamsa — Marriage, spouse, life purpose</div><div class="chart-grid" id="d9Chart"></div></div>
+                <div id="d9InterpWrap"></div>
+            </div>
         </div>
-        <div id="d7InterpWrap"></div>
 
-        <h3 class="section-title">👨‍👩‍👧 D12 ドワダシャムシャ（両親・家系・遺伝）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ドワダシャムシャ — 両親、家系、遺伝的特性を示す分割チャート</div>
-            <div class="chart-grid" id="d12Chart"></div>
+        <!-- Career/Wealth -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 Career & Wealth — D10 · D2 · D4</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">💼 D10 Dasamsa (Career)</h3>
+                <div class="chart-container"><div class="chart-label">Dasamsa — Career, social achievement</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
+                <h3 class="section-title">💰 D2 Hora (Wealth)</h3>
+                <div class="chart-container"><div class="chart-label">Hora — Wealth accumulation</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
+                <h3 class="section-title">🏠 D4 Chaturthamsa (Property)</h3>
+                <div class="chart-container"><div class="chart-label">Chaturthamsa — Property, real estate</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
+            </div>
         </div>
-        <div id="d12InterpWrap"></div>
 
-        <h3 class="section-title">🔮 D60 シャシュティアムシャ（前世カルマ）</h3>
-        <div class="chart-container">
-            <div class="chart-label">シャシュティアムシャ — 前世のカルマと魂の究極的目的。パラシャラが最も重要とした分割チャート</div>
-            <div class="chart-grid" id="d60Chart"></div>
+        <!-- Family -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 Family — D7 · D3 · D12 · D40 · D45</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">👶 D7 Saptamsa (Children)</h3>
+                <div class="chart-container"><div class="chart-label">Saptamsa — Children, offspring</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+                <h3 class="section-title">👫 D3 Drekkana (Siblings)</h3>
+                <div class="chart-container"><div class="chart-label">Drekkana — Siblings, courage</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
+                <h3 class="section-title">👨‍👩‍👧 D12 Dwadasamsa (Parents)</h3>
+                <div class="chart-container"><div class="chart-label">Dwadasamsa — Parents, lineage</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
+                <h3 class="section-title">👩 D40 Khavedamsa (Maternal Legacy)</h3>
+                <div class="chart-container"><div class="chart-label">Khavedamsa — Mother lineage</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
+                <h3 class="section-title">👨 D45 Akshavedamsa (Paternal Legacy)</h3>
+                <div class="chart-container"><div class="chart-label">Akshavedamsa — Father lineage</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
+            </div>
         </div>
-        <div id="d60InterpWrap"></div>
 
-        <h3 class="section-title">💰 D2 ホーラチャート（財運・富）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ホーラ — 財運と富の蓄積方法を示す分割チャート</div>
-            <div class="chart-grid" id="d2Chart"></div>
+        <!-- Spirituality/Education -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 Spirituality · Education · Health — D20 · D24 · D27 · D16</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">📚 D24 Education</h3>
+                <div class="chart-container"><div class="chart-label">Chaturvimsamsa — Education, learning</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
+                <h3 class="section-title">🙏 D20 Spiritual Practice</h3>
+                <div class="chart-container"><div class="chart-label">Vimsamsa — Spiritual practice</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
+                <h3 class="section-title">💪 D27 Strength</h3>
+                <div class="chart-container"><div class="chart-label">Saptavimsamsa — Strength, vitality</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
+                <h3 class="section-title">🚗 D16 Comforts</h3>
+                <div class="chart-container"><div class="chart-label">Shodasamsa — Vehicles, comforts</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
+            </div>
         </div>
-        <div id="d2InterpWrap"></div>
 
-        <h3 class="section-title">👫 D3 ドレッカナチャート（兄弟・勇気・コミュニケーション）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ドレッカナ — 兄弟姉妹、勇気、コミュニケーション能力を示す分割チャート</div>
-            <div class="chart-grid" id="d3Chart"></div>
+        <!-- Warnings -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ Cautions — D30 Disease · Foreign Fortune</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">⚠️ D30 Trimsamsa (Disease)</h3>
+                <div class="chart-container"><div class="chart-label">Trimsamsa — Misfortune, disease</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
+                <h3 class="section-title">✈️ Foreign Fortune & Migration</h3>
+                <div id="foreignWrap"></div>
+            </div>
         </div>
-        <div id="d3InterpWrap"></div>
 
-        <h3 class="section-title">🏠 D4 チャトゥルタムシャチャート（財産・不動産・幸運）</h3>
-        <div class="chart-container">
-            <div class="chart-label">チャトゥルタムシャ — 財産、不動産、全般的な幸運を示す分割チャート</div>
-            <div class="chart-grid" id="d4Chart"></div>
+        <!-- Karma -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 Karma — D60 Past Life</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">🔮 D60 Shashtiamsa (Past Life Karma)</h3>
+                <div class="chart-container"><div class="chart-label">Shashtiamsa — Past life karma</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
+            </div>
         </div>
-        <div id="d4InterpWrap"></div>
-
-        <h3 class="section-title">🚗 D16 ショーダシャムシャチャート（乗り物・快適さ・幸福）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ショーダシャムシャ — 乗り物、物質的快適さ、全般的な幸福を示す分割チャート</div>
-            <div class="chart-grid" id="d16Chart"></div>
-        </div>
-        <div id="d16InterpWrap"></div>
-
-        <h3 class="section-title">🙏 D20 ヴィムシャムシャチャート（精神修行・宗教）</h3>
-        <div class="chart-container">
-            <div class="chart-label">ヴィムシャムシャ — 精神修行、宗教的傾向、霊的成長を示す分割チャート</div>
-            <div class="chart-grid" id="d20Chart"></div>
-        </div>
-        <div id="d20InterpWrap"></div>
-
-        <h3 class="section-title">📚 D24 チャトゥルヴィムシャムシャチャート（教育・学問）</h3>
-        <div class="chart-container">
-            <div class="chart-label">チャトゥルヴィムシャムシャ — 教育、学問、知的達成を示す分割チャート</div>
-            <div class="chart-grid" id="d24Chart"></div>
-        </div>
-        <div id="d24InterpWrap"></div>
-
-        <h3 class="section-title">💪 D27 サプタヴィムシャムシャチャート（体力・強み）</h3>
-        <div class="chart-container">
-            <div class="chart-label">サプタヴィムシャムシャ — 体力、強み、弱みを示す分割チャート</div>
-            <div class="chart-grid" id="d27Chart"></div>
-        </div>
-        <div id="d27InterpWrap"></div>
-
-        <h3 class="section-title">⚠️ D30 トリムシャムシャチャート（不運・病気・障害）</h3>
-        <div class="chart-container">
-            <div class="chart-label">トリムシャムシャ — 不運、病気、障害、悪の源を示す分割チャート</div>
-            <div class="chart-grid" id="d30Chart"></div>
-        </div>
-        <div id="d30InterpWrap"></div>
-
-        <h3 class="section-title">👩 D40 カヴェダムシャチャート（母系の遺産）</h3>
-        <div class="chart-container">
-            <div class="chart-label">カヴェダムシャ — 母方の遺産、母系の影響を示す分割チャート</div>
-            <div class="chart-grid" id="d40Chart"></div>
-        </div>
-        <div id="d40InterpWrap"></div>
-
-        <h3 class="section-title">👨 D45 アクシャヴェダムシャチャート（父系の遺産）</h3>
-        <div class="chart-container">
-            <div class="chart-label">アクシャヴェダムシャ — 父方の遺産、父系の影響を示す分割チャート</div>
-            <div class="chart-grid" id="d45Chart"></div>
-        </div>
-        <div id="d45InterpWrap"></div>
-
-        <h3 class="section-title">🌙 ナクシャトラ (あなたの星 — 最も深い本質)</h3>
-        <div id="nakshatraWrap"></div>
-
-        <h3 class="section-title">⏳ 大運 (人生の時期別運勢)</h3>
-        <div id="dashaWrap"></div>
-
-        <h3 class="section-title">📖 総合解釈</h3>
-        <div id="interpWrap"></div>
-
-        <h3 class="section-title">🪐 惑星別詳細解釈 (各惑星がどの人生領域に影響を与えるか)</h3>
-        <div id="planetHouseWrap"></div>
-
-        <h3 class="section-title">🎓 教育 & 知識 (4宮・5宮)</h3>
-        <div id="educationWrap"></div>
-
-        <h3 class="section-title">👶 子供運 (5宮)</h3>
-        <div id="childrenWrap"></div>
-
-        <h3 class="section-title">✈️ 海外運 & 移住 (9宮・12宮)</h3>
-        <div id="foreignWrap"></div>
-
-        <h3 class="section-title">⚖️ 惑星の品位 (高揚・減衰・本宮)</h3>
-        <div id="dignityWrap"></div>
-
-        <h3 class="section-title">🍀 ラッキー情報</h3>
-        <div id="luckyWrap"></div>
-
-        <h3 class="section-title">💎 癒し & 強化方法</h3>
-        <div id="remedyWrap"></div>
 
     </div>
 </div>

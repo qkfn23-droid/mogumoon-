@@ -486,184 +486,163 @@
         <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 Generar Carta</button>
     </div>
 
-    <!-- Results -->
+<!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <h3 class="section-title">📚 Guia para Principiantes de Astrologia Vedica</h3>
-        <div class="interp-card" style="border-left:3px solid #c9a84c;">
-            <div class="interp-text" style="line-height:2;">
-                <strong style="color:#c9a84c;font-size:15px;">🌟 Terminos Clave para Lectores Primerizos</strong><br><br>
-
-                <strong>🪐 9 Planetas (Graha)</strong> — Nueve fuerzas que determinan tu personalidad y destino<br>
-                ☉ <strong>Sol</strong> = Yo, padre, autoridad, confianza (Quien eres)<br>
-                ☽ <strong>Luna</strong> = Emociones, madre, mente, vida diaria (Como sientes)<br>
-                ♂ <strong>Marte</strong> = Energia, coraje, accion, ira (Como luchas)<br>
-                ☿ <strong>Mercurio</strong> = Inteligencia, comunicacion, aprendizaje, negocios (Como piensas)<br>
-                ♃ <strong>Jupiter</strong> = Suerte, sabiduria, riqueza, maestro (Que bendiciones tienes) — <em>El planeta mas auspicioso</em><br>
-                ♀ <strong>Venus</strong> = Amor, encanto, arte, matrimonio (Como amas)<br>
-                ♄ <strong>Saturno</strong> = Pruebas, paciencia, responsabilidad, karma (Cual es la leccion de tu vida) — <em>Lento pero el mas poderoso</em><br>
-                ☊ <strong>Rahu</strong> = Deseo, obsesion, innovacion, tierras extranjeras (Deseos no cumplidos de vidas pasadas) — <em>Un planeta sombra sin forma fisica</em><br>
-                ☋ <strong>Ketu</strong> = Liberacion, espiritualidad, desapego, pasado (Lo que ya se logro en vidas pasadas) — <em>La sombra opuesta de Rahu</em><br><br>
-
-                <strong>🏛️ 12 Casas</strong> — Doce areas de la vida. La casa que ocupa un planeta determina que area de tu vida influye.<br>
-                1a=Yo · 2a=Dinero/Familia · 3a=Comunicacion/Hermanos · 4a=Hogar/Madre · 5a=Hijos/Romance/Creatividad · 6a=Salud/Enemigos · 7a=Conyuge/Pareja · 8a=Transformacion/Muerte/Herencia · 9a=Suerte/Extranjero/Padre · 10a=Carrera/Fama · 11a=Ingresos/Deseos · 12a=Extranjero/Perdida/Espiritualidad<br><br>
-
-                <strong>⬆ Lagna (Ascendente)</strong> — El signo zodiacal que se eleva en el horizonte oriental en el momento de tu nacimiento. Determina como los demas ven tu personalidad y apariencia. <em>En la astrologia vedica, el Lagna es mas importante que el signo solar usado en la astrologia occidental!</em><br><br>
-
-                <strong>🌙 Nakshatra</strong> — Una de las 27 divisiones de mansiones lunares donde se posiciona la Luna. Analiza la personalidad con mas precision que los 12 signos zodiacales occidentales. Representa tu naturaleza mas profunda.<br><br>
-
-                <strong>⏳ Dasha (Periodo Planetario)</strong> — Fortuna por periodos de vida por fase. La energia del planeta que rige ese periodo se fortalece. El ciclo completo abarca 120 anos con 9 planetas turnandose.<br><br>
-
-                <strong>🔮 Yoga</strong> — Combinaciones planetarias especiales. Cuando dos o mas planetas forman relaciones especificas, crean destinos especiales. (ej., Gajakesari Yoga = Luna + Jupiter → Sabiduria y fama)
+        <!-- Guide -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 Vedic Astrology Guide</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div class="interp-card" style="border-left:3px solid #c9a84c;">
+                    <div class="interp-text" style="line-height:2;">
+                        <strong>🪐 9 Planets</strong> — ☉Sun=Self ☽Moon=Emotions ♂Mars=Energy ☿Mercury=Intelligence ♃Jupiter=Luck ♀Venus=Love ♄Saturn=Trials ☊Rahu=Desire ☋Ketu=Liberation<br>
+                        <strong>🏛️ 12 Houses</strong> — 1st=Self 2nd=Money 3rd=Communication 4th=Home 5th=Children 6th=Health 7th=Spouse 8th=Transformation 9th=Luck 10th=Career 11th=Income 12th=Spirituality<br>
+                        <strong>⬆ Lagna</strong> = Rising sign at birth (most important!) &nbsp; <strong>🌙 Nakshatra</strong> = 27 lunar mansions
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 class="section-title">🪐 Posiciones Planetarias</h3>
-        <div id="planetTableWrap"></div>
-
-        <h3 class="section-title">🏛️ Carta Natal (Tu Mapa del Cielo)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Carta Estilo Sur de la India — 12 celdas = 12 signos, los simbolos planetarios muestran donde estaba cada planeta al nacer</div>
-            <div class="chart-grid" id="d1Chart"></div>
+        <!-- Basic Chart -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 Basic Chart — Planets & Birth Chart</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">🪐 Planetary Positions</h3>
+                <div id="planetTableWrap"></div>
+                <h3 class="section-title">🏛️ Birth Chart (D1 Rasi)</h3>
+                <div class="chart-container"><div class="chart-label">South Indian Style — 12 cells = 12 signs</div><div class="chart-grid" id="d1Chart"></div></div>
+                <h3 class="section-title">🌙 Nakshatra</h3>
+                <div id="nakshatraWrap"></div>
+            </div>
         </div>
 
-                <h3 class="section-title">🕉️ D9 Carta Navamsa (Matrimonio · Cónyuge · Dharma)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Navamsa — La carta divisional más importante para el matrimonio, el cónyuge y el propósito de vida</div>
-            <div class="chart-grid" id="d9Chart"></div>
+        <!-- Dasha -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ Dasha — Life Period Fortune</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div id="dashaWrap"></div>
+            </div>
         </div>
-        <div id="d9InterpWrap"></div>
 
-<h3 class="section-title">💼 D10 Dasamsa Chart (Career · Social Status)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Dasamsa — Divisional chart showing career, profession, and social achievement</div>
-            <div class="chart-grid" id="d10Chart"></div>
+        <!-- Comprehensive -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 Interpretation — Personality · Wealth · Career · Health</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div id="interpWrap"></div>
+                <h3 class="section-title">🪐 Planet-by-Planet Interpretation</h3>
+                <div id="planetHouseWrap"></div>
+                <h3 class="section-title">⚖️ Planetary Dignity</h3>
+                <div id="dignityWrap"></div>
+                <h3 class="section-title">🍀 Lucky Information</h3>
+                <div id="luckyWrap"></div>
+                <h3 class="section-title">💎 Remedies</h3>
+                <div id="remedyWrap"></div>
+            </div>
         </div>
-        <div id="d10InterpWrap"></div>
 
-        <h3 class="section-title">👶 D7 Saptamsa Chart (Children · Offspring)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Saptamsa — Divisional chart for children, offspring, and creative ability</div>
-            <div class="chart-grid" id="d7Chart"></div>
+        <!-- Marriage -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 Marriage & Spouse — D9 Navamsa</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <div class="chart-container"><div class="chart-label">Navamsa — Marriage, spouse, life purpose</div><div class="chart-grid" id="d9Chart"></div></div>
+                <div id="d9InterpWrap"></div>
+            </div>
         </div>
-        <div id="d7InterpWrap"></div>
 
-        <h3 class="section-title">👨‍👩‍👧 D12 Dwadasamsa Chart (Parents · Lineage)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Dwadasamsa — Divisional chart for parents, lineage, and hereditary traits</div>
-            <div class="chart-grid" id="d12Chart"></div>
+        <!-- Career/Wealth -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 Career & Wealth — D10 · D2 · D4</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">💼 D10 Dasamsa (Career)</h3>
+                <div class="chart-container"><div class="chart-label">Dasamsa — Career, social achievement</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
+                <h3 class="section-title">💰 D2 Hora (Wealth)</h3>
+                <div class="chart-container"><div class="chart-label">Hora — Wealth accumulation</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
+                <h3 class="section-title">🏠 D4 Chaturthamsa (Property)</h3>
+                <div class="chart-container"><div class="chart-label">Chaturthamsa — Property, real estate</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
+            </div>
         </div>
-        <div id="d12InterpWrap"></div>
 
-        <h3 class="section-title">🔮 D60 Shashtiamsa Chart (Past Life Karma)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Shashtiamsa — Past life karma and soul's ultimate purpose. Parashara's most important chart</div>
-            <div class="chart-grid" id="d60Chart"></div>
+        <!-- Family -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 Family — D7 · D3 · D12 · D40 · D45</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">👶 D7 Saptamsa (Children)</h3>
+                <div class="chart-container"><div class="chart-label">Saptamsa — Children, offspring</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+                <h3 class="section-title">👫 D3 Drekkana (Siblings)</h3>
+                <div class="chart-container"><div class="chart-label">Drekkana — Siblings, courage</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
+                <h3 class="section-title">👨‍👩‍👧 D12 Dwadasamsa (Parents)</h3>
+                <div class="chart-container"><div class="chart-label">Dwadasamsa — Parents, lineage</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
+                <h3 class="section-title">👩 D40 Khavedamsa (Maternal Legacy)</h3>
+                <div class="chart-container"><div class="chart-label">Khavedamsa — Mother lineage</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
+                <h3 class="section-title">👨 D45 Akshavedamsa (Paternal Legacy)</h3>
+                <div class="chart-container"><div class="chart-label">Akshavedamsa — Father lineage</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
+            </div>
         </div>
-        <div id="d60InterpWrap"></div>
 
-        <h3 class="section-title">💰 D2 Hora (Riqueza)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Hora — Carta divisional que muestra la acumulacion de riqueza</div>
-            <div class="chart-grid" id="d2Chart"></div>
+        <!-- Spirituality/Education -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 Spirituality · Education · Health — D20 · D24 · D27 · D16</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">📚 D24 Education</h3>
+                <div class="chart-container"><div class="chart-label">Chaturvimsamsa — Education, learning</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
+                <h3 class="section-title">🙏 D20 Spiritual Practice</h3>
+                <div class="chart-container"><div class="chart-label">Vimsamsa — Spiritual practice</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
+                <h3 class="section-title">💪 D27 Strength</h3>
+                <div class="chart-container"><div class="chart-label">Saptavimsamsa — Strength, vitality</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
+                <h3 class="section-title">🚗 D16 Comforts</h3>
+                <div class="chart-container"><div class="chart-label">Shodasamsa — Vehicles, comforts</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
+            </div>
         </div>
-        <div id="d2InterpWrap"></div>
 
-        <h3 class="section-title">👫 D3 Drekkana (Hermanos · Coraje)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Drekkana — Carta divisional para hermanos, coraje y comunicacion</div>
-            <div class="chart-grid" id="d3Chart"></div>
+        <!-- Warnings -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ Cautions — D30 Disease · Foreign Fortune</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">⚠️ D30 Trimsamsa (Disease)</h3>
+                <div class="chart-container"><div class="chart-label">Trimsamsa — Misfortune, disease</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
+                <h3 class="section-title">✈️ Foreign Fortune & Migration</h3>
+                <div id="foreignWrap"></div>
+            </div>
         </div>
-        <div id="d3InterpWrap"></div>
 
-        <h3 class="section-title">🏠 D4 Chaturthamsa (Propiedad · Bienes)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Chaturthamsa — Carta divisional para propiedad y bienes inmuebles</div>
-            <div class="chart-grid" id="d4Chart"></div>
+        <!-- Karma -->
+        <div class="category-group" style="margin-bottom:20px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
+                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 Karma — D60 Past Life</span>
+                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+            </div>
+            <div class="category-content" style="display:none;">
+                <h3 class="section-title">🔮 D60 Shashtiamsa (Past Life Karma)</h3>
+                <div class="chart-container"><div class="chart-label">Shashtiamsa — Past life karma</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
+            </div>
         </div>
-        <div id="d4InterpWrap"></div>
-
-        <h3 class="section-title">🚗 D16 Shodasamsa (Vehiculos · Comodidades)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Shodasamsa — Carta divisional para vehiculos y comodidades materiales</div>
-            <div class="chart-grid" id="d16Chart"></div>
-        </div>
-        <div id="d16InterpWrap"></div>
-
-        <h3 class="section-title">🙏 D20 Vimsamsa (Practica Espiritual)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Vimsamsa — Carta divisional para la practica espiritual y religion</div>
-            <div class="chart-grid" id="d20Chart"></div>
-        </div>
-        <div id="d20InterpWrap"></div>
-
-        <h3 class="section-title">📚 D24 Chaturvimsamsa (Educacion)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Chaturvimsamsa — Carta divisional para educacion y logros academicos</div>
-            <div class="chart-grid" id="d24Chart"></div>
-        </div>
-        <div id="d24InterpWrap"></div>
-
-        <h3 class="section-title">💪 D27 Saptavimsamsa (Fuerza · Vitalidad)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Saptavimsamsa — Carta divisional para fuerza fisica y vitalidad</div>
-            <div class="chart-grid" id="d27Chart"></div>
-        </div>
-        <div id="d27InterpWrap"></div>
-
-        <h3 class="section-title">⚠️ D30 Trimsamsa (Infortunio · Enfermedad)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Trimsamsa — Carta divisional que muestra fuentes de infortunio y obstaculos</div>
-            <div class="chart-grid" id="d30Chart"></div>
-        </div>
-        <div id="d30InterpWrap"></div>
-
-        <h3 class="section-title">👩 D40 Khavedamsa (Herencia Materna)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Khavedamsa — Carta divisional para la herencia e influencia materna</div>
-            <div class="chart-grid" id="d40Chart"></div>
-        </div>
-        <div id="d40InterpWrap"></div>
-
-        <h3 class="section-title">👨 D45 Akshavedamsa (Herencia Paterna)</h3>
-        <div class="chart-container">
-            <div class="chart-label">Akshavedamsa — Carta divisional para la herencia e influencia paterna</div>
-            <div class="chart-grid" id="d45Chart"></div>
-        </div>
-        <div id="d45InterpWrap"></div>
-
-
-        
-
-        <h3 class="section-title">🌙 Nakshatra (Tu Estrella — Tu Naturaleza Mas Profunda)</h3>
-        <div id="nakshatraWrap"></div>
-
-        <h3 class="section-title">⏳ Dasha (Fortuna por Periodos de Vida)</h3>
-        <div id="dashaWrap"></div>
-
-        <h3 class="section-title">📖 Interpretacion Completa</h3>
-        <div id="interpWrap"></div>
-
-        <h3 class="section-title">🪐 Interpretacion Detallada Planeta por Planeta (Como cada planeta influye en tus areas de vida)</h3>
-        <div id="planetHouseWrap"></div>
-
-        <h3 class="section-title">🎓 Educacion y Conocimiento (Casas 4 y 5)</h3>
-        <div id="educationWrap"></div>
-
-        <h3 class="section-title">👶 Fortuna de los Hijos (Casa 5)</h3>
-        <div id="childrenWrap"></div>
-
-        <h3 class="section-title">✈️ Fortuna en el Extranjero y Migracion (Casas 9 y 12)</h3>
-        <div id="foreignWrap"></div>
-
-        <h3 class="section-title">⚖️ Dignidad Planetaria (Exaltacion · Debilitacion · Signo Propio)</h3>
-        <div id="dignityWrap"></div>
-
-        <h3 class="section-title">🍀 Informacion de la Suerte</h3>
-        <div id="luckyWrap"></div>
-
-        <h3 class="section-title">💎 Remedios y Metodos de Fortalecimiento</h3>
-        <div id="remedyWrap"></div>
 
     </div>
 </div>
