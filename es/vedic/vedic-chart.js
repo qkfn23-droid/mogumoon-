@@ -20,7 +20,19 @@ function recalcMode() {
 }
 function updateCatHeaders() {
     var e = window.vedicMode === 'easy';
-    // Category headers updated dynamically
+    var ids = {
+        catGuide: e ? 'Glosario' : 'Guía de Astrología Védica',
+        catBasic: e ? 'Mis Posiciones Planetarias' : 'Carta Básica — Posiciones & Carta Natal',
+        catDasha: e ? 'Mis Períodos de Vida' : 'Dasha — Períodos de Vida',
+        catInterp: e ? 'Mi Lectura — Personalidad·Riqueza·Carrera·Salud' : 'Interpretación — Personalidad·Riqueza·Carrera·Salud·Yoga',
+        catMarriage: e ? 'Mi Pareja' : 'Matrimonio & Pareja — D9 Navamsha',
+        catCareer: e ? 'Mi Carrera·Riqueza' : 'Carrera & Riqueza — D10·D2·D4',
+        catFamily: e ? 'Mi Familia' : 'Familia — D7·D3·D12·D40·D45',
+        catSpirit: e ? 'Espiritualidad·Educación·Salud' : 'Espiritualidad·Educación·Salud — D20·D24·D27·D16',
+        catWarn: e ? 'Precauciones de Salud' : 'Precauciones — D30 Enfermedad·Extranjero',
+        catKarma: e ? 'Karma de Vidas Pasadas' : 'Karma — D60 Vidas Pasadas',
+    };
+    for (var id in ids) { var el = document.getElementById(id); if (el) el.textContent = ids[id]; }
 }
 
 // Ayanamsa (Lahiri) - approximate

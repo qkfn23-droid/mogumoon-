@@ -504,7 +504,7 @@
         <!-- Guide -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 Guia de Astrologia Védica</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 <span id="catGuide">Guia de Astrologia Védica</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -521,11 +521,11 @@
         <!-- Basic Chart -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 Carta Básica — Planetas & Carta Natal</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 <span id="catBasic">Carta Básica — Planetas & Carta Natal</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
-                <h3 class="section-title">🪐 Posicoes Planetarias</h3>
+                <h3 class="section-title">🪐 <span id="secPlanetHouse">Posicoes Planetarias</span></h3>
                 <div id="planetTableWrap"></div>
                 <h3 class="section-title">🏛️ Mapa Natal (D1 Rasi)</h3>
                 <div class="chart-container"><div class="chart-label">Estilo Sul-Indiano — 12 celulas = 12 signos</div><div class="chart-grid" id="d1Chart"></div></div>
@@ -537,7 +537,7 @@
         <!-- Dasha -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ Dasha — Fortuna por Período</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ <span id="catDasha">Dasha — Fortuna por Período</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -548,18 +548,18 @@
         <!-- Comprehensive -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 Interpretação — Personalidade · Riqueza · Carreira · Saúde</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 <span id="catInterp">Interpretação — Personalidade · Riqueza · Carreira · Saúde</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <div id="interpWrap"></div>
                 <h3 class="section-title">🪐 Interpretacao Planeta por Planeta</h3>
                 <div id="planetHouseWrap"></div>
-                <h3 class="section-title">⚖️ Dignidade Planetaria</h3>
+                <h3 class="section-title">⚖️ <span id="secDignity">Dignidade Planetaria</span></h3>
                 <div id="dignityWrap"></div>
-                <h3 class="section-title">🍀 Informacoes de Sorte</h3>
+                <h3 class="section-title">🍀 <span id="secLucky">Informacoes de Sorte</span></h3>
                 <div id="luckyWrap"></div>
-                <h3 class="section-title">💎 Remedios</h3>
+                <h3 class="section-title">💎 <span id="secRemedy">Remedios</span></h3>
                 <div id="remedyWrap"></div>
             </div>
         </div>
@@ -567,7 +567,7 @@
         <!-- Marriage -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 Casamento & Cônjuge — D9 Navamsa</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 <span id="catMarriage">Casamento & Cônjuge — D9 Navamsa</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
@@ -579,15 +579,15 @@
         <!-- Career/Wealth -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 Carreira & Riqueza — D10 · D2 · D4</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 <span id="catCareer">Carreira & Riqueza — D10 · D2 · D4</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
-                <h3 class="section-title">💼 D10 Dasamsa (Carreira)</h3>
+                <h3 class="section-title">💼 <span id="secD10">D10 Dasamsa (Carreira)</span></h3>
                 <div class="chart-container"><div class="chart-label">Dasamsa — Carreira, conquista social</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
-                <h3 class="section-title">💰 D2 Hora (Riqueza)</h3>
+                <h3 class="section-title">💰 <span id="secD2">D2 Hora (Riqueza)</span></h3>
                 <div class="chart-container"><div class="chart-label">Hora — Acumulacao de riqueza</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
-                <h3 class="section-title">🏠 D4 Chaturthamsa (Propriedade)</h3>
+                <h3 class="section-title">🏠 <span id="secD4">D4 Chaturthamsa (Propriedade)</span></h3>
                 <div class="chart-container"><div class="chart-label">Chaturthamsa — Propriedade, imoveis</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
             </div>
         </div>
@@ -595,19 +595,19 @@
         <!-- Family -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 Família — D7 · D3 · D12 · D40 · D45</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 <span id="catFamily">Família — D7 · D3 · D12 · D40 · D45</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
-                <h3 class="section-title">👶 D7 Saptamsa (Filhos)</h3>
+                <h3 class="section-title">👶 <span id="secD7">D7 Saptamsa (Filhos)</span></h3>
                 <div class="chart-container"><div class="chart-label">Saptamsa — Filhos, descendencia</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
-                <h3 class="section-title">👫 D3 Drekkana (Irmaos)</h3>
+                <h3 class="section-title">👫 <span id="secD3">D3 Drekkana (Irmaos)</span></h3>
                 <div class="chart-container"><div class="chart-label">Drekkana — Irmaos, coragem</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
-                <h3 class="section-title">👨‍👩‍👧 D12 Dwadasamsa (Pais)</h3>
+                <h3 class="section-title">👨‍👩‍👧 <span id="secD12">D12 Dwadasamsa (Pais)</span></h3>
                 <div class="chart-container"><div class="chart-label">Dwadasamsa — Pais, linhagem</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
-                <h3 class="section-title">👩 D40 Khavedamsa (Heranca Materna)</h3>
+                <h3 class="section-title">👩 <span id="secD40">D40 Khavedamsa (Heranca Materna)</span></h3>
                 <div class="chart-container"><div class="chart-label">Khavedamsa — Linhagem materna</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
-                <h3 class="section-title">👨 D45 Akshavedamsa (Heranca Paterna)</h3>
+                <h3 class="section-title">👨 <span id="secD45">D45 Akshavedamsa (Heranca Paterna)</span></h3>
                 <div class="chart-container"><div class="chart-label">Akshavedamsa — Linhagem paterna</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
             </div>
         </div>
@@ -615,17 +615,17 @@
         <!-- Spirituality/Education -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 Espiritualidade · Educação · Saúde — D20 · D24 · D27 · D16</span>
+                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 <span id="catSpirit">Espiritualidade · Educação · Saúde — D20 · D24 · D27 · D16</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
-                <h3 class="section-title">📚 D24 Educacao</h3>
+                <h3 class="section-title">📚 <span id="secD24">D24 Educacao</span></h3>
                 <div class="chart-container"><div class="chart-label">Chaturvimsamsa — Educacao, aprendizado</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
-                <h3 class="section-title">🙏 D20 Pratica Espiritual</h3>
+                <h3 class="section-title">🙏 <span id="secD20">D20 Pratica Espiritual</span></h3>
                 <div class="chart-container"><div class="chart-label">Vimsamsa — Pratica espiritual</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
-                <h3 class="section-title">💪 D27 Forca</h3>
+                <h3 class="section-title">💪 <span id="secD27">D27 Forca</span></h3>
                 <div class="chart-container"><div class="chart-label">Saptavimsamsa — Forca, vitalidade</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
-                <h3 class="section-title">🚗 D16 Conforto</h3>
+                <h3 class="section-title">🚗 <span id="secD16">D16 Conforto</span></h3>
                 <div class="chart-container"><div class="chart-label">Shodasamsa — Veiculos, conforto</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
             </div>
         </div>
@@ -633,13 +633,13 @@
         <!-- Warnings -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ Precauções — D30 Doença · Fortuna Estrangeira</span>
+                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ <span id="catWarn">Precauções — D30 Doença · Fortuna Estrangeira</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">
-                <h3 class="section-title">⚠️ D30 Trimsamsa (Doenca)</h3>
+                <h3 class="section-title">⚠️ <span id="secD30">D30 Trimsamsa (Doenca)</span></h3>
                 <div class="chart-container"><div class="chart-label">Trimsamsa — Infortunio, doenca</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
-                <h3 class="section-title">✈️ Fortuna no Exterior e Migracao</h3>
+                <h3 class="section-title">✈️ <span id="secForeign">Fortuna no Exterior e Migracao</span></h3>
                 <div id="foreignWrap"></div>
             </div>
         </div>
@@ -647,7 +647,7 @@
         <!-- Karma -->
         <div class="category-group" style="margin-bottom:20px;">
             <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 Karma — D60 Vida Passada</span>
+                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 <span id="catKarma">Karma — D60 Vida Passada</span></span>
                 <span class="cat-arrow" style="float:right;color:#666;">▶</span>
             </div>
             <div class="category-content" style="display:none;">

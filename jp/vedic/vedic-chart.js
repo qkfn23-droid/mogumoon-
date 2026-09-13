@@ -20,7 +20,19 @@ function recalcMode() {
 }
 function updateCatHeaders() {
     var e = window.vedicMode === 'easy';
-    // Category headers updated dynamically
+    var ids = {
+        catGuide: e ? '用語説明' : 'ヴェーダ占星術ガイド',
+        catBasic: e ? '私の惑星位置' : '基本チャート — 惑星位置 & 出生チャート',
+        catDasha: e ? '私の運勢時期' : 'ダシャー — 人生の時期別運勢',
+        catInterp: e ? '私の解釈 — 性格・財運・職業・健康' : '総合解釈 — 性格・財運・職業・健康・ヨーガ',
+        catMarriage: e ? '私の配偶者詳細' : '結婚 & 配偶者 — D9 ナヴァムシャ',
+        catCareer: e ? '私の職業・財運詳細' : '職業 & 財運 — D10・D2・D4',
+        catFamily: e ? '私の家族' : '家族 — D7・D3・D12・D40・D45',
+        catSpirit: e ? '霊性・教育・健康' : '霊性・教育・健康 — D20・D24・D27・D16',
+        catWarn: e ? '健康注意事項' : '注意事項 — D30 疾病・海外運',
+        catKarma: e ? '前世カルマ' : 'カルマ — D60 前世',
+    };
+    for (var id in ids) { var el = document.getElementById(id); if (el) el.textContent = ids[id]; }
 }
 
 // Ayanamsa (Lahiri) - approximate
