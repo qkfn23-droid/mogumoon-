@@ -293,20 +293,20 @@ function calculateChart() {
     renderPlanetTable(positions, lagnaSign, lagnaSidereal);
     renderD1Chart(positions, lagnaSign);
     renderD9Chart(positions, lagnaSign, lagnaSidereal);
-    renderDivisionalChart(positions, lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', 'Dasamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', 'Saptamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', 'Dwadasamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', 'Shashtiamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 2, 'd2Chart', 'd2InterpWrap', 'D2', 'Hora');
-    renderDivisionalChart(positions, lagnaSidereal, 3, 'd3Chart', 'd3InterpWrap', 'D3', 'Drekkana');
-    renderDivisionalChart(positions, lagnaSidereal, 4, 'd4Chart', 'd4InterpWrap', 'D4', 'Chaturthamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 16, 'd16Chart', 'd16InterpWrap', 'D16', 'Shodasamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 20, 'd20Chart', 'd20InterpWrap', 'D20', 'Vimsamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 24, 'd24Chart', 'd24InterpWrap', 'D24', 'Chaturvimsamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 27, 'd27Chart', 'd27InterpWrap', 'D27', 'Saptavimsamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 30, 'd30Chart', 'd30InterpWrap', 'D30', 'Trimsamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', 'Khavedamsa');
-    renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'Akshavedamsa');
+    renderDivisionalChart(positions, lagnaSidereal, 10, 'd10Chart', 'd10InterpWrap', 'D10', 'ダシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 7, 'd7Chart', 'd7InterpWrap', 'D7', 'サプタムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 12, 'd12Chart', 'd12InterpWrap', 'D12', 'ドワダシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 60, 'd60Chart', 'd60InterpWrap', 'D60', 'シャシュティアムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 2, 'd2Chart', 'd2InterpWrap', 'D2', 'ホーラ');
+    renderDivisionalChart(positions, lagnaSidereal, 3, 'd3Chart', 'd3InterpWrap', 'D3', 'ドレッカナ');
+    renderDivisionalChart(positions, lagnaSidereal, 4, 'd4Chart', 'd4InterpWrap', 'D4', 'チャトゥルタムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 16, 'd16Chart', 'd16InterpWrap', 'D16', 'ショーダシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 20, 'd20Chart', 'd20InterpWrap', 'D20', 'ヴィムシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 24, 'd24Chart', 'd24InterpWrap', 'D24', 'チャトゥルヴィムシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 27, 'd27Chart', 'd27InterpWrap', 'D27', 'サプタヴィムシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 30, 'd30Chart', 'd30InterpWrap', 'D30', 'トリムシャムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 40, 'd40Chart', 'd40InterpWrap', 'D40', 'カヴェダムシャ');
+    renderDivisionalChart(positions, lagnaSidereal, 45, 'd45Chart', 'd45InterpWrap', 'D45', 'アクシャヴェダムシャ');
     renderNakshatra(moonPos);
     renderDasha(moonNakshatra, utcDate, moonPos ? moonPos.sidereal : 0);
     renderInterpretation(positions, lagnaSign, moonPos);
@@ -565,10 +565,10 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const venusD9Sign = venusD9 ? venusD9.d9Sign : 0;
 
     const dirSources = [
-        {name:'D1 7th House', sign: d1H7Sign, desc:'Spouse house in birth chart'},
-        {name:'D9 7th House', sign: d9H7Sign, desc:'Spouse house in Navamsa'},
-        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'Where the D9 7th lord goes'},
-        {name:'D9 Venus', sign: venusD9Sign, desc:'Spouse karaka in Navamsa'},
+        {name:'D1 7th House', sign: d1H7Sign, desc:'出生チャートの配偶者ハウス'},
+        {name:'D9 7th House', sign: d9H7Sign, desc:'ナヴァムシャの配偶者ハウス'},
+        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'D9 7室主の位置'},
+        {name:'D9 Venus', sign: venusD9Sign, desc:'ナヴァムシャの配偶者カラカ'},
         {name:'Upapada (UL)', sign: ulSign, desc:'12th Arudha — spouse background'},
         {name:'Darapada (A7)', sign: a7Sign, desc:'7th Arudha — spouse social image'}
     ];
@@ -1741,66 +1741,66 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
 
         const D60_DEITIES = [
-            {name:'Ghora',nature:'malefic',desc:'Destruction and fear. Dark karma from past life'},
-            {name:'Rakshasa',nature:'malefic',desc:'Demonic energy. Strong desire and attachment'},
-            {name:'Deva',nature:'benefic',desc:'Divine being. Past life merit and blessings'},
-            {name:'Kubera',nature:'benefic',desc:'God of wealth. Wealth-building karma'},
-            {name:'Yaksha',nature:'benefic',desc:'Nature guardian. Harmony with nature'},
-            {name:'Kinnara',nature:'benefic',desc:'Celestial musician. Artistic talent'},
-            {name:'Bhrashta',nature:'malefic',desc:'The fallen. Karma of falling from high'},
-            {name:'Kulaghna',nature:'malefic',desc:'Family destroyer. Family-related karma'},
-            {name:'Garala',nature:'malefic',desc:'Poison. Toxic actions karma'},
-            {name:'Vahni',nature:'malefic',desc:'Fire god. Anger and destruction karma'},
-            {name:'Maya',nature:'malefic',desc:'Illusion. Deception karma'},
-            {name:'Purishaka',nature:'malefic',desc:'Bondage. Restraining others karma'},
-            {name:'Apampathi',nature:'benefic',desc:'Lord of waters. Purification and healing'},
-            {name:'Marut',nature:'benefic',desc:'Wind god. Freedom and change'},
-            {name:'Kala',nature:'malefic',desc:'God of time. Time and death karma'},
-            {name:'Sarpa',nature:'malefic',desc:'Serpent. Bondage and attachment — unable to let go'},
-            {name:'Amrita',nature:'benefic',desc:'Nectar of immortality. Pursuit of eternal life'},
-            {name:'Indu',nature:'benefic',desc:'Moon. Sensitivity and intuition'},
-            {name:'Mridu',nature:'benefic',desc:'The gentle. Gentleness and compassion'},
-            {name:'Komala',nature:'benefic',desc:'The delicate. Art and beauty'},
-            {name:'Heramba',nature:'benefic',desc:'Ganesha avatar. Overcoming obstacles'},
-            {name:'Brahma',nature:'benefic',desc:'Creator god. Creation and knowledge'},
-            {name:'Vishnu',nature:'benefic',desc:'Preserver god. Protection and order'},
-            {name:'Maheshwara',nature:'benefic',desc:'Great Lord Shiva. Transformation and liberation'},
-            {name:'Deva2',nature:'benefic',desc:'Saint. Spiritual practice'},
-            {name:'Bala',nature:'benefic',desc:'Strength. Fortitude and courage'},
-            {name:'Vishwakarma',nature:'benefic',desc:'Cosmic architect. Building and creation'},
-            {name:'Tamasa',nature:'malefic',desc:'Darkness. Ignorance karma'},
-            {name:'Kanchana',nature:'benefic',desc:'Gold. Purity and value'},
-            {name:'Varaha',nature:'benefic',desc:'Vishnu boar avatar. Salvation'},
-            {name:'Ramasala',nature:'benefic',desc:'Abode of Rama. Morality and duty'},
-            {name:'Ghrisha',nature:'benefic',desc:'The radiant. Wisdom and enlightenment'},
-            {name:'Indra',nature:'benefic',desc:'King of gods. Leadership'},
-            {name:'Jala',nature:'benefic',desc:'Water. Flow and adaptation'},
-            {name:'Vishwa',nature:'benefic',desc:'Universe. Universal love'},
-            {name:'Amara',nature:'benefic',desc:'Immortal. Pursuit of eternity'},
-            {name:'Bala2',nature:'malefic',desc:'Young strength. Immature power use'},
-            {name:'Pitri',nature:'malefic',desc:'Ancestors. Ancestral karma'},
-            {name:'Rudra',nature:'malefic',desc:'Storm god. Destructive transformation'},
-            {name:'Varuna',nature:'benefic',desc:'Ocean god. Cosmic order'},
+            {name:'Ghora',nature:'malefic',desc:'破壊と恐怖。前世の暗いカルマ'},
+            {name:'Rakshasa',nature:'malefic',desc:'悪魔のエネルギー。強い欲望と執着'},
+            {name:'Deva',nature:'benefic',desc:'神聖な存在。前世の功徳と祝福'},
+            {name:'Kubera',nature:'benefic',desc:'富の神。富を築くカルマ'},
+            {name:'Yaksha',nature:'benefic',desc:'自然の守護者。自然との調和'},
+            {name:'Kinnara',nature:'benefic',desc:'天上の音楽家。芸術的才能'},
+            {name:'Bhrashta',nature:'malefic',desc:'堕落した者。高所からの転落のカルマ'},
+            {name:'Kulaghna',nature:'malefic',desc:'家門の破壊者。家族関連のカルマ'},
+            {name:'Garala',nature:'malefic',desc:'毒。毒となる行為のカルマ'},
+            {name:'Vahni',nature:'malefic',desc:'火の神。怒りと破壊のカルマ'},
+            {name:'Maya',nature:'malefic',desc:'幻想。欺瞞のカルマ'},
+            {name:'Purishaka',nature:'malefic',desc:'束縛。他者を拘束したカルマ'},
+            {name:'Apampathi',nature:'benefic',desc:'水の主。浄化と治癒'},
+            {name:'Marut',nature:'benefic',desc:'風の神。自由と変化'},
+            {name:'Kala',nature:'malefic',desc:'時間の神。時間と死のカルマ'},
+            {name:'Sarpa',nature:'malefic',desc:'蛇。束縛と執着 — 手放せないカルマ'},
+            {name:'Amrita',nature:'benefic',desc:'不死の甘露。永遠の命の追求'},
+            {name:'Indu',nature:'benefic',desc:'月。感性と直感'},
+            {name:'Mridu',nature:'benefic',desc:'柔らかい者。温和さと慈悲'},
+            {name:'Komala',nature:'benefic',desc:'繊細な者。芸術と美'},
+            {name:'Heramba',nature:'benefic',desc:'ガネーシャの化身。障害を克服'},
+            {name:'Brahma',nature:'benefic',desc:'創造の神。創造と知識'},
+            {name:'Vishnu',nature:'benefic',desc:'維持の神。保護と秩序'},
+            {name:'Maheshwara',nature:'benefic',desc:'偉大なるシヴァ。変革と解脱'},
+            {name:'Deva2',nature:'benefic',desc:'聖人。霊的修行'},
+            {name:'Bala',nature:'benefic',desc:'力。強靭さと勇気'},
+            {name:'Vishwakarma',nature:'benefic',desc:'宇宙の建築家。建設と創造'},
+            {name:'Tamasa',nature:'malefic',desc:'闇。無知のカルマ'},
+            {name:'Kanchana',nature:'benefic',desc:'黄金。純粋さと価値'},
+            {name:'Varaha',nature:'benefic',desc:'ヴィシュヌの猪の化身。救済'},
+            {name:'Ramasala',nature:'benefic',desc:'ラーマの住処。道徳と義務'},
+            {name:'Ghrisha',nature:'benefic',desc:'輝く者。知恵と悟り'},
+            {name:'Indra',nature:'benefic',desc:'神々の王。指導力'},
+            {name:'Jala',nature:'benefic',desc:'水。流れと適応'},
+            {name:'Vishwa',nature:'benefic',desc:'宇宙。普遍的な愛'},
+            {name:'Amara',nature:'benefic',desc:'不滅。永遠の追求'},
+            {name:'Bala2',nature:'malefic',desc:'若い力。未熟な力の使用'},
+            {name:'Pitri',nature:'malefic',desc:'祖先。祖先のカルマ'},
+            {name:'Rudra',nature:'malefic',desc:'嵐の神。破壊的変革'},
+            {name:'Varuna',nature:'benefic',desc:'海の神。宇宙の秩序'},
             {name:'Aryama',nature:'benefic',desc:'太陽の守護神. Friendship and contracts'},
-            {name:'Mitra',nature:'benefic',desc:'God of friendship. Trust and companionship'},
-            {name:'Agni',nature:'malefic',desc:'Fire god. Purifying fire'},
-            {name:'Varuna2',nature:'benefic',desc:'Ocean god. Deep wisdom'},
-            {name:'Gauri',nature:'benefic',desc:'Parvati. Devotion and love'},
-            {name:'Mahakala',nature:'malefic',desc:'Great Time. Trying to master time'},
-            {name:'Pitamaha',nature:'benefic',desc:'Great Father Brahma. Creator'},
-            {name:'Kartikeya',nature:'benefic',desc:'War god. Righteous battle'},
-            {name:'Yama',nature:'malefic',desc:'God of death. Judgment and justice'},
-            {name:'Kala2',nature:'malefic',desc:'Time. Chased by time'},
-            {name:'Varuna3',nature:'benefic',desc:'Ocean god. Law and truth'},
-            {name:'Kubera2',nature:'benefic',desc:'God of wealth. Generosity'},
-            {name:'Aditya',nature:'benefic',desc:'Sun god. Light and truth'},
-            {name:'Rishi',nature:'benefic',desc:'Sage. Wisdom and practice'},
-            {name:'Vasu',nature:'benefic',desc:'Celestial being. Governing nature'},
-            {name:'Ashwini',nature:'benefic',desc:'Twin healers. Healing'},
-            {name:'Naga',nature:'malefic',desc:'Serpent deity. Mystery and secrets'},
-            {name:'Gandharva',nature:'benefic',desc:'Celestial musician. Art and music'},
-            {name:'Prajapati',nature:'benefic',desc:'Creator. Creating life'},
-            {name:'Charachara',nature:'benefic',desc:'All things. Oneness with everything'}
+            {name:'Mitra',nature:'benefic',desc:'友情の神。信頼と仲間'},
+            {name:'Agni',nature:'malefic',desc:'火の神。浄化の炎'},
+            {name:'Varuna2',nature:'benefic',desc:'海の神。深い知恵'},
+            {name:'Gauri',nature:'benefic',desc:'パールヴァティー。献身と愛'},
+            {name:'Mahakala',nature:'malefic',desc:'偉大な時間。時間を支配しようとしたカルマ'},
+            {name:'Pitamaha',nature:'benefic',desc:'偉大な父ブラフマー。創造者'},
+            {name:'Kartikeya',nature:'benefic',desc:'戦争の神。正義の戦い'},
+            {name:'Yama',nature:'malefic',desc:'死の神。審判と正義'},
+            {name:'Kala2',nature:'malefic',desc:'時間。時間に追われるカルマ'},
+            {name:'Varuna3',nature:'benefic',desc:'海の神。法と真実'},
+            {name:'Kubera2',nature:'benefic',desc:'富の神。寛大さ'},
+            {name:'Aditya',nature:'benefic',desc:'太陽神。光と真理'},
+            {name:'Rishi',nature:'benefic',desc:'聖者。知恵と修行'},
+            {name:'Vasu',nature:'benefic',desc:'天上の存在。自然を治める'},
+            {name:'Ashwini',nature:'benefic',desc:'双子の治癒者。治癒'},
+            {name:'Naga',nature:'malefic',desc:'蛇の神。神秘と秘密'},
+            {name:'Gandharva',nature:'benefic',desc:'天上の音楽家。芸術と音楽'},
+            {name:'Prajapati',nature:'benefic',desc:'創造主。生命の創造'},
+            {name:'Charachara',nature:'benefic',desc:'万物。全てと一つであったカルマ'}
         ];
 
         // Deity calculation helper
@@ -1865,7 +1865,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // Parashara quote
         html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
-        html += '📜 <strong>パラシャラ曰く：</strong> "Shashtiamsa (D60) is the most important of all divisional charts. Planets in benefic deity divisions give good results, malefic divisions give bad results."<br>';
+        html += '📜 <strong>パラシャラ曰く：</strong> "シャシュティアムシャ（D60）は全分割チャートの中で最も重要である。吉神の分割にある惑星は良い結果を、凶神の分割にある惑星は悪い結果をもたらす。"<br>';
         html += '<span style="color:#666;">— ブリハット・パラシャラ・ホーラ・シャーストラ（BPHS）</span></div></div>';
 
         // Ch1: Soul Identity
