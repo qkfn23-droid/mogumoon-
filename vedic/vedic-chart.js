@@ -884,8 +884,15 @@ function renderNakshatra(moonPos) {
     if (!moonPos) return;
     const nak = NAKSHATRAS[moonPos.nakshatra];
     if (!nak) return;
+    const isEasy = window.vedicMode === 'easy';
 
-    const html = `
+    const html = isEasy ? `
+        <div class="nakshatra-card">
+            <div class="nakshatra-name">당신의 별: ${nak.ko}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}"</div>
+            <div class="nakshatra-detail">${nak.desc}</div>
+        </div>
+    ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
             <div class="nakshatra-meaning">"${nak.meaning}" — 지배행성: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
@@ -937,7 +944,10 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     const now = new Date();
     let currentDate = new Date(birthDate);
 
-    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — 인생은 9개 행성이 차례로 지배하는 시기로 나뉩니다. <strong>대운(Mahadasha)</strong>은 큰 시기, <strong>소대운(Antardasha/Bhukti)</strong>은 대운 안의 세부 시기입니다. 달의 나크샤트라 위치로 계산됩니다.<br><br>';
+    const isEasy = window.vedicMode === 'easy';
+    let html = isEasy ?
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 인생은 시기별로 다른 에너지가 흐릅니다. 아래에서 지금 당신이 어떤 시기에 있는지, 앞으로 어떤 시기가 오는지 확인하세요.<br><br>' :
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>빔쇼타리 대운(Vimshottari Dasha)</strong> — 인생은 9개 행성이 차례로 지배하는 시기로 나뉩니다. <strong>대운(Mahadasha)</strong>은 큰 시기, <strong>소대운(Antardasha/Bhukti)</strong>은 대운 안의 세부 시기입니다. 달의 나크샤트라 위치로 계산됩니다.<br><br>';
     html += '🌙 출생 시 달: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 첫 대운: <strong>' + DASHA_KO[startRuler] + '</strong> (잔여: ' + remainingYears.toFixed(2) + '년)</div></div>';
 
     // Build all mahadasha periods with correct first period
