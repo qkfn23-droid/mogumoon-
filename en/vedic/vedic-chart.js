@@ -2196,7 +2196,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         let ch4 = (isEasy
-            ? '<strong>spouse와의 전생 connection</strong><br><br>'
+            ? '<strong>Past Life Spouse Connection</strong><br><br>'
             : '<strong>D60 7 house (spouse): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
@@ -2270,7 +2270,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch5 = (isEasy
             ? '<strong>Past life career karma</strong><br><br>'
             : '<strong>D60 10 house (career): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
-        ch5 += '전생에서의 career적 karma가 <strong>' + careerKarma + '</strong> direction. Natural attraction to this field in this life.<br>';
+        ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2334,11 +2334,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         });
 
         let ch8 = isEasy ?
-            '9개 planet 중 <strong style="color:#5cb85c">' + beneficCount + '개가 좋은 기운</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개가 주의 기운</strong><br><br>' :
-            '9개 planet 중 <strong style="color:#5cb85c">' + beneficCount + '개 길신</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + '개 흉신</strong> placement<br><br>';
+            '<strong style="color:#5cb85c">' + beneficCount + ' good energy</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' caution energy</strong> out of 9 planets<br><br>' :
+            '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
-                '🌟 <strong>In past lives, 정말 좋은 일을 많이 했어요!</strong> 거의 모든 planet이 좋은 기운 아래 있어서, 이번 생에서 자연스럽게 좋은 결과를 얻습. 타고난 fortune이 강한 편이에요.' :
+                '🌟 <strong>You did so many good things in past lives!</strong> Almost all planets under good energy — naturally getting good results. Strong innate fortune.' :
                 '🌟 <strong>매우 강한 전생 merit.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
@@ -2542,7 +2542,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercury (학습) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>뛰어난 intellectual ability!</strong> 수학, 언어, analysis에 talent.' : (isEasy ? 'intellectual ability이 잘 발휘becomes.' : 'intellectual ability이 ' + mH + ' house 영역에서 발휘됨.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercury (학습) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellect!</strong> Talent in math, language, analysis.' : (isEasy ? 'Intellectual ability well expressed.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
         }
         html += '</div></div>';
 
@@ -2570,7 +2570,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d27_6planets = dPositions.filter(p => p.dSign === d27_6sign);
         html += '<br><strong>' + (isEasy ? 'Weakness:' : 'D27 6 house (약점/취약점) — ' + SIGNS[d27_6sign] + ':') + '</strong><br>';
         const bodyParts = ['Head/Brain','Neck/Thyroid','Lungs/Arms','Stomach/Chest','Heart/Back','Digestive/Intestines','Kidneys/Lower back','Reproductive','Liver/Thighs','Bones/Joints','Ankles/Circulatory','Feet/Immune'];
-        html += 'Vulnerable area: <strong>' + bodyParts[d27_6sign] + '</strong> — 이 부위의 health 관리에 주의하세요.<br>';
+        html += 'Vulnerable area: <strong>' + bodyParts[d27_6sign] + '</strong> — watch this area carefully.<br>';
         if (d27_6planets.length > 0) {
             d27_6planets.forEach(p => { html += isEasy ? 'Special attention needed for this area.<br>' : '• ' + p.name + ' 6 house position하여 이 부위에 특별한 주의가 필요합.<br>'; });
         }
