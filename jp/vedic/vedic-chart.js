@@ -104,7 +104,7 @@ function renderEasyMode(positions, lagnaSign, moonPos) {
     html += '<div class="interp-card"><div class="interp-title">💼 내 직업</div><div class="interp-text">' + career + '</div></div>';
 
     // 健康
-    var health = ['頭と顔の部位が弱点です。 두통이나 열이 자주 올 수 있고, 화가 나면 머리에 열이 오르는 타입입니다. 규칙적인 운동으로 에너지를 발산하고, 충분한 수분을 섭취하세요. 사고나 부상에 주의하고, 성급한 행동을 자제하면 건강이 좋아져요.','首と甲状腺が弱点です。 과식하는 경향이 있어서 체중 관리와 당뇨에 주의하세요. 성대와 목 건강도 중요합니다. 좋은 음식을 즐기되 적당히, 그리고 목 스트레칭을 자주 해주세요. 자연 속에서 산책하는 것이 건강에 가장 좋아요.','肺と腕、肩、神経系が弱点です。 불안이나 수면 문제가 있을 수 있고, 걱정이 많아 스트레스가 쌓이기 쉬워요. 호흡 명상이 큰 도움이 되며, 규칙적인 수면 패턴을 유지하세요. 손과 팔을 많이 쓰는 일을 할 때 스트레칭을 잊지 마세요.','胃腸と胸の部位が弱点です。 감정 스트레스가 바로 소화기 건강에 영향을 주는 타입이라, 스트레스 관리가 곧 건강 관리예요. 감정적으로 힘들 때 과식하지 않도록 주의하고, 따뜻한 음식과 차를 즐기세요. 물 근처에서 시간을 보내면 마음과 몸이 동시에 치유돼요.','心臓と背中、脊椎が弱点です。 과로를 주의하세요 — 당신은 열심히 일하는 타입이라 무리하기 쉬워요. 심혈관 건강을 위해 유산소 운동을 규칙적으로 하고, 충분한 휴식을 취하세요. 자존심이 상하면 스트레스가 심해지니, 마음 관리도 중요해요.','消化器系と腸、皮膚が弱点です。 소화불량이나 알레르기가 있을 수 있고, 완벽주의적 성격 때문에 스트레스성 질환이 올 수 있어요. 식이요법이 매우 중요하며, 건강한 음식을 선택하는 습관이 약이 됩니다. 요가나 명상으로 마음을 이완시키세요.','腎臓と腰、皮膚が弱点です。 수분 섭취를 충분히 하고, 균형 잡힌 생활을 유지하세요. 당분 섭취를 줄이고 신장 건강에 좋은 음식을 챙기세요. 스트레스를 받으면 피부에 바로 나타나는 타입이니, 마음의 평화가 곧 피부 건강이에요.','生殖器と排泄器系が弱点です。 만성 질환이 올 수 있으니 정기적인 건강 검진이 중요합니다. 감정적 스트레스가 건강에 직접적 영향을 주며, 극단적인 다이어트나 무리한 운동은 피하세요. 깊은 호흡과 명상이 도움됩니다.','肝臓と太もも、お尻が弱点です。 좋은 음식을 즐기는 성향이라 과체중에 주의하세요. 야외 활동과 등산, 자전거 등이 건강에 가장 좋으며, 앉아 있는 시간을 줄이는 게 중요합니다. 해외 여행이 몸과 마음 모두에 치유 효과를 줘요.','骨と関節、膝、皮膚が弱点です。 류마티스나 관절염에 주의하고, 칼슘과 비타민D를 충분히 섭취하세요. 젊을 때 건강 관리를 잘하면 나이 들어서 오히려 건강해지는 특이한 체질이에요. 스트레칭과 관절 운동을 습관화하세요.','足首とふくらはぎ、循環系が弱点です。 혈압 관리가 중요하고, 순환을 돕기 위해 규칙적으로 걷는 습관을 가지세요. 독특한 건강 문제가 갑자기 올 수 있으니, 이상한 증상이 느껴지면 바로 검진받으세요. 전자기기 사용을 줄이는 것도 도움돼요.','足とリンパ系、免疫システムが弱点です。 원인 불명의 피로감이나 면역 저하에 주의하세요. 충분한 수면이 당신에게는 가장 강력한 건강 비결이에요. 물 근처에서 시간을 보내거나, 명상과 요가를 하면 면역력이 크게 올라갑니다. 알코올과 약물에 민감한 체질이니 절제가 중요해요.'][lagnaSign];
+    var health = ['頭と顔の部位が弱点です。 頭痛や発熱が頻繁に起こりやすく、怒ると頭に熱が上がるタイプです。規則的な運動でエネルギーを発散し、十分な水分を摂りましょう。事故や怪我に注意し、性急な行動を控えると健康が良くなります。','首と甲状腺が弱点です。 過食の傾向があるので体重管理と糖尿に注意。声帯と首の健康も重要です。良い食べ物を適度に楽しみ、首のストレッチを頻繁に行いましょう。自然の中での散歩が健康に最適です。','肺と腕、肩、神経系が弱点です。 不安や睡眠問題があるかもしれず、心配が多くストレスが溜まりやすいです。呼吸瞑想が大いに助けになり、規則的な睡眠パターンを維持しましょう。','胃腸と胸の部位が弱点です。 感情的ストレスがすぐ消化器の健康に影響するタイプです。ストレス管理が健康管理です。温かい食べ物とお茶を楽しみましょう。水辺で過ごすと心と体が同時に癒されます。','心臓と背中、脊椎が弱点です。 過労に注意 — 頑張り屋のタイプなので無理しやすいです。心血管の健康のため有酸素運動を規則的に行い、十分な休息を取りましょう。','消化器系と腸、皮膚が弱点です。 消化不良やアレルギーがあるかもしれず、完璧主義的性格のためストレス性疾患が来る可能性があります。食事療法が非常に重要です。ヨガや瞑想でリラックスしましょう。','腎臓と腰、皮膚が弱点です。 十分な水分を摂り、バランスの取れた生活を維持しましょう。糖分摂取を減らし腎臓に良い食べ物を取りましょう。ストレスが肌にすぐ現れるタイプなので、心の平和が肌の健康です。','生殖器と排泄器系が弱点です。 慢性疾患が来る可能性があるので定期的な健康診断が重要です。感情的ストレスが健康に直接影響し、極端なダイエットや無理な運動は避けましょう。深い呼吸と瞑想が助けになります。','肝臓と太もも、お尻が弱点です。 良い食べ物を楽しむ性向なので過体重に注意。アウトドア活動、登山、自転車が健康に最適で、座っている時間を減らすことが重要です。海外旅行が心身の癒し効果をもたらします。','骨と関節、膝、皮膚が弱点です。 リウマチや関節炎に注意し、カルシウムとビタミンDを十分に摂りましょう。若い時に健康管理をしっかりすれば年を取ると逆に健康になる特異な体質です。ストレッチと関節運動を習慣化しましょう。','足首とふくらはぎ、循環系が弱点です。 血圧管理が重要で、循環を助けるため規則的に歩く習慣を持ちましょう。独特な健康問題が突然来る可能性があるので、異常な症状を感じたらすぐ検診を受けましょう。','足とリンパ系、免疫システムが弱点です。 원인 불명의 피로감이나 면역 저하에 주의하세요. 十分な睡眠があなたにとって最も強力な健康の秘訣です。水辺で過ごしたり、瞑想やヨガをすると免疫力が大きく上がります。アルコールや薬物に敏感な体質なので節制が重要です。'][lagnaSign];
     html += '<div class="interp-card"><div class="interp-title">🏥 내 건강</div><div class="interp-text">' + health + '</div></div>';
 
     // 現在の大運簡単要約
@@ -535,7 +535,7 @@ function renderD1Chart(positions, lagnaSign) {
 }
 
 function getNavamsaSign(siderealLon) {
-    // ナヴァムシャ: 各サイン(30度)を9等分(3.333...도), 파다에 따라 사인 배정
+    // ナヴァムシャ: 各サイン(30度)を9等分
     // 火のサイン: 牡羊座から開始
     // 地のサイン: 山羊座から開始
     // 風のサイン: 天秤座から開始
@@ -610,16 +610,16 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const d9H10Ruler = SIGN_RULERS[d9H10Sign];
     const d9H10Planets = d9PlanetsInHouse(10);
 
-    // 配偶者의 10궁 (파생하우스: 7궁에서 10번째 = D9 4궁)
+    // 配偶者の10宮
     const spouseH10 = 4; // 7宮から10番目
     const d9H4Sign = (d9LagnaSign + 3) % 12;
     const d9H4Ruler = SIGN_RULERS[d9H4Sign];
     const d9H4Planets = d9PlanetsInHouse(4);
 
-    // D9 1궁 (결혼 후 본인)
+    // D9 1宮
     const d9H1Planets = d9PlanetsInHouse(1);
 
-    // 사인별 직업 경향
+    // サイン別職業傾向
     const careerBySgn = [
         'リーダーシップ、軍事、スポーツ、起業（火の開拓者）',
         '金融、農業、芸術、不動産、食品（安定と物質）',
@@ -635,7 +635,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         '芸術、スピリチュアリティ、ヒーリング、音楽、慈善活動（超越と奉仕）'
     ];
 
-    // 행성별 배우자 직업 경향
+    // 惑星別配偶者職業傾向
     const planetCareer = {
         Sun: '政府官僚、政治家、医師、CEO — 権威ある職業',
         Moon: '看護師、カウンセラー、シェフ、接客業 — 介護・感情的な役割',
@@ -650,58 +650,58 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     let html = '';
 
-    // 1. D9 라그나 분석 (결혼 후 본인)
+    // 1. D9 ラグナ分析
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🕉️ 결혼 후의 당신' : '🕉️ D9 라그나 — 결혼 후의 당신: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">${isEasy ? '🕉️ 結婚後のあなた' : '🕉️ D9 ラグナ — 結婚後のあなた: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
-            ${isEasy ? '결혼 후, 그리고 인생 후반(30대 이후)에 드러나는 당신의 진짜 모습입니다.' : '나바암샤 라그나가 <strong>' + SIGNS[d9LagnaSign] + '</strong>에 있습니다. 이것은 결혼 후, 그리고 인생 후반(30대 이후)에 드러나는 당신의 진짜 모습입니다.'}
-            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>특별한 표시!</strong> 당신의 본질이 결혼 후에도 변하지 않으며, 내면과 외면이 일치하는 사람입니다.' : '<br><br><strong>D1과 D9 라그나가 같은 사인!</strong> 이것을 <strong>바르고타마(Vargottama)</strong>라 하며, 매우 강력합니다. 당신의 본질이 결혼 후에도 변하지 않으며, 내면과 외면이 일치하는 사람입니다.') : ''}
-            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? '결혼 후 당신의 성격에 강하게 영향을 주는 에너지가 있습니다.' : '<strong>D9 1궁의 행성:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — 이 행성들이 결혼 후 당신의 성격에 강하게 영향을 줍니다.') : ''}
+            ${isEasy ? '結婚後、そして人生後半（30代以降）に現れるあなたの本当の姿です。' : 'ナヴァムシャ・ラグナは<strong>' + SIGNS[d9LagnaSign] + '</strong>。これは結婚後、30代以降に現れるあなたの本当の姿です。'}
+            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>特別な印！</strong> あなたの本質は結婚後も変わらず、内面と外面が一致しています。' : '<br><br><strong>D1とD9ラグナが同じサイン！</strong> これを<strong>ヴァルゴッタマ(Vargottama)</strong>と言い、非常に強力です。あなたの本質は結婚後も変わりません。') : ''}
+            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? '結婚後あなたの性格に強く影響するエネルギーがあります。' : '<strong>D9 1宮の惑星:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — これらの惑星が結婚後あなたの性格に強く影響します。') : ''}
         </div>
     </div>`;
 
-    // 2. D9 7궁 (배우자)
+    // 2. D9 7宮（配偶者）
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 배우자의 성격' : '💍 D9 7궁 — 배우자의 성격: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 配偶者の性格' : '💍 D9 7宮 — 配偶者の性格: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력') + '의 성질을 가진 파트너입니다.' : '나바암샤 7궁이 <strong>' + SIGNS[d9H7Sign] + '</strong>에 있으며, 주인 행성은 <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>입니다.<br><br>이것은 배우자의 핵심 성격을 나타냅니다. ' + SIGNS[d9H7Sign] + '의 에너지를 가진 파트너 — ' + (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '독특한 매력') + '의 성질을 가진 사람입니다.'}
-            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? '좋은 에너지! 배우자에게서 축복을 받습니다.' : '도전의 에너지 — 결혼 생활에서 성장의 기회이기도 합니다.').join('<br>') : '<strong>D9 7궁의 행성:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '좋은 에너지! 배우자에게서 이 행성의 축복을 받습니다.' : '도전의 에너지 — 결혼 생활에서 성장의 기회이기도 합니다.'}`).join('<br>')) : ''}
+            ${isEasy ? (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '独特な魅力') + 'の性質を持つパートナーです。' : 'ナヴァムシャ7宮は<strong>' + SIGNS[d9H7Sign] + '</strong>、支配星は<strong>' + RULER_NAMES[d9H7Ruler] + '</strong>。<br><br>これは配偶者の核心的な性格を表します。' + SIGNS[d9H7Sign] + 'のエネルギーを持つパートナー — ' + (careerBySgn[d9H7Sign].split('(')[1]?.replace(')','') || '独特な魅力') + 'の性質を持つ人です。'}
+            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? '良いエネルギー！配偶者から祝福を受けます。' : '挑戦のエネルギー — 結婚生活での成長の機会でもあります。').join('<br>') : '<strong>D9 7宮の惑星:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '良いエネルギー！配偶者からこの惑星の祝福を受けます。' : '挑戦のエネルギー — 結婚生活での成長の機会でもあります。'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
-    // 3. D9 10궁 (본인의 Dharma/사명)
+    // 3. D9 10宮（使命）
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💼 인생의 사명' : '💼 D9 10궁 — 인생의 사명(Dharma): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 人生の使命' : '💼 D9 10宮 — 人生の使命(ダルマ): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '결혼 후, 성숙해진 이후에 추구하게 되는 진정한 소명입니다.' : '나바암샤 10궁이 <strong>' + SIGNS[d9H10Sign] + '</strong>에 있으며, 주인 행성은 <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>입니다.<br><br>D1의 10궁이 \'직업\'을 보여준다면, D9의 10궁은 <strong>인생의 더 큰 사명(Dharma)</strong>을 보여줍니다. 결혼 후, 그리고 성숙해진 이후에 추구하게 되는 진정한 소명입니다.'}<br><br>
+            ${isEasy ? '結婚後、成熟した後に追求する真の天職です。' : 'ナヴァムシャ10宮は<strong>' + SIGNS[d9H10Sign] + '</strong>、支配星は<strong>' + RULER_NAMES[d9H10Ruler] + '</strong>。<br><br>D1の10宮が「職業」を示すなら、D9の10宮は<strong>人生のより大きな使命(ダルマ)</strong> — 成熟した後に追求する真の天職。'}<br><br>
             <strong>사명의 방향:</strong> ${careerBySgn[d9H10Sign]}
-            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || '독특한 직업 에너지').join('<br>') : '<strong>D9 10궁의 행성:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || '독특한 직업 에너지'}`).join('<br>')) : ''}
+            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || '独特な職業エネルギー').join('<br>') : '<strong>D9 10宮の惑星:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || '独特な職業エネルギー'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
-    // 4. 배우자의 직업 (파생하우스: D9 4궁 = 7궁에서 10번째)
+    // 4. 配偶者の職業
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👔 배우자의 직업' : '👔 배우자의 직업 — 파생 10궁(D9 4궁): ' + SIGNS[d9H4Sign] + ' ' + SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-title">${isEasy ? '👔 配偶者の職業' : '👔 配偶者の職業 — 派生10宮(D9 4宮): ' + SIGNS[d9H4Sign] + ' ' + SIGN_SYMBOLS[d9H4Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '<strong>파생하우스 원리:</strong> 7궁(배우자)에서 10번째 하우스 = D9의 4궁이 배우자의 직업/사회적 활동을 나타냅니다.<br><br>D9 4궁이 <strong>' + SIGNS[d9H4Sign] + '</strong>에 있으며, 주인 행성은 <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>입니다.<br><br>'}
+            ${isEasy ? '' : '<strong>派生ハウスの原理:</strong> 7宮(配偶者)から10番目のハウス = D9の4宮が配偶者の職業/社会活動を表します。<br><br>D9 4宮は<strong>' + SIGNS[d9H4Sign] + '</strong>、支配星は<strong>' + RULER_NAMES[d9H4Ruler] + '</strong>。<br><br>'}
             <strong>배우자의 직업 경향:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `배우자가 ${planetCareer[p.id] || '특수한 직업'} 분야에서 활동할 가능성`).join('<br>') : '<strong>D9 4궁(배우자 10궁)의 행성:</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: 배우자가 ${planetCareer[p.id] || '특수한 직업'} 분야에서 활동할 가능성`).join('<br>')) : ''}
+            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `배우자가 ${planetCareer[p.id] || '専門分野'} 분야에서 활동할 가능성`).join('<br>') : '<strong>D9 4宮(配偶者10宮)の惑星:</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: 배우자가 ${planetCareer[p.id] || '専門分野'} 분야에서 활동할 가능성`).join('<br>')) : ''}
         </div>
     </div>`;
 
-    // 5. 바르고타마 행성 체크
+    // 5. ヴァルゴッタマチェック
     const vargottamaPlanets = d9Positions.filter(p => p.sign === p.d9Sign);
     if (vargottamaPlanets.length > 0) {
         html += `<div class="interp-card">
-            <div class="interp-title">${isEasy ? '⭐ 특별히 강한 행성' : '⭐ 바르고타마(Vargottama) 행성 — 특별히 강한 행성'}</div>
+            <div class="interp-title">${isEasy ? '⭐ 特別に強い惑星' : '⭐ ヴァルゴッタマ(Vargottama) 惑星 — 特別に強い'}</div>
             <div class="interp-text">
-                ${isEasy ? '아래 행성들은 특별히 강력하며, 인생 전반에 걸쳐 일관되게 작용합니다.' : 'D1과 D9에서 같은 사인에 있는 행성을 <strong>바르고타마</strong>라 합니다. 이 행성은 매우 강력하며, 그 행성의 에너지가 인생 전반에 걸쳐 일관되게 작용합니다.'}<br><br>
-                ${isEasy ? '특별히 강한 에너지가 인생 전반에 걸쳐 일관되게 작용합니다!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: D1과 D9 모두 ${SIGNS[p.sign]}에 위치 — 이 행성의 에너지가 특별히 강합니다!`).join('<br>')}
+                ${isEasy ? '以下の惑星は特別に強力で、人生全般にわたり一貫して作用します。' : 'D1とD9で同じサインにある惑星を<strong>ヴァルゴッタマ</strong>と言います。この惑星は非常に強力で、そのエネルギーが人生全般にわたり一貫して作用します。'}<br><br>
+                ${isEasy ? '特別に強いエネルギーが人生全般にわたり一貫して作用します！' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: D1과 D9 모두 ${SIGNS[p.sign]}에 위치 — 이 행성의 에너지가 특별히 강합니다!`).join('<br>')}
             </div>
         </div>`;
     }
 
-    // 6. 배우자 방향 분석 (UL + A7 + D1 7궁 + D9 7궁 종합)
+    // 6. 配偶者方向分析
     const DIRECTIONS = {
         0:'東', 1:'南', 2:'西', 3:'北',
         4:'東', 5:'南', 6:'西', 7:'北',
@@ -713,7 +713,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         8:'東（射手座 — 火）',9:'南（山羊座 — 土）',10:'西（水瓶座 — 風）',11:'北（魚座 — 水）'
     };
 
-    // Arudha Pada 계산 함수
+    // Arudha Pada 計算関数
     function calcArudha(houseNum, lagnaS, pos) {
         const houseSign = (lagnaS + houseNum - 1) % 12;
         const ruler = SIGN_RULERS[houseSign];
@@ -722,41 +722,41 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         const rulerSign = rulerPlanet.sign;
         const dist = ((rulerSign - houseSign) + 12) % 12;
         let arudhaSign = (rulerSign + dist) % 12;
-        // 예외: 아루다가 같은 사인이거나 7번째이면 10번째로
+        // 例外処理
         if (arudhaSign === houseSign || arudhaSign === (houseSign + 6) % 12) {
             arudhaSign = (houseSign + 9) % 12;
         }
         return arudhaSign;
     }
 
-    // D1에서의 원래 positions 사용 (d9Positions에는 d1 sign도 있음)
-    const d1Positions = d9Positions; // d9Positions는 {...p, d9Sign} 이므로 p.sign = D1 sign
+    // D1の元のpositions使用 (d9Positions에는 d1 sign도 있음)
+    const d1Positions = d9Positions; 
 
-    // UL (Upapada Lagna) = 12궁의 아루다
+    // UL = 12宮のアルダ
     const ulSign = calcArudha(12, d1LagnaSign, d1Positions);
 
-    // A7 (Darapada) = 7궁의 아루다
+    // A7 = 7宮のアルダ
     const a7Sign = calcArudha(7, d1LagnaSign, d1Positions);
 
-    // D1 7궁 사인
+    // D1 7宮サイン
     const d1H7Sign = (d1LagnaSign + 6) % 12;
 
-    // D9 7궁 주인의 D9 위치
+    // D9 7宮主のD9位置
     const d9H7RulerPlanet = d9Positions.find(p => p.id === d9H7Ruler);
     const d9H7RulerSign = d9H7RulerPlanet ? d9H7RulerPlanet.d9Sign : d9H7Sign;
 
-    // D9 금성(Venus) 위치 — 배우자의 카라카(상징 행성)
+    // D9 金星位置
     const venusD9 = d9Positions.find(p => p.id === 'Venus');
     const venusD9Sign = venusD9 ? venusD9.d9Sign : 0;
 
-    // 방향 집계 — 6가지 지표
+    // 方向集計 — 6指標
     const dirSources = [
         {name:'D1 7宮', sign: d1H7Sign, desc:'出生図の配偶者ハウス'},
         {name:'D9 7宮', sign: d9H7Sign, desc:'ナヴァムシャの配偶者ハウス'},
         {name:'D9 7宮主', sign: d9H7RulerSign, desc:'ナヴァムシャ7宮主の位置'},
         {name:'D9 金星(♀)', sign: venusD9Sign, desc:'ナヴァムシャの配偶者カラカ'},
-        {name:'ウパパダ(UL)', sign: ulSign, desc:'12궁 아루다 — 배우자 가문/배경'},
-        {name:'ダラパダ(A7)', sign: a7Sign, desc:'7궁 아루다 — 배우자 사회적 이미지'}
+        {name:'ウパパダ(UL)', sign: ulSign, desc:'12宮アルダ — 配偶者の背景'},
+        {name:'ダラパダ(A7)', sign: a7Sign, desc:'7宮アルダ — 配偶者の社会的イメージ'}
     ];
 
     const dirCount = {};
@@ -769,10 +769,10 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🧭 배우자가 올 方向' : '🧭 배우자의 방향 — 6가지 지표 종합 분석'}</div>
+        <div class="interp-title">${isEasy ? '🧭 配偶者が来る方向' : '🧭 配偶者の方向 — 6指標総合分析'}</div>
         <div class="interp-text">
-            ${isEasy ? '배우자가 어느 방향에서 올지를 여러 지표로 분석합니다.' : '베딕 점성술에서는 배우자가 어느 방향에서 올지를 여러 지표를 종합하여 분석합니다.'}<br><br>
-            ${isEasy ? '' : '<strong>6가지 지표 분석:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7궁주(' + RULER_NAMES[d9H7Ruler] + '):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 방향을 나타냅니다. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
+            ${isEasy ? '配偶者がどの方向から来るかを複数の指標で分析します。' : 'ヴェーダ占星術では配偶者がどの方向から来るかを複数の指標を総合して分析します。'}<br><br>
+            ${isEasy ? '' : '<strong>6指標分析:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 우파파다 라그나(UL):</strong> 12궁의 아루다 파다. 배우자의 가문/배경과 결혼의 환경을 나타냅니다. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 다라파다(A7):</strong> 7궁의 아루다 파다. 배우자의 사회적 이미지와 외적 인상을 나타냅니다. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7궁주(' + RULER_NAMES[d9H7Ruler] + '):</strong> 나바암샤 7궁의 주인이 가는 사인이 배우자의 실질적 방향을 나타냅니다. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 금성:</strong> 배우자의 카라카(상징 행성). 금성의 나바암샤 위치가 배우자 에너지의 근원지입니다. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
                 <strong style="font-size:16px;">🧭 종합 결론: ${agreement >= 4 ? '圧倒的に強い' : agreement >= 3 ? '非常に強い' : agreement >= 2 ? '強い' : ''} ${primaryDir} 방향</strong><br><br>
                 6가지 지표 중 <strong>${agreement}개</strong>가 <strong>${primaryDir}</strong>을 가리키고 있습니다.
@@ -780,7 +780,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
                 ${agreement === 3 ? '<br>3개 지표 일치 — <strong>高い確率</strong>로 ' + primaryDir + ' 方向です。' : ''}
                 ${agreement === 2 ? '<br>2개 지표 일치 — ' + primaryDir + ' 方向が有力ですが、他の可能性もあります。' : ''}
                 ${agreement <= 1 ? '<br>지표가 분산되어 있어 특정 방향보다는 다양한 경로에서 만남이 올 수 있습니다. 열린 마음으로 인연을 기다리세요.' : ''}
-                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 二つの方向が同等: <strong>' + sortedDirs[0][0] + '</strong>과 <strong>' + sortedDirs[1][0] + '</strong> 両方可能性があります。' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 二つの方向が同等: <strong>' + sortedDirs[0][0] + '</strong>と<strong>' + sortedDirs[1][0] + '</strong> 両方可能性があります。' : ''}
             </div>
         </div>
     </div>`;
@@ -854,11 +854,11 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
         "神秘的な感受性とスピリチュアルな深み。夢のようなロマンスが魅力。"
     ];
 
-    // D1 7궁 사인으로 만남 환경
+    // D1 7宮サイン으로 만남 환경
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🤝 배우자를 만나는 환경' : '🤝 배우자를 만나는 환경 — D1 7궁: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">${isEasy ? '🤝 配偶者との出会いの場' : '🤝 배우자를 만나는 환경 — D1 7궁: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '7궁 사인이 배우자와의 만남의 환경과 방식을 나타냅니다.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -868,7 +868,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // UL 사인으로 배우자 가문/배경
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🏛️ 배우자의 가문/배경' : '🏛️ 배우자의 가문/배경 — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">${isEasy ? '🏛️ 配偶者の家庭/背景' : '🏛️ 배우자의 가문/배경 — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '우파파다 라그나(UL)는 배우자의 가정환경과 성장 배경을 나타냅니다.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -877,7 +877,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // A7 사인으로 배우자 외적 이미지
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👤 배우자의 첫인상' : '👤 배우자의 첫인상/외적 이미지 — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">${isEasy ? '👤 配偶者の第一印象' : '👤 배우자의 첫인상/외적 이미지 — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '다라파다(A7)는 배우자가 세상에 보여주는 외적 이미지, 첫인상을 나타냅니다.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -886,7 +886,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // D9 금성 사인으로 배우자 매력 포인트
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💎 배우자의 매력 포인트' : '💎 배우자의 매력 포인트 — D9 금성: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">${isEasy ? '💎 配偶者の魅力ポイント' : '💎 배우자의 매력 포인트 — D9 금성: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '나바암샤의 금성 위치는 배우자의 핵심 매력과 사랑의 스타일을 나타냅니다.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
