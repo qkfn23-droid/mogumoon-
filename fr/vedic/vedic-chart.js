@@ -1743,7 +1743,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const D60_DEITIES = [
             {name:'Ghora',nature:'malefic',desc:'Destruction and fear. Dark karma from past life'},
             {name:'Rakshasa',nature:'malefic',desc:'Demonic energy. Strong desire and attachment'},
-            {name:'Deva',nature:'benefic',desc:'Divine being. Past life merit and blessings'},
+            {name:'Deva',nature:'benefic',desc:'Etre divin. Merite et benedictions des vies passees'},
             {name:'Kubera',nature:'benefic',desc:'God of wealth. Wealth-building karma'},
             {name:'Yaksha',nature:'benefic',desc:'Nature guardian. Harmony with nature'},
             {name:'Kinnara',nature:'benefic',desc:'Celestial musician. Artistic talent'},
@@ -1934,7 +1934,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const rahuH = ((rahuD60.dSign - dLagnaSign + 12) % 12) + 1;
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
-                ch4 += '<br><br>🔥 <strong>Rahu-Ketu axis on 1-7 line!</strong> Very strong past life connection with spouse. Destined to meet.';
+                ch4 += '<br><br>🔥 <strong>Axe Rahu-Ketu sur la ligne 1-7!</strong> Tres forte connexion de vies passees avec le conjoint. Destines a se rencontrer.';
             }
         }
         const h7lordPlanet = dPositions.find(p => p.id === d60H7lord);

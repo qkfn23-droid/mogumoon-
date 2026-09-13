@@ -1743,7 +1743,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const D60_DEITIES = [
             {name:'Ghora',nature:'malefic',desc:'Destruction and fear. Dark karma from past life'},
             {name:'Rakshasa',nature:'malefic',desc:'Demonic energy. Strong desire and attachment'},
-            {name:'Deva',nature:'benefic',desc:'Divine being. Past life merit and blessings'},
+            {name:'Deva',nature:'benefic',desc:'Ser divino. Merito y bendiciones de vidas pasadas'},
             {name:'Kubera',nature:'benefic',desc:'God of wealth. Wealth-building karma'},
             {name:'Yaksha',nature:'benefic',desc:'Nature guardian. Harmony with nature'},
             {name:'Kinnara',nature:'benefic',desc:'Celestial musician. Artistic talent'},
