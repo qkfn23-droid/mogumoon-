@@ -545,7 +545,7 @@
             <span class="civ-badge badge-live">NEW</span>
             <div class="civ-emoji">📖</div>
             <div class="civ-info">
-                <div class="civ-name" style="color:#d4a853;">易経 (I Ching)</div>
+                <div class="civ-name" style="color:#d4a853;">易経 (易経)</div>
                 <div class="civ-sub">六十四卦 · 卦辞 · 象伝 · 3000年の知恵</div>
             </div>
             <span class="civ-arrow">→</span>
@@ -575,7 +575,7 @@
             <span class="civ-badge badge-live">NEW</span>
             <div class="civ-emoji">🔢</div>
             <div class="civ-info">
-                <div class="civ-name" style="color:#2ecc71;">数秘術 (Numerology)</div>
+                <div class="civ-name" style="color:#2ecc71;">数秘術 (数秘術)</div>
                 <div class="civ-sub">運命数 · 表現数 · 魂の衝動数 · 人格数 · マスターナンバー</div>
             </div>
             <span class="civ-arrow">→</span>
@@ -614,25 +614,25 @@
 <!-- Ghost Chat -->
 <div id="ghostChat" style="display:none;position:fixed;bottom:80px;right:20px;width:340px;max-height:500px;background:#0d0d20;border:1px solid #c9a84c;border-radius:16px;z-index:9998;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
 <div style="background:linear-gradient(135deg,#1a1a3e,#12122a);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a2a5a;">
-<span style="display:inline-block;width:36px;height:40px;"><svg viewBox="0 0 120 135" xmlns="http://www.w3.org/2000/svg"><path d="M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z" fill="#f0ece4" stroke="#888" stroke-width="1.2"/><ellipse cx="43" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><ellipse cx="77" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><circle cx="48" cy="64" r="2.8" fill="#555"/><circle cx="72" cy="64" r="2.8" fill="#555"/><path d="M56,77 Q60,81 64,77" fill="none" stroke="#999" stroke-width="1.2" stroke-linecap="round"/></svg></span><div><strong style="color:#c9a84c;font-size:15px;">Mogu</strong><br><span style="color:#666;font-size:11px;">Ask me anything!</span></div>
+<span style="display:inline-block;width:36px;height:40px;"><svg viewBox="0 0 120 135" xmlns="http://www.w3.org/2000/svg"><path d="M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z" fill="#f0ece4" stroke="#888" stroke-width="1.2"/><ellipse cx="43" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><ellipse cx="77" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><circle cx="48" cy="64" r="2.8" fill="#555"/><circle cx="72" cy="64" r="2.8" fill="#555"/><path d="M56,77 Q60,81 64,77" fill="none" stroke="#999" stroke-width="1.2" stroke-linecap="round"/></svg></span><div><strong style="color:#c9a84c;font-size:15px;">モグ</strong><br><span style="color:#666;font-size:11px;">何でも聞いて！</span></div>
 <span onclick="document.getElementById('ghostChat').style.display='none';document.getElementById('ghostLabel').style.display=''" style="margin-left:auto;color:#666;cursor:pointer;font-size:18px;">✕</span>
 </div>
 <div id="gcMessages" style="padding:12px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
-<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">안녕! 나는 <strong style="color:#c9a84c;">Mogu</strong>야~<br>What are you curious about? Tap a button or type below~</div>
+<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">안녕! 나는 <strong style="color:#c9a84c;">モグ</strong>야~<br>何が気になる？ボタンを押すか入力してね～</div>
 <div style="display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;">
-<button onclick="document.getElementById('gcInput').value='love fortune';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💍 Love/Spouse</button>
-<button onclick="document.getElementById('gcInput').value='my personality';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Personality</button>
-<button onclick="document.getElementById('gcInput').value='today fortune';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">📅 Fortune</button>
-<button onclick="document.getElementById('gcInput').value='career wealth';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💼 Career/Wealth</button>
-<button onclick="document.getElementById('gcInput').value='compatibility';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💑 Compatibility</button>
-<button onclick="document.getElementById('gcInput').value='past life';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Past Life</button>
-<button onclick="document.getElementById('gcInput').value='dream';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🌿 Dream</button>
-<button onclick="document.getElementById('gcInput').value='tarot';ghostSend()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🃏 Tarot</button>
+<button onclick="document.getElementById('gcInput').value='恋愛運';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💍 恋愛/配偶者</button>
+<button onclick="document.getElementById('gcInput').value='性格';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 性格/運命</button>
+<button onclick="document.getElementById('gcInput').value='今日の運勢';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">📅 運勢</button>
+<button onclick="document.getElementById('gcInput').value='仕事 財運';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💼 仕事/財運</button>
+<button onclick="document.getElementById('gcInput').value='相性';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💑 相性</button>
+<button onclick="document.getElementById('gcInput').value='前世';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 前世</button>
+<button onclick="document.getElementById('gcInput').value='夢';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🌿 夢</button>
+<button onclick="document.getElementById('gcInput').value='タロット';ghost送信()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🃏 タロット</button>
 </div>
 </div>
 <div style="padding:8px;border-top:1px solid #2a2a5a;display:flex;gap:6px;">
-<input id="gcInput" type="text" placeholder="e.g. I want to see my love fortune" style="flex:1;padding:10px 12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')ghostSend()">
-<button onclick="ghostSend()" style="padding:8px 14px;background:#c9a84c;border:none;border-radius:8px;color:#0a0a1a;font-weight:700;cursor:pointer;font-size:13px;">Send</button>
+<input id="gcInput" type="text" placeholder="例：恋愛運が見たい" style="flex:1;padding:10px 12px;background:#1a1a3e;border:1px solid #2a2a5a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')ghost送信()">
+<button onclick="ghost送信()" style="padding:8px 14px;background:#c9a84c;border:none;border-radius:8px;color:#0a0a1a;font-weight:700;cursor:pointer;font-size:13px;">送信</button>
 </div>
 </div>
 <div style="position:fixed;bottom:16px;right:70px;z-index:9998;display:flex;align-items:center;gap:8px;">
@@ -641,59 +641,59 @@
 </div>
 <script>
 var gcData = {
-    love: {msg:'Oh! Curious about love/spouse fortune! I recommend these tools 👻', items:[
-        {icon:'🕉️',name:'Vedic Astrology',desc:'Spouse appearance, personality, timing, direction!',url:'vedic/',badge:'⭐Pick'},
-        {icon:'☯️',name:'Four Pillars (Saju)',desc:'Spouse fortune, marriage timing',url:'saju/'},
-        {icon:'💜',name:'Zi Wei Dou Shu',desc:'Marriage palace detailed analysis',url:'ziwei/'},
-        {icon:'💑',name:'Birthday Compatibility',desc:'Check two people compatibility',url:'compatibility/'},
+    love: {msg:'おっ！恋愛/配偶者運が気になるんだね！ おすすめのツールはこれ 👻', items:[
+        {icon:'🕉️',name:'ヴェーダ占星術',desc:'配偶者の外見、性格、出会う時期、方向まで！',url:'vedic/',badge:'⭐おすすめ'},
+        {icon:'☯️',name:'四柱推命',desc:'配偶者運、結婚時期',url:'saju/'},
+        {icon:'💜',name:'紫微斗数',desc:'結婚宮の詳細分析',url:'ziwei/'},
+        {icon:'💑',name:'誕生日相性',desc:'二人の相性チェック',url:'compatibility/'},
     ]},
-    personality: {msg:'Curious about personality! Here are my picks 👻', items:[
-        {icon:'🕉️',name:'Vedic Astrology',desc:'Personality, appearance, talent by Lagna',url:'vedic/',badge:'⭐Pick'},
-        {icon:'☯️',name:'Four Pillars (Saju)',desc:'Destiny by five elements',url:'saju/'},
-        {icon:'🔢',name:'Numerology',desc:'Destiny by birth numbers',url:'numerology/'},
-        {icon:'🧿',name:'Aura Color Test',desc:'Discover your energy color',url:'aura/'},
+    personality: {msg:'性格が気になるんだね！おすすめ 👻', items:[
+        {icon:'🕉️',name:'ヴェーダ占星術',desc:'ラグナで見る性格、外見、才能',url:'vedic/',badge:'⭐おすすめ'},
+        {icon:'☯️',name:'四柱推命',desc:'五行で見る運命',url:'saju/'},
+        {icon:'🔢',name:'数秘術',desc:'誕生日の数字で見る運命',url:'numerology/'},
+        {icon:'🧿',name:'オーラカラーテスト',desc:'エネルギーの色を発見',url:'aura/'},
     ]},
-    fortune: {msg:'Curious about fortune! Try these 👻', items:[
-        {icon:'✨',name:'Daily Fortune',desc:'Daily tarot + horoscope + lucky numbers',url:'daily/',badge:'⭐Daily'},
-        {icon:'🕉️',name:'Vedic Dasha',desc:'Which planet rules your current period?',url:'vedic/'},
-        {icon:'🌕',name:'Moon Phase',desc:'Today's moon + suitable activities',url:'moon/'},
-        {icon:'📊',name:'Biorhythm',desc:'Check today's condition',url:'biorhythm/'},
+    fortune: {msg:'運勢が気になる！これを試してみて 👻', items:[
+        {icon:'✨',name:'今日の運勢',desc:'毎日のタロット+星座+ラッキーナンバー',url:'daily/',badge:'⭐毎日更新'},
+        {icon:'🕉️',name:'ヴェーダ大運',desc:'今どの惑星が支配する時期？',url:'vedic/'},
+        {icon:'🌕',name:'ムーンフェーズ',desc:'今日の月+適した活動',url:'moon/'},
+        {icon:'📊',name:'バイオリズム',desc:'今日のコンディションチェック',url:'biorhythm/'},
     ]},
-    career: {msg:'Career/wealth fortune! Check here 👻', items:[
-        {icon:'🕉️',name:'Vedic Astrology',desc:'Career chart + wealth chart analysis',url:'vedic/',badge:'⭐Pick'},
-        {icon:'☯️',name:'Four Pillars (Saju)',desc:'Wealth, suitable career, major periods',url:'saju/'},
-        {icon:'💜',name:'Zi Wei Dou Shu',desc:'Career + wealth palace analysis',url:'ziwei/'},
+    career: {msg:'仕事/財運！ここでチェック 👻', items:[
+        {icon:'🕉️',name:'ヴェーダ占星術',desc:'職業チャート+財運チャート分析',url:'vedic/',badge:'⭐おすすめ'},
+        {icon:'☯️',name:'四柱推命',desc:'財運、適職、大運',url:'saju/'},
+        {icon:'💜',name:'紫微斗数',desc:'官禄宮+財帛宮分析',url:'ziwei/'},
     ]},
-    compat: {msg:'Compatibility! Check here 👻', items:[
-        {icon:'💑',name:'Birthday Compatibility',desc:'Love, friendship, destiny compatibility',url:'compatibility/',badge:'⭐Pick'},
-        {icon:'💕',name:'Zodiac Compatibility',desc:'12Zodiac Compatibility',url:'zodiac-match/'},
-        {icon:'🐾',name:'Spirit Animal Match',desc:'Guardian animal compatibility',url:'spirit-animal/'},
+    compat: {msg:'相性！ここでチェック 👻', items:[
+        {icon:'💑',name:'誕生日相性',desc:'恋愛・友情・運命の相性',url:'compatibility/',badge:'⭐おすすめ'},
+        {icon:'💕',name:'星座相性',desc:'12星座相性',url:'zodiac-match/'},
+        {icon:'🐾',name:'スピリットアニマル相性',desc:'守護動物の相性',url:'spirit-animal/'},
     ]},
-    karma: {msg:'Curious about past life?! Here 👻', items:[
-        {icon:'🕉️',name:'Vedic D60',desc:'60 deities past life karma',url:'vedic/',badge:'⭐Pick'},
-        {icon:'🏛️',name:'Past Life Test',desc:'Past life job, era, talent',url:'past-life/'},
-        {icon:'🏛️',name:'Hellenistic',desc:'Guardian planet and destiny',url:'hellenistic/'},
+    karma: {msg:'前世が気になる？！ここ 👻', items:[
+        {icon:'🕉️',name:'ヴェーダD60',desc:'60神で見る前世カルマ',url:'vedic/',badge:'⭐おすすめ'},
+        {icon:'🏛️',name:'前世テスト',desc:'前世の職業、時代、才能',url:'past-life/'},
+        {icon:'🏛️',name:'ヘレニスティック',desc:'守護惑星と運命',url:'hellenistic/'},
     ]},
-    dream: {msg:'Dream interpretation! Right here 👻', items:[
-        {icon:'🌿',name:'Dream Dictionary',desc:'Dream symbols + keyword search',url:'dream/',badge:'⭐Go'},
+    dream: {msg:'夢解釈！ここだよ 👻', items:[
+        {icon:'🌿',name:'夢辞典',desc:'夢のシンボル+キーワード検索',url:'dream/',badge:'⭐すぐ'},
     ]},
-    quick: {msg:'Need a quick answer! 👻', items:[
-        {icon:'🃏',name:'Tarot Cards',desc:'Today's advice, love, direction',url:'tarot/',badge:'⭐Pick'},
-        {icon:'🔮',name:'Crystal Ball',desc:'Crystal Ball에게 질문하기',url:'crystal-ball/'},
-        {icon:'📖',name:'I Ching',desc:'3000 years of wisdom',url:'iching/'},
+    quick: {msg:'すぐ答えが欲しい！ 👻', items:[
+        {icon:'🃏',name:'タロットカード',desc:'今日のアドバイス、恋愛、方向',url:'tarot/',badge:'⭐おすすめ'},
+        {icon:'🔮',name:'水晶玉',desc:'水晶玉에게 질문하기',url:'crystal-ball/'},
+        {icon:'📖',name:'易経',desc:'3000年の知恵',url:'iching/'},
     ]},
 };
 var gcKeywords = {
-    love: ['spouse','love','marriage','husband','wife','partner','dating','crush','relationship','soulmate','wedding'],
-    personality: ['personality','destiny','myself','appearance','talent','who am i','character','fate'],
-    fortune: ['fortune','today','tomorrow','this year','luck','horoscope','daily','monthly','yearly'],
-    career: ['career','money','job','wealth','salary','business','promotion','investment','rich','income'],
-    compat: ['compatibility','맞는','어울리','합이','찰떡','상성'],
-    karma: ['past life','카르마','업보','윤회','전세','과거 생'],
-    dream: ['dream','해몽','악몽','꿈에서','꿈을'],
-    quick: ['tarot','답','조언','빨리','Crystal Ball','점','뽑기','질문','고민'],
+    love: ['配偶者','恋愛','結婚','夫','妻','恋','彼氏','彼女','パートナー','出会い','婚活'],
+    personality: ['性格','運命','自分','外見','才能','私','気質','適性'],
+    fortune: ['運勢','今日','明日','今年','運','占い','毎日','今月','来年'],
+    career: ['仕事','お金','職業','財運','給料','事業','昇進','投資','転職','収入'],
+    compat: ['相性','맞는','어울리','합이','찰떡','상성'],
+    karma: ['前世','카르마','업보','윤회','전세','과거 생'],
+    dream: ['夢','해몽','악몽','꿈에서','꿈을'],
+    quick: ['タロット','답','조언','빨리','水晶玉','점','뽑기','질문','고민'],
 };
-function ghostSend() {
+function ghost送信() {
     var input = document.getElementById('gcInput');
     var msg = input.value.trim();
     if (!msg) return;
@@ -723,7 +723,7 @@ function ghostSend() {
             });
             reply += '</div>';
         } else {
-            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hmm... I'm not sure 😅<br>Try these keywords:<br><br>💍 <strong>spouse, love, marriage</strong><br>🔮 <strong>personality, destiny, myself</strong><br>📅 <strong>fortune, today, this year</strong><br>💼 <strong>career, money, wealth</strong><br>💑 <strong>compatibility</strong><br>🔮 <strong>past life, karma</strong><br>🌿 <strong>dream</strong><br>🃏 <strong>tarot, advice</strong></div>';
+            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">うーん...ちょっとわからないな 😅<br>こんなキーワードで聞いてみて：<br><br>💍 <strong>配偶者、恋愛、結婚</strong><br>🔮 <strong>性格、運命、自分</strong><br>📅 <strong>運勢、今日、今年</strong><br>💼 <strong>仕事、お金、財運</strong><br>💑 <strong>相性</strong><br>🔮 <strong>前世、カルマ</strong><br>🌿 <strong>夢</strong><br>🃏 <strong>タロット、アドバイス</strong></div>';
         }
         box.innerHTML += reply;
         box.scrollTop = box.scrollHeight;
