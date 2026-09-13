@@ -752,8 +752,8 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
     const now = new Date();
     let currentDate = new Date(birthDate);
 
-    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">\xf0\x9f\x92\xa1 <strong>ヴィムショータリ・ダシャー</strong> \xe2\x80\x94 人生は9つの惑星が順番に支配する時期に分かれます。 <strong>大運（マハーダシャー）</strong>は大きな時期、<strong>小運（アンタルダシャー/ブクティ）</strong>はその中の細かい時期です。 月のナクシャトラ位置から計算されます。<br><br>';
-    html += '\xf0\x9f\x8c\x99 出生時の月： <strong>' + nak.ko + ' (' + nak.name + ')</strong> \xe2\x80\x94 最初のダシャー： <strong>' + DASHA_KO[startRuler] + '</strong> （残り： ' + remainingYears.toFixed(2) + '年）</div></div>';
+    let html = '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>ヴィムショータリ・ダシャー</strong> — 人生は9つの惑星が順番に支配する時期に分かれます。 <strong>大運（マハーダシャー）</strong>は大きな時期、<strong>小運（アンタルダシャー/ブクティ）</strong>はその中の細かい時期です。 月のナクシャトラ位置から計算されます。<br><br>';
+    html += '🌙 出生時の月： <strong>' + nak.ko + ' (' + nak.name + ')</strong> — 最初のダシャー： <strong>' + DASHA_KO[startRuler] + '</strong> （残り： ' + remainingYears.toFixed(2) + '年）</div></div>';
 
     const periods = [];
     for (let i = 0; i < 9; i++) {
@@ -778,7 +778,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '年</span>';
         if (isCurrent) html += '<span class="dasha-badge">現在</span>';
-        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + ') \xe2\x96\xbc</span>';
+        html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + ') ▼</span>';
 
         html += '<div class="bhukti-list" style="display:' + (isCurrent ? '' : 'none') + ';margin-top:8px;padding-top:8px;border-top:1px solid #2a2a5a;">';
 
@@ -798,7 +798,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
             const bAge = getAge(bStart);
 
             html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
-            html += '<span>' + (bCurrent ? '\xe2\x96\xb6 ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
+            html += '<span>' + (bCurrent ? '▶ ' : '  ') + DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet] + '</span>';
             html += '<span>' + fmtDate(bStart) + '</span>';
             html += '<span>(' + bAge + ')</span>';
             html += '</div>';
