@@ -373,7 +373,7 @@
             .civ-card { padding: 18px; gap: 14px; }
         }
     </style>
-<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .form-box,.light-mode .calc-box,.light-mode .interp-card,.light-mode .info-item,.light-mode .palace-cell{background:#fff !important;border-color:#ddd !important;color:#333 !important}.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}.light-mode footer{color:#999 !important}.light-mode .civ-card{background:#fff !important;border-color:#ddd !important}.light-mode .civ-name{color:#333 !important}.light-mode .civ-sub,.light-mode .civ-desc{color:#666 !important}.light-mode .container,.light-mode .page-title p{color:#666 !important}</style></head>
+<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .form-box,.light-mode .calc-box,.light-mode .interp-card,.light-mode .info-item,.light-mode .palace-cell{background:#fff !important;border-color:#ddd !important;color:#333 !important}.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}.light-mode footer{color:#999 !important}.light-mode .civ-card{background:#fff !important;border-color:#ddd !important}.light-mode .civ-name{color:#333 !important}.light-mode .civ-sub,.light-mode .civ-desc{color:#666 !important}.light-mode .container,.light-mode .page-title p{color:#666 !important}.light-mode #ghostLabel{background:#fff !important;border-color:#c9a84c !important;color:#c9a84c !important}.light-mode #ghostChat{background:#f5f5f5 !important}.light-mode #ghostChat div[style*="background:#1a1a3e"]{background:#fff !important}.light-mode #ghostChat div[style*="background:#0d0d20"]{background:#eee !important}</style></head>
 <body>
 
 <header>
@@ -614,7 +614,7 @@
 <div id="ghostChat" style="display:none;position:fixed;bottom:80px;right:20px;width:340px;max-height:500px;background:#0d0d20;border:1px solid #c9a84c;border-radius:16px;z-index:9998;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
 <div style="background:linear-gradient(135deg,#1a1a3e,#12122a);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a2a5a;">
 <span style="font-size:28px;">👻</span><div><strong style="color:#c9a84c;font-size:15px;">모구</strong><br><span style="color:#666;font-size:11px;">뭐든 물어봐!</span></div>
-<span onclick="document.getElementById('ghostChat').style.display='none'" style="margin-left:auto;color:#666;cursor:pointer;font-size:18px;">✕</span>
+<span onclick="document.getElementById('ghostChat').style.display='none';document.getElementById('ghostLabel').style.display=''" style="margin-left:auto;color:#666;cursor:pointer;font-size:18px;">✕</span>
 </div>
 <div id="gcMessages" style="padding:12px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
 <div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">안녕! 나는 <strong style="color:#c9a84c;">모구</strong>야 👻<br>뭐가 궁금해? 편하게 말해봐~</div>
@@ -626,7 +626,7 @@
 </div>
 <div style="position:fixed;bottom:16px;right:70px;z-index:9998;display:flex;align-items:center;gap:8px;">
 <div id="ghostLabel" style="position:relative;background:#1a1a3e;border:1px solid #c9a84c;border-radius:10px;padding:6px 12px;color:#c9a84c;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.3);">Q&A<div style="position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:6px solid #c9a84c;"></div></div>
-<button onclick="var gc=document.getElementById('ghostChat');gc.style.display=gc.style.display==='none'?'block':'none';document.getElementById('ghostLabel').style.display='none'" style="width:48px;height:48px;border-radius:50%;border:2px solid #c9a84c;font-size:22px;cursor:pointer;background:#1a1a3e;box-shadow:0 2px 8px rgba(0,0,0,0.3);">👻</button>
+<button onclick="var gc=document.getElementById('ghostChat');var gl=document.getElementById('ghostLabel');if(gc.style.display==='none'){gc.style.display='block';gl.style.display='none'}else{gc.style.display='none';gl.style.display=''}" style="width:48px;height:48px;border-radius:50%;border:2px solid #c9a84c;font-size:22px;cursor:pointer;background:#1a1a3e;box-shadow:0 2px 8px rgba(0,0,0,0.3);">👻</button>
 </div>
 <script>
 var gcData = {
