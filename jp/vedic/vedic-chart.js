@@ -868,7 +868,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // UL 사인으로 배우자 가문/배경
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🏛️ 配偶者の家庭/背景' : '🏛️ 배우자의 가문/배경 — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">${isEasy ? '🏛️ 配偶者の家庭/背景' : '🏛️ 配偶者の家庭/背景 — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '우파파다 라그나(UL)는 배우자의 가정환경과 성장 배경을 나타냅니다.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -877,7 +877,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // A7 사인으로 배우자 외적 이미지
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👤 配偶者の第一印象' : '👤 배우자의 첫인상/외적 이미지 — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">${isEasy ? '👤 配偶者の第一印象' : '👤 配偶者の第一印象 — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '다라파다(A7)는 배우자가 세상에 보여주는 외적 이미지, 첫인상을 나타냅니다.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -886,7 +886,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // D9 금성 사인으로 배우자 매력 포인트
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💎 配偶者の魅力ポイント' : '💎 배우자의 매력 포인트 — D9 금성: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">${isEasy ? '💎 配偶者の魅力ポイント' : '💎 配偶者の魅力ポイント — D9 金星: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '나바암샤의 금성 위치는 배우자의 핵심 매력과 사랑의 스타일을 나타냅니다.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -991,7 +991,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         const dashaEasyDesc = {Ketu:'内面の省察と霊的成長の時期',Venus:'愛・美・豊かさの時期',Sun:'自信とリーダーシップが輝く時期',Moon:'感情と家庭が中心の時期',Mars:'挑戦と行動力の時期',Rahu:'大きな変化と新しいチャンスの時期',Jupiter:'幸運と成長が訪れる時期',Saturn:'忍耐すれば大きな成果が得られる時期',Mercury:'勉強・コミュニケーション・ビジネスが順調な時期'};
         html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
-        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '년</span>';
+        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '年</span>';
         if (isCurrent) html += '<span class="dasha-badge">현재</span>';
         html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + '세) ▼</span>';
 
@@ -1017,7 +1017,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
             html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;' + (bCurrent ? 'color:#c9a84c;font-weight:700;' : 'color:#888;') + '">';
             html += '<span>' + (bCurrent ? '▶ ' : '  ') + (isEasy ? dashaEasyDesc[bPlanet] : DASHA_KO[p.planet] + '-' + DASHA_KO[bPlanet]) + '</span>';
             html += '<span>' + fmtDate(bStart) + '</span>';
-            html += '<span>(' + bAge + '세)</span>';
+            html += '<span>(' + bAge + ')</span>';
             html += '</div>';
 
             bhuktiDate = bEnd;
@@ -1187,24 +1187,24 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     const spouseAppearance = [
-        '鋭い目鼻立ち、強い印象。 운동선수 같은 탄탄한 체형이나 근육질. 눈빛이 강렬하고 에너지가 넘치는 외모. 붉은 계열 옷이 잘 어울리며, 활동적이고 역동적인 분위기.',
-        '부드럽고 매력적인 외모. 풍만한 체형에 감각적인 입술. 피부가 좋고 자연스러운 아름다움. 목소리가 좋으며 전체적으로 따뜻하고 편안한 인상. 브랜드 옷을 즐김.',
-        '젊어 보이는 외모에 밝은 인상. 날씬하고 키가 큰 편. 말을 잘하며 표정이 풍부하고 눈이 반짝임. 유행에 민감하고 스타일리시한 패션 감각.',
-        '둥근 얼굴에 부드러운 인상. 살짝 통통하거나 곡선미가 있는 체형. 피부가 희고 눈이 큼. 모성적 분위기. 편안한 옷차림을 선호하며 집에서 더 매력적.',
-        '당당한 체격에 카리스마 넘치는 외모. 풍성한 머리카락이 특징. 눈에 띄는 존재감이 있으며 옷을 잘 입음. 화려한 액세서리를 좋아하며 어디서든 시선을 끄는 타입.',
-        '단정하고 깔끔한 외모. 마른 편이며 비율이 좋음. 지적인 인상에 안경이 잘 어울림. 미니멀한 패션을 선호하며 청결함이 매력 포인트. 디테일에 신경 쓰는 스타일.',
-        '균형 잡힌 외모에 세련된 인상. 대칭적인 얼굴형. 미소가 매력적이고 사교적인 분위기. 패션 감각이 뛰어나고 항상 잘 차려입음. 보조개가 있을 수 있음.',
+        '鋭い目鼻立ち、強い印象。アスリートのような引き締まった体型。エネルギッシュな外見。赤系の服が似合い、活動的でダイナミックな雰囲気。',
+        '柔らかく魅力的な外見。ふくよかな体型に感覚的な唇。肌が良く自然な美しさ。声が良く全体的に温かく安心する印象。',
+        '若く見える外見に明るい印象。スリムで背が高い方。話し上手で表情豊かで目が輝く。トレンドに敏感でスタイリッシュなファッションセンス。',
+        '丸い顔に柔らかい印象。少しぽっちゃりか曲線美のある体型。色白で目が大きい。母性的な雰囲気。楽な服装を好み家でより魅力的。',
+        '堂々とした体格にカリスマ溢れる外見。豊かな髪が特徴。目立つ存在感があり着こなし上手。華やかなアクセサリーが好きでどこでも視線を集めるタイプ。',
+        '端正で清潔感のある外見。痩せ型で比率が良い。知的な印象に眼鏡が似合う。ミニマルなファッションを好み清潔感が魅力ポイント。',
+        'バランスの取れた外見に洗練された印象。対称的な顔立ち。笑顔が魅力的で社交的な雰囲気。ファッションセンスに優れ常にきちんとした装い。',
         '鋭く神秘的な外見。深い目つきが強い印象を残す。痩せ型で鋭い目鼻立ち。全体的にダークトーンの服を好む。',
-        '키가 크고 체격이 좋음. 밝고 개방적인 인상. 이국적인 매력이 있거나 외국인 같은 분위기. 캐주얼하고 자유로운 옷차림. 웃는 얼굴이 매력적이며 스포티한 스타일.',
-        '진지하고 성숙한 외모. 마른 편이며 뼈대가 뚜렷함. 나이보다 어른스러워 보이며 시간이 갈수록 매력이 늘어남. 정장이 잘 어울리며 클래식한 스타일. 턱선이 뚜렷.',
-        '독특하고 비범한 외모. 개성 있는 패션 스타일. 키가 크거나 눈에 띄는 특징이 있음. 평범하지 않은 매력. 미래적이고 실험적인 스타일을 좋아함.',
-        '부드럽고 몽환적인 외모. 큰 눈에 꿈꾸는 듯한 표정. 살짝 통통한 편이며 피부가 투명함. 파스텔 톤이 잘 어울리며 예술가 분위기. 신비로운 매력.'
+        '背が高く体格が良い。明るく開放的な印象。異国的な魅力。カジュアルで自由な服装。笑顔が魅力的でスポーティーなスタイル。',
+        '真面目で成熟した外見。痩せ型で骨格がしっかり。年齢より大人に見え時間と共に魅力が増す。スーツが似合いクラシックなスタイル。',
+        '独特で非凡な外見。個性的なファッションスタイル。背が高いか目立つ特徴がある。平凡でない魅力。未来的で実験的なスタイルを好む。',
+        '柔らかく幻想的な外見。大きな目に夢見るような表情。少しぽっちゃりで肌が透明感がある。パステルトーンが似合い芸術家の雰囲気。神秘的な魅力。'
     ];
 
     let spouseText = (isEasy ? '' : '<strong>📐 배우자 외모 & 첫인상:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 배우자 성격:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += isEasy ? '<br><br>' : '<br><br><strong>7궁의 행성:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>7宮の惑星:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': '配偶者が社会的に認められている人。やや支配的かもしれないが尊敬できるパートナー。',
@@ -1242,7 +1242,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 私の配偶者' : '💕 배우자 & 결혼운 — 7궁: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 私の配偶者' : '💕 配偶者 & 結婚運 — 7宮: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1542,7 +1542,7 @@ function renderEducation(positions, lagnaSign) {
     let text = isEasy ? '<strong>기초 교육:</strong> ' : `<strong>4궁 (기초 교육·학위):</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['活動的な学習、体育/軍事教育', '美術/音楽/料理教育', '言語/文学/コミュニケーション', '家庭教育重視、歴史学', '演劇/リーダーシップ/政治学', '科学/医学/分析学', '法学/外交/デザイン', '心理学/研究/調査', '哲学/神学/国際学', '経営/行政/建築', 'IT/科学技術/航空', '芸術/映画/音楽/霊性'];
     text += eduSign4[h4sign] + 'に適しています。';
-    if (h4.length > 0 && !isEasy) text += '4궁의 ' + h4.map(p => p.name).join(', ') + 'が教育に影響。';
+    if (h4.length > 0 && !isEasy) text += '4宮の' + h4.map(p => p.name).join(', ') + 'が教育に影響。';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
@@ -1990,7 +1990,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (benefics.length > 0) html += (isEasy ? '좋은 행성이 자녀 자리에 있어 자녀복이 있습니다.' : '길성이 5궁에 있어 자녀복이 있습니다.') + '<br>';
         if (malefics.length > 0) html += (isEasy ? '도전의 행성이 자녀 자리에 있어 자녀 관련 어려움이 있을 수 있습니다.' : '흉성이 5궁에 있어 자녀 관련 어려움이 있을 수 있습니다.') + '<br>';
-        if (d7_5planets.length === 0) html += isEasy ? '자녀 자리에 행성이 없어 다른 요소를 종합적으로 봐야 합니다.' : '5궁에 행성이 없어 5궁주(지배성)의 위치를 봐야 합니다.';
+        if (d7_5planets.length === 0) html += isEasy ? '자녀 자리에 행성이 없어 다른 요소를 종합적으로 봐야 합니다.' : '5宮に惑星がなく、5宮主（支配星）の位置を見る必要があります。';
         html += '</div></div>';
 
     } else if (division === 12) {
