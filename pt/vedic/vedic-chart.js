@@ -1070,18 +1070,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremamente intuitivo e espiritual. Sonhos são vívidos e às vezes proféticos. Empatiza profundamente com a dor dos outros. Arte, meditação e água trazem paz.'
         ];
         const moonInterp = [
-            'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
-            'Emotionally very stable, seeking comfort. Dislikes change and finds security in the familiar. Healed by good food, music, and nature. Once you give your heart, it rarely changes.',
-            'Processes emotions rationally and organizes feelings through conversation. Curious with many simultaneous interests. Seeks variety over emotional depth and cannot tolerate boredom.',
-            'Moon in its own sign (domicile). Extremely rich in sensitivity, absorbing others\' emotions like a sponge. Strong maternal instincts, finding stability at home. Emotions may fluctuate with the Moon\'s cycle.',
-            'Dramatic and passionate emotional expression. Strong need to be recognized and loved; deeply hurt when ignored. Creative activities serve as emotional healing. Romantic and generous heart.',
-            'Tendency to analyze and organize emotions. Worries a lot and is perfectionist but resolves things practically. May have health concerns, finding stability in daily routines.',
-            'Finds emotional balance within relationships. Feels anxious alone and stabilizes when with a partner. Extremely averse to conflict and discord, finding inner peace in art and beauty.',
-            'Emotions are as deep and intense as the ocean. Loves deeply and hates deeply; never forgives betrayal. Very strong intuition, instinctively reading others\' true intentions. Emotional energy of transformation and rebirth.',
-            'Emotionally optimistic and freedom-loving. Dislikes being constrained and seeks new experiences. Sublimating emotions through philosophical thought, with travel as the best remedy.',
-            'Controls emotions well and doesn\'t show them outwardly. Strong sense of responsibility, prioritizing duty over feelings. May have had emotional difficulties in childhood, but grows emotionally mature with age.',
-            'Unique and unpredictable emotional patterns. Independent, loving in unconventional ways. Pursues universal love for humanity and social causes, seeing the bigger picture over personal emotions.',
-            'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
+            'Uma paixão ardente queima interiormente. Emoções são espontâneas e mudam rapidamente. A raiva se acende rápido mas apaga igual; desejo de independência emocional.',
+            'Emocionalmente muito estável, buscando conforto. Não gosta de mudanças e encontra segurança no familiar. Curado por boa comida, música e natureza.',
+            'Processa emoções racionalmente e organiza sentimentos pela conversa. Curioso com muitos interesses simultâneos. Busca variedade sobre profundidade emocional.',
+            'Lua em seu próprio signo (domicílio). Extremamente rico em sensibilidade, absorvendo emoções alheias. Fortes instintos maternais, encontrando estabilidade em casa.',
+            'Expressão emocional dramática e apaixonada. Forte necessidade de ser reconhecido e amado. Atividades criativas servem como cura emocional. Coração romântico e generoso.',
+            'Tendência a analisar e organizar emoções. Preocupa-se muito e é perfeccionista mas resolve as coisas praticamente. Encontra estabilidade em rotinas diárias.',
+            'Encontra equilíbrio emocional nos relacionamentos. Se sente ansioso sozinho e se estabiliza com parceiro. Extremamente avesso a conflitos, encontrando paz na arte e beleza.',
+            'Emoções são tão profundas e intensas quanto o oceano. Ama profundamente e odeia profundamente; nunca perdoa traição. Intuição muito forte.',
+            'Emocionalmente otimista e amante da liberdade. Não gosta de ser restringido e busca novas experiências. Sublima emoções pelo pensamento filosófico.',
+            'Controla bem as emoções e não as mostra externamente. Forte senso de responsabilidade. Pode ter tido dificuldades emocionais na infância, mas amadurece com a idade.',
+            'Padrões emocionais únicos e imprevisíveis. Independente, amando de maneiras não convencionais. Persegue amor universal pela humanidade e causas sociais.',
+            'Extremamente intuitivo e espiritual. Sonhos são vívidos e podem ser proféticos. Empatiza profundamente com o sofrimento alheio. Encontra estabilidade na arte e meditação.'
         ];
         html += `<div class="interp-card">
             <div class="interp-title">🌙 ${isEasy ? 'Seu Estilo Emocional' : 'Interior & Emoções — Lua: ' + SIGNS[moonPos.sign] + ' ' + SIGN_SYMBOLS[moonPos.sign]}</div>
@@ -1097,9 +1097,9 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h2sign = (lagnaSign + 1) % 12;
     const h11sign = (lagnaSign + 10) % 12;
 
-    let wealthText = isEasy ? '' : `<strong>2nd House (Accumulated Wealth):</strong> ${SIGNS[h2sign]}. `;
+    let wealthText = isEasy ? '' : `<strong>Casa 2 (Riqueza Acumulada):</strong> ${SIGNS[h2sign]}. `;
     if (h2planets.length === 0) {
-        wealthText += isEasy ? 'Wealth accumulation is steady and stable. Builds up steadily without major fluctuations. ' : 'No planets in 2nd — steady wealth accumulation. ';
+        wealthText += isEasy ? 'A acumulação de riqueza é constante e estável. Constrói-se sem grandes flutuações. ' : 'Sem planetas na 2ª — acumulação de riqueza constante. ';
     } else {
         h2planets.forEach(p => {
             const pWealth = {
@@ -1117,9 +1117,9 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         });
     }
 
-    wealthText += isEasy ? '<br><br>' : `<br><br><strong>11th House (Income & Gains):</strong> ${SIGNS[h11sign]}. `;
+    wealthText += isEasy ? '<br><br>' : `<br><br><strong>Casa 11 (Renda & Ganhos):</strong> ${SIGNS[h11sign]}. `;
     if (h11planets.length === 0) {
-        wealthText += isEasy ? 'Income is stable but without major fluctuations.' : 'No planets in 11th — stable income without major changes.';
+        wealthText += isEasy ? 'A renda é estável mas sem grandes flutuações.' : 'Sem planetas na 11ª — renda estável sem grandes mudanças.';
     } else {
         h11planets.forEach(p => {
             const pIncome = {
@@ -1136,7 +1136,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">💰 ${isEasy ? 'My Wealth Fortune' : 'Wealth Fortune'}</div>
+        <div class="interp-title">💰 ${isEasy ? 'Minha Fortuna de Riqueza' : 'Fortuna de Riqueza'}</div>
         <div class="interp-text">${wealthText}</div>
     </div>`;
 
@@ -1180,7 +1180,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     let spouseText = (isEasy ? '' : '<strong>📐 Spouse Appearance:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 spouse Personality:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
-        spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planets in 7th:</strong> ';
+        spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planetas na 7ª:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
                 'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
@@ -1218,7 +1218,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 Meu Parceiro' : '💕 Spouse & Marriage — 7th House: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 Meu Parceiro' : '💕 Parceiro & Casamento — Casa 7: ' + SIGNS[h7sign] + ' ' + SIGN_SYMBOLS[h7sign]}</div>
         <div class="interp-text">${spouseText}</div>
     </div>`;
 
@@ -1243,10 +1243,10 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
     ];
 
-    let careerText = isEasy ? careerSign[h10sign] : `10th house is in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
+    let careerText = isEasy ? careerSign[h10sign] : `A casa 10 está em ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
 
     if (h10planets.length > 0) {
-        careerText += isEasy ? '<br><br>' : '<br><br><strong>Planets in 10th:</strong>';
+        careerText += isEasy ? '<br><br>' : '<br><br><strong>Planetas na 10ª:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
                 'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
@@ -1262,7 +1262,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     }
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💼 Minha Carreira' : '💼 career & societyAchievement — 10th: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 Minha Carreira' : '💼 Carreira & Conquistas Sociais — Casa 10: ' + SIGNS[h10sign] + ' ' + SIGN_SYMBOLS[h10sign]}</div>
         <div class="interp-text">${careerText}</div>
     </div>`;
 
@@ -1288,8 +1288,8 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🏥 Minha Saúde' : '🏥 health — Vulnerable Areas'}</div>
-        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? isEasy ? '<br><br>Special health attention needed.' : '<br><br>6 house ' + h6planets.map(p => p.name).join(', ') + ' requires special attention to health.' : ''}</div>
+        <div class="interp-title">${isEasy ? '🏥 Minha Saúde' : '🏥 Saúde — Áreas Vulneráveis'}</div>
+        <div class="interp-text">${healthByLagna[lagnaSign]}${h6planets.length > 0 ? isEasy ? '<br><br>Atenção especial à saúde necessária.' : '<br><br>Casa 6: ' + h6planets.map(p => p.name).join(', ') + ' requer atenção especial à saúde.' : ''}</div>
     </div>`;
 
     // ═══════════════════════════════════
@@ -1336,7 +1336,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
                     'Venus': 'A period of love and abundance! Romance, marriage, and artistic activities become active. You enjoy material prosperity and indulge in luxury. You may acquire a new car, new home, or jewelry. Aesthetic sense develops and social activities flourish. The longest cycle at 20 years.'
                 };
                 html += `<div class="interp-card">
-                    <div class="interp-title">${isEasy ? '⏳ Current Period: ' + DASHA_KO[currentDasha] : '⏳ Current Dasha: ' + DASHA_KO[currentDasha] + ' Dasha'}</div>
+                    <div class="interp-title">${isEasy ? '⏳ Período Atual: ' + DASHA_KO[currentDasha] : '⏳ Dasha Atual: ' + DASHA_KO[currentDasha] + ' Dasha'}</div>
                     <div class="interp-text">${dashaInterp[currentDasha]}</div>
                 </div>`;
             }
