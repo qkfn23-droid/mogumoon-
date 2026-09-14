@@ -2137,7 +2137,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Parasara 인용
         if (!isEasy) {
             html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
-            html += '📜 <strong>Parasara says:</strong> "Shashtiamsha (D60) is the most important of all divisional charts. Benefic planets in benefic divisions give good results, malefic planets in malefic divisions give bad results."<br>';
+            html += '📜 <strong>Parasara dice:</strong> "Shashtiamsha (D60) is the most important of all divisional charts. Benefic planets in benefic divisions give good results, malefic planets in malefic divisions give bad results."<br>';
             html += '<span style="color:#666;">— Brihat Parasara Hora Shastra (BPHS)</span></div></div>';
         }
 

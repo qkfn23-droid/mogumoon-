@@ -654,9 +654,9 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🕉️ Du nach der Hochzeit' : '🕉️ D9 Lagna — Du nach der Hochzeit: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'Dies offenbart dein wahres Selbst nach der Hochzeit und in der zweiten Lebenshälfte (nach den 30ern).' : 'Navamsa Lagna is in <strong>' + SIGNS[d9LagnaSign] + '</strong>. This reveals your true self after marriage and in the second half of life (after 30s).'}
+            ${isEasy ? 'Dies offenbart dein wahres Selbst nach der Hochzeit und in der zweiten Lebenshälfte (nach den 30ern).' : 'Navamsa Lagna ist in <strong>' + SIGNS[d9LagnaSign] + '</strong>. This reveals your true self after marriage and in the second half of life (after 30s).'}
             ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>Special sign!</strong> Your essence remains unchanged after marriage — inner and outer self are aligned.' : '<br><br><strong>D1 and D9 Lagna in same sign!</strong> Called <strong>Vargottama</strong> — very powerful. Your essence remains unchanged after marriage.') : ''}
-            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'Es gibt Energien, die deine Persönlichkeit nach der Hochzeit stark beeinflussen.' : '<strong>Planets in D9 1st:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — beeinflussen stark deine Persönlichkeit nach der Hochzeit.') : ''}
+            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'Es gibt Energien, die deine Persönlichkeit nach der Hochzeit stark beeinflussen.' : '<strong>Planeten in D9 1.:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — beeinflussen stark deine Persönlichkeit nach der Hochzeit.') : ''}
         </div>
     </div>`;
 
@@ -664,8 +664,8 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💍 Partnercharakter' : '💍 D9 7. Haus — Partnercharakter: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' Qualitäten.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' qualities.'}
-            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.').join('<br>') : '<strong>Planets in D9 7th:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! Blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.'}`).join('<br>')) : ''}
+            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' Qualitäten.' : 'Das 7. Navamsa-Haus ist in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' Energie-Partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' Qualitäten.'}
+            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.').join('<br>') : '<strong>Planeten in D9 7.:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Wohltätig! Segen von deinem Partner.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -673,7 +673,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💼 Lebenszweck' : '💼 D9 10th House — Life Purpose (Dharma): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'The true calling you pursue after maturity.' : 'Navamsa 10th house is in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
+            ${isEasy ? 'The true calling you pursue after maturity.' : 'Das 10. Navamsa-Haus ist in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
             <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
             ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'einzigartige Karriereenergie').join('<br>') : '<strong>Planeten in D9 10.:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'einzigartige Karriereenergie'}`).join('<br>')) : ''}
         </div>
@@ -683,7 +683,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '👔 Partnerkarriere' : '👔 Spouse Career — Derived 10th (D9 4th): ' + SIGNS[d9H4Sign] + ' ' + SIGN_SYMBOLS[d9H4Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '<strong>Derived house:</strong> 10th from 7th (spouse) = D9 4th house shows spouse career.<br><br>D9 4th is in <strong>' + SIGNS[d9H4Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
+            ${isEasy ? '' : '<strong>Abgeleitetes Haus:</strong> 10. vom 7. (Partner) = D9 4. Haus zeigt Partnerkarriere.<br><br>D9 4. ist in <strong>' + SIGNS[d9H4Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
             <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
             ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Spouse likely works in ${planetCareer[p.id] || 'Fachgebiet'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'Fachgebiet'}`).join('<br>')) : ''}
         </div>
@@ -695,7 +695,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         html += `<div class="interp-card">
             <div class="interp-title">${isEasy ? '⭐ Außergewöhnlich starke Planeten' : '⭐ Vargottama Planets — Exceptionally Strong'}</div>
             <div class="interp-text">
-                ${isEasy ? 'Diese Planeten sind außergewöhnlich kraftvoll und wirken beständig durchs ganze Leben.' : 'Planets in the same sign in both D1 and D9 are called <strong>Vargottama</strong>. Very powerful, acting consistently throughout life.'}<br><br>
+                ${isEasy ? 'Diese Planeten sind außergewöhnlich kraftvoll und wirken beständig durchs ganze Leben.' : 'Planeten im selben Zeichen in D1 und D9 heißen <strong>Vargottama</strong>. Sehr kraftvoll, wirken beständig durchs ganze Leben.'}<br><br>
                 ${isEasy ? 'Außergewöhnlich starke Energie wirkt beständig in deinem ganzen Leben!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In both D1 and D9 ${SIGNS[p.sign]} — this planet's energy is exceptionally strong!`).join('<br>')}
             </div>
         </div>`;
