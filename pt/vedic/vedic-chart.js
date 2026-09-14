@@ -1650,8 +1650,8 @@ function renderDignity(positions, lagnaSign) {
     let html = `<div class="interp-card" style="margin-bottom:16px;">
         <div class="interp-text">
             ${isEasy ?
-            '<strong>💡 Easy guide:</strong> Shows how strongly each energy works in your life.<br><br>🟢 <strong>Very Strong</strong> = Peak condition! Great fortune and results.<br>🟡 <strong>Strong</strong> = Stable, good results.<br>⚪ <strong>Average</strong> = Neither strong nor weak.<br>🔴 <strong>Weak</strong> = Challenges but can overcome with effort.' :
-            '<strong>💡 Guide:</strong> Planetary dignity means how well a planet exerts its power.<br><br>🟢 <strong>Exalted</strong> = Peak condition! Great fortune and results in this planet\'s life area.<br>🟡 <strong>Own Sign</strong> = Comfortable as at home. Stable, good results.<br>⚪ <strong>Neutral</strong> = Average. Neither strong nor weak.<br>🔴 <strong>Debilitated</strong> = Weakened. Challenges in this area but can overcome with effort.'}
+            '<strong>💡 Guia simples:</strong> Mostra quao fortemente cada energia atua na sua vida.<br><br>🟢 <strong>Muito Forte</strong> = Condicao maxima! Grande fortuna e resultados.<br>🟡 <strong>Forte</strong> = Estavel, bons resultados.<br>⚪ <strong>Medio</strong> = Nem forte nem fraco.<br>🔴 <strong>Fraco</strong> = Desafios mas superaveis com esforco.' :
+            '<strong>💡 Guia:</strong> Dignidade planetaria mostra quao bem um planeta exerce seu poder.<br><br>🟢 <strong>Exaltado</strong> = Condicao maxima! Grande fortuna nesta area de vida.<br>🟡 <strong>Domicilio</strong> = Como em casa. Resultados estaveis e bons.<br>⚪ <strong>Neutro</strong> = Medio. Nem forte nem fraco.<br>🔴 <strong>Debilitado</strong> = Enfraquecido. Desafios mas superaveis com esforco.'}
         </div>
     </div>`;
 
@@ -1694,9 +1694,9 @@ function renderDignity(positions, lagnaSign) {
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → ' + house + 'th (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Exalted') ? 'Very Strong!' : dignity.includes('Debilitated') ? 'Weak' : dignity.includes('Own Sign') ? 'Strong' : 'Average') : dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → ' + house + ' (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Exalted') ? 'Muito Forte!' : dignity.includes('Debilitated') ? 'Fraco' : dignity.includes('Own Sign') ? 'Forte' : 'Medio') : dignity}</span></div>
             <div class="interp-text">
-                ${isEasy ? '' : '<span style="color:#666;font-size:12px;">Role: ' + role + ' │ Position: ' + house + ' = ' + area + '</span><br><br>'}
+                ${isEasy ? '' : '<span style="color:#666;font-size:12px;">Papel: ' + role + ' │ Posicao: ' + house + ' = ' + area + '</span><br><br>'}
                 ${simpleDesc}
             </div>
         </div>`;
