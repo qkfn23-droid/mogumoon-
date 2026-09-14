@@ -771,63 +771,63 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     const isEasy = window.vedicMode === 'easy';
     let html = '';
     const meetingBySgn = [
-        "Active places, sports, competitive environments, leadership gatherings. Intense and sudden first meeting.",
-        "Workplace, financial institutions, restaurants, nature. Slowly building trust.",
-        "SNS, school, seminars, while traveling, blind dates. Relationship starts with conversation.",
-        "Family introductions, neighborhood gatherings, childhood friends. Starts in comfortable settings.",
-        "Parties, concerts, creative gatherings, glamorous venues. Dramatic first encounter.",
-        "Workplace, hospital, health-related, volunteer activities. Meeting starts from practical needs.",
-        "Blind dates, matchmaking, legal/diplomatic events, art exhibitions. Elegant and refined meeting.",
-        "Crisis situations, deep conversations, secret places, research labs. Fated and intense attraction.",
-        "Abroad, university, religious/philosophical gatherings, while traveling. Connection from far away. May be different culture.",
-        "Workplace, business events, official functions. Meeting related to social status.",
-        "Online, hobby clubs, social movements, friend of a friend. Unique and unconventional meeting.",
-        "Spiritual gatherings, abroad, arts/music, hospital, hints in dreams. Mystical and fated meeting."
+        "Lugares ativos, esporte, ambientes competitivos. Primeiro encontro intenso e repentino.",
+        "Local de trabalho, instituicoes financeiras, restaurantes, natureza. Construindo confianca lentamente.",
+        "Redes sociais, escola, seminarios, viajando, encontros as cegas. Relacao comeca com conversa.",
+        "Apresentacoes familiares, reunioes de vizinhanca, amigos de infancia. Ambientes confortaveis.",
+        "Festas, shows, encontros criativos, lugares glamorosos. Primeiro encontro dramatico.",
+        "Local de trabalho, hospital, relacionado a saude, voluntariado. Encontro por necessidades praticas.",
+        "Encontros as cegas, eventos juridicos/diplomaticos, exposicoes de arte. Encontro elegante.",
+        "Situacoes de crise, conversas profundas, lugares secretos. Atracao intensa e predestinada.",
+        "Exterior, universidade, encontros religiosos/filosoficos. Conexao de longe.",
+        "Local de trabalho, eventos empresariais, funcoes oficiais. Encontro relacionado a status social.",
+        "Online, clubes de hobby, movimentos sociais, amigo de amigo. Encontro unico.",
+        "Encontros espirituais, exterior, artes/musica, hospital. Encontro mistico e predestinado."
     ];
 
     const backgroundBySgn = [
-        "Independent, self-made family. Strong leadership heritage.",
-        "Financially stable family. Traditional values. Possibly wealthy background.",
-        "Intellectual, communicative family. Emphasis on education.",
-        "Warm, family-oriented household. Strong mother figure.",
-        "Prestigious, proud family. Social status and reputation.",
-        "Practical, hardworking family. Health/medical/education background.",
-        "Balanced, dignified family. Arts/law/diplomacy background.",
-        "Family with secrets or transformations. Deep family history.",
-        "Scholarly, religious/philosophical family. Possible foreign background.",
-        "Strict, traditional family. Socially respected. Emphasis on responsibility.",
-        "Free-spirited, unique family structure. Progressive thinking.",
-        "Spiritual or artistic family. Possible foreign background. Rich sensitivity."
+        "Familia independente e autodidata. Forte heranca de lideranca.",
+        "Familia financeiramente estavel. Valores tradicionais.",
+        "Familia intelectual e comunicativa. Enfase em educacao.",
+        "Lar caloroso e orientado a familia. Forte figura materna.",
+        "Familia prestigiosa e orgulhosa. Status social e reputacao.",
+        "Familia pratica e trabalhadora. Contexto saude/medico/educacao.",
+        "Familia equilibrada e digna. Contexto artes/direito/diplomacia.",
+        "Familia com segredos ou transformacoes. Historia familiar profunda.",
+        "Familia academica, religiosa/filosofica. Possivel contexto estrangeiro.",
+        "Familia estrita e tradicional. Socialmente respeitada.",
+        "Estrutura familiar livre e unica. Pensamento progressista.",
+        "Familia espiritual ou artistica. Possivel contexto estrangeiro."
     ];
 
     const imageBySgn = [
-        "Energetic, confident first impression. Sporty or strong image.",
-        "Calm, reliable first impression. Refined and dignified image.",
-        "Bright, talkative first impression. Intellectual and witty image.",
-        "Warm, nurturing first impression. Soft and caring image.",
-        "Glamorous, charismatic first impression. Confident image.",
-        "Neat, tidy first impression. Meticulous and professional image.",
-        "Elegant, charming first impression. Balanced and sophisticated image.",
-        "Mysterious, intense first impression. Deep and charismatic image.",
-        "Free-spirited, vibrant first impression. Positive and adventurous image.",
-        "Serious, mature first impression. Responsible and reliable image.",
-        "Unique, individualistic first impression. Trendy and original image.",
-        "Dreamy, mystical first impression. Artistic and emotional image."
+        "Primeira impressao energetica e confiante. Imagem esportiva ou forte.",
+        "Primeira impressao calma e confiavel. Imagem refinada e digna.",
+        "Primeira impressao brilhante e falante. Imagem intelectual.",
+        "Primeira impressao calorosa e cuidadora. Imagem suave.",
+        "Primeira impressao glamorosa e carismatica. Imagem confiante.",
+        "Primeira impressao arrumada e ordenada. Imagem profissional.",
+        "Primeira impressao elegante e encantadora. Imagem sofisticada.",
+        "Primeira impressao misteriosa e intensa. Imagem profunda.",
+        "Primeira impressao livre e vibrante. Imagem aventureira.",
+        "Primeira impressao seria e madura. Imagem responsavel.",
+        "Primeira impressao unica e individualista. Imagem original.",
+        "Primeira impressao sonhadora e mistica. Imagem artistica."
     ];
 
     const attractBySgn = [
-        "Strong energy and confidence. Proactive and protective nature is attractive.",
-        "Stability and sensual charm. Enjoying good food, scents, and textures.",
-        "Wit and conversation skills. Intellectual stimulation is the attraction.",
-        "Devoted care and emotion. Feeling at home together is the charm.",
-        "Shining presence and generosity. Feeling special together is attractive.",
-        "Delicate consideration and perfectionism. Attention to detail is charming.",
-        "Elegance and harmonious personality. The world becomes beautiful together.",
-        "Intense gaze and depth. Soul-piercing focus is the attraction.",
-        "Free spirit and humor. Adventures begin when you are together.",
-        "Solid trustworthiness and maturity. Rock-solid stability is attractive.",
-        "Unique individuality and progressive thinking. Freshness never seen before.",
-        "Mystical sensitivity and spiritual depth. Dream-like romance is the charm."
+        "Energia forte e confianca. Natureza proativa e protetora e atraente.",
+        "Estabilidade e charme sensual. Apreciar boa comida e texturas.",
+        "Sagacidade e habilidades de conversa. Estimulo intelectual e a atracao.",
+        "Cuidado devoto e emocao. Sentir-se em casa juntos.",
+        "Presenca brilhante e generosidade. Sentir-se especial juntos.",
+        "Consideracao delicada e perfeccionismo. Atencao aos detalhes encanta.",
+        "Elegancia e personalidade harmoniosa. O mundo fica belo juntos.",
+        "Olhar intenso e profundidade. Foco que penetra a alma e a atracao.",
+        "Espirito livre e humor. Aventuras comecam quando estao juntos.",
+        "Confiabilidade solida e maturidade. Estabilidade firme e atraente.",
+        "Individualidade unica e pensamento progressista. Frescor nunca visto.",
+        "Sensibilidade mistica e profundidade espiritual. Romance de sonho."
     ];
 
     // D1 7 house 사인으로 만남 환경
