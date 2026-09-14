@@ -685,7 +685,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? '' : '<strong>Maison derivee :</strong> 10e depuis la 7e (partenaire) = La 4e D9 montre la carriere du partenaire.<br><br>La 4e D9 est en <strong>' + SIGNS[d9H4Sign] + '</strong>, regi par <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
             <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Le partenaire travaille probablement dans ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Le partenaire travaille probablement dans ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>')) : ''}
+            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Le partenaire travaille probablement dans ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>') : '<strong>Planetes en D9 4e (10e du partenaire) :</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Le partenaire travaille probablement dans ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -2106,10 +2106,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Healer, Server — Practiced medicine or service, excellent analytical skills. Helping others is soul duty.',
             'Diplomat, Artist — Pursued harmony and beauty, skilled in relationships. Partnership is core theme.',
             'Practitioner, Alchemist — Underwent deep transformation, strong attraction to secrets and mystery.',
-            'Sage, Explorer — Sought truth, spiritual wisdom and adventurousness remain. Higher learning karma.',
+            'Sage, Explorateur — A cherche la verite, sagesse spirituelle et aventure persistent. Karma d\'education superieure.',
             'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
             'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
-            'Medium, Artist — Communed with spiritual world, extremely strong intuition. Closest to liberation.'
+            'Medium, Artiste — A communie avec le monde spirituel, intuition extremement forte. Le plus proche de la liberation.'
         ];
 
         // 행성별 D60 사인 해석 (전통)
