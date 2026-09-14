@@ -727,12 +727,12 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 방향 집계 — 6가지 지표
     const dirSources = [
-        {name:'D1 7th', sign: d1H7Sign, desc:'Spouse house in birth chart'},
-        {name:'D9 7th', sign: d9H7Sign, desc:'Spouse house in Navamsa'},
-        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'Where D9 7th lord goes'},
-        {name:'D9 Venus', sign: venusD9Sign, desc:'Spouse karaka in Navamsa'},
-        {name:'Upapada (UL)', sign: ulSign, desc:'12th Arudha — spouse background'},
-        {name:'Darapada (A7)', sign: a7Sign, desc:'7th Arudha — spouse social image'}
+        {name:'D1 7th', sign: d1H7Sign, desc:'Casa do parceiro na carta natal'},
+        {name:'D9 7th', sign: d9H7Sign, desc:'Casa do parceiro no Navamsa'},
+        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'Onde vai o senhor da 7a D9'},
+        {name:'D9 Venus', sign: venusD9Sign, desc:'Karaka do parceiro no Navamsa'},
+        {name:'Upapada (UL)', sign: ulSign, desc:'12a Arudha — contexto do parceiro'},
+        {name:'Darapada (A7)', sign: a7Sign, desc:'7a Arudha — imagem social do parceiro'}
     ];
 
     const dirCount = {};
@@ -836,7 +836,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🤝 Ambiente de Encontro' : '🤝 Ambiente de Encontro — D1 7ª: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '7th house sign reveals meeting environment.<br><br>'}
+            ${isEasy ? '' : 'O signo da casa 7 revela o ambiente de encontro.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
             ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Foreign connection possibility!</strong> Spouse may be a foreigner or you may meet abroad.' : ''}
         </div>
@@ -846,7 +846,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🏛️ Contexto Familiar do Parceiro' : '🏛️ Contexto do Parceiro — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Upapada Lagna (UL) reveals spouse family background.<br><br>'}
+            ${isEasy ? '' : 'Upapada Lagna (UL) revela o contexto familiar do parceiro.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
@@ -855,7 +855,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '👤 Primeira Impressão do Parceiro' : '👤 Primeira Impressão — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Darapada (A7) shows spouse first impression.<br><br>'}
+            ${isEasy ? '' : 'Darapada (A7) mostra a primeira impressao do parceiro.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
@@ -1602,7 +1602,7 @@ function renderForeign(positions, lagnaSign) {
         text += 'Viagens ao exterior existem mas não há conexão forte.';
     } else {
         h9.forEach(p => {
-            const f9 = { Sun: 'Father has foreign connections. Government overseas trips.', Moon: 'Enjoys foreign travel emotionally. Popularity abroad.', Mars: 'Adventure/challenge abroad. Military/technology related foreign activities.', Mercury: 'Study abroad/business success! Multilingual ability.', Jupiter: 'Great fortune abroad! Study abroad/immigration success. Meeting foreign teachers.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Success after hardship abroad. Long-term foreign residence.', Rahu: 'Strong foreign migration indicator! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connection. Spiritual pilgrimage.' };
+            const f9 = { Sun: 'O pai tem conexoes no exterior. Viagens governamentais ao exterior.', Moon: 'Aprecia viagens emocionalmente. Popularidade no exterior.', Mars: 'Aventura/desafio no exterior. Atividades militares/tecnologicas.', Mercury: 'Estudo/negocios no exterior com sucesso! Habilidade multilingue.', Jupiter: 'Grande fortuna no exterior! Estudo/imigracao com sucesso. Encontro com mestres estrangeiros.', Venus: 'Romance no exterior. Atividades artisticas/moda no exterior.', Saturn: 'Sucesso apos dificuldades no exterior. Residencia de longo prazo.', Rahu: 'Forte indicador de migracao! Profundamente imerso na cultura estrangeira.', Ketu: 'Conexao estrangeira de vidas passadas. Peregrinacao espiritual.' };
             text += isEasy ? `${f9[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f9[p.id] || ''}<br>`;
         });
     }
@@ -1612,7 +1612,7 @@ function renderForeign(positions, lagnaSign) {
         text += 'Residência doméstica é mais natural.';
     } else {
         h12.forEach(p => {
-            const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT. Overseas education.', Jupiter: 'foreignSpiritual growth abroad. Charity. Foreign university.', Venus: 'Luxury and pleasure abroad. Foreign art activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Strong immigration indicator! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
+            const f12 = { Sun: 'Encontrando identidade no exterior. Posto governamental no exterior.', Moon: 'Alta possibilidade de viver no exterior! Estabilidade emocional no ultramar.', Mars: 'Gasto de energia no exterior. Investimento/imoveis no exterior.', Mercury: 'Negocios/TI no exterior. Educacao no ultramar.', Jupiter: 'Crescimento espiritual no exterior. Caridade. Universidade estrangeira.', Venus: 'Luxo e prazer no exterior. Atividades artisticas estrangeiras.', Saturn: 'Trabalho duro no exterior. Mas estabelecimento de longo prazo.', Rahu: 'Forte indicador de imigracao! Adaptacao a cultura ocidental.', Ketu: 'Pratica espiritual no exterior. Vida solitaria no ultramar.' };
             text += isEasy ? `${f12[p.id] || ''}<br>` : `${p.symbol} ${p.name}: ${f12[p.id] || ''}<br>`;
         });
     }
