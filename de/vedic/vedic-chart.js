@@ -1229,18 +1229,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h10planets = planetsInHouse(10);
 
     const careerSign = [
-        'Suited for military, police, sports, surgery, corporate management, leadership roles.',
-        'Finance, food industry, agriculture, fashion, real estate, art, banking fields.',
-        'Media, writing, education, communications, IT, marketing, translation fields.',
-        'Medical, nursing, hospitality, maritime, real estate, food & beverage fields.',
-        'Politics, entertainment, management, government agencies, leadership positions, gold-related fields.',
-        'Medical, accounting, analysis, consulting, healthcare, quality control fields.',
-        'Law, diplomacy, fashion, interior design, counseling, event planning fields.',
-        'Research, investigation, insurance, medicine, psychology, taxation, mining fields.',
-        'Education, law, religion, publishing, travel, international trade fields.',
-        'Management, civil service, architecture, civil engineering, politics, large corporations.',
-        'Technology, science, IT, aviation, aerospace, social work, innovation fields.',
-        'Art, film, music, medical, overseas, spiritual fields, NGO-related fields.'
+        'Geeignet für Militär, Polizei, Sport, Chirurgie, Unternehmensführung, Führungsrollen.',
+        'Finanzen, Lebensmittelindustrie, Landwirtschaft, Mode, Immobilien, Kunst, Bankwesen.',
+        'Medien, Schreiben, Bildung, Kommunikation, IT, Marketing, Übersetzung.',
+        'Medizin, Pflege, Gastgewerbe, Maritime, Immobilien, Gastronomie.',
+        'Politik, Unterhaltung, Management, Regierungsbehörden, Führungspositionen, Gold.',
+        'Medizin, Buchhaltung, Analyse, Beratung, Gesundheitswesen, Qualitätskontrolle.',
+        'Recht, Diplomatie, Mode, Innenarchitektur, Beratung, Eventplanung.',
+        'Forschung, Ermittlung, Versicherung, Medizin, Psychologie, Steuern, Bergbau.',
+        'Bildung, Recht, Religion, Verlagswesen, Reisen, internationaler Handel.',
+        'Management, öffentlicher Dienst, Architektur, Bauingenieurwesen, Politik, Großkonzerne.',
+        'Technologie, Wissenschaft, IT, Luftfahrt, Raumfahrt, Sozialarbeit, Innovation.',
+        'Kunst, Film, Musik, Medizin, Ausland, spirituelle Bereiche, NGO.'
     ];
 
     let careerText = isEasy ? careerSign[h10sign] : `10. Haus ist in ${SIGNS[h10sign]}. ${careerSign[h10sign]}`;
@@ -1273,18 +1273,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const h6planets = planetsInHouse(6);
 
     const healthByLagna = [
-        'Watch for head, brain, and face-related conditions. Prone to headaches, fevers, and inflammation. Regular exercise is essential.',
-        'Watch for neck, thyroid, and jaw issues. Prone to overeating and diabetes. Take care of vocal cords and throat health.',
-        'Watch for lungs, arms, shoulders, and nervous system. Anxiety and sleep issues possible. Breathing meditation helps.',
-        'Watch for stomach, chest, and breast-related issues. Digestive disorders and water retention. Emotional stress directly affects health.',
-        'Watch for heart, back, and spine issues. Cardiovascular health management is essential. Beware of overwork.',
-        'Watch for digestive system, intestines, and skin. Indigestion and allergies. Diet is important.',
-        'Watch for kidneys, lower back, and skin. Adequate hydration and balanced lifestyle essential.',
-        'Watch for reproductive and excretory systems. Possibility of chronic conditions. Regular checkups are important.',
-        'Watch for liver, thighs, and hips. Tendency toward being overweight. Outdoor activities are good for health.',
-        'Watch for bones, joints, knees, and skin. Rheumatism and arthritis. Calcium intake is important.',
-        'Watch for ankles, calves, and circulatory system. Blood pressure management. Unusual health issues possible.',
-        'Watch for feet, lymphatic system, and immunity. Unexplained conditions possible. Adequate sleep is key.'
+        'Achte auf Kopf, Gehirn und Gesichtsbeschwerden. Anfällig für Kopfschmerzen, Fieber und Entzündungen.',
+        'Achte auf Nacken, Schilddrüse und Kieferprobleme. Neigung zum Überessen und Diabetes.',
+        'Achte auf Lungen, Arme, Schultern und Nervensystem. Angstzustände und Schlafprobleme möglich.',
+        'Achte auf Magen, Brust und Brustbereich. Verdauungsstörungen und Wassereinlagerungen.',
+        'Achte auf Herz, Rücken und Wirbelsäule. Kardiovaskuläres Management ist wichtig.',
+        'Achte auf Verdauungssystem, Darm und Haut. Verdauungsstörungen und Allergien.',
+        'Achte auf Nieren, unteren Rücken und Haut. Ausreichende Flüssigkeitszufuhr wichtig.',
+        'Achte auf Reproduktions- und Ausscheidungssysteme. Chronische Erkrankungen möglich.',
+        'Achte auf Leber, Oberschenkel und Hüften. Neigung zu Übergewicht.',
+        'Achte auf Knochen, Gelenke, Knie und Haut. Rheuma und Arthritis.',
+        'Achte auf Knöchel, Waden und Kreislaufsystem. Blutdruckmanagement.',
+        'Achte auf Füße, Lymphsystem und Immunität. Unerklärliche Beschwerden möglich.'
     ];
 
     html += `<div class="interp-card">
@@ -1554,18 +1554,18 @@ function renderChildren(positions, lagnaSign) {
     let text = isEasy ? '' : `<strong>5. Haus (Kinder):</strong> ${SIGNS[h5sign]}.<br><br>`;
 
     const childSign = [
-        'Active and independent children. Talented in sports/leadership. Gains independence early.',
-        'Calm and artistic children. Talented in music/art. Materially well-off children.',
-        'Smart and quick-speaking children. Excellent academics. Possibility of twins.',
-        'Sensitive and gentle children. Special bond with mother. Domestic children.',
-        'Charismatic and creative children. Leader qualities. Talent in entertainment/art.',
-        'Meticulous and analytical children. Talent in medicine/science. Health care is important.',
-        'Charming and sociable children. Talent in art/diplomacy. Excellent sense of balance.',
-        'Intense and intuitive children. Research/exploration spirit. May have many secrets.',
-        'Free-spirited and adventurous children. Possible study/travel abroad. Philosophical tendencies.',
-        'Serious and ambitious children. Matures early. Achievement-oriented.',
-        'Unique and innovative children. Talented in technology/science. Independent personality.',
-        'Artistic and spiritual children. Rich imagination. Talented in music/painting.'
+        'Aktive und unabhängige Kinder. Talent in Sport/Führung. Früh selbstständig.',
+        'Ruhige und künstlerische Kinder. Talent in Musik/Kunst. Materiell gut gestellt.',
+        'Schlaue und redegewandte Kinder. Ausgezeichnete Akademiker. Möglichkeit von Zwillingen.',
+        'Sensible und sanfte Kinder. Besondere Bindung zur Mutter. Häusliche Kinder.',
+        'Charismatische und kreative Kinder. Führungsqualitäten. Talent in Unterhaltung/Kunst.',
+        'Akribische und analytische Kinder. Talent in Medizin/Wissenschaft.',
+        'Charmante und gesellige Kinder. Talent in Kunst/Diplomatie. Guter Gleichgewichtssinn.',
+        'Intensive und intuitive Kinder. Forschungs-/Entdeckergeist. Können Geheimnisse haben.',
+        'Freigeistige und abenteuerlustige Kinder. Mögliches Studium/Reise ins Ausland.',
+        'Ernste und ehrgeizige Kinder. Reifen früh. Leistungsorientiert.',
+        'Einzigartige und innovative Kinder. Talent in Technologie/Wissenschaft.',
+        'Künstlerische und spirituelle Kinder. Reiche Vorstellungskraft. Talent in Musik/Malerei.'
     ];
     text += childSign[h5sign];
 
