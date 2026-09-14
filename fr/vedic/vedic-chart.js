@@ -1547,7 +1547,7 @@ function renderEducation(positions, lagnaSign) {
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>Haute reussite academique attendue !</strong> Ecole superieure/doctorat/etudes a l\'etranger possible.' : '<br><br>🎓 <strong>Jupiter in ' + jH + 'th house — high academic achievement expected!</strong> Graduate school/PhD/study abroad possible.';
+        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>Haute reussite academique attendue !</strong> Ecole superieure/doctorat/etudes a l\'etranger possible.' : '<br><br>🎓 <strong>Jupiter en ' + jH + 'e maison — haute reussite academique attendue !</strong> Superieur/doctorat/etudes a l\'etranger possible.';
     }
 
     text += isEasy ? '<br><br><strong>Éducation supérieure :</strong> ' : `<br><br><strong>5e Maison (Éducation supérieure) :</strong> ${SIGNS[h5sign]}. `;
@@ -2566,7 +2566,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercure (Apprentissage) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Intellect exceptionnel !</strong> Talent en maths, langues, analyse.' : (isEasy ? 'Capacite intellectuelle bien exprimee.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercure (Apprentissage) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Intellect exceptionnel !</strong> Talent en maths, langues, analyse.' : (isEasy ? 'Capacite intellectuelle bien exprimee.' : 'Capacite intellectuelle dans le ' + mH + 'e domaine.')) + '<br>';
         }
         html += '</div></div>';
 
@@ -2586,7 +2586,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Soleil (Vitalite) → ' + sH + 'th:</strong> ') + (isEasy ? 'Source de vitalite : ' : 'Source of vitality in ' + sH + 'th house area. ') + ([,'Energie du soi','Vitalite des activites de richesse','Energie de la communication','Stabilite du foyer','Vitalite de la creation','Energie du service','Vitalite des relations','Energie de la transformation','Vitalite des voyages','Energie de la carriere','Vitalite de la societe','Energie de la pratique spirituelle'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Soleil (Vitalite) → ' + sH + 'th:</strong> ') + (isEasy ? 'Source de vitalite : ' : 'Source de vitalite dans le ' + sH + 'e domaine. ') + ([,'Energie du soi','Vitalite des activites de richesse','Energie de la communication','Stabilite du foyer','Vitalite de la creation','Energie du service','Vitalite des relations','Energie de la transformation','Vitalite des voyages','Energie de la carriere','Vitalite de la societe','Energie de la pratique spirituelle'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석

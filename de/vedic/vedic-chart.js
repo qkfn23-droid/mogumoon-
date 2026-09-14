@@ -1547,7 +1547,7 @@ function renderEducation(positions, lagnaSign) {
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : '<br><br>🎓 <strong>Jupiter in ' + jH + 'th house — high academic achievement expected!</strong> Graduate school/PhD/study abroad possible.';
+        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : '<br><br>🎓 <strong>Jupiter im ' + jH + '. Haus — hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.';
     }
 
     text += isEasy ? '<br><br><strong>Höhere Bildung:</strong> ' : `<br><br><strong>5. Haus (Höhere Bildung):</strong> ${SIGNS[h5sign]}. `;
@@ -2586,7 +2586,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Sonne (Vitalität) → ' + sH + 'th:</strong> ') + (isEasy ? 'Quelle der Vitalität: ' : 'Source of vitality in ' + sH + 'th house area. ') + ([,'Energie aus dem Selbst','Vitalität aus Wohlstandsaktivitäten','Energie aus Kommunikation','Stabilität vom Zuhause','Vitalität aus Schöpfung','Energie aus Dienst','Vitalität aus Beziehungen','Energie aus Transformation','Vitalität aus Reisen','Energie aus der Karriere','Vitalität aus der Gesellschaft','Energie aus spiritueller Praxis'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sonne (Vitalität) → ' + sH + 'th:</strong> ') + (isEasy ? 'Quelle der Vitalität: ' : 'Vitalitätsquelle im ' + sH + '. Haus-Bereich. ') + ([,'Energie aus dem Selbst','Vitalität aus Wohlstandsaktivitäten','Energie aus Kommunikation','Stabilität vom Zuhause','Vitalität aus Schöpfung','Energie aus Dienst','Vitalität aus Beziehungen','Energie aus Transformation','Vitalität aus Reisen','Energie aus der Karriere','Vitalität aus der Gesellschaft','Energie aus spiritueller Praxis'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석
