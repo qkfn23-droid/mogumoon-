@@ -834,7 +834,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🤝 Environnement de rencontre' : '🤝 Meeting Environment — D1 7th: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">${isEasy ? '🤝 Environnement de rencontre' : '🤝 Environnement de rencontre — D1 7e : ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
             ${isEasy ? '' : '7th house sign reveals meeting environment.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
@@ -844,7 +844,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // UL 사인으로 spouse 가문/배경
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🏛️ Contexte familial du partenaire' : '🏛️ Spouse Background — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">${isEasy ? '🏛️ Contexte familial du partenaire' : '🏛️ Contexte du partenaire — UL : ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Upapada Lagna (UL) reveals spouse family background.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
@@ -853,7 +853,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // A7 사인으로 spouse 외적 이미지
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👤 Première impression du partenaire' : '👤 Spouse First Impression — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">${isEasy ? '👤 Première impression du partenaire' : '👤 Première impression — A7 : ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Darapada (A7) shows spouse first impression.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
@@ -862,7 +862,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
 
     // D9 Venus 사인으로 spouse 매력 포인트
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💎 Point d\'attraction du partenaire' : '💎 Spouse Attraction — D9 Venus: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">${isEasy ? '💎 Point d\'attraction du partenaire' : '💎 Attraction du partenaire — D9 Vénus : ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
             ${isEasy ? '' : 'Venus in Navamsa reveals spouse charm and love style.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
@@ -1515,7 +1515,7 @@ function renderEducation(positions, lagnaSign) {
     const h5sign = (lagnaSign + 4) % 12;
 
     const isEasy = window.vedicMode === 'easy';
-    let text = isEasy ? '<strong>Basic Education:</strong> ' : `<strong>4th House (Basic Education):</strong> ${SIGNS[h4sign]}. `;
+    let text = isEasy ? '<strong>Éducation de base :</strong> ' : `<strong>4e Maison (Éducation de base) :</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
     text += eduSign4[h4sign] + ' suited. ';
     if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influences education. ';
@@ -1526,14 +1526,14 @@ function renderEducation(positions, lagnaSign) {
         if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>High academic achievement expected!</strong> Graduate school/PhD/study abroad possible.' : '<br><br>🎓 <strong>Jupiter in ' + jH + 'th house — high academic achievement expected!</strong> Graduate school/PhD/study abroad possible.';
     }
 
-    text += isEasy ? '<br><br><strong>Higher education:</strong> ' : `<br><br><strong>5 house (Higher Education)::</strong> ${SIGNS[h5sign]}. `;
+    text += isEasy ? '<br><br><strong>Éducation supérieure :</strong> ' : `<br><br><strong>5e Maison (Éducation supérieure) :</strong> ${SIGNS[h5sign]}. `;
     if (h5.length > 0) {
         h5.forEach(p => {
             const h5p = { Sun: 'Excels in leadership/political science', Moon: 'art/psychology talent', Mars: 'Engineering/technology/sports talent', Mercury: 'Math/language/business genius', Jupiter: 'Best placement! Scholar/professor/researcher', Venus: 'art/design/music talent', Saturn: 'Late academics but deep research' };
             text += isEasy ? `${h5p[p.id] || 'influences academics'}. ` : `${p.name}: ${h5p[p.id] || 'influences academics'}. `;
         });
     } else {
-        text += isEasy ? 'No particularly strong academic energy, but steady effort will bring good results.' : 'No planets in 5th — 5th lord position is key.';
+        text += isEasy ? 'Pas d\'énergie académique particulièrement forte, mais un effort régulier donnera de bons résultats.' : 'Pas de planètes en 5e — la position du 5e seigneur est la clé.';
     }
 
     document.getElementById('educationWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
@@ -1551,7 +1551,7 @@ function renderChildren(positions, lagnaSign) {
     const h5sign = (lagnaSign + 4) % 12;
     const jupiter = positions.find(p => p.id === 'Jupiter');
 
-    let text = isEasy ? "" : `<strong>5th House (Children):</strong> ${SIGNS[h5sign]}.<br><br>`;
+    let text = isEasy ? '' : `<strong>5e Maison (Enfants) :</strong> ${SIGNS[h5sign]}.<br><br>`;
 
     const childSign = [
         'Active and independent children. Talented in sports/leadership. Gains independence early.',
@@ -1570,7 +1570,7 @@ function renderChildren(positions, lagnaSign) {
     text += childSign[h5sign];
 
     if (h5.length > 0) {
-        text += isEasy ? '<br><br>' : '<br><br><strong>Planets in 5th:</strong><br>';
+        text += isEasy ? '<br><br>' : '<br><br><strong>Planètes en 5e :</strong><br>';
         h5.forEach(p => {
             const ch = { Sun: 'Connection with sons. Children have leadership.', Moon: 'Connection with daughters. Strong emotional bond.', Mars: 'Active children. May be difficult to manage.', Mercury: 'Very smart children! Excellent academics.', Jupiter: 'Blessed children! Fortune through children.', Venus: 'Beautiful artistic children. Connection with daughters.', Saturn: 'Children may come late. But responsible children.' };
             text += `${ch[p.id] || ''}<br>`;
@@ -1579,7 +1579,7 @@ function renderChildren(positions, lagnaSign) {
 
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if (jH === 5) text += isEasy ? '<br>🌟 <strong>Best children fortune! Children bring great luck.</strong>' : '<br>🌟 <strong>Jupiter in 5th! Best children fortune.</strong>';
+        if (jH === 5) text += isEasy ? '<br>🌟 <strong>Meilleure fortune d\'enfants ! Les enfants apportent grande chance.</strong>' : '<br>🌟 <strong>Jupiter en 5e ! Meilleure fortune d\'enfants.</strong>';
     }
 
     document.getElementById('childrenWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
@@ -1597,9 +1597,9 @@ function renderForeign(positions, lagnaSign) {
     const rahu = positions.find(p => p.id === 'Rahu');
 
     const isEasy = window.vedicMode === 'easy';
-    let text = isEasy ? '<strong>foreign travel·fortune:</strong><br>' : '<strong>9 house (foreign travel·fortune·Higher education):</strong><br>';
+    let text = isEasy ? '<strong>Voyages à l\'étranger·fortune :</strong><br>' : '<strong>9e Maison (Voyages·fortune·Éducation supérieure) :</strong><br>';
     if (h9.length === 0) {
-        text += 'Foreign travel exists but not a strong connection.';
+        text += 'Les voyages à l\'étranger existent mais pas de connexion forte.';
     } else {
         h9.forEach(p => {
             const f9 = { Sun: 'Father has foreign connections. Government overseas trips.', Moon: 'Enjoys foreign travel emotionally. Popularity abroad.', Mars: 'Adventure/challenge abroad. Military/technology related foreign activities.', Mercury: 'Study abroad/business success! Multilingual ability.', Jupiter: 'Great fortune abroad! Study abroad/immigration success. Meeting foreign teachers.', Venus: 'Romance abroad. Art/fashion-related foreign activities.', Saturn: 'Success after hardship abroad. Long-term foreign residence.', Rahu: 'Strong foreign migration indicator! Deeply immersed in foreign culture.', Ketu: 'Past-life foreign connection. Spiritual pilgrimage.' };
@@ -1607,9 +1607,9 @@ function renderForeign(positions, lagnaSign) {
         });
     }
 
-    text += isEasy ? '<br><strong>Foreign Settlement:</strong><br>' : '<br><strong>12 house (foreign settlement·Immigration):</strong><br>';
+    text += isEasy ? '<br><strong>Installation à l\'étranger :</strong><br>' : '<br><strong>12e Maison (Installation·Immigration) :</strong><br>';
     if (h12.length === 0) {
-        text += 'Domestic residence is more natural.';
+        text += 'La résidence domestique est plus naturelle.';
     } else {
         h12.forEach(p => {
             const f12 = { Sun: 'Finding identity abroad. Government foreign posting.', Moon: 'High possibility of living abroad! Emotional stability overseas.', Mars: 'Energy expenditure abroad. Foreign investment/real estate.', Mercury: 'Foreign business/IT. Overseas education.', Jupiter: 'foreignSpiritual growth abroad. Charity. Foreign university.', Venus: 'Luxury and pleasure abroad. Foreign art activities.', Saturn: 'Hard labor abroad. But long-term settlement.', Rahu: 'Strong immigration indicator! Adapting to Western culture.', Ketu: 'Spiritual practice abroad. Solitary overseas life.' };
@@ -1619,7 +1619,7 @@ function renderForeign(positions, lagnaSign) {
 
     if (rahu) {
         const rH = houseOf(rahu.sign);
-        if ([9, 12, 7].includes(rH)) text += isEasy ? '<br>✈️ <strong>Very high possibility of foreign migration!</strong>' : '<br>✈️ <strong>Rahu in ' + rH + 'th — very high chance of foreign residence!</strong>';
+        if ([9, 12, 7].includes(rH)) text += isEasy ? '<br>✈️ <strong>Très haute possibilité de migration !</strong>' : '<br>✈️ <strong>Rahu en ' + rH + 'e — très haute chance de résidence à l\'étranger !</strong>';
     }
 
     document.getElementById('foreignWrap').innerHTML = `<div class="interp-card"><div class="interp-text">${text}</div></div>`;
@@ -1631,20 +1631,20 @@ function renderForeign(positions, lagnaSign) {
 function renderDignity(positions, lagnaSign) {
     function houseOf(s) { return ((s - lagnaSign + 12) % 12) + 1; }
     const isEasy = window.vedicMode === 'easy';
-    const houseArea = {1:'Self',2:'Money/Family',3:'Communication/Siblings',4:'Home/Mother',5:'Children/Romance',6:'Health/Enemies',7:'Spouse',8:'Transformation/Inheritance',9:'Luck/Foreign',10:'Career/Fame',11:'Income/Wishes',12:'Foreign/Spirituality'};
+    const houseArea = {1:'Soi',2:'Argent/Famille',3:'Communication/Frères',4:'Foyer/Mère',5:'Enfants/Romance',6:'Santé/Ennemis',7:'Partenaire',8:'Transformation/Héritage',9:'Chance/Étranger',10:'Carrière/Renommée',11:'Revenus/Souhaits',12:'Étranger/Spiritualité'};
     const EXALT = { Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6 };
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
     const OWN = { Sun: [4], Moon: [3], Mars: [0,7], Mercury: [2,5], Jupiter: [8,11], Venus: [1,6], Saturn: [9,10] };
 
     // 쉬운 설명
     const planetRole = {
-        Sun: 'Self/Confidence/Father/Authority',
-        Moon: 'Emotions/Mind/Mother/Daily life',
-        Mars: 'Energy/Courage/Action/Competition',
-        Mercury: 'Intelligence/Communication/Learning/Business',
-        Jupiter: 'Luck/Wisdom/Wealth/Marriage',
-        Venus: 'Love/Charm/Art/Pleasure',
-        Saturn: 'Patience/Trials/Responsibility/Effort'
+        Sun: 'Soi/Confiance/Père/Autorité',
+        Moon: 'Émotions/Esprit/Mère/Quotidien',
+        Mars: 'Énergie/Courage/Action/Compétition',
+        Mercury: 'Intelligence/Communication/Apprentissage/Affaires',
+        Jupiter: 'Chance/Sagesse/Richesse/Mariage',
+        Venus: 'Amour/Charme/Art/Plaisir',
+        Saturn: 'Patience/Épreuves/Responsabilité/Effort'
     };
 
     let html = `<div class="interp-card" style="margin-bottom:16px;">
