@@ -1018,36 +1018,36 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // 1. 성격 & appearance (1 house Lagna)
     // ═══════════════════════════════════
     const lagnaEasy = [
-        'Action-oriented! Quick to decide with natural leadership qualities. You love new challenges. People often ask you to take the lead. A bit impatient, but incredibly driven.',
-        'You love stability. You enjoy comfort, beauty, and good food. Once you make up your mind, you see it through. Stubborn, but that makes you incredibly reliable.',
-        'Curious about everything! Great communicator and multi-talented. You pick up new information fast and draw people in with your wit. Sometimes scattered, but that\'s part of your charm.',
-        'Warm and emotional. You treasure family and read people\'s feelings well. A natural caregiver who makes everyone feel comfortable. Mood swings happen, but your empathy is your superpower.',
-        'Born leader! You have a big presence and naturally draw attention. Confident and magnetic. You crave recognition, but you\'re equally generous with love and praise.',
-        'Detail-oriented and analytical. You strive for perfection and care about health. Sharp observer who catches what others miss. You worry a bit much, but that means you\'re always prepared.',
-        'You seek harmony. Refined, charming, with excellent artistic taste. A natural peacemaker who hates conflict. Happiest when surrounded by beautiful things.',
-        'You have depth. Strong intuition that cuts through to the truth. Calm on the surface but intense emotions underneath. Life throws big changes at you, and each one makes you stronger.',
-        'Free spirit! You love travel and learning. Positive and philosophical. Interested in different cultures, with a broad worldview. Your humor lights up any room.',
-        'Ambitious. Patient and increasingly attractive with age. Systematically works toward goals. Even if you struggle early on, you\'re the late-bloomer type who eventually gets everything they want.',
-        'Unique. You think differently from everyone else and you\'re innovative. You hate being boxed in and want to change the world in your own way. Talented in tech or science.',
-        'Deeply sensitive. Strong intuition drawn to art and spirituality. Vivid dreams and rich imagination. You empathize deeply with others\' pain. Your inner world is richer than the outer one.'
+        'Orientado à ação! Rápido em decidir com qualidades de liderança natural. Você ama novos desafios. As pessoas pedem que você assuma a liderança. Um pouco impaciente, mas incrivelmente determinado.',
+        'Você ama estabilidade. Aprecia conforto, beleza e boa comida. Uma vez decidido, vai até o fim. Teimoso, mas isso te torna incrivelmente confiável.',
+        'Curioso por tudo! Grande comunicador e multitalentoso. Absorve informações rápido e atrai pessoas com sua sagacidade. Às vezes disperso, mas isso faz parte do seu charme.',
+        'Caloroso e emocional. Valoriza a família e lê bem os sentimentos das pessoas. Um cuidador natural que faz todos se sentirem confortáveis. Mudanças de humor acontecem, mas sua empatia é seu superpoder.',
+        'Líder nato! Você tem grande presença e naturalmente atrai atenção. Confiante e magnético. Deseja reconhecimento, mas é igualmente generoso com amor e elogios.',
+        'Detalhista e analítico. Busca perfeição e cuida da saúde. Observador afiado que percebe o que outros perdem. Se preocupa demais, mas isso significa que está sempre preparado.',
+        'Busca harmonia. Refinado, charmoso, com excelente gosto artístico. Um pacificador natural que odeia conflitos. Mais feliz quando cercado de coisas belas.',
+        'Tem profundidade. Forte intuição que corta até a verdade. Calmo na superfície mas emoções intensas por baixo. A vida te joga grandes mudanças, e cada uma te torna mais forte.',
+        'Espírito livre! Ama viajar e aprender. Positivo e filosófico. Interessado em diferentes culturas, com visão ampla do mundo. Seu humor ilumina qualquer ambiente.',
+        'Ambicioso. Paciente e cada vez mais atraente com a idade. Trabalha sistematicamente rumo aos objetivos. Mesmo que lute no início, é do tipo que floresce tarde e eventualmente consegue tudo.',
+        'Único. Pensa diferente de todos e é inovador. Odeia ser enquadrado e quer mudar o mundo à sua maneira. Talento em tecnologia ou ciência.',
+        'Profundamente sensível. Forte intuição atraída por arte e espiritualidade. Sonhos vívidos e imaginação rica. Empatiza profundamente com a dor dos outros. Seu mundo interior é mais rico que o exterior.'
     ];
     const lagnaInterp = [
-        'Aries Lagna ruled by Mars. Strong willpower and leadership, independent personality. Quick to act with a pioneering spirit. Sharp features with an active impression. Impulsive but courageous, excelling in competition.',
-        'Taurus Lagna ruled by Venus. Seeks stability and abundance, loves sensory beauty. Soft appearance with an attractive voice. Values material security with exceptional artistic sense. Stubborn but reliable.',
-        'Gemini Lagna ruled by Mercury. Intellectually curious with outstanding communication skills. Youthful appearance with an agile build. Versatile but can be scattered, talented in writing and languages.',
-        'Cancer Lagna ruled by the Moon. Rich in sensitivity and highly intuitive. Round face with a soft impression. Devoted to home and family with strong protective instincts. Emotional ups and downs but deeply empathetic.',
-        'Leo Lagna ruled by the Sun. Overflowing with charisma and creative energy. Dignified build with a commanding presence. Natural-born leader who enjoys the spotlight. High self-esteem but generous heart.',
-        'Virgo Lagna ruled by Mercury. Analytical and perfectionist. Neat appearance with an intellectual impression. Excellent attention to detail and practical abilities, with interest in health and hygiene.',
-        'Libra Lagna ruled by Venus. Seeks balance and harmony, diplomatically skilled. Well-proportioned appearance with a refined impression. Excels in relationships and partnerships with superb aesthetic sense.',
-        'Scorpio Lagna ruled by Mars. Intense intuition and transformative power. Sharp eyes with a mysterious impression. Penetrates to the essence with deep insight, keeps secrets well. Experiences dramatic life changes multiple times.',
-        'Sagittarius Lagna ruled by Jupiter. A philosopher seeking freedom and truth. Large build with a bright impression. Optimistic and values moral principles. Deep connections with travel and higher education.',
-        'Capricorn Lagna ruled by Saturn. Strong ambition and patience. Lean build with a serious impression. Systematically works toward goals, the type who grows younger with age. Values social status and achievement.',
-        'Aquarius Lagna ruled by Saturn. Innovative and original. Unique appearance with an intellectual impression. Values humanitarian ideals with unconventional thinking. Talented in technology and science.',
-        'Pisces Lagna ruled by Jupiter. Spiritual and intuitive. Soft appearance with a dreamy impression. Extremely gifted artistic sensitivity with interest in transcendent worlds. Self-sacrificing tendency.'
+        'Lagna Áries regido por Marte. Forte vontade e liderança, personalidade independente. Rápido em agir com espírito pioneiro. Traços marcados com impressão ativa. Impulsivo mas corajoso.',
+        'Lagna Touro regido por Vênus. Busca estabilidade e abundância, ama beleza sensorial. Aparência suave com voz atraente. Senso artístico excepcional. Teimoso mas confiável.',
+        'Lagna Gêmeos regido por Mercúrio. Intelectualmente curioso com habilidades de comunicação excepcionais. Aparência jovem com compleição ágil. Versátil mas pode ser disperso.',
+        'Lagna Câncer regido pela Lua. Rico em sensibilidade e altamente intuitivo. Rosto redondo com impressão suave. Devoto ao lar e família. Altos e baixos emocionais mas profundamente empático.',
+        'Lagna Leão regido pelo Sol. Transbordando carisma e energia criativa. Compleição digna com presença imponente. Líder nato que aprecia os holofotes. Alta autoestima mas coração generoso.',
+        'Lagna Virgem regido por Mercúrio. Analítico e perfeccionista. Aparência arrumada com impressão intelectual. Excelente atenção aos detalhes, interesse em saúde e higiene.',
+        'Lagna Libra regido por Vênus. Busca equilíbrio e harmonia, diplomaticamente habilidoso. Aparência proporcionada com impressão refinada. Excelente em relacionamentos com superb senso estético.',
+        'Lagna Escorpião regido por Marte. Intuição intensa e poder transformador. Olhos penetrantes com impressão misteriosa. Penetra a essência, guarda bem os segredos. Vive mudanças dramáticas múltiplas.',
+        'Lagna Sagitário regido por Júpiter. Filósofo buscando liberdade e verdade. Compleição grande com impressão brilhante. Otimista e valoriza princípios morais. Conexões profundas com viagens e educação.',
+        'Lagna Capricórnio regido por Saturno. Forte ambição e paciência. Compleição magra com impressão séria. Trabalha sistematicamente rumo a objetivos, rejuvenesce com a idade.',
+        'Lagna Aquário regido por Saturno. Inovador e original. Aparência única com impressão intelectual. Valoriza ideais humanitários com pensamento não convencional.',
+        'Lagna Peixes regido por Júpiter. Espiritual e intuitivo. Aparência suave com impressão sonhadora. Sensibilidade artística extremamente dotada. Tendência ao autossacrifício.'
     ];
 
     html += `<div class="interp-card">
-        <div class="interp-title">👤 ${isEasy ? 'Your Personality' : 'Personality & Appearance — Lagna: ' + SIGNS[lagnaSign] + ' ' + SIGN_SYMBOLS[lagnaSign]}</div>
+        <div class="interp-title">👤 ${isEasy ? 'Sua Personalidade' : 'Personalidade & Aparência — Lagna: ' + SIGNS[lagnaSign] + ' ' + SIGN_SYMBOLS[lagnaSign]}</div>
         <div class="interp-text">${isEasy ? lagnaEasy[lagnaSign] : lagnaInterp[lagnaSign]}</div>
     </div>`;
 
@@ -1056,18 +1056,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     // ═══════════════════════════════════
     if (moonPos) {
         const moonEasy = [
-            'There\'s a fiery passion inside you. Emotions rise fast and cool down fast. When you\'re stressed, you need to move your body — exercise or outdoor activities work best.',
-            'You\'re emotionally very stable. You dislike sudden changes and find comfort in the familiar. Good food, music, and beautiful nature heal your soul. Once you give your heart, it rarely changes.',
-            'You process emotions through conversation. Talking things out makes you feel better. You\'re curious about everything and can\'t stand boredom. Your humor can lighten any mood.',
-            'You\'re extremely sensitive and empathetic. You absorb others\' emotions like a sponge. Home is your safe space, and your bond with your mother is strong. Cooking or decorating brings emotional peace.',
-            'Your emotional expression is dramatic and passionate. You deeply need to be loved and recognized. But you give love just as generously. Creative activities — art, writing, music — are your emotional medicine.',
-            'You tend to analyze your emotions. You worry a lot but are great at solving problems practically. Daily routines — morning exercise, healthy meals, organizing — bring emotional stability.',
-            'You find emotional balance in relationships. You feel lonely when alone and stabilize when with close friends or a partner. You deeply hate conflict and find peace in beauty and art.',
-            'Your emotions are as deep and intense as the ocean. You love deeply and never forget betrayal. Your intuition is incredibly strong — you read truth through eyes and actions, not words.',
-            'You\'re emotionally bright and optimistic. You love freedom and hate being constrained. Travel is your best emotional remedy. You process feelings through philosophical thinking.',
-            'You don\'t show emotions easily. Strong sense of responsibility, always putting duty first. You may have been mature beyond your years as a child, but you grow more emotionally open with age.',
-            'You have unique, unpredictable emotional patterns. You love in unconventional ways and see the bigger picture. You find emotional fulfillment in social causes and community activities.',
-            'You\'re extremely intuitive and spiritual. Your dreams are vivid and sometimes feel prophetic. You deeply empathize with others\' pain. Art, meditation, and being near water bring you peace.'
+            'Uma paixão ardente queima dentro de você. Emoções sobem rápido e descem rápido. Quando estressado, precisa mover o corpo — exercício ou atividades ao ar livre funcionam melhor.',
+            'Você é emocionalmente muito estável. Não gosta de mudanças súbitas e encontra conforto no familiar. Boa comida, música e natureza bonita curam sua alma.',
+            'Você processa emoções através da conversa. Falar te faz sentir melhor. Curioso por tudo e não suporta tédio. Seu humor pode aliviar qualquer clima.',
+            'Você é extremamente sensível e empático. Absorve as emoções dos outros como esponja. Seu lar é seu espaço seguro, e seu vínculo com sua mãe é forte.',
+            'Sua expressão emocional é dramática e apaixonada. Precisa profundamente ser amado e reconhecido. Mas dá amor com igual generosidade. Atividades criativas são seu remédio emocional.',
+            'Tende a analisar suas emoções. Se preocupa muito mas é excelente em resolver problemas praticamente. Rotinas diárias trazem estabilidade emocional.',
+            'Encontra equilíbrio emocional nos relacionamentos. Se sente solitário quando sozinho e se estabiliza com amigos próximos ou parceiro. Odeia conflitos e encontra paz na beleza e arte.',
+            'Suas emoções são tão profundas e intensas quanto o oceano. Ama profundamente e nunca esquece traição. Sua intuição é incrivelmente forte — lê a verdade através de olhos e ações.',
+            'Emocionalmente brilhante e otimista. Ama liberdade e odeia restrições. Viajar é seu melhor remédio emocional. Processa sentimentos através de pensamento filosófico.',
+            'Não mostra emoções facilmente. Forte senso de responsabilidade, dever vem sempre primeiro. Pode ter sido maduro além da idade quando criança, mas fica mais aberto emocionalmente com a idade.',
+            'Tem padrões emocionais únicos e imprevisíveis. Ama de maneiras não convencionais e vê o panorama geral. Encontra realização emocional em causas sociais.',
+            'Extremamente intuitivo e espiritual. Sonhos são vívidos e às vezes proféticos. Empatiza profundamente com a dor dos outros. Arte, meditação e água trazem paz.'
         ];
         const moonInterp = [
             'A fiery passion burns within. Emotions are spontaneous and change quickly. Anger flares fast but fades just as quickly; you desire emotional independence. Relieving stress through exercise works best.',
@@ -1084,7 +1084,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
             'Extremely intuitive and spiritual. Dreams are vivid and may be prophetic. Deeply empathizes with others\' suffering, with blurred boundaries between self and others. Finds stability in art, meditation, and spiritual practice.'
         ];
         html += `<div class="interp-card">
-            <div class="interp-title">🌙 ${isEasy ? 'Your Emotional Style' : 'Inner Self & Emotions — Moon: ' + SIGNS[moonPos.sign] + ' ' + SIGN_SYMBOLS[moonPos.sign]}</div>
+            <div class="interp-title">🌙 ${isEasy ? 'Seu Estilo Emocional' : 'Interior & Emoções — Lua: ' + SIGNS[moonPos.sign] + ' ' + SIGN_SYMBOLS[moonPos.sign]}</div>
             <div class="interp-text">${isEasy ? moonEasy[moonPos.sign] : moonInterp[moonPos.sign]}</div>
         </div>`;
     }
