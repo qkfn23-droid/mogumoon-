@@ -1710,18 +1710,18 @@ function renderDignity(positions, lagnaSign) {
 // ═══════════════════════════════════════════════════
 function renderLucky(lagnaSign, moonPos) {
     const luckyData = [
-        { color: 'Red, Orange', number: '1, 9', day: 'Mardi', gem: 'Red Coral', dir: 'East' },
-        { color: 'White, Pink', number: '2, 6', day: 'Vendredi', gem: 'Diamond', dir: 'Southeast' },
-        { color: 'Green', number: '3, 5', day: 'Mercredi', gem: 'Emerald', dir: 'North' },
-        { color: 'White, Silver', number: '2, 7', day: 'Lundi', gem: 'Pearl', dir: 'Northwest' },
-        { color: 'Gold, Orange', number: '1, 4', day: 'Dimanche', gem: 'Ruby', dir: 'East' },
-        { color: 'Green, Light Green', number: '5, 3', day: 'Mercredi', gem: 'Emerald', dir: 'South' },
-        { color: 'White, Pastel', number: '6, 2', day: 'Vendredi', gem: 'Diamond', dir: 'West' },
-        { color: 'Red, Crimson', number: '9, 1', day: 'Mardi', gem: 'Red Coral', dir: 'South' },
-        { color: 'Yellow, Gold', number: '3, 9', day: 'Jeudi', gem: 'Yellow Sapphire', dir: 'Northeast' },
-        { color: 'Navy, Black', number: '8, 4', day: 'Samedi', gem: 'Blue Sapphire', dir: 'West' },
-        { color: 'Navy, Purple', number: '4, 8', day: 'Samedi', gem: 'Blue Sapphire', dir: 'West' },
-        { color: 'Yellow, Gold', number: '3, 7', day: 'Jeudi', gem: 'Yellow Sapphire', dir: 'Northeast' }
+        { color: 'Red, Orange', number: '1, 9', day: 'Mardi', gem: 'Corail rouge', dir: 'East' },
+        { color: 'White, Pink', number: '2, 6', day: 'Vendredi', gem: 'Diamant', dir: 'Southeast' },
+        { color: 'Green', number: '3, 5', day: 'Mercredi', gem: 'Emeraude', dir: 'North' },
+        { color: 'White, Silver', number: '2, 7', day: 'Lundi', gem: 'Perle', dir: 'Northwest' },
+        { color: 'Gold, Orange', number: '1, 4', day: 'Dimanche', gem: 'Rubis', dir: 'East' },
+        { color: 'Green, Light Green', number: '5, 3', day: 'Mercredi', gem: 'Emeraude', dir: 'South' },
+        { color: 'White, Pastel', number: '6, 2', day: 'Vendredi', gem: 'Diamant', dir: 'West' },
+        { color: 'Red, Crimson', number: '9, 1', day: 'Mardi', gem: 'Corail rouge', dir: 'South' },
+        { color: 'Yellow, Gold', number: '3, 9', day: 'Jeudi', gem: 'Saphir jaune', dir: 'Northeast' },
+        { color: 'Navy, Black', number: '8, 4', day: 'Samedi', gem: 'Saphir bleu', dir: 'West' },
+        { color: 'Navy, Purple', number: '4, 8', day: 'Samedi', gem: 'Saphir bleu', dir: 'West' },
+        { color: 'Yellow, Gold', number: '3, 7', day: 'Jeudi', gem: 'Saphir jaune', dir: 'Northeast' }
     ];
 
     const d = luckyData[lagnaSign];
@@ -1746,13 +1746,13 @@ function renderRemedy(positions, lagnaSign) {
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
 
     const remedies = {
-        Sun: { gem: 'Ruby', mantra: 'Om Suryaya Namaha', color: 'Orange/red on Sunday', food: 'Wheat, saffron, sunflower seeds', charity: 'Sunday: donate wheat/copper' },
-        Moon: { gem: 'Pearl', mantra: 'Om Chandraya Namaha', color: 'White/silver on Monday', food: 'Milk, rice, coconut', charity: 'Monday: donate rice/milk' },
-        Mars: { gem: 'Red Coral', mantra: 'Om Mangalaya Namaha', color: 'Red on Tuesday', food: 'Lentils, red fruits', charity: 'Tuesday: donate red lentils' },
-        Mercury: { gem: 'Emerald', mantra: 'Om Budhaya Namaha', color: 'Green on Wednesday', food: 'Green beans, green vegetables', charity: 'Wednesday: donate green vegetables' },
-        Jupiter: { gem: 'Yellow Sapphire', mantra: 'Om Gurave Namaha', color: 'Yellow on Thursday', food: 'Chickpeas, bananas, turmeric', charity: 'Thursday: donate yellow food/books' },
-        Venus: { gem: 'Diamond', mantra: 'Om Shukraya Namaha', color: 'White/pastel on Friday', food: 'Milk, cream, fruits', charity: 'Friday: donate white clothes/rice' },
-        Saturn: { gem: 'Blue Sapphire', mantra: 'Om Shanaishcharaya Namaha', color: 'Navy/black on Saturday', food: 'Black beans, sesame', charity: 'Saturday: donate black beans/oil' }
+        Sun: { gem: 'Rubis', mantra: 'Om Suryaya Namaha', color: 'Orange/red on Sunday', food: 'Wheat, saffron, sunflower seeds', charity: 'Sunday: donate wheat/copper' },
+        Moon: { gem: 'Perle', mantra: 'Om Chandraya Namaha', color: 'White/silver on Monday', food: 'Milk, rice, coconut', charity: 'Monday: donate rice/milk' },
+        Mars: { gem: 'Corail rouge', mantra: 'Om Mangalaya Namaha', color: 'Red on Tuesday', food: 'Lentils, red fruits', charity: 'Tuesday: donate red lentils' },
+        Mercury: { gem: 'Emeraude', mantra: 'Om Budhaya Namaha', color: 'Green on Wednesday', food: 'Green beans, green vegetables', charity: 'Wednesday: donate green vegetables' },
+        Jupiter: { gem: 'Saphir jaune', mantra: 'Om Gurave Namaha', color: 'Yellow on Thursday', food: 'Chickpeas, bananas, turmeric', charity: 'Thursday: donate yellow food/books' },
+        Venus: { gem: 'Diamant', mantra: 'Om Shukraya Namaha', color: 'White/pastel on Friday', food: 'Milk, cream, fruits', charity: 'Friday: donate white clothes/rice' },
+        Saturn: { gem: 'Saphir bleu', mantra: 'Om Shanaishcharaya Namaha', color: 'Navy/black on Saturday', food: 'Black beans, sesame', charity: 'Saturday: donate black beans/oil' }
     };
 
     let html = '';
@@ -1924,7 +1924,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             html += '<strong>Votre tendance de carriere :</strong><br>';
         } else {
             html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (ruler: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
-            html += '<strong>D10 10 house (career):</strong> ' + SIGNS[d10_10sign] + ' (ruler: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
+            html += '<strong>D10 10e Maison (carriere) :</strong> ' + SIGNS[d10_10sign] + ' (ruler: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         }
         if (d10_10planets.length > 0) {
             if (!isEasy) html += '<strong>Planetes en 10e :</strong> ' + d10_10planets.map(p => p.name).join(', ') + '<br>';
@@ -1959,14 +1959,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 Analyse des enfants' : '👶 D7 Analyse des enfants') + '</div><div class="interp-text">';
         if (!isEasy) {
             if (!isEasy) html += '<strong>D7 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-            html += '<strong>D7 5 house (children):</strong> ' + SIGNS[d7_5sign] + ' (ruler: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
+            html += '<strong>D7 5e Maison (enfants) :</strong> ' + SIGNS[d7_5sign] + ' (ruler: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
         }
         if (d7_5planets.length > 0) {
-            if (!isEasy) html += '<strong>5 house planet:</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';
+            if (!isEasy) html += '<strong>Planetes en 5e Maison :</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';
         }
-        if (benefics.length > 0) html += (isEasy ? 'Planetes benefiques — beni avec des enfants.' : 'Benefic planets in 5th house — blessed with children.') + '<br>';
-        if (malefics.length > 0) html += (isEasy ? 'Planetes de defi — difficultes avec les enfants possibles.' : 'Malefic planets in 5th house — children related difficulties possible.') + '<br>';
-        if (d7_5planets.length === 0) html += isEasy ? 'Pas de planetes en position enfants — d\'autres facteurs doivent etre analyses.' : '5th house empty — check 5th lord position.';
+        if (benefics.length > 0) html += (isEasy ? 'Planetes benefiques — beni avec des enfants.' : 'Planetes benefiques en 5e maison — beni avec des enfants.') + '<br>';
+        if (malefics.length > 0) html += (isEasy ? 'Planetes de defi — difficultes avec les enfants possibles.' : 'Planetes malefiques en 5e maison — difficultes avec les enfants possibles.') + '<br>';
+        if (d7_5planets.length === 0) html += isEasy ? 'Pas de planetes en position enfants — d\'autres facteurs doivent etre analyses.' : '5e maison vide — verifier la position du seigneur de la 5e.';
         html += '</div></div>';
 
     } else if (division === 12) {
