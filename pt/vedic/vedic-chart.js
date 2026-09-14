@@ -597,31 +597,31 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 사인별 career 경향
     const careerBySgn = [
-        'Leadership, military, sports, entrepreneurship (fire pioneer)',
-        'Finance, agriculture, arts, real estate, food (stability & material)',
-        'Communication, media, writing, teaching, marketing (intellectual)',
-        'Nursing, caregiving, cooking, hospitality, counseling (emotional care)',
-        'Politics, entertainment, leadership, creativity (shining stage)',
-        'Medicine, accounting, analysis, editing, health/wellness (precise service)',
-        'Law, diplomacy, design, fashion, mediation (balance & beauty)',
-        'Research, investigation, medicine, occult, psychology (depth & transformation)',
-        'Education, travel, philosophy, religion, publishing (expansion & exploration)',
-        'Government, construction, management, CEO, organizational leader (system & authority)',
-        'Technology, IT, invention, social activism, science (innovation)',
-        'Arts, spirituality, healing, music, charity (transcendence & service)'
+        'Lideranca, militar, esporte, empreendedorismo (pioneiro de fogo)',
+        'Financas, agricultura, artes, imoveis, alimentacao (estabilidade e material)',
+        'Comunicacao, midia, escrita, ensino, marketing (intelectual)',
+        'Enfermagem, cuidado, culinaria, hotelaria, aconselhamento (cuidado emocional)',
+        'Politica, entretenimento, lideranca, criatividade (palco brilhante)',
+        'Medicina, contabilidade, analise, edicao, saude (servico preciso)',
+        'Direito, diplomacia, design, moda, mediacao (equilibrio e beleza)',
+        'Pesquisa, investigacao, medicina, ocultismo, psicologia (profundidade)',
+        'Educacao, viagem, filosofia, religiao, editorial (expansao)',
+        'Governo, construcao, gestao, CEO, lider organizacional (sistema e autoridade)',
+        'Tecnologia, TI, invencao, ativismo social, ciencia (inovacao)',
+        'Artes, espiritualidade, cura, musica, caridade (transcendencia e servico)'
     ];
 
     // 행성별 spouse career 경향
     const planetCareer = {
-        Sun: 'Government official, politician, doctor, CEO — authoritative positions',
-        Moon: 'Nurse, counselor, chef, hospitality — caregiving/emotional roles',
-        Mars: 'Military, police, surgeon, engineer, athlete',
-        Mercury: 'Writer, teacher, programmer, accountant, merchant',
-        Jupiter: 'Professor, judge, religious leader, consultant, senior professional',
-        Venus: 'Designer, actor, musician, fashion, beauty industry',
-        Saturn: 'Construction, mining, agriculture, management, craftsman',
-        Rahu: 'IT, foreign-related, unconventional careers, research',
-        Ketu: 'Spirituality, alternative medicine, research, ascetic'
+        Sun: 'Funcionario do governo, politico, medico, CEO — posicoes autoritarias',
+        Moon: 'Enfermeiro, conselheiro, chef, hotelaria — papeis de cuidado',
+        Mars: 'Militar, policia, cirurgiao, engenheiro, atleta',
+        Mercury: 'Escritor, professor, programador, contador, comerciante',
+        Jupiter: 'Professor, juiz, lider religioso, consultor, profissional senior',
+        Venus: 'Designer, ator, musico, moda, industria de beleza',
+        Saturn: 'Construcao, mineracao, agricultura, gestao, artesao',
+        Rahu: 'TI, relacionado ao exterior, carreiras nao convencionais, pesquisa',
+        Ketu: 'Espiritualidade, medicina alternativa, pesquisa, asceta'
     };
 
     let html = '';
@@ -1123,13 +1123,13 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     } else {
         h11planets.forEach(p => {
             const pIncome = {
-                'Jupiter': 'Large income and abundant profits! Social networks bring wealth.',
-                'Venus': 'Income through art, socializing, and fashion. Female friends are helpful.',
-                'Saturn': 'Steady and stable income but slow growth. Good retirement security.',
-                'Mars': 'Income through competition. Profits from technology, real estate, and sports.',
-                'Mercury': 'Income through intellectual networks. Entrepreneurial aptitude.',
-                'Sun': 'Income through authority. Political connections bring wealth.',
-                'Moon': 'Income through public popularity. Fluctuating but steady flow.'
+                'Jupiter': 'Grandes rendas e lucros abundantes! Redes sociais trazem riqueza.',
+                'Venus': 'Renda por arte, socializacao e moda. Amigas sao uteis.',
+                'Saturn': 'Renda constante e estavel mas crescimento lento. Boa seguranca para aposentadoria.',
+                'Mars': 'Renda por competicao. Lucros de tecnologia, imoveis e esportes.',
+                'Mercury': 'Renda por redes intelectuais. Aptidao empresarial.',
+                'Sun': 'Renda por autoridade. Conexoes politicas trazem riqueza.',
+                'Moon': 'Renda por popularidade publica. Flutuante mas fluxo constante.'
             };
             wealthText += isEasy ? `${pIncome[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pIncome[p.id] || ''} `;
         });
@@ -1183,15 +1183,15 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planetas na 7ª:</strong> ';
         h7planets.forEach(p => {
             const pH7 = {
-                'Sun': 'Spouse is socially recognized. May be somewhat dominant but a respectable partner.',
-                'Moon': 'An emotional and caring spouse. Marriage life with deep emotional connection.',
-                'Mars': 'Passionate but may have frequent arguments. A strong-willed spouse. Energetic relationship.',
-                'Mercury': 'An intellectual spouse with great conversation. A good relationship as business partners too.',
-                'Jupiter': 'Most blessed placement! A wise and moral spouse. Happy married life. Luck through spouse.',
-                'Venus': 'A very attractive and loving spouse. Romantic married life. May enjoy luxury.',
-                'Saturn': 'Late marriage or spouse with significant age difference. Difficult early on but stable, long-lasting marriage.',
-                'Rahu': 'Unconventional marriage. Spouse from foreign country or different background. Sudden meeting.',
-                'Ketu': 'Past-life connection. Strong spiritual bond but some distance in worldly relationships.'
+                'Sun': 'Parceiro e socialmente reconhecido. Pode ser dominante mas respeitavel.',
+                'Moon': 'Um parceiro emocional e carinhoso. Vida conjugal com conexao profunda.',
+                'Mars': 'Apaixonado mas discussoes possiveis. Um parceiro de forte vontade.',
+                'Mercury': 'Um parceiro intelectual com grande conversa. Boa parceria de negocios.',
+                'Jupiter': 'A posicao mais abençoada! Um parceiro sabio e moral. Vida conjugal feliz.',
+                'Venus': 'Um parceiro muito atraente e amoroso. Vida conjugal romantica.',
+                'Saturn': 'Casamento tardio ou parceiro com diferenca de idade significativa. Dificil mas estavel.',
+                'Rahu': 'Casamento nao convencional. Parceiro do exterior ou contexto diferente.',
+                'Ketu': 'Conexao de vidas passadas. Forte vinculo espiritual mas alguma distancia.'
             };
             spouseText += isEasy ? `<br>${pH7[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pH7[p.id] || ''}`;
         });
@@ -1249,13 +1249,13 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         careerText += isEasy ? '<br><br>' : '<br><br><strong>Planetas na 10ª:</strong>';
         h10planets.forEach(p => {
             const pCareer = {
-                'Sun': ' Government, leadership, authoritative positions. A career that garners social attention.',
-                'Moon': ' Public-facing career. Caring, hospitality, food & beverage, emotion-related fields.',
-                'Mars': ' Technology, engineering, military, surgery, sports. Success in competitive fields.',
-                'Mercury': ' Business, communication, IT, education. Success through intellectual abilities.',
-                'Jupiter': ' Education, law, religion, consulting. A respected career. One of the best placements.',
-                'Venus': ' Art, entertainment, fashion, beauty, diplomacy. Success in creative fields.',
-                'Saturn': ' Slow but certain success. Systematic organizations, architecture, civil service. Shines after middle age.'
+                'Sun': ' Governo, lideranca, posicoes autoritarias. Carreira com atencao social.',
+                'Moon': ' Carreira publica. Cuidado, hotelaria, alimentacao, campos emocionais.',
+                'Mars': ' Tecnologia, engenharia, militar, cirurgia, esporte. Sucesso em competicao.',
+                'Mercury': ' Negocios, comunicacao, TI, educacao. Sucesso por habilidades intelectuais.',
+                'Jupiter': ' Educacao, direito, religiao, consultoria. Carreira respeitada. Melhor posicao.',
+                'Venus': ' Arte, entretenimento, moda, beleza, diplomacia. Sucesso em campos criativos.',
+                'Saturn': ' Sucesso lento mas certo. Organizacoes sistematicas, arquitetura, servico publico.'
             };
             careerText += isEasy ? `<br>${pCareer[p.id] || ''}` : `<br>${p.symbol} ${p.name}: ${pCareer[p.id] || ''}`;
         });
