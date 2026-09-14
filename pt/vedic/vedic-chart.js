@@ -772,7 +772,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '🧭 De Onde Vem Seu Parceiro' : '🧭 Spouse Direction — 6-Indicator Analysis'}</div>
         <div class="interp-text">
             ${isEasy ? 'Analise de qual direcao seu parceiro pode vir.' : 'A astrologia vedica determina a direcao do parceiro combinando multiplos indicadores.'}<br><br>
-            ${isEasy ? '' : '<strong>6 Indicators:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> 12th house Arudha Pada. Indicates spouse\'s family/background and marriage environment. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> 7th house Arudha Pada. Indicates spouse\'s social image and outer impression. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7th lord (' + RULER_NAMES[d9H7Ruler] + '):</strong> The sign where Navamsa 7th house ruler goes indicates spouse\'s actual direction. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Natural significator of spouse. Venus\'s Navamsa position shows the source of spouse energy. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
+            ${isEasy ? '' : '<strong>6 Indicadores:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> 12th house Arudha Pada. Indicates spouse\'s family/background and marriage environment. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> 7th house Arudha Pada. Indicates spouse\'s social image and outer impression. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7th lord (' + RULER_NAMES[d9H7Ruler] + '):</strong> The sign where Navamsa 7th house ruler goes indicates spouse\'s actual direction. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Natural significator of spouse. Venus\'s Navamsa position shows the source of spouse energy. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
                 <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Esmagadoramente forte' : agreement >= 3 ? 'Muito forte' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
                 Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
@@ -1542,7 +1542,7 @@ function renderEducation(positions, lagnaSign) {
     let text = isEasy ? '<strong>Educação Básica:</strong> ' : `<strong>Casa 4 (Educação Básica):</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
     text += eduSign4[h4sign] + ' adequado. ';
-    if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influencia a educacao. ';
+    if (h4.length > 0 && !isEasy) text += 'Na casa 4, ' + h4.map(p => p.name).join(', ') + ' influencia a educacao. ';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
@@ -2225,7 +2225,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
         if (d60H7planets.length > 0) {
-            ch4 += '<br><strong>' + (isEasy ? 'Planets in spouse position:' : 'D60 Planets in 7th:') + '</strong><br>';
+            ch4 += '<br><strong>' + (isEasy ? 'Planetas na posicao do parceiro:' : 'Planetas D60 na 7ª:') + '</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (isEasy) {
@@ -2250,7 +2250,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Voce amou sinceramente em vidas passadas, entao um belo amor te espera.' :
                     'Licoes de amor nao resolvidas de vidas passadas. Aprender o amor verdadeiro e importante e te torna mais profundo.');
             } else {
-                ch4 += '<br><strong>♀ Vênus (Planeta do Amor)</strong> → D60 ' + venH + ' house (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+                ch4 += '<br><strong>♀ Vênus (Planeta do Amor)</strong> → D60 ' + venH + ' casa (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
                     'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
                     'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
@@ -2277,9 +2277,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 const h7lDesc = h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Conhecer parceiro em ambiente estrangeiro/espiritual.' : '';
                 if (h7lDesc) ch4 += '<br><br>' + h7lDesc;
             } else {
-                ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' house (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
+                ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' casa (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
                 ch4 += 'Conexao carmica com o parceiro <strong>' + houseThemes[h7lH] + '</strong> se manifesta atraves desta area. ';
-                ch4 += h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Karma to meet spouse in foreign/spiritual settings.' : '';
+                ch4 += h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Karma para conhecer parceiro em ambiente estrangeiro/espiritual.' : '';
             }
         }
         html += subChapter('💍', 'Karma do Parceiro — Conexão de Vidas Passadas', ch4);
@@ -2298,7 +2298,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Senhor do Karma)</strong> → D60 ' + satH + ' house (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Senhor do Karma)</strong> → D60 ' + satH + ' casa (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
                     'Esta e uma <strong>bencao muito rara</strong>! A paciencia de vidas passadas reduz desafios de carreira nesta vida.' :
@@ -2308,7 +2308,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Saturno sob divindade malefica — <strong>karma pesado de vidas passadas</strong> na area de carreira. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
         }
         if (d60H10planets.length > 0) {
-            ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carreira:' : 'D60 Planets in 10th:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma de carreira concentrado nesses planetas.';
+            ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carreira:' : 'Planetas D60 na 10ª:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma de carreira concentrado nesses planetas.';
         }
         html += subChapter('💼', 'Karma de Carreira — Vocação de Vidas Passadas', ch5);
 

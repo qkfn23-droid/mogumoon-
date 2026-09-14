@@ -2225,7 +2225,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
         if (d60H7planets.length > 0) {
-            ch4 += '<br><strong>' + (isEasy ? 'Planetas en posición de pareja:' : 'D60 Planets in 7th:') + '</strong><br>';
+            ch4 += '<br><strong>' + (isEasy ? 'Planetas en posición de pareja:' : 'Planetas D60 en la 7ª:') + '</strong><br>';
             d60H7planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (isEasy) {
@@ -2250,7 +2250,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Amaste sinceramente en vidas pasadas, así que un amor hermoso te espera.' :
                     'Lecciones de amor no resueltas de vidas pasadas. Aprender el amor verdadero es importante y te hace más profundo.');
             } else {
-                ch4 += '<br><strong>♀ Venus (Planeta del Amor)</strong> → D60 ' + venH + ' house (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+                ch4 += '<br><strong>♀ Venus (Planeta del Amor)</strong> → D60 ' + venH + ' casa (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
                     'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
                     'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
@@ -2274,12 +2274,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
             const h7lD = getDeity(h7lordPlanet.sidereal);
             if (isEasy) {
-                const h7lDesc = h7lH === 1 ? 'Spouse directly connected to your growth.' : h7lH === 4 ? 'Meet spouse through home and sanctuary.' : h7lH === 9 ? 'Spouse connection through foreign/education.' : h7lH === 10 ? 'Spouse connection through career/social.' : h7lH === 12 ? 'Meet spouse in foreign/spiritual settings.' : '';
+                const h7lDesc = h7lH === 1 ? 'Pareja directamente conectada con tu crecimiento.' : h7lH === 4 ? 'Conocer a la pareja a través del hogar y el santuario.' : h7lH === 9 ? 'Conexión con la pareja a través del extranjero/educación.' : h7lH === 10 ? 'Conexión con la pareja a través de carrera/social.' : h7lH === 12 ? 'Conocer a la pareja en entornos extranjeros/espirituales.' : '';
                 if (h7lDesc) ch4 += '<br><br>' + h7lDesc;
             } else {
-                ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' house (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
+                ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' casa (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
                 ch4 += 'Conexión kármica con la pareja <strong>' + houseThemes[h7lH] + '</strong> se manifiesta a través de esta área. ';
-                ch4 += h7lH === 1 ? 'Spouse directly connected to your growth.' : h7lH === 4 ? 'Meet spouse through home and sanctuary.' : h7lH === 9 ? 'Spouse connection through foreign/education.' : h7lH === 10 ? 'Spouse connection through career/social.' : h7lH === 12 ? 'Karma to meet spouse in foreign/spiritual settings.' : '';
+                ch4 += h7lH === 1 ? 'Pareja directamente conectada con tu crecimiento.' : h7lH === 4 ? 'Conocer a la pareja a través del hogar y el santuario.' : h7lH === 9 ? 'Conexión con la pareja a través del extranjero/educación.' : h7lH === 10 ? 'Conexión con la pareja a través de carrera/social.' : h7lH === 12 ? 'Karma para conocer a la pareja en entornos extranjeros/espirituales.' : '';
             }
         }
         html += subChapter('💍', 'Karma de Pareja — Conexión de Vidas Pasadas', ch4);
@@ -2298,7 +2298,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Señor del Karma)</strong> → D60 ' + satH + ' house (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturno (Señor del Karma)</strong> → D60 ' + satH + ' casa (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
                     '¡Esta es una <strong>bendición muy rara</strong>! La paciencia de vidas pasadas reduce los desafíos profesionales en esta vida.' :
@@ -2308,7 +2308,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Saturno bajo deidad maléfica — <strong>karma pesado de vidas pasadas</strong> en el área profesional. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
         }
         if (d60H10planets.length > 0) {
-            ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carrera:' : 'D60 Planets in 10th:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma profesional concentrado en estos planetas.';
+            ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carrera:' : 'Planetas D60 en la 10ª:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma profesional concentrado en estos planetas.';
         }
         html += subChapter('💼', 'Karma de Carrera — Vocación de Vidas Pasadas', ch5);
 
