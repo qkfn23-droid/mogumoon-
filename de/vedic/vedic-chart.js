@@ -632,7 +632,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? 'Dies offenbart dein wahres Selbst nach der Hochzeit und in der zweiten Lebenshälfte (nach den 30ern).' : 'Navamsa Lagna is in <strong>' + SIGNS[d9LagnaSign] + '</strong>. This reveals your true self after marriage and in the second half of life (after 30s).'}
             ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>Special sign!</strong> Your essence remains unchanged after marriage — inner and outer self are aligned.' : '<br><br><strong>D1 and D9 Lagna in same sign!</strong> Called <strong>Vargottama</strong> — very powerful. Your essence remains unchanged after marriage.') : ''}
-            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'Es gibt Energien, die deine Persönlichkeit nach der Hochzeit stark beeinflussen.' : '<strong>Planets in D9 1st:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — strongly influence your personality after marriage.') : ''}
+            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'Es gibt Energien, die deine Persönlichkeit nach der Hochzeit stark beeinflussen.' : '<strong>Planets in D9 1st:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — beeinflussen stark deine Persönlichkeit nach der Hochzeit.') : ''}
         </div>
     </div>`;
 
@@ -1365,7 +1365,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const sun = positions.find(p => p.id === 'Sun');
     const mercury = positions.find(p => p.id === 'Mercury');
     if (sun && mercury && sun.sign === mercury.sign) {
-        yogaText += isEasy ? '<strong>📚 Segen herausragender Intelligenz</strong>' : '<strong>📚 Budha-Aditya Yoga</strong> — Sun-Mercury same sign! Outstanding intellect and communication. Success in education, writing, business. Authoritative intellectual leader.<br><br>';
+        yogaText += isEasy ? '<strong>📚 Segen herausragender Intelligenz</strong>' : '<strong>📚 Budha-Aditya Yoga</strong> — Sonne-Merkur im selben Zeichen! Herausragender Intellekt und Kommunikation. Erfolg in Bildung, Schreiben, Geschäft. Autoritärer intellektueller Führer.<br><br>';
     }
 
     // Chandra-Mangala Yoga
@@ -1523,7 +1523,7 @@ function renderEducation(positions, lagnaSign) {
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
         const jH = houseOf(jupiter.sign);
-        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>High academic achievement expected!</strong> Graduate school/PhD/study abroad possible.' : '<br><br>🎓 <strong>Jupiter in ' + jH + 'th house — high academic achievement expected!</strong> Graduate school/PhD/study abroad possible.';
+        if ([1,4,5,9].includes(jH)) text += isEasy ? '<br><br>🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : '<br><br>🎓 <strong>Jupiter in ' + jH + 'th house — high academic achievement expected!</strong> Graduate school/PhD/study abroad possible.';
     }
 
     text += isEasy ? '<br><br><strong>Höhere Bildung:</strong> ' : `<br><br><strong>5. Haus (Höhere Bildung):</strong> ${SIGNS[h5sign]}. `;
@@ -2278,7 +2278,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch5 += isEasy ?
                 ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
                     'This is a <strong>very rare blessing</strong>! Past life patience reduces career challenges in this life.' :
-                    'Heavy career lesson from past lives. Steady effort and helping others is the key.')) :
+                    'Schwere Karrierelektion aus früheren Leben. Stetiger Einsatz und anderen helfen ist der Schlüssel.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
                     'Saturn under benefic deity is a <strong>very rare blessing</strong>! Past life patience reduces career trials.' :
                     'Saturn under malefic deity — <strong>heavy past-life karma</strong> in career area. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
@@ -2354,7 +2354,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planets to watch: ' : 'Planets to watch: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
             ch8 += isEasy ?
-                '🔥 <strong>This life is about resolving past life lessons.</strong> Many challenges, but those with the heaviest lessons grow the most. Steady effort and helping others is especially important.' :
+                '🔥 <strong>Dieses Leben dient der Auflösung vergangener Lebenslektionen.</strong> Viele Herausforderungen, aber wer die schwersten Lektionen hat, wächst am meisten. Stetiger Einsatz und anderen helfen ist besonders wichtig.' :
                 '🔥 <strong>A life of karma settlement.</strong> Many challenges from past lives, but Parasara said "the soul with heaviest karma grows the most". Mantra practice and charity are especially important.';
         }
         html += subChapter('📊', 'Gesamte Karma-Bewertung', ch8);
@@ -2375,11 +2375,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD2) {
             const sunInOwn = sunD2.dSign === 4; // Leo
-            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>Selbstgemacht!</strong> Baut Wohlstand durch Autorität und Führung auf.' : '🌟 <strong>Sun in own Hora (Leo)!</strong> Self-made type. Builds wealth through authority and leadership.') : (isEasy ? 'Einkommen durch andere oder Regierung/öffentlichen Sektor.' : 'Sun in Moon Hora. Income through others help or government/public sector.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>Selbstgemacht!</strong> Baut Wohlstand durch Autorität und Führung auf.' : '🌟 <strong>Sonne im eigenen Hora (Löwe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autorität und Führung auf.') : (isEasy ? 'Einkommen durch andere oder Regierung/öffentlichen Sektor.' : 'Sonne im Mond-Hora. Einkommen durch Hilfe anderer oder Regierung/öffentlichen Sektor.')) + '<br>';
         }
         if (moonD2) {
             const moonInOwn = moonD2.dSign === 3; // Cancer
-            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Reiches Leben durch öffentliche Beziehungen!</strong>' : '🌟 <strong>Moon in own Hora (Cancer)!</strong> Abundant life through public and relationships.') : (isEasy ? 'Einkommen durch eigene Anstrengung und unabhängige Aktivität.' : 'Moon in Sun Hora. Income through own effort and independent activity.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Reiches Leben durch öffentliche Beziehungen!</strong>' : '🌟 <strong>Mond im eigenen Hora (Krebs)!</strong> Reiches Leben durch Öffentlichkeit und Beziehungen.') : (isEasy ? 'Einkommen durch eigene Anstrengung und unabhängige Aktivität.' : 'Mond im Sonnen-Hora. Einkommen durch eigene Anstrengung und unabhängige Aktivität.')) + '<br>';
         }
         if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? 'Kann großen Wohlstand durch eigene Fähigkeit aufbauen.' : 'Überfluss durch Beziehungen mit anderen.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — great wealth through own ability.' : 'Moon Hora — abundance through relationships with others.')) + '<br>';
         if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'Selbstgemacht durch Kunst/Luxusgüter.' : 'Wohlstand durch Ehepartner oder Partner.') : 'Venus in ' + (venD2.dSign === 4 ? 'Sun Hora — self-made through art/luxury goods.' : 'Moon Hora — wealth through spouse or partner.')) + '<br>';
