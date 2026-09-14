@@ -559,8 +559,6 @@ function updateTrueSolarNote() {
     const corr = Math.round((lng - stdMeridian) * 4);
     const sign = corr >= 0 ? '+' : '';
     document.getElementById('trueSolarNote').textContent = `Correção hora solar: ${sign}${corr}min (longitude ${lng}°, padrão ${stdMeridian}°)`;
-} min (longitude ${lng}°E, referência ${stdMeridian}°E)`;
-    }
 }
 
 document.getElementById('birthLocation')?.addEventListener('change', updateTrueSolarNote);

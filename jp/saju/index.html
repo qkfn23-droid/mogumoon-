@@ -573,8 +573,6 @@ function updateTrueSolarNote() {
     const corr = Math.round((lng - stdMeridian) * 4);
     const sign = corr >= 0 ? '+' : '';
     document.getElementById('trueSolarNote').textContent = `真太陽時補正: ${sign}${corr}分 (経度 ${lng}°, 基準 ${stdMeridian}°)`;
-}分 (経度 ${lng}°E、基準 ${stdMeridian}°E)`;
-    }
 }
 
 document.getElementById('birthLocation')?.addEventListener('change', updateTrueSolarNote);
