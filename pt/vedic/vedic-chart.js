@@ -747,14 +747,14 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '🧭 De Onde Vem Seu Parceiro' : '🧭 Spouse Direction — 6-Indicator Analysis'}</div>
         <div class="interp-text">
-            ${isEasy ? 'Analise de qual direcao seu parceiro pode vir.' : 'Vedic astrology determines spouse direction by combining multiple indicators.'}<br><br>
+            ${isEasy ? 'Analise de qual direcao seu parceiro pode vir.' : 'A astrologia vedica determina a direcao do parceiro combinando multiplos indicadores.'}<br><br>
             ${isEasy ? '' : '<strong>6 Indicators:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> 12th house Arudha Pada. Indicates spouse\'s family/background and marriage environment. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> 7th house Arudha Pada. Indicates spouse\'s social image and outer impression. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7th lord (' + RULER_NAMES[d9H7Ruler] + '):</strong> The sign where Navamsa 7th house ruler goes indicates spouse\'s actual direction. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Natural significator of spouse. Venus\'s Navamsa position shows the source of spouse energy. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
+                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Esmagadoramente forte' : agreement >= 3 ? 'Muito forte' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
                 Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
                 ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
-                ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favored but other possibilities exist.' : ''}
+                ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favorecido mas outras possibilidades existem.' : ''}
                 ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
             </div>
@@ -864,7 +864,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💎 Ponto de Atração do Parceiro' : '💎 Atração do Parceiro — D9 Vênus: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Venus in Navamsa reveals spouse charm and love style.<br><br>'}
+            ${isEasy ? '' : 'Venus no Navamsa revela o charme e estilo de amor do parceiro.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
@@ -2113,7 +2113,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Parasara 인용
         if (!isEasy) {
             html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
-            html += '📜 <strong>Parasara says:</strong> "Shashtiamsha (D60) is the most important of all divisional charts. Benefic planets in benefic divisions give good results, malefic planets in malefic divisions give bad results."<br>';
+            html += '📜 <strong>Parasara diz:</strong> "Shashtiamsha (D60) is the most important of all divisional charts. Benefic planets in benefic divisions give good results, malefic planets in malefic divisions give bad results."<br>';
             html += '<span style="color:#666;">— Brihat Parasara Hora Shastra (BPHS)</span></div></div>';
         }
 
@@ -2284,7 +2284,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Saturn under malefic deity — <strong>heavy past-life karma</strong> in career area. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
         }
         if (d60H10planets.length > 0) {
-            ch5 += '<br><br><strong>' + (isEasy ? 'Career planets:' : 'D60 Planets in 10th:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Career karma concentrated in these planets.';
+            ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carreira:' : 'D60 Planets in 10th:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma de carreira concentrado nesses planetas.';
         }
         html += subChapter('💼', 'Karma de Carreira — Vocação de Vidas Passadas', ch5);
 
@@ -2300,7 +2300,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
             d60H2planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
-                ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Good wealth connections from past lives — abundance in this life too.' : 'Wealth lessons from past lives. Steady effort can overcome them.') + '<br>';
+                ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Boas conexoes de riqueza de vidas passadas — abundancia nesta vida tambem.' : 'Licoes de riqueza de vidas passadas. Esforco constante pode supera-las.') + '<br>';
             });
         }
         html += subChapter('💰', 'Karma de Riqueza — Fortuna de Vidas Passadas', ch6);
@@ -2339,23 +2339,23 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (beneficCount >= 7) {
             ch8 += isEasy ?
                 '🌟 <strong>You did so many good things in past lives!</strong> Almost all planets under good energy — naturally getting good results. Strong innate fortune.' :
-                '🌟 <strong>Very strong past-life merit.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
+                '🌟 <strong>Merito muito forte de vidas passadas.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
                 '✨ <strong>Abundant good energy from past lives.</strong> Protected in many areas of life.' :
-                '✨ <strong>Abundant past life merit.</strong> Benefics dominate — protected in many areas.';
+                '✨ <strong>Merito abundante de vidas passadas.</strong> Benefics dominate — protected in many areas.';
             if (maleficPlanets.length > 0) ch8 += isEasy ?
                 ' However, some areas need more effort.' :
                 ' However, karmic challenges exist in <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> areas. Practice mantra and charity for these planets.';
         } else if (beneficCount >= 3) {
             ch8 += isEasy ?
                 '⚖️ <strong>Good energy and challenging energy are half and half.</strong> Good things and hard things alternate in life.' :
-                '⚖️ <strong>Karma in balance.</strong> Mixed fortune — good and challenges alternate.';
-            if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planets to watch: ' : 'Planets to watch: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
+                '⚖️ <strong>Karma em equilibrio.</strong> Mixed fortune — good and challenges alternate.';
+            if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planetas a observar: ' : 'Planetas a observar: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
             ch8 += isEasy ?
                 '🔥 <strong>Esta vida trata de resolver licoes de vidas passadas.</strong> Muitos desafios, mas aqueles com as licoes mais pesadas crescem mais. Esforco constante e ajudar outros e especialmente importante.' :
-                '🔥 <strong>A life of karma settlement.</strong> Many challenges from past lives, but Parasara said "the soul with heaviest karma grows the most". Mantra practice and charity are especially important.';
+                '🔥 <strong>Uma vida de acerto de karma.</strong> Many challenges from past lives, but Parasara said "the soul with heaviest karma grows the most". Mantra practice and charity are especially important.';
         }
         html += subChapter('📊', 'Avaliação Geral do Karma', ch8);
 
