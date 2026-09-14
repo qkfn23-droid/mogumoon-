@@ -862,7 +862,7 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
         <div class="interp-text">
             ${isEasy ? '' : 'Le signe de la 7e maison revele l\'environnement de rencontre.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
-            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Foreign connection possibility!</strong> Spouse may be a foreigner or you may meet abroad.' : ''}
+            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Possibilite de connexion etrangere !</strong> Le partenaire peut etre etranger ou vous pouvez vous rencontrer a l\'etranger.' : ''}
         </div>
     </div>`;
 
@@ -2014,7 +2014,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moon4 = d12_4planets.find(p => p.id === 'Moon');
         const sun9 = d12_9planets.find(p => p.id === 'Sun');
         if (moon4) html += (isEasy ? 'Lune en position de mere — connexion profonde avec la mere.' : 'Lune en 4e maison — connexion profonde avec la mere.') + '<br>';
-        if (sun9) html += (isEasy ? 'Sun in father position — deep connection with father.' : 'Sun in 9th house — deep connection with father.') + '<br>';
+        if (sun9) html += (isEasy ? 'Soleil en position de pere — connexion profonde avec le pere.' : 'Soleil en 9e maison — connexion profonde avec le pere.') + '<br>';
         html += '</div></div>';
 
     } else if (division === 60) {
@@ -2137,14 +2137,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // Parasara 인용
         if (!isEasy) {
             html += '<div class="interp-card" style="border-left:3px solid #8b7ec8;"><div class="interp-text" style="font-size:13px;color:#888;">';
-            html += '📜 <strong>Parasara dit :</strong> "Shashtiamsha (D60) is the most important of all divisional charts. Benefic planets in benefic divisions give good results, malefic planets in malefic divisions give bad results."<br>';
+            html += '📜 <strong>Parasara dit :</strong> "Shashtiamsha (D60) est la plus importante de toutes les cartes divisionnaires. Les planetes benefiques dans les divisions benefiques donnent de bons resultats, les malefiques dans les malefiques donnent de mauvais resultats."<br>';
             html += '<span style="color:#666;">— Brihat Parasara Hora Shastra (BPHS)</span></div></div>';
         }
 
         // ─── 소챕터 1: soul의 정체성 ───
         const lagnaD = getDeity(lagnaSidereal);
         let ch1 = isEasy
-            ? '<strong>Past life identity</strong>' + deityTag(lagnaD) + '<br><br>'
+            ? '<strong>Identite des vies passees</strong>' + deityTag(lagnaD) + '<br><br>'
             : '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
@@ -2163,7 +2163,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         if (sunD60) {
             const sunD = getDeity(sunD60.sidereal);
-            let ch2 = (isEasy ? '<strong>Sun Past Life Memory</strong>' : '<strong>D60 Soleil: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
+            let ch2 = (isEasy ? '<strong>Memoire du Soleil des vies passees</strong>' : '<strong>D60 Soleil: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
             ch2 += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
                 ch2 += '<br>' + (isEasy ?
@@ -2181,7 +2181,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (moonD60) {
             const moonD = getDeity(moonD60.sidereal);
-            let ch3 = (isEasy ? '<strong>Moon Past Life Memory</strong>' : '<strong>D60 Lune: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
+            let ch3 = (isEasy ? '<strong>Memoire de la Lune des vies passees</strong>' : '<strong>D60 Lune: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
             ch3 += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
                 ch3 += '<br>' + (isEasy ?
@@ -2205,18 +2205,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
         const spouseKarmaBySign = [
-            'Past life warrior/leader connection. Intense, independent spouse karma. Souls who fought or competed together.',
-            'Past life artist/wealthy connection. Materially abundant marriage karma. Souls who pursued beauty together.',
-            'Past life scholar/merchant connection. Intellectual marriage karma. Souls who studied or traded together.',
-            'Past life family/protector connection. Deep emotional bond marriage karma. Souls who cared for each other.',
-            'Past life royalty/nobility connection. Splendid, respected marriage karma. Souls who ruled together.',
+            'Connexion guerrier/leader des vies passees. Karma matrimonial intense et independant. Ames qui ont combattu ensemble.',
+            'Connexion artiste/riche. Karma matrimonial materiellement abondant. Ames qui ont poursuivi la beaute ensemble.',
+            'Connexion erudit/commercant. Karma matrimonial intellectuel. Ames qui ont etudie ou commerce ensemble.',
+            'Connexion famille/protecteur. Karma matrimonial de lien emotionnel profond. Ames qui ont pris soin l\'une de l\'autre.',
+            'Connexion royaute/noblesse. Karma matrimonial splendide et respecte. Ames qui ont gouverne ensemble.',
             'Past life healer/servant connection. Service and devotion marriage karma. Souls who helped others together.',
             'Past life diplomat/artist connection. Harmonious, beautiful marriage karma. Souls who sought balance together.',
             'Past life practitioner/mystic connection. Intense, transformative marriage karma. Souls who shared life and death.',
             'Past life sage/explorer connection. Free, expansive marriage karma. Foreign spouse possible.',
             'Past life official/architect connection. Responsible, stable marriage karma. Late marriage possible.',
             'Past life official/soldier/systematic professional connection. Saturn-ruled sign with responsible, disciplined spouse karma. Souls who practiced social duty together. Marriage may be somewhat late or with age gap.',
-            'Past life medium/artist connection. Mystical, spiritual marriage karma. May meet first in dreams.'
+            'Connexion medium/artiste. Karma matrimonial mystique et spirituel. Peuvent se rencontrer d\'abord en reves.'
         ];
 
         let ch4 = (isEasy
