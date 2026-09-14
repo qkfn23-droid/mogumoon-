@@ -2153,10 +2153,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Voce fez muitas coisas boas em vidas passadas, entao boas oportunidades vem naturalmente. Sua existencia esta protegida.' :
                     'Licoes nao resolvidas de vidas passadas afetam sua personalidade, mas supera-las leva a maior crescimento.') :
                 (lagnaD.deity.nature === 'benefic' ?
-                    '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects — good opportunities come naturally.' :
-                    '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted, but overcoming leads to growth.'));
+                    '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — O merito de vidas passadas protege — boas oportunidades vem naturalmente.' :
+                    '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Desafio carmico impresso, mas supera-lo leva ao crescimento.'));
         }
-        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' — core past-life karma concentrated in these planets.' : ' positioned in D60 Lagna — Core past-life karma concentrated in these planets.');
+        if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' — karma central de vidas passadas concentrado nesses planetas.' : ' posicionado no D60 Lagna — Karma central de vidas passadas concentrado nesses planetas.');
         html += subChapter('🪐', 'Identidade da Alma — Quem Você Foi em Vidas Passadas', ch1);
 
         // ─── 소챕터 2: soul의 목적 ───
@@ -2171,8 +2171,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Voce perseguiu bem seu verdadeiro proposito em vidas passadas, entao a autorrealizacao vem naturalmente. Tenha confianca!' :
                         'Havia confusao sobre quem voce e em vidas passadas. Encontrar seu verdadeiro eu e uma jornada importante que te faz crescer.') :
                     (sunD.deity.nature === 'benefic' ?
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Soul purpose correctly pursued — self-realization comes naturally.' :
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Past life challenge with self/authority — finding true self is the soul task.'));
+                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Proposito da alma corretamente perseguido — a autorrealizacao vem naturalmente.' :
+                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Desafio de vidas passadas com o eu/autoridade — encontrar o verdadeiro eu e a tarefa da alma.'));
             }
             html += subChapter('☉', 'Propósito da Alma — Por Que Você Nasceu', ch2);
         }
@@ -2189,8 +2189,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Sua mente era pacifica em vidas passadas, entao voce e emocionalmente estavel com forte intuicao. Confie no seu instinto.' :
                         'Tracos de dificuldades emocionais de vidas passadas permanecem profundos no seu coracao. Meditacao e estar perto da agua ajuda muito na cura.') :
                     (moonD.deity.nature === 'benefic' ?
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Mind was peaceful — emotionally stable with strong intuition.' :
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Emotional wounds remain unconscious. Recognizing and healing is this life emotional task. Meditation and rest near water helps.'));
+                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. A mente era pacifica — emocionalmente estavel com forte intuicao.' :
+                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Feridas emocionais permanecem inconscientes. Reconhecer e curar e a tarefa emocional desta vida. Meditacao e descanso perto da agua ajudam.'));
             }
             html += subChapter('☽', 'Memória Emocional — Padrões Inconscientes', ch3);
         }
@@ -2235,8 +2235,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 } else {
                     ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                     ch4 += (p.natural === 'benefic'
-                        ? 'Benefic in 7th house — Built good karma with spouse in past lives. Blessings from spouse in this life too.'
-                        : 'Malefic in 7th house — Unresolved karma with spouse from past lives. Settling it in this life. Challenging but opportunity for growth.') + '<br>';
+                        ? 'Benefico na casa 7 — Bom karma com o parceiro em vidas passadas. Bencaos do parceiro nesta vida tambem.'
+                        : 'Malefico na casa 7 — Karma nao resolvido com o parceiro de vidas passadas. Resolvendo nesta vida. Desafiador mas oportunidade de crescimento.') + '<br>';
                 }
             });
         }
@@ -2278,7 +2278,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 if (h7lDesc) ch4 += '<br><br>' + h7lDesc;
             } else {
                 ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' house (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
-                ch4 += 'Karmic connection with spouse <strong>' + houseThemes[h7lH] + '</strong> manifests through this area. ';
+                ch4 += 'Conexao carmica com o parceiro <strong>' + houseThemes[h7lH] + '</strong> se manifesta atraves desta area. ';
                 ch4 += h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Karma to meet spouse in foreign/spiritual settings.' : '';
             }
         }
@@ -2304,8 +2304,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Esta e uma <strong>bencao muito rara</strong>! A paciencia de vidas passadas reduz desafios de carreira nesta vida.' :
                     'Licao pesada de carreira de vidas passadas. Esforco constante e ajudar outros e a chave.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
-                    'Saturn under benefic deity is a <strong>very rare blessing</strong>! Past life patience reduces career trials.' :
-                    'Saturn under malefic deity — <strong>heavy past-life karma</strong> in career area. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
+                    'Saturno sob divindade benefica e uma <strong>bencao muito rara</strong>! A paciencia de vidas passadas reduz as provacoes de carreira.' :
+                    'Saturno sob divindade malefica — <strong>karma pesado de vidas passadas</strong> na area de carreira. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
         }
         if (d60H10planets.length > 0) {
             ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carreira:' : 'D60 Planets in 10th:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma de carreira concentrado nesses planetas.';
@@ -2370,7 +2370,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 '✨ <strong>Merito abundante de vidas passadas.</strong> Benefics dominate — protected in many areas.';
             if (maleficPlanets.length > 0) ch8 += isEasy ?
                 ' However, some areas need more effort.' :
-                ' However, karmic challenges exist in <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong> areas. Practice mantra and charity for these planets.';
+                ' No entanto, existem desafios carmicos em <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>. Pratique mantras e caridade para esses planetas.';
         } else if (beneficCount >= 3) {
             ch8 += isEasy ?
                 '⚖️ <strong>Good energy and challenging energy are half and half.</strong> Good things and hard things alternate in life.' :
