@@ -2132,7 +2132,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return ' — deidad: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benéfico' : 'Maléfico') + '</span>';
         }
 
-        const houseThemes = ['','Self/Existence','Wealth/Value','Communication/Learning','Home/Rest','Creation/Love','Service/Trial','Relationship/Partner','Transformation/Secret','Wisdom/Religion','Society/Career','Wish/Gain','Liberation/Transcendence'];
+        const houseThemes = ['','Yo/Existencia','Riqueza/Valor','Comunicación/Aprendizaje','Hogar/Descanso','Creación/Amor','Servicio/Prueba','Relación/Pareja','Transformación/Secreto','Sabiduría/Religión','Sociedad/Carrera','Deseo/Ganancia','Liberación/Trascendencia'];
 
         // Parasara 인용
         if (!isEasy) {
@@ -2153,8 +2153,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Hiciste muchas cosas buenas en vidas pasadas, así que las buenas oportunidades llegan naturalmente. Tu existencia está protegida.' :
                     'Lecciones no resueltas de vidas pasadas afectan tu personalidad, pero superarlas lleva a mayor crecimiento.') :
                 (lagnaD.deity.nature === 'benefic' ?
-                    '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — El mérito de vidas pasadas protege — las buenas oportunidades llegan naturalmente.' :
-                    '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Desafío kármico impreso, pero superarlo lleva al crecimiento.'));
+                    '<strong>' + lagnaD.deity.ko + '</strong> guarda el Lagna. ' + lagnaD.deity.desc + ' — El mérito de vidas pasadas protege — las buenas oportunidades llegan naturalmente.' :
+                    '<strong>' + lagnaD.deity.ko + '</strong> influencia el Lagna. ' + lagnaD.deity.desc + ' — Desafío kármico impreso, pero superarlo lleva al crecimiento.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' — karma central de vidas pasadas concentrado en estos planetas.' : ' posicionado en D60 Lagna — Karma central de vidas pasadas concentrado en estos planetas.');
         html += subChapter('🪐', 'Identidad del Alma — Quién Fuiste en Vidas Pasadas', ch1);
@@ -2252,7 +2252,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><strong>♀ Venus (Planeta del Amor)</strong> → D60 ' + venH + ' casa (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                    'Venus bajo benéfica <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
+                    'Venus bajo benéfica <strong>' + venD.deity.ko + '</strong> protección. El amor bien practicado — un amor hermoso te espera. ' + venD.deity.desc :
                     'Venus bajo maléfica <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influencia. Desafíos amorosos pasados — aprender el amor verdadero es la tarea. ' + (venD.deity?venD.deity.desc:'');
             }
         }
@@ -2305,7 +2305,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Lección profesional pesada de vidas pasadas. El esfuerzo constante y ayudar a otros es la clave.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
                     'Saturno bajo deidad benéfica es una <strong>bendición muy rara</strong>! La paciencia de vidas pasadas reduce las pruebas profesionales.' :
-                    'Saturno bajo deidad maléfica — <strong>karma pesado de vidas pasadas</strong> en el área profesional. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
+                    'Saturno bajo deidad maléfica — <strong>karma pesado de vidas pasadas</strong> en el área profesional. ' + (satD.deity?satD.deity.desc:'') + '. Paciencia, servicio, mantra(Om Shanaishcharaya Namaha) para disolver este karma.');
         }
         if (d60H10planets.length > 0) {
             ch5 += '<br><br><strong>' + (isEasy ? 'Planetas de carrera:' : 'Planetas D60 en la 10ª:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karma profesional concentrado en estos planetas.';
@@ -2615,7 +2615,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += (isEasy ? '' : '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d30LagnaInterp + '<br><br>';
 
         html += '<strong>' + (isEasy ? 'Precaución de enfermedades:' : 'D30 Casa 6 (enfermedad/enemigo) — ' + SIGNS[d30_6sign] + ':') + '</strong><br>';
-        const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immune, feet, mental health'];
+        const diseaseBySign = ['Dolor de cabeza, fiebre, inflamación','Cuello, tiroides, diabetes','Pulmones, nervios, ansiedad','Estómago, retención de agua','Corazón, espalda, presión arterial','Digestivo, intestinos, piel','Riñones, espalda baja, urinario','Reproductivo, condiciones crónicas','Hígado, muslos, sobrepeso','Huesos, articulaciones, reumatismo','Circulatorio, presión arterial, tobillos','Inmunidad, pies, salud mental'];
         html += 'Cuidado con: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
             const dis = {Sun:'Cuidado con enfermedades de ojos y corazón',Moon:'Salud mental y problemas de retención de agua',Mars:'Cuidado con accidentes, cirugía, quemaduras',Mercury:'Sistema nervioso y problemas de piel',Jupiter:'Cuidado con hígado y sobrepeso',Venus:'Cuidado con riñón, diabetes, ETS',Saturn:'Enfermedad crónica, problemas articulares',Rahu:'Enfermedad de causa desconocida, adicción',Ketu:'Inmunidad reducida, alergia'};

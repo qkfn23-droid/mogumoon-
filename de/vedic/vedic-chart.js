@@ -593,7 +593,7 @@ function renderD9Chart(positions, lagnaSign, lagnaSidereal) {
 }
 
 function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
-    const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const SIGN_RULERS = ['Mars','Venus','Merkur','Mond','Sonne','Merkur','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'Sun',Moon:'Moon',Mars:'Mars',Mercury:'Mercury',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
     const isEasy = window.vedicMode === 'easy';
 
@@ -703,14 +703,14 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 6. spouse 방향 분석 (UL + A7 + D1 7 house + D9 7 house 종합)
     const DIRECTIONS = {
-        0:'East', 1:'South', 2:'West', 3:'North',
-        4:'East', 5:'South', 6:'West', 7:'North',
-        8:'East', 9:'South', 10:'West', 11:'North'
+        0:'Osten', 1:'Süden', 2:'Westen', 3:'Norden',
+        4:'Osten', 5:'Süden', 6:'Westen', 7:'Norden',
+        8:'Osten', 9:'Süden', 10:'Westen', 11:'Norden'
     };
     const DIR_DETAIL = {
-        0:'East (Aries — fire)',1:'South (Taurus — earth)',2:'West (Gemini — air)',3:'North (Cancer — water)',
-        4:'East (Leo — fire)',5:'South (Virgo — earth)',6:'West (Libra — air)',7:'North (Scorpio — water)',
-        8:'East (Sagittarius — fire)',9:'South (Capricorn — earth)',10:'West (Aquarius — air)',11:'North (Pisces — water)'
+        0:'Osten (Widder — Feuer)',1:'Süden (Stier — Erde)',2:'Westen (Zwillinge — Luft)',3:'Norden (Krebs — Wasser)',
+        4:'Osten (Löwe — Feuer)',5:'Süden (Jungfrau — Erde)',6:'Westen (Waage — Luft)',7:'Norden (Skorpion — Wasser)',
+        8:'Osten (Schütze — Feuer)',9:'Süden (Steinbock — Erde)',10:'Westen (Wassermann — Luft)',11:'Norden (Fische — Wasser)'
     };
 
     // Arudha Pada 계산 함수
@@ -911,7 +911,7 @@ function renderNakshatra(moonPos) {
     ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
-            <div class="nakshatra-meaning">"${nak.meaning}" — Ruling Planet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}" — Herrscherplanet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
             <div class="nakshatra-detail">
                 Deity: ${nak.deity}<br><br>
                 ${nak.desc}
@@ -1734,18 +1734,18 @@ function renderDignity(positions, lagnaSign) {
 // ═══════════════════════════════════════════════════
 function renderLucky(lagnaSign, moonPos) {
     const luckyData = [
-        { color: 'Red, Orange', number: '1, 9', day: 'Dienstag', gem: 'Rote Koralle', dir: 'East' },
-        { color: 'White, Pink', number: '2, 6', day: 'Freitag', gem: 'Diamant', dir: 'Southeast' },
-        { color: 'Green', number: '3, 5', day: 'Mittwoch', gem: 'Smaragd', dir: 'North' },
-        { color: 'White, Silver', number: '2, 7', day: 'Montag', gem: 'Perle', dir: 'Northwest' },
-        { color: 'Gold, Orange', number: '1, 4', day: 'Sonntag', gem: 'Rubin', dir: 'East' },
-        { color: 'Green, Light Green', number: '5, 3', day: 'Mittwoch', gem: 'Smaragd', dir: 'South' },
-        { color: 'White, Pastel', number: '6, 2', day: 'Freitag', gem: 'Diamant', dir: 'West' },
-        { color: 'Red, Crimson', number: '9, 1', day: 'Dienstag', gem: 'Rote Koralle', dir: 'South' },
-        { color: 'Yellow, Gold', number: '3, 9', day: 'Donnerstag', gem: 'Gelber Saphir', dir: 'Northeast' },
-        { color: 'Navy, Black', number: '8, 4', day: 'Samstag', gem: 'Blauer Saphir', dir: 'West' },
-        { color: 'Navy, Purple', number: '4, 8', day: 'Samstag', gem: 'Blauer Saphir', dir: 'West' },
-        { color: 'Yellow, Gold', number: '3, 7', day: 'Donnerstag', gem: 'Gelber Saphir', dir: 'Northeast' }
+        { color: 'Rot, Orange', number: '1, 9', day: 'Dienstag', gem: 'Rote Koralle', dir: 'Osten' },
+        { color: 'Weiß, Rosa', number: '2, 6', day: 'Freitag', gem: 'Diamant', dir: 'Südosten' },
+        { color: 'Grün', number: '3, 5', day: 'Mittwoch', gem: 'Smaragd', dir: 'Norden' },
+        { color: 'Weiß, Silber', number: '2, 7', day: 'Montag', gem: 'Perle', dir: 'Nordwesten' },
+        { color: 'Gold, Orange', number: '1, 4', day: 'Sonntag', gem: 'Rubin', dir: 'Osten' },
+        { color: 'Grün, Hellgrün', number: '5, 3', day: 'Mittwoch', gem: 'Smaragd', dir: 'Süden' },
+        { color: 'Weiß, Pastell', number: '6, 2', day: 'Freitag', gem: 'Diamant', dir: 'Westen' },
+        { color: 'Rot, Karmesin', number: '9, 1', day: 'Dienstag', gem: 'Rote Koralle', dir: 'Süden' },
+        { color: 'Gelb, Gold', number: '3, 9', day: 'Donnerstag', gem: 'Gelber Saphir', dir: 'Nordosten' },
+        { color: 'Dunkelblau, Schwarz', number: '8, 4', day: 'Samstag', gem: 'Blauer Saphir', dir: 'Westen' },
+        { color: 'Dunkelblau, Lila', number: '4, 8', day: 'Samstag', gem: 'Blauer Saphir', dir: 'Westen' },
+        { color: 'Gelb, Gold', number: '3, 7', day: 'Donnerstag', gem: 'Gelber Saphir', dir: 'Nordosten' }
     ];
 
     const d = luckyData[lagnaSign];
@@ -1756,7 +1756,7 @@ function renderLucky(lagnaSign, moonPos) {
             <strong>📅 Glückstag:</strong> ${d.day}<br>
             <strong>💎 Glücksstein:</strong> ${d.gem}<br>
             <strong>🧭 Glücksrichtung:</strong> ${d.dir}<br>
-            <strong>🪐 Lagna-Herrscherplanet:</strong> ${['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'][lagnaSign]}
+            <strong>🪐 Lagna-Herrscherplanet:</strong> ${['Mars','Venus','Merkur','Mond','Sonne','Merkur','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'][lagnaSign]}
         </div>
     </div>`;
     document.getElementById('luckyWrap').innerHTML = html;
@@ -1930,7 +1930,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
     // 해석
     if (!interpEl) return;
-    const SIGN_RULERS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+    const SIGN_RULERS = ['Mars','Venus','Merkur','Mond','Sonne','Merkur','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
     const RULER_NAMES = {Sun:'Sun',Moon:'Moon',Mars:'Mars',Mercury:'Mercury',Jupiter:'Jupiter',Venus:'Venus',Saturn:'Saturn',Rahu:'Rahu',Ketu:'Ketu'};
 
     const isEasy = window.vedicMode === 'easy';
@@ -2132,7 +2132,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             return ' — Gottheit: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Günstig' : 'Ungünstig') + '</span>';
         }
 
-        const houseThemes = ['','Self/Existence','Wealth/Value','Communication/Learning','Home/Rest','Creation/Love','Service/Trial','Relationship/Partner','Transformation/Secret','Wisdom/Religion','Society/Career','Wish/Gain','Liberation/Transcendence'];
+        const houseThemes = ['','Selbst/Existenz','Wohlstand/Wert','Kommunikation/Lernen','Heim/Ruhe','Schöpfung/Liebe','Dienst/Prüfung','Beziehung/Partner','Transformation/Geheimnis','Weisheit/Religion','Gesellschaft/Karriere','Wunsch/Gewinn','Befreiung/Transzendenz'];
 
         // Parasara 인용
         if (!isEasy) {
@@ -2153,8 +2153,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Du hast in früheren Leben viel Gutes getan, daher kommen gute Gelegenheiten natürlich. Deine Existenz ist geschützt.' :
                     'Ungelöste Lektionen aus früheren Leben beeinflussen deine Persönlichkeit, aber sie zu überwinden führt zu größerem Wachstum.') :
                 (lagnaD.deity.nature === 'benefic' ?
-                    '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Verdienst aus früheren Leben schützt — gute Gelegenheiten kommen natürlich.' :
-                    '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmische Herausforderung eingeprägt, aber Überwindung führt zu Wachstum.'));
+                    '<strong>' + lagnaD.deity.ko + '</strong> bewacht den Lagna. ' + lagnaD.deity.desc + ' — Verdienst aus früheren Leben schützt — gute Gelegenheiten kommen natürlich.' :
+                    '<strong>' + lagnaD.deity.ko + '</strong> beeinflusst den Lagna. ' + lagnaD.deity.desc + ' — Karmische Herausforderung eingeprägt, aber Überwindung führt zu Wachstum.'));
         }
         if (d60_planets_1.length > 0) ch1 += '<br><br>' + d60_planets_1.map(p => p.name).join(', ') + (isEasy ? ' — Kern-Karma aus früheren Leben in diesen Planeten konzentriert.' : ' im D60 Lagna positioniert — Kern-Karma aus früheren Leben in diesen Planeten konzentriert.');
         html += subChapter('🪐', 'Seelenidentität — Wer warst du in früheren Leben', ch1);
@@ -2252,7 +2252,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><strong>♀ Venus (Planet der Liebe)</strong> → D60 ' + venH + ' Haus (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                    'Venus unter günstiger <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
+                    'Venus unter günstiger <strong>' + venD.deity.ko + '</strong> Schutz. Gut praktizierte Liebe — eine schöne Liebe erwartet dich. ' + venD.deity.desc :
                     'Venus unter ungünstiger <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> Einfluss. Vergangene Liebesherausforderungen — wahre Liebe lernen ist die Aufgabe. ' + (venD.deity?venD.deity.desc:'');
             }
         }
@@ -2305,7 +2305,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Schwere Karrierelektion aus früheren Leben. Stetiger Einsatz und anderen helfen ist der Schlüssel.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
                     'Saturn unter wohltätiger Gottheit ist ein <strong>sehr seltener Segen</strong>! Geduld aus früheren Leben reduziert Karriereprüfungen.' :
-                    'Saturn unter übeltätiger Gottheit — <strong>schweres Karma aus früheren Leben</strong> im Karrierebereich. ' + (satD.deity?satD.deity.desc:'') + '. Patience, service, mantra(Om Shanaishcharaya Namaha) to dissolve this karma.');
+                    'Saturn unter übeltätiger Gottheit — <strong>schweres Karma aus früheren Leben</strong> im Karrierebereich. ' + (satD.deity?satD.deity.desc:'') + '. Geduld, Dienst, Mantra(Om Shanaishcharaya Namaha) um dieses Karma aufzulösen.');
         }
         if (d60H10planets.length > 0) {
             ch5 += '<br><br><strong>' + (isEasy ? 'Karriereplaneten:' : 'D60 Planeten im 10.:') + '</strong> ' + d60H10planets.map(p => p.name).join(', ') + ' — Karriere-Karma in diesen Planeten konzentriert.';
@@ -2625,12 +2625,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Gefahr/Operation:' : 'D30 8. Haus (Gefahr/Operation) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
         if (d30_8planets.length > 0) {
             d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Gefahr/Unfall-Warnung. Versicherung wichtig.' : 'Geschützt in der Krise.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Gefahr/Unfall-Warnung. Versicherung wichtig.' : 'Geschützt in der Krise.') + '<br>'; });
-        } else html += isEasy ? 'Few big dangers.<br>' : '8. Haus leer — wenige große Gefahren.<br>';
+        } else html += isEasy ? 'Wenige große Gefahren.<br>' : '8. Haus leer — wenige große Gefahren.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Krankenhausaufenthalt:' : 'D30 12. Haus (Krankenhausaufenthalt/Verlust) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
             d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Krankenhausaufenthalt möglich.' : 'Spirituelle Heilung und Genesung.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Krankenhausaufenthalt möglich. Ausländische Medizin.' : 'Spirituelle Heilung und Genesung.') + '<br>'; });
-        } else html += isEasy ? 'Low hospitalization risk.<br>' : '12. Haus leer — Krankenhausrisiko ist gering.<br>';
+        } else html += isEasy ? 'Geringes Krankenhausrisiko.<br>' : '12. Haus leer — Krankenhausrisiko ist gering.<br>';
         html += '</div></div>';
 
     } else if (division === 40) {
