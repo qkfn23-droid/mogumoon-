@@ -1148,36 +1148,36 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     const venus = positions.find(p => p.id === 'Venus');
 
     const spouseSign = [
-        'An independent and energetic spouse. Destined for someone with strong willpower and leadership. An active and direct partner.',
-        'A beautiful and artistic spouse. Destined for someone materially stable. A sensual and loyal partner.',
-        'An intelligent spouse with good communication skills. Destined for someone you can converse with well. A humorous and versatile partner.',
-        'An emotional and domestic spouse. Destined for someone nurturing. A partner with motherly warmth.',
-        'A charismatic and dignified spouse. Destined for someone socially prominent. A partner with high self-esteem but generous nature.',
-        'A meticulous and practical spouse. Destined for someone interested in health and wellness. An analytical and service-oriented partner.',
-        'An attractive and refined spouse. Destined for someone diplomatic with good sense of balance. A partner with excellent artistic taste.',
-        'An intense and mysterious spouse. Destined for someone with deep emotions. A transformative and passionate partner. May have many secrets.',
-        'A free-spirited and optimistic spouse. Possible connection with a foreigner or someone from another culture. A philosophical and adventurous partner.',
-        'A serious and ambitious spouse. May have an age difference. A responsible and socially successful partner. Marriage may come late.',
-        'A unique and independent spouse. Unconventional meeting or relationship. An intellectual and innovative partner. A free-form marriage.',
-        'A spiritual and intuitive spouse. Connection with an artist or spiritual practitioner. A dreamy and romantic partner. Watch for idealization.'
+        'Um parceiro independente e energético. Destinado a alguém com forte vontade e liderança. Um parceiro ativo e direto.',
+        'Um parceiro bonito e artístico. Destinado a alguém materialmente estável. Um parceiro sensual e leal.',
+        'Um parceiro inteligente com boas habilidades de comunicação. Destinado a alguém com quem conversar bem.',
+        'Um parceiro emocional e caseiro. Destinado a alguém cuidador. Um parceiro com calor maternal.',
+        'Um parceiro carismático e digno. Destinado a alguém socialmente proeminente. Um parceiro com alta autoestima mas generoso.',
+        'Um parceiro meticuloso e prático. Destinado a alguém interessado em saúde. Um parceiro analítico e orientado a serviço.',
+        'Um parceiro atraente e refinado. Destinado a alguém diplomático. Um parceiro com excelente gosto artístico.',
+        'Um parceiro intenso e misterioso. Destinado a alguém com emoções profundas. Um parceiro transformador e apaixonado.',
+        'Um parceiro livre e otimista. Possível conexão com estrangeiro ou outra cultura. Um parceiro filosófico e aventureiro.',
+        'Um parceiro sério e ambicioso. Pode haver diferença de idade. Um parceiro responsável e socialmente bem-sucedido. Casamento pode vir tarde.',
+        'Um parceiro único e independente. Encontro ou relação não convencional. Um parceiro intelectual e inovador.',
+        'Um parceiro espiritual e intuitivo. Conectado a artista ou praticante espiritual. Um parceiro sonhador e romântico.'
     ];
 
     const spouseAppearance = [
-        'Sharp features, strong impression. Athletic build. Intense eyes full of energy. Red tones suit well. Active, dynamic vibe.',
-        'Soft, attractive appearance. Full figure with sensual lips. Good skin with natural beauty. Warm, comfortable impression.',
-        'Youthful appearance, bright impression. Slim and tall. Expressive face with sparkling eyes. Trendy and stylish.',
-        'Round face, soft impression. Slightly curvy figure. Fair skin with large eyes. Motherly vibe. More attractive at home.',
-        'Dignified build with charismatic appearance. Rich hair is a feature. Commanding presence, well-dressed. Draws attention everywhere.',
-        'Neat, clean appearance. Lean with good proportions. Intellectual impression. Minimal fashion, cleanliness is charm.',
-        'Balanced appearance, refined impression. Symmetrical face. Charming smile, social vibe. Always well-dressed. May have dimples.',
-        'Sharp, mysterious appearance. Deep eyes leave strong impression. Lean with sharp features. Prefers dark tones. Hidden sexiness.',
-        'Tall with good build. Bright, open impression. Exotic charm. Casual, free clothing. Attractive smile, sporty style.',
-        'Serious, mature appearance. Lean with defined bone structure. Looks older than age but grows more attractive over time. Classic suit style.',
-        'Unique, extraordinary appearance. Distinctive fashion. Tall or with notable features. Unconventional charm. Futuristic style.',
-        'Soft, dreamy appearance. Large eyes with dreamy expression. Slightly plump with translucent skin. Pastel tones suit. Mystical charm.'
+        'Traços marcados, impressão forte. Compleição atlética. Olhos intensos cheios de energia. Tons vermelhos combinam.',
+        'Aparência suave e atraente. Figura cheia com lábios sensuais. Boa pele com beleza natural.',
+        'Aparência jovem, impressão brilhante. Magro e alto. Rosto expressivo com olhos brilhantes. Na moda e estiloso.',
+        'Rosto redondo, impressão suave. Figura levemente curvilínea. Pele clara com olhos grandes. Vibração maternal.',
+        'Compleição digna com aparência carismática. Cabelo abundante é um traço. Presença imponente, bem vestido.',
+        'Aparência arrumada e limpa. Magro com boas proporções. Impressão intelectual. Moda minimalista.',
+        'Aparência equilibrada, impressão refinada. Rosto simétrico. Sorriso encantador, vibração social. Pode ter covinhas.',
+        'Aparência afiada e misteriosa. Olhos profundos deixam forte impressão. Magro com traços marcados. Prefere tons escuros.',
+        'Alto com boa compleição. Impressão brilhante e aberta. Charme exótico. Roupas casuais e livres.',
+        'Aparência séria e madura. Magro com estrutura óssea definida. Parece mais velho mas mais atraente com o tempo.',
+        'Aparência única e extraordinária. Moda distintiva. Alto ou com traços notáveis. Charme não convencional.',
+        'Aparência suave e sonhadora. Olhos grandes com expressão sonhadora. Levemente cheinho com pele translúcida. Charme místico.'
     ];
 
-    let spouseText = (isEasy ? '' : '<strong>📐 Spouse Appearance:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 spouse Personality:</strong><br>') + spouseSign[h7sign];
+    let spouseText = (isEasy ? '' : '<strong>📐 Aparência do Parceiro:</strong><br>') + spouseAppearance[h7sign] + (isEasy ? '<br><br>' : isEasy ? '<br><br>' : '<br><br><strong>📋 Personalidade do Parceiro:</strong><br>') + spouseSign[h7sign];
 
     if (h7planets.length > 0) {
         spouseText += isEasy ? '<br><br>' : '<br><br><strong>Planetas na 7ª:</strong> ';
