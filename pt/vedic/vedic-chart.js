@@ -2145,7 +2145,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const lagnaD = getDeity(lagnaSidereal);
         let ch1 = isEasy
             ? '<strong>Identidade de vidas passadas</strong>' + deityTag(lagnaD) + '<br><br>'
-            : '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
+            : '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (regente: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
             ch1 += '<br>' + (isEasy ?
