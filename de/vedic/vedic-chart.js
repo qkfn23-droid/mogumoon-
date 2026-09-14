@@ -2253,7 +2253,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 ch4 += '<br><strong>♀ Venus (Planet der Liebe)</strong> → D60 ' + venH + ' Haus (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
                     'Venus unter günstiger <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
-                    'Venus unter ungünstiger <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
+                    'Venus unter ungünstiger <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> Einfluss. Vergangene Liebesherausforderungen — wahre Liebe lernen ist die Aufgabe. ' + (venD.deity?venD.deity.desc:'');
             }
         }
 
@@ -2294,7 +2294,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch5 = (isEasy
             ? '<strong>Karriere-Karma früherer Leben</strong><br><br>'
             : '<strong>D60 10. Haus (Karriere): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
-        ch5 += 'Karriere-Karma früherer Leben in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
+        ch5 += 'Karriere-Karma früherer Leben in <strong>' + careerKarma + '</strong> Richtung. Natürliche Anziehung zu diesem Bereich.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
