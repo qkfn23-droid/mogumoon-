@@ -1381,7 +1381,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const jupH = houseOf(jupiter.sign);
         const diff = Math.abs(moonH - jupH);
         if (diff === 0 || diff === 3 || diff === 6 || diff === 9) {
-            yogaText += isEasy ? '<strong>🐘 Bénédiction de sagesse et renommée</strong>' : '<strong>🐘 Gajakesari Yoga (Gajakesari)</strong> — Moon-Jupiter Kendra relationship! Wisdom, fame, abundance combination. Respected in society with outstanding intellect. Good education and children fortune.<br><br>';
+            yogaText += isEasy ? '<strong>🐘 Bénédiction de sagesse et renommée</strong>' : '<strong>🐘 Gajakesari Yoga</strong> — Relation Kendra Lune-Jupiter ! Combinaison sagesse, renommee, abondance. Respecte en societe. Bonne fortune en education et enfants.<br><br>';
         }
     }
 
@@ -1394,7 +1394,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
     // Chandra-Mangala Yoga
     if (moonPos && mars && moonPos.sign === mars.sign) {
-        yogaText += isEasy ? '<strong>🔥 Bénédiction de volonté forte et richesse</strong>' : '<strong>🔥 Chandra-Mangala Yoga</strong> — Moon-Mars same sign! Strong will and wealth accumulation. Success in business with bold decision-making.<br><br>';
+        yogaText += isEasy ? '<strong>🔥 Bénédiction de volonté forte et richesse</strong>' : '<strong>🔥 Chandra-Mangala Yoga</strong> — Lune-Mars meme signe ! Forte volonte et accumulation de richesse. Succes en affaires avec decisions audacieuses.<br><br>';
     }
 
     // Kuja Dosha (Manglik)
@@ -2210,17 +2210,17 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Connexion erudit/commercant. Karma matrimonial intellectuel. Ames qui ont etudie ou commerce ensemble.',
             'Connexion famille/protecteur. Karma matrimonial de lien emotionnel profond. Ames qui ont pris soin l\'une de l\'autre.',
             'Connexion royaute/noblesse. Karma matrimonial splendide et respecte. Ames qui ont gouverne ensemble.',
-            'Past life healer/servant connection. Service and devotion marriage karma. Souls who helped others together.',
-            'Past life diplomat/artist connection. Harmonious, beautiful marriage karma. Souls who sought balance together.',
-            'Past life practitioner/mystic connection. Intense, transformative marriage karma. Souls who shared life and death.',
-            'Past life sage/explorer connection. Free, expansive marriage karma. Foreign spouse possible.',
-            'Past life official/architect connection. Responsible, stable marriage karma. Late marriage possible.',
-            'Past life official/soldier/systematic professional connection. Saturn-ruled sign with responsible, disciplined spouse karma. Souls who practiced social duty together. Marriage may be somewhat late or with age gap.',
+            'Connexion guerisseur/serviteur. Karma matrimonial de service et devotion. Ames qui ont aide les autres ensemble.',
+            'Connexion diplomate/artiste. Karma matrimonial harmonieux et beau. Ames qui ont cherche l\'equilibre ensemble.',
+            'Connexion praticien/mystique. Karma matrimonial intense et transformateur. Ames qui ont partage vie et mort.',
+            'Connexion sage/explorateur. Karma matrimonial libre et expansif. Partenaire etranger possible.',
+            'Connexion officier/architecte. Karma matrimonial responsable et stable. Mariage tardif possible.',
+            'Connexion officier/soldat. Signe regi par Saturne avec karma matrimonial responsable. Ames qui ont pratique le devoir social ensemble. Mariage peut etre tardif ou avec ecart d\'age.',
             'Connexion medium/artiste. Karma matrimonial mystique et spirituel. Peuvent se rencontrer d\'abord en reves.'
         ];
 
         let ch4 = (isEasy
-            ? '<strong>Past Life Spouse Connection</strong><br><br>'
+            ? '<strong>Connexion du partenaire des vies passees</strong><br><br>'
             : '<strong>D60 7e Maison (partenaire) : ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
@@ -2292,7 +2292,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const careerKarma = ['military/leadership/sports','finance/art/agriculture','education/media/commerce','nursing/real estate/hospitality','politics/entertainment/management','medical/analysis/service','law/diplomacy/design','research/investigation/medicine','education/religion/foreign','administration/construction/civil servant','technology/science/innovation','art/spirituality/hospital'][d60H10sign];
 
         let ch5 = (isEasy
-            ? '<strong>Past life career karma</strong><br><br>'
+            ? '<strong>Karma de carriere des vies passees</strong><br><br>'
             : '<strong>D60 10e Maison (carriere) : ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
         ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
@@ -2316,9 +2316,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H2sign = (dLagnaSign + 1) % 12;
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
         let ch6 = (isEasy
-            ? '<strong>Past life wealth karma</strong><br><br>'
+            ? '<strong>Karma de richesse des vies passees</strong><br><br>'
             : '<strong>D60 2e Maison (richesse) : ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
-        const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
+        const wealthKarma = ['Instinct de richesse autodidacte.','Environnement abondant des vies passees.','Construction intellectuelle de richesse.','Richesse familiale/immobiliere.','Richesse par l\'autorite.','Richesse par le service. Frugal.','Richesse par partenariat.','Richesse des autres (heritage).','La fortune apporte la richesse. Etranger.','Lent mais sur. Riche apres la cinquantaine.','Richesse par l\'innovation. Non conventionnel.','Activite spirituelle et richesse. Donner.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
             ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
