@@ -1668,29 +1668,29 @@ function renderDignity(positions, lagnaSign) {
             emoji = '🟢';
             color = '#5cb85c';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> — greatest blessing! Innate talents shine and good results come naturally.`
-                : `<strong>${p.name} at maximum power!</strong> "${role}" energy maximized in <strong>${house}(${area})</strong>. Innate talents shine.`;
+                ? `<strong>${area}</strong> — größter Segen! Angeborene Talente strahlen und gute Ergebnisse kommen natürlich.`
+                : `<strong>${p.name} auf maximaler Kraft!</strong> Die Energie von "${role}" maximiert in <strong>${house}(${area})</strong>. Talente strahlen.`;
         } else if (p.sign === DEBI[p.id]) {
             dignity = 'Debilitated';
             emoji = '🔴';
             color = '#d9534f';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> — may face challenges. But conscious effort leads to great growth. See remedies below.`
-                : `<strong>${p.name} weakened.</strong> "${role}" energy weakened in <strong>${house}(${area})</strong>. Challenges but conscious effort leads to growth. See remedies.`;
+                ? `<strong>${area}</strong> — kann Herausforderungen haben. Aber bewusste Anstrengung führt zu großem Wachstum. Siehe Heilmittel unten.`
+                : `<strong>${p.name} geschwächt.</strong> Die Energie von "${role}" geschwächt in <strong>${house}(${area})</strong>. Herausforderungen aber Wachstum durch Anstrengung.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
             dignity = 'Own Sign';
             emoji = '🟡';
             color = '#c9a84c';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> — stably works in your favor. Good results come naturally.`
-                : `<strong>${p.name} at home!</strong> "${role}" energy stably works in <strong>${house}(${area})</strong>. Good results naturally.`;
+                ? `<strong>${area}</strong> — arbeitet stabil zu deinen Gunsten. Gute Ergebnisse kommen natürlich.`
+                : `<strong>${p.name} zu Hause!</strong> Die Energie von "${role}" arbeitet stabil in <strong>${house}(${area})</strong>. Gute Ergebnisse natürlich.`;
         } else {
             dignity = 'Neutral';
             emoji = '⚪';
             color = '#999';
             simpleDesc = isEasy
-                ? `<strong>${area}</strong> — average influence. Neither particularly strong nor weak.`
-                : `${p.name}'s "${role}" energy exerts average influence in <strong>${house}(${area})</strong>. Results vary with other planets.`;
+                ? `<strong>${area}</strong> — durchschnittlicher Einfluss. Weder besonders stark noch schwach.`
+                : `Die Energie von "${role}" von ${p.name} übt durchschnittlichen Einfluss in <strong>${house}(${area})</strong> aus.`;
         }
 
         html += `<div class="interp-card">
