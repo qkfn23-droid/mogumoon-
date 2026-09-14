@@ -120,7 +120,7 @@
             <label>출생시간 <span class="optional-tag">(모르면 '모름' 선택)</span></label>
             <div class="input-row">
                 <select id="birthHour"></select>
-                <select id="birthMin"><option value="0">00분</option><option value="15">15분</option><option value="30" selected>30분</option><option value="45">45분</option></select>
+                <select id="birthMin"></select>
                 <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">시간 입력</option><option value="unknown">모름</option></select>
             </div>
         </div>
@@ -871,6 +871,8 @@ function initForm() {
     for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '월'; if (i === 3) o.selected = true; m.appendChild(o); }
     for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '일'; if (i === 15) o.selected = true; d.appendChild(o); }
     for (let i = 0; i < 24; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '시'; if (i === 6) o.selected = true; h.appendChild(o); }
+    const mi = document.getElementById('birthMin');
+    for (let i = 0; i < 60; i++) { const o = document.createElement('option'); o.value = i; o.textContent = String(i).padStart(2,'0') + '분'; if (i === 30) o.selected = true; mi.appendChild(o); }
 }
 
 initForm();
