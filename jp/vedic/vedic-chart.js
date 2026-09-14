@@ -2312,13 +2312,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const lagnaD2 = getDeity(lagnaSidereal);
             if (lagnaD2.deity) {
                 const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                ch7 += '<div style="padding:4px 0;">⬆ ラグナ → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+                ch7 += '<div style="padding:4px 0;">⬆ ラグナ → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? '吉' : '凶') + '</span></div>';
             }
             positions.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (pD.deity) {
                     const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                    ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '길' : '흉') + '</span></div>';
+                    ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? '吉' : '凶') + '</span></div>';
                 }
             });
             html += subChapter('🕉️', '惑星別守護神リスト', ch7);
