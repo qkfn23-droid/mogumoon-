@@ -2252,8 +2252,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><strong>♀ Venus (Planeta del Amor)</strong> → D60 ' + venH + ' casa (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                    'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
-                    'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
+                    'Venus bajo benéfica <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
+                    'Venus bajo maléfica <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
             }
         }
 
@@ -2358,7 +2358,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         });
 
         let ch8 = isEasy ?
-            '<strong style="color:#5cb85c">' + beneficCount + ' good energy</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' caution energy</strong> out of 9 planets<br><br>' :
+            '<strong style="color:#5cb85c">' + beneficCount + ' buena energía</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' energía de precaución</strong> de 9 planetas<br><br>' :
             '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?

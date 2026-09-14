@@ -2252,8 +2252,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><strong>♀ Venus (Planet der Liebe)</strong> → D60 ' + venH + ' Haus (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                    'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
-                    'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
+                    'Venus unter günstiger <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
+                    'Venus unter ungünstiger <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
             }
         }
 
@@ -2294,7 +2294,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch5 = (isEasy
             ? '<strong>Karriere-Karma früherer Leben</strong><br><br>'
             : '<strong>D60 10. Haus (Karriere): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
-        ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
+        ch5 += 'Karriere-Karma früherer Leben in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2358,7 +2358,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         });
 
         let ch8 = isEasy ?
-            '<strong style="color:#5cb85c">' + beneficCount + ' good energy</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' caution energy</strong> out of 9 planets<br><br>' :
+            '<strong style="color:#5cb85c">' + beneficCount + ' gute Energie</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' Vorsichtsenergie</strong> von 9 Planeten<br><br>' :
             '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
@@ -2593,7 +2593,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d27_6sign = (dLagnaSign + 5) % 12;
         const d27_6planets = dPositions.filter(p => p.dSign === d27_6sign);
         html += '<br><strong>' + (isEasy ? 'Schwäche:' : 'D27 6. Haus (Schwäche/Verwundbarkeit) — ' + SIGNS[d27_6sign] + ':') + '</strong><br>';
-        const bodyParts = ['Head/Brain','Neck/Thyroid','Lungs/Arms','Stomach/Chest','Heart/Back','Digestive/Intestines','Kidneys/Lower back','Reproductive','Liver/Thighs','Bones/Joints','Ankles/Circulatory','Feet/Immune'];
+        const bodyParts = ['Kopf/Gehirn','Nacken/Schilddrüse','Lungen/Arme','Magen/Brust','Herz/Rücken','Verdauung/Darm','Nieren/Unterer Rücken','Fortpflanzung','Leber/Oberschenkel','Knochen/Gelenke','Knöchel/Kreislauf','Füße/Immunsystem'];
         html += 'Verwundbarer Bereich: <strong>' + bodyParts[d27_6sign] + '</strong> — achte auf diesen Bereich.<br>';
         if (d27_6planets.length > 0) {
             d27_6planets.forEach(p => { html += isEasy ? 'Besondere Aufmerksamkeit für diesen Bereich nötig.<br>' : '• ' + p.name + ' im 6. Haus — besondere Aufmerksamkeit für diesen Bereich nötig.<br>'; });
@@ -2615,7 +2615,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += (isEasy ? '' : '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d30LagnaInterp + '<br><br>';
 
         html += '<strong>' + (isEasy ? 'Krankheitswarnung:' : 'D30 6. Haus (Krankheit/Feind) — ' + SIGNS[d30_6sign] + ':') + '</strong><br>';
-        const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immune, feet, mental health'];
+        const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immunsystem, Füße, psychische Gesundheit'];
         html += 'Achte auf: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
             const dis = {Sun:'Achte auf Augen- und Herzerkrankungen',Moon:'Psychische Gesundheit und Wassereinlagerungen',Mars:'Vorsicht vor Unfällen, Operationen, Verbrennungen',Mercury:'Nervensystem und Hautprobleme',Jupiter:'Achte auf Leber und Übergewicht',Venus:'Achte auf Niere, Diabetes, STD',Saturn:'Chronische Krankheit, Gelenkprobleme',Rahu:'Krankheit unbekannter Ursache, Sucht',Ketu:'Geschwächte Immunität, Allergie'};

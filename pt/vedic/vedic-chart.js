@@ -2252,8 +2252,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             } else {
                 ch4 += '<br><strong>♀ Vênus (Planeta do Amor)</strong> → D60 ' + venH + ' casa (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
-                    'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
-                    'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
+                    'Venus sob benefico <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
+                    'Venus sob malefico <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
             }
         }
 
@@ -2294,7 +2294,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch5 = (isEasy
             ? '<strong>Karma de carreira de vidas passadas</strong><br><br>'
             : '<strong>D60 Casa 10 (carreira): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
-        ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
+        ch5 += 'Karma de carreira de vidas passadas em <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
@@ -2358,7 +2358,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         });
 
         let ch8 = isEasy ?
-            '<strong style="color:#5cb85c">' + beneficCount + ' good energy</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' caution energy</strong> out of 9 planets<br><br>' :
+            '<strong style="color:#5cb85c">' + beneficCount + ' boa energia</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' energia de cautela</strong> de 9 planetas<br><br>' :
             '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
@@ -2593,7 +2593,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d27_6sign = (dLagnaSign + 5) % 12;
         const d27_6planets = dPositions.filter(p => p.dSign === d27_6sign);
         html += '<br><strong>' + (isEasy ? 'Weakness:' : 'D27 Casa 6 (fraqueza) — ' + SIGNS[d27_6sign] + ':') + '</strong><br>';
-        const bodyParts = ['Head/Brain','Neck/Thyroid','Lungs/Arms','Stomach/Chest','Heart/Back','Digestive/Intestines','Kidneys/Lower back','Reproductive','Liver/Thighs','Bones/Joints','Ankles/Circulatory','Feet/Immune'];
+        const bodyParts = ['Cabeca/Cerebro','Pescoco/Tireoide','Pulmoes/Bracos','Estomago/Peito','Coracao/Costas','Digestivo/Intestinos','Rins/Lombar','Reprodutivo','Figado/Coxas','Ossos/Articulacoes','Tornozelos/Circulatorio','Pes/Imunologico'];
         html += 'Área vulnerável: <strong>' + bodyParts[d27_6sign] + '</strong> — cuide desta área com atenção.<br>';
         if (d27_6planets.length > 0) {
             d27_6planets.forEach(p => { html += isEasy ? 'Atencao especial necessaria para esta area.<br>' : '• ' + p.name + ' na casa 6 — atencao especial necessaria.<br>'; });
