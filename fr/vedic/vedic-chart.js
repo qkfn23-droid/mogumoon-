@@ -1325,15 +1325,15 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
 
             if (currentDasha) {
                 const dashaInterp = {
-                    'Sun': 'A period of self-discovery and authority. A time to exercise leadership and receive social recognition. Relationships with government or authority figures become important. Changes may occur in your relationship with your father. Watch your heart and eye health. This period strengthens your self-esteem and identity.',
-                    'Moon': 'A period of emotions and inner life. Home and relationship with mother become important. Real estate matters may arise, and public relations become active. Emotional fluctuations are large but intuition strengthens. Possibility of travel and relocation.',
-                    'Mars': 'A period of action and energy. A great time to courageously start new ventures. Real estate transactions, surgeries, and technology-related activities become active. Changes in sibling relationships. Watch for disputes, accidents, and burns. Good results in exercise and competition.',
-                    'Rahu': 'A period of rapid change and innovation. Unexpected opportunities and challenges come. Foreign-related activities become active, with potential advancement in technology and innovation fields. Material desires intensify — be careful not to get lost in illusions. You will have unique experiences. An 18-year long cycle.',
-                    'Jupiter': 'A period of luck and growth! A time when good things in life — education, marriage, childbirth, promotions — are more likely to happen. Spiritual growth and wisdom deepen. You will meet a teacher or mentor. Activities related to law, education, and religion are favorable.',
-                    'Saturn': 'A period of patience and trials. Growth is slow but certain. Responsibilities grow heavier with experiences of limitation and structure. Watch your health, especially bones and joints. A 19-year long cycle where true abilities are tested. When it ends, you discover a stronger self.',
-                    'Mercury': 'A period of intellectual activity and business. Favorable for learning, communication, writing, and business ventures. A great time to learn new skills. Relationships with siblings and friends become active. Watch nervous system health. You will find yourself juggling multiple things simultaneously.',
-                    'Ketu': 'A period of spiritual awakening and detachment. You become more detached from the material world with deepening spiritual interests. You may experience sudden changes and losses, but these lead to spiritual growth. Intuition becomes very strong — an excellent time for meditation and spiritual practice.',
-                    'Venus': 'A period of love and abundance! Romance, marriage, and artistic activities become active. You enjoy material prosperity and indulge in luxury. You may acquire a new car, new home, or jewelry. Aesthetic sense develops and social activities flourish. The longest cycle at 20 years.'
+                    'Sun': 'Une periode de decouverte de soi et d\'autorite. Un temps pour exercer le leadership et recevoir la reconnaissance sociale.',
+                    'Moon': 'Une periode d\'emotions et de vie interieure. Le foyer et la relation avec la mere deviennent importants. Les fluctuations emotionnelles sont grandes mais l\'intuition se renforce.',
+                    'Mars': 'Une periode d\'action et d\'energie. Un excellent moment pour commencer courageusement de nouveaux projets. Attention aux disputes et accidents.',
+                    'Rahu': 'Une periode de changement rapide et d\'innovation. Des opportunites et defis inattendus arrivent. Activites liees a l\'etranger deviennent actives. Un cycle de 18 ans.',
+                    'Jupiter': 'Une periode de chance et de croissance ! Education, mariage, naissance, promotions deviennent plus probables. La croissance spirituelle s\'approfondit.',
+                    'Saturn': 'Une periode de patience et d\'epreuves. La croissance est lente mais certaine. Attention a la sante, surtout os et articulations. Un cycle de 19 ans.',
+                    'Mercury': 'Une periode d\'activite intellectuelle et d\'affaires. Favorable pour l\'apprentissage, la communication et les entreprises.',
+                    'Ketu': 'Une periode d\'eveil spirituel et de detachement. Des changements soudains possibles mais menant a la croissance spirituelle. L\'intuition devient tres forte.',
+                    'Venus': 'Une periode d\'amour et d\'abondance ! Romance, mariage et activites artistiques deviennent actifs. Le sens esthetique se developpe. Le cycle le plus long avec 20 ans.'
                 };
                 html += `<div class="interp-card">
                     <div class="interp-title">${isEasy ? '⏳ Période actuelle : ' + DASHA_KO[currentDasha] : '⏳ Dasha actuel : ' + DASHA_KO[currentDasha] + ' Dasha'}</div>
