@@ -777,7 +777,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
                 <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Esmagadoramente forte' : agreement >= 3 ? 'Muito forte' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
                 Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
                 ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Preste atencao a cidades, locais de trabalho ou viagens nesta direcao.' : ''}
-                ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
+                ${agreement === 3 ? '<br>3 indicadores — <strong>Alta probabilidade</strong> de direcao ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favorecido mas outras possibilidades existem.' : ''}
                 ${agreement <= 1 ? '<br>Indicadores dispersos — parceiro pode vir de varias direcoes. Mantenha a mente aberta.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
@@ -1540,7 +1540,7 @@ function renderEducation(positions, lagnaSign) {
 
     const isEasy = window.vedicMode === 'easy';
     let text = isEasy ? '<strong>Educação Básica:</strong> ' : `<strong>Casa 4 (Educação Básica):</strong> ${SIGNS[h4sign]}. `;
-    const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
+    const eduSign4 = ['Aprendizado ativo, educacao fisica/militar', 'Belas-artes/musica/educacao culinaria', 'Linguas/literatura/comunicacao', 'Enfase em educacao domestica, historia', 'Teatro/lideranca/ciencias politicas', 'Ciencia/medicina/analitica', 'Direito/diplomacia/design', 'Psicologia/pesquisa/investigacao', 'Filosofia/teologia/estudos internacionais', 'Negocios/administracao/arquitetura', 'TI/tecnologia cientifica/aviacao', 'Arte/cinema/musica/espiritualidade'];
     text += eduSign4[h4sign] + ' adequado. ';
     if (h4.length > 0 && !isEasy) text += 'Na casa 4, ' + h4.map(p => p.name).join(', ') + ' influencia a educacao. ';
 
@@ -1956,18 +1956,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         // Career 성향 by D10 Lagna
         const careerBySign = [
-            'Leadership, Military, Sports, Entrepreneur',  // Aries
-            'Finance, Arts, Real Estate, Food Industry',     // Taurus
-            'Communication, Media, Education, IT',  // Gemini
-            'Nursing, Real Estate, Hotels, Counseling',    // Cancer
-            'Politics, Entertainment, Management, Administration',        // Leo
-            'Medical, Accounting, Analysis, Research',          // Virgo
-            'Law, Diplomacy, Design, Consulting',      // Libra
-            'Investigation, Research, Medicine, Insurance',          // Scorpio
-            'Education, Religion, Foreign Trade, Publishing',      // Sagittarius
-            'Administration, Construction, Mining, Civil Service',        // Capricorn
-            'IT, Innovation, NGO, Aviation',           // Aquarius
-            'Arts, Hospital, Foreign, Spirituality'           // Pisces
+            'Lideranca, Militar, Esporte, Empreendedor',  // Aries
+            'Financas, Artes, Imoveis, Alimentacao',     // Taurus
+            'Comunicacao, Midia, Educacao, TI',  // Gemini
+            'Enfermagem, Imoveis, Hoteis, Aconselhamento',    // Cancer
+            'Politica, Entretenimento, Gestao, Administracao',        // Leo
+            'Medicina, Contabilidade, Analise, Pesquisa',          // Virgo
+            'Direito, Diplomacia, Design, Consultoria',      // Libra
+            'Investigacao, Pesquisa, Medicina, Seguros',          // Scorpio
+            'Educacao, Religiao, Comercio Exterior, Editorial',      // Sagittarius
+            'Administracao, Construcao, Mineracao, Servico Publico',        // Capricorn
+            'TI, Inovacao, ONG, Aviacao',           // Aquarius
+            'Artes, Hospital, Exterior, Espiritualidade'           // Pisces
         ];
         html += '<strong>Campo adequado:</strong> ' + careerBySign[dLagnaSign];
         html += '</div></div>';
