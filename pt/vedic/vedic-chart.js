@@ -2443,7 +2443,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<strong>' + (isEasy ? 'Property/Home:' : 'D4 4 house (real estate/home) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
         if (d4_4planets.length > 0) {
-            const prop = {Sun:'Government-owned building or prestigious residence',Moon:'Beautiful home. Near water. Mother\'s influence',Mars:'New home construction. Real estate disputes possible',Mercury:'Commercial real estate. Multiple properties',Jupiter:'Spacious, abundant home! Best real estate fortune',Venus:'Luxurious home. Beautiful interior',Saturn:'Old property. Repairs needed. Stable after middle age',Rahu:'Foreign real estate. Unconventional dwelling',Ketu:'Indifferent to real estate. Prefers spiritual spaces'};
+            const prop = {Sun:'Edificio governamental ou residencia prestigiosa',Moon:'Lar bonito. Perto da agua. Influencia da mae',Mars:'Construcao de nova casa. Disputas imobiliarias possiveis',Mercury:'Imoveis comerciais. Multiplas propriedades',Jupiter:'Lar espacoso e abundante! Melhor fortuna imobiliaria',Venus:'Lar luxuoso. Interior bonito',Saturn:'Propriedade antiga. Reparos necessarios. Estavel apos meia-idade',Rahu:'Imoveis no exterior. Moradia nao convencional',Ketu:'Indiferente a imoveis. Prefere espacos espirituais'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
         } else html += isEasy ? 'Fortuna imobiliaria estavel.<br>' : '4th house empty — 4th lord position is key to real estate fortune.<br>';
 
@@ -2524,7 +2524,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Basic Education:' : 'D24 4th house (basic education) — ' + SIGNS[d24_4sign] + ':') + '</strong><br>';
         if (d24_4planets.length > 0) {
             d24_4planets.forEach(p => {
-                const edu4 = {Sun:'Prestigious school. Authoritative education',Moon:'Comfortable learning environment. Strong home education influence',Mars:'Competitive learning. Physical/technical education strong',Mercury:'Best placement! Outstanding academic ability',Jupiter:'Rich educational environment. Good teachers',Venus:'Art education. Beautiful school',Saturn:'Difficult education environment but deep knowledge if overcome',Rahu:'Unconventional education. Foreign school',Ketu:'Less interest in education. Intuitive learning'};
+                const edu4 = {Sun:'Escola prestigiosa. Educacao autoritaria',Moon:'Ambiente de aprendizado confortavel. Forte influencia da educacao domestica',Mars:'Aprendizado competitivo. Educacao fisica/tecnica forte',Mercury:'Melhor posicao! Habilidade academica excepcional',Jupiter:'Ambiente educacional rico. Bons professores',Venus:'Educacao artistica. Escola bonita',Saturn:'Ambiente educacional dificil mas conhecimento profundo se superado',Rahu:'Educacao nao convencional. Escola estrangeira',Ketu:'Menos interesse em educacao. Aprendizado intuitivo'};
                 html += isEasy ? (edu4[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (edu4[p.id]||'') + '<br>';
             });
         } else html += isEasy ? 'Cresce constantemente em ambiente educacional estavel.<br>' : '4 house no planets.<br>';
