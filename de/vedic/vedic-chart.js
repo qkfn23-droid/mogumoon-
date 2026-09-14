@@ -2206,8 +2206,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 const pD = getDeity(p.sidereal);
                 if (isEasy) {
                     ch4 += (p.natural === 'benefic'
-                        ? 'Good past-life connection with spouse — blessings in this life.'
-                        : 'Unresolved past-life issues with spouse. Challenges but growth opportunities.') + '<br>';
+                        ? 'Gute Verbindung zum Partner aus früheren Leben — Segen in diesem Leben.'
+                        : 'Ungelöste Probleme mit dem Partner aus früheren Leben. Herausforderungen aber Wachstumschancen.') + '<br>';
                 } else {
                     ch4 += p.symbol + ' <strong>' + p.name + '</strong>' + deityTag(pD) + '<br>';
                     ch4 += (p.natural === 'benefic'
@@ -2223,8 +2223,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const venH = ((venusD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (isEasy) {
                 ch4 += '<br>' + (venD.deity && venD.deity.nature === 'benefic' ?
-                    'You loved sincerely in past lives, so beautiful love awaits.' :
-                    'Unresolved love lessons from past lives. Learning true love is important and makes you deeper.');
+                    'Du hast in früheren Leben aufrichtig geliebt, daher erwartet dich schöne Liebe.' :
+                    'Ungelöste Liebeslektionen aus früheren Leben. Wahre Liebe zu lernen ist wichtig und macht dich tiefer.');
             } else {
                 ch4 += '<br><strong>♀ Venus (Planet of Love)</strong> → D60 ' + venH + ' house (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
@@ -2277,7 +2277,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             if (!isEasy) ch5 += '<br><strong>♄ Saturn (Lord of Karma)</strong> → D60 ' + satH + ' house (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
-                    'This is a <strong>very rare blessing</strong>! Past life patience reduces career challenges in this life.' :
+                    'Das ist ein <strong>sehr seltener Segen</strong>! Geduld aus früheren Leben reduziert Karriereherausforderungen in diesem Leben.' :
                     'Schwere Karrierelektion aus früheren Leben. Stetiger Einsatz und anderen helfen ist der Schlüssel.')) :
                 (satD.deity && satD.deity.nature === 'benefic' ?
                     'Saturn under benefic deity is a <strong>very rare blessing</strong>! Past life patience reduces career trials.' :
@@ -2538,11 +2538,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Wisdom) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>High academic achievement expected!</strong> Graduate/doctoral/study abroad possible.' : (isEasy ? 'Growth through academics expected.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Wisdom) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : (isEasy ? 'Wachstum durch Akademik erwartet.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercury (Learning) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellect!</strong> Talent in math, language, analysis.' : (isEasy ? 'Intellectual ability well expressed.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercury (Learning) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Herausragender Intellekt!</strong> Talent in Mathe, Sprachen, Analyse.' : (isEasy ? 'Intellektuelle Fähigkeit gut ausgedrückt.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
         }
         html += '</div></div>';
 
