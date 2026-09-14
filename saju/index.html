@@ -124,9 +124,9 @@
                 <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">시간 입력</option><option value="unknown">모름</option></select>
             </div>
         </div>
-        <div class="input-group" id="trueSolarGroup">
-            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">진태양시 보정 <span class="optional-tag">(출생지 경도 기반)</span></label>
-            <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+        <div class="input-group" id="locationGroup">
+            <label>출생지 <span class="optional-tag">(진태양시 자동 보정)</span></label>
+            <div class="input-row">
                 <select id="birthTimezone" onchange="updateCities()">
                     <option value="135" selected>UTC+9 (한국/일본)</option>
                     <option value="120">UTC+8 (중국/대만/홍콩)</option>
@@ -144,7 +144,7 @@
                 <select id="birthLocation">
                 </select>
             </div>
-            <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
+            <div id="trueSolarNote" style="font-size:11px;color:#888;margin-top:6px;"></div>
         </div>
         <div class="input-group">
             <label>성별</label>
@@ -304,7 +304,7 @@ function updateCities() {
         const o = document.createElement('option');
         o.value = c.v; o.textContent = c.n; sel.appendChild(o);
     });
-    toggleTrueSolar();
+    updateTrueSolarNote();
 }
 
 // 진태양시 보정
@@ -577,25 +577,18 @@ function toggleTime() {
         document.getElementById(id).disabled = disabled;
         document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
     });
-    if (disabled) {
-        document.getElementById('trueSolar').checked = false;
-        toggleTrueSolar();
-    }
+    document.getElementById('locationGroup').style.display = disabled ? 'none' : '';
 }
 
-function toggleTrueSolar() {
-    const on = document.getElementById('trueSolar').checked;
-    document.getElementById('locationRow').style.display = on ? 'flex' : 'none';
-    document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
-    if (on) {
-        const lng = parseFloat(document.getElementById('birthLocation').value);
-        const stdMeridian = parseFloat(document.getElementById('birthTimezone').value);
-        const corr = Math.round((lng - stdMeridian) * 4);
-        document.getElementById('trueSolarNote').textContent = `보정값: ${corr}분 (경도 ${lng}°E, 기준 ${stdMeridian}°E)`;
-    }
+function updateTrueSolarNote() {
+    const lng = parseFloat(document.getElementById('birthLocation').value);
+    const stdMeridian = parseFloat(document.getElementById('birthTimezone').value);
+    const corr = Math.round((lng - stdMeridian) * 4);
+    const sign = corr >= 0 ? '+' : '';
+    document.getElementById('trueSolarNote').textContent = `진태양시 보정: ${sign}${corr}분 (경도 ${lng}°, 기준 ${stdMeridian}°)`;
 }
 
-document.getElementById('birthLocation')?.addEventListener('change', toggleTrueSolar);
+document.getElementById('birthLocation')?.addEventListener('change', updateTrueSolarNote);
 
 function calculate() {
     const year = parseInt(document.getElementById('birthYear').value);
@@ -604,27 +597,16 @@ function calculate() {
     const timeUnknown = document.getElementById('birthTimeUnknown').value === 'unknown';
     const gender = document.getElementById('gender').value;
 
-    // 시간 계산 (진태양시 보정 포함)
+    // 시간 계산 (진태양시 자동 보정)
     let hourIdx = -1;
     let trueSolarInfo = null;
     if (!timeUnknown) {
-        const rawHourIdx = parseInt(document.getElementById('birthHour').value);
+        const rawHour = parseInt(document.getElementById('birthHour').value);
         const rawMin = parseInt(document.getElementById('birthMin').value);
-        // 시진 → 실제 시간 변환
-        const shichenStartHours = [23,1,3,5,7,9,11,13,15,17,19,21];
-        const shichenMidHours = [0,2,4,6,8,10,12,14,16,18,20,22]; // 시진 중간값
-        const rawMinute = rawMin;
-
-        if (document.getElementById('trueSolar').checked) {
-            const lng = parseFloat(document.getElementById('birthLocation').value);
-            // 진태양시 보정 시 시진 중간값 사용 (시작값 사용 시 경계에서 시진이 바뀌는 문제 방지)
-            const rawHour = shichenMidHours[rawHourIdx];
-            const tst = getTrueSolarHour(rawHour, rawMinute, lng);
-            hourIdx = hourToShichen(tst.hour, tst.minute);
-            trueSolarInfo = { rawHour, rawMinute, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
-        } else {
-            hourIdx = rawHourIdx;
-        }
+        const lng = parseFloat(document.getElementById('birthLocation').value);
+        const tst = getTrueSolarHour(rawHour, rawMin, lng);
+        hourIdx = hourToShichen(tst.hour, tst.minute);
+        trueSolarInfo = { rawHour, rawMinute: rawMin, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
     }
 
     const yp = getYearPillar(year, month, day);
@@ -888,12 +870,12 @@ function initForm() {
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i + '년'; if (i === 1995) o.selected = true; y.appendChild(o); }
     for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '월'; if (i === 3) o.selected = true; m.appendChild(o); }
     for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '일'; if (i === 15) o.selected = true; d.appendChild(o); }
-    const hourLabels = ['자시(23~1)','축시(1~3)','인시(3~5)','묘시(5~7)','진시(7~9)','사시(9~11)','오시(11~13)','미시(13~15)','신시(15~17)','유시(17~19)','술시(19~21)','해시(21~23)'];
-    for (let i = 0; i < 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = hourLabels[i]; if (i === 5) o.selected = true; h.appendChild(o); }
+    for (let i = 0; i < 24; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + '시'; if (i === 6) o.selected = true; h.appendChild(o); }
 }
 
 initForm();
 updateCities();
+updateTrueSolarNote();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
 </script>
 
