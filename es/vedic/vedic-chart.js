@@ -675,7 +675,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? 'La verdadera vocación que persigues después de la madurez.' : 'La casa 10 Navamsa está en <strong>' + SIGNS[d9H10Sign] + '</strong>, regida por <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>Mientras la casa 10 de D1 muestra tu carrera, la casa 10 de D9 revela tu <strong>propósito de vida mayor (Dharma)</strong>.'}<br><br>
             <strong>Dirección del propósito:</strong> ${careerBySgn[d9H10Sign]}
-            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planetas en D9 10ª:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
+            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'energía profesional única').join('<br>') : '<strong>Planetas en D9 10ª:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'energía profesional única'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -2013,7 +2013,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         const moon4 = d12_4planets.find(p => p.id === 'Moon');
         const sun9 = d12_9planets.find(p => p.id === 'Sun');
-        if (moon4) html += (isEasy ? 'Moon in mother position — deep connection with mother.' : 'Moon in 4th house — deep connection with mother.') + '<br>';
+        if (moon4) html += (isEasy ? 'Luna en posición de madre — conexión profunda con la madre.' : 'Luna en casa 4 — conexión profunda con la madre.') + '<br>';
         if (sun9) html += (isEasy ? 'Sun in father position — deep connection with father.' : 'Sun in 9th house — deep connection with father.') + '<br>';
         html += '</div></div>';
 
@@ -2171,8 +2171,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Perseguiste bien tu verdadero propósito en vidas pasadas, así que la autorrealización llega naturalmente. ¡Ten confianza!' :
                         'Hubo confusión sobre quién eres en vidas pasadas. Encontrar tu verdadero yo es un viaje importante que te hace crecer.') :
                     (sunD.deity.nature === 'benefic' ?
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. El propósito del alma fue correctamente perseguido — la autorrealización llega naturalmente.' :
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Desafío de vidas pasadas con el yo/autoridad — encontrar el verdadero yo es la tarea del alma.'));
+                        'Deidad solar <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. El propósito del alma fue correctamente perseguido — la autorrealización llega naturalmente.' :
+                        'Deidad solar <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Desafío de vidas pasadas con el yo/autoridad — encontrar el verdadero yo es la tarea del alma.'));
             }
             html += subChapter('☉', 'Propósito del Alma — Por Qué Naciste', ch2);
         }
@@ -2189,8 +2189,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Tu mente estaba en paz en vidas pasadas, así que eres emocionalmente estable con fuerte intuición. Confía en tu instinto.' :
                         'Rastros de dificultades emocionales de vidas pasadas permanecen profundos en tu corazón. La meditación y estar cerca del agua ayuda enormemente a sanar.') :
                     (moonD.deity.nature === 'benefic' ?
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. La mente era pacífica — emocionalmente estable con fuerte intuición.' :
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Las heridas emocionales permanecen en el inconsciente. Reconocer y sanar es la tarea emocional de esta vida. La meditación y el descanso cerca del agua ayudan.'));
+                        'Deidad lunar <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. La mente era pacífica — emocionalmente estable con fuerte intuición.' :
+                        'Deidad lunar <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Las heridas emocionales permanecen en el inconsciente. Reconocer y sanar es la tarea emocional de esta vida. La meditación y el descanso cerca del agua ayudan.'));
             }
             html += subChapter('☽', 'Memoria Emocional — Patrones Inconscientes', ch3);
         }
@@ -2205,18 +2205,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const ketuD60 = dPositions.find(p => p.id === 'Ketu');
 
         const spouseKarmaBySign = [
-            'Past life warrior/leader connection. Intense, independent spouse karma. Souls who fought or competed together.',
-            'Past life artist/wealthy connection. Materially abundant marriage karma. Souls who pursued beauty together.',
-            'Past life scholar/merchant connection. Intellectual marriage karma. Souls who studied or traded together.',
-            'Past life family/protector connection. Deep emotional bond marriage karma. Souls who cared for each other.',
-            'Past life royalty/nobility connection. Splendid, respected marriage karma. Souls who ruled together.',
+            'Conexión de guerrero/líder de vidas pasadas. Karma matrimonial intenso e independiente. Almas que lucharon juntas.',
+            'Conexión de artista/rico de vidas pasadas. Karma matrimonial materialmente abundante. Almas que persiguieron la belleza juntas.',
+            'Conexión de erudito/comerciante de vidas pasadas. Karma matrimonial intelectual. Almas que estudiaron juntas.',
+            'Conexión de familia/protector de vidas pasadas. Karma matrimonial de vínculo emocional profundo. Almas que se cuidaron mutuamente.',
+            'Conexión de realeza/nobleza de vidas pasadas. Karma matrimonial espléndido y respetado. Almas que gobernaron juntas.',
             'Past life healer/servant connection. Service and devotion marriage karma. Souls who helped others together.',
-            'Past life diplomat/artist connection. Harmonious, beautiful marriage karma. Souls who sought balance together.',
-            'Past life practitioner/mystic connection. Intense, transformative marriage karma. Souls who shared life and death.',
-            'Past life sage/explorer connection. Free, expansive marriage karma. Foreign spouse possible.',
-            'Past life official/architect connection. Responsible, stable marriage karma. Late marriage possible.',
-            'Past life official/soldier/systematic professional connection. Saturn-ruled sign with responsible, disciplined spouse karma. Souls who practiced social duty together. Marriage may be somewhat late or with age gap.',
-            'Past life medium/artist connection. Mystical, spiritual marriage karma. May meet first in dreams.'
+            'Conexión de diplomático/artista de vidas pasadas. Karma matrimonial armonioso y bello. Almas que buscaron equilibrio juntas.',
+            'Conexión de practicante/místico de vidas pasadas. Karma matrimonial intenso y transformador. Almas que compartieron vida y muerte.',
+            'Conexión de sabio/explorador de vidas pasadas. Karma matrimonial libre y expansivo. Pareja extranjera posible.',
+            'Conexión de oficial/arquitecto de vidas pasadas. Karma matrimonial responsable y estable. Matrimonio tardío posible.',
+            'Conexión de oficial/soldado de vidas pasadas. Signo regido por Saturno con karma matrimonial responsable y disciplinado. Almas que practicaron el deber social juntas. Matrimonio puede ser tardío o con diferencia de edad.',
+            'Conexión de médium/artista de vidas pasadas. Karma matrimonial místico y espiritual. Pueden conocerse primero en sueños.'
         ];
 
         let ch4 = (isEasy

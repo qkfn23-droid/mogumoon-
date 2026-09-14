@@ -664,7 +664,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💍 Caractère du partenaire' : '💍 D9 7th House — Spouse Character: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' quality partner.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' qualities.'}
+            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualite du partenaire.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualities.'}
             ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.').join('<br>') : '<strong>Planets in D9 7th:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! Blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.'}`).join('<br>')) : ''}
         </div>
     </div>`;
@@ -675,7 +675,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? 'The true calling you pursue after maturity.' : 'Navamsa 10th house is in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
             <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
-            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planetes en D9 10e :</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
+            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'energie de carriere unique').join('<br>') : '<strong>Planetes en D9 10e :</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'energie de carriere unique'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -685,7 +685,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? '' : '<strong>Derived house:</strong> 10th from 7th (spouse) = D9 4th house shows spouse career.<br><br>D9 4th is in <strong>' + SIGNS[d9H4Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
             <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>')) : ''}
+            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Spouse likely works in ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'domaine specialise'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -2013,7 +2013,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         const moon4 = d12_4planets.find(p => p.id === 'Moon');
         const sun9 = d12_9planets.find(p => p.id === 'Sun');
-        if (moon4) html += (isEasy ? 'Moon in mother position — deep connection with mother.' : 'Moon in 4th house — deep connection with mother.') + '<br>';
+        if (moon4) html += (isEasy ? 'Lune en position de mere — connexion profonde avec la mere.' : 'Lune en 4e maison — connexion profonde avec la mere.') + '<br>';
         if (sun9) html += (isEasy ? 'Sun in father position — deep connection with father.' : 'Sun in 9th house — deep connection with father.') + '<br>';
         html += '</div></div>';
 
@@ -2171,8 +2171,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Vous avez bien poursuivi votre vrai but dans vos vies passees, alors la realisation de soi vient naturellement. Soyez confiant !' :
                         'Il y avait de la confusion sur qui vous etes dans vos vies passees. Trouver votre vrai vous est un voyage important qui vous fait grandir.') :
                     (sunD.deity.nature === 'benefic' ?
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. But de l\'ame correctement poursuivi — la realisation de soi vient naturellement.' :
-                        'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Defi des vies passees avec soi/autorite — trouver le vrai soi est la tache de l\'ame.'));
+                        'Divinite solaire <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. But de l\'ame correctement poursuivi — la realisation de soi vient naturellement.' :
+                        'Divinite solaire <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Defi des vies passees avec soi/autorite — trouver le vrai soi est la tache de l\'ame.'));
             }
             html += subChapter('☉', 'But de l\'âme — Pourquoi êtes-vous né', ch2);
         }
@@ -2189,8 +2189,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                         'Votre esprit etait paisible dans vos vies passees, alors vous etes emotionnellement stable avec une forte intuition. Faites confiance a votre instinct.' :
                         'Des traces de difficultes emotionnelles des vies passees restent profondes dans votre coeur. La meditation et la proximite de l\'eau aident grandement a guerir.') :
                     (moonD.deity.nature === 'benefic' ?
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. L\'esprit etait paisible — emotionnellement stable avec forte intuition.' :
-                        'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Les blessures emotionnelles restent inconscientes. Reconnaitre et guerir est la tache emotionnelle de cette vie. La meditation et le repos pres de l\'eau aident.'));
+                        'Divinite lunaire <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. L\'esprit etait paisible — emotionnellement stable avec forte intuition.' :
+                        'Divinite lunaire <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Les blessures emotionnelles restent inconscientes. Reconnaitre et guerir est la tache emotionnelle de cette vie. La meditation et le repos pres de l\'eau aident.'));
             }
             html += subChapter('☽', 'Mémoire émotionnelle — Schémas inconscients', ch3);
         }
