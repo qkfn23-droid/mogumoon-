@@ -2394,7 +2394,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                 html += isEasy ? (wealth[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (wealth[p.id]||'') + '<br>';
             });
         } else {
-            html += isEasy ? 'Steadily accumulates wealth.<br>' : '2nd house empty — 2nd house lord position is key to wealth accumulation.<br>';
+            html += isEasy ? 'Acumula riqueza constantemente.<br>' : 'Casa 2 vazia — a posicao do senhor da casa 2 e chave para acumulacao de riqueza.<br>';
         }
         html += '</div></div>';
 
@@ -2415,7 +2415,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (d3_3planets.length > 0) {
             const bro = {Sun:'Irmao mais novo tem lideranca e autoridade',Moon:'Emocionalmente proximo do irmao mais novo',Mars:'Irmao mais novo ativo e corajoso. Discussoes possiveis',Mercury:'Irmao mais novo intelectual com boa comunicacao',Jupiter:'Irmao mais novo sabio que traz fortuna',Venus:'Irmao mais novo encantador e artistico',Saturn:'Dificuldade com irmao mais novo. Diferenca de idade possivel',Rahu:'Irmao mais novo unico ou relacionado ao exterior',Ketu:'Distancia com irmao mais novo. Conexao espiritual'};
             d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
-        } else html += isEasy ? '' : '3rd house empty — check 3rd lord position.<br>';
+        } else html += isEasy ? '' : 'Casa 3 vazia — verificar posicao do senhor da 3a.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Older siblings:' : 'D3 11th house (older siblings) — ' + SIGNS[d3_11sign] + ':') + '</strong><br>';
         if (d3_11planets.length > 0) {
@@ -2445,12 +2445,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Edificio governamental ou residencia prestigiosa',Moon:'Lar bonito. Perto da agua. Influencia da mae',Mars:'Construcao de nova casa. Disputas imobiliarias possiveis',Mercury:'Imoveis comerciais. Multiplas propriedades',Jupiter:'Lar espacoso e abundante! Melhor fortuna imobiliaria',Venus:'Lar luxuoso. Interior bonito',Saturn:'Propriedade antiga. Reparos necessarios. Estavel apos meia-idade',Rahu:'Imoveis no exterior. Moradia nao convencional',Ketu:'Indiferente a imoveis. Prefere espacos espirituais'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
-        } else html += isEasy ? 'Fortuna imobiliaria estavel.<br>' : '4th house empty — 4th lord position is key to real estate fortune.<br>';
+        } else html += isEasy ? 'Fortuna imobiliaria estavel.<br>' : 'Casa 4 vazia — a posicao do senhor da 4a e chave para fortuna imobiliaria.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Overall fortune:' : 'D4 10th house (overall fortune) — ' + SIGNS[d4_10sign] + ':') + '</strong><br>';
         if (d4_10planets.length > 0) {
             d4_10planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? 'Fortuna geral e boa!<br>' : 'Esforco necessario mas oportunidade de crescimento.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefic in 10th house — overall fortune is good!' : 'Malefic in 10th house — effort needed for fortune but opportunity for growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Fortuna geral e boa!<br>' : 'Esforco necessario mas oportunidade de crescimento.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Benefico na casa 10 — fortuna geral e boa!' : 'Malefico na casa 10 — esforco necessario mas oportunidade de crescimento.') + '<br>';
             });
         } else html += isEasy ? '' : '10 house no planets.<br>';
         html += '</div></div>';
@@ -2469,7 +2469,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             d16_4planets.forEach(p => {
                 html += isEasy ? (p.natural === 'benefic' ? 'Conforto material e felicidade abundantes!<br>' : 'Esforco necessario para conforto material.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
             });
-        } else html += isEasy ? 'Conforto material medio.<br>' : '4th house empty — 4th lord position is key to happiness.<br>';
+        } else html += isEasy ? 'Conforto material medio.<br>' : 'Casa 4 vazia — a posicao do senhor da 4a e chave para a felicidade.<br>';
 
         const venD16 = dPositions.find(p => p.id === 'Venus');
         if (venD16) {
@@ -2504,7 +2504,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Guru/Teacher:' : 'D20 9th house (guru/teacher) — ' + SIGNS[d20_9sign] + ':') + '</strong><br>';
         if (d20_9planets.length > 0) {
             d20_9planets.forEach(p => { html += isEasy ? 'Forte conexao com mestre espiritual.<br>' : '• ' + p.name + ': Strong connection with spiritual teacher.<br>'; });
-        } else html += isEasy ? 'Bom buscar ativamente um mestre espiritual.<br>' : '9th house empty — actively seek a spiritual teacher.<br>';
+        } else html += isEasy ? 'Bom buscar ativamente um mestre espiritual.<br>' : 'Casa 9 vazia — busque ativamente um mestre espiritual.<br>';
         html += '</div></div>';
 
     } else if (division === 24) {
@@ -2601,12 +2601,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Danger/Surgery:' : 'D30 8 house (danger/surgery) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
         if (d30_8planets.length > 0) {
             d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Precaucao de perigo/acidente. Seguro importante.' : 'Protegido em crise.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaucao de perigo/acidente. Seguro importante.' : 'Protegido em crise.') + '<br>'; });
-        } else html += isEasy ? 'Few big dangers.<br>' : '8th house empty — few major dangers.<br>';
+        } else html += isEasy ? 'Few big dangers.<br>' : 'Casa 8 vazia — poucos grandes perigos.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Hospitalization:' : 'D30 12th house (hospitalization/loss) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
             d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalizacao possivel.' : 'Cura espiritual e recuperacao.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalizacao possivel. Medicina estrangeira.' : 'Cura espiritual e recuperacao.') + '<br>'; });
-        } else html += isEasy ? 'Low hospitalization risk.<br>' : '12th house empty — hospitalization risk is low.<br>';
+        } else html += isEasy ? 'Low hospitalization risk.<br>' : 'Casa 12 vazia — risco de hospitalizacao e baixo.<br>';
         html += '</div></div>';
 
     } else if (division === 40) {
@@ -2630,7 +2630,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Maternal family:' : 'D40 4th house (maternal home) — ' + SIGNS[d40_4sign] + ':') + '</strong><br>';
         if (d40_4planets.length > 0) {
             d40_4planets.forEach(p => { html += isEasy ? 'Energia fortemente herdada do lado materno.<br>' : '• ' + p.name + ': This planet\'s energy is strongly inherited from maternal line.<br>'; });
-        } else html += isEasy ? 'Heranca estavel do lado materno.<br>' : '4th house empty — 4th lord position is key to maternal heritage.<br>';
+        } else html += isEasy ? 'Heranca estavel do lado materno.<br>' : 'Casa 4 vazia — a posicao do senhor da 4a e chave para a heranca materna.<br>';
         html += '</div></div>';
 
     } else if (division === 45) {
@@ -2654,7 +2654,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Paternal family:' : 'D45 9th house (paternal home/father) — ' + SIGNS[d45_9sign] + ':') + '</strong><br>';
         if (d45_9planets.length > 0) {
             d45_9planets.forEach(p => { html += isEasy ? 'Energia fortemente herdada do lado paterno.<br>' : '• ' + p.name + ': This planet\'s energy is strongly inherited from paternal line.<br>'; });
-        } else html += isEasy ? 'Heranca estavel do lado paterno.<br>' : '9th house empty — 9th lord position is key to paternal heritage.<br>';
+        } else html += isEasy ? 'Heranca estavel do lado paterno.<br>' : 'Casa 9 vazia — a posicao do senhor da 9a e chave para a heranca paterna.<br>';
         html += '</div></div>';
     }
 
