@@ -94,7 +94,7 @@ function renderEasyMode(positions, lagnaSign, moonPos) {
     var h7p = positions.filter(function(p){return houseOf(p.sign)===7;});
     var spouseExtra = '';
     h7p.forEach(function(p) {
-        var desc = {Sun:'A spouse with high social status.',Moon:'An emotional and caring spouse.',Mars:'Passionate but arguments possible. Strong spouse.',Mercury:'An intellectual spouse with great conversation.',Jupiter:'A wise and moral spouse! Best marriage fortune.',Venus:'A very attractive and loving spouse.',Saturn:'Late marriage but lasting relationship. Age difference possible.',Rahu:'Unconventional marriage. Foreign spouse possible.',Ketu:'Past-life connection. A spouse with strong spiritual bond.'};
+        var desc = {Sun:'Un partenaire de haut statut social.',Moon:'Un partenaire emotionnel et attentionne.',Mars:'Passionne mais disputes possibles. Partenaire fort.',Mercury:'Un partenaire intellectuel avec grande conversation.',Jupiter:'A wise and moral spouse! Best marriage fortune.',Venus:'Un partenaire tres attrayant et aimant.',Saturn:'Mariage tardif mais relation durable. Difference d\'age possible.',Rahu:'Mariage non conventionnel. Partenaire etranger possible.',Ketu:'Connexion de vies passees. Partenaire avec fort lien spirituel.'};
         if (desc[p.id]) spouseExtra += '<br>✦ ' + desc[p.id];
     });
     html += '<div class="interp-card"><div class="interp-title">💍 Mon partenaire</div><div class="interp-text">' + spouse + spouseExtra + '</div></div>';
@@ -652,7 +652,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 1. D9 Lagna 분석 (결혼 후 본인)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🕉️ Vous après le mariage' : '🕉️ D9 Lagna — You After Marriage: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">${isEasy ? '🕉️ Vous après le mariage' : '🕉️ D9 Lagna — Vous Après le Mariage : ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
             ${isEasy ? 'Cela revele votre vrai vous apres le mariage et dans la seconde moitie de la vie (apres 30 ans).' : 'Le Lagna Navamsa est en <strong>' + SIGNS[d9LagnaSign] + '</strong>. Cela revele votre vrai vous apres le mariage et dans la seconde moitie de la vie (apres 30 ans).'}
             ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>Signe special !</strong> Votre essence reste inchangee apres le mariage — le soi interieur et exterieur sont alignes.' : '<br><br><strong>D1 et D9 Lagna dans le meme signe !</strong> Appele <strong>Vargottama</strong> — tres puissant. Votre essence reste inchangee apres le mariage.') : ''}
@@ -662,7 +662,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 2. D9 7 house (spouse)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 Caractère du partenaire' : '💍 D9 7th House — Spouse Character: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 Caractère du partenaire' : '💍 D9 7e Maison — Caractère du Partenaire : ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualite du partenaire.' : 'La 7e maison Navamsa est en <strong>' + SIGNS[d9H7Sign] + '</strong>, regi par <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>Cela revele la personnalite centrale de votre partenaire. ' + SIGNS[d9H7Sign] + ' partenaire a energie ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualites.'}
             ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Energie positive ! Vous recevez des benedictions de votre partenaire.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.').join('<br>') : '<strong>Planetes en D9 7e :</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefique ! Benedictions de votre partenaire.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.'}`).join('<br>')) : ''}
@@ -769,7 +769,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🧭 D\'où vient votre partenaire' : '🧭 Spouse Direction — 6-Indicator Analysis'}</div>
+        <div class="interp-title">${isEasy ? '🧭 D\'où vient votre partenaire' : '🧭 Direction du Partenaire — Analyse de 6 Indicateurs'}</div>
         <div class="interp-text">
             ${isEasy ? 'Analyse de quelle direction votre partenaire peut venir.' : 'L\'astrologie vedique determine la direction du partenaire en combinant plusieurs indicateurs.'}<br><br>
             ${isEasy ? '' : '<strong>6 Indicateurs :</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> 12e Maison Arudha Pada. Indique la famille/le contexte du partenaire et l\'environnement du mariage. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> 7e Maison Arudha Pada. Indique l\'image sociale et l\'impression exterieure du partenaire. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7th lord (' + RULER_NAMES[d9H7Ruler] + '):</strong> Le signe ou va le maitre de la 7e maison Navamsa indique la direction reelle du partenaire. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Significateur naturel du partenaire. La position de Venus en Navamsa montre la source de l\'energie du partenaire. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
@@ -2411,7 +2411,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // D2 2궁(축적된 부) 분석
         const d2H2sign = (dLagnaSign + 1) % 12;
         const d2H2planets = dPositions.filter(p => p.dSign === d2H2sign);
-        html += '<br><strong>' + (isEasy ? 'Accumulated wealth:' : 'D2 2e Maison (richesse accumulee) — ' + SIGNS[d2H2sign] + ':') + '</strong><br>';
+        html += '<br><strong>' + (isEasy ? 'Richesse accumulée :' : 'D2 2e Maison (richesse accumulee) — ' + SIGNS[d2H2sign] + ':') + '</strong><br>';
         if (d2H2planets.length > 0) {
             d2H2planets.forEach(p => {
                 const wealth = {Sun:'Richesse par autorite et statut',Moon:'Richesse fluide par activites publiques',Mars:'Richesse dans l\'immobilier, technologie, domaines competitifs',Mercury:'Richesse dans les affaires, intellectuel, communication',Jupiter:'Richesse abondante en education, religion, droit',Venus:'Richesse liee a l\'art, mode, articles de luxe',Saturn:'Richesse lente mais reguliere. Stable apres la cinquantaine',Rahu:'Richesse par methodes non conventionnelles ou sources etrangeres',Ketu:'Detache du materiel. Poursuit les valeurs spirituelles'};
