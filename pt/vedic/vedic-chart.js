@@ -70,7 +70,7 @@ function renderEasyMode(positions, lagnaSign, moonPos) {
     var h7p = positions.filter(function(p){return houseOf(p.sign)===7;});
     var spouseExtra = '';
     h7p.forEach(function(p) {
-        var desc = {Sun:'A spouse with high social status.',Moon:'An emotional and caring spouse.',Mars:'Passionate but arguments possible. Strong spouse.',Mercury:'An intellectual spouse with great conversation.',Jupiter:'A wise and moral spouse! Best marriage fortune.',Venus:'A very attractive and loving spouse.',Saturn:'Late marriage but lasting relationship. Age difference possible.',Rahu:'Unconventional marriage. Foreign spouse possible.',Ketu:'Past-life connection. A spouse with strong spiritual bond.'};
+        var desc = {Sun:'Um parceiro com alto status social.',Moon:'Um parceiro emocional e carinhoso.',Mars:'Apaixonado mas discussoes possiveis. Parceiro forte.',Mercury:'Um parceiro intelectual com otima conversa.',Jupiter:'Um parceiro sabio e moral! Melhor fortuna matrimonial.',Venus:'Um parceiro muito atraente e amoroso.',Saturn:'Casamento tardio mas relacionamento duradouro. Diferenca de idade possivel.',Rahu:'Casamento nao convencional. Parceiro estrangeiro possivel.',Ketu:'Conexao de vidas passadas. Parceiro com forte vinculo espiritual.'};
         if (desc[p.id]) spouseExtra += '<br>✦ ' + desc[p.id];
     });
     html += '<div class="interp-card"><div class="interp-title">💍 Meu Parceiro</div><div class="interp-text">' + spouse + spouseExtra + '</div></div>';
@@ -2126,8 +2126,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (lagnaD.deity) {
             ch1 += '<br>' + (isEasy ?
                 (lagnaD.deity.nature === 'benefic' ?
-                    'You did many good things in past lives, so good opportunities come naturally. Your existence is protected.' :
-                    'Unresolved lessons from past lives affect your personality, but overcoming them leads to greater growth.') :
+                    'Voce fez muitas coisas boas em vidas passadas, entao boas oportunidades vem naturalmente. Sua existencia esta protegida.' :
+                    'Licoes nao resolvidas de vidas passadas afetam sua personalidade, mas supera-las leva a maior crescimento.') :
                 (lagnaD.deity.nature === 'benefic' ?
                     '<strong>' + lagnaD.deity.ko + '</strong> guards the Lagna. ' + lagnaD.deity.desc + ' — Past life merit protects — good opportunities come naturally.' :
                     '<strong>' + lagnaD.deity.ko + '</strong> influences the Lagna. ' + lagnaD.deity.desc + ' — Karmic challenge imprinted, but overcoming leads to growth.'));
@@ -2144,8 +2144,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             if (sunD.deity) {
                 ch2 += '<br>' + (isEasy ?
                     (sunD.deity.nature === 'benefic' ?
-                        'You pursued your true purpose well in past lives, so self-realization comes naturally. Be confident!' :
-                        'There was confusion about who you are in past lives. Finding your true self is an important journey that makes you grow.') :
+                        'Voce perseguiu bem seu verdadeiro proposito em vidas passadas, entao a autorrealizacao vem naturalmente. Tenha confianca!' :
+                        'Havia confusao sobre quem voce e em vidas passadas. Encontrar seu verdadeiro eu e uma jornada importante que te faz crescer.') :
                     (sunD.deity.nature === 'benefic' ?
                         'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Soul purpose correctly pursued — self-realization comes naturally.' :
                         'Sun deity <strong>' + sunD.deity.ko + '</strong>: ' + sunD.deity.desc + '. Past life challenge with self/authority — finding true self is the soul task.'));
@@ -2162,8 +2162,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             if (moonD.deity) {
                 ch3 += '<br>' + (isEasy ?
                     (moonD.deity.nature === 'benefic' ?
-                        'Your mind was peaceful in past lives, so you are emotionally stable with strong intuition. Trust your gut.' :
-                        'Traces of emotional hardship from past lives remain deep in your heart. Meditation and being near water greatly helps healing.') :
+                        'Sua mente era pacifica em vidas passadas, entao voce e emocionalmente estavel com forte intuicao. Confie no seu instinto.' :
+                        'Tracos de dificuldades emocionais de vidas passadas permanecem profundos no seu coracao. Meditacao e estar perto da agua ajuda muito na cura.') :
                     (moonD.deity.nature === 'benefic' ?
                         'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Mind was peaceful — emotionally stable with strong intuition.' :
                         'Moon deity <strong>' + moonD.deity.ko + '</strong>: ' + moonD.deity.desc + '. Emotional wounds remain unconscious. Recognizing and healing is this life emotional task. Meditation and rest near water helps.'));
@@ -2250,12 +2250,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const h7lH = ((h7lordPlanet.dSign - dLagnaSign + 12) % 12) + 1;
             const h7lD = getDeity(h7lordPlanet.sidereal);
             if (isEasy) {
-                const h7lDesc = h7lH === 1 ? 'Spouse directly connected to your growth.' : h7lH === 4 ? 'Meet spouse through home and sanctuary.' : h7lH === 9 ? 'Spouse connection through foreign/education.' : h7lH === 10 ? 'Spouse connection through career/social.' : h7lH === 12 ? 'Meet spouse in foreign/spiritual settings.' : '';
+                const h7lDesc = h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Conhecer parceiro em ambiente estrangeiro/espiritual.' : '';
                 if (h7lDesc) ch4 += '<br><br>' + h7lDesc;
             } else {
                 ch4 += '<br><br><strong>7 lord ' + (RULER_NAMES[d60H7lord]||d60H7lord) + '</strong> → D60 ' + h7lH + ' house (' + houseThemes[h7lH] + ')' + deityTag(h7lD) + '<br>';
                 ch4 += 'Karmic connection with spouse <strong>' + houseThemes[h7lH] + '</strong> manifests through this area. ';
-                ch4 += h7lH === 1 ? 'Spouse directly connected to your growth.' : h7lH === 4 ? 'Meet spouse through home and sanctuary.' : h7lH === 9 ? 'Spouse connection through foreign/education.' : h7lH === 10 ? 'Spouse connection through career/social.' : h7lH === 12 ? 'Karma to meet spouse in foreign/spiritual settings.' : '';
+                ch4 += h7lH === 1 ? 'Parceiro diretamente conectado ao seu crescimento.' : h7lH === 4 ? 'Conhecer parceiro pelo lar e santuario.' : h7lH === 9 ? 'Conexao com parceiro por exterior/educacao.' : h7lH === 10 ? 'Conexao com parceiro por carreira/social.' : h7lH === 12 ? 'Karma to meet spouse in foreign/spiritual settings.' : '';
             }
         }
         html += subChapter('💍', 'Karma do Parceiro — Conexão de Vidas Passadas', ch4);
