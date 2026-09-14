@@ -119,13 +119,13 @@
             <label>Hora de nacimiento <span class="optional-tag">(selecciona 'Desconocida' si no sabes)</span></label>
             <div class="input-row">
                 <select id="birthHour"></select>
-                <select id="birthMin"><option value="0">00 min</option><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option></select>
+                <select id="birthMin"></select>
                 <select id="birthTimeUnknown" onchange="toggleTime()"><option value="known">Ingresar hora</option><option value="unknown">Desconocida</option></select>
             </div>
         </div>
-        <div class="input-group" id="trueSolarGroup">
-            <label><input type="checkbox" id="trueSolar" onchange="toggleTrueSolar()" style="width:16px;height:16px;accent-color:#d4a853;vertical-align:middle;margin-right:6px;">Corrección de Hora Solar Verdadera <span class="optional-tag">(basado en longitud de nacimiento)</span></label>
-            <div class="input-row" id="locationRow" style="display:none;margin-top:8px;">
+        <div class="input-group" id="locationGroup">
+            <label>Lugar de nacimiento <span class="optional-tag">(corrección automática hora solar)</span></label>
+            <div class="input-row">
                 <select id="birthTimezone" onchange="updateCities()">
                     <option value="135" selected>UTC+9 (Corea/Japón)</option>
                     <option value="120">UTC+8 (China/Taiwán/HK)</option>
@@ -143,7 +143,7 @@
                 <select id="birthLocation">
                 </select>
             </div>
-            <div id="trueSolarNote" style="display:none;font-size:11px;color:#888;margin-top:6px;"></div>
+            <div id="trueSolarNote" style="font-size:11px;color:#888;margin-top:6px;"></div>
         </div>
         <div class="input-group">
             <label>Género</label>
@@ -291,7 +291,7 @@ function updateCities() {
         const o = document.createElement('option');
         o.value = c.v; o.textContent = c.n; sel.appendChild(o);
     });
-    toggleTrueSolar();
+    updateTrueSolarNote();
 }
 
 // Corrección de Hora Solar Verdadera
@@ -550,24 +550,20 @@ function toggleTime() {
         document.getElementById(id).disabled = disabled;
         document.getElementById(id).style.opacity = disabled ? '0.4' : '1';
     });
-    if (disabled) {
-        document.getElementById('trueSolar').checked = false;
-        toggleTrueSolar();
+    document.getElementById('locationGroup').style.display = disabled ? 'none' : '';
+}
+
+function updateTrueSolarNote() {
+    const lng = parseFloat(document.getElementById('birthLocation').value);
+    const stdMeridian = parseFloat(document.getElementById('birthTimezone').value);
+    const corr = Math.round((lng - stdMeridian) * 4);
+    const sign = corr >= 0 ? '+' : '';
+    document.getElementById('trueSolarNote').textContent = `Corrección hora solar: ${sign}${corr}min (longitud ${lng}°, estándar ${stdMeridian}°)`;
+} min (longitud ${lng}°E, estándar ${stdMeridian}°E)`;
     }
 }
 
-function toggleTrueSolar() {
-    const on = document.getElementById('trueSolar').checked;
-    document.getElementById('locationRow').style.display = on ? 'flex' : 'none';
-    document.getElementById('trueSolarNote').style.display = on ? 'block' : 'none';
-    if (on) {
-        const lng = parseFloat(document.getElementById('birthLocation').value);
-        const stdMeridian = parseFloat(document.getElementById('birthTimezone').value); const corr = Math.round((lng - stdMeridian) * 4);
-        document.getElementById('trueSolarNote').textContent = `Corrección: ${corr} min (longitud ${lng}°E, estándar ${stdMeridian}°E)`;
-    }
-}
-
-document.getElementById('birthLocation')?.addEventListener('change', toggleTrueSolar);
+document.getElementById('birthLocation')?.addEventListener('change', updateTrueSolarNote);
 
 function calculate() {
     const year = parseInt(document.getElementById('birthYear').value);
@@ -580,21 +576,12 @@ function calculate() {
     let hourIdx = -1;
     let trueSolarInfo = null;
     if (!timeUnknown) {
-        const rawHourIdx = parseInt(document.getElementById('birthHour').value);
+        const rawHour = parseInt(document.getElementById('birthHour').value);
         const rawMin = parseInt(document.getElementById('birthMin').value);
-        const shichenStartHours = [23,1,3,5,7,9,11,13,15,17,19,21];
-        const shichenMidHours = [0,2,4,6,8,10,12,14,16,18,20,22];
-        const rawMinute = rawMin;
-
-        if (document.getElementById('trueSolar').checked) {
-            const lng = parseFloat(document.getElementById('birthLocation').value);
-            const rawHour = shichenMidHours[rawHourIdx];
-            const tst = getTrueSolarHour(rawHour, rawMinute, lng);
-            hourIdx = hourToShichen(tst.hour, tst.minute);
-            trueSolarInfo = { rawHour, rawMinute, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
-        } else {
-            hourIdx = rawHourIdx;
-        }
+        const lng = parseFloat(document.getElementById('birthLocation').value);
+        const tst = getTrueSolarHour(rawHour, rawMin, lng);
+        hourIdx = hourToShichen(tst.hour, tst.minute);
+        trueSolarInfo = { rawHour, rawMinute: rawMin, corrHour: tst.hour, corrMin: tst.minute, correctionMin: tst.correctionMin };
     }
 
     const yp = getYearPillar(year, month, day);
@@ -856,12 +843,14 @@ function initForm() {
     for (let i = 2025; i >= 1940; i--) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 1995) o.selected = true; y.appendChild(o); }
     for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 3) o.selected = true; m.appendChild(o); }
     for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i; if (i === 15) o.selected = true; d.appendChild(o); }
-    const hourLabels = ['Zi (23-1)','Chou (1-3)','Yin (3-5)','Mao (5-7)','Chen (7-9)','Si (9-11)','Wu (11-13)','Wei (13-15)','Shen (15-17)','You (17-19)','Xu (19-21)','Hai (21-23)'];
-    for (let i = 0; i < 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = hourLabels[i]; if (i === 5) o.selected = true; h.appendChild(o); }
+    for (let i = 0; i < 24; i++) { const o = document.createElement('option'); o.value = i; o.textContent = i + 'h'; if (i === 6) o.selected = true; h.appendChild(o); }
+    const mi = document.getElementById('birthMin');
+    for (let i = 0; i < 60; i++) { const o = document.createElement('option'); o.value = i; o.textContent = String(i).padStart(2,'0') + 'min'; if (i === 30) o.selected = true; mi.appendChild(o); }
 }
 
 initForm();
 updateCities();
+updateTrueSolarNote();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
 </script>
 
