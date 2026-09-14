@@ -665,7 +665,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '💍 Partnercharakter' : '💍 D9 7. Haus — Partnercharakter: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' Qualitäten.' : 'Das 7. Navamsa-Haus ist in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' Energie-Partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'einzigartiger Charme') + ' Qualitäten.'}
-            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.').join('<br>') : '<strong>Planeten in D9 7.:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Wohltätig! Segen von deinem Partner.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.'}`).join('<br>')) : ''}
+            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive Energie! Du erhältst Segen von deinem Partner.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.').join('<br>') : '<strong>Planeten in D9 7.:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Wohltätig! Segen von deinem Partner.' : 'Herausfordernde Energie — auch Wachstumschancen in der Ehe.'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -776,7 +776,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
                 <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Überwältigend stark' : agreement >= 3 ? 'Sehr stark' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
                 Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
-                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
+                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Achte auf Städte, Arbeitsplätze oder Reisen in dieser Richtung.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' bevorzugt aber andere Möglichkeiten bestehen.' : ''}
                 ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
@@ -1541,8 +1541,8 @@ function renderEducation(positions, lagnaSign) {
     const isEasy = window.vedicMode === 'easy';
     let text = isEasy ? '<strong>Grundbildung:</strong> ' : `<strong>4. Haus (Grundbildung):</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
-    text += eduSign4[h4sign] + ' suited. ';
-    if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influences education. ';
+    text += eduSign4[h4sign] + ' geeignet. ';
+    if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' beeinflusst die Bildung. ';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
@@ -1947,8 +1947,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (isEasy) {
             html += '<strong>Deine Karrieretendenz:</strong><br>';
         } else {
-            html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (ruler: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
-            html += '<strong>D10 10. Haus (Karriere):</strong> ' + SIGNS[d10_10sign] + ' (ruler: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
+            html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (Herrscher: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
+            html += '<strong>D10 10. Haus (Karriere):</strong> ' + SIGNS[d10_10sign] + ' (Herrscher: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         }
         if (d10_10planets.length > 0) {
             if (!isEasy) html += '<strong>Planeten im 10.:</strong> ' + d10_10planets.map(p => p.name).join(', ') + '<br>';
@@ -1983,7 +1983,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 Kinderanalyse' : '👶 D7 Kinderanalyse') + '</div><div class="interp-text">';
         if (!isEasy) {
             if (!isEasy) html += '<strong>D7 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-            html += '<strong>D7 5. Haus (Kinder):</strong> ' + SIGNS[d7_5sign] + ' (ruler: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
+            html += '<strong>D7 5. Haus (Kinder):</strong> ' + SIGNS[d7_5sign] + ' (Herrscher: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
         }
         if (d7_5planets.length > 0) {
             if (!isEasy) html += '<strong>5. Haus Planeten:</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';

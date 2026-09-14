@@ -665,7 +665,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-title">${isEasy ? '💍 Caractère du partenaire' : '💍 D9 7th House — Spouse Character: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
             ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualite du partenaire.' : 'La 7e maison Navamsa est en <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' partenaire a energie ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'charme unique') + ' qualites.'}
-            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.').join('<br>') : '<strong>Planetes en D9 7e :</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefique ! Benedictions de votre partenaire.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.'}`).join('<br>')) : ''}
+            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Energie positive ! Vous recevez des benedictions de votre partenaire.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.').join('<br>') : '<strong>Planetes en D9 7e :</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefique ! Benedictions de votre partenaire.' : 'Energie de defi — aussi des opportunites de croissance dans le mariage.'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -776,7 +776,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
                 <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Extremement fort' : agreement >= 3 ? 'Tres fort' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
                 Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
-                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
+                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Faites attention aux villes, lieux de travail ou voyages dans cette direction.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favorise mais d\'autres possibilites existent.' : ''}
                 ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
@@ -1541,8 +1541,8 @@ function renderEducation(positions, lagnaSign) {
     const isEasy = window.vedicMode === 'easy';
     let text = isEasy ? '<strong>Éducation de base :</strong> ' : `<strong>4e Maison (Éducation de base) :</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Active learning, physical/military education', 'Fine arts/music/culinary education', 'Languages/literature/communication', 'Home education emphasis, history', 'Drama/leadership/political science', 'Science/medicine/analytics', 'Law/diplomacy/design', 'Psychology/research/investigation', 'Philosophy/theology/international studies', 'Business/administration/architecture', 'IT/science technology/aviation', 'Art/film/music/spirituality'];
-    text += eduSign4[h4sign] + ' suited. ';
-    if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influences education. ';
+    text += eduSign4[h4sign] + ' adapte. ';
+    if (h4.length > 0 && !isEasy) text += 'In 4th house, ' + h4.map(p => p.name).join(', ') + ' influence l\'education. ';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
     if (jupiter) {
@@ -1947,8 +1947,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (isEasy) {
             html += '<strong>Votre tendance de carriere :</strong><br>';
         } else {
-            html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (ruler: ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
-            html += '<strong>D10 10e Maison (carriere) :</strong> ' + SIGNS[d10_10sign] + ' (ruler: ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
+            html += '<strong>D10 Lagna:</strong> ' + SIGNS[dLagnaSign] + ' (maitre : ' + (RULER_NAMES[d10_1lord]||d10_1lord) + ')<br>';
+            html += '<strong>D10 10e Maison (carriere) :</strong> ' + SIGNS[d10_10sign] + ' (maitre : ' + (RULER_NAMES[d10_10lord]||d10_10lord) + ')<br>';
         }
         if (d10_10planets.length > 0) {
             if (!isEasy) html += '<strong>Planetes en 10e :</strong> ' + d10_10planets.map(p => p.name).join(', ') + '<br>';
@@ -1983,7 +1983,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '👶 Analyse des enfants' : '👶 D7 Analyse des enfants') + '</div><div class="interp-text">';
         if (!isEasy) {
             if (!isEasy) html += '<strong>D7 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
-            html += '<strong>D7 5e Maison (enfants) :</strong> ' + SIGNS[d7_5sign] + ' (ruler: ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
+            html += '<strong>D7 5e Maison (enfants) :</strong> ' + SIGNS[d7_5sign] + ' (maitre : ' + (RULER_NAMES[d7_5lord]||d7_5lord) + ')<br>';
         }
         if (d7_5planets.length > 0) {
             if (!isEasy) html += '<strong>Planetes en 5e Maison :</strong> ' + d7_5planets.map(p => p.name).join(', ') + '<br>';

@@ -1541,7 +1541,7 @@ function renderEducation(positions, lagnaSign) {
     const isEasy = window.vedicMode === 'easy';
     let text = isEasy ? '<strong>Educación Básica:</strong> ' : `<strong>Casa 4 (Educación Básica):</strong> ${SIGNS[h4sign]}. `;
     const eduSign4 = ['Aprendizaje activo, educación física/militar', 'Bellas artes/música/educación culinaria', 'Idiomas/literatura/comunicación', 'Énfasis en educación doméstica, historia', 'Drama/liderazgo/ciencias políticas', 'Ciencia/medicina/análisis', 'Derecho/diplomacia/diseño', 'Psicología/investigación', 'Filosofía/teología/estudios internacionales', 'Negocios/administración/arquitectura', 'TI/tecnología científica/aviación', 'Arte/cine/música/espiritualidad'];
-    text += eduSign4[h4sign] + ' suited. ';
+    text += eduSign4[h4sign] + ' apropiado. ';
     if (h4.length > 0 && !isEasy) text += 'En la casa 4, ' + h4.map(p => p.name).join(', ') + ' influye en la educación. ';
 
     const jupiter = positions.find(p => p.id === 'Jupiter');
