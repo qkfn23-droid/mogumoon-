@@ -1688,21 +1688,21 @@ function renderDignity(positions, lagnaSign) {
         const area = houseArea[house] || '';
 
         if (p.sign === EXALT[p.id]) {
-            dignity = 'Exalted';
+            dignity = 'Exaltado';
             emoji = '🟢';
             color = '#5cb85c';
             simpleDesc = isEasy
                 ? `<strong>${area}</strong> — ¡la mayor bendición! Los talentos innatos brillan y los buenos resultados llegan naturalmente.`
                 : `<strong>${p.name} al máximo poder!</strong> La energía de "${role}" maximizada en <strong>${house}(${area})</strong>. Los talentos innatos brillan.`;
         } else if (p.sign === DEBI[p.id]) {
-            dignity = 'Debilitated';
+            dignity = 'Debilitado';
             emoji = '🔴';
             color = '#d9534f';
             simpleDesc = isEasy
                 ? `<strong>${area}</strong> — puedes enfrentar desafíos. Pero el esfuerzo consciente lleva a gran crecimiento. Ve los remedios abajo.`
                 : `<strong>${p.name} debilitado.</strong> La energía de "${role}" debilitada en <strong>${house}(${area})</strong>. Desafíos pero el esfuerzo consciente lleva al crecimiento. Ve remedios.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
-            dignity = 'Own Sign';
+            dignity = 'Signo Propio';
             emoji = '🟡';
             color = '#c9a84c';
             simpleDesc = isEasy
@@ -1718,7 +1718,7 @@ function renderDignity(positions, lagnaSign) {
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → Casa ' + house + ' (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Exalted') ? '¡Muy Fuerte!' : dignity.includes('Debilitated') ? 'Débil' : dignity.includes('Own Sign') ? 'Fuerte' : 'Promedio') : dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → Casa ' + house + ' (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Exaltado') ? '¡Muy Fuerte!' : dignity.includes('Debilitado') ? 'Débil' : dignity.includes('Signo Propio') ? 'Fuerte' : 'Promedio') : dignity}</span></div>
             <div class="interp-text">
                 ${isEasy ? '' : '<span style="color:#666;font-size:12px;">Rol: ' + role + ' │ Posición: ' + house + ' = ' + area + '</span><br><br>'}
                 ${simpleDesc}
@@ -2359,11 +2359,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch8 = isEasy ?
             '<strong style="color:#5cb85c">' + beneficCount + ' buena energía</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' energía de precaución</strong> de 9 planetas<br><br>' :
-            '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
+            '<strong style="color:#5cb85c">' + beneficCount + ' benéfico</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' maléfico</strong> ubicación<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
                 '🌟 <strong>¡Hiciste tantas cosas buenas en vidas pasadas!</strong> Casi todos los planetas bajo buena energía — obteniendo buenos resultados naturalmente. Fuerte fortuna innata.' :
-                '🌟 <strong>Mérito muy fuerte de vidas pasadas.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
+                '🌟 <strong>Mérito muy fuerte de vidas pasadas.</strong> Parasara llamó a tales cartas "un alma bendecida por los dioses". La mayoría de planetas bajo benéficos — buenos resultados naturalmente.';
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
                 '✨ <strong>Abundante buena energía de vidas pasadas.</strong> Protegido en muchas áreas de la vida.' :
@@ -2375,7 +2375,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             ch8 += isEasy ?
                 '⚖️ <strong>Buena energía y energía desafiante están mitad y mitad.</strong> Cosas buenas y difíciles se alternan en la vida.' :
                 '⚖️ <strong>Karma en equilibrio.</strong> Fortuna mixta — lo bueno y los desafíos se alternan.';
-            if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planets to watch: ' : 'Planets to watch: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
+            if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planetas a observar:' : 'Planetas a observar:') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
             ch8 += isEasy ?
                 '🔥 <strong>Esta vida trata de resolver lecciones de vidas pasadas.</strong> Muchos desafíos, pero los que tienen las lecciones más pesadas crecen más. El esfuerzo constante y ayudar a otros es especialmente importante.' :
@@ -2399,11 +2399,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD2) {
             const sunInOwn = sunD2.dSign === 4; // Leo
-            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>¡Autodidacta!</strong> Construye riqueza a través de autoridad y liderazgo.' : '🌟 <strong>¡Sol en su propio Hora (Leo)!</strong> Tipo autodidacta. Construye riqueza a través de autoridad y liderazgo.') : (isEasy ? 'Ingresos a través de otros o sector gobierno/público.' : 'Sol en Hora de Luna. Ingresos a través de la ayuda de otros o sector gobierno/público.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sol → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>¡Autodidacta!</strong> Construye riqueza a través de autoridad y liderazgo.' : '🌟 <strong>¡Sol en su propio Hora (Leo)!</strong> Tipo autodidacta. Construye riqueza a través de autoridad y liderazgo.') : (isEasy ? 'Ingresos a través de otros o sector gobierno/público.' : 'Sol en Hora de Luna. Ingresos a través de la ayuda de otros o sector gobierno/público.')) + '<br>';
         }
         if (moonD2) {
             const moonInOwn = moonD2.dSign === 3; // Cancer
-            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>¡Vida abundante a través de relaciones públicas!</strong>' : '🌟 <strong>¡Luna en su propio Hora (Cáncer)!</strong> Vida abundante a través del público y relaciones.') : (isEasy ? 'Ingresos por esfuerzo propio y actividad independiente.' : 'Luna en Hora de Sol. Ingresos por esfuerzo propio y actividad independiente.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☽ Luna → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>¡Vida abundante a través de relaciones públicas!</strong>' : '🌟 <strong>¡Luna en su propio Hora (Cáncer)!</strong> Vida abundante a través del público y relaciones.') : (isEasy ? 'Ingresos por esfuerzo propio y actividad independiente.' : 'Luna en Hora de Sol. Ingresos por esfuerzo propio y actividad independiente.')) + '<br>';
         }
         if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? 'Puede construir gran riqueza con su propia habilidad.' : 'Abundancia a través de relaciones con otros.') : 'Júpiter en ' + (jupD2.dSign === 4 ? 'Hora Solar — gran riqueza por habilidad propia.' : 'Hora Lunar — abundancia a través de relaciones.')) + '<br>';
         if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'Autodidacta a través de arte/artículos de lujo.' : 'Riqueza a través de la pareja.') : 'Venus en ' + (venD2.dSign === 4 ? 'Hora Solar — autodidacta por arte/lujo.' : 'Hora Lunar — riqueza por la pareja.')) + '<br>';
@@ -2491,7 +2491,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Confort/Felicidad:' : 'D16 Casa 4 (confort/felicidad) — ' + SIGNS[d16_4sign] + ':') + '</strong><br>';
         if (d16_4planets.length > 0) {
             d16_4planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '¡Abundante confort material y felicidad!<br>' : 'Esfuerzo necesario para confort material.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? '¡Confort material y felicidad abundantes!' : 'Effort needed for material comfort.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '¡Abundante confort material y felicidad!<br>' : 'Esfuerzo necesario para confort material.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? '¡Confort material y felicidad abundantes!' : 'Esfuerzo necesario para el confort material.') + '<br>';
             });
         } else html += isEasy ? 'Confort material promedio.<br>' : 'Casa 4 vacía — la posición del señor de la 4ª es clave para la felicidad.<br>';
 
@@ -2556,17 +2556,17 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Educación Superior:' : 'D24 Casa 5 (educación superior/intelecto) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? '¡Logro sobresaliente en educación superior!<br>' : 'Los desafíos académicos llevan al crecimiento.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? '¡Logro excepcional en educación superior!' : 'Academic challenges lead to growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? '¡Logro sobresaliente en educación superior!<br>' : 'Los desafíos académicos llevan al crecimiento.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? '¡Logro excepcional en educación superior!' : 'Los desafíos académicos llevan al crecimiento.') + '<br>';
             });
         } else html += isEasy ? 'Steady effort brings good results.<br>' : 'Casa 5 sin planetas.<br>';
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Júpiter (Sabiduría) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>High academic achievement expected!</strong> Graduate/doctoral/study abroad possible.' : (isEasy ? 'Crecimiento a través de los estudios esperado.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Júpiter (Sabiduría) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>¡Alto logro académico esperado!</strong> Posgrado/doctorado/estudios en el extranjero posible.' : (isEasy ? 'Crecimiento a través de los estudios esperado.' : 'Crecimiento a través de los estudios. La bendición de Júpiter se manifiesta en la casa ' + jH + '.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellect!</strong> Talent in math, language, analysis.' : (isEasy ? 'Habilidad intelectual bien expresada.' : 'Habilidad intelectual en el área de casa ' + mH + '.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>¡Intelecto excepcional!</strong> Talento en matemáticas, idiomas, análisis.' : (isEasy ? 'Habilidad intelectual bien expresada.' : 'Habilidad intelectual en el área de casa ' + mH + '.')) + '<br>';
         }
         html += '</div></div>';
 

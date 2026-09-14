@@ -962,11 +962,11 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
 
     const isEasy = window.vedicMode === 'easy';
     let html = isEasy ?
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 Life flows with different energies. Check your current period.<br><br>' :
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period. Calculated from Moon nakshatra position.<br><br>';
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 Das Leben fließt mit verschiedenen Energien. Überprüfe deine aktuelle Periode.<br><br>' :
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — Das Leben wird in Perioden unterteilt, die von 9 Planeten regiert werden. <strong>Mahadasha</strong> ist die Hauptperiode, <strong>Antardasha (Bhukti)</strong> ist die Unterperiode. Berechnet aus der Mond-Nakshatra-Position.<br><br>';
     html += isEasy ?
         '</div></div>' :
-        '🌙 Geburtsmond: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
+        '🌙 Geburtsmond: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — Erste Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (verbleibend: ' + remainingYears.toFixed(2) + ' Jahre)</div></div>';
 
     // Build all mahadasha periods with correct first period
     const periods = [];
@@ -1688,21 +1688,21 @@ function renderDignity(positions, lagnaSign) {
         const area = houseArea[house] || '';
 
         if (p.sign === EXALT[p.id]) {
-            dignity = 'Exalted';
+            dignity = 'Erhöht';
             emoji = '🟢';
             color = '#5cb85c';
             simpleDesc = isEasy
                 ? `<strong>${area}</strong> — größter Segen! Angeborene Talente strahlen und gute Ergebnisse kommen natürlich.`
                 : `<strong>${p.name} auf maximaler Kraft!</strong> Die Energie von "${role}" maximiert in <strong>${house}(${area})</strong>. Talente strahlen.`;
         } else if (p.sign === DEBI[p.id]) {
-            dignity = 'Debilitated';
+            dignity = 'Geschwächt';
             emoji = '🔴';
             color = '#d9534f';
             simpleDesc = isEasy
                 ? `<strong>${area}</strong> — kann Herausforderungen haben. Aber bewusste Anstrengung führt zu großem Wachstum. Siehe Heilmittel unten.`
                 : `<strong>${p.name} geschwächt.</strong> Die Energie von "${role}" geschwächt in <strong>${house}(${area})</strong>. Herausforderungen aber Wachstum durch Anstrengung.`;
         } else if (OWN[p.id] && OWN[p.id].includes(p.sign)) {
-            dignity = 'Own Sign';
+            dignity = 'Eigenes Zeichen';
             emoji = '🟡';
             color = '#c9a84c';
             simpleDesc = isEasy
@@ -1718,7 +1718,7 @@ function renderDignity(positions, lagnaSign) {
         }
 
         html += `<div class="interp-card">
-            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → ' + house + ' (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Exalted') ? 'Sehr Stark!' : dignity.includes('Debilitated') ? 'Schwach' : dignity.includes('Own Sign') ? 'Stark' : 'Durchschnitt') : dignity}</span></div>
+            <div class="interp-title">${emoji} ${isEasy ? area + ' — ' : p.symbol + ' ' + p.name + ' — ' + SIGNS[p.sign] + ' ' + SIGN_SYMBOLS[p.sign] + ' → ' + house + ' (' + area + ') — '}<span style="color:${color}">${isEasy ? (dignity.includes('Erhöht') ? 'Sehr Stark!' : dignity.includes('Geschwächt') ? 'Schwach' : dignity.includes('Eigenes Zeichen') ? 'Stark' : 'Durchschnitt') : dignity}</span></div>
             <div class="interp-text">
                 ${isEasy ? '' : '<span style="color:#666;font-size:12px;">Rolle: ' + role + ' │ Position: ' + house + ' = ' + area + '</span><br><br>'}
                 ${simpleDesc}
@@ -1770,13 +1770,13 @@ function renderRemedy(positions, lagnaSign) {
     const DEBI = { Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0 };
 
     const remedies = {
-        Sun: { gem: 'Rubin', mantra: 'Om Suryaya Namaha', color: 'Orange/red on Sunday', food: 'Wheat, saffron, sunflower seeds', charity: 'Sunday: donate wheat/copper' },
-        Moon: { gem: 'Perle', mantra: 'Om Chandraya Namaha', color: 'White/silver on Monday', food: 'Milk, rice, coconut', charity: 'Monday: donate rice/milk' },
-        Mars: { gem: 'Rote Koralle', mantra: 'Om Mangalaya Namaha', color: 'Red on Tuesday', food: 'Lentils, red fruits', charity: 'Tuesday: donate red lentils' },
-        Mercury: { gem: 'Smaragd', mantra: 'Om Budhaya Namaha', color: 'Green on Wednesday', food: 'Green beans, green vegetables', charity: 'Wednesday: donate green vegetables' },
-        Jupiter: { gem: 'Gelber Saphir', mantra: 'Om Gurave Namaha', color: 'Yellow on Thursday', food: 'Chickpeas, bananas, turmeric', charity: 'Thursday: donate yellow food/books' },
-        Venus: { gem: 'Diamant', mantra: 'Om Shukraya Namaha', color: 'White/pastel on Friday', food: 'Milk, cream, fruits', charity: 'Friday: donate white clothes/rice' },
-        Saturn: { gem: 'Blauer Saphir', mantra: 'Om Shanaishcharaya Namaha', color: 'Navy/black on Saturday', food: 'Black beans, sesame', charity: 'Saturday: donate black beans/oil' }
+        Sun: { gem: 'Rubin', mantra: 'Om Suryaya Namaha', color: 'Orange/Rot am Sonntag', food: 'Weizen, Safran, Sonnenblumenkerne', charity: 'Sonntag: Weizen/Kupfer spenden' },
+        Moon: { gem: 'Perle', mantra: 'Om Chandraya Namaha', color: 'Weiß/Silber am Montag', food: 'Milch, Reis, Kokosnuss', charity: 'Montag: Reis/Milch spenden' },
+        Mars: { gem: 'Rote Koralle', mantra: 'Om Mangalaya Namaha', color: 'Rot am Dienstag', food: 'Linsen, rote Früchte', charity: 'Dienstag: rote Linsen spenden' },
+        Mercury: { gem: 'Smaragd', mantra: 'Om Budhaya Namaha', color: 'Grün am Mittwoch', food: 'Grüne Bohnen, grünes Gemüse', charity: 'Mittwoch: grünes Gemüse spenden' },
+        Jupiter: { gem: 'Gelber Saphir', mantra: 'Om Gurave Namaha', color: 'Gelb am Donnerstag', food: 'Kichererbsen, Bananen, Kurkuma', charity: 'Donnerstag: gelbe Lebensmittel/Bücher spenden' },
+        Venus: { gem: 'Diamant', mantra: 'Om Shukraya Namaha', color: 'Weiß/Pastell am Freitag', food: 'Milch, Sahne, Früchte', charity: 'Freitag: weiße Kleidung/Reis spenden' },
+        Saturn: { gem: 'Blauer Saphir', mantra: 'Om Shanaishcharaya Namaha', color: 'Dunkelblau/Schwarz am Samstag', food: 'Schwarze Bohnen, Sesam', charity: 'Samstag: schwarze Bohnen/Öl spenden' }
     };
 
     let html = '';
@@ -2359,27 +2359,27 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch8 = isEasy ?
             '<strong style="color:#5cb85c">' + beneficCount + ' gute Energie</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' Vorsichtsenergie</strong> von 9 Planeten<br><br>' :
-            '<strong style="color:#5cb85c">' + beneficCount + ' benefic</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' malefic</strong> placement<br><br>';
+            '<strong style="color:#5cb85c">' + beneficCount + ' wohltätig</strong>, <strong style="color:#d9534f">' + (positions.length - beneficCount) + ' übeltätig</strong> Platzierung<br><br>';
         if (beneficCount >= 7) {
             ch8 += isEasy ?
                 '🌟 <strong>Du hast in früheren Leben so viel Gutes getan!</strong> Fast alle Planeten unter guter Energie — natürlich gute Ergebnisse. Starkes angeborenes Glück.' :
-                '🌟 <strong>Sehr starkes Verdienst aus früheren Leben.</strong> Parasara called such charts "a soul blessed by the gods". Most planets under benefics — good results naturally.';
+                '🌟 <strong>Sehr starkes Verdienst aus früheren Leben.</strong> Parasara nannte solche Horoskope "eine von den Göttern gesegnete Seele". Die meisten Planeten unter Wohltätern — natürlich gute Ergebnisse.';
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
-                '✨ <strong>Abundant good energy from past lives.</strong> Protected in many areas of life.' :
-                '✨ <strong>Reichliches Verdienst aus früheren Leben.</strong> Benefics dominate — protected in many areas.';
+                '✨ <strong>Reichliche gute Energie aus früheren Leben.</strong> In vielen Lebensbereichen geschützt.' :
+                '✨ <strong>Reichliches Verdienst aus früheren Leben.</strong> Wohltäter dominieren — in vielen Bereichen geschützt.';
             if (maleficPlanets.length > 0) ch8 += isEasy ?
-                ' However, some areas need more effort.' :
+                ' Einige Bereiche erfordern jedoch mehr Einsatz.' :
                 ' Jedoch bestehen karmische Herausforderungen in <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>. Praktiziere Mantras und Wohltätigkeit für diese Planeten.';
         } else if (beneficCount >= 3) {
             ch8 += isEasy ?
-                '⚖️ <strong>Good energy and challenging energy are half and half.</strong> Good things and hard things alternate in life.' :
-                '⚖️ <strong>Karma im Gleichgewicht.</strong> Mixed fortune — good and challenges alternate.';
+                '⚖️ <strong>Gute Energie und herausfordernde Energie sind halb und halb.</strong> Gutes und Schwieriges wechseln sich im Leben ab.' :
+                '⚖️ <strong>Karma im Gleichgewicht.</strong> Gemischtes Glück — Gutes und Herausforderungen wechseln sich ab.';
             if (maleficPlanets.length > 0) ch8 += '<br>' + (isEasy ? 'Planeten zu beachten: ' : 'Planeten zu beachten: ') + '<strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>';
         } else {
             ch8 += isEasy ?
                 '🔥 <strong>Dieses Leben dient der Auflösung vergangener Lebenslektionen.</strong> Viele Herausforderungen, aber wer die schwersten Lektionen hat, wächst am meisten. Stetiger Einsatz und anderen helfen ist besonders wichtig.' :
-                '🔥 <strong>Ein Leben der Karma-Abrechnung.</strong> Many challenges from past lives, but Parasara said "the soul with heaviest karma grows the most". Mantra practice and charity are especially important.';
+                '🔥 <strong>Ein Leben der Karma-Abrechnung.</strong> Viele Herausforderungen aus früheren Leben, aber Parasara sagte "die Seele mit dem schwersten Karma wächst am meisten". Mantra-Praxis und Wohltätigkeit sind besonders wichtig.';
         }
         html += subChapter('📊', 'Gesamte Karma-Bewertung', ch8);
 
@@ -2399,11 +2399,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD2) {
             const sunInOwn = sunD2.dSign === 4; // Leo
-            html += (isEasy ? '' : '<strong>☉ Sun → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>Selbstgemacht!</strong> Baut Wohlstand durch Autorität und Führung auf.' : '🌟 <strong>Sonne im eigenen Hora (Löwe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autorität und Führung auf.') : (isEasy ? 'Einkommen durch andere oder Regierung/öffentlichen Sektor.' : 'Sonne im Mond-Hora. Einkommen durch Hilfe anderer oder Regierung/öffentlichen Sektor.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sonne → ' + SIGNS[sunD2.dSign] + ':</strong> ') + (sunInOwn ? (isEasy ? '🌟 <strong>Selbstgemacht!</strong> Baut Wohlstand durch Autorität und Führung auf.' : '🌟 <strong>Sonne im eigenen Hora (Löwe)!</strong> Selbstgemachter Typ. Baut Wohlstand durch Autorität und Führung auf.') : (isEasy ? 'Einkommen durch andere oder Regierung/öffentlichen Sektor.' : 'Sonne im Mond-Hora. Einkommen durch Hilfe anderer oder Regierung/öffentlichen Sektor.')) + '<br>';
         }
         if (moonD2) {
             const moonInOwn = moonD2.dSign === 3; // Cancer
-            html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Reiches Leben durch öffentliche Beziehungen!</strong>' : '🌟 <strong>Mond im eigenen Hora (Krebs)!</strong> Reiches Leben durch Öffentlichkeit und Beziehungen.') : (isEasy ? 'Einkommen durch eigene Anstrengung und unabhängige Aktivität.' : 'Mond im Sonnen-Hora. Einkommen durch eigene Anstrengung und unabhängige Aktivität.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☽ Mond → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Reiches Leben durch öffentliche Beziehungen!</strong>' : '🌟 <strong>Mond im eigenen Hora (Krebs)!</strong> Reiches Leben durch Öffentlichkeit und Beziehungen.') : (isEasy ? 'Einkommen durch eigene Anstrengung und unabhängige Aktivität.' : 'Mond im Sonnen-Hora. Einkommen durch eigene Anstrengung und unabhängige Aktivität.')) + '<br>';
         }
         if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? 'Kann großen Wohlstand durch eigene Fähigkeit aufbauen.' : 'Überfluss durch Beziehungen mit anderen.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sonnen-Hora — großer Wohlstand durch eigene Fähigkeit.' : 'Mond-Hora — Überfluss durch Beziehungen.')) + '<br>';
         if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'Selbstgemacht durch Kunst/Luxusgüter.' : 'Wohlstand durch Ehepartner oder Partner.') : 'Venus in ' + (venD2.dSign === 4 ? 'Sonnen-Hora — selbstgemacht durch Kunst/Luxus.' : 'Mond-Hora — Wohlstand durch Partner.')) + '<br>';
@@ -2491,7 +2491,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Komfort/Glück:' : 'D16 4. Haus (Komfort/Glück) — ' + SIGNS[d16_4sign] + ':') + '</strong><br>';
         if (d16_4planets.length > 0) {
             d16_4planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? 'Reichlicher materieller Komfort und Glück!<br>' : 'Einsatz nötig für materiellen Komfort.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Materieller Komfort und Glück reichlich!' : 'Effort needed for material comfort.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Reichlicher materieller Komfort und Glück!<br>' : 'Einsatz nötig für materiellen Komfort.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Materieller Komfort und Glück reichlich!' : 'Einsatz nötig für materiellen Komfort.') + '<br>';
             });
         } else html += isEasy ? 'Durchschnittlicher materieller Komfort.<br>' : '4. Haus leer — Position des 4. Herrschers ist der Schlüssel zum Glück.<br>';
 
@@ -2556,17 +2556,17 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Höhere Bildung:' : 'D24 5. Haus (Höhere Bildung/Intellekt) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!<br>' : 'Akademische Herausforderungen führen zu Wachstum.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!' : 'Academic challenges lead to growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!<br>' : 'Akademische Herausforderungen führen zu Wachstum.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!' : 'Akademische Herausforderungen führen zu Wachstum.') + '<br>';
             });
         } else html += isEasy ? 'Stetiger Einsatz bringt gute Ergebnisse.<br>' : '5. Haus ohne Planeten.<br>';
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Weisheit) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : (isEasy ? 'Wachstum durch Akademik erwartet.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Weisheit) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : (isEasy ? 'Wachstum durch Akademik erwartet.' : 'Wachstum durch Akademik. Jupiters Segen manifestiert sich im ' + jH + '. Haus-Bereich.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Merkur (Lernen) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Herausragender Intellekt!</strong> Talent in Mathe, Sprachen, Analyse.' : (isEasy ? 'Intellektuelle Fähigkeit gut ausgedrückt.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Merkur (Lernen) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Herausragender Intellekt!</strong> Talent in Mathe, Sprachen, Analyse.' : (isEasy ? 'Intellektuelle Fähigkeit gut ausgedrückt.' : 'Intellektuelle Fähigkeit im ' + mH + '. Haus-Bereich.')) + '<br>';
         }
         html += '</div></div>';
 
