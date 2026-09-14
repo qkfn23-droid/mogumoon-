@@ -2163,7 +2163,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         if (sunD60) {
             const sunD = getDeity(sunD60.sidereal);
-            let ch2 = (isEasy ? '<strong>Sun Past Life Memory</strong>' : '<strong>D60 Sun: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
+            let ch2 = (isEasy ? '<strong>Sun Past Life Memory</strong>' : '<strong>D60 Sonne: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
             ch2 += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
                 ch2 += '<br>' + (isEasy ?
@@ -2181,7 +2181,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (moonD60) {
             const moonD = getDeity(moonD60.sidereal);
-            let ch3 = (isEasy ? '<strong>Moon Past Life Memory</strong>' : '<strong>D60 Moon: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
+            let ch3 = (isEasy ? '<strong>Moon Past Life Memory</strong>' : '<strong>D60 Mond: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
             ch3 += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
                 ch3 += '<br>' + (isEasy ?
@@ -2221,7 +2221,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch4 = (isEasy
             ? '<strong>Past Life Spouse Connection</strong><br><br>'
-            : '<strong>D60 7 house (spouse): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
+            : '<strong>D60 7. Haus (Partner): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
         if (d60H7planets.length > 0) {
@@ -2263,8 +2263,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
                 ch4 += isEasy
-                    ? '<br><br>🔥 <strong>Very strong past-life connection!</strong> Deep connection with spouse in past lives — destined to meet in this life.'
-                    : '<br><br>🔥 <strong>Rahu-Ketu axis on D60 1-7 line!</strong> This indicates a <strong>very strong past-life connection</strong> with your spouse. Destined to meet in this life.';
+                    ? '<br><br>🔥 <strong>Sehr starke Verbindung aus früheren Leben!</strong> Tiefe Verbindung mit dem Partner — bestimmt, sich in diesem Leben zu treffen.'
+                    : '<br><br>🔥 <strong>Rahu-Ketu-Achse auf D60 1-7 Linie!</strong> Dies zeigt eine <strong>sehr starke Verbindung aus früheren Leben</strong> mit deinem Partner. Bestimmt, sich in diesem Leben zu treffen.';
             }
         }
 
@@ -2293,7 +2293,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch5 = (isEasy
             ? '<strong>Past life career karma</strong><br><br>'
-            : '<strong>D60 10 house (career): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
+            : '<strong>D60 10. Haus (Karriere): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
         ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
@@ -2317,7 +2317,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
         let ch6 = (isEasy
             ? '<strong>Past life wealth karma</strong><br><br>'
-            : '<strong>D60 2 house (wealth): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
+            : '<strong>D60 2. Haus (Wohlstand): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
         const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {

@@ -2221,7 +2221,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch4 = (isEasy
             ? '<strong>Past Life Spouse Connection</strong><br><br>'
-            : '<strong>D60 7 house (spouse): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
+            : '<strong>D60 Casa 7 (pareja): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
         if (d60H7planets.length > 0) {
@@ -2263,8 +2263,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const ketuH = ((ketuD60.dSign - dLagnaSign + 12) % 12) + 1;
             if (rahuH === 7 || ketuH === 7 || rahuH === 1 || ketuH === 1) {
                 ch4 += isEasy
-                    ? '<br><br>🔥 <strong>Very strong past-life connection!</strong> Deep connection with spouse in past lives — destined to meet in this life.'
-                    : '<br><br>🔥 <strong>Rahu-Ketu axis on D60 1-7 line!</strong> This indicates a <strong>very strong past-life connection</strong> with your spouse. Destined to meet in this life.';
+                    ? '<br><br>🔥 <strong>¡Conexión muy fuerte de vidas pasadas!</strong> Conexión profunda con la pareja en vidas pasadas — destinados a encontrarse en esta vida.'
+                    : '<br><br>🔥 <strong>¡Eje Rahu-Ketu en línea D60 1-7!</strong> Esto indica una <strong>conexión muy fuerte de vidas pasadas</strong> con tu pareja. Destinados a encontrarse en esta vida.';
             }
         }
 
@@ -2293,7 +2293,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         let ch5 = (isEasy
             ? '<strong>Past life career karma</strong><br><br>'
-            : '<strong>D60 10 house (career): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
+            : '<strong>D60 Casa 10 (carrera): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
         ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
@@ -2317,7 +2317,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H2planets = dPositions.filter(p => p.dSign === d60H2sign);
         let ch6 = (isEasy
             ? '<strong>Past life wealth karma</strong><br><br>'
-            : '<strong>D60 2 house (wealth): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
+            : '<strong>D60 Casa 2 (riqueza): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
         const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
