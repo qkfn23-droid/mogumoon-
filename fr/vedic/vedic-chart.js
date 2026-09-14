@@ -673,7 +673,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     html += `<div class="interp-card">
         <div class="interp-title">${isEasy ? '💼 But de vie' : '💼 D9 10e Maison — But de Vie (Dharma) : ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'La vraie vocation que vous poursuivez apres la maturite.' : 'La 10e maison Navamsa est en <strong>' + SIGNS[d9H10Sign] + '</strong>, regi par <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'La 10e montre votre carriere, D9\'La 10e revele votre <strong>but de vie superieur (Dharma)</strong>.'}<br><br>
+            ${isEasy ? 'La vraie vocation que vous poursuivez apres la maturite.' : 'La 10e maison Navamsa est en <strong>' + SIGNS[d9H10Sign] + '</strong>, regi par <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>Alors que la 10e de D1 montre votre carriere, la 10e de D9 revele votre <strong>but de vie superieur (Dharma)</strong>.'}<br><br>
             <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
             ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'energie de carriere unique').join('<br>') : '<strong>Planetes en D9 10e :</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'energie de carriere unique'}`).join('<br>')) : ''}
         </div>
