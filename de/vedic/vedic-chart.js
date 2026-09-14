@@ -206,8 +206,8 @@ const DASHA_YEARS = {
 };
 const DASHA_ORDER = ['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
 const DASHA_KO = {
-    'Ketu': 'Ketu', 'Venus': 'Venus', 'Sun': 'Sun', 'Moon': 'Moon', 'Mars': 'Mars',
-    'Rahu': 'Rahu', 'Jupiter': 'Jupiter', 'Saturn': 'Saturn', 'Mercury': 'Mercury'
+    'Ketu': 'Ketu', 'Venus': 'Venus', 'Sun': 'Sonne', 'Moon': 'Mond', 'Mars': 'Mars',
+    'Rahu': 'Rahu', 'Jupiter': 'Jupiter', 'Saturn': 'Saturn', 'Mercury': 'Merkur'
 };
 
 // South Indian chart house layout (fixed signs)
