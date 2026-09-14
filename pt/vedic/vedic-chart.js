@@ -2289,7 +2289,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const d60H10lord = SIGN_RULERS[d60H10sign];
         const d60H10planets = dPositions.filter(p => p.dSign === d60H10sign);
         const satD60 = dPositions.find(p => p.id === 'Saturn');
-        const careerKarma = ['military/leadership/sports','finance/art/agriculture','education/media/commerce','nursing/real estate/hospitality','politics/entertainment/management','medical/analysis/service','law/diplomacy/design','research/investigation/medicine','education/religion/foreign','administration/construction/civil servant','technology/science/innovation','art/spirituality/hospital'][d60H10sign];
+        const careerKarma = ['militar/lideranca/esportes','financas/arte/agricultura','educacao/midia/comercio','enfermagem/imoveis/hotelaria','politica/entretenimento/gestao','medicina/analise/servico','direito/diplomacia/design','pesquisa/investigacao/medicina','educacao/religiao/exterior','administracao/construcao/funcionario','tecnologia/ciencia/inovacao','arte/espiritualidade/hospital'][d60H10sign];
 
         let ch5 = (isEasy
             ? '<strong>Karma de carreira de vidas passadas</strong><br><br>'

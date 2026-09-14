@@ -2210,7 +2210,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Conexión de erudito/comerciante de vidas pasadas. Karma matrimonial intelectual. Almas que estudiaron juntas.',
             'Conexión de familia/protector de vidas pasadas. Karma matrimonial de vínculo emocional profundo. Almas que se cuidaron mutuamente.',
             'Conexión de realeza/nobleza de vidas pasadas. Karma matrimonial espléndido y respetado. Almas que gobernaron juntas.',
-            'Past life healer/servant connection. Service and devotion marriage karma. Souls who helped others together.',
+            'Conexión de sanador/servidor de vidas pasadas. Karma matrimonial de servicio y devoción. Almas que ayudaron a otros juntas.',
             'Conexión de diplomático/artista de vidas pasadas. Karma matrimonial armonioso y bello. Almas que buscaron equilibrio juntas.',
             'Conexión de practicante/místico de vidas pasadas. Karma matrimonial intenso y transformador. Almas que compartieron vida y muerte.',
             'Conexión de sabio/explorador de vidas pasadas. Karma matrimonial libre y expansivo. Pareja extranjera posible.',
@@ -2292,9 +2292,9 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const careerKarma = ['militar/liderazgo/deportes','finanzas/arte/agricultura','educación/medios/comercio','enfermería/inmuebles/hostelería','política/entretenimiento/gestión','médica/análisis/servicio','derecho/diplomacia/diseño','investigación/medicina','educación/religión/extranjero','administración/construcción/funcionario','tecnología/ciencia/innovación','arte/espiritualidad/hospital'][d60H10sign];
 
         let ch5 = (isEasy
-            ? '<strong>Past life career karma</strong><br><br>'
+            ? '<strong>Karma profesional de vidas pasadas</strong><br><br>'
             : '<strong>D60 Casa 10 (carrera): ' + SIGNS[d60H10sign] + ' ' + SIGN_SYMBOLS[d60H10sign] + '</strong> (10 lord: ' + (RULER_NAMES[d60H10lord]||d60H10lord) + ')<br><br>');
-        ch5 += 'Past life career karma in <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
+        ch5 += 'Karma profesional de vidas pasadas en <strong>' + careerKarma + '</strong> direction. Natural attraction to this field.<br>';
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
