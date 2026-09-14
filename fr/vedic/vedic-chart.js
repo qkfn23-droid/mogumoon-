@@ -1103,15 +1103,15 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     } else {
         h2planets.forEach(p => {
             const pWealth = {
-                'Sun': 'Income through authority and status. Potential earnings from government or public sectors.',
-                'Moon': 'Fluctuating financial situation. Income possible in public-facing businesses or food & beverage industries.',
-                'Mars': 'Aggressive investment tendencies. Income from real estate, technology, or military-related fields.',
-                'Mercury': 'Earning money through intellectual abilities. Wealth from writing, education, communications, and IT.',
-                'Jupiter': 'Most auspicious placement! Abundant wealth fortune. Great income from education, law, or religious fields.',
-                'Venus': 'Accumulates wealth through luxury goods, art, entertainment, and fashion. Abundant dining life.',
-                'Saturn': 'Slowly and steadily accumulates wealth. Difficulties early on but stabilizes after middle age.',
-                'Rahu': 'Earns money through unconventional methods. Sudden wealth from foreign, technology, or innovation sectors.',
-                'Ketu': 'Indifference to wealth. Values spiritual matters over material ones; watch for sudden losses.'
+                'Sun': 'Revenus par autorite et statut. Gains potentiels du gouvernement ou secteur public.',
+                'Moon': 'Situation financiere fluctuante. Revenus possibles dans les affaires publiques ou la restauration.',
+                'Mars': 'Tendances d\'investissement agressives. Revenus de l\'immobilier, technologie ou domaines militaires.',
+                'Mercury': 'Gagner de l\'argent par les capacites intellectuelles. Richesse de l\'ecriture, education et IT.',
+                'Jupiter': 'La position la plus auspicieuse ! Fortune abondante. Grands revenus de l\'education, droit ou religion.',
+                'Venus': 'Accumule la richesse par articles de luxe, art, divertissement et mode.',
+                'Saturn': 'Accumule lentement et regulierement. Difficultes au debut mais stabilisation apres la cinquantaine.',
+                'Rahu': 'Gagne de l\'argent par des methodes non conventionnelles. Richesse soudaine de l\'etranger.',
+                'Ketu': 'Indifference a la richesse. Valorise le spirituel sur le materiel ; attention aux pertes soudaines.'
             };
             wealthText += isEasy ? `${pWealth[p.id] || ''} ` : `${p.symbol} ${p.name}: ${pWealth[p.id] || ''} `;
         });
@@ -1201,18 +1201,18 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
         const venusHouse = houseOf(venus.sign);
         spouseText += isEasy ? '<br><br>' : `<br><br><strong>Venus Position (${venusHouse}th):</strong> `;
         const venusHouseInterp = {
-            1: 'Attractive appearance. Enjoys romance and falls in love easily.',
-            2: 'Wealth comes through spouse. Beautiful voice and gourmet tastes.',
-            3: 'Artistic communication skills. Pleasant relationships with siblings.',
-            4: 'Happiness at home with a beautiful residence. Strong influence from mother.',
-            5: 'A life rich in romance. Good relationship with children. Joy in creative work.',
-            6: 'Service-oriented attitude in romance. Possibility of workplace romance.',
-            7: 'Very attractive spouse. A strong indicator of happy married life.',
-            8: 'Deep and transformative love. Secret romance. Spouse\'s wealth.',
-            9: 'Romance abroad. Connection with a teacher or mentor. Philosophical love.',
-            10: 'Socially recognized marriage. Meeting through career.',
-            11: 'From friends to lovers. Finding connections through social activities.',
-            12: 'Secret romance. Foreign connections. Spiritual love.'
+            1: 'Apparence attrayante. Apprecie la romance et tombe amoureux facilement.',
+            2: 'La richesse vient par le partenaire. Belle voix et gouts gourmets.',
+            3: 'Competences de communication artistiques. Relations agreables avec les freres/soeurs.',
+            4: 'Bonheur a la maison avec belle residence. Forte influence de la mere.',
+            5: 'Une vie riche en romance. Bonne relation avec les enfants.',
+            6: 'Attitude de service dans la romance. Possibilite de romance au travail.',
+            7: 'Partenaire tres attrayant. Fort indicateur de vie conjugale heureuse.',
+            8: 'Amour profond et transformateur. Romance secrete. Richesse du partenaire.',
+            9: 'Romance a l\'etranger. Connexion avec un professeur ou mentor.',
+            10: 'Mariage socialement reconnu. Rencontre par la carriere.',
+            11: 'D\'amis a amoureux. Connexions par activites sociales.',
+            12: 'Romance secrete. Connexions etrangeres. Amour spirituel.'
         };
         spouseText += venusHouseInterp[venusHouse] || '';
     }
