@@ -779,7 +779,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
                 ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Faites attention aux villes, lieux de travail ou voyages dans cette direction.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favorise mais d\'autres possibilites existent.' : ''}
-                ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
+                ${agreement <= 1 ? '<br>Indicateurs disperses — le partenaire peut venir de differentes directions. Gardez l\'esprit ouvert.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
             </div>
         </div>
@@ -2321,7 +2321,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const wealthKarma = ['Instinct de richesse autodidacte.','Environnement abondant des vies passees.','Construction intellectuelle de richesse.','Richesse familiale/immobiliere.','Richesse par l\'autorite.','Richesse par le service. Frugal.','Richesse par partenariat.','Richesse des autres (heritage).','La fortune apporte la richesse. Etranger.','Lent mais sur. Riche apres la cinquantaine.','Richesse par l\'innovation. Non conventionnel.','Activite spirituelle et richesse. Donner.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
+            ch6 += isEasy ? '<br>' : '<br><strong>Planetes D60 en 2e :</strong><br>';
             d60H2planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Bonnes connexions de richesse des vies passees — abondance dans cette vie aussi.' : 'Lecons de richesse des vies passees. Un effort regulier peut les surmonter.') + '<br>';

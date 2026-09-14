@@ -779,7 +779,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
                 ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Preste atencao a cidades, locais de trabalho ou viagens nesta direcao.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favorecido mas outras possibilidades existem.' : ''}
-                ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
+                ${agreement <= 1 ? '<br>Indicadores dispersos — parceiro pode vir de varias direcoes. Mantenha a mente aberta.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
             </div>
         </div>
@@ -2321,7 +2321,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const wealthKarma = ['Instinto de riqueza autodidata.','Ambiente abundante de vidas passadas.','Construcao intelectual de riqueza.','Riqueza familiar/imobiliaria.','Riqueza por autoridade.','Riqueza por servico. Frugal.','Riqueza por parceria.','Riqueza de outros (heranca).','Fortuna traz riqueza. Exterior.','Lento mas seguro. Rico apos meia-idade.','Riqueza de inovacao. Nao convencional.','Atividade espiritual e riqueza. Dar.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
+            ch6 += isEasy ? '<br>' : '<br><strong>Planetas D60 na 2a:</strong><br>';
             d60H2planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Boas conexoes de riqueza de vidas passadas — abundancia nesta vida tambem.' : 'Licoes de riqueza de vidas passadas. Esforco constante pode supera-las.') + '<br>';

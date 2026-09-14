@@ -779,7 +779,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
                 ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + '. Achte auf Städte, Arbeitsplätze oder Reisen in dieser Richtung.' : ''}
                 ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
                 ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' bevorzugt aber andere Möglichkeiten bestehen.' : ''}
-                ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
+                ${agreement <= 1 ? '<br>Indikatoren verteilt — Partner kann aus verschiedenen Richtungen kommen. Bleib offen.' : ''}
                 ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
             </div>
         </div>
@@ -2321,7 +2321,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const wealthKarma = ['Selbstgemachter Wohlstandsinstinkt.','Reiches Umfeld in früheren Leben.','Intellektueller Wohlstandsaufbau.','Familien-/Immobilienwohlstand.','Wohlstand durch Autorität.','Wohlstand durch Dienst. Sparsam.','Partnerschaftswohlstand.','Wohlstand anderer (Erbschaft).','Glück bringt Wohlstand. Ausland.','Langsam aber sicher. Reich nach der Lebensmitte.','Innovationswohlstand. Unkonventionell.','Spirituelle Aktivität und Wohlstand. Geben.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
+            ch6 += isEasy ? '<br>' : '<br><strong>D60 2. Haus Planeten:</strong><br>';
             d60H2planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Gute Wohlstandsverbindungen aus früheren Leben — Überfluss auch in diesem Leben.' : 'Wohlstandslektionen aus früheren Leben. Stetiger Einsatz kann sie überwinden.') + '<br>';
