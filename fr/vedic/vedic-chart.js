@@ -1529,7 +1529,7 @@ function renderEducation(positions, lagnaSign) {
     text += isEasy ? '<br><br><strong>Éducation supérieure :</strong> ' : `<br><br><strong>5e Maison (Éducation supérieure) :</strong> ${SIGNS[h5sign]}. `;
     if (h5.length > 0) {
         h5.forEach(p => {
-            const h5p = { Sun: 'Excels in leadership/political science', Moon: 'art/psychology talent', Mars: 'Engineering/technology/sports talent', Mercury: 'Math/language/business genius', Jupiter: 'Best placement! Scholar/professor/researcher', Venus: 'art/design/music talent', Saturn: 'Late academics but deep research' };
+            const h5p = { Sun: 'Excelle en leadership/sciences politiques', Moon: 'talent en art/psychologie', Mars: 'Talent en ingenierie/technologie/sport', Mercury: 'Genie en maths/langues/affaires', Jupiter: 'Meilleure position ! Erudit/professeur/chercheur', Venus: 'talent en art/design/musique', Saturn: 'Academique tardif mais recherche profonde' };
             text += isEasy ? `${h5p[p.id] || 'influences academics'}. ` : `${p.name}: ${h5p[p.id] || 'influences academics'}. `;
         });
     } else {
@@ -2413,7 +2413,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<strong>' + (isEasy ? 'Younger siblings:' : 'D3 3 house (younger) — ' + SIGNS[d3_3sign] + ':') + '</strong><br>';
         if (d3_3planets.length > 0) {
-            const bro = {Sun:'Younger sibling has leadership and authority',Moon:'Emotionally close with younger sibling',Mars:'Active and brave younger sibling. Arguments possible',Mercury:'Younger sibling is intellectual with good communication',Jupiter:'Younger sibling is wise and brings fortune',Venus:'Younger sibling is charming and artistic',Saturn:'Difficulty with younger sibling. Age gap possible',Rahu:'Younger sibling is unique or foreign-related',Ketu:'Distance with younger sibling. Spiritual connection'};
+            const bro = {Sun:'Le frere/soeur cadet a du leadership et de l\'autorite',Moon:'Emotionnellement proche du frere/soeur cadet',Mars:'Frere/soeur cadet actif et courageux. Disputes possibles',Mercury:'Frere/soeur cadet intellectuel avec bonne communication',Jupiter:'Frere/soeur cadet sage qui apporte la fortune',Venus:'Frere/soeur cadet charmant et artistique',Saturn:'Difficulte avec le frere/soeur cadet. Ecart d\'age possible',Rahu:'Frere/soeur cadet unique ou lie a l\'etranger',Ketu:'Distance avec le frere/soeur cadet. Connexion spirituelle'};
             d3_3planets.forEach(p => { html += isEasy ? (bro[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (bro[p.id]||'') + '<br>'; });
         } else html += isEasy ? '' : '3rd house empty — check 3rd lord position.<br>';
 
@@ -2425,7 +2425,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (marsD3) {
             const marsH = ((marsD3.dSign - dLagnaSign + 12) % 12) + 1;
             html += isEasy ? '<br>' : '<br><strong>♂ Mars (sibling karaka):</strong> ';
-            html += marsH <= 4 ? 'Close sibling relationship. Courageous siblings.' : marsH <= 8 ? 'Sibling conflicts or transformation through siblings.' : 'Siblings abroad or spiritual tendency.';
+            html += marsH <= 4 ? 'Relation fraternelle proche. Freres/soeurs courageux.' : marsH <= 8 ? 'Conflits fraternels ou transformation par les freres/soeurs.' : 'Freres/soeurs a l\'etranger ou tendance spirituelle.';
         }
         html += '</div></div>';
 
@@ -2594,18 +2594,18 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immune, feet, mental health'];
         html += 'Watch for: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
-            const dis = {Sun:'Watch for eye and heart related disease',Moon:'Mental health and water retention issues',Mars:'Watch for accidents, surgery, burns',Mercury:'Nervous system and skin problems',Jupiter:'Watch for liver and overweight',Venus:'Watch for kidney, diabetes, STD',Saturn:'Chronic disease, joint problems',Rahu:'Unknown cause disease, addiction',Ketu:'Lowered immunity, allergy'};
+            const dis = {Sun:'Attention aux maladies des yeux et du coeur',Moon:'Sante mentale et problemes de retention d\'eau',Mars:'Attention aux accidents, chirurgie, brulures',Mercury:'Systeme nerveux et problemes de peau',Jupiter:'Attention au foie et au surpoids',Venus:'Attention aux reins, diabete, MST',Saturn:'Maladie chronique, problemes articulaires',Rahu:'Maladie de cause inconnue, addiction',Ketu:'Immunite reduite, allergie'};
             d30_6planets.forEach(p => { html += isEasy ? (dis[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (dis[p.id]||'') + '<br>'; });
         }
 
         html += '<br><strong>' + (isEasy ? 'Danger/Surgery:' : 'D30 8 house (danger/surgery) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
         if (d30_8planets.length > 0) {
-            d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>'; });
+            d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Precaution danger/accident. Assurance importante.' : 'Protege en crise.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaution danger/accident. Assurance importante.' : 'Protege en crise.') + '<br>'; });
         } else html += isEasy ? 'Few big dangers.<br>' : '8th house empty — few major dangers.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Hospitalization:' : 'D30 12th house (hospitalization/loss) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
-            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalization possible.' : 'Spiritual healing and recovery.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalization possible. Foreign medical.' : 'Spiritual healing and recovery.') + '<br>'; });
+            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalisation possible.' : 'Guerison spirituelle et recuperation.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalisation possible. Medecine etrangere.' : 'Guerison spirituelle et recuperation.') + '<br>'; });
         } else html += isEasy ? 'Low hospitalization risk.<br>' : '12th house empty — hospitalization risk is low.<br>';
         html += '</div></div>';
 

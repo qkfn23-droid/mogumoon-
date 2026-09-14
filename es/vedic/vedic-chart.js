@@ -2425,7 +2425,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (marsD3) {
             const marsH = ((marsD3.dSign - dLagnaSign + 12) % 12) + 1;
             html += isEasy ? '<br>' : '<br><strong>♂ Mars (sibling karaka):</strong> ';
-            html += marsH <= 4 ? 'Close sibling relationship. Courageous siblings.' : marsH <= 8 ? 'Sibling conflicts or transformation through siblings.' : 'Siblings abroad or spiritual tendency.';
+            html += marsH <= 4 ? 'Relacion fraternal cercana. Hermanos valientes.' : marsH <= 8 ? 'Conflictos fraternales o transformacion a traves de hermanos.' : 'Hermanos en el extranjero o tendencia espiritual.';
         }
         html += '</div></div>';
 
@@ -2600,12 +2600,12 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<br><strong>' + (isEasy ? 'Peligro/Cirugía:' : 'D30 8 house (danger/surgery) — ' + SIGNS[d30_8sign] + ':') + '</strong><br>';
         if (d30_8planets.length > 0) {
-            d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Danger/accident caution. Insurance important.' : 'Protected in crisis.') + '<br>'; });
+            d30_8planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Precaucion de peligro/accidente. Seguro importante.' : 'Protegido en crisis.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Precaucion de peligro/accidente. Seguro importante.' : 'Protegido en crisis.') + '<br>'; });
         } else html += isEasy ? 'Pocos peligros grandes.<br>' : 'Casa 8 vacía — pocos peligros grandes.<br>';
 
         html += '<br><strong>' + (isEasy ? 'Hospitalización:' : 'D30 12th house (hospitalization/loss) — ' + SIGNS[d30_12sign] + ':') + '</strong><br>';
         if (d30_12planets.length > 0) {
-            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalization possible.' : 'Spiritual healing and recovery.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalization possible. Foreign medical.' : 'Spiritual healing and recovery.') + '<br>'; });
+            d30_12planets.forEach(p => { html += isEasy ? (p.natural === 'malefic' ? 'Hospitalizacion posible.' : 'Sanacion espiritual y recuperacion.') + '<br>' : '• ' + p.name + ': ' + (p.natural === 'malefic' ? 'Hospitalizacion posible. Medicina extranjera.' : 'Sanacion espiritual y recuperacion.') + '<br>'; });
         } else html += isEasy ? 'Bajo riesgo de hospitalización.<br>' : 'Casa 12 vacía — el riesgo de hospitalización es bajo.<br>';
         html += '</div></div>';
 
