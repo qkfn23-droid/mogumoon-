@@ -966,7 +966,7 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period. Calculated from Moon nakshatra position.<br><br>';
     html += isEasy ?
         '</div></div>' :
-        '🌙 Birth Moon: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
+        '🌙 Geburtsmond: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
 
     // Build all mahadasha periods with correct first period
     const periods = [];
@@ -1802,7 +1802,7 @@ function renderRemedy(positions, lagnaSign) {
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">All planets in good positions! No special remedies needed. Wear the gem of your Lagna ruler for luck.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">Alle Planeten in guten Positionen! Keine besonderen Heilmittel nötig. Wear the gem of your Lagna ruler for luck.</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;
@@ -2098,17 +2098,17 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
 
         const pastLifeThemes = [
-            'Warrior, Leader — Wielded power, natural leadership and decisiveness imprinted on the soul.',
-            'Artist, Farmer — Worked with nature, deep instinct for stability and material beauty.',
-            'Scholar, Merchant — Lived by knowledge, versatility and curiosity remain. Natural talent for language.',
-            'Protector, Nurturer — Cared for others, deep sensitivity and maternal instinct. Strong home karma.',
-            'Royalty, Priest — Held high status, natural authority and dignity. Standing on stage is soul instinct.',
-            'Healer, Server — Practiced medicine or service, excellent analytical skills. Helping others is soul duty.',
-            'Diplomat, Artist — Pursued harmony and beauty, skilled in relationships. Partnership is core theme.',
-            'Practitioner, Alchemist — Underwent deep transformation, strong attraction to secrets and mystery.',
+            'Krieger, Anführer — Übte Macht aus, natürliche Führung und Entschlossenheit in der Seele eingeprägt.',
+            'Künstler, Bauer — Arbeitete mit der Natur, tiefer Instinkt für Stabilität und materielle Schönheit.',
+            'Gelehrter, Händler — Lebte vom Wissen, Vielseitigkeit und Neugier bleiben. Natürliches Sprachtalent.',
+            'Beschützer, Betreuer — Sorgte für andere, tiefe Sensibilität und mütterlicher Instinkt. Starkes Zuhause-Karma.',
+            'Königtum, Priester — Hatte hohen Status, natürliche Autorität und Würde. Auf der Bühne stehen ist Seeleninstinkt.',
+            'Heiler, Diener — Praktizierte Medizin oder Dienst, ausgezeichnete analytische Fähigkeiten. Anderen helfen ist Seelenpflicht.',
+            'Diplomat, Künstler — Verfolgte Harmonie und Schönheit, geschickt in Beziehungen. Partnerschaft ist Kernthema.',
+            'Praktiker, Alchemist — Durchlief tiefe Transformation, starke Anziehung zu Geheimnissen und Mysterien.',
             'Weiser, Entdecker — Suchte Wahrheit, spirituelle Weisheit und Abenteuerlust bleiben. Höheres Bildungs-Karma.',
-            'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
-            'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
+            'Beamter, Architekt — Baute Ordnung, starke Geduld und Verantwortung. Disziplin in der Seele eingeprägt.',
+            'Beamter, Wächter — Baute soziale Ordnung, Organisationsgeist. Saturn-regiert, Pflicht in der Seele eingeprägt.',
             'Medium, Künstler — Kommunizierte mit der spirituellen Welt, extrem starke Intuition. Am nächsten zur Befreiung.'
         ];
 
@@ -2129,7 +2129,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         function deityTag(d) {
             if (!d.deity || isEasy) return '';
             const c = d.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-            return ' — deity: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span>';
+            return ' — Gottheit: <strong>' + d.deity.name + '</strong>(' + d.deity.ko + ') <span style="color:' + c + ';font-weight:700;">' + (d.deity.nature === 'benefic' ? 'Günstig' : 'Ungünstig') + '</span>';
         }
 
         const houseThemes = ['','Self/Existence','Wealth/Value','Communication/Learning','Home/Rest','Creation/Love','Service/Trial','Relationship/Partner','Transformation/Secret','Wisdom/Religion','Society/Career','Wish/Gain','Liberation/Transcendence'];
@@ -2335,13 +2335,13 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const lagnaD2 = getDeity(lagnaSidereal);
             if (lagnaD2.deity) {
                 const lc = lagnaD2.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                ch7 += '<div style="padding:4px 0;">⬆ Lagna → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span></div>';
+                ch7 += '<div style="padding:4px 0;">⬆ Lagna → <strong>' + lagnaD2.deity.name + '</strong>(' + lagnaD2.deity.ko + ') <span style="color:' + lc + ';">' + (lagnaD2.deity.nature === 'benefic' ? 'Günstig' : 'Ungünstig') + '</span></div>';
             }
             positions.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 if (pD.deity) {
                     const c = pD.deity.nature === 'benefic' ? '#5cb85c' : '#d9534f';
-                    ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? 'Benefic' : 'Malefic') + '</span></div>';
+                    ch7 += '<div style="padding:4px 0;">' + p.symbol + ' ' + p.name + ' → <strong>' + pD.deity.name + '</strong>(' + pD.deity.ko + ') <span style="color:' + c + ';">' + (pD.deity.nature === 'benefic' ? 'Günstig' : 'Ungünstig') + '</span></div>';
                 }
             });
             html += subChapter('🕉️', 'Planetare Gottheitenliste', ch7);
