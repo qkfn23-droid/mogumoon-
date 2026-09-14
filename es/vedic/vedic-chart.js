@@ -2014,7 +2014,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moon4 = d12_4planets.find(p => p.id === 'Moon');
         const sun9 = d12_9planets.find(p => p.id === 'Sun');
         if (moon4) html += (isEasy ? 'Luna en posición de madre — conexión profunda con la madre.' : 'Luna en casa 4 — conexión profunda con la madre.') + '<br>';
-        if (sun9) html += (isEasy ? 'Sun in father position — deep connection with father.' : 'Sun in 9th house — deep connection with father.') + '<br>';
+        if (sun9) html += (isEasy ? 'Sol en posición de padre — conexión profunda con el padre.' : 'Sol en casa 9 — conexión profunda con el padre.') + '<br>';
         html += '</div></div>';
 
     } else if (division === 60) {
@@ -2109,7 +2109,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             'Sage, Explorer — Sought truth, spiritual wisdom and adventurousness remain. Higher learning karma.',
             'Official, Architect — Built order, strong patience and responsibility. Discipline imprinted on soul.',
             'Official, Guardian — Built social order, organizational spirit. Saturn-ruled, duty imprinted on soul.',
-            'Medium, Artist — Communed with spiritual world, extremely strong intuition. Closest to liberation.'
+            'Médium, Artista — Comulgó con el mundo espiritual, intuición extremadamente fuerte. Más cercano a la liberación.'
         ];
 
         // 행성별 D60 사인 해석 (전통)
@@ -2144,7 +2144,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         // ─── 소챕터 1: soul의 정체성 ───
         const lagnaD = getDeity(lagnaSidereal);
         let ch1 = isEasy
-            ? '<strong>Past life identity</strong>' + deityTag(lagnaD) + '<br><br>'
+            ? '<strong>Identidad de vidas pasadas</strong>' + deityTag(lagnaD) + '<br><br>'
             : '<strong>D60 Lagna: ' + SIGNS[dLagnaSign] + ' ' + SIGN_SYMBOLS[dLagnaSign] + '</strong> (ruler: ' + (RULER_NAMES[d60_1lord]||d60_1lord) + ')' + deityTag(lagnaD) + '<br><br>';
         ch1 += pastLifeThemes[dLagnaSign] + '<br>';
         if (lagnaD.deity) {
@@ -2163,7 +2163,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const sunD60 = dPositions.find(p => p.id === 'Sun');
         if (sunD60) {
             const sunD = getDeity(sunD60.sidereal);
-            let ch2 = (isEasy ? '<strong>Sun Past Life Memory</strong>' : '<strong>D60 Sun: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
+            let ch2 = (isEasy ? '<strong>Memoria del Sol de Vidas Pasadas</strong>' : '<strong>D60 Sun: ' + SIGNS[sunD60.dSign] + ' ' + SIGN_SYMBOLS[sunD60.dSign] + '</strong>') + deityTag(sunD) + '<br><br>';
             ch2 += (d60PlanetInSign.Sun[sunD60.dSign] || '') + '<br>';
             if (sunD.deity) {
                 ch2 += '<br>' + (isEasy ?
@@ -2181,7 +2181,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const moonD60 = dPositions.find(p => p.id === 'Moon');
         if (moonD60) {
             const moonD = getDeity(moonD60.sidereal);
-            let ch3 = (isEasy ? '<strong>Moon Past Life Memory</strong>' : '<strong>D60 Moon: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
+            let ch3 = (isEasy ? '<strong>Memoria de la Luna de Vidas Pasadas</strong>' : '<strong>D60 Moon: ' + SIGNS[moonD60.dSign] + ' ' + SIGN_SYMBOLS[moonD60.dSign] + '</strong>') + deityTag(moonD) + '<br><br>';
             ch3 += (d60PlanetInSign.Moon[moonD60.dSign] || '') + '<br>';
             if (moonD.deity) {
                 ch3 += '<br>' + (isEasy ?
@@ -2220,7 +2220,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         ];
 
         let ch4 = (isEasy
-            ? '<strong>Past Life Spouse Connection</strong><br><br>'
+            ? '<strong>Conexión de Pareja de Vidas Pasadas</strong><br><br>'
             : '<strong>D60 Casa 7 (pareja): ' + SIGNS[d60H7sign] + ' ' + SIGN_SYMBOLS[d60H7sign] + '</strong> (7 lord: ' + (RULER_NAMES[d60H7lord]||d60H7lord) + ')<br><br>');
         ch4 += spouseKarmaBySign[d60H7sign] + '<br>';
 
@@ -2318,10 +2318,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         let ch6 = (isEasy
             ? '<strong>Past life wealth karma</strong><br><br>'
             : '<strong>D60 Casa 2 (riqueza): ' + SIGNS[d60H2sign] + ' ' + SIGN_SYMBOLS[d60H2sign] + '</strong><br><br>');
-        const wealthKarma = ['Self-made wealth instinct.','Abundant environment past life.','Intellectual wealth building.','Family/property wealth.','Wealth through authority.','Wealth through service. Frugal.','Partnership wealth.','Others wealth (inheritance).','Fortune brings wealth. Foreign.','Slow but sure. Rich after midlife.','Innovation wealth. Unconventional.','Spiritual activity and wealth. Giving.'][d60H2sign];
+        const wealthKarma = ['Instinto de riqueza autodidacta.','Ambiente abundante de vidas pasadas.','Construcción intelectual de riqueza.','Riqueza familiar/inmobiliaria.','Riqueza por autoridad.','Riqueza por servicio. Frugal.','Riqueza por asociación.','Riqueza de otros (herencia).','La fortuna trae riqueza. Extranjero.','Lento pero seguro. Rico después de la mediana edad.','Riqueza de innovación. No convencional.','Actividad espiritual y riqueza. Dar.'][d60H2sign];
         ch6 += wealthKarma + '<br>';
         if (d60H2planets.length > 0) {
-            ch6 += isEasy ? '<br>' : '<br><strong>D60 2 house planet:</strong><br>';
+            ch6 += isEasy ? '<br>' : '<br><strong>Planetas D60 en casa 2:</strong><br>';
             d60H2planets.forEach(p => {
                 const pD = getDeity(p.sidereal);
                 ch6 += (isEasy ? '' : p.symbol + ' ' + p.name + deityTag(pD) + ' — ') + (p.natural === 'benefic' ? 'Buenas conexiones de riqueza de vidas pasadas — abundancia en esta vida también.' : 'Lecciones de riqueza de vidas pasadas. El esfuerzo constante puede superarlas.') + '<br>';
@@ -2367,7 +2367,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         } else if (beneficCount >= 5) {
             ch8 += isEasy ?
                 '✨ <strong>Abundante buena energía de vidas pasadas.</strong> Protegido en muchas áreas de la vida.' :
-                '✨ <strong>Abundant past life merit.</strong> Benefics dominate — protected in many areas.';
+                '✨ <strong>Mérito abundante de vidas pasadas.</strong> Los benéficos dominan — protegido en muchas áreas.';
             if (maleficPlanets.length > 0) ch8 += isEasy ?
                 ' Sin embargo, algunas áreas necesitan más esfuerzo.' :
                 ' Sin embargo, existen desafíos kármicos en <strong>' + maleficPlanets.map(p => p.name).join(', ') + '</strong>. Practica mantras y caridad para estos planetas.';
@@ -2566,7 +2566,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellect!</strong> Talent in math, language, analysis.' : (isEasy ? 'Habilidad intelectual bien expresada.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Mercurio (Aprendizaje) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Outstanding intellect!</strong> Talent in math, language, analysis.' : (isEasy ? 'Habilidad intelectual bien expresada.' : 'Habilidad intelectual en el área de casa ' + mH + '.')) + '<br>';
         }
         html += '</div></div>';
 
@@ -2586,7 +2586,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Sol (Vitalidad) → ' + sH + 'th:</strong> ') + (isEasy ? 'Fuente de vitalidad: ' : 'Source of vitality in ' + sH + 'th house area. ') + ([,'Energía del yo','Vitalidad de actividades de riqueza','Energía de la comunicación','Estabilidad del hogar','Vitalidad de la creación','Energía del servicio','Vitalidad de las relaciones','Energía de la transformación','Vitalidad de los viajes','Energía de la carrera','Vitalidad de la sociedad','Energía de la práctica espiritual'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sol (Vitalidad) → ' + sH + 'th:</strong> ') + (isEasy ? 'Fuente de vitalidad: ' : 'Fuente de vitalidad en el área de casa ' + sH + '. ') + ([,'Energía del yo','Vitalidad de actividades de riqueza','Energía de la comunicación','Estabilidad del hogar','Vitalidad de la creación','Energía del servicio','Vitalidad de las relaciones','Energía de la transformación','Vitalidad de los viajes','Energía de la carrera','Vitalidad de la sociedad','Energía de la práctica espiritual'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석
