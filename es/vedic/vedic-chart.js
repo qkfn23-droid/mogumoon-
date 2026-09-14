@@ -597,71 +597,71 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 사인별 career 경향
     const careerBySgn = [
-        'Leadership, military, sports, entrepreneurship (fire pioneer)',
-        'Finance, agriculture, arts, real estate, food (stability & material)',
-        'Communication, media, writing, teaching, marketing (intellectual)',
-        'Nursing, caregiving, cooking, hospitality, counseling (emotional care)',
-        'Politics, entertainment, leadership, creativity (shining stage)',
-        'Medicine, accounting, analysis, editing, health/wellness (precise service)',
-        'Law, diplomacy, design, fashion, mediation (balance & beauty)',
-        'Research, investigation, medicine, occult, psychology (depth & transformation)',
-        'Education, travel, philosophy, religion, publishing (expansion & exploration)',
-        'Government, construction, management, CEO, organizational leader (system & authority)',
-        'Technology, IT, invention, social activism, science (innovation)',
-        'Arts, spirituality, healing, music, charity (transcendence & service)'
+        'Liderazgo, militar, deportes, emprendimiento (pionero de fuego)',
+        'Finanzas, agricultura, artes, bienes raíces, alimentación (estabilidad y material)',
+        'Comunicación, medios, escritura, enseñanza, marketing (intelectual)',
+        'Enfermería, cuidado, cocina, hostelería, consejería (cuidado emocional)',
+        'Política, entretenimiento, liderazgo, creatividad (escenario brillante)',
+        'Medicina, contabilidad, análisis, edición, salud/bienestar (servicio preciso)',
+        'Derecho, diplomacia, diseño, moda, mediación (equilibrio y belleza)',
+        'Investigación, medicina, ocultismo, psicología (profundidad y transformación)',
+        'Educación, viajes, filosofía, religión, editorial (expansión y exploración)',
+        'Gobierno, construcción, gestión, CEO, líder organizacional (sistema y autoridad)',
+        'Tecnología, TI, invención, activismo social, ciencia (innovación)',
+        'Artes, espiritualidad, sanación, música, caridad (trascendencia y servicio)'
     ];
 
     // 행성별 spouse career 경향
     const planetCareer = {
-        Sun: 'Government official, politician, doctor, CEO — authoritative positions',
-        Moon: 'Nurse, counselor, chef, hospitality — caregiving/emotional roles',
-        Mars: 'Military, police, surgeon, engineer, athlete',
-        Mercury: 'Writer, teacher, programmer, accountant, merchant',
-        Jupiter: 'Professor, judge, religious leader, consultant, senior professional',
-        Venus: 'Designer, actor, musician, fashion, beauty industry',
-        Saturn: 'Construction, mining, agriculture, management, craftsman',
-        Rahu: 'IT, foreign-related, unconventional careers, research',
-        Ketu: 'Spirituality, alternative medicine, research, ascetic'
+        Sun: 'Funcionario del gobierno, político, doctor, CEO — posiciones autoritarias',
+        Moon: 'Enfermero/a, consejero/a, chef, hostelería — roles de cuidado/emocionales',
+        Mars: 'Militar, policía, cirujano, ingeniero, atleta',
+        Mercury: 'Escritor, profesor, programador, contador, comerciante',
+        Jupiter: 'Profesor, juez, líder religioso, consultor, profesional senior',
+        Venus: 'Diseñador, actor, músico, moda, industria de belleza',
+        Saturn: 'Construcción, minería, agricultura, gestión, artesano',
+        Rahu: 'TI, relacionado con el extranjero, carreras no convencionales, investigación',
+        Ketu: 'Espiritualidad, medicina alternativa, investigación, asceta'
     };
 
     let html = '';
 
     // 1. D9 Lagna 분석 (결혼 후 본인)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🕉️ You After Marriage' : '🕉️ D9 Lagna — You After Marriage: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
+        <div class="interp-title">${isEasy ? '🕉️ Tú Después del Matrimonio' : '🕉️ D9 Lagna — Tú Después del Matrimonio: ' + SIGNS[d9LagnaSign] + ' ' + SIGN_SYMBOLS[d9LagnaSign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'This reveals your true self after marriage and in the second half of life (after 30s).' : 'Navamsa Lagna is in <strong>' + SIGNS[d9LagnaSign] + '</strong>. This reveals your true self after marriage and in the second half of life (after 30s).'}
-            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>Special sign!</strong> Your essence remains unchanged after marriage — inner and outer self are aligned.' : '<br><br><strong>D1 and D9 Lagna in same sign!</strong> Called <strong>Vargottama</strong> — very powerful. Your essence remains unchanged after marriage.') : ''}
-            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'There are energies that strongly influence your personality after marriage.' : '<strong>Planets in D9 1st:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — strongly influence your personality after marriage.') : ''}
+            ${isEasy ? 'Esto revela tu verdadero yo después del matrimonio y en la segunda mitad de la vida (después de los 30).' : 'El Lagna Navamsa está en <strong>' + SIGNS[d9LagnaSign] + '</strong>. Esto revela tu verdadero yo después del matrimonio y en la segunda mitad de la vida (después de los 30).'}
+            ${d9LagnaSign === d1LagnaSign ? (isEasy ? '<br><br><strong>¡Signo especial!</strong> Tu esencia permanece sin cambios después del matrimonio — el yo interior y exterior están alineados.' : '<br><br><strong>¡D1 y D9 Lagna en el mismo signo!</strong> Llamado <strong>Vargottama</strong> — muy poderoso. Tu esencia permanece sin cambios después del matrimonio.') : ''}
+            ${d9H1Planets.length > 0 ? '<br><br>' + (isEasy ? 'Hay energías que influyen fuertemente en tu personalidad después del matrimonio.' : '<strong>Planetas en D9 1ª:</strong> ' + d9H1Planets.map(p => p.symbol + ' ' + p.name).join(', ') + ' — influyen fuertemente en tu personalidad después del matrimonio.') : ''}
         </div>
     </div>`;
 
     // 2. D9 7 house (spouse)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💍 Spouse Character' : '💍 D9 7th House — Spouse Character: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
+        <div class="interp-title">${isEasy ? '💍 Carácter de la Pareja' : '💍 Casa 7 D9 — Carácter de la Pareja: ' + SIGNS[d9H7Sign] + ' ' + SIGN_SYMBOLS[d9H7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' quality partner.' : 'Navamsa 7th house is in <strong>' + SIGNS[d9H7Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>This reveals your spouse\'s core personality. ' + SIGNS[d9H7Sign] + ' energy partner — ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'unique charm') + ' qualities.'}
-            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? 'Positive energy! You receive blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.').join('<br>') : '<strong>Planets in D9 7th:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? 'Benefic! Blessings from your spouse.' : 'Challenge energy — also opportunities for growth in marriage.'}`).join('<br>')) : ''}
+            ${isEasy ? ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'encanto único') + ' cualidad en la pareja.' : 'La casa 7 Navamsa está en <strong>' + SIGNS[d9H7Sign] + '</strong>, regida por <strong>' + RULER_NAMES[d9H7Ruler] + '</strong>.<br><br>Esto revela la personalidad central de tu pareja. Pareja con energía ' + SIGNS[d9H7Sign] + ' — cualidades de ' + ((careerBySgn[d9H7Sign]||'').split(/[（(]/)[1]?.replace(/[）)]/,'') || 'encanto único') + '.'}
+            ${d9H7Planets.length > 0 ? '<br><br>' + (isEasy ? d9H7Planets.map(p => p.natural === 'benefic' ? '¡Energía positiva! Recibes bendiciones de tu pareja.' : 'Energía desafiante — también oportunidades de crecimiento en el matrimonio.').join('<br>') : '<strong>Planetas en D9 7ª:</strong><br>' + d9H7Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${p.natural === 'benefic' ? '¡Benéfico! Bendiciones de tu pareja.' : 'Energía desafiante — también oportunidades de crecimiento en el matrimonio.'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
     // 3. D9 10 house (본인의 Dharma/사명)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💼 Life Purpose' : '💼 D9 10th House — Life Purpose (Dharma): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
+        <div class="interp-title">${isEasy ? '💼 Propósito de Vida' : '💼 Casa 10 D9 — Propósito de Vida (Dharma): ' + SIGNS[d9H10Sign] + ' ' + SIGN_SYMBOLS[d9H10Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? 'The true calling you pursue after maturity.' : 'Navamsa 10th house is in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
-            <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
+            ${isEasy ? 'La verdadera vocación que persigues después de la madurez.' : 'La casa 10 Navamsa está en <strong>' + SIGNS[d9H10Sign] + '</strong>, regida por <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>Mientras la casa 10 de D1 muestra tu carrera, la casa 10 de D9 revela tu <strong>propósito de vida mayor (Dharma)</strong>.'}<br><br>
+            <strong>Dirección del propósito:</strong> ${careerBySgn[d9H10Sign]}
             ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planets in D9 10th:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
     // 4. spouse의 career (파생하우스: D9 4 house = 7 house서 10번째)
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👔 Spouse Career' : '👔 Spouse Career — Derived 10th (D9 4th): ' + SIGNS[d9H4Sign] + ' ' + SIGN_SYMBOLS[d9H4Sign]}</div>
+        <div class="interp-title">${isEasy ? '👔 Carrera de la Pareja' : '👔 Carrera de la Pareja — Casa Derivada 10ª (D9 4ª): ' + SIGNS[d9H4Sign] + ' ' + SIGN_SYMBOLS[d9H4Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '<strong>Derived house:</strong> 10th from 7th (spouse) = D9 4th house shows spouse career.<br><br>D9 4th is in <strong>' + SIGNS[d9H4Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
-            <strong>Spouse career tendency:</strong> ${careerBySgn[d9H4Sign]}
-            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>') : '<strong>Planets in D9 4th (spouse 10th):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: Spouse likely works in ${planetCareer[p.id] || 'specialized field'}`).join('<br>')) : ''}
+            ${isEasy ? '' : '<strong>Casa derivada:</strong> La 10ª desde la 7ª (pareja) = La casa 4 D9 muestra la carrera de la pareja.<br><br>La 4ª D9 está en <strong>' + SIGNS[d9H4Sign] + '</strong>, regida por <strong>' + RULER_NAMES[d9H4Ruler] + '</strong>.<br><br>'}
+            <strong>Tendencia profesional de la pareja:</strong> ${careerBySgn[d9H4Sign]}
+            ${d9H4Planets.length > 0 ? '<br><br>' + (isEasy ? d9H4Planets.map(p => `La pareja probablemente trabaja en ${planetCareer[p.id] || 'campo especializado'}`).join('<br>') : '<strong>Planetas en D9 4ª (10ª de la pareja):</strong><br>' + d9H4Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: La pareja probablemente trabaja en ${planetCareer[p.id] || 'campo especializado'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -669,24 +669,24 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const vargottamaPlanets = d9Positions.filter(p => p.sign === p.d9Sign);
     if (vargottamaPlanets.length > 0) {
         html += `<div class="interp-card">
-            <div class="interp-title">${isEasy ? '⭐ Exceptionally Strong Planets' : '⭐ Vargottama Planets — Exceptionally Strong'}</div>
+            <div class="interp-title">${isEasy ? '⭐ Planetas Excepcionalmente Fuertes' : '⭐ Planetas Vargottama — Excepcionalmente Fuertes'}</div>
             <div class="interp-text">
-                ${isEasy ? 'These planets are exceptionally powerful and act consistently throughout life.' : 'Planets in the same sign in both D1 and D9 are called <strong>Vargottama</strong>. Very powerful, acting consistently throughout life.'}<br><br>
-                ${isEasy ? 'Exceptionally strong energy acts consistently throughout your life!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In both D1 and D9 ${SIGNS[p.sign]} — this planet's energy is exceptionally strong!`).join('<br>')}
+                ${isEasy ? 'Estos planetas son excepcionalmente poderosos y actúan consistentemente durante toda la vida.' : 'Los planetas en el mismo signo en D1 y D9 se llaman <strong>Vargottama</strong>. Muy poderosos, actuando consistentemente durante toda la vida.'}<br><br>
+                ${isEasy ? '¡Energía excepcionalmente fuerte que actúa consistentemente en tu vida!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: En D1 y D9 en ${SIGNS[p.sign]} — ¡la energía de este planeta es excepcionalmente fuerte!`).join('<br>')}
             </div>
         </div>`;
     }
 
     // 6. spouse 방향 분석 (UL + A7 + D1 7 house + D9 7 house 종합)
     const DIRECTIONS = {
-        0:'East', 1:'South', 2:'West', 3:'North',
-        4:'East', 5:'South', 6:'West', 7:'North',
-        8:'East', 9:'South', 10:'West', 11:'North'
+        0:'Este', 1:'Sur', 2:'Oeste', 3:'Norte',
+        4:'Este', 5:'Sur', 6:'Oeste', 7:'Norte',
+        8:'Este', 9:'Sur', 10:'Oeste', 11:'Norte'
     };
     const DIR_DETAIL = {
-        0:'East (Aries — fire)',1:'South (Taurus — earth)',2:'West (Gemini — air)',3:'North (Cancer — water)',
-        4:'East (Leo — fire)',5:'South (Virgo — earth)',6:'West (Libra — air)',7:'North (Scorpio — water)',
-        8:'East (Sagittarius — fire)',9:'South (Capricorn — earth)',10:'West (Aquarius — air)',11:'North (Pisces — water)'
+        0:'Este (Aries — fuego)',1:'Sur (Tauro — tierra)',2:'Oeste (Géminis — aire)',3:'Norte (Cáncer — agua)',
+        4:'Este (Leo — fuego)',5:'Sur (Virgo — tierra)',6:'Oeste (Libra — aire)',7:'Norte (Escorpio — agua)',
+        8:'Este (Sagitario — fuego)',9:'Sur (Capricornio — tierra)',10:'Oeste (Acuario — aire)',11:'Norte (Piscis — agua)'
     };
 
     // Arudha Pada 계산 함수
@@ -727,12 +727,12 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
 
     // 방향 집계 — 6가지 지표
     const dirSources = [
-        {name:'D1 7th', sign: d1H7Sign, desc:'Spouse house in birth chart'},
-        {name:'D9 7th', sign: d9H7Sign, desc:'Spouse house in Navamsa'},
-        {name:'D9 7th Lord', sign: d9H7RulerSign, desc:'Where D9 7th lord goes'},
-        {name:'D9 Venus', sign: venusD9Sign, desc:'Spouse karaka in Navamsa'},
-        {name:'Upapada (UL)', sign: ulSign, desc:'12th Arudha — spouse background'},
-        {name:'Darapada (A7)', sign: a7Sign, desc:'7th Arudha — spouse social image'}
+        {name:'D1 7ª', sign: d1H7Sign, desc:'Casa de la pareja en carta natal'},
+        {name:'D9 7ª', sign: d9H7Sign, desc:'Casa de la pareja en Navamsa'},
+        {name:'Señor D9 7ª', sign: d9H7RulerSign, desc:'Donde va el señor de la 7ª D9'},
+        {name:'D9 Venus', sign: venusD9Sign, desc:'Karaka de pareja en Navamsa'},
+        {name:'Upapada (UL)', sign: ulSign, desc:'Arudha 12ª — trasfondo de la pareja'},
+        {name:'Darapada (A7)', sign: a7Sign, desc:'Arudha 7ª — imagen social de la pareja'}
     ];
 
     const dirCount = {};
@@ -745,18 +745,18 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
     const agreement = sortedDirs[0][1];
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🧭 Where Your Spouse Comes From' : '🧭 Spouse Direction — 6-Indicator Analysis'}</div>
+        <div class="interp-title">${isEasy ? '🧭 De Dónde Viene Tu Pareja' : '🧭 Dirección de la Pareja — Análisis de 6 Indicadores'}</div>
         <div class="interp-text">
-            ${isEasy ? 'Analysis of which direction your spouse may come from.' : 'Vedic astrology determines spouse direction by combining multiple indicators.'}<br><br>
-            ${isEasy ? '' : '<strong>6 Indicators:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> 12th house Arudha Pada. Indicates spouse\'s family/background and marriage environment. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> 7th house Arudha Pada. Indicates spouse\'s social image and outer impression. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 D9 7th lord (' + RULER_NAMES[d9H7Ruler] + '):</strong> The sign where Navamsa 7th house ruler goes indicates spouse\'s actual direction. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Natural significator of spouse. Venus\'s Navamsa position shows the source of spouse energy. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
+            ${isEasy ? 'Análisis de qué dirección puede venir tu pareja.' : 'La astrología védica determina la dirección de la pareja combinando múltiples indicadores.'}<br><br>
+            ${isEasy ? '' : '<strong>6 Indicadores:</strong><br>' + dirSources.map(s => `• <strong>${s.name}</strong>: ${SIGNS[s.sign]} ${SIGN_SYMBOLS[s.sign]} → <strong>${DIRECTIONS[s.sign]}</strong> <span style="color:#666;font-size:12px;">(${s.desc})</span>`).join('<br>') + '<br><br><strong>🧿 Upapada Lagna (UL):</strong> Arudha Pada de casa 12. Indica la familia/trasfondo de la pareja y ambiente matrimonial. → <strong>' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign] + '</strong><br><strong>🎯 Darapada (A7):</strong> Arudha Pada de casa 7. Indica la imagen social e impresión externa de la pareja. → <strong>' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign] + '</strong><br><strong>💍 Señor D9 7ª (' + RULER_NAMES[d9H7Ruler] + '):</strong> El signo donde va el regente de la casa 7 Navamsa indica la dirección real de la pareja. → <strong>' + SIGNS[d9H7RulerSign] + ' ' + SIGN_SYMBOLS[d9H7RulerSign] + '</strong><br><strong>♀ D9 Venus:</strong> Significador natural de la pareja. La posición de Venus en Navamsa muestra la fuente de energía de la pareja. → <strong>' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign] + '</strong><br><br>'}
             <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px;margin-top:10px;">
-                <strong style="font-size:16px;">🧭 Conclusion: ${agreement >= 4 ? 'Overwhelmingly strong' : agreement >= 3 ? 'Very strong' : agreement >= 2 ? 'Strong' : ''} ${primaryDir} direction</strong><br><br>
-                Out of 6 indicators <strong>${agreement}</strong> point to <strong>${primaryDir}</strong> point to this direction.
-                ${agreement >= 4 ? '<br>4+ indicators agree! <strong>Very high probability</strong>of ' + primaryDir + ' direction. Pay attention to cities, workplaces, or travels in this direction.' : ''}
-                ${agreement === 3 ? '<br>3 indicators — <strong>High probability</strong>of ' + primaryDir + ' direction.' : ''}
-                ${agreement === 2 ? '<br>2 indicators — ' + primaryDir + ' favored but other possibilities exist.' : ''}
-                ${agreement <= 1 ? '<br>Indicators spread — spouse may come from various directions. Keep an open mind.' : ''}
-                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Two directions equally: <strong>' + sortedDirs[0][0] + '</strong> and <strong>' + sortedDirs[1][0] + '</strong> both possible.' : ''}
+                <strong style="font-size:16px;">🧭 Conclusión: ${agreement >= 4 ? 'Abrumadoramente fuerte' : agreement >= 3 ? 'Muy fuerte' : agreement >= 2 ? 'Fuerte' : ''} dirección ${primaryDir}</strong><br><br>
+                De 6 indicadores, <strong>${agreement}</strong> apuntan a la dirección <strong>${primaryDir}</strong>.
+                ${agreement >= 4 ? '<br>¡4+ indicadores coinciden! <strong>Muy alta probabilidad</strong> de dirección ' + primaryDir + '. Presta atención a ciudades, lugares de trabajo o viajes en esta dirección.' : ''}
+                ${agreement === 3 ? '<br>3 indicadores — <strong>Alta probabilidad</strong> de dirección ' + primaryDir + '.' : ''}
+                ${agreement === 2 ? '<br>2 indicadores — ' + primaryDir + ' favorecido pero existen otras posibilidades.' : ''}
+                ${agreement <= 1 ? '<br>Indicadores dispersos — la pareja puede venir de varias direcciones. Mantén la mente abierta.' : ''}
+                ${sortedDirs.length > 1 && sortedDirs[1][1] === sortedDirs[0][1] ? '<br><br>💡 Dos direcciones iguales: <strong>' + sortedDirs[0][0] + '</strong> y <strong>' + sortedDirs[1][0] + '</strong> ambas posibles.' : ''}
             </div>
         </div>
     </div>`;
@@ -771,100 +771,100 @@ function renderSpouseProfile(d1LagnaSign, ulSign, a7Sign, venusD9Sign) {
     const isEasy = window.vedicMode === 'easy';
     let html = '';
     const meetingBySgn = [
-        "Active places, sports, competitive environments, leadership gatherings. Intense and sudden first meeting.",
-        "Workplace, financial institutions, restaurants, nature. Slowly building trust.",
-        "SNS, school, seminars, while traveling, blind dates. Relationship starts with conversation.",
-        "Family introductions, neighborhood gatherings, childhood friends. Starts in comfortable settings.",
-        "Parties, concerts, creative gatherings, glamorous venues. Dramatic first encounter.",
-        "Workplace, hospital, health-related, volunteer activities. Meeting starts from practical needs.",
-        "Blind dates, matchmaking, legal/diplomatic events, art exhibitions. Elegant and refined meeting.",
-        "Crisis situations, deep conversations, secret places, research labs. Fated and intense attraction.",
-        "Abroad, university, religious/philosophical gatherings, while traveling. Connection from far away. May be different culture.",
-        "Workplace, business events, official functions. Meeting related to social status.",
-        "Online, hobby clubs, social movements, friend of a friend. Unique and unconventional meeting.",
-        "Spiritual gatherings, abroad, arts/music, hospital, hints in dreams. Mystical and fated meeting."
+        "Lugares activos, deportes, ambientes competitivos, reuniones de liderazgo. Primer encuentro intenso y repentino.",
+        "Lugar de trabajo, instituciones financieras, restaurantes, naturaleza. Construyendo confianza lentamente.",
+        "Redes sociales, escuela, seminarios, viajando, citas a ciegas. La relación comienza con conversación.",
+        "Presentaciones familiares, reuniones del vecindario, amigos de infancia. Comienza en ambientes cómodos.",
+        "Fiestas, conciertos, reuniones creativas, lugares glamorosos. Primer encuentro dramático.",
+        "Lugar de trabajo, hospital, relacionado con salud, actividades voluntarias. El encuentro comienza por necesidades prácticas.",
+        "Citas a ciegas, eventos legales/diplomáticos, exposiciones de arte. Encuentro elegante y refinado.",
+        "Situaciones de crisis, conversaciones profundas, lugares secretos, laboratorios. Atracción predestinada e intensa.",
+        "Extranjero, universidad, reuniones religiosas/filosóficas, viajando. Conexión de lejos. Puede ser cultura diferente.",
+        "Lugar de trabajo, eventos empresariales, funciones oficiales. Encuentro relacionado con estatus social.",
+        "Online, clubs de hobby, movimientos sociales, amigo de un amigo. Encuentro único y no convencional.",
+        "Reuniones espirituales, extranjero, artes/música, hospital, pistas en sueños. Encuentro místico y predestinado."
     ];
 
     const backgroundBySgn = [
-        "Independent, self-made family. Strong leadership heritage.",
-        "Financially stable family. Traditional values. Possibly wealthy background.",
-        "Intellectual, communicative family. Emphasis on education.",
-        "Warm, family-oriented household. Strong mother figure.",
-        "Prestigious, proud family. Social status and reputation.",
-        "Practical, hardworking family. Health/medical/education background.",
-        "Balanced, dignified family. Arts/law/diplomacy background.",
-        "Family with secrets or transformations. Deep family history.",
-        "Scholarly, religious/philosophical family. Possible foreign background.",
-        "Strict, traditional family. Socially respected. Emphasis on responsibility.",
-        "Free-spirited, unique family structure. Progressive thinking.",
-        "Spiritual or artistic family. Possible foreign background. Rich sensitivity."
+        "Familia independiente y autodidacta. Herencia de fuerte liderazgo.",
+        "Familia financieramente estable. Valores tradicionales. Posible trasfondo adinerado.",
+        "Familia intelectual y comunicativa. Énfasis en la educación.",
+        "Hogar cálido y orientado a la familia. Fuerte figura materna.",
+        "Familia prestigiosa y orgullosa. Estatus social y reputación.",
+        "Familia práctica y trabajadora. Trasfondo de salud/médico/educación.",
+        "Familia equilibrada y digna. Trasfondo de artes/derecho/diplomacia.",
+        "Familia con secretos o transformaciones. Historia familiar profunda.",
+        "Familia académica, religiosa/filosófica. Posible trasfondo extranjero.",
+        "Familia estricta y tradicional. Socialmente respetada. Énfasis en responsabilidad.",
+        "Estructura familiar libre y única. Pensamiento progresista.",
+        "Familia espiritual o artística. Posible trasfondo extranjero. Rica sensibilidad."
     ];
 
     const imageBySgn = [
-        "Energetic, confident first impression. Sporty or strong image.",
-        "Calm, reliable first impression. Refined and dignified image.",
-        "Bright, talkative first impression. Intellectual and witty image.",
-        "Warm, nurturing first impression. Soft and caring image.",
-        "Glamorous, charismatic first impression. Confident image.",
-        "Neat, tidy first impression. Meticulous and professional image.",
-        "Elegant, charming first impression. Balanced and sophisticated image.",
-        "Mysterious, intense first impression. Deep and charismatic image.",
-        "Free-spirited, vibrant first impression. Positive and adventurous image.",
-        "Serious, mature first impression. Responsible and reliable image.",
-        "Unique, individualistic first impression. Trendy and original image.",
-        "Dreamy, mystical first impression. Artistic and emotional image."
+        "Primera impresión enérgica y segura. Imagen deportiva o fuerte.",
+        "Primera impresión tranquila y confiable. Imagen refinada y digna.",
+        "Primera impresión brillante y habladora. Imagen intelectual e ingeniosa.",
+        "Primera impresión cálida y cuidadora. Imagen suave y cariñosa.",
+        "Primera impresión glamorosa y carismática. Imagen segura.",
+        "Primera impresión pulcra y ordenada. Imagen meticulosa y profesional.",
+        "Primera impresión elegante y encantadora. Imagen equilibrada y sofisticada.",
+        "Primera impresión misteriosa e intensa. Imagen profunda y carismática.",
+        "Primera impresión libre y vibrante. Imagen positiva y aventurera.",
+        "Primera impresión seria y madura. Imagen responsable y confiable.",
+        "Primera impresión única e individualista. Imagen trendy y original.",
+        "Primera impresión soñadora y mística. Imagen artística y emocional."
     ];
 
     const attractBySgn = [
-        "Strong energy and confidence. Proactive and protective nature is attractive.",
-        "Stability and sensual charm. Enjoying good food, scents, and textures.",
-        "Wit and conversation skills. Intellectual stimulation is the attraction.",
-        "Devoted care and emotion. Feeling at home together is the charm.",
-        "Shining presence and generosity. Feeling special together is attractive.",
-        "Delicate consideration and perfectionism. Attention to detail is charming.",
-        "Elegance and harmonious personality. The world becomes beautiful together.",
-        "Intense gaze and depth. Soul-piercing focus is the attraction.",
-        "Free spirit and humor. Adventures begin when you are together.",
-        "Solid trustworthiness and maturity. Rock-solid stability is attractive.",
-        "Unique individuality and progressive thinking. Freshness never seen before.",
-        "Mystical sensitivity and spiritual depth. Dream-like romance is the charm."
+        "Energía fuerte y confianza. La naturaleza proactiva y protectora es atractiva.",
+        "Estabilidad y encanto sensual. Disfrutar buena comida, aromas y texturas.",
+        "Ingenio y habilidades de conversación. La estimulación intelectual es la atracción.",
+        "Cuidado devoto y emoción. Sentirse en casa juntos es el encanto.",
+        "Presencia brillante y generosidad. Sentirse especial juntos es atractivo.",
+        "Consideración delicada y perfeccionismo. La atención al detalle es encantadora.",
+        "Elegancia y personalidad armoniosa. El mundo se vuelve bello juntos.",
+        "Mirada intensa y profundidad. El enfoque que penetra el alma es la atracción.",
+        "Espíritu libre y humor. Las aventuras comienzan cuando están juntos.",
+        "Fiabilidad sólida y madurez. La estabilidad firme como roca es atractiva.",
+        "Individualidad única y pensamiento progresista. Frescura nunca antes vista.",
+        "Sensibilidad mística y profundidad espiritual. El romance de ensueño es el encanto."
     ];
 
     // D1 7 house 사인으로 만남 환경
     const d1H7ForMeeting = (d1LagnaSign + 6) % 12;
 
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🤝 Meeting Environment' : '🤝 Meeting Environment — D1 7th: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
+        <div class="interp-title">${isEasy ? '🤝 Ambiente de Encuentro' : '🤝 Ambiente de Encuentro — D1 7ª: ' + SIGNS[d1H7ForMeeting] + ' ' + SIGN_SYMBOLS[d1H7ForMeeting]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : '7th house sign reveals meeting environment.<br><br>'}
+            ${isEasy ? '' : 'El signo de la casa 7 revela el ambiente de encuentro.<br><br>'}
             <strong>${meetingBySgn[d1H7ForMeeting]}</strong>
-            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>Foreign connection possibility!</strong> Spouse may be a foreigner or you may meet abroad.' : ''}
+            ${d1H7ForMeeting === 8 || d1H7ForMeeting === 11 ? '<br><br>💡 <strong>¡Posibilidad de conexión extranjera!</strong> La pareja puede ser extranjera o puedes conocerla en el extranjero.' : ''}
         </div>
     </div>`;
 
     // UL 사인으로 spouse 가문/배경
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '🏛️ Spouse Family Background' : '🏛️ Spouse Background — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
+        <div class="interp-title">${isEasy ? '🏛️ Trasfondo Familiar de la Pareja' : '🏛️ Trasfondo de la Pareja — UL: ' + SIGNS[ulSign] + ' ' + SIGN_SYMBOLS[ulSign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Upapada Lagna (UL) reveals spouse family background.<br><br>'}
+            ${isEasy ? '' : 'Upapada Lagna (UL) revela el trasfondo familiar de la pareja.<br><br>'}
             <strong>${backgroundBySgn[ulSign]}</strong>
         </div>
     </div>`;
 
     // A7 사인으로 spouse 외적 이미지
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '👤 Spouse First Impression' : '👤 Spouse First Impression — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
+        <div class="interp-title">${isEasy ? '👤 Primera Impresión de la Pareja' : '👤 Primera Impresión — A7: ' + SIGNS[a7Sign] + ' ' + SIGN_SYMBOLS[a7Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Darapada (A7) shows spouse first impression.<br><br>'}
+            ${isEasy ? '' : 'Darapada (A7) muestra la primera impresión de la pareja.<br><br>'}
             <strong>${imageBySgn[a7Sign]}</strong>
         </div>
     </div>`;
 
     // D9 Venus 사인으로 spouse 매력 포인트
     html += `<div class="interp-card">
-        <div class="interp-title">${isEasy ? '💎 Spouse Attraction Point' : '💎 Spouse Attraction — D9 Venus: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
+        <div class="interp-title">${isEasy ? '💎 Punto de Atracción de la Pareja' : '💎 Atracción de la Pareja — D9 Venus: ' + SIGNS[venusD9Sign] + ' ' + SIGN_SYMBOLS[venusD9Sign]}</div>
         <div class="interp-text">
-            ${isEasy ? '' : 'Venus in Navamsa reveals spouse charm and love style.<br><br>'}
+            ${isEasy ? '' : 'Venus en Navamsa revela el encanto y estilo de amor de la pareja.<br><br>'}
             <strong>${attractBySgn[venusD9Sign]}</strong>
         </div>
     </div>`;
@@ -880,16 +880,16 @@ function renderNakshatra(moonPos) {
 
     const html = isEasy ? `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">Your Star: ${nak.ko}</div>
+            <div class="nakshatra-name">Tu Estrella: ${nak.ko}</div>
             <div class="nakshatra-meaning">"${nak.meaning}"</div>
             <div class="nakshatra-detail">${nak.desc}</div>
         </div>
     ` : `
         <div class="nakshatra-card">
             <div class="nakshatra-name">${nak.ko} (${nak.name})</div>
-            <div class="nakshatra-meaning">"${nak.meaning}" — Ruling Planet: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
+            <div class="nakshatra-meaning">"${nak.meaning}" — Planeta Regente: ${DASHA_KO[nak.ruler] || nak.ruler}</div>
             <div class="nakshatra-detail">
-                Deity: ${nak.deity}<br><br>
+                Deidad: ${nak.deity}<br><br>
                 ${nak.desc}
             </div>
         </div>
@@ -938,11 +938,11 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
 
     const isEasy = window.vedicMode === 'easy';
     let html = isEasy ?
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 Life flows with different energies. Check your current period.<br><br>' :
-        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — Life is divided into periods ruled by 9 planets. <strong>Mahadasha</strong> is the major period, <strong>Antardasha (Bhukti)</strong> is the sub-period. Calculated from Moon nakshatra position.<br><br>';
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 La vida fluye con diferentes energías. Verifica tu período actual.<br><br>' :
+        '<div class="interp-card" style="margin-bottom:12px;border-left:3px solid #c9a84c;"><div class="interp-text" style="font-size:12px;color:#888;">💡 <strong>Vimshottari Dasha</strong> — La vida se divide en períodos regidos por 9 planetas. <strong>Mahadasha</strong> es el período mayor, <strong>Antardasha (Bhukti)</strong> es el sub-período. Calculado desde la posición del nakshatra lunar.<br><br>';
     html += isEasy ?
         '</div></div>' :
-        '🌙 Birth Moon: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — First Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (remaining: ' + remainingYears.toFixed(2) + ' yrs)</div></div>';
+        '🌙 Luna natal: <strong>' + nak.ko + ' (' + nak.name + ')</strong> — Primer Dasha: <strong>' + DASHA_KO[startRuler] + '</strong> (restante: ' + remainingYears.toFixed(2) + ' años)</div></div>';
 
     // Build all mahadasha periods with correct first period
     const periods = [];
@@ -964,11 +964,11 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         const age = getAge(p.startD);
 
         html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
-        const dashaEasyDesc = {Ketu:'Inner reflection & spiritual growth',Venus:'Love, beauty & abundance',Sun:'Confidence & leadership shines',Moon:'Emotions & home take center stage',Mars:'Challenges & action energy',Rahu:'Big changes & new opportunities',Jupiter:'Luck & growth arrive',Saturn:'Patience brings great rewards',Mercury:'Study, communication & business thrive'};
+        const dashaEasyDesc = {Ketu:'Reflexión interior y crecimiento espiritual',Venus:'Amor, belleza y abundancia',Sun:'Confianza y liderazgo brillan',Moon:'Emociones y hogar toman protagonismo',Mars:'Desafíos y energía de acción',Rahu:'Grandes cambios y nuevas oportunidades',Jupiter:'Suerte y crecimiento llegan',Saturn:'La paciencia trae grandes recompensas',Mercury:'Estudio, comunicación y negocios prosperan'};
         html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
-        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + ' yrs</span>';
-        if (isCurrent) html += '<span class="dasha-badge">Current</span>';
+        html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + ' años</span>';
+        if (isCurrent) html += '<span class="dasha-badge">Actual</span>';
         html += '<span style="font-size:10px;color:#666;margin-left:4px;">(' + age + ') ▼</span>';
 
         // Antardasha (Bhukti) - sub-periods within this mahadasha
