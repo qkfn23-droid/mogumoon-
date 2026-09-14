@@ -94,7 +94,7 @@ function renderEasyMode(positions, lagnaSign, moonPos) {
     var h7p = positions.filter(function(p){return houseOf(p.sign)===7;});
     var spouseExtra = '';
     h7p.forEach(function(p) {
-        var desc = {Sun:'Un partenaire de haut statut social.',Moon:'Un partenaire emotionnel et attentionne.',Mars:'Passionne mais disputes possibles. Partenaire fort.',Mercury:'Un partenaire intellectuel avec grande conversation.',Jupiter:'A wise and moral spouse! Best marriage fortune.',Venus:'Un partenaire tres attrayant et aimant.',Saturn:'Mariage tardif mais relation durable. Difference d\'age possible.',Rahu:'Mariage non conventionnel. Partenaire etranger possible.',Ketu:'Connexion de vies passees. Partenaire avec fort lien spirituel.'};
+        var desc = {Sun:'Un partenaire de haut statut social.',Moon:'Un partenaire emotionnel et attentionne.',Mars:'Passionne mais disputes possibles. Partenaire fort.',Mercury:'Un partenaire intellectuel avec grande conversation.',Jupiter:'Un partenaire sage et moral ! Meilleure fortune matrimoniale.',Venus:'Un partenaire tres attrayant et aimant.',Saturn:'Mariage tardif mais relation durable. Difference d\'age possible.',Rahu:'Mariage non conventionnel. Partenaire etranger possible.',Ketu:'Connexion de vies passees. Partenaire avec fort lien spirituel.'};
         if (desc[p.id]) spouseExtra += '<br>✦ ' + desc[p.id];
     });
     html += '<div class="interp-card"><div class="interp-title">💍 Mon partenaire</div><div class="interp-text">' + spouse + spouseExtra + '</div></div>';
