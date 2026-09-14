@@ -696,7 +696,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
             <div class="interp-title">${isEasy ? '⭐ Außergewöhnlich starke Planeten' : '⭐ Vargottama Planeten — Außergewöhnlich Stark'}</div>
             <div class="interp-text">
                 ${isEasy ? 'Diese Planeten sind außergewöhnlich kraftvoll und wirken beständig durchs ganze Leben.' : 'Planeten im selben Zeichen in D1 und D9 heißen <strong>Vargottama</strong>. Sehr kraftvoll, wirken beständig durchs ganze Leben.'}<br><br>
-                ${isEasy ? 'Außergewöhnlich starke Energie wirkt beständig in deinem ganzen Leben!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In both D1 and D9 ${SIGNS[p.sign]} — this planet's energy is exceptionally strong!`).join('<br>')}
+                ${isEasy ? 'Außergewöhnlich starke Energie wirkt beständig in deinem ganzen Leben!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In D1 und D9 ${SIGNS[p.sign]} — die Energie dieses Planeten ist außergewöhnlich stark!`).join('<br>')}
             </div>
         </div>`;
     }
@@ -904,7 +904,7 @@ function renderNakshatra(moonPos) {
 
     const html = isEasy ? `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">Your Star: ${nak.ko}</div>
+            <div class="nakshatra-name">Dein Stern: ${nak.ko}</div>
             <div class="nakshatra-meaning">"${nak.meaning}"</div>
             <div class="nakshatra-detail">${nak.desc}</div>
         </div>
@@ -1401,7 +1401,7 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += isEasy ? `<strong>⚠️ Ehe-Warnung</strong>` : `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Mars in ${marsH}th house — challenges in married life possible. Check partner chart recommended. Marriage after age 28 may be favorable.<br><br>`;
+            yogaText += isEasy ? `<strong>⚠️ Ehe-Warnung</strong>` : `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Mars im ${marsH}. Haus — Herausforderungen im Eheleben möglich. Partnerhoroskop-Vergleich empfohlen. Heirat nach dem 28. Lebensjahr kann günstig sein.<br><br>`;
         }
     }
 
@@ -1802,7 +1802,7 @@ function renderRemedy(positions, lagnaSign) {
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">Alle Planeten in guten Positionen! Keine besonderen Heilmittel nötig. Wear the gem of your Lagna ruler for luck.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">Alle Planeten in guten Positionen! Keine besonderen Heilmittel nötig. Trage den Edelstein deines Lagna-Herrschers für Glück.</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;
@@ -2615,7 +2615,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += (isEasy ? '' : '<strong>D30 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d30LagnaInterp + '<br><br>';
 
         html += '<strong>' + (isEasy ? 'Krankheitswarnung:' : 'D30 6. Haus (Krankheit/Feind) — ' + SIGNS[d30_6sign] + ':') + '</strong><br>';
-        const diseaseBySign = ['Headache, fever, inflammation','Neck, thyroid, diabetes','Lungs, nerves, anxiety','Stomach, water retention','Heart, back, blood pressure','Digestive, intestines, skin','Kidneys, lower back, urinary','Reproductive, chronic conditions','Liver, thighs, overweight','Bones, joints, rheumatism','Circulatory, blood pressure, ankles','Immunsystem, Füße, psychische Gesundheit'];
+        const diseaseBySign = ['Kopfschmerz, Fieber, Entzündung','Nacken, Schilddrüse, Diabetes','Lungen, Nerven, Angst','Magen, Wassereinlagerung','Herz, Rücken, Blutdruck','Verdauung, Darm, Haut','Nieren, unterer Rücken, Harnwege','Reproduktiv, chronische Beschwerden','Leber, Oberschenkel, Übergewicht','Knochen, Gelenke, Rheuma','Kreislauf, Blutdruck, Knöchel','Immunsystem, Füße, psychische Gesundheit'];
         html += 'Achte auf: <strong>' + diseaseBySign[d30_6sign] + '</strong><br>';
         if (d30_6planets.length > 0) {
             const dis = {Sun:'Achte auf Augen- und Herzerkrankungen',Moon:'Psychische Gesundheit und Wassereinlagerungen',Mars:'Vorsicht vor Unfällen, Operationen, Verbrennungen',Mercury:'Nervensystem und Hautprobleme',Jupiter:'Achte auf Leber und Übergewicht',Venus:'Achte auf Niere, Diabetes, STD',Saturn:'Chronische Krankheit, Gelenkprobleme',Rahu:'Krankheit unbekannter Ursache, Sucht',Ketu:'Geschwächte Immunität, Allergie'};

@@ -696,7 +696,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
             <div class="interp-title">${isEasy ? '⭐ Planetas Excepcionalmente Fortes' : '⭐ Planetas Vargottama — Excepcionalmente Fortes'}</div>
             <div class="interp-text">
                 ${isEasy ? 'Estes planetas sao excepcionalmente poderosos e atuam consistentemente por toda a vida.' : 'Planetas no mesmo signo em D1 e D9 sao chamados <strong>Vargottama</strong>. Muito poderosos, atuando consistentemente por toda a vida.'}<br><br>
-                ${isEasy ? 'Energia excepcionalmente forte atua consistentemente por toda sua vida!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: In both D1 and D9 ${SIGNS[p.sign]} — this planet's energy is exceptionally strong!`).join('<br>')}
+                ${isEasy ? 'Energia excepcionalmente forte atua consistentemente por toda sua vida!' : vargottamaPlanets.map(p => `<strong>${p.symbol} ${p.name}</strong>: Em D1 e D9 ${SIGNS[p.sign]} — a energia deste planeta e excepcionalmente forte!`).join('<br>')}
             </div>
         </div>`;
     }
@@ -904,7 +904,7 @@ function renderNakshatra(moonPos) {
 
     const html = isEasy ? `
         <div class="nakshatra-card">
-            <div class="nakshatra-name">Your Star: ${nak.ko}</div>
+            <div class="nakshatra-name">Sua Estrela: ${nak.ko}</div>
             <div class="nakshatra-meaning">"${nak.meaning}"</div>
             <div class="nakshatra-detail">${nak.desc}</div>
         </div>
@@ -1401,13 +1401,13 @@ function renderInterpretation(positions, lagnaSign, moonPos) {
     if (mars) {
         const marsH = houseOf(mars.sign);
         if ([1,2,4,7,8,12].includes(marsH)) {
-            yogaText += isEasy ? `<strong>⚠️ Precaução Matrimonial</strong>` : `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Mars in ${marsH}th house — challenges in married life possible. Check partner chart recommended. Marriage after age 28 may be favorable.<br><br>`;
+            yogaText += isEasy ? `<strong>⚠️ Precaução Matrimonial</strong>` : `<strong>⚠️ Kuja Dosha (Manglik)</strong> — Marte na casa ${marsH} — desafios na vida conjugal possiveis. Comparacao do mapa do parceiro recomendada. Casamento apos 28 anos pode ser favoravel.<br><br>`;
         }
     }
 
     if (yogaText) {
         html += `<div class="interp-card">
-            <div class="interp-title">${isEasy ? '🔮 Your Special Talents' : '🔮 Yogas Especiais (Combinacoes Planetarias)'}</div>
+            <div class="interp-title">${isEasy ? '🔮 Seus Talentos Especiais' : '🔮 Yogas Especiais (Combinacoes Planetarias)'}</div>
             <div class="interp-text">${yogaText}</div>
         </div>`;
     }
@@ -1802,7 +1802,7 @@ function renderRemedy(positions, lagnaSign) {
     });
 
     if (!html) {
-        html = '<div class="interp-card"><div class="interp-text">Todos os planetas em boas posicoes! Nenhum remedio especial necessario. Wear the gem of your Lagna ruler for luck.</div></div>';
+        html = '<div class="interp-card"><div class="interp-text">Todos os planetas em boas posicoes! Nenhum remedio especial necessario. Use a pedra preciosa do seu regente do Lagna para sorte.</div></div>';
     }
 
     document.getElementById('remedyWrap').innerHTML = html;
