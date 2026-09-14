@@ -675,7 +675,7 @@ function renderD9Interpretation(d9Positions, d9LagnaSign, d1LagnaSign) {
         <div class="interp-text">
             ${isEasy ? 'The true calling you pursue after maturity.' : 'Navamsa 10th house is in <strong>' + SIGNS[d9H10Sign] + '</strong>, ruled by <strong>' + RULER_NAMES[d9H10Ruler] + '</strong>.<br><br>While D1\'s 10th shows your career, D9\'s 10th reveals your <strong>greater life purpose (Dharma)</strong>.'}<br><br>
             <strong>Direction of purpose:</strong> ${careerBySgn[d9H10Sign]}
-            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planets in D9 10th:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
+            ${d9H10Planets.length > 0 ? '<br><br>' + (isEasy ? d9H10Planets.map(p => planetCareer[p.id] || 'unique career energy').join('<br>') : '<strong>Planeten in D9 10.:</strong><br>' + d9H10Planets.map(p => `${p.symbol} <strong>${p.name}</strong>: ${planetCareer[p.id] || 'unique career energy'}`).join('<br>')) : ''}
         </div>
     </div>`;
 
@@ -2004,10 +2004,10 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (!isEasy) {
             if (!isEasy) html += '<strong>D12 Lagna:</strong> ' + SIGNS[dLagnaSign] + '<br>';
         }
-        html += '<strong>' + (isEasy ? 'Mother' : 'D12 4 house (Mother): ' + SIGNS[d12_4sign]) + '</strong>';
+        html += '<strong>' + (isEasy ? 'Mother' : 'D12 4. Haus (Mutter): ' + SIGNS[d12_4sign]) + '</strong>';
         if (d12_4planets.length > 0 && !isEasy) html += ' — ' + d12_4planets.map(p => p.name).join(', ');
         html += '<br>';
-        html += '<strong>' + (isEasy ? 'Father' : 'D12 9 house (Father): ' + SIGNS[d12_9sign]) + '</strong>';
+        html += '<strong>' + (isEasy ? 'Father' : 'D12 9. Haus (Vater): ' + SIGNS[d12_9sign]) + '</strong>';
         if (d12_9planets.length > 0 && !isEasy) html += ' — ' + d12_9planets.map(p => p.name).join(', ');
         html += '<br>';
 
@@ -2250,7 +2250,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
                     'Du hast in früheren Leben aufrichtig geliebt, daher erwartet dich schöne Liebe.' :
                     'Ungelöste Liebeslektionen aus früheren Leben. Wahre Liebe zu lernen ist wichtig und macht dich tiefer.');
             } else {
-                ch4 += '<br><strong>♀ Venus (Planet of Love)</strong> → D60 ' + venH + ' house (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
+                ch4 += '<br><strong>♀ Venus (Planet der Liebe)</strong> → D60 ' + venH + ' house (' + houseThemes[venH] + ')' + deityTag(venD) + '<br>';
                 ch4 += venD.deity && venD.deity.nature === 'benefic' ?
                     'Venus under benefic <strong>' + venD.deity.ko + '</strong> protection. Love practiced well — beautiful love awaits. ' + venD.deity.desc :
                     'Venus under malefic <strong>' + (venD.deity?venD.deity.ko:'') + '</strong> influence. Past love challenges — learning true love is the task. ' + (venD.deity?venD.deity.desc:'');
@@ -2298,7 +2298,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (satD60) {
             const satD = getDeity(satD60.sidereal);
             const satH = ((satD60.dSign - dLagnaSign + 12) % 12) + 1;
-            if (!isEasy) ch5 += '<br><strong>♄ Saturn (Lord of Karma)</strong> → D60 ' + satH + ' house (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
+            if (!isEasy) ch5 += '<br><strong>♄ Saturn (Herr des Karma)</strong> → D60 ' + satH + ' house (' + houseThemes[satH] + ')' + deityTag(satD) + '<br>';
             ch5 += isEasy ?
                 ('<br>' + (satD.deity && satD.deity.nature === 'benefic' ?
                     'Das ist ein <strong>sehr seltener Segen</strong>! Geduld aus früheren Leben reduziert Karriereherausforderungen in diesem Leben.' :
@@ -2405,8 +2405,8 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
             const moonInOwn = moonD2.dSign === 3; // Cancer
             html += (isEasy ? '' : '<strong>☽ Moon → ' + SIGNS[moonD2.dSign] + ':</strong> ') + (moonInOwn ? (isEasy ? '🌟 <strong>Reiches Leben durch öffentliche Beziehungen!</strong>' : '🌟 <strong>Mond im eigenen Hora (Krebs)!</strong> Reiches Leben durch Öffentlichkeit und Beziehungen.') : (isEasy ? 'Einkommen durch eigene Anstrengung und unabhängige Aktivität.' : 'Mond im Sonnen-Hora. Einkommen durch eigene Anstrengung und unabhängige Aktivität.')) + '<br>';
         }
-        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? 'Kann großen Wohlstand durch eigene Fähigkeit aufbauen.' : 'Überfluss durch Beziehungen mit anderen.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sun Hora — great wealth through own ability.' : 'Moon Hora — abundance through relationships with others.')) + '<br>';
-        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'Selbstgemacht durch Kunst/Luxusgüter.' : 'Wohlstand durch Ehepartner oder Partner.') : 'Venus in ' + (venD2.dSign === 4 ? 'Sun Hora — self-made through art/luxury goods.' : 'Moon Hora — wealth through spouse or partner.')) + '<br>';
+        if (jupD2) html += (isEasy ? '' : '<strong>♃ Jupiter → ' + SIGNS[jupD2.dSign] + ':</strong> ') + (isEasy ? (jupD2.dSign === 4 ? 'Kann großen Wohlstand durch eigene Fähigkeit aufbauen.' : 'Überfluss durch Beziehungen mit anderen.') : 'Jupiter in ' + (jupD2.dSign === 4 ? 'Sonnen-Hora — großer Wohlstand durch eigene Fähigkeit.' : 'Mond-Hora — Überfluss durch Beziehungen.')) + '<br>';
+        if (venD2) html += (isEasy ? '' : '<strong>♀ Venus → ' + SIGNS[venD2.dSign] + ':</strong> ') + (isEasy ? (venD2.dSign === 4 ? 'Selbstgemacht durch Kunst/Luxusgüter.' : 'Wohlstand durch Ehepartner oder Partner.') : 'Venus in ' + (venD2.dSign === 4 ? 'Sonnen-Hora — selbstgemacht durch Kunst/Luxus.' : 'Mond-Hora — Wohlstand durch Partner.')) + '<br>';
 
         // D2 2궁(축적된 부) 분석
         const d2H2sign = (dLagnaSign + 1) % 12;
@@ -2448,7 +2448,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (marsD3) {
             const marsH = ((marsD3.dSign - dLagnaSign + 12) % 12) + 1;
-            html += isEasy ? '<br>' : '<br><strong>♂ Mars (sibling karaka):</strong> ';
+            html += isEasy ? '<br>' : '<br><strong>♂ Mars (Geschwister-Karaka):</strong> ';
             html += marsH <= 4 ? 'Enge Geschwisterbeziehung. Mutige Geschwister.' : marsH <= 8 ? 'Geschwisterkonflikte oder Transformation durch Geschwister.' : 'Geschwister im Ausland oder spirituelle Tendenz.';
         }
         html += '</div></div>';
@@ -2465,7 +2465,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<div class="interp-card"><div class="interp-title">' + (isEasy ? '🏠 Eigentum & Glücksanalyse' : '🏠 D4 Chaturthamsha — Eigentum & Glücksanalyse') + '</div><div class="interp-text">';
         html += (isEasy ? '' : '<strong>D4 Lagna: ' + SIGNS[dLagnaSign] + '</strong><br>') + d4LagnaInterp + '<br><br>';
 
-        html += '<strong>' + (isEasy ? 'Eigentum/Zuhause:' : 'D4 4 house (real estate/home) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
+        html += '<strong>' + (isEasy ? 'Eigentum/Zuhause:' : 'D4 4. Haus (Immobilien/Zuhause) — ' + SIGNS[d4_4sign] + ':') + '</strong><br>';
         if (d4_4planets.length > 0) {
             const prop = {Sun:'Regierungsgebäude oder prestigeträchtige Residenz',Moon:'Schönes Zuhause. Nahe am Wasser. Einfluss der Mutter',Mars:'Neubau. Immobilienstreitigkeiten möglich',Mercury:'Gewerbeimmobilien. Mehrere Immobilien',Jupiter:'Geräumiges, reiches Zuhause! Bestes Immobilienglück',Venus:'Luxuriöses Zuhause. Schönes Interieur',Saturn:'Altes Eigentum. Reparaturen nötig. Stabil nach der Lebensmitte',Rahu:'Auslandsimmobilien. Unkonventionelle Wohnung',Ketu:'Gleichgültig gegenüber Immobilien. Bevorzugt spirituelle Räume'};
             d4_4planets.forEach(p => { html += isEasy ? (prop[p.id]||'') + '<br>' : '• ' + p.name + ': ' + (prop[p.id]||'') + '<br>'; });
@@ -2491,14 +2491,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<strong>' + (isEasy ? 'Komfort/Glück:' : 'D16 4th house (comfort/happiness) — ' + SIGNS[d16_4sign] + ':') + '</strong><br>';
         if (d16_4planets.length > 0) {
             d16_4planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? 'Reichlicher materieller Komfort und Glück!<br>' : 'Einsatz nötig für materiellen Komfort.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Material comfort and happiness abundant!' : 'Effort needed for material comfort.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Reichlicher materieller Komfort und Glück!<br>' : 'Einsatz nötig für materiellen Komfort.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Materieller Komfort und Glück reichlich!' : 'Effort needed for material comfort.') + '<br>';
             });
         } else html += isEasy ? 'Durchschnittlicher materieller Komfort.<br>' : '4. Haus leer — Position des 4. Herrschers ist der Schlüssel zum Glück.<br>';
 
         const venD16 = dPositions.find(p => p.id === 'Venus');
         if (venD16) {
             const vH = ((venD16.dSign - dLagnaSign + 12) % 12) + 1;
-            html += isEasy ? '<br>' : '<br><strong>♀ Venus (comfort karaka):</strong> ';
+            html += isEasy ? '<br>' : '<br><strong>♀ Venus (Komfort-Karaka):</strong> ';
             html += [,'Creates own comfort','Comfort through wealth','Happiness through communication','Great happiness at home!','Happiness through children/romance','Comfort through health management','Happiness through spouse!','Happiness through transformation','Happiness through travel/learning','Comfort through social status','Happiness through friends/network','Happiness through spiritual peace'][vH] || '';
         }
         html += '</div></div>';
@@ -2519,11 +2519,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (jupD20) {
             const jH = ((jupD20.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>♃ Jupiter (Spiritual Teacher) → ' + jH + 'th:</strong> ') + ([,'Strong spiritual self','Spiritual knowledge becomes wealth','Spiritual communication ability','Deep inner peace','Past life spiritual merit','Spirituality through service','Meeting a teacher','Secret spiritual knowledge','Best placement! Great spiritual fortune','Spiritual authority','Spiritual community','Liberation and awakening'][jH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>♃ Jupiter (Spiritueller Lehrer) → ' + jH + 'th:</strong> ') + ([,'Strong spiritual self','Spiritual knowledge becomes wealth','Spiritual communication ability','Deep inner peace','Past life spiritual merit','Spirituality through service','Meeting a teacher','Secret spiritual knowledge','Best placement! Great spiritual fortune','Spiritual authority','Spiritual community','Liberation and awakening'][jH] || '') + '<br>';
         }
         if (ketuD20) {
             const kH = ((ketuD20.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☋ Ketu (Liberation) → ' + kH + 'th:</strong> ') + ([,'Innate spiritual ability','Spiritual values','Spiritual communication','Deep inner liberation','Result of past life practice','Serving soul','Spiritual growth through spouse','Deep transformative spirituality','Spiritual pilgrim','Spiritual career','Leader of spiritual community','Soul near liberation'][kH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☋ Ketu (Befreiung) → ' + kH + 'th:</strong> ') + ([,'Innate spiritual ability','Spiritual values','Spiritual communication','Deep inner liberation','Result of past life practice','Serving soul','Spiritual growth through spouse','Deep transformative spirituality','Spiritual pilgrim','Spiritual career','Leader of spiritual community','Soul near liberation'][kH] || '') + '<br>';
         }
         html += '<br><strong>' + (isEasy ? 'Guru/Lehrer:' : 'D20 9th house (guru/teacher) — ' + SIGNS[d20_9sign] + ':') + '</strong><br>';
         if (d20_9planets.length > 0) {
@@ -2556,17 +2556,17 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         html += '<br><strong>' + (isEasy ? 'Höhere Bildung:' : 'D24 5th house (higher education/intellect) — ' + SIGNS[d24_5sign] + ':') + '</strong><br>';
         if (d24_5planets.length > 0) {
             d24_5planets.forEach(p => {
-                html += isEasy ? (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!<br>' : 'Akademische Herausforderungen führen zu Wachstum.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Outstanding higher education achievement!' : 'Academic challenges lead to growth.') + '<br>';
+                html += isEasy ? (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!<br>' : 'Akademische Herausforderungen führen zu Wachstum.<br>') : '• ' + p.name + ': ' + (p.natural === 'benefic' ? 'Herausragende Leistung in höherer Bildung!' : 'Academic challenges lead to growth.') + '<br>';
             });
         } else html += isEasy ? 'Stetiger Einsatz bringt gute Ergebnisse.<br>' : '5 house no planets.<br>';
 
         if (jupD24) {
             const jH = ((jupD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Wisdom) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : (isEasy ? 'Wachstum durch Akademik erwartet.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
+            html += (isEasy ? '<br>' : '<br><strong>♃ Jupiter (Weisheit) → ' + jH + 'th:</strong> ') + ([1,4,5,9].includes(jH) ? '🎓 <strong>Hohe akademische Leistung erwartet!</strong> Postgraduale/Promotion/Auslandsstudium möglich.' : (isEasy ? 'Wachstum durch Akademik erwartet.' : 'Growth through academics. Jupiter\'s blessing manifests in ' + jH + 'th house area.')) + '<br>';
         }
         if (merD24) {
             const mH = ((merD24.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☿ Mercury (Learning) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Herausragender Intellekt!</strong> Talent in Mathe, Sprachen, Analyse.' : (isEasy ? 'Intellektuelle Fähigkeit gut ausgedrückt.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
+            html += (isEasy ? '' : '<strong>☿ Merkur (Lernen) → ' + mH + 'th:</strong> ') + ([1,4,5,9].includes(mH) ? '📖 <strong>Herausragender Intellekt!</strong> Talent in Mathe, Sprachen, Analyse.' : (isEasy ? 'Intellektuelle Fähigkeit gut ausgedrückt.' : 'Intellectual ability in ' + mH + 'th house area.')) + '<br>';
         }
         html += '</div></div>';
 
@@ -2582,11 +2582,11 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         const satD27 = dPositions.find(p => p.id === 'Saturn');
         if (marsD27) {
             const mH = ((marsD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>♂ Mars (Energy) → ' + mH + 'th:</strong> ') + ([,'Strong physique and will!','Can earn through physical strength','Courage and adventurous spirit strong','Home exercise type','Sports talent!','Immunity to overcome disease','Exercise with spouse','Survival strength in crisis','Strong in adventure/exploration','Physical strength for career','Goal achievement energy','Physical activity abroad'][mH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>♂ Mars (Energie) → ' + mH + 'th:</strong> ') + ([,'Strong physique and will!','Can earn through physical strength','Courage and adventurous spirit strong','Home exercise type','Sports talent!','Immunity to overcome disease','Exercise with spouse','Survival strength in crisis','Strong in adventure/exploration','Physical strength for career','Goal achievement energy','Physical activity abroad'][mH] || '') + '<br>';
         }
         if (sunD27) {
             const sH = ((sunD27.dSign - dLagnaSign + 12) % 12) + 1;
-            html += (isEasy ? '' : '<strong>☉ Sun (Vitality) → ' + sH + 'th:</strong> ') + (isEasy ? 'Source of vitality: ' : 'Source of vitality in ' + sH + 'th house area. ') + ([,'Energy from self','Vitality from wealth activities','Energy from communication','Stability from home','Vitality from creation','Energy from service','Vitality from relationships','Energy from transformation','Vitality from travel','Energy from career','Vitality from society','Energy from spiritual practice'][sH] || '') + '<br>';
+            html += (isEasy ? '' : '<strong>☉ Sonne (Vitalität) → ' + sH + 'th:</strong> ') + (isEasy ? 'Source of vitality: ' : 'Source of vitality in ' + sH + 'th house area. ') + ([,'Energy from self','Vitality from wealth activities','Energy from communication','Stability from home','Vitality from creation','Energy from service','Vitality from relationships','Energy from transformation','Vitality from travel','Energy from career','Vitality from society','Energy from spiritual practice'][sH] || '') + '<br>';
         }
 
         // D27 6 house (약점/질병) 분석
@@ -2646,14 +2646,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (moonD40) {
             const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1;
-            if (!isEasy) html += '<strong>☽ Moon (Mother karaka):</strong> ';
+            if (!isEasy) html += '<strong>☽ Mond (Mutter-Karaka):</strong> ';
             html += [,'Mutter hat starken Einfluss','Wohlstand von der Mutter','Gute Kommunikation mit der Mutter','Tiefe Bindung zur Mutter! Beste Platzierung','Mutter ist kreativ','Mutter ist serviceorientiert','Mutter beeinflusst Beziehungen','Erbschaft von der Mutter','Mutter ist religiös/bildungsorientiert','Mutter hat sozialen Status','Mutter ist unabhängig','Mutter ist spirituell'][mH] || '';
             html += '<br>';
         }
 
         html += '<br><strong>' + (isEasy ? 'Mütterliche Familie:' : 'D40 4th house (maternal home) — ' + SIGNS[d40_4sign] + ':') + '</strong><br>';
         if (d40_4planets.length > 0) {
-            d40_4planets.forEach(p => { html += isEasy ? 'Stark geerbte Energie von mütterlicher Seite.<br>' : '• ' + p.name + ': This planet\'s energy is strongly inherited from maternal line.<br>'; });
+            d40_4planets.forEach(p => { html += isEasy ? 'Stark geerbte Energie von mütterlicher Seite.<br>' : '• ' + p.name + ': Die Energie dieses Planeten wird stark von mütterlicher Seite vererbt.<br>'; });
         } else html += isEasy ? 'Stabiles Erbe von mütterlicher Seite.<br>' : '4. Haus leer — Position des 4. Herrschers ist der Schlüssel zum mütterlichen Erbe.<br>';
         html += '</div></div>';
 
@@ -2670,14 +2670,14 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         if (sunD45) {
             const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1;
-            if (!isEasy) html += '<strong>☉ Sun (Father karaka):</strong> ';
+            if (!isEasy) html += '<strong>☉ Sonne (Vater-Karaka):</strong> ';
             html += [,'Vater hat starken Einfluss','Wohlstand vom Vater','Gute Kommunikation mit dem Vater','Vater ist familienorientiert','Vater ist kreativ','Vater ist serviceorientiert','Vater beeinflusst Beziehungen','Erbschaft vom Vater','Vater ist religiös/bildungsorientiert','Vater hat Erfolg in der Gesellschaft! Beste Platzierung','Vater ist unabhängig','Vater ist spirituell'][sH] || '';
             html += '<br>';
         }
 
         html += '<br><strong>' + (isEasy ? 'Väterliche Familie:' : 'D45 9th house (paternal home/father) — ' + SIGNS[d45_9sign] + ':') + '</strong><br>';
         if (d45_9planets.length > 0) {
-            d45_9planets.forEach(p => { html += isEasy ? 'Stark geerbte Energie von väterlicher Seite.<br>' : '• ' + p.name + ': This planet\'s energy is strongly inherited from paternal line.<br>'; });
+            d45_9planets.forEach(p => { html += isEasy ? 'Stark geerbte Energie von väterlicher Seite.<br>' : '• ' + p.name + ': Die Energie dieses Planeten wird stark von väterlicher Seite vererbt.<br>'; });
         } else html += isEasy ? 'Stabiles Erbe von väterlicher Seite.<br>' : '9. Haus leer — Position des 9. Herrschers ist der Schlüssel zum väterlichen Erbe.<br>';
         html += '</div></div>';
     }
