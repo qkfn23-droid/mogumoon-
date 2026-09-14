@@ -1530,7 +1530,7 @@ function renderEducation(positions, lagnaSign) {
     if (h5.length > 0) {
         h5.forEach(p => {
             const h5p = { Sun: 'Excelle en leadership/sciences politiques', Moon: 'talent en art/psychologie', Mars: 'Talent en ingenierie/technologie/sport', Mercury: 'Genie en maths/langues/affaires', Jupiter: 'Meilleure position ! Erudit/professeur/chercheur', Venus: 'talent en art/design/musique', Saturn: 'Academique tardif mais recherche profonde' };
-            text += isEasy ? `${h5p[p.id] || 'influences academics'}. ` : `${p.name}: ${h5p[p.id] || 'influences academics'}. `;
+            text += isEasy ? `${h5p[p.id] || 'influence les etudes'}. ` : `${p.name}: ${h5p[p.id] || 'influence les etudes'}. `;
         });
     } else {
         text += isEasy ? 'Pas d\'énergie académique particulièrement forte, mais un effort régulier donnera de bons résultats.' : 'Pas de planètes en 5e — la position du 5e seigneur est la clé.';
@@ -1572,7 +1572,7 @@ function renderChildren(positions, lagnaSign) {
     if (h5.length > 0) {
         text += isEasy ? '<br><br>' : '<br><br><strong>Planètes en 5e :</strong><br>';
         h5.forEach(p => {
-            const ch = { Sun: 'Connection with sons. Children have leadership.', Moon: 'Connection with daughters. Strong emotional bond.', Mars: 'Active children. May be difficult to manage.', Mercury: 'Very smart children! Excellent academics.', Jupiter: 'Blessed children! Fortune through children.', Venus: 'Beautiful artistic children. Connection with daughters.', Saturn: 'Children may come late. But responsible children.' };
+            const ch = { Sun: 'Connexion avec les fils. Les enfants ont du leadership.', Moon: 'Connexion avec les filles. Fort lien emotionnel.', Mars: 'Enfants actifs. Peuvent etre difficiles a gerer.', Mercury: 'Enfants tres intelligents ! Excellents en academique.', Jupiter: 'Enfants benis ! Fortune par les enfants.', Venus: 'Beaux enfants artistiques. Connexion avec les filles.', Saturn: 'Les enfants peuvent venir tard. Mais enfants responsables.' };
             text += `${ch[p.id] || ''}<br>`;
         });
     }
@@ -2419,7 +2419,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
 
         html += '<br><strong>' + (isEasy ? 'Older siblings:' : 'D3 11th house (older siblings) — ' + SIGNS[d3_11sign] + ':') + '</strong><br>';
         if (d3_11planets.length > 0) {
-            d3_11planets.forEach(p => { html += isEasy ? 'Influences older sibling relationship.<br>' : '• ' + p.name + ' in 11th house — influences relationship with older siblings.<br>'; });
+            d3_11planets.forEach(p => { html += isEasy ? 'Influence la relation avec les freres/soeurs aines.<br>' : '• ' + p.name + ' in 11th house — influences relationship with older siblings.<br>'; });
         } else html += isEasy ? '' : '11 house no planets.<br>';
 
         if (marsD3) {
@@ -2623,7 +2623,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD40) {
             const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1;
             if (!isEasy) html += '<strong>☽ Moon (Mother karaka):</strong> ';
-            html += [,'Mother has strong influence','Wealth from mother','Good communication with mother','Deep bond with mother! Best placement','Mother is creative','Mother is service-oriented','Mother influences relationships','Inheritance from mother','Mother is religious/educational','Mother has social status','Mother is independent','Mother is spiritual'][mH] || '';
+            html += [,'La mere a une forte influence','Richesse de la mere','Bonne communication avec la mere','Lien profond avec la mere ! Meilleure position','La mere est creative','La mere est orientee service','La mere influence les relations','Heritage de la mere','La mere est religieuse/educative','La mere a un statut social','La mere est independante','La mere est spirituelle'][mH] || '';
             html += '<br>';
         }
 
@@ -2647,7 +2647,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (sunD45) {
             const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1;
             if (!isEasy) html += '<strong>☉ Sun (Father karaka):</strong> ';
-            html += [,'Father has strong influence','Wealth from father','Good communication with father','Father is family-oriented','Father is creative','Father is service-oriented','Father influences relationships','Inheritance from father','Father is religious/educational','Father succeeds in society! Best placement','Father is independent','Father is spiritual'][sH] || '';
+            html += [,'Le pere a une forte influence','Richesse du pere','Bonne communication avec le pere','Le pere est oriente famille','Le pere est creatif','Le pere est oriente service','Le pere influence les relations','Heritage du pere','Le pere est religieux/educatif','Le pere reussit en societe ! Meilleure position','Le pere est independant','Le pere est spirituel'][sH] || '';
             html += '<br>';
         }
 

@@ -2623,7 +2623,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (moonD40) {
             const mH = ((moonD40.dSign - dLagnaSign + 12) % 12) + 1;
             if (!isEasy) html += '<strong>☽ Moon (Mother karaka):</strong> ';
-            html += [,'Mother has strong influence','Wealth from mother','Good communication with mother','Deep bond with mother! Best placement','Mother is creative','Mother is service-oriented','Mother influences relationships','Inheritance from mother','Mother is religious/educational','Mother has social status','Mother is independent','Mother is spiritual'][mH] || '';
+            html += [,'La madre tiene fuerte influencia','Riqueza de la madre','Buena comunicacion con la madre','Vinculo profundo con la madre! Mejor posicion','La madre es creativa','La madre esta orientada al servicio','La madre influye en las relaciones','Herencia de la madre','La madre es religiosa/educativa','La madre tiene estatus social','La madre es independiente','La madre es espiritual'][mH] || '';
             html += '<br>';
         }
 
@@ -2647,7 +2647,7 @@ function renderDivisionalChart(positions, lagnaSidereal, division, chartId, inte
         if (sunD45) {
             const sH = ((sunD45.dSign - dLagnaSign + 12) % 12) + 1;
             if (!isEasy) html += '<strong>☉ Sun (Father karaka):</strong> ';
-            html += [,'Father has strong influence','Wealth from father','Good communication with father','Father is family-oriented','Father is creative','Father is service-oriented','Father influences relationships','Inheritance from father','Father is religious/educational','Father succeeds in society! Best placement','Father is independent','Father is spiritual'][sH] || '';
+            html += [,'El padre tiene fuerte influencia','Riqueza del padre','Buena comunicacion con el padre','El padre esta orientado a la familia','El padre es creativo','El padre esta orientado al servicio','El padre influye en las relaciones','Herencia del padre','El padre es religioso/educativo','El padre tiene exito en la sociedad! Mejor posicion','El padre es independiente','El padre es espiritual'][sH] || '';
             html += '<br>';
         }
 
