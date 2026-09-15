@@ -467,16 +467,16 @@ function checkCompat() {
         const mEl = document.getElementById('m'+n);
         const dEl = document.getElementById('d'+n);
         yEl.innerHTML = '<option value="">Year</option>';
-        for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}Year</option>`;
+        for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}</option>`;
         mEl.innerHTML = '<option value="">Month</option>';
-        for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}Month</option>`;
+        for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}</option>`;
         function updateDays() {
             const y = parseInt(yEl.value) || 2000;
             const m = parseInt(mEl.value) || 1;
             const maxD = new Date(y, m, 0).getDate();
             const cur = parseInt(dEl.value);
             dEl.innerHTML = '<option value="">Day</option>';
-            for (let d = 1; d <= maxD; d++) dEl.innerHTML += `<option value="${d}"${d===cur?' selected':''}>${d}Day</option>`;
+            for (let d = 1; d <= maxD; d++) dEl.innerHTML += `<option value="${d}"${d===cur?' selected':''}>${d}</option>`;
         }
         yEl.onchange = updateDays;
         mEl.onchange = updateDays;
