@@ -141,7 +141,7 @@
 
 <div class="seo-content">
 <div class="seo-section"><h2>Compatibilite BaZi</h2><p>Comparez les Quatre Piliers de deux personnes pour analyser les combinaisons de Troncs, Branches, oppositions et interactions des Cinq Elements.</p></div>
-<div class="seo-section"><h2>Questions fréquentes</h2><details class="seo-faq"><summary>What is Compatibilite BaZi?</summary><p>Compare les Troncs Celestes et Branches Terrestres de deux themes natals pour trouver combinaisons, oppositions et penalites.</p></details></div>
+<div class="seo-section"><h2>Questions fréquentes</h2><details class="seo-faq"><summary>Qu'est-ce que la Compatibilite BaZi ?</summary><p>Compare les Troncs Celestes et Branches Terrestres de deux themes natals pour trouver combinaisons, oppositions et penalites.</p></details></div>
 <div class="seo-section"><h2>Outils associés</h2><div class="seo-related"><a href="../../fr/saju/">Quatre Piliers (BaZi)</a><a href="../../fr/vedic/">Astrologie Vedique</a><a href="../../fr/zodiac-compat/">Compatibilite Zodiacale</a></div></div>
 </div>
 
@@ -149,13 +149,13 @@
 
 <script>
 // ═══ 천간·지지 기본 데이터 ═══
-const STEMS = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
-const BRANCHES = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 const STEM_ELEMENTS = ['Wood','Wood','Fire','Fire','Earth','Earth','Metal','Metal','Water','Water'];
 const BRANCH_ELEMENTS = ['Water','Earth','Wood','Wood','Earth','Fire','Fire','Earth','Metal','Metal','Earth','Water'];
 const ELEMENT_NAMES = { 'Wood':'Wood 木', 'Fire':'Fire 火', 'Earth':'Earth 土', 'Metal':'Metal 金', 'Water':'Water 水' };
 const EL_CLASS = { 'Wood':'el-wood', 'Fire':'el-fire', 'Earth':'el-earth', 'Metal':'el-metal', 'Water':'el-water' };
-const ANIMALS = ['🐀Rat','🐂Ox','🐅Tiger','🐇Rabbit','🐉Dragon','🐍Snake','🐴Horse','🐑Goat','🐵Monkey','🐓Rooster','🐕Dog','🐗Pig'];
+const ANIMALS = ['🐀Rat','🐂Boeuf','🐅Tigre','🐇Lapin','🐉Dragon','🐍Serpent','🐴Cheval','🐑Chevre','🐵Singe','🐓Coq','🐕Chien','🐗Cochon'];
 
 // ═══ 만세력 계산 (saju 페이지와 동일) ═══
 function getAdjustedAnnee(y, m, d) { if (m < 2 || (m === 2 && d < 4)) return y - 1; return y; }

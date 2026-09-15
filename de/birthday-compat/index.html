@@ -141,7 +141,7 @@
 
 <div class="seo-content">
 <div class="seo-section"><h2>BaZi Kompatibilitaet</h2><p>Vergleichen Sie die Vier Saeulen zweier Personen fuer Himmelsstamm- und Erdzweig-Kombinationen, Konflikte und Fuenf-Elemente-Interaktionen.</p></div>
-<div class="seo-section"><h2>Häufige Fragen</h2><details class="seo-faq"><summary>What is BaZi Kompatibilitaet?</summary><p>Vergleicht die Himmelsstamme und Erdzweige zweier Geburtskarten, um Kombinationen, Konflikte und Strafen zu finden.</p></details></div>
+<div class="seo-section"><h2>Häufige Fragen</h2><details class="seo-faq"><summary>Was ist BaZi-Kompatibilitaet?</summary><p>Vergleicht die Himmelsstamme und Erdzweige zweier Geburtskarten, um Kombinationen, Konflikte und Strafen zu finden.</p></details></div>
 <div class="seo-section"><h2>Verwandte Tools</h2><div class="seo-related"><a href="../../de/saju/">Vier Saeulen (BaZi)</a><a href="../../de/vedic/">Vedische Astrologie</a><a href="../../de/zodiac-compat/">Sternzeichen-Kompatibilitaet</a></div></div>
 </div>
 
@@ -149,13 +149,13 @@
 
 <script>
 // ═══ 천간·지지 기본 데이터 ═══
-const STEMS = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
-const BRANCHES = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 const STEM_ELEMENTS = ['Wood','Wood','Fire','Fire','Earth','Earth','Metal','Metal','Water','Water'];
 const BRANCH_ELEMENTS = ['Water','Earth','Wood','Wood','Earth','Fire','Fire','Earth','Metal','Metal','Earth','Water'];
 const ELEMENT_NAMES = { 'Wood':'Wood 木', 'Fire':'Fire 火', 'Earth':'Earth 土', 'Metal':'Metal 金', 'Water':'Water 水' };
 const EL_CLASS = { 'Wood':'el-wood', 'Fire':'el-fire', 'Earth':'el-earth', 'Metal':'el-metal', 'Water':'el-water' };
-const ANIMALS = ['🐀Rat','🐂Ox','🐅Tiger','🐇Rabbit','🐉Dragon','🐍Snake','🐴Horse','🐑Goat','🐵Monkey','🐓Rooster','🐕Dog','🐗Pig'];
+const ANIMALS = ['🐀Ratte','🐂Ochse','🐅Tiger','🐇Hase','🐉Drache','🐍Schlange','🐴Pferd','🐑Ziege','🐵Affe','🐓Hahn','🐕Hund','🐗Schwein'];
 
 // ═══ 만세력 계산 (saju 페이지와 동일) ═══
 function getAdjustedJahr(y, m, d) { if (m < 2 || (m === 2 && d < 4)) return y - 1; return y; }

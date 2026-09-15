@@ -141,7 +141,7 @@
 
 <div class="seo-content">
 <div class="seo-section"><h2>四柱推命 相性</h2><p>二人の四柱推命を比較し、天干合・地支合・沖・五行の相性を分析します。</p></div>
-<div class="seo-section"><h2>よくある質問</h2><details class="seo-faq"><summary>What is 四柱推命 相性?</summary><p>二人の生年月日から天干と地支を比較し、合・沖・刑の関係を分析します。合が多ければ調和、沖が多ければ葛藤の可能性があります。</p></details></div>
+<div class="seo-section"><h2>よくある質問</h2><details class="seo-faq"><summary>四柱推命相性とは？</summary><p>二人の生年月日から天干と地支を比較し、合・沖・刑の関係を分析します。合が多ければ調和、沖が多ければ葛藤の可能性があります。</p></details></div>
 <div class="seo-section"><h2>関連ツール</h2><div class="seo-related"><a href="../../jp/saju/">四柱推命</a><a href="../../jp/vedic/">ヴェーダ占星術</a><a href="../../jp/zodiac-compat/">星座相性</a></div></div>
 </div>
 
@@ -149,13 +149,13 @@
 
 <script>
 // ═══ 천간·지지 기본 데이터 ═══
-const STEMS = ['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'];
-const BRANCHES = ['Zi','Chou','Yin','Mao','Chen','Si','Wu','Wei','Shen','You','Xu','Hai'];
+const STEMS = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 const STEM_ELEMENTS = ['Wood','Wood','Fire','Fire','Earth','Earth','Metal','Metal','Water','Water'];
 const BRANCH_ELEMENTS = ['Water','Earth','Wood','Wood','Earth','Fire','Fire','Earth','Metal','Metal','Earth','Water'];
 const ELEMENT_NAMES = { 'Wood':'Wood 木', 'Fire':'Fire 火', 'Earth':'Earth 土', 'Metal':'Metal 金', 'Water':'Water 水' };
 const EL_CLASS = { 'Wood':'el-wood', 'Fire':'el-fire', 'Earth':'el-earth', 'Metal':'el-metal', 'Water':'el-water' };
-const ANIMALS = ['🐀Rat','🐂Ox','🐅Tiger','🐇Rabbit','🐉Dragon','🐍Snake','🐴Horse','🐑Goat','🐵Monkey','🐓Rooster','🐕Dog','🐗Pig'];
+const ANIMALS = ['🐀子','🐂丑','🐅寅','🐇卯','🐉辰','🐍巳','🐴午','🐑未','🐵申','🐓酉','🐕戌','🐗亥'];
 
 // ═══ 만세력 계산 (saju 페이지와 동일) ═══
 function getAdjusted年柱(y, m, d) { if (m < 2 || (m === 2 && d < 4)) return y - 1; return y; }
@@ -365,7 +365,7 @@ function checkCompat() {
         const labels = ['年柱','月柱','日柱'];
         return `<div class="pillar-side"><div class="pillar-side-title">${name}</div><div class="pillars-row">${pillars.map((p,i) =>
             `<div class="p-cell${i===2?' day':''}"><div class="p-label">${labels[i]}</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[p.stem]]}">${STEMS[p.stem]}</div><div class="p-char ${EL_CLASS[BRANCH_ELEMENTS[p.branch]]}">${BRANCHES[p.branch]}</div><div class="p-el">${STEM_ELEMENTS[p.stem]}/${BRANCH_ELEMENTS[p.branch]}</div>${i===0?'<div class="p-el">'+ANIMALS[p.branch]+'</div>':''}</div>`
-        ).join('')}<div class="p-cell"><div class="p-label">日柱 Master</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[pillars[2].stem]]}" style="font-size:28px;">${STEMS[pillars[2].stem]}</div><div class="p-el" style="font-size:12px;">${ELEMENT_NAMES[STEM_ELEMENTS[pillars[2].stem]]}</div></div></div></div>`;
+        ).join('')}<div class="p-cell"><div class="p-label">日干</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[pillars[2].stem]]}" style="font-size:28px;">${STEMS[pillars[2].stem]}</div><div class="p-el" style="font-size:12px;">${ELEMENT_NAMES[STEM_ELEMENTS[pillars[2].stem]]}</div></div></div></div>`;
     }
 
     function elBar(cnt, name) {
