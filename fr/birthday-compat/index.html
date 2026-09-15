@@ -23,14 +23,14 @@
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/fr/birthday-compat/">
     <meta name="description" content="Free BaZi compatibility. Compare two birth dates for Heavenly Stem combinations, Earthly Branch combinations, clashes, and Five Elements analysis.">
     <link rel="canonical" href="https://mogumoon.com/birthday-compat/">
-    <meta property="og:title" content="BaZi Compatibility (四柱 合) - Traditional Compatibility | MOGU Moon">
+    <meta property="og:title" content="Compatibilite BaZi (四柱 合) - Traditional Compatibility | MOGU Moon">
     <meta property="og:description" content="Compare two people's Four Pillars to analyze Stem combinations, Branch combinations, clashes, and Five Elements compatibility.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mogumoon.com/fr/birthday-compat/">
     <meta property="og:image" content="https://mogumoon.com/og-image.png">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What is BaZi Compatibility?","acceptedAnswer":{"@type":"Answer","text":"It compares Heavenly Stems and Earthly Branches of two people's birth charts to find combinations (合), clashes (沖), and penalties (刑). More combinations means harmony; more clashes means potential conflict."}},
+    {"@type":"Question","name":"What is Compatibilite BaZi?","acceptedAnswer":{"@type":"Answer","text":"Compare les Troncs Celestes et Branches Terrestres de deux themes natals pour trouver combinaisons, oppositions et penalites."}},
     {"@type":"Question","name":"What are Stem Combinations?","acceptedAnswer":{"@type":"Answer","text":"When specific pairs of the 10 Heavenly Stems meet, they combine to generate a new element. In compatibility, stem combinations signify harmony between two people."}},
     {"@type":"Question","name":"Are Branch Oppositions bad?","acceptedAnswer":{"@type":"Answer","text":"Branch clashes indicate conflict and tension, but are not necessarily bad. Oppositions are energy of change and can drive mutual growth."}}
     ]}
@@ -140,9 +140,9 @@
 </div>
 
 <div class="seo-content">
-<div class="seo-section"><h2>BaZi Compatibility</h2><p>Compare two people's Four Pillars (BaZi) to analyze Heavenly Stem combinations, Earthly Branch combinations, clashes, and Five Elements interactions.</p></div>
-<div class="seo-section"><h2>Questions fréquentes</h2><details class="seo-faq"><summary>What is BaZi Compatibility?</summary><p>It compares Heavenly Stems and Earthly Branches of two people's birth charts to find combinations (合), clashes (沖), and penalties (刑). More combinations means harmony; more clashes means potential conflict.</p></details></div>
-<div class="seo-section"><h2>Outils associés</h2><div class="seo-related"><a href="../../fr/saju/">Four Pillars (BaZi)</a><a href="../../fr/vedic/">Vedic Astrology</a><a href="../../fr/zodiac-compat/">Zodiac Compatibility</a></div></div>
+<div class="seo-section"><h2>Compatibilite BaZi</h2><p>Comparez les Quatre Piliers de deux personnes pour analyser les combinaisons de Troncs, Branches, oppositions et interactions des Cinq Elements.</p></div>
+<div class="seo-section"><h2>Questions fréquentes</h2><details class="seo-faq"><summary>What is Compatibilite BaZi?</summary><p>Compare les Troncs Celestes et Branches Terrestres de deux themes natals pour trouver combinaisons, oppositions et penalites.</p></details></div>
+<div class="seo-section"><h2>Outils associés</h2><div class="seo-related"><a href="../../fr/saju/">Quatre Piliers (BaZi)</a><a href="../../fr/vedic/">Astrologie Vedique</a><a href="../../fr/zodiac-compat/">Compatibilite Zodiacale</a></div></div>
 </div>
 
 <footer>&copy; 2025 MOGU Moon</footer>
@@ -466,7 +466,7 @@ function checkCompat() {
         const mEl = document.getElementById('m'+n);
         const dEl = document.getElementById('d'+n);
         yEl.innerHTML = '<option value="">Année</option>';
-        for (let y = now.getFullAnnee(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}</option>`;
+        for (let y = now.getFullYear(); y >= 1920; y--) yEl.innerHTML += `<option value="${y}">${y}</option>`;
         mEl.innerHTML = '<option value="">Mois</option>';
         for (let m = 1; m <= 12; m++) mEl.innerHTML += `<option value="${m}">${m}</option>`;
         function updateJours() {
