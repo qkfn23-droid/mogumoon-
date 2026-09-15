@@ -242,7 +242,7 @@ function initForm() {
     for (let i = 1; i <= 12; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Month ' + i; if (i === 3) o.selected = true; m.appendChild(o); }
     for (let i = 1; i <= 31; i++) { const o = document.createElement('option'); o.value = i; o.textContent = 'Day ' + i; if (i === 15) o.selected = true; d.appendChild(o); }
     [12,1,2,3,4,5,6,7,8,9,10,11].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v + ':00'; if (v === 10) o.selected = true; h.appendChild(o); });
-    for (let i = 0; i < 60; i += 5) { const o = document.createElement('option'); o.value = i; o.textContent = ':' + String(i).padStart(2,'0'); if (i === 30) o.selected = true; min.appendChild(o); }
+    for (let i = 0; i < 60; i++) { const o = document.createElement('option'); o.value = i; o.textContent = ':' + String(i).padStart(2,'0'); if (i === 30) o.selected = true; min.appendChild(o); }
 }
 
 function toggleTime() {
