@@ -642,44 +642,45 @@
 <button onclick="var gc=document.getElementById('ghostChat');var gl=document.getElementById('ghostLabel');if(gc.style.display==='none'){gc.style.display='block';gl.style.display='none'}else{gc.style.display='none';gl.style.display=''}" style="width:48px;height:48px;border-radius:50%;border:2px solid #c9a84c;font-size:22px;cursor:pointer;background:#1a1a3e;box-shadow:0 2px 8px rgba(0,0,0,0.3);padding:6px;"><svg viewBox="0 0 120 135" xmlns="http://www.w3.org/2000/svg"><path d="M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z" fill="#f0ece4" stroke="#888" stroke-width="1.2"/><ellipse cx="43" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><ellipse cx="77" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><circle cx="48" cy="64" r="2.8" fill="#555"/><circle cx="72" cy="64" r="2.8" fill="#555"/><path d="M56,77 Q60,81 64,77" fill="none" stroke="#999" stroke-width="1.2" stroke-linecap="round"/></svg></button>
 </div>
 <script>
+var moguIcon='<img src="data:image/svg+xml,'+encodeURIComponent('<svg viewBox=\"0 0 120 135\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z\" fill=\"#f0ece4\" stroke=\"#888\" stroke-width=\"1.2\"/><ellipse cx=\"43\" cy=\"70\" rx=\"7\" ry=\"4\" fill=\"rgba(245,180,170,0.35)\"/><ellipse cx=\"77\" cy=\"70\" rx=\"7\" ry=\"4\" fill=\"rgba(245,180,170,0.35)\"/><circle cx=\"48\" cy=\"64\" r=\"2.8\" fill=\"#555\"/><circle cx=\"72\" cy=\"64\" r=\"2.8\" fill=\"#555\"/><path d=\"M56,77 Q60,81 64,77\" fill=\"none\" stroke=\"#999\" stroke-width=\"1.2\" stroke-linecap=\"round\"/></svg>')+'" style="width:20px;height:22px;vertical-align:middle;margin-left:4px;" alt="Mogu">';
 var gcData = {
-    love: {msg:'おっ！恋愛/配偶者運が気になるんだね！ おすすめのツールはこれ 👻', items:[
+    love: {msg:'おっ！恋愛/配偶者運が気になるんだね！ おすすめのツールはこれ '+moguIcon, items:[
         {icon:'🕉️',name:'ヴェーダ占星術',desc:'配偶者の外見、性格、出会う時期、方向まで！',url:'vedic/',badge:'⭐おすすめ'},
         {icon:'☯️',name:'四柱推命',desc:'配偶者運、結婚時期',url:'saju/'},
         {icon:'💜',name:'紫微斗数',desc:'結婚宮の詳細分析',url:'ziwei/'},
         {icon:'💑',name:'誕生日相性',desc:'二人の相性チェック',url:'birthday-compat/'},
     ]},
-    personality: {msg:'性格が気になるんだね！おすすめ 👻', items:[
+    personality: {msg:'性格が気になるんだね！おすすめ '+moguIcon, items:[
         {icon:'🕉️',name:'ヴェーダ占星術',desc:'ラグナで見る性格、外見、才能',url:'vedic/',badge:'⭐おすすめ'},
         {icon:'☯️',name:'四柱推命',desc:'五行で見る運命',url:'saju/'},
         {icon:'🔢',name:'数秘術',desc:'誕生日の数字で見る運命',url:'numerology/'},
         {icon:'🧿',name:'オーラカラーテスト',desc:'エネルギーの色を発見',url:'aura/'},
     ]},
-    fortune: {msg:'運勢が気になる！これを試してみて 👻', items:[
+    fortune: {msg:'運勢が気になる！これを試してみて '+moguIcon, items:[
         {icon:'✨',name:'今日の運勢',desc:'毎日のタロット+星座+ラッキーナンバー',url:'daily/',badge:'⭐毎日更新'},
         {icon:'🕉️',name:'ヴェーダ大運',desc:'今どの惑星が支配する時期？',url:'vedic/'},
         {icon:'🌕',name:'ムーンフェーズ',desc:'今日の月+適した活動',url:'moonphase/'},
         {icon:'📊',name:'バイオリズム',desc:'今日のコンディションチェック',url:'biorhythm/'},
     ]},
-    career: {msg:'仕事/財運！ここでチェック 👻', items:[
+    career: {msg:'仕事/財運！ここでチェック '+moguIcon, items:[
         {icon:'🕉️',name:'ヴェーダ占星術',desc:'職業チャート+財運チャート分析',url:'vedic/',badge:'⭐おすすめ'},
         {icon:'☯️',name:'四柱推命',desc:'財運、適職、大運',url:'saju/'},
         {icon:'💜',name:'紫微斗数',desc:'官禄宮+財帛宮分析',url:'ziwei/'},
     ]},
-    compat: {msg:'相性！ここでチェック 👻', items:[
+    compat: {msg:'相性！ここでチェック '+moguIcon, items:[
         {icon:'💑',name:'誕生日相性',desc:'恋愛・友情・運命の相性',url:'birthday-compat/',badge:'⭐おすすめ'},
         {icon:'💕',name:'星座相性',desc:'12星座相性',url:'zodiac-compat/'},
         {icon:'🐾',name:'スピリットアニマル相性',desc:'守護動物の相性',url:'spirit-animal/'},
     ]},
-    karma: {msg:'前世が気になる？！ここ 👻', items:[
+    karma: {msg:'前世が気になる？！ここ '+moguIcon, items:[
         {icon:'🕉️',name:'ヴェーダD60',desc:'60神で見る前世カルマ',url:'vedic/',badge:'⭐おすすめ'},
         {icon:'🏛️',name:'前世テスト',desc:'前世の職業、時代、才能',url:'past-life/'},
         {icon:'🏛️',name:'ヘレニスティック',desc:'守護惑星と運命',url:'hellenistic/'},
     ]},
-    dream: {msg:'夢解釈！ここだよ 👻', items:[
+    dream: {msg:'夢解釈！ここだよ '+moguIcon, items:[
         {icon:'🌿',name:'夢辞典',desc:'夢のシンボル+キーワード検索',url:'dream/',badge:'⭐すぐ'},
     ]},
-    quick: {msg:'すぐ答えが欲しい！ 👻', items:[
+    quick: {msg:'すぐ答えが欲しい！ '+moguIcon, items:[
         {icon:'🃏',name:'タロットカード',desc:'今日のアドバイス、恋愛、方向',url:'tarot/',badge:'⭐おすすめ'},
         {icon:'🔮',name:'水晶玉',desc:'水晶玉에게 질문하기',url:'crystal/'},
         {icon:'📖',name:'易経',desc:'3000年の知恵',url:'iching/'},

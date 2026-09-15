@@ -642,44 +642,45 @@
 <button onclick="var gc=document.getElementById('ghostChat');var gl=document.getElementById('ghostLabel');if(gc.style.display==='none'){gc.style.display='block';gl.style.display='none'}else{gc.style.display='none';gl.style.display=''}" style="width:48px;height:48px;border-radius:50%;border:2px solid #c9a84c;font-size:22px;cursor:pointer;background:#1a1a3e;box-shadow:0 2px 8px rgba(0,0,0,0.3);padding:6px;"><svg viewBox="0 0 120 135" xmlns="http://www.w3.org/2000/svg"><path d="M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z" fill="#f0ece4" stroke="#888" stroke-width="1.2"/><ellipse cx="43" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><ellipse cx="77" cy="70" rx="7" ry="4" fill="rgba(245,180,170,0.35)"/><circle cx="48" cy="64" r="2.8" fill="#555"/><circle cx="72" cy="64" r="2.8" fill="#555"/><path d="M56,77 Q60,81 64,77" fill="none" stroke="#999" stroke-width="1.2" stroke-linecap="round"/></svg></button>
 </div>
 <script>
+var moguIcon='<img src="data:image/svg+xml,'+encodeURIComponent('<svg viewBox=\"0 0 120 135\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M60,12 C33,12 18,38 18,65 L18,100 C18,104 22,108 27,104 C32,100 34,106 39,108 C44,110 47,104 52,106 C57,108 59,112 60,112 C61,112 63,108 68,106 C73,104 76,110 81,108 C86,106 88,100 93,104 C98,108 102,104 102,100 L102,65 C102,38 87,12 60,12Z\" fill=\"#f0ece4\" stroke=\"#888\" stroke-width=\"1.2\"/><ellipse cx=\"43\" cy=\"70\" rx=\"7\" ry=\"4\" fill=\"rgba(245,180,170,0.35)\"/><ellipse cx=\"77\" cy=\"70\" rx=\"7\" ry=\"4\" fill=\"rgba(245,180,170,0.35)\"/><circle cx=\"48\" cy=\"64\" r=\"2.8\" fill=\"#555\"/><circle cx=\"72\" cy=\"64\" r=\"2.8\" fill=\"#555\"/><path d=\"M56,77 Q60,81 64,77\" fill=\"none\" stroke=\"#999\" stroke-width=\"1.2\" stroke-linecap=\"round\"/></svg>')+'" style="width:20px;height:22px;vertical-align:middle;margin-left:4px;" alt="Mogu">';
 var gcData = {
-    love: {msg:'Oh! Curious about love/spouse fortune! I recommend these tools 👻', items:[
+    love: {msg:'Oh! Curious about love/spouse fortune! I recommend these tools '+moguIcon, items:[
         {icon:'🕉️',name:'Vedic Astrology',desc:'Spouse appearance, personality, timing, direction!',url:'vedic/',badge:'⭐Pick'},
         {icon:'☯️',name:'Four Pillars (Saju)',desc:'Spouse fortune, marriage timing',url:'saju/'},
         {icon:'💜',name:'Zi Wei Dou Shu',desc:'Marriage palace detailed analysis',url:'ziwei/'},
         {icon:'💑',name:'Birthday Compatibility',desc:'Check two people compatibility',url:'birthday-compat/'},
     ]},
-    personality: {msg:'Curious about personality! Here are my picks 👻', items:[
+    personality: {msg:'Curious about personality! Here are my picks '+moguIcon, items:[
         {icon:'🕉️',name:'Vedic Astrology',desc:'Personality, appearance, talent by Lagna',url:'vedic/',badge:'⭐Pick'},
         {icon:'☯️',name:'Four Pillars (Saju)',desc:'Destiny by five elements',url:'saju/'},
         {icon:'🔢',name:'Numerology',desc:'Destiny by birth numbers',url:'numerology/'},
         {icon:'🧿',name:'Aura Color Test',desc:'Discover your energy color',url:'aura/'},
     ]},
-    fortune: {msg:'Curious about fortune! Try these 👻', items:[
+    fortune: {msg:'Curious about fortune! Try these '+moguIcon, items:[
         {icon:'✨',name:'Daily Fortune',desc:'Daily tarot + horoscope + lucky numbers',url:'daily/',badge:'⭐Daily'},
         {icon:'🕉️',name:'Vedic Dasha',desc:'Which planet rules your current period?',url:'vedic/'},
         {icon:'🌕',name:'Moon Phase',desc:'Todays moon + suitable activities',url:'moonphase/'},
         {icon:'📊',name:'Biorhythm',desc:'Check todays condition',url:'biorhythm/'},
     ]},
-    career: {msg:'Career/wealth fortune! Check here 👻', items:[
+    career: {msg:'Career/wealth fortune! Check here '+moguIcon, items:[
         {icon:'🕉️',name:'Vedic Astrology',desc:'Career chart + wealth chart analysis',url:'vedic/',badge:'⭐Pick'},
         {icon:'☯️',name:'Four Pillars (Saju)',desc:'Wealth, suitable career, major periods',url:'saju/'},
         {icon:'💜',name:'Zi Wei Dou Shu',desc:'Career + wealth palace analysis',url:'ziwei/'},
     ]},
-    compat: {msg:'Compatibility! Check here 👻', items:[
+    compat: {msg:'Compatibility! Check here '+moguIcon, items:[
         {icon:'💑',name:'Birthday Compatibility',desc:'Love, friendship, destiny compatibility',url:'birthday-compat/',badge:'⭐Pick'},
         {icon:'💕',name:'Zodiac Compatibility',desc:'12Zodiac Compatibility',url:'zodiac-compat/'},
         {icon:'🐾',name:'Spirit Animal Match',desc:'Guardian animal compatibility',url:'spirit-animal/'},
     ]},
-    karma: {msg:'Curious about past life?! Here 👻', items:[
+    karma: {msg:'Curious about past life?! Here '+moguIcon, items:[
         {icon:'🕉️',name:'Vedic D60',desc:'60 deities past life karma',url:'vedic/',badge:'⭐Pick'},
         {icon:'🏛️',name:'Past Life Test',desc:'Past life job, era, talent',url:'past-life/'},
         {icon:'🏛️',name:'Hellenistic',desc:'Guardian planet and destiny',url:'hellenistic/'},
     ]},
-    dream: {msg:'Dream interpretation! Right here 👻', items:[
+    dream: {msg:'Dream interpretation! Right here '+moguIcon, items:[
         {icon:'🌿',name:'Dream Dictionary',desc:'Dream symbols + keyword search',url:'dream/',badge:'⭐Go'},
     ]},
-    quick: {msg:'Need a quick answer! 👻', items:[
+    quick: {msg:'Need a quick answer! '+moguIcon, items:[
         {icon:'🃏',name:'Tarot Cards',desc:'Todays advice, love, direction',url:'tarot/',badge:'⭐Pick'},
         {icon:'🔮',name:'Crystal Ball',desc:'Crystal Ball에게 질문하기',url:'crystal/'},
         {icon:'📖',name:'I Ching',desc:'3000 years of wisdom',url:'iching/'},
