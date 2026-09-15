@@ -25,15 +25,15 @@
     <meta name="description" content="Free zodiac compatibility. Analyze sun sign + デカン from birth date. Love, friendship, element compatibility.">
     <link rel="canonical" href="https://mogumoon.com/jp/zodiac-compat/">
     <meta property="og:title" content="星座相性 - 太陽星座 · デカン · 元素分析 | MOGU Moon">
-    <meta property="og:description" content="Precise compatibility analysis with sun sign and デカン from birth date.">
+    <meta property="og:description" content="Precise compatibility analysis with sun signとデカン from birth date.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mogumoon.com/jp/zodiac-compat/">
     <meta property="og:image" content="https://mogumoon.com/og-image.png">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What is 星座相性?","acceptedAnswer":{"@type":"Answer","text":"Compares two people sun signs and デカンs to analyze element, aspect, and planetary compatibility."}},
-    {"@type":"Question","name":"デカン이 뭔가요?","acceptedAnswer":{"@type":"Answer","text":"Each zodiac sign is divided into three 10-degree sections. Even the same 牡羊座라도 1デカン and 3デカン은 성격이 크게 다릅니다. 고대 이집트에서 시작된 전통 체계입니다."}},
-    {"@type":"Question","name":"Is zodiac compatibility accurate?","acceptedAnswer":{"@type":"Answer","text":"Zodiac compatibility is for fun and self-understanding. Real relationships depend more on effort and communication."}}
+    {"@type":"Question","name":"What is 星座相性?","acceptedAnswer":{"@type":"Answer","text":"Compares two people sun signsとデカンs to analyze element, aspect,とplanetary compatibility."}},
+    {"@type":"Question","name":"デカン이 뭔가요?","acceptedAnswer":{"@type":"Answer","text":"Each zodiac sign is divided into three 10-degree sections. Even the same 牡羊座라도 1デカンと3デカン은 성격이 크게 다릅니다. 고대 이집트에서 시작된 전통 체계입니다."}},
+    {"@type":"Question","name":"Is zodiac compatibility accurate?","acceptedAnswer":{"@type":"Answer","text":"Zodiac compatibility is for funとself-understanding. Real relationships depend more on effortとcommunication."}}
     ]}
     </script>
     <style>
@@ -183,15 +183,15 @@ function getSignAndDecan(sunLon) {
 
 // ═══ 元素相性 ═══
 function elementCompat(e1, e2) {
-    if (e1 === e2) return { score: 85, type: '同一元素', desc: 'Same element — instinctive understanding, but shared weaknesses may amplify.' };
+    if (e1 === e2) return { score: 85, type: '同一元素', desc: '同じ元素 — 本能的に理解し合いますが、同じ弱点も増幅される可能性があります。' };
     const pair = [e1,e2].sort().join('-');
     const data = {
-        'air-fire': { score: 82, type: '相生', desc: 'Fire + Air = flames grow higher! A fantastic combination of mutual inspiration and energy.' },
-        'earth-water': { score: 80, type: '相生', desc: 'Water nourishes Earth — soft, natural harmony. Emotional depth meets practical stability.' },
+        'air-fire': { score: 82, type: '相生', desc: 'Fire + Air = flames grow higher! A fantastic combination of mutual inspirationとenergy.' },
+        'earth-water': { score: 80, type: '相生', desc: '水が大地を潤すように柔らかく自然な調和。感情の深さと現実的な安定の出会い。' },
         'earth-fire': { score: 50, type: '緊張', desc: '情熱と安定の衝突。ペースを合わせることが鍵。' },
         'fire-water': { score: 45, type: '衝突', desc: '熱い火と冷たい水 — 激情的ですが衝突も頻繁。' },
-        'air-water': { score: 48, type: '緊張', desc: 'Thought meets feeling. Different communication styles require effort.' },
-        'air-earth': { score: 50, type: '緊張', desc: 'Freedom vs stability clash. View differences with curiosity.' },
+        'air-water': { score: 48, type: '緊張', desc: '思考と感情の出会い。異なるコミュニケーションスタイルには努力が必要。' },
+        'air-earth': { score: 50, type: '緊張', desc: '自由と安定の衝突。違いを好奇心で見てください。' },
     };
     return data[pair] || { score: 60, type: '中立', desc: '異なる魅力で惹かれ合う関係です。' };
 }
@@ -201,32 +201,32 @@ function aspectAnalysis(sign1, sign2) {
     const diff = Math.abs(sign1 - sign2);
     const angle = Math.min(diff, 12 - diff);
     const aspects = {
-        0: { name: '合(0°)', score: 8, desc: 'Same sign — deep understanding and empathy. Mirror-like relationship.' },
-        1: { name: '半合(30°)', score: -3, desc: 'Adjacent signs — subtle tension. Similar yet different energy.' },
-        2: { name: 'セクスタイル(60°)', score: 10, desc: '相生 angle — naturally compatible and mutually supportive.' },
-        3: { name: 'スクエア(90°)', score: -8, desc: '挑戦的な相性 angle — friction exists but drives growth.' },
+        0: { name: '合(0°)', score: 8, desc: '同じ星座 — 深い理解と共感。鏡のような関係。' },
+        1: { name: '半合(30°)', score: -3, desc: '隣り合う星座 — 微妙な緊張。似ているようで異なるエネルギー。' },
+        2: { name: 'セクスタイル(60°)', score: 10, desc: '相生 angle — naturally compatibleとmutually supportive.' },
+        3: { name: 'スクエア(90°)', score: -8, desc: '挑戦的 — 摩擦がありますが成長の原動力になります。' },
         4: { name: 'トライン(120°)', score: 12, desc: 'Most harmonious angle — flows naturally like water.' },
         5: { name: 'インコンジャンクト(150°)', score: -5, desc: 'Difficult to understand — unfamiliar worlds but much to learn.' },
-        6: { name: 'オポジション(180°)', score: 3, desc: 'Opposite — strong attraction and conflict coexist. Complementary but tense.' },
+        6: { name: 'オポジション(180°)', score: 3, desc: '正反対 — 強い引力と衝突が共存。補完的だが緊張感。' },
     };
     return aspects[angle] || { name: '中立', score: 0, desc: '' };
 }
 
 // ═══ デカン 궁합 ═══
 function デカンCompat(d1, d2) {
-    if (d1.ruler === d2.ruler) return { score: 10, desc: 'Same planetary ruler! <strong>' + d1.ruler + '</strong> energy shared — deep mutual understanding.' };
+    if (d1.ruler === d2.ruler) return { score: 10, desc: '同じ惑星支配！ <strong>' + d1.ruler + '</strong>のエネルギーを共有 — 深い共感。' };
     // 相生 행성 조합
     const good = [['金星','月'],['木星','太陽'],['金星','木星']];
     for (const [a,b] of good) {
         if ((d1.ruler===a && d2.ruler===b) || (d1.ruler===b && d2.ruler===a))
-            return { score: 6, desc: d1.ruler + ' and ' + d2.ruler + ' — harmonious meeting. Energies complement each other gently.' };
+            return { score: 6, desc: d1.ruler + 'と' + d2.ruler + ' — harmonious meeting. Energies complement each other gently.' };
     }
     const tense = [['火星','土星'],['火星','月'],['土星','金星']];
     for (const [a,b] of tense) {
         if ((d1.ruler===a && d2.ruler===b) || (d1.ruler===b && d2.ruler===a))
-            return { score: -4, desc: d1.ruler + ' and ' + d2.ruler + ' — tense relationship. Friction exists but overcoming it creates strong bonds.' };
+            return { score: -4, desc: d1.ruler + 'と' + d2.ruler + ' — tense relationship. Friction exists but overcoming it creates strong bonds.' };
     }
-    return { score: 2, desc: d1.ruler + ' and ' + d2.ruler + ' — smooth energy exchange without special conflict.' };
+    return { score: 2, desc: d1.ruler + 'と' + d2.ruler + ' — 特別な衝突なく穏やかなエネルギー交流。' };
 }
 
 // ═══ 종합 ═══
@@ -301,7 +301,7 @@ function checkCompat() {
             <div class="reading-text">
                 元素: <strong>${elResult.score}点</strong> · アスペクト: <strong>${aspResult.score >= 0 ? '+' : ''}${aspResult.score}点</strong> · デカン: <strong>${decResult.score >= 0 ? '+' : ''}${decResult.score}点</strong><br><br>
                 ${totalScore >= 65
-                    ? 'Overall a <strong>harmonious relationship</strong>. Many areas of natural compatibility.'
+                    ? '全体的に<strong>調和のとれた関係</strong>です。自然に合う部分が多いです。'
                     : totalScore >= 45
                     ? '適度な<strong>緊張と調和</strong>が共存。違いが成長の原動力になります。'
                     : 'A <strong>challenging relationship</strong>, but great opportunity for growth. Respect differences.'
