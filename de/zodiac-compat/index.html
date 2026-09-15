@@ -183,15 +183,15 @@ function getSignAndDecan(sunLon) {
 
 // ═══ Element-Kompatibilitat ═══
 function elementCompat(e1, e2) {
-    if (e1 === e2) return { score: 85, type: 'Gleiches Element', desc: 'Same element — instinctive understanding, but shared weaknesses may amplify.' };
+    if (e1 === e2) return { score: 85, type: 'Gleiches Element', desc: 'Gleiches Element — instinktives Verstandnis aber gemeinsame Schwachen konnen sich verstarken.' };
     const pair = [e1,e2].sort().join('-');
     const data = {
         'air-fire': { score: 82, type: 'Harmonisch', desc: 'Fire + Air = flames grow higher! A fantastic combination of mutual inspiration and energy.' },
-        'earth-water': { score: 80, type: 'Harmonisch', desc: 'Water nourishes Earth — soft, natural harmony. Emotional depth meets practical stability.' },
+        'earth-water': { score: 80, type: 'Harmonisch', desc: 'Wasser nahrt Erde — sanfte naturliche Harmonie. Emotionale Tiefe trifft Stabilitat.' },
         'earth-fire': { score: 50, type: 'Angespannt', desc: 'Leidenschaft vs Stabilitat. Tempo abstimmen ist der Schlussel.' },
         'fire-water': { score: 45, type: 'Konflikt', desc: 'Heisses Feuer und kaltes Wasser — leidenschaftlich aber haufige Konflikte.' },
-        'air-water': { score: 48, type: 'Angespannt', desc: 'Thought meets feeling. Different communication styles require effort.' },
-        'air-earth': { score: 50, type: 'Angespannt', desc: 'Freedom vs stability clash. View differences with curiosity.' },
+        'air-water': { score: 48, type: 'Angespannt', desc: 'Denken trifft Fuhlen. Verschiedene Kommunikationsstile erfordern Einsatz.' },
+        'air-earth': { score: 50, type: 'Angespannt', desc: 'Freiheit vs Stabilitat. Unterschiede mit Neugier betrachten.' },
     };
     return data[pair] || { score: 60, type: 'Neutral', desc: 'Angezogen von verschiedenen Reizen.' };
 }
@@ -201,20 +201,20 @@ function aspectAnalysis(sign1, sign2) {
     const diff = Math.abs(sign1 - sign2);
     const angle = Math.min(diff, 12 - diff);
     const aspects = {
-        0: { name: 'Konjunktion(0°)', score: 8, desc: 'Same sign — deep understanding and empathy. Mirror-like relationship.' },
-        1: { name: 'Halbsextil(30°)', score: -3, desc: 'Adjacent signs — subtle tension. Similar yet different energy.' },
+        0: { name: 'Konjunktion(0°)', score: 8, desc: 'Gleiches Zeichen — tiefes Verstandnis und Empathie. Spiegelbeziehung.' },
+        1: { name: 'Halbsextil(30°)', score: -3, desc: 'Benachbarte Zeichen — subtile Spannung. Ahnlich aber verschieden.' },
         2: { name: 'Sextil(60°)', score: 10, desc: 'Harmonisch angle — naturally compatible and mutually supportive.' },
-        3: { name: 'Quadrat(90°)', score: -8, desc: 'Herausfordernd angle — friction exists but drives growth.' },
+        3: { name: 'Quadrat(90°)', score: -8, desc: 'Herausfordernd — Reibung aber fordert Wachstum.' },
         4: { name: 'Trigon(120°)', score: 12, desc: 'Most harmonious angle — flows naturally like water.' },
         5: { name: 'Inkonjunktion(150°)', score: -5, desc: 'Difficult to understand — unfamiliar worlds but much to learn.' },
-        6: { name: 'Opposition(180°)', score: 3, desc: 'Opposite — strong attraction and conflict coexist. Complementary but tense.' },
+        6: { name: 'Opposition(180°)', score: 3, desc: 'Gegensatz — starke Anziehung und Konflikt koexistieren. Komplementar aber angespannt.' },
     };
     return aspects[angle] || { name: 'Neutral', score: 0, desc: '' };
 }
 
 // ═══ decan 궁합 ═══
 function decanCompat(d1, d2) {
-    if (d1.ruler === d2.ruler) return { score: 10, desc: 'Same planetary ruler! <strong>' + d1.ruler + '</strong> energy shared — deep mutual understanding.' };
+    if (d1.ruler === d2.ruler) return { score: 10, desc: 'Gleicher Herrscher! <strong>' + d1.ruler + '</strong> Energie geteilt — tiefes gegenseitiges Verstandnis.' };
     // Harmonisch 행성 조합
     const good = [['Venus','Moon'],['Jupiter','Sun'],['Venus','Jupiter']];
     for (const [a,b] of good) {
@@ -226,7 +226,7 @@ function decanCompat(d1, d2) {
         if ((d1.ruler===a && d2.ruler===b) || (d1.ruler===b && d2.ruler===a))
             return { score: -4, desc: d1.ruler + ' and ' + d2.ruler + ' — tense relationship. Friction exists but overcoming it creates strong bonds.' };
     }
-    return { score: 2, desc: d1.ruler + ' and ' + d2.ruler + ' — smooth energy exchange without special conflict.' };
+    return { score: 2, desc: d1.ruler + ' and ' + d2.ruler + ' — glatter Energieaustausch ohne besonderen Konflikt.' };
 }
 
 // ═══ 종합 ═══
@@ -301,7 +301,7 @@ function checkCompat() {
             <div class="reading-text">
                 Element: <strong>${elResult.score}Pkt</strong> · Aspekt: <strong>${aspResult.score >= 0 ? '+' : ''}${aspResult.score}Pkt</strong> · decan: <strong>${decResult.score >= 0 ? '+' : ''}${decResult.score}Pkt</strong><br><br>
                 ${totalScore >= 65
-                    ? 'Overall a <strong>harmonious relationship</strong>. Many areas of natural compatibility.'
+                    ? 'Insgesamt eine <strong>harmonische Beziehung</strong>. Viele naturliche Kompatibilitat.'
                     : totalScore >= 45
                     ? 'Massige <strong>Spannung und Harmonie</strong> koexistieren. Unterschiede fordern Wachstum.'
                     : 'A <strong>challenging relationship</strong>, but great opportunity for growth. Respect differences.'
