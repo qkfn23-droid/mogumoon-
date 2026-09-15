@@ -364,7 +364,7 @@ function checkCompat() {
     function pillarHTML(pillars, name) {
         const labels = ['Ano','Mes','Dia'];
         return `<div class="pillar-side"><div class="pillar-side-title">${name}</div><div class="pillars-row">${pillars.map((p,i) =>
-            `<div class="p-cell${i===2?' day':''}"><div class="p-label">${labels[i]}</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[p.stem]]}">${STEMS[p.stem]}</div><div class="p-char ${EL_CLASS[BRANCH_ELEMENTS[p.branch]]}">${BRANCHES[p.branch]}</div><div class="p-el">${STEM_ELEMENTS[p.stem]}/${BRANCH_ELEMENTS[p.branch]}</div>${i===0?'<div class="p-el">'+ANIMALS[p.branch]+'</div>':''}</div>`
+            `<div class="p-cell${i===2?' day':''}"><div class="p-label">${labels[i]}</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[p.stem]]}">${STEMS[p.stem]}</div><div class="p-char ${EL_CLASS[BRANCH_ELEMENTS[p.branch]]}">${BRANCHES[p.branch]}</div><div class="p-el">${elShort[STEM_ELEMENTS[p.stem]]}/${elShort[BRANCH_ELEMENTS[p.branch]]}</div>${i===0?'<div class="p-el">'+ANIMALS[p.branch]+'</div>':''}</div>`
         ).join('')}<div class="p-cell"><div class="p-label">Dia Master</div><div class="p-char ${EL_CLASS[STEM_ELEMENTS[pillars[2].stem]]}" style="font-size:28px;">${STEMS[pillars[2].stem]}</div><div class="p-el" style="font-size:12px;">${ELEMENT_NAMES[STEM_ELEMENTS[pillars[2].stem]]}</div></div></div></div>`;
     }
 
