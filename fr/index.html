@@ -622,13 +622,13 @@
 <div id="gcMessages" style="padding:12px;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
 <div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Salut! Je suis <strong style="color:#c9a84c;">Mogu</strong>~<br>Qu est-ce qui te rend curieux? Appuie ou ecris~</div>
 <div style="display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;">
-<button onclick="document.getElementById('gcInput').value='love fortune';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💍 Amour/Conjoint</button>
-<button onclick="document.getElementById('gcInput').value='my personality';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Personnalite</button>
-<button onclick="document.getElementById('gcInput').value='today fortune';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">📅 Horoscope</button>
-<button onclick="document.getElementById('gcInput').value='career wealth';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💼 Carriere/Richesse</button>
-<button onclick="document.getElementById('gcInput').value='compatibility';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">─── ♡ Compatibilité ♡ ───</button>
-<button onclick="document.getElementById('gcInput').value='past life';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Vie Anterieure</button>
-<button onclick="document.getElementById('gcInput').value='dream';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🌿 Reve</button>
+<button onclick="document.getElementById('gcInput').value='amour conjoint';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💍 Amour/Conjoint</button>
+<button onclick="document.getElementById('gcInput').value='personnalite destin';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Personnalite</button>
+<button onclick="document.getElementById('gcInput').value='horoscope aujourd';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">📅 Horoscope</button>
+<button onclick="document.getElementById('gcInput').value='carriere argent';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">💼 Carriere/Richesse</button>
+<button onclick="document.getElementById('gcInput').value='compatibilite';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">─── ♡ Compatibilité ♡ ───</button>
+<button onclick="document.getElementById('gcInput').value='vie anterieure';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🔮 Vie Anterieure</button>
+<button onclick="document.getElementById('gcInput').value='reve';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🌿 Reve</button>
 <button onclick="document.getElementById('gcInput').value='tarot';ghostEnvoyer()" style="padding:5px 10px;background:#0d0d20;border:1px solid #c9a84c;border-radius:15px;color:#c9a84c;font-size:11px;cursor:pointer;">🃏 Tarot</button>
 </div>
 </div>
@@ -687,14 +687,14 @@ var gcData = {
     ]},
 };
 var gcKeywords = {
-    love: ['spouse','love','marriage','husband','wife','partner','dating','crush','relationship','soulmate','wedding'],
-    personality: ['personality','destiny','myself','appearance','talent','who am i','character','fate'],
-    fortune: ['fortune','today','tomorrow','this year','luck','horoscope','daily','monthly','yearly'],
-    career: ['career','money','job','wealth','salary','business','promotion','investment','rich','income'],
-    compat: ['compatibility','맞는','어울리','합이','찰떡','상성'],
-    karma: ['past life','카르마','업보','윤회','전세','과거 생'],
-    dream: ['dream','해몽','악몽','꿈에서','꿈을'],
-    quick: ['tarot','답','조언','빨리','Crystal Ball','점','뽑기','질문','고민'],
+    love: ['conjoint','amour','mariage','mari','femme','partenaire','couple','relation','ame soeur'],
+    personality: ['personnalite','destin','moi','apparence','talent','qui suis','caractere'],
+    fortune: ['fortune','aujourd','demain','cette annee','chance','horoscope','quotidien'],
+    career: ['carriere','argent','travail','richesse','salaire','entreprise','promotion','investissement'],
+    compat: ['compatibilite','compatible','couple ideal','ame soeur','match'],
+    karma: ['vie anterieure','karma','reincarnation','passe','vies passees'],
+    dream: ['reve','reves','cauchemar','rever','songe'],
+    quick: ['tarot','conseil','rapide','Crystal Ball','question','reponse'],
 };
 function ghostEnvoyer() {
     var input = document.getElementById('gcInput');
@@ -726,7 +726,7 @@ function ghostEnvoyer() {
             });
             reply += '</div>';
         } else {
-            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hmm... je ne suis pas sur 😅<br>Essaie ces mots:<br><br>💍 <strong>spouse, love, marriage</strong><br>🔮 <strong>personality, destiny, myself</strong><br>📅 <strong>fortune, today, this year</strong><br>💼 <strong>career, money, wealth</strong><br>💑 <strong>compatibility</strong><br>🔮 <strong>past life, karma</strong><br>🌿 <strong>dream</strong><br>🃏 <strong>tarot, advice</strong></div>';
+            reply = '<div style="background:#1a1a3e;padding:10px 14px;border-radius:12px 12px 12px 4px;color:#e0d8cc;font-size:13px;max-width:85%;align-self:flex-start;">Hmm... je ne suis pas sur 😅<br>Essaie ces mots:<br><br>💍 <strong>amour, conjoint, mariage</strong><br>🔮 <strong>personnalite, destin</strong><br>📅 <strong>horoscope, aujourd hui</strong><br>💼 <strong>carriere, argent, richesse</strong><br>💑 <strong>compatibilite</strong><br>🔮 <strong>vie anterieure, karma</strong><br>🌿 <strong>reve</strong><br>🃏 <strong>tarot, conseil</strong></div>';
         }
         box.innerHTML += reply;
         box.scrollTop = box.scrollHeight;
