@@ -31,9 +31,9 @@
     <meta property="og:image" content="https://mogumoon.com/og-image.png">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"별자리 궁합이란?","acceptedAnswer":{"@type":"Answer","text":"두 사람의 Sun 별자리와 decan을 비교하여 원소 궁합, 각도 궁합, 행성 궁합을 분석합니다."}},
-    {"@type":"Question","name":"decan이 뭔가요?","acceptedAnswer":{"@type":"Answer","text":"같은 별자리를 10도씩 3등분한 것입니다. 같은 Aries라도 1decan and 3decan은 성격이 크게 다릅니다. 고대 이집트에서 시작된 전통 체계입니다."}},
-    {"@type":"Question","name":"별자리 궁합은 정확한가요?","acceptedAnswer":{"@type":"Answer","text":"별자리 궁합은 재미와 자기 이해를 위한 참고 자료입니다. 실제 관계는 노력 and 소통이 더 중요합니다."}}
+    {"@type":"Question","name":"What is Zodiac Compatibility?","acceptedAnswer":{"@type":"Answer","text":"Compares two people sun signs and decans to analyze element, aspect, and planetary compatibility."}},
+    {"@type":"Question","name":"decan이 뭔가요?","acceptedAnswer":{"@type":"Answer","text":"Each zodiac sign is divided into three 10-degree sections. Even the same Aries라도 1decan and 3decan은 성격이 크게 다릅니다. 고대 이집트에서 시작된 전통 체계입니다."}},
+    {"@type":"Question","name":"Is zodiac compatibility accurate?","acceptedAnswer":{"@type":"Answer","text":"Zodiac compatibility is for fun and self-understanding. Real relationships depend more on effort and communication."}}
     ]}
     </script>
     <style>
@@ -181,7 +181,7 @@ function getSignAndDecan(sunLon) {
     return { signIdx, decan: decanInSign, decanIdx, ruler, degree: sunLon };
 }
 
-// ═══ 원소 궁합 ═══
+// ═══ Element Compatibility ═══
 function elementCompat(e1, e2) {
     if (e1 === e2) return { score: 85, type: 'Same Element', desc: 'Same element — instinctive understanding, but shared weaknesses may amplify.' };
     const pair = [e1,e2].sort().join('-');
