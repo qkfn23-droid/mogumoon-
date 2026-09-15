@@ -277,7 +277,7 @@ function analyzeElements(el1, el2) {
     strong2.forEach(s => { if (weak1.includes(s)) complements.push(s); });
 
     if (complements.length > 0) {
-        commentary += 'A <strong>complementary relationship</strong> where each fills the other's missing elements. (' + complements.map(e => ELEMENT_NAMES[e]).join(', ') + ')';
+        commentary += 'A <strong>complementary relationship</strong> where each fills the other\'s missing elements. (' + complements.map(e => ELEMENT_NAMES[e]).join(', ') + ')';
     } else {
         // 같은 오행이 강한지
         const bothStrong = strong1.filter(s => strong2.includes(s));
@@ -402,7 +402,7 @@ function checkCompat() {
             <div class="compat-text">${stemCombs.length > 0
                 ? stemCombs.map(c => `<span class="tag-good">${c.name} (→${ELEMENT_NAMES[c.element]})</span> ${c.from} ↔ ${c.to}`).join('<br>')
                   + '<br><br>Stem combinations represent <strong>mental harmony and resonance</strong>. Combinations indicate natural understanding.'
-                : '<span class="tag-neutral">No Stem Combinations</span><br><br>No stem combinations doesn't mean bad compatibility. Harmony can be found in other factors.'
+                : '<span class="tag-neutral">No Stem Combinations</span><br><br>No stem combinations does not mean bad compatibility. Harmony can be found in other factors.'
             }</div>
         </div>
 
