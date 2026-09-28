@@ -131,10 +131,14 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 
 <div class="page-layout">
 <div class="content">
-    <div class="page-title">
-        <h2 id="ui-pageTitle"></h2>
-        <p id="ui-pageSubtitle"></p>
+    <div style="padding:12px 40px 0;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;" id="ui-pageTitle"></div>
+            <div style="font-size:11px;color:#666;" id="ui-pageSubtitle"></div>
+        </div>
     </div>
+</div>
 
     <div class="mode-selector" style="display:flex;gap:0;margin-bottom:20px;border:2px solid #3a2550;border-radius:10px;overflow:hidden;">
         <button class="mode-btn" id="ui-modeNormal" style="flex:1;padding:12px;border:none;background:#9b59b6;color:#fff;font-size:14px;font-weight:600;cursor:pointer;" onclick="setMode('normal')"></button>
