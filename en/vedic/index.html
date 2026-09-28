@@ -159,6 +159,48 @@ optgroup{color:#c9a84c;font-weight:600;}
 .easy-mode .chart-label{display:none !important;}
 .easy-mode .easy-hide{display:none !important;}
 
+/* Category content: 2-column where chart+interp sit side by side */
+.category-content{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.category-content .section-title{grid-column:1/-1;}
+.category-content .chart-container{max-width:100%;}
+.category-content .chart-grid{max-width:360px;margin:0 auto;}
+.category-content .interp-card{align-self:start;}
+
+/* Dasha timeline: horizontal scroll */
+.dasha-timeline{display:flex;gap:8px;overflow-x:auto;padding:4px 0;grid-column:1/-1;}
+.dasha-item{flex-shrink:0;min-width:140px;border-radius:10px;flex-direction:column;text-align:center;padding:12px;background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;}
+.dasha-item.current{border-color:#c9a84c;background:linear-gradient(135deg,#1a2a1a,#12301a);}
+
+/* Full-width elements inside category-content */
+.category-content .nakshatra-card,
+.category-content .planet-table,
+.category-content #interpWrap,
+.category-content #planetHouseWrap,
+.category-content #dignityWrap,
+.category-content #luckyWrap,
+.category-content #remedyWrap,
+.category-content #dashaWrap,
+.category-content #foreignWrap,
+.category-content #childrenWrap,
+.category-content #educationWrap,
+.category-content #spouseProfileWrap,
+.category-content #d9InterpWrap,
+.category-content #d10InterpWrap,
+.category-content #d2InterpWrap,
+.category-content #d4InterpWrap,
+.category-content #d7InterpWrap,
+.category-content #d3InterpWrap,
+.category-content #d12InterpWrap,
+.category-content #d20InterpWrap,
+.category-content #d24InterpWrap,
+.category-content #d27InterpWrap,
+.category-content #d30InterpWrap,
+.category-content #d40InterpWrap,
+.category-content #d45InterpWrap,
+.category-content #d60InterpWrap,
+.category-content #planetTableWrap,
+.category-content #nakshatraWrap{grid-column:1/-1;}
+
 /* Responsive */
 @media(max-width:1024px){
 .page-layout{grid-template-columns:1fr;}
@@ -169,6 +211,7 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
+.category-content{grid-template-columns:1fr;}
 }
 @media(max-width:480px){
 .chart-cell{min-height:45px;font-size:10px;}
