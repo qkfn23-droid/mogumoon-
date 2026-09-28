@@ -330,7 +330,8 @@ function answer(idx) {
 function showResult() {
     document.getElementById('quizSection').style.display = 'none';
     document.getElementById('progressFill').style.width = '100%';
-    document.getElementById('progressText').textContent = '완료!';
+    document.getElementById('progressText').style.display = 'none';
+    document.querySelector('.progress-bar').style.display = 'none';
     document.getElementById('shareBar').style.display = 'block';
 
     const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
