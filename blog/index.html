@@ -8,51 +8,110 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
 <meta name="description" content="MOGU Moon 블로그 — 점성술, 사주, 베딕, 데칸 등 전통 점성술 이야기.">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
-header { background: linear-gradient(135deg, #1a0a0a, #2a1515); border-bottom: 1px solid #3a2020; padding: 16px 20px; text-align: center; }
-header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
-.container { max-width: 700px; margin: 30px auto; padding: 0 20px; }
-.page-title { text-align: center; margin-bottom: 40px; }
-.page-title h1 { font-size: 28px; color: #d4a853; margin-bottom: 8px; }
-.page-title p { color: #8888aa; font-size: 14px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a1a;color:#e0d8cc;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.5),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.3),transparent),radial-gradient(2px 2px at 45% 45%,rgba(201,168,76,0.3),transparent);z-index:-1;}
 
-.post-card { display: block; background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 12px; padding: 24px; margin-bottom: 16px; text-decoration: none; transition: all 0.2s; }
-.post-card:hover { border-color: #d4a853; transform: translateY(-2px); }
-.post-date { font-size: 12px; color: #666; margin-bottom: 6px; }
-.post-title { font-size: 18px; color: #d4a853; font-weight: 700; margin-bottom: 8px; }
-.post-desc { font-size: 13px; color: #999; line-height: 1.6; }
-.post-tags { margin-top: 10px; }
-.post-tag { display: inline-block; padding: 2px 10px; background: rgba(212,168,83,0.1); border: 1px solid rgba(212,168,83,0.2); border-radius: 12px; font-size: 11px; color: #d4a853; margin-right: 6px; }
+/* Nav */
+.nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a3e;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:20px;font-weight:700;color:#c9a84c;text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.nav-logo svg{width:26px;height:26px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;font-size:13px;padding:8px 14px;border-radius:20px;color:#888;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:rgba(201,168,76,0.1);color:#c9a84c;}
+.nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
+.nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
 
-.empty-state { text-align: center; padding: 60px 20px; color: #666; }
-.empty-state p { font-size: 14px; margin-top: 12px; }
+/* Page */
+.page-wrap{max-width:1100px;margin:0 auto;padding:24px 40px 40px;}
+.page-title{text-align:center;margin-bottom:32px;}
+.page-title h1{font-size:26px;color:#c9a84c;margin-bottom:6px;}
+.page-title p{color:#666;font-size:13px;}
 
-footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+/* Grid */
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+
+.post-card{display:flex;flex-direction:column;background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:14px;padding:22px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden;}
+.post-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
+.post-card:hover{border-color:rgba(201,168,76,0.4);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.post-date{font-size:11px;color:#555;margin-bottom:8px;}
+.post-title{font-size:16px;color:#c9a84c;font-weight:700;margin-bottom:8px;line-height:1.4;}
+.post-desc{font-size:12px;color:#888;line-height:1.6;flex:1;}
+.post-tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
+.post-tag{display:inline-block;padding:3px 10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.15);border-radius:12px;font-size:10px;color:#c9a84c;}
+
+/* Featured (first post) */
+.post-card.featured{grid-column:1/-1;flex-direction:row;gap:24px;padding:28px;}
+.post-card.featured .post-title{font-size:20px;}
+.post-card.featured .post-desc{font-size:13px;}
+.featured-badge{display:inline-block;font-size:10px;background:#c9a84c;color:#0a0a1a;padding:2px 10px;border-radius:8px;font-weight:700;margin-bottom:8px;}
+
+/* Footer */
+.app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
+.app-footer a{color:#555;text-decoration:none;}
+
+/* Responsive */
+@media(max-width:900px){
+.post-grid{grid-template-columns:repeat(2,1fr);}
+.post-card.featured{flex-direction:column;}
+}
+@media(max-width:600px){
+.post-grid{grid-template-columns:1fr;}
+.page-wrap{padding:16px 16px 32px;}
+}
+
+/* Light mode */
+.light-mode{background:#f5f5f5 !important;color:#333 !important}
+.light-mode .nav{background:rgba(255,255,255,0.95) !important;border-color:#eee !important}
+.light-mode .post-card{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important}
+.light-mode .post-title{color:#b8860b !important}
+.light-mode .post-desc{color:#555 !important}
+.light-mode .app-footer{color:#999 !important}
+.light-mode .page-title h1{color:#b8860b !important}
 </style>
-<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .post-card{background:#fff !important;border-color:#ddd !important}.light-mode .post-title{color:#b8942a !important}.light-mode .post-desc{color:#555 !important}.light-mode footer{color:#999 !important}</style>
 </head>
 <body>
 
-<header>
-    <a href="../index.html">MOGU <span style="color:#b8942a">Moon</span></a>
-</header>
+<!-- Nav -->
+<nav class="nav">
+    <a href="/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/">홈</a>
+        <a href="/about/">소개</a>
+        <a href="/blog/" class="active">블로그</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="" selected>KR</option>
+            <option value="/en/blog/">EN</option>
+            <option value="/jp/blog/">JP</option>
+            <option value="/es/blog/">ES</option>
+            <option value="/de/blog/">DE</option>
+            <option value="/fr/blog/">FR</option>
+            <option value="/pt/blog/">PT</option>
+        </select>
+    </div>
+</nav>
 
-<div class="container">
+<div class="page-wrap">
     <div class="page-title">
-        <h1>📝 블로그</h1>
+        <h1>블로그</h1>
         <p>세상은 신기해</p>
     </div>
 
-    <div id="postList">
-        <a href="what-is-blackhole/" class="post-card">
-            <div class="post-date">2026.09.24</div>
-            <div class="post-title">블랙홀은 뭘까?</div>
-            <div class="post-desc">빛도 빨아들인다. 안에 뭐가 있는지 모른다. 화이트홀, 우주는 블랙홀 속?</div>
-            <div class="post-tags">
-                <span class="post-tag">블랙홀</span>
-                <span class="post-tag">화이트홀</span>
-                <span class="post-tag">우주</span>
+    <div class="post-grid">
+        <a href="what-is-blackhole/" class="post-card featured">
+            <div>
+                <span class="featured-badge">NEW</span>
+                <div class="post-date">2026.09.24</div>
+                <div class="post-title">블랙홀은 뭘까?</div>
+                <div class="post-desc">빛도 빨아들인다. 안에 뭐가 있는지 모른다. 화이트홀, 우주는 블랙홀 속?</div>
+                <div class="post-tags">
+                    <span class="post-tag">블랙홀</span>
+                    <span class="post-tag">화이트홀</span>
+                    <span class="post-tag">우주</span>
+                </div>
             </div>
         </a>
         <a href="why-these-12/" class="post-card">
@@ -62,7 +121,6 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">별자리</span>
                 <span class="post-tag">바빌로니아</span>
-                <span class="post-tag">농사</span>
             </div>
         </a>
         <a href="why-planet-meanings/" class="post-card">
@@ -72,7 +130,6 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">행성</span>
                 <span class="post-tag">점성술</span>
-                <span class="post-tag">문명</span>
             </div>
         </a>
         <a href="is-space-black/" class="post-card">
@@ -82,7 +139,6 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">우주</span>
                 <span class="post-tag">암흑</span>
-                <span class="post-tag">인간의 눈</span>
             </div>
         </a>
         <a href="same-team/" class="post-card">
@@ -92,16 +148,14 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">별</span>
                 <span class="post-tag">순환</span>
-                <span class="post-tag">생물</span>
             </div>
         </a>
         <a href="change-reads-change/" class="post-card">
             <div class="post-date">2026.09.18</div>
             <div class="post-title">변화하는 것으로 변화하는 것을 읽었다</div>
-            <div class="post-desc">바빌로니아 보리 영수증에 행성이 적혀 있다. 쐐기문자와 점성술. 수메르 그림문자의 미스터리.</div>
+            <div class="post-desc">바빌로니아 보리 영수증에 행성이 적혀 있다. 쐐기문자와 점성술.</div>
             <div class="post-tags">
                 <span class="post-tag">쐐기문자</span>
-                <span class="post-tag">점성술</span>
                 <span class="post-tag">수메르</span>
             </div>
         </a>
@@ -112,7 +166,6 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">금</span>
                 <span class="post-tag">우주</span>
-                <span class="post-tag">고대</span>
             </div>
         </a>
         <a href="3-earth-3/" class="post-card">
@@ -122,7 +175,6 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">베딕</span>
                 <span class="post-tag">태양계</span>
-                <span class="post-tag">미스터리</span>
             </div>
         </a>
         <a href="vedic-planets/" class="post-card">
@@ -132,52 +184,50 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-tags">
                 <span class="post-tag">베딕</span>
                 <span class="post-tag">행성</span>
-                <span class="post-tag">주파수</span>
             </div>
         </a>
         <a href="mythical-creatures/" class="post-card">
             <div class="post-date">2026.09.16</div>
             <div class="post-title">상상의 동물은 진짜 상상일까?</div>
-            <div class="post-desc">용, 유니콘, 그리핀 — 진짜 상상일까? 고대 벽화의 미스터리. 제로에서 상상이 가능할까?</div>
+            <div class="post-desc">용, 유니콘, 그리핀 — 진짜 상상일까? 고대 벽화의 미스터리.</div>
             <div class="post-tags">
                 <span class="post-tag">고대</span>
                 <span class="post-tag">미스터리</span>
-                <span class="post-tag">우주</span>
             </div>
         </a>
         <a href="ocean-secrets/" class="post-card">
             <div class="post-date">2026.09.16</div>
             <div class="post-title">바다는 신기해</div>
-            <div class="post-desc">바다 끝에는 뭐가 있을까? 심해 생물은 왜 우주처럼 생겼을까. 외계인, 확률, 수학.</div>
+            <div class="post-desc">바다 끝에는 뭐가 있을까? 심해 생물은 왜 우주처럼 생겼을까.</div>
             <div class="post-tags">
                 <span class="post-tag">바다</span>
                 <span class="post-tag">우주</span>
-                <span class="post-tag">확률</span>
             </div>
         </a>
         <a href="is-astrology-a-scam/" class="post-card">
             <div class="post-date">2026.09.16</div>
             <div class="post-title">점성술은 사기일까?</div>
-            <div class="post-desc">과학적 증거를 요구하는 기준은 왜 점성술에만 적용될까. 몇천 년의 데이터, 확률, 그리고 참고 지도.</div>
+            <div class="post-desc">과학적 증거를 요구하는 기준은 왜 점성술에만 적용될까. 몇천 년의 데이터.</div>
             <div class="post-tags">
                 <span class="post-tag">점성술</span>
                 <span class="post-tag">데이터</span>
-                <span class="post-tag">확률</span>
             </div>
         </a>
         <a href="human-emotions/" class="post-card">
             <div class="post-date">2026.09.15</div>
             <div class="post-title">인간의 감정이란</div>
             <div class="post-desc">질투, 외로움, 고독의 장점이 뭔지 모르겠다. 이쁜 감정만 남겨두면 안 되나?</div>
-            <div class="post-tags"><span class="post-tag">감정</span><span class="post-tag">질투</span><span class="post-tag">사랑</span></div>
+            <div class="post-tags">
+                <span class="post-tag">감정</span>
+                <span class="post-tag">사랑</span>
+            </div>
         </a>
         <a href="emotions-and-astrology/" class="post-card">
             <div class="post-date">2026.09.15</div>
             <div class="post-title">감정과 점성술</div>
-            <div class="post-desc">점성술이 수학이라면 감정도 수학인가? 명반에 배우자가 적혀있다. 숫자 안에 사랑이 들어있다.</div>
+            <div class="post-desc">점성술이 수학이라면 감정도 수학인가? 명반에 배우자가 적혀있다.</div>
             <div class="post-tags">
                 <span class="post-tag">감정</span>
-                <span class="post-tag">사랑</span>
                 <span class="post-tag">점성술</span>
             </div>
         </a>
@@ -187,26 +237,28 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
             <div class="post-desc">수학은 시험 과목이 아니다. NASA가 우주 소리를 들려준 것도, AI가 말하는 것도 전부 수학이다.</div>
             <div class="post-tags">
                 <span class="post-tag">수학</span>
-                <span class="post-tag">언어</span>
                 <span class="post-tag">NASA</span>
             </div>
         </a>
         <a href="why-astrology-is-math/" class="post-card">
             <div class="post-date">2026.09.15</div>
             <div class="post-title">점성술은 왜 수학일까?</div>
-            <div class="post-desc">태어나면 숫자가 붙는다. 아무도 고르지 않았다. 그냥 세상에 나왔고, 숫자가 찍혔다. 왜 읽히지?</div>
+            <div class="post-desc">태어나면 숫자가 붙는다. 아무도 고르지 않았다. 그냥 세상에 나왔고, 숫자가 찍혔다.</div>
             <div class="post-tags">
                 <span class="post-tag">점성술</span>
                 <span class="post-tag">수학</span>
-                <span class="post-tag">고대역사</span>
             </div>
         </a>
     </div>
 </div>
 
-<footer>&copy; 2025 MOGU Moon</footer>
+<footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="../privacy/">개인정보처리방침</a>
+</footer>
 
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
-<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script></body>
+<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script>
+</body>
 </html>
