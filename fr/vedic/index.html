@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astrologie Védique - MOGU Moon</title>
-<meta name="description" content="Thème astral védique.">
+<meta name="description" content="Thème védique.">
     <link rel="alternate" hreflang="ko" href="https://mogumoon.com/fr/vedic/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/vedic/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/vedic/">
@@ -25,7 +25,7 @@
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/fr/vedic/">
     <link rel="canonical" href="https://mogumoon.com/fr/vedic/">
     <meta property="og:title" content="Astrologie Védique - MOGU Moon">
-    <meta property="og:description" content="Thème astral védique.">
+    <meta property="og:description" content="Thème védique.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://mogumoon.com/fr/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/fr/vedic/">
@@ -167,9 +167,9 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* 2-column layout for chart sections */
-.result-2col{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;margin-bottom:16px;}
-.result-2col .chart-container{margin-bottom:0;}
+/* Chart + interp: chart centered above, interp below full-width */
+.result-2col{margin-bottom:16px;}
+.result-2col .chart-container{max-width:450px;margin:0 auto 16px;}
 .result-2col .chart-grid{max-width:100%;}
 .result-2col .interp-area{display:flex;flex-direction:column;gap:10px;}
 
@@ -191,7 +191,6 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.result-2col{grid-template-columns:1fr;}
 .dasha-row{flex-wrap:wrap;}
 }
 @media(max-width:480px){
@@ -240,7 +239,7 @@ optgroup{color:#c9a84c;font-weight:600;}
     </div>
     <div class="input-bar-inner">
         <div class="ib-group">
-            <label>Date de Naissance</label>
+            <label>Date</label>
             <div class="ib-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -248,7 +247,7 @@ optgroup{color:#c9a84c;font-weight:600;}
             </div>
         </div>
         <div class="ib-group">
-            <label>Heure de Naissance <span class="optional-tag">(Inconnu)</span></label>
+            <label>Heure <span class="optional-tag">(Inconnu)</span></label>
             <div class="ib-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
@@ -453,13 +452,13 @@ optgroup{color:#c9a84c;font-weight:600;}
         <a href="../hellenistic/" class="rel-item">🏛️ Hellénistique</a>
         <a href="../maya/" class="rel-item">🌀 Maya</a>
         <a href="../egypt/" class="rel-item">𓂀 Décans</a>
-        <a href="../birthday-compat/" class="rel-item">💑 Compatibilité</a>
+        <a href="../birthday-compat/" class="rel-item">💑 Compat</a>
     </div>
     <div class="side-card">
         <div class="side-title">🔥 Populaire</div>
         <a href="../tarot/" class="rel-item">🃏 Tarot</a>
         <a href="../daily/" class="rel-item">✨ Horoscope</a>
-        <a href="../past-life/" class="rel-item">🏛️ Vie Antérieure</a>
+        <a href="../past-life/" class="rel-item">🏛️ Vie Ant</a>
         <a href="../dream/" class="rel-item">🌿 Rêves</a>
     </div>
 </div>

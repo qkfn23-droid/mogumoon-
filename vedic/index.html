@@ -167,9 +167,9 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* 2-column layout for chart sections */
-.result-2col{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;margin-bottom:16px;}
-.result-2col .chart-container{margin-bottom:0;}
+/* Chart + interp: chart centered above, interp below full-width */
+.result-2col{margin-bottom:16px;}
+.result-2col .chart-container{max-width:450px;margin:0 auto 16px;}
 .result-2col .chart-grid{max-width:100%;}
 .result-2col .interp-area{display:flex;flex-direction:column;gap:10px;}
 
@@ -191,7 +191,6 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.result-2col{grid-template-columns:1fr;}
 .dasha-row{flex-wrap:wrap;}
 }
 @media(max-width:480px){

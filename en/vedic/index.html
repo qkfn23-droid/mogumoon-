@@ -167,9 +167,9 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* 2-column layout for chart sections */
-.result-2col{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;margin-bottom:16px;}
-.result-2col .chart-container{margin-bottom:0;}
+/* Chart + interp: chart centered above, interp below full-width */
+.result-2col{margin-bottom:16px;}
+.result-2col .chart-container{max-width:450px;margin:0 auto 16px;}
 .result-2col .chart-grid{max-width:100%;}
 .result-2col .interp-area{display:flex;flex-direction:column;gap:10px;}
 
@@ -191,7 +191,6 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.result-2col{grid-template-columns:1fr;}
 .dasha-row{flex-wrap:wrap;}
 }
 @media(max-width:480px){
@@ -451,16 +450,16 @@ optgroup{color:#c9a84c;font-weight:600;}
         <a href="../saju/" class="rel-item">☯️ Four Pillars</a>
         <a href="../ziwei/" class="rel-item">💜 Zi Wei Dou Shu</a>
         <a href="../hellenistic/" class="rel-item">🏛️ Hellenistic</a>
-        <a href="../maya/" class="rel-item">🌀 Mayan Astrology</a>
-        <a href="../egypt/" class="rel-item">𓂀 Egyptian Decans</a>
-        <a href="../birthday-compat/" class="rel-item">💑 BaZi Compatibility</a>
+        <a href="../maya/" class="rel-item">🌀 Mayan</a>
+        <a href="../egypt/" class="rel-item">𓂀 Egyptian</a>
+        <a href="../birthday-compat/" class="rel-item">💑 BaZi Compat</a>
     </div>
     <div class="side-card">
         <div class="side-title">🔥 Popular</div>
-        <a href="../tarot/" class="rel-item">🃏 Tarot Cards</a>
-        <a href="../daily/" class="rel-item">✨ Daily Fortune</a>
-        <a href="../past-life/" class="rel-item">🏛️ Past Life Test</a>
-        <a href="../dream/" class="rel-item">🌿 Dream Dictionary</a>
+        <a href="../tarot/" class="rel-item">🃏 Tarot</a>
+        <a href="../daily/" class="rel-item">✨ Daily</a>
+        <a href="../past-life/" class="rel-item">🏛️ Past Life</a>
+        <a href="../dream/" class="rel-item">🌿 Dream</a>
     </div>
 </div>
 

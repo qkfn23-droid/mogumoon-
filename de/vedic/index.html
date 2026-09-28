@@ -167,9 +167,9 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* 2-column layout for chart sections */
-.result-2col{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;margin-bottom:16px;}
-.result-2col .chart-container{margin-bottom:0;}
+/* Chart + interp: chart centered above, interp below full-width */
+.result-2col{margin-bottom:16px;}
+.result-2col .chart-container{max-width:450px;margin:0 auto 16px;}
 .result-2col .chart-grid{max-width:100%;}
 .result-2col .interp-area{display:flex;flex-direction:column;gap:10px;}
 
@@ -191,7 +191,6 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.result-2col{grid-template-columns:1fr;}
 .dasha-row{flex-wrap:wrap;}
 }
 @media(max-width:480px){
@@ -253,7 +252,7 @@ optgroup{color:#c9a84c;font-weight:600;}
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
-                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()"><option value="known">Zeit eingeben</option><option value="unknown">Unbekannt</option></select>
+                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()"><option value="known">Zeit</option><option value="unknown">Unbekannt</option></select>
             </div>
         </div>
         <div class="ib-group">
@@ -453,14 +452,14 @@ optgroup{color:#c9a84c;font-weight:600;}
         <a href="../hellenistic/" class="rel-item">🏛️ Hellenistisch</a>
         <a href="../maya/" class="rel-item">🌀 Maya</a>
         <a href="../egypt/" class="rel-item">𓂀 Dekane</a>
-        <a href="../birthday-compat/" class="rel-item">💑 Kompatibilität</a>
+        <a href="../birthday-compat/" class="rel-item">💑 Compat</a>
     </div>
     <div class="side-card">
         <div class="side-title">🔥 Beliebt</div>
         <a href="../tarot/" class="rel-item">🃏 Tarot</a>
         <a href="../daily/" class="rel-item">✨ Horoskop</a>
         <a href="../past-life/" class="rel-item">🏛️ Früheres Leben</a>
-        <a href="../dream/" class="rel-item">🌿 Traumdeutung</a>
+        <a href="../dream/" class="rel-item">🌿 Traum</a>
     </div>
 </div>
 
