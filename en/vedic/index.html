@@ -159,6 +159,14 @@ optgroup{color:#c9a84c;font-weight:600;}
 .easy-mode .chart-label{display:none !important;}
 .easy-mode .easy-hide{display:none !important;}
 
+/* Tab bar */
+.tab-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.mode-toggle{display:flex;gap:4px;margin-right:8px;}
+.tab-btn{padding:8px 14px;border:1px solid #2a2a5a;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;color:#777;background:transparent;transition:all .2s;white-space:nowrap;}
+.tab-btn:hover{border-color:rgba(201,168,76,0.3);color:#c9a84c;}
+.tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
+.tab-panel{min-height:200px;}
+
 /* Category content: 2-column where chart+interp sit side by side */
 .category-content{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .category-content .section-title{grid-column:1/-1;}
@@ -350,188 +358,132 @@ optgroup{color:#c9a84c;font-weight:600;}
     <!-- Results -->
     <div class="result-section" id="resultSection">
 
-        <!-- Mode Toggle -->
-        <div class="mode-bar">
-            <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.add('easy-mode')" style="padding:8px 18px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Easy</button>
-            <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.remove('easy-mode')" style="padding:8px 18px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Expert</button>
+        <!-- Mode + Tab bar -->
+        <div class="tab-bar">
+            <div class="mode-toggle">
+                <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.add('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Easy</button>
+                <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.remove('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Expert</button>
+            </div>
+            <button class="tab-btn easy-hide" data-tab="guide" onclick="switchTab('guide')">📚 가이드</button>
+            <button class="tab-btn easy-hide" data-tab="basic" onclick="switchTab('basic')">🪐 차트</button>
+            <button class="tab-btn active" data-tab="dasha" onclick="switchTab('dasha')"><span id="catDasha">⏳ 대운</span></button>
+            <button class="tab-btn" data-tab="interp" onclick="switchTab('interp')"><span id="catInterp">📖 종합</span></button>
+            <button class="tab-btn" data-tab="marriage" onclick="switchTab('marriage')"><span id="catMarriage">💍 결혼</span></button>
+            <button class="tab-btn" data-tab="career" onclick="switchTab('career')"><span id="catCareer">💼 직업</span></button>
+            <button class="tab-btn" data-tab="family" onclick="switchTab('family')"><span id="catFamily">👨‍👩‍👧 가족</span></button>
+            <button class="tab-btn" data-tab="spirit" onclick="switchTab('spirit')"><span id="catSpirit">🙏 영성</span></button>
+            <button class="tab-btn" data-tab="warn" onclick="switchTab('warn')"><span id="catWarn">⚠️ 주의</span></button>
+            <button class="tab-btn" data-tab="karma" onclick="switchTab('karma')"><span id="catKarma">🔮 카르마</span></button>
         </div>
 
-        <!-- 📚 기초 가이드 -->
-        <div class="category-group easy-hide" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" >
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">📚 <span id="catGuide">베딕 점성술 기초 가이드</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <div class="interp-card" style="border-left:3px solid #c9a84c;">
-                    <div class="interp-text" style="line-height:2;">
-                        <strong>🪐 9개 행성</strong> — ☉태양=자아 ☽달=감정 ♂화성=에너지 ☿수성=지능 ♃목성=행운 ♀금성=사랑 ♄토성=시련 ☊라후=욕망 ☋케투=해탈<br>
-                        <strong>🏛️ 12궁</strong> — 1궁=나 2궁=돈 3궁=소통 4궁=가정 5궁=자녀 6궁=건강 7궁=배우자 8궁=변혁 9궁=행운 10궁=직업 11궁=수입 12궁=영성<br>
-                        <strong>⬆ 라그나</strong> = 태어난 순간 떠오르던 별자리 (가장 중요!) &nbsp; <strong>🌙 나크샤트라</strong> = 27개 달의 별자리
-                    </div>
+        <!-- 📚 가이드 -->
+        <div class="tab-panel" id="tab-guide" style="display:none;">
+            <div class="interp-card" style="border-left:3px solid #c9a84c;">
+                <div class="interp-text" style="line-height:2;">
+                    <strong>🪐 9개 행성</strong> — ☉태양=자아 ☽달=감정 ♂화성=에너지 ☿수성=지능 ♃목성=행운 ♀금성=사랑 ♄토성=시련 ☊라후=욕망 ☋케투=해탈<br>
+                    <strong>🏛️ 12궁</strong> — 1궁=나 2궁=돈 3궁=소통 4궁=가정 5궁=자녀 6궁=건강 7궁=배우자 8궁=변혁 9궁=행운 10궁=직업 11궁=수입 12궁=영성<br>
+                    <strong>⬆ 라그나</strong> = 태어난 순간 떠오르던 별자리 (가장 중요!) &nbsp; <strong>🌙 나크샤트라</strong> = 27개 달의 별자리
                 </div>
             </div>
         </div>
 
         <!-- 🪐 기본 차트 -->
-        <div class="category-group easy-hide" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">🪐 <span id="catBasic">기본 차트 — 행성 위치 & 출생 차트</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title">🪐 행성 위치</h3>
-                <div id="planetTableWrap"></div>
-                <h3 class="section-title">🏛️ 출생 차트 (D1 라시)</h3>
-                <div class="chart-container">
-                    <div class="chart-label">남인도식 차트</div>
-                    <div class="chart-grid" id="d1Chart"></div>
-                </div>
-                <h3 class="section-title">🌙 나크샤트라 (당신의 별)</h3>
-                <div id="nakshatraWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-basic" style="display:none;">
+            <h3 class="section-title">🪐 행성 위치</h3>
+            <div id="planetTableWrap"></div>
+            <h3 class="section-title">🏛️ 출생 차트 (D1 라시)</h3>
+            <div class="chart-container"><div class="chart-label">남인도식 차트</div><div class="chart-grid" id="d1Chart"></div></div>
+            <h3 class="section-title">🌙 나크샤트라 (당신의 별)</h3>
+            <div id="nakshatraWrap"></div>
         </div>
 
         <!-- ⏳ 대운 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">⏳ <span id="catDasha">대운 — 인생의 시기별 운세</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <div id="dashaWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-dasha">
+            <div id="dashaWrap"></div>
         </div>
 
         <!-- 📖 종합 해석 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">📖 <span id="catInterp">종합 해석 — 성격·재물·직업·건강·요가</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <div id="interpWrap"></div>
-                <h3 class="section-title" id="secPlanetHouse">🪐 행성별 상세 해석</h3>
-                <div id="planetHouseWrap"></div>
-                <h3 class="section-title" id="secDignity">⚖️ 행성 품위 (고양·감쇄·본궁)</h3>
-                <div id="dignityWrap"></div>
-                <h3 class="section-title" id="secLucky">🍀 행운의 정보</h3>
-                <div id="luckyWrap"></div>
-                <h3 class="section-title" id="secRemedy">💎 치유 & 강화 방법</h3>
-                <div id="remedyWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-interp" style="display:none;">
+            <div id="interpWrap"></div>
+            <h3 class="section-title" id="secPlanetHouse">🪐 행성별 상세 해석</h3>
+            <div id="planetHouseWrap"></div>
+            <h3 class="section-title" id="secDignity">⚖️ 행성 품위</h3>
+            <div id="dignityWrap"></div>
+            <h3 class="section-title" id="secLucky">🍀 행운의 정보</h3>
+            <div id="luckyWrap"></div>
+            <h3 class="section-title" id="secRemedy">💎 치유 & 강화 방법</h3>
+            <div id="remedyWrap"></div>
         </div>
 
         <!-- 💍 결혼/배우자 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">💍 <span id="catMarriage">결혼 & 배우자 — D9 나바암샤</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <div class="chart-container">
-                    <div class="chart-label">나바암샤 — 결혼운, 배우자 성격, 인생의 사명</div>
-                    <div class="chart-grid" id="d9Chart"></div>
-                </div>
-                <div id="d9InterpWrap"></div>
-                <div id="spouseProfileWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-marriage" style="display:none;">
+            <div class="chart-container"><div class="chart-label">나바암샤 — 결혼운, 배우자 성격</div><div class="chart-grid" id="d9Chart"></div></div>
+            <div id="d9InterpWrap"></div>
+            <div id="spouseProfileWrap"></div>
         </div>
 
         <!-- 💼 직업/재물 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">💼 <span id="catCareer">직업 & 재물 — D10·D2·D4</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title" id="secD10">💼 D10 다샴샤 (직업·커리어)</h3>
-                <div class="chart-container"><div class="chart-label">다샴샤 — 직업, 사회적 성취</div><div class="chart-grid" id="d10Chart"></div></div>
-                <div id="d10InterpWrap"></div>
-                <h3 class="section-title" id="secD2">💰 D2 호라 (재물·부)</h3>
-                <div class="chart-container"><div class="chart-label">호라 — 재물운과 부의 축적</div><div class="chart-grid" id="d2Chart"></div></div>
-                <div id="d2InterpWrap"></div>
-                <h3 class="section-title" id="secD4">🏠 D4 차투르탐샤 (재산·부동산)</h3>
-                <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산, 부동산, 행운</div><div class="chart-grid" id="d4Chart"></div></div>
-                <div id="d4InterpWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-career" style="display:none;">
+            <h3 class="section-title" id="secD10">💼 D10 다샴샤</h3>
+            <div class="chart-container"><div class="chart-label">다샴샤 — 직업, 사회적 성취</div><div class="chart-grid" id="d10Chart"></div></div>
+            <div id="d10InterpWrap"></div>
+            <h3 class="section-title" id="secD2">💰 D2 호라</h3>
+            <div class="chart-container"><div class="chart-label">호라 — 재물운</div><div class="chart-grid" id="d2Chart"></div></div>
+            <div id="d2InterpWrap"></div>
+            <h3 class="section-title" id="secD4">🏠 D4 차투르탐샤</h3>
+            <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산</div><div class="chart-grid" id="d4Chart"></div></div>
+            <div id="d4InterpWrap"></div>
         </div>
 
         <!-- 👨‍👩‍👧 가족 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 <span id="catFamily">가족 — D7·D3·D12·D40·D45</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title" id="secD7">👶 D7 삽탐샤 (자녀·후손)</h3>
-                <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운, 창조력</div><div class="chart-grid" id="d7Chart"></div></div>
-                <div id="d7InterpWrap"></div>
-                <div id="childrenWrap"></div>
-                <h3 class="section-title" id="secD3">👫 D3 드레카나 (형제·용기)</h3>
-                <div class="chart-container"><div class="chart-label">드레카나 — 형제자매, 용기, 소통</div><div class="chart-grid" id="d3Chart"></div></div>
-                <div id="d3InterpWrap"></div>
-                <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 드와다샴샤 (부모·가계)</h3>
-                <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모, 가계, 유전</div><div class="chart-grid" id="d12Chart"></div></div>
-                <div id="d12InterpWrap"></div>
-                <h3 class="section-title" id="secD40">👩 D40 카베담샤 (모계 유산)</h3>
-                <div class="chart-container"><div class="chart-label">카베담샤 — 어머니 쪽 유산</div><div class="chart-grid" id="d40Chart"></div></div>
-                <div id="d40InterpWrap"></div>
-                <h3 class="section-title" id="secD45">👨 D45 악샤베담샤 (부계 유산)</h3>
-                <div class="chart-container"><div class="chart-label">악샤베담샤 — 아버지 쪽 유산</div><div class="chart-grid" id="d45Chart"></div></div>
-                <div id="d45InterpWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-family" style="display:none;">
+            <h3 class="section-title" id="secD7">👶 D7 삽탐샤</h3>
+            <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운</div><div class="chart-grid" id="d7Chart"></div></div>
+            <div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+            <h3 class="section-title" id="secD3">👫 D3 드레카나</h3>
+            <div class="chart-container"><div class="chart-label">드레카나 — 형제자매</div><div class="chart-grid" id="d3Chart"></div></div>
+            <div id="d3InterpWrap"></div>
+            <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 드와다샴샤</h3>
+            <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모</div><div class="chart-grid" id="d12Chart"></div></div>
+            <div id="d12InterpWrap"></div>
+            <h3 class="section-title" id="secD40">👩 D40 카베담샤</h3>
+            <div class="chart-container"><div class="chart-label">카베담샤 — 모계 유산</div><div class="chart-grid" id="d40Chart"></div></div>
+            <div id="d40InterpWrap"></div>
+            <h3 class="section-title" id="secD45">👨 D45 악샤베담샤</h3>
+            <div class="chart-container"><div class="chart-label">악샤베담샤 — 부계 유산</div><div class="chart-grid" id="d45Chart"></div></div>
+            <div id="d45InterpWrap"></div>
         </div>
 
         <!-- 🙏 영성/교육/건강 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#c9a84c;">🙏 <span id="catSpirit">영성·교육·건강 — D20·D24·D27·D16</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title" id="secD24">📚 D24 차투르빔샴샤 (교육·학문)</h3>
-                <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육, 학문, 지적 성취</div><div class="chart-grid" id="d24Chart"></div></div>
-                <div id="d24InterpWrap"></div>
-                <div id="educationWrap"></div>
-                <h3 class="section-title" id="secD20">🙏 D20 빔샴샤 (영적 수행·종교)</h3>
-                <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행, 종교적 성향</div><div class="chart-grid" id="d20Chart"></div></div>
-                <div id="d20InterpWrap"></div>
-                <h3 class="section-title" id="secD27">💪 D27 삽타빔샴샤 (체력·강점)</h3>
-                <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력, 강점, 약점</div><div class="chart-grid" id="d27Chart"></div></div>
-                <div id="d27InterpWrap"></div>
-                <h3 class="section-title" id="secD16">🚗 D16 쇼다샴샤 (차량·편의·행복)</h3>
-                <div class="chart-container"><div class="chart-label">쇼다샴샤 — 차량, 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div>
-                <div id="d16InterpWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-spirit" style="display:none;">
+            <h3 class="section-title" id="secD24">📚 D24 차투르빔샴샤</h3>
+            <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육</div><div class="chart-grid" id="d24Chart"></div></div>
+            <div id="d24InterpWrap"></div><div id="educationWrap"></div>
+            <h3 class="section-title" id="secD20">🙏 D20 빔샴샤</h3>
+            <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행</div><div class="chart-grid" id="d20Chart"></div></div>
+            <div id="d20InterpWrap"></div>
+            <h3 class="section-title" id="secD27">💪 D27 삽타빔샴샤</h3>
+            <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력</div><div class="chart-grid" id="d27Chart"></div></div>
+            <div id="d27InterpWrap"></div>
+            <h3 class="section-title" id="secD16">🚗 D16 쇼다샴샤</h3>
+            <div class="chart-container"><div class="chart-label">쇼다샴샤 — 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div>
+            <div id="d16InterpWrap"></div>
         </div>
 
         <!-- ⚠️ 주의사항 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#d9534f;">⚠️ <span id="catWarn">주의사항 — D30 질병·장애·해외운</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤 (불행·질병·장애)</h3>
-                <div class="chart-container"><div class="chart-label">트림샴샤 — 불행, 질병, 장애의 원천</div><div class="chart-grid" id="d30Chart"></div></div>
-                <div id="d30InterpWrap"></div>
-                <h3 class="section-title" id="secForeign">✈️ 해외운 & 이주 (9궁·12궁)</h3>
-                <div id="foreignWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-warn" style="display:none;">
+            <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤</h3>
+            <div class="chart-container"><div class="chart-label">트림샴샤 — 질병, 장애</div><div class="chart-grid" id="d30Chart"></div></div>
+            <div id="d30InterpWrap"></div>
+            <h3 class="section-title" id="secForeign">✈️ 해외운 & 이주</h3>
+            <div id="foreignWrap"></div>
         </div>
 
         <!-- 🔮 카르마 -->
-        <div class="category-group" style="margin-bottom:8px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
-                <span style="font-size:16px;font-weight:700;color:#8b7ec8;">🔮 <span id="catKarma">카르마 — D60 전생·카르마</span></span>
-                <span class="cat-arrow">▶</span>
-            </div>
-            <div class="category-content" style="display:none;">
-                <h3 class="section-title">🔮 D60 샤슈티암샤 (전생 카르마)</h3>
-                <div class="chart-container"><div class="chart-label">샤슈티암샤 — 전생의 카르마와 영혼의 궁극적 목적</div><div class="chart-grid" id="d60Chart"></div></div>
-                <div id="d60InterpWrap"></div>
-            </div>
+        <div class="tab-panel" id="tab-karma" style="display:none;">
+            <h3 class="section-title">🔮 D60 샤슈티암샤 (전생 카르마)</h3>
+            <div class="chart-container"><div class="chart-label">샤슈티암샤 — 전생 카르마</div><div class="chart-grid" id="d60Chart"></div></div>
+            <div id="d60InterpWrap"></div>
         </div>
 
     </div>
@@ -582,6 +534,14 @@ function _loadAstro(cb) {
 }
 var _origCalc;
 document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none';});
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    var panel = document.getElementById('tab-'+name);
+    if(panel) panel.style.display='';
+    var btn = document.querySelector('[data-tab="'+name+'"]');
+    if(btn) btn.classList.add('active');
+}
 </script>
 
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
