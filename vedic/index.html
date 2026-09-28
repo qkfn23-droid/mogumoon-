@@ -36,405 +36,210 @@
     ]}
 </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a1a;color:#e0d8cc;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.5),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.3),transparent),radial-gradient(2px 2px at 45% 45%,rgba(201,168,76,0.3),transparent);z-index:-1;}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0a1a;
-            color: #e0d8cc;
-            min-height: 100vh;
-        }
+/* Nav */
+.nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a3e;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:20px;font-weight:700;color:#c9a84c;text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.nav-logo svg{width:26px;height:26px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;font-size:13px;padding:8px 14px;border-radius:20px;color:#888;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:rgba(201,168,76,0.1);color:#c9a84c;}
+.nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
+.nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
 
-        header {
-            background: linear-gradient(135deg, #0d0d2b, #1a1a3e);
-            border-bottom: 1px solid #2a2a5a;
-            padding: 16px 20px;
-            text-align: center;
-        }
+/* Input bar (가로) */
+.input-bar{max-width:1200px;margin:12px auto 0;padding:0 24px;}
+.input-bar-inner{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:14px;padding:14px 20px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;}
+.ib-group{display:flex;flex-direction:column;gap:4px;}
+.ib-group label{font-size:11px;color:#c9a84c;font-weight:600;}
+.ib-row{display:flex;gap:6px;}
+.ib-group select,.ib-group input{padding:10px 12px;background:#161630;border:1px solid #4a4a7a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;min-width:70px;transition:all .2s;}
+.ib-group select:focus,.ib-group input:focus{border-color:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,0.25);background:#1a1a3e;}
+.optional-tag{font-size:10px;color:#666;font-weight:400;}
+.calc-btn{padding:10px 28px;background:linear-gradient(135deg,#c9a84c,#a8872a);color:#0a0a1a;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:1px;}
+.calc-btn:hover{background:linear-gradient(135deg,#dbb85c,#c9a84c);transform:translateY(-1px);}
+#customLatLng{margin-top:6px;}
+#customLatLng .input-row{display:flex;gap:6px;}
+#customLatLng input{padding:10px 12px;background:#0a0a1a;border:1px solid #3a3a6a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;flex:1;}
 
-        header h1 {
-            font-size: 20px;
-            color: #c9a84c;
-            letter-spacing: 2px;
-        }
+/* 2-column page layout */
+.page-layout{max-width:1200px;margin:0 auto;padding:16px 24px;display:grid;grid-template-columns:1fr 300px;gap:24px;}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0;}
 
-        header h1 span { color: #8b7ec8; }
+/* Result section */
+.result-section{display:none;}
 
-        .container {
-            max-width: 700px;
-            margin: 20px auto 40px;
-            padding: 0 20px;
-        }
+/* Section title */
+.section-title{font-size:16px;color:#c9a84c;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid #2a2a5a;}
 
-        .page-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+/* Mode toggle */
+.mode-bar{display:flex;gap:6px;margin-bottom:8px;}
+.mode-bar button{padding:8px 18px;border:1px solid #c9a84c;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
 
-        .page-title h2 {
-            font-size: 28px;
-            color: #c9a84c;
-            margin-bottom: 8px;
-        }
+/* Category accordion */
+.category-group{margin-bottom:8px;}
+.category-header{cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;display:flex;align-items:center;justify-content:space-between;transition:all .2s;}
+.category-header:hover{border-color:rgba(201,168,76,0.3);}
+.cat-arrow{color:#666;font-size:14px;}
 
-        .page-title p {
-            color: #8888aa;
-            font-size: 14px;
-        }
+/* Chart */
+.chart-container{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:14px;padding:16px;margin-bottom:16px;}
+.chart-label{text-align:center;font-size:12px;color:#8b7ec8;margin-bottom:8px;font-weight:600;}
+.chart-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:0;aspect-ratio:1;border:2px solid #c9a84c;max-width:400px;margin:0 auto;}
+.chart-cell{border:1px solid #3a3a6a;padding:6px;font-size:11px;color:#aaa;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:55px;position:relative;}
+.chart-cell.empty{background:#0d0d20;}
+.chart-cell .house-num{position:absolute;top:2px;left:4px;font-size:9px;color:#555;}
+.chart-cell .planet{font-size:12px;font-weight:600;color:#c9a84c;margin:1px 0;}
+.chart-cell .planet.benefic{color:#5cb85c;}
+.chart-cell .planet.malefic{color:#d9534f;}
 
-        /* Input Form */
-        .form-box {
-            background: linear-gradient(135deg, #12122a, #1a1a3e);
-            border: 1px solid #2a2a5a;
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 24px;
-        }
+/* Planet table */
+.planet-table{width:100%;border-collapse:collapse;font-size:13px;background:#12122a;border-radius:12px;overflow:hidden;border:1px solid #2a2a5a;}
+.planet-table th{background:#1a1a3e;color:#c9a84c;padding:10px 12px;text-align:left;font-weight:600;font-size:12px;}
+.planet-table td{padding:10px 12px;border-bottom:1px solid #1a1a3e;color:#ccc;}
+.planet-table tr:last-child td{border-bottom:none;}
+.planet-table tr:hover{background:#1a1a30;}
 
-        .input-group {
-            margin-bottom: 20px;
-        }
+/* Nakshatra */
+.nakshatra-card{background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:12px;padding:20px;text-align:center;margin-bottom:16px;}
+.nakshatra-name{font-size:22px;color:#c9a84c;font-weight:700;margin-bottom:4px;}
+.nakshatra-meaning{font-size:14px;color:#8b7ec8;margin-bottom:10px;}
+.nakshatra-detail{font-size:13px;color:#999;line-height:1.6;}
 
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #c9a84c;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
+/* Dasha */
+.dasha-timeline{background:#12122a;border:1px solid #2a2a5a;border-radius:12px;overflow:hidden;}
+.dasha-item{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a1a3e;font-size:13px;}
+.dasha-item:last-child{border-bottom:none;}
+.dasha-item.current{background:#1a2a1a;border-left:3px solid #c9a84c;}
+.dasha-planet{min-width:60px;font-weight:700;color:#c9a84c;}
+.dasha-period{flex:1;color:#999;}
+.dasha-years{color:#666;font-size:12px;}
+.dasha-badge{font-size:10px;background:#c9a84c;color:#0a0a1a;padding:2px 8px;border-radius:10px;font-weight:700;margin-left:8px;}
 
-        .input-row {
-            display: flex;
-            gap: 10px;
-        }
+/* Interp cards */
+.interp-card{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:12px;padding:18px;margin-bottom:10px;}
+.interp-title{font-size:14px;color:#c9a84c;font-weight:600;margin-bottom:6px;}
+.interp-text{font-size:13px;color:#999;line-height:1.7;}
 
-        .input-row input, .input-row select, input[type="text"], input[type="date"], input[type="time"] {
-            flex: 1;
-            padding: 12px 14px;
-            background: #0a0a1a;
-            border: 1px solid #3a3a6a;
-            border-radius: 8px;
-            color: #e0d8cc;
-            font-size: 15px;
-            outline: none;
-        }
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:70px;align-self:start;}
+.side-card{background:linear-gradient(135deg,#0e0e22,#14142e);border:1px solid #1e1e3e;border-radius:14px;padding:16px;position:relative;overflow:hidden;}
+.side-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
+.side-title{font-size:12px;font-weight:700;color:#c9a84c;margin-bottom:10px;letter-spacing:1px;}
+.rel-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;text-decoration:none;color:#777;font-size:12px;transition:all .2s;}
+.rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
 
-        input:focus, select:focus {
-            border-color: #c9a84c;
-        }
+/* Ad slot */
+.ad-slot{background:linear-gradient(135deg,#0e0e22,#14142e);border:2px dashed rgba(201,168,76,0.15);border-radius:12px;padding:16px;text-align:center;color:#444;font-size:11px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;}
 
-        .optional-tag {
-            font-size: 11px;
-            color: #666;
-            font-weight: 400;
-        }
+/* Footer */
+.app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
+.app-footer a{color:#555;text-decoration:none;}
 
-        .calc-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #c9a84c, #a8872a);
-            color: #0a0a1a;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 1px;
-        }
+/* SEO */
+.seo-content{max-width:1200px;margin:20px auto;padding:0 24px;}
+.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:20px;margin-bottom:12px;}
+.seo-section h2{font-size:16px;font-weight:700;margin-bottom:8px;color:#d4a853;}
+.seo-section p,.seo-section li{font-size:13px;color:#aaa;line-height:1.8;}
+.seo-faq summary{font-size:14px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0;}
+.seo-faq p{margin-top:8px;}
+.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px;}
 
-        .calc-btn:hover {
-            background: linear-gradient(135deg, #dbb85c, #c9a84c);
-            transform: translateY(-1px);
-        }
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23c9a84c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;cursor:pointer;}
+select:disabled{opacity:0.4;cursor:not-allowed;}
+optgroup{color:#c9a84c;font-weight:600;}
 
-        /* Results */
-        .result-section {
-            display: none;
-        }
+/* Easy mode */
+.easy-mode .chart-container{display:none !important;}
+.easy-mode .planet-table{display:none !important;}
+.easy-mode .chart-grid{display:none !important;}
+.easy-mode .chart-label{display:none !important;}
+.easy-mode .easy-hide{display:none !important;}
 
-        .section-title {
-            font-size: 18px;
-            color: #c9a84c;
-            margin: 30px 0 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #2a2a5a;
-        }
+/* Responsive */
+@media(max-width:1024px){
+.page-layout{grid-template-columns:1fr;}
+.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+}
+@media(max-width:768px){
+.input-bar-inner{flex-direction:column;align-items:stretch;}
+.ib-group{width:100%;}
+.calc-btn{width:100%;}
+.sidebar{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+.chart-cell{min-height:45px;font-size:10px;}
+.chart-cell .planet{font-size:10px;}
+.chart-grid{max-width:100%;}
+}
 
-        /* Chart Grid (South Indian style) */
-        .chart-container {
-            background: linear-gradient(135deg, #12122a, #1a1a3e);
-            border: 1px solid #2a2a5a;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .chart-label {
-            text-align: center;
-            font-size: 14px;
-            color: #8b7ec8;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 0;
-            aspect-ratio: 1;
-            border: 2px solid #c9a84c;
-        }
-
-        .chart-cell {
-            border: 1px solid #3a3a6a;
-            padding: 6px;
-            font-size: 11px;
-            color: #aaa;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 60px;
-            position: relative;
-        }
-
-        .chart-cell.empty {
-            background: #0d0d20;
-        }
-
-        .chart-cell .house-num {
-            position: absolute;
-            top: 2px;
-            left: 4px;
-            font-size: 9px;
-            color: #555;
-        }
-
-        .chart-cell .planet {
-            font-size: 12px;
-            font-weight: 600;
-            color: #c9a84c;
-            margin: 1px 0;
-        }
-
-        .chart-cell .planet.benefic { color: #5cb85c; }
-        .chart-cell .planet.malefic { color: #d9534f; }
-
-        /* Planet Table */
-        .planet-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            background: #12122a;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #2a2a5a;
-        }
-
-        .planet-table th {
-            background: #1a1a3e;
-            color: #c9a84c;
-            padding: 10px 12px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .planet-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #1a1a3e;
-            color: #ccc;
-        }
-
-        .planet-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .planet-table tr:hover {
-            background: #1a1a30;
-        }
-
-        /* Nakshatra Card */
-        .nakshatra-card {
-            background: linear-gradient(135deg, #1a1a3e, #12122a);
-            border: 1px solid #2a2a5a;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .nakshatra-name {
-            font-size: 24px;
-            color: #c9a84c;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .nakshatra-meaning {
-            font-size: 14px;
-            color: #8b7ec8;
-            margin-bottom: 12px;
-        }
-
-        .nakshatra-detail {
-            font-size: 13px;
-            color: #999;
-            line-height: 1.6;
-        }
-
-        /* Dasha Timeline */
-        .dasha-timeline {
-            background: #12122a;
-            border: 1px solid #2a2a5a;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .dasha-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            border-bottom: 1px solid #1a1a3e;
-            font-size: 13px;
-        }
-
-        .dasha-item:last-child { border-bottom: none; }
-
-        .dasha-item.current {
-            background: #1a2a1a;
-            border-left: 3px solid #c9a84c;
-        }
-
-        .dasha-planet {
-            min-width: 60px;
-            font-weight: 700;
-            color: #c9a84c;
-        }
-
-        .dasha-period {
-            flex: 1;
-            color: #999;
-        }
-
-        .dasha-years {
-            color: #666;
-            font-size: 12px;
-        }
-
-        .dasha-badge {
-            font-size: 10px;
-            background: #c9a84c;
-            color: #0a0a1a;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-
-        /* Interpretation */
-        .interp-card {
-            background: linear-gradient(135deg, #12122a, #1a1a3e);
-            border: 1px solid #2a2a5a;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 12px;
-        }
-
-        .interp-title {
-            font-size: 14px;
-            color: #c9a84c;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .interp-text {
-            font-size: 13px;
-            color: #999;
-            line-height: 1.7;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #444;
-            font-size: 13px;
-        }
-
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23c9a84c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 30px;
-            cursor: pointer;
-        }
-
-        select:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        optgroup {
-            color: #c9a84c;
-            font-weight: 600;
-        }
-
-        @media (max-width: 480px) {
-            .chart-cell { min-height: 50px; font-size: 10px; }
-            .chart-cell .planet { font-size: 10px; }
-        }
-    
-    /* Easy mode: hide technical elements */
-    .easy-mode .chart-container { display: none !important; }
-    .easy-mode .planet-table { display: none !important; }
-    .easy-mode .chart-grid { display: none !important; }
-    .easy-mode .chart-label { display: none !important; }
-    .easy-mode .easy-hide { display: none !important; }
+/* Light mode */
+.light-mode{background:#f5f5f5 !important;color:#333 !important}
+.light-mode .nav{background:rgba(255,255,255,0.95) !important;border-color:#eee !important}
+.light-mode .input-bar-inner,.light-mode .chart-container,.light-mode .interp-card,.light-mode .category-header,.light-mode .side-card{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important;color:#333 !important}
+.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}
+.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}
+.light-mode .interp-text{color:#555 !important}
+.light-mode .app-footer{color:#999 !important}
+.light-mode .page-layout,.light-mode .seo-section p{color:#666 !important}
     </style>
-<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .form-box,.light-mode .calc-box,.light-mode .interp-card,.light-mode .info-item,.light-mode .palace-cell{background:#fff !important;border-color:#ddd !important;color:#333 !important}.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}.light-mode footer{color:#999 !important}.light-mode .civ-card{background:#fff !important;border-color:#ddd !important}.light-mode .civ-name{color:#333 !important}.light-mode .civ-sub,.light-mode .civ-desc{color:#666 !important}.light-mode .container,.light-mode .page-title p{color:#666 !important}</style><style>.seo-content{max-width:700px;margin:30px auto;padding:0 20px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style></head>
+</head>
 <body class="easy-mode">
 
-<header>
-    <a href="../index.html" style="text-decoration:none;font-size:20px;color:#c9a84c;letter-spacing:2px;font-weight:700;">MOGU <span style="color:#a89040;">Moon</span></a>
-</header>
-<nav style="max-width:700px;margin:10px auto 0;padding:0 20px;font-size:12px;color:#888;"><a href="/" style="color:#c9a84c;text-decoration:none;">홈</a> <span style="margin:0 6px;">›</span> <a href="/" style="color:#c9a84c;text-decoration:none;">점성술</a> <span style="margin:0 6px;">›</span> <span>베딕 점성술</span></nav>
-
-<div class="container">
-    <div class="page-title">
-        <h2>베딕 점성술 (Jyotish)</h2>
-        <p>인도 베다 시대부터 전해 내려온 고대 천문점성술로 당신의 운명을 읽습니다</p>
+<!-- Nav -->
+<nav class="nav">
+    <a href="/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/">홈</a>
+        <a href="/about/">소개</a>
+        <a href="/blog/">블로그</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="" selected>KR</option>
+            <option value="/en/vedic/">EN</option>
+            <option value="/jp/vedic/">JP</option>
+            <option value="/es/vedic/">ES</option>
+            <option value="/de/vedic/">DE</option>
+            <option value="/fr/vedic/">FR</option>
+            <option value="/pt/vedic/">PT</option>
+        </select>
     </div>
+</nav>
 
-    <div class="form-box">
-        <div class="input-group">
+<!-- Page title + Input bar -->
+<div class="input-bar">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <span style="font-size:20px;">🕉️</span>
+        <div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">베딕 점성술 (Jyotish)</div>
+            <div style="font-size:11px;color:#666;">고대 인도 천문점성술로 당신의 운명을 읽습니다</div>
+        </div>
+    </div>
+    <div class="input-bar-inner">
+        <div class="ib-group">
             <label>생년월일</label>
-            <div class="input-row">
+            <div class="ib-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
                 <select id="birthDay"></select>
             </div>
         </div>
-
-        <div class="input-group">
-            <label>출생시간 <span class="optional-tag">(모르면 '모름' 선택)</span></label>
-            <div class="input-row">
-                <select id="birthAmpm">
-                    <option value="am">오전</option>
-                    <option value="pm">오후</option>
-                </select>
+        <div class="ib-group">
+            <label>출생시간 <span class="optional-tag">(모르면 '모름')</span></label>
+            <div class="ib-row">
+                <select id="birthAmpm"><option value="am">오전</option><option value="pm">오후</option></select>
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
-                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()">
-                    <option value="known">시간 입력</option>
-                    <option value="unknown">모름</option>
-                </select>
+                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()"><option value="known">시간 입력</option><option value="unknown">모름</option></select>
             </div>
         </div>
-
-        <div class="input-group">
+        <div class="ib-group">
             <label>출생지</label>
             <select id="birthCity" onchange="onCityChange()">
                 <optgroup label="🇰🇷 한국">
@@ -490,31 +295,36 @@
                     <option value="custom">위도/경도/시차 직접 입력</option>
                 </optgroup>
             </select>
-            <div id="customLatLng" style="display:none; margin-top:8px;">
+            <div id="customLatLng" style="display:none;">
                 <div class="input-row">
                     <input type="number" id="birthLat" placeholder="위도 (예: 37.57)" step="0.01">
                     <input type="number" id="birthLng" placeholder="경도 (예: 126.98)" step="0.01">
                 </div>
             </div>
         </div>
-
         <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 명반 생성</button>
     </div>
+</div>
+
+<div class="page-layout">
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="content">
 
     <!-- Results -->
     <div class="result-section" id="resultSection">
 
         <!-- Mode Toggle -->
-        <div style="display:flex;justify-content:center;gap:8px;margin-bottom:20px;">
-            <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.add('easy-mode')" style="padding:10px 20px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">쉬운 해석</button>
-            <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.remove('easy-mode')" style="padding:10px 20px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;">전문가 해석</button>
+        <div class="mode-bar">
+            <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.add('easy-mode')" style="padding:8px 18px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">쉬운 해석</button>
+            <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.querySelectorAll('.category-header').forEach(function(h){var c=h.nextElementSibling;if(c)c.style.display='none';var a=h.querySelector('.cat-arrow');if(a)a.textContent='▶'});var rs=document.getElementById('resultSection');if(rs)rs.scrollIntoView({behavior:'smooth'});document.body.classList.remove('easy-mode')" style="padding:8px 18px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">전문가 해석</button>
         </div>
 
-        <!-- 📚 기초 가이드 (쉬운모드에서 숨김) -->
-        <div class="category-group easy-hide" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📚 <span id="catGuide">베딕 점성술 기초 가이드</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 📚 기초 가이드 -->
+        <div class="category-group easy-hide" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" >
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">📚 <span id="catGuide">베딕 점성술 기초 가이드</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <div class="interp-card" style="border-left:3px solid #c9a84c;">
@@ -527,18 +337,18 @@
             </div>
         </div>
 
-        <!-- 🪐 기본 차트 (쉬운모드에서 숨김) -->
-        <div class="category-group easy-hide" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🪐 <span id="catBasic">기본 차트 — 행성 위치 & 출생 차트</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 🪐 기본 차트 -->
+        <div class="category-group easy-hide" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">🪐 <span id="catBasic">기본 차트 — 행성 위치 & 출생 차트</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title">🪐 행성 위치</h3>
                 <div id="planetTableWrap"></div>
                 <h3 class="section-title">🏛️ 출생 차트 (D1 라시)</h3>
                 <div class="chart-container">
-                    <div class="chart-label">남인도식 차트 — 12칸 = 12별자리, 행성 기호가 있는 곳이 태어날 때 그 행성의 위치</div>
+                    <div class="chart-label">남인도식 차트</div>
                     <div class="chart-grid" id="d1Chart"></div>
                 </div>
                 <h3 class="section-title">🌙 나크샤트라 (당신의 별)</h3>
@@ -546,22 +356,22 @@
             </div>
         </div>
 
-        <!-- ⏳ 대운 (항상 펼침) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">⏳ <span id="catDasha">대운 — 인생의 시기별 운세</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- ⏳ 대운 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">⏳ <span id="catDasha">대운 — 인생의 시기별 운세</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <div id="dashaWrap"></div>
             </div>
         </div>
 
-        <!-- 📖 종합 해석 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">📖 <span id="catInterp">종합 해석 — 성격·재물·직업·건강·요가</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 📖 종합 해석 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">📖 <span id="catInterp">종합 해석 — 성격·재물·직업·건강·요가</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <div id="interpWrap"></div>
@@ -576,11 +386,11 @@
             </div>
         </div>
 
-        <!-- 💍 결혼/배우자 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💍 <span id="catMarriage">결혼 & 배우자 — D9 나바암샤</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 💍 결혼/배우자 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">💍 <span id="catMarriage">결혼 & 배우자 — D9 나바암샤</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <div class="chart-container">
@@ -592,11 +402,11 @@
             </div>
         </div>
 
-        <!-- 💼 직업/재물 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">💼 <span id="catCareer">직업 & 재물 — D10·D2·D4</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 💼 직업/재물 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">💼 <span id="catCareer">직업 & 재물 — D10·D2·D4</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title" id="secD10">💼 D10 다샴샤 (직업·커리어)</h3>
@@ -611,11 +421,11 @@
             </div>
         </div>
 
-        <!-- 👨‍👩‍👧 가족 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 <span id="catFamily">가족 — D7·D3·D12·D40·D45</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 👨‍👩‍👧 가족 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">👨‍👩‍👧 <span id="catFamily">가족 — D7·D3·D12·D40·D45</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title" id="secD7">👶 D7 삽탐샤 (자녀·후손)</h3>
@@ -637,11 +447,11 @@
             </div>
         </div>
 
-        <!-- 🙏 영성/교육/건강 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#c9a84c;">🙏 <span id="catSpirit">영성·교육·건강 — D20·D24·D27·D16</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 🙏 영성/교육/건강 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#c9a84c;">🙏 <span id="catSpirit">영성·교육·건강 — D20·D24·D27·D16</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title" id="secD24">📚 D24 차투르빔샴샤 (교육·학문)</h3>
@@ -660,11 +470,11 @@
             </div>
         </div>
 
-        <!-- ⚠️ 주의사항 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#d9534f;">⚠️ <span id="catWarn">주의사항 — D30 질병·장애·해외운</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- ⚠️ 주의사항 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#d9534f;">⚠️ <span id="catWarn">주의사항 — D30 질병·장애·해외운</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤 (불행·질병·장애)</h3>
@@ -675,11 +485,11 @@
             </div>
         </div>
 
-        <!-- 🔮 카르마 (접힘) -->
-        <div class="category-group" style="margin-bottom:20px;">
-            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'" style="cursor:pointer;padding:14px 16px;background:linear-gradient(135deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:10px;margin-bottom:2px;">
-                <span style="font-size:17px;font-weight:700;color:#8b7ec8;">🔮 <span id="catKarma">카르마 — D60 전생·카르마</span></span>
-                <span class="cat-arrow" style="float:right;color:#666;">▶</span>
+        <!-- 🔮 카르마 -->
+        <div class="category-group" style="margin-bottom:8px;">
+            <div class="category-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'':'none'; this.querySelector('.cat-arrow').textContent=this.nextElementSibling.style.display==='none'?'▶':'▼'">
+                <span style="font-size:16px;font-weight:700;color:#8b7ec8;">🔮 <span id="catKarma">카르마 — D60 전생·카르마</span></span>
+                <span class="cat-arrow">▶</span>
             </div>
             <div class="category-content" style="display:none;">
                 <h3 class="section-title">🔮 D60 샤슈티암샤 (전생 카르마)</h3>
@@ -691,35 +501,47 @@
     </div>
 </div>
 
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+    <div class="ad-slot" style="min-height:250px;">
+        <span style="font-size:9px;color:#c9a84c;font-weight:600;">ADVERTISEMENT</span><br>300x250
+    </div>
+    <div class="side-card">
+        <div class="side-title">🔗 관련 도구</div>
+        <a href="../saju/" class="rel-item">☯️ 사주팔자</a>
+        <a href="../ziwei/" class="rel-item">💜 자미두수</a>
+        <a href="../hellenistic/" class="rel-item">🏛️ 헬레니즘 점성술</a>
+        <a href="../maya/" class="rel-item">🌀 마야 점성술</a>
+        <a href="../egypt/" class="rel-item">𓂀 이집트 데칸</a>
+        <a href="../birthday-compat/" class="rel-item">💑 사주 궁합</a>
+    </div>
+    <div class="ad-slot" style="min-height:600px;">
+        <span style="font-size:9px;color:#c9a84c;font-weight:600;">ADVERTISEMENT</span><br>300x600
+    </div>
+    <div class="side-card">
+        <div class="side-title">🔥 인기</div>
+        <a href="../tarot/" class="rel-item">🃏 타로 카드</a>
+        <a href="../daily/" class="rel-item">✨ 오늘의 운세</a>
+        <a href="../past-life/" class="rel-item">🏛️ 전생 테스트</a>
+        <a href="../dream/" class="rel-item">🌿 꿈 해몽</a>
+    </div>
+</div>
+
+</div>
+
+<!-- SEO Content -->
 <div class="seo-content">
-<div class="seo-section"><h2>베딕 점성술이란?</h2><p>베딕 점성술(조티시)은 약 5000년 전 고대 인도에서 시작된 천문학적 체계라고 한다. 산스크리트어로 "빛의 과학"이라는 뜻이다. 서양 점성술과 달리 항성 기준(사이드리얼)을 사용하며, 나크샤트라(27개 별자리 구간), 다샤(행성 주기), 디비저널 차트 등 정밀한 분석 체계를 갖추고 있다. 생년월일, 출생시간, 출생지를 입력하면 출생 차트가 생성된다.</p></div>
-<div class="seo-section"><h2>사용 방법</h2><p>1. 생년월일, 출생시간, 출생지를 입력한다.<br>2. 출생 차트(쿤달리)가 자동으로 생성된다.<br>3. 행성 배치, 하우스, 나크샤트라 해석을 확인한다.</p></div>
-<div class="seo-section"><h2>자주 묻는 질문</h2><details class="seo-faq"><summary>베딕 점성술은 서양 점성술과 다른가요?</summary><p>네, 베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)을 사용합니다. 약 23도의 차이가 있습니다.</p></details><details class="seo-faq"><summary>출생시간을 모르면 어떻게 하나요?</summary><p>출생시간 없이도 기본적인 차트는 생성됩니다. 다만 정확한 하우스 배치와 라그나(상승점)는 출생시간이 있어야 정확합니다.</p></details><details class="seo-faq"><summary>베딕 점성술의 역사는 얼마나 되나요?</summary><p>약 5000년 전 고대 인도의 베다 문헌에서 시작됐다고 합니다. 가장 오래된 점성술 체계 중 하나입니다.</p></details><details class="seo-faq"><summary>개인정보가 저장되나요?</summary><p>아닙니다. 모든 처리는 브라우저에서만 이루어지며, 서버에 전송되지 않습니다.</p></details></div>
+<div class="seo-section"><h2>베딕 점성술이란?</h2><p>베딕 점성술(조티시)은 약 5000년 전 고대 인도에서 시작된 천문학적 체계라고 한다. 산스크리트어로 "빛의 과학"이라는 뜻이다. 서양 점성술과 달리 항성 기준(사이드리얼)을 사용하며, 나크샤트라(27개 별자리 구간), 다샤(행성 주기), 디비저널 차트 등 정밀한 분석 체계를 갖추고 있다.</p></div>
+<div class="seo-section"><h2>자주 묻는 질문</h2><details class="seo-faq"><summary>베딕 점성술은 서양 점성술과 다른가요?</summary><p>네, 베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)을 사용합니다. 약 23도의 차이가 있습니다.</p></details><details class="seo-faq"><summary>출생시간을 모르면 어떻게 하나요?</summary><p>출생시간 없이도 기본적인 차트는 생성됩니다. 다만 정확한 하우스 배치와 라그나는 출생시간이 있어야 정확합니다.</p></details></div>
 <div class="seo-section"><h2>관련 도구</h2><div class="seo-related"><a href="../saju/">사주팔자</a><a href="../hellenistic/">헬레니스틱 점성술</a></div></div>
 </div>
-<div style="text-align:center;padding:20px 0;border-top:1px solid #3a2540;margin-top:30px;"><span style="font-size:13px;color:#888;margin-right:8px;">Share:</span><a href="javascript:void(0)" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(document.title),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1da1f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Twitter</a><a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=400');return false" style="display:inline-block;padding:6px 12px;background:#1877f2;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Facebook</a><a href="javascript:void(0)" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+location.href),'_blank');return false" style="display:inline-block;padding:6px 12px;background:#25d366;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">WhatsApp</a><a href="javascript:void(0)" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copy URL</a></div>
-<footer>
-    &copy; 2025 Ancient Astrology
+
+<footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="../privacy/">개인정보처리방침</a>
 </footer>
 
-<style>
-    .preset-city {
-        padding: 4px 12px;
-        background: #1a1a3e;
-        border: 1px solid #3a3a6a;
-        border-radius: 20px;
-        color: #8b7ec8;
-        font-size: 12px;
-        cursor: pointer;
-    }
-    .preset-city:hover {
-        border-color: #c9a84c;
-        color: #c9a84c;
-    }
-</style>
-
 <script>
-// Lazy load: astronomy.js loads only when Generate button is clicked
 var _astroLoaded = false;
 function _loadAstro(cb) {
     if (_astroLoaded) { cb(); return; }
@@ -729,10 +551,12 @@ function _loadAstro(cb) {
     document.head.appendChild(s);
 }
 var _origCalc;
-// Prevent Chrome drag freeze
 document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-    </script>
+</script>
 
-<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
+<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
+<script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
 <script src="vedic-chart.js" defer></script>
-<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script></html>
+<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script>
+</body>
+</html>
