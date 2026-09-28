@@ -180,12 +180,19 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 /* Responsive */
 @media(max-width:768px){
+.nav-links a{font-size:11px;padding:6px 8px;white-space:nowrap;}
+.nav-lang{font-size:10px;padding:4px 6px;}
 .page-layout{grid-template-columns:1fr;}
 .sidebar{position:static;display:grid;grid-template-columns:1fr;gap:12px;}
 .input-bar-inner{flex-direction:column;align-items:stretch;}
 .ib-group{width:100%;}
+.ib-row{flex-wrap:wrap;}
+.ib-row select,.ib-row input{min-width:0;flex:1;}
 .calc-btn{width:100%;}
 .dasha-row{flex-wrap:wrap;}
+.dasha-item{flex-direction:column;align-items:flex-start;gap:4px;}
+.dasha-planet{min-width:unset;}
+.dasha-period{white-space:normal;word-break:keep-all;}
 }
 @media(max-width:480px){
 .chart-cell{min-height:45px;font-size:10px;}
