@@ -990,15 +990,39 @@ function renderDasha(moonNakshatra, birthDate, moonSidereal) {
         currentDate = endD;
     }
 
-    html += '<div class="dasha-timeline">';
+    const dashaEasyDesc = {Ketu:'내면 성찰과 영적 성장의 시기',Venus:'사랑·아름다움·풍요의 시기',Sun:'자신감과 리더십이 빛나는 시기',Moon:'감정과 가정이 중심이 되는 시기',Mars:'도전과 행동력이 넘치는 시기',Rahu:'큰 변화와 새로운 기회의 시기',Jupiter:'행운과 성장이 찾아오는 시기',Saturn:'인내하면 큰 성과를 얻는 시기',Mercury:'공부·소통·사업이 잘 되는 시기'};
+
+    // Horizontal timeline cards
+    html += '<div style="font-size:14px;font-weight:700;color:#c9a84c;margin-bottom:8px;">⏳ 대운 타임라인</div>';
+    html += '<div class="dasha-row">';
+    periods.forEach((p) => {
+        const isCurrent = now >= p.startD && now < p.endD;
+        html += '<div class="dasha-card ' + (isCurrent ? 'current' : '') + '">';
+        html += '<div class="dp">' + DASHA_KO[p.planet] + '</div>';
+        html += '<div class="dd">' + p.startD.getFullYear() + ' ~ ' + p.endD.getFullYear() + '</div>';
+        if (isCurrent) html += '<div class="db">현재</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+
+    // Current dasha detail
+    var currentP = periods.find(function(p){ return now >= p.startD && now < p.endD; });
+    if (currentP) {
+        html += '<div class="interp-card" style="border-left:3px solid #c9a84c;margin-top:12px;">';
+        html += '<div class="interp-title">현재: ' + DASHA_KO[currentP.planet] + ' 대운 (' + fmtDate(currentP.startD) + ' ~ ' + fmtDate(currentP.endD) + ')</div>';
+        html += '<div class="interp-text">' + (isEasy ? dashaEasyDesc[currentP.planet] : DASHA_KO[currentP.planet] + ' 대운 기간입니다.') + '</div>';
+        html += '</div>';
+    }
+
+    // Detailed list (expandable)
+    html += '<div class="dasha-timeline" style="margin-top:12px;">';
 
     periods.forEach((p, pi) => {
         const isCurrent = now >= p.startD && now < p.endD;
         const age = getAge(p.startD);
 
         html += '<div class="dasha-item ' + (isCurrent ? 'current' : '') + '" style="cursor:pointer;" onclick="this.querySelector(\'.bhukti-list\') && (this.querySelector(\'.bhukti-list\').style.display = this.querySelector(\'.bhukti-list\').style.display===\'none\'?\'\':\'none\')">';
-        const dashaEasyDesc = {Ketu:'내면 성찰과 영적 성장의 시기',Venus:'사랑·아름다움·풍요의 시기',Sun:'자신감과 리더십이 빛나는 시기',Moon:'감정과 가정이 중심이 되는 시기',Mars:'도전과 행동력이 넘치는 시기',Rahu:'큰 변화와 새로운 기회의 시기',Jupiter:'행운과 성장이 찾아오는 시기',Saturn:'인내하면 큰 성과를 얻는 시기',Mercury:'공부·소통·사업이 잘 되는 시기'};
-        html += '<span class="dasha-planet">' + (isEasy ? dashaEasyDesc[p.planet] : DASHA_KO[p.planet]) + '</span>';
+        html += '<span class="dasha-planet">' + DASHA_KO[p.planet] + '</span>';
         html += '<span class="dasha-period">' + fmtDate(p.startD) + ' ~ ' + fmtDate(p.endD) + '</span>';
         html += '<span class="dasha-years">' + (p.actualDays / 365.25).toFixed(1) + '년</span>';
         if (isCurrent) html += '<span class="dasha-badge">현재</span>';

@@ -13,8 +13,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vedisches Horoskop - MOGU Moon</title>
-<meta name="description" content="Kostenloses vedisches Horoskop.">
+    <title>Vedische Astrologie - MOGU Moon</title>
+<meta name="description" content="Vedisches Horoskop.">
     <link rel="alternate" hreflang="ko" href="https://mogumoon.com/de/vedic/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/vedic/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/vedic/">
@@ -24,8 +24,8 @@
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/vedic/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/de/vedic/">
     <link rel="canonical" href="https://mogumoon.com/de/vedic/">
-    <meta property="og:title" content="Vedisches Horoskop - MOGU Moon">
-    <meta property="og:description" content="Kostenloses vedisches Horoskop.">
+    <meta property="og:title" content="Vedische Astrologie - MOGU Moon">
+    <meta property="og:description" content="Vedisches Horoskop.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://mogumoon.com/de/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/de/vedic/">
@@ -167,20 +167,19 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* Tab panel: chart + interp side by side where applicable */
-.tab-panel .chart-container{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}
-.tab-panel .chart-grid{max-width:400px;margin:0 auto;}
-.tab-panel #d9InterpWrap,.tab-panel #spouseProfileWrap,
-.tab-panel #d10InterpWrap,.tab-panel #d2InterpWrap,.tab-panel #d4InterpWrap,
-.tab-panel #d7InterpWrap,.tab-panel #d3InterpWrap,.tab-panel #d12InterpWrap,
-.tab-panel #d40InterpWrap,.tab-panel #d45InterpWrap,
-.tab-panel #d20InterpWrap,.tab-panel #d24InterpWrap,.tab-panel #d27InterpWrap,
-.tab-panel #d16InterpWrap,.tab-panel #d30InterpWrap,
-.tab-panel #d60InterpWrap{display:inline-block;vertical-align:top;width:48%;}
+/* 2-column layout for chart sections */
+.result-2col{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;margin-bottom:16px;}
+.result-2col .chart-container{margin-bottom:0;}
+.result-2col .chart-grid{max-width:100%;}
+.result-2col .interp-area{display:flex;flex-direction:column;gap:10px;}
 
-/* Dasha: keep existing vertical style but compact */
-.dasha-timeline{border-radius:12px;overflow:hidden;}
-.dasha-item.current{border-left:3px solid #c9a84c;background:#1a2a1a;}
+/* Dasha: horizontal card timeline */
+.dasha-row{display:flex;gap:10px;overflow-x:auto;padding:8px 0;}
+.dasha-card{flex-shrink:0;min-width:150px;background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:12px;padding:14px;text-align:center;}
+.dasha-card.current{border-color:#c9a84c;background:linear-gradient(135deg,#1a2a1a,#12301a);}
+.dasha-card .dp{font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:4px;}
+.dasha-card .dd{font-size:11px;color:#888;}
+.dasha-card .db{font-size:9px;background:#c9a84c;color:#0a0a1a;padding:2px 8px;border-radius:8px;font-weight:700;display:inline-block;margin-top:6px;}
 
 /* Responsive */
 @media(max-width:1024px){
@@ -192,13 +191,8 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.tab-panel .chart-container,.tab-panel #d9InterpWrap,.tab-panel #spouseProfileWrap,
-.tab-panel #d10InterpWrap,.tab-panel #d2InterpWrap,.tab-panel #d4InterpWrap,
-.tab-panel #d7InterpWrap,.tab-panel #d3InterpWrap,.tab-panel #d12InterpWrap,
-.tab-panel #d40InterpWrap,.tab-panel #d45InterpWrap,
-.tab-panel #d20InterpWrap,.tab-panel #d24InterpWrap,.tab-panel #d27InterpWrap,
-.tab-panel #d16InterpWrap,.tab-panel #d30InterpWrap,
-.tab-panel #d60InterpWrap{display:block;width:100%;margin-right:0;}
+.result-2col{grid-template-columns:1fr;}
+.dasha-row{flex-wrap:wrap;}
 }
 @media(max-width:480px){
 .chart-cell{min-height:45px;font-size:10px;}
@@ -325,7 +319,7 @@ optgroup{color:#c9a84c;font-weight:600;}
                 </div>
             </div>
         </div>
-        <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 Horoskop erstellen</button>
+        <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 Erstellen</button>
     </div>
 </div>
 
@@ -368,12 +362,8 @@ optgroup{color:#c9a84c;font-weight:600;}
 
         <!-- 🪐 기본 차트 -->
         <div class="tab-panel" id="tab-basic" style="display:none;">
-            <h3 class="section-title">🪐 행성 위치</h3>
-            <div id="planetTableWrap"></div>
-            <h3 class="section-title">🏛️ 출생 차트 (D1 라시)</h3>
-            <div class="chart-container"><div class="chart-label">남인도식 차트</div><div class="chart-grid" id="d1Chart"></div></div>
-            <h3 class="section-title">🌙 나크샤트라 (당신의 별)</h3>
-            <div id="nakshatraWrap"></div>
+            <div id="planetTableWrap" style="margin-bottom:16px;"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">남인도식 차트 (D1 라시)</div><div class="chart-grid" id="d1Chart"></div></div><div class="interp-area"><div id="nakshatraWrap"></div></div></div>
         </div>
 
         <!-- ⏳ 대운 -->
@@ -396,73 +386,59 @@ optgroup{color:#c9a84c;font-weight:600;}
 
         <!-- 💍 결혼/배우자 -->
         <div class="tab-panel" id="tab-marriage" style="display:none;">
-            <div class="chart-container"><div class="chart-label">나바암샤 — 결혼운, 배우자 성격</div><div class="chart-grid" id="d9Chart"></div></div>
-            <div id="d9InterpWrap"></div>
-            <div id="spouseProfileWrap"></div>
+            <div class="result-2col">
+                <div class="chart-container"><div class="chart-label">나바암샤 — 결혼운, 배우자 성격</div><div class="chart-grid" id="d9Chart"></div></div>
+                <div class="interp-area"><div id="d9InterpWrap"></div><div id="spouseProfileWrap"></div></div>
+            </div>
         </div>
 
         <!-- 💼 직업/재물 -->
         <div class="tab-panel" id="tab-career" style="display:none;">
             <h3 class="section-title" id="secD10">💼 D10 다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">다샴샤 — 직업, 사회적 성취</div><div class="chart-grid" id="d10Chart"></div></div>
-            <div id="d10InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">다샴샤 — 직업</div><div class="chart-grid" id="d10Chart"></div></div><div class="interp-area"><div id="d10InterpWrap"></div></div></div>
             <h3 class="section-title" id="secD2">💰 D2 호라</h3>
-            <div class="chart-container"><div class="chart-label">호라 — 재물운</div><div class="chart-grid" id="d2Chart"></div></div>
-            <div id="d2InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">호라 — 재물운</div><div class="chart-grid" id="d2Chart"></div></div><div class="interp-area"><div id="d2InterpWrap"></div></div></div>
             <h3 class="section-title" id="secD4">🏠 D4 차투르탐샤</h3>
-            <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산</div><div class="chart-grid" id="d4Chart"></div></div>
-            <div id="d4InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">차투르탐샤 — 재산</div><div class="chart-grid" id="d4Chart"></div></div><div class="interp-area"><div id="d4InterpWrap"></div></div></div>
         </div>
 
         <!-- 👨‍👩‍👧 가족 -->
         <div class="tab-panel" id="tab-family" style="display:none;">
             <h3 class="section-title" id="secD7">👶 D7 삽탐샤</h3>
-            <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운</div><div class="chart-grid" id="d7Chart"></div></div>
-            <div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운</div><div class="chart-grid" id="d7Chart"></div></div><div class="interp-area"><div id="d7InterpWrap"></div><div id="childrenWrap"></div></div></div>
             <h3 class="section-title" id="secD3">👫 D3 드레카나</h3>
-            <div class="chart-container"><div class="chart-label">드레카나 — 형제자매</div><div class="chart-grid" id="d3Chart"></div></div>
-            <div id="d3InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">드레카나 — 형제자매</div><div class="chart-grid" id="d3Chart"></div></div><div class="interp-area"><div id="d3InterpWrap"></div></div></div>
             <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 드와다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모</div><div class="chart-grid" id="d12Chart"></div></div>
-            <div id="d12InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">드와다샴샤 — 부모</div><div class="chart-grid" id="d12Chart"></div></div><div class="interp-area"><div id="d12InterpWrap"></div></div></div>
             <h3 class="section-title" id="secD40">👩 D40 카베담샤</h3>
-            <div class="chart-container"><div class="chart-label">카베담샤 — 모계 유산</div><div class="chart-grid" id="d40Chart"></div></div>
-            <div id="d40InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">카베담샤 — 모계</div><div class="chart-grid" id="d40Chart"></div></div><div class="interp-area"><div id="d40InterpWrap"></div></div></div>
             <h3 class="section-title" id="secD45">👨 D45 악샤베담샤</h3>
-            <div class="chart-container"><div class="chart-label">악샤베담샤 — 부계 유산</div><div class="chart-grid" id="d45Chart"></div></div>
-            <div id="d45InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">악샤베담샤 — 부계</div><div class="chart-grid" id="d45Chart"></div></div><div class="interp-area"><div id="d45InterpWrap"></div></div></div>
         </div>
 
         <!-- 🙏 영성/교육/건강 -->
         <div class="tab-panel" id="tab-spirit" style="display:none;">
-            <h3 class="section-title" id="secD24">📚 D24 차투르빔샴샤</h3>
-            <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육</div><div class="chart-grid" id="d24Chart"></div></div>
-            <div id="d24InterpWrap"></div><div id="educationWrap"></div>
-            <h3 class="section-title" id="secD20">🙏 D20 빔샴샤</h3>
-            <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행</div><div class="chart-grid" id="d20Chart"></div></div>
-            <div id="d20InterpWrap"></div>
-            <h3 class="section-title" id="secD27">💪 D27 삽타빔샴샤</h3>
-            <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력</div><div class="chart-grid" id="d27Chart"></div></div>
-            <div id="d27InterpWrap"></div>
-            <h3 class="section-title" id="secD16">🚗 D16 쇼다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">쇼다샴샤 — 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div>
-            <div id="d16InterpWrap"></div>
+            <h3 class="section-title" id="secD24">📚 D24 교육</h3>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육</div><div class="chart-grid" id="d24Chart"></div></div><div class="interp-area"><div id="d24InterpWrap"></div><div id="educationWrap"></div></div></div>
+            <h3 class="section-title" id="secD20">🙏 D20 영성</h3>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행</div><div class="chart-grid" id="d20Chart"></div></div><div class="interp-area"><div id="d20InterpWrap"></div></div></div>
+            <h3 class="section-title" id="secD27">💪 D27 체력</h3>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력</div><div class="chart-grid" id="d27Chart"></div></div><div class="interp-area"><div id="d27InterpWrap"></div></div></div>
+            <h3 class="section-title" id="secD16">🚗 D16 편의</h3>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">쇼다샴샤 — 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div><div class="interp-area"><div id="d16InterpWrap"></div></div></div>
         </div>
 
         <!-- ⚠️ 주의사항 -->
         <div class="tab-panel" id="tab-warn" style="display:none;">
             <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤</h3>
-            <div class="chart-container"><div class="chart-label">트림샴샤 — 질병, 장애</div><div class="chart-grid" id="d30Chart"></div></div>
-            <div id="d30InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">트림샴샤 — 질병, 장애</div><div class="chart-grid" id="d30Chart"></div></div><div class="interp-area"><div id="d30InterpWrap"></div></div></div>
             <h3 class="section-title" id="secForeign">✈️ 해외운 & 이주</h3>
             <div id="foreignWrap"></div>
         </div>
 
         <!-- 🔮 카르마 -->
         <div class="tab-panel" id="tab-karma" style="display:none;">
-            <h3 class="section-title">🔮 D60 샤슈티암샤 (전생 카르마)</h3>
-            <div class="chart-container"><div class="chart-label">샤슈티암샤 — 전생 카르마</div><div class="chart-grid" id="d60Chart"></div></div>
-            <div id="d60InterpWrap"></div>
+            <div class="result-2col"><div class="chart-container"><div class="chart-label">D60 샤슈티암샤 — 전생 카르마</div><div class="chart-grid" id="d60Chart"></div></div><div class="interp-area"><div id="d60InterpWrap"></div></div></div>
         </div>
 
     </div>
@@ -471,18 +447,18 @@ optgroup{color:#c9a84c;font-weight:600;}
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
     <div class="side-card">
-        <div class="side-title">🔗 Verwandte Tools</div>
+        <div class="side-title">🔗 Tools</div>
         <a href="../saju/" class="rel-item">☯️ Vier Säulen</a>
-        <a href="../ziwei/" class="rel-item">💜 Zi Wei Dou Shu</a>
+        <a href="../ziwei/" class="rel-item">💜 Zi Wei</a>
         <a href="../hellenistic/" class="rel-item">🏛️ Hellenistisch</a>
-        <a href="../maya/" class="rel-item">🌀 Maya-Astrologie</a>
-        <a href="../egypt/" class="rel-item">𓂀 Ägyptische Dekane</a>
-        <a href="../birthday-compat/" class="rel-item">💑 BaZi Kompatibilität</a>
+        <a href="../maya/" class="rel-item">🌀 Maya</a>
+        <a href="../egypt/" class="rel-item">𓂀 Dekane</a>
+        <a href="../birthday-compat/" class="rel-item">💑 Kompatibilität</a>
     </div>
     <div class="side-card">
         <div class="side-title">🔥 Beliebt</div>
         <a href="../tarot/" class="rel-item">🃏 Tarot</a>
-        <a href="../daily/" class="rel-item">✨ Tageshoroskop</a>
+        <a href="../daily/" class="rel-item">✨ Horoskop</a>
         <a href="../past-life/" class="rel-item">🏛️ Früheres Leben</a>
         <a href="../dream/" class="rel-item">🌿 Traumdeutung</a>
     </div>
