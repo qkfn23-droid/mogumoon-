@@ -23,12 +23,19 @@
 <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/blog/why-planet-meanings/">
 <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/blog/why-planet-meanings/">
 <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/jp/blog/why-planet-meanings/">
+
+
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
-header { background: linear-gradient(135deg, #1a0a0a, #2a1515); border-bottom: 1px solid #3a2020; padding: 16px 20px; text-align: center; }
-header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
-.container { max-width: 680px; margin: 30px auto; padding: 0 20px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0c0c1e;color:#ddd;min-height:100vh;line-height:1.7;}
+.nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a3e;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:20px;font-weight:700;color:#c9a84c;text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.nav-logo svg{width:26px;height:26px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;font-size:13px;padding:8px 14px;border-radius:20px;color:#888;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:rgba(201,168,76,0.1);color:#c9a84c;}
+.nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
+.container{max-width:760px;margin:0 auto;padding:40px 24px;}
 .post-header { margin-bottom: 32px; }
 .post-date { font-size: 12px; color: #666; margin-bottom: 8px; }
 .post-h1 { font-size: 26px; color: #d4a853; font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
@@ -43,13 +50,31 @@ article hr { border: none; border-top: 1px solid #3a2a15; margin: 28px 0; }
 .post-nav a:hover { text-decoration: underline; }
 footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
 </style>
-<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode article{color:#333 !important}.light-mode .post-h1{color:#b8942a !important}.light-mode article h2{color:#b8942a !important;border-color:#eee !important}.light-mode footer{color:#999 !important}</style>
+<style>.light-mode{background:#fafaf8 !important;color:#333 !important}.light-mode .nav{background:rgba(255,255,255,0.95) !important;border-color:#eee !important}.light-mode article{color:#333 !important}.light-mode .post-h1{color:#b8860b !important}.light-mode article h2{color:#b8860b !important;border-color:#eee !important}.light-mode footer{color:#bbb !important}</style>
 </head>
 <body>
 
-<header>
-    <a href="/jp/">MOGU <span style="color:#b8942a">Moon</span></a>
-</header>
+
+<nav class="nav">
+    <a href="/jp/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/jp/">ホーム</a>
+        <a href="/jp/about/">紹介</a>
+        <a href="/jp/blog/" class="active">ブログ</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/blog/why-planet-meanings/">KR</option>
+            <option value="/en/blog/why-planet-meanings/">EN</option>
+            <option value="/jp/blog/why-planet-meanings/" selected>JP</option>
+            <option value="/es/blog/why-planet-meanings/">ES</option>
+            <option value="/de/blog/why-planet-meanings/">DE</option>
+            <option value="/fr/blog/why-planet-meanings/">FR</option>
+            <option value="/pt/blog/why-planet-meanings/">PT</option>
+        </select>
+    </div>
+</nav>
 
 <div class="container">
     <div class="post-header">
@@ -121,6 +146,11 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
 </div>
 
 <footer>&copy; 2025 MOGU Moon</footer>
+
+<footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="/jp/privacy/">プライバシーポリシー</a>
+</footer>
 
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
