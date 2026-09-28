@@ -89,7 +89,16 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
         footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
     </style>
-<style>.seo-content{max-width:900px;margin:30px auto;padding:0 20px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style></head>
+<style>.page-layout{padding:16px 40px;display:grid;grid-template-columns:1fr 280px;gap:24px;}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:60px;align-self:start;max-height:calc(100vh - 80px);overflow-y:auto;}
+.side-card{background:linear-gradient(135deg,#0e0e22,#14142e);border:1px solid #1e1e3e;border-radius:14px;padding:16px;position:relative;overflow:hidden;}
+.side-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
+.side-title{font-size:12px;font-weight:700;color:#c9a84c;margin-bottom:10px;letter-spacing:1px;}
+.rel-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;text-decoration:none;color:#777;font-size:12px;transition:all .2s;}
+.rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
+@media(max-width:768px){.page-layout{grid-template-columns:1fr;padding:16px 16px;}.sidebar{position:static;}}
+.seo-content{margin:20px 0;padding:0 40px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style></head>
 <body>
 
 <nav class="nav">
@@ -113,11 +122,18 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     </div>
 </nav>
 
-<div class="container">
-    <div class="page-title">
-        <h2>🔢 수비학 (Numerology)</h2>
-        <p>숫자에 담긴 당신의 운명을 읽어보세요</p>
+<div style="padding:12px 40px 0;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <span style="font-size:20px;">🔢</span>
+        <div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">수비학 (Numerology)</div>
+            <div style="font-size:11px;color:#666;">숫자에 담긴 당신의 운명을 읽어보세요</div>
+        </div>
     </div>
+</div>
+
+<div class="page-layout">
+<div class="content">
 
     <div class="form-box">
         <div class="form-row">
@@ -145,8 +161,27 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         <div id="resultCards"></div>
     </div>
 
-    <div class="disclaimer">🔢 수비학은 자기 이해와 성찰을 위한 도구입니다. 중요한 결정은 전문가와 상담하세요.</div>
+    </div>
+
+<div class="sidebar">
+    <div class="side-card">
+        <div class="side-title">🔗 관련 도구</div>
+        <a href="../saju/" class="rel-item">☯️ 사주팔자</a>
+        <a href="../vedic/" class="rel-item">🕉️ 베딕 점성술</a>
+        <a href="../ziwei/" class="rel-item">💜 자미두수</a>
+        <a href="../tarot/" class="rel-item">🃏 타로 카드</a>
+        <a href="../hellenistic/" class="rel-item">🏛️ 헬레니즘 점성술</a>
+        <a href="../daily/" class="rel-item">✨ 오늘의 운세</a>
+    </div>
+    <div class="side-card">
+        <div class="side-title">🔥 인기</div>
+        <a href="../birthday-compat/" class="rel-item">💑 사주 궁합</a>
+        <a href="../past-life/" class="rel-item">🏛️ 전생 테스트</a>
+        <a href="../dream/" class="rel-item">🌿 꿈 해몽</a>
+        <a href="../aura/" class="rel-item">🌈 오라 컬러</a>
+    </div>
 </div>
+</div><!-- /page-layout -->
 
 <div class="seo-content">
 <div class="seo-section"><h2>수비학이란?</h2><p>수비학(Numerology)은 숫자에 의미를 부여하는 체계라고 한다. 피타고라스가 "만물은 수로 이루어져 있다"고 말한 것에서 유래했다고 한다. 생년월일이나 이름의 숫자를 분석하여 성격, 운명, 인생의 경로를 해석한다.</p></div>
