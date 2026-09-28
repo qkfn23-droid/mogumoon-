@@ -22,15 +22,15 @@ body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
 .nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
 
 /* Hero */
-.hero{max-width:760px;margin:0 auto;padding:56px 24px 0;}
+.hero{max-width:1200px;margin:0 auto;padding:48px 40px 0;}
 .hero-greeting{font-size:14px;color:#888;margin-bottom:4px;}
 .hero h1{font-size:32px;font-weight:800;color:#e8e0d0;margin-bottom:8px;letter-spacing:-0.5px;}
 .hero h1 span{color:#c9a84c;}
-.hero-sub{font-size:15px;color:#777;margin-bottom:40px;line-height:1.7;}
+.hero-sub{font-size:15px;color:#777;margin-bottom:36px;line-height:1.7;}
 
 /* Featured */
-.featured{max-width:760px;margin:0 auto;padding:0 24px;}
-.featured-card{display:block;text-decoration:none;background:linear-gradient(135deg,#161630,#1e1e40);border:1px solid #2a2a5a;border-radius:16px;padding:32px 36px;margin-bottom:40px;transition:all .25s;position:relative;overflow:hidden;}
+.featured{max-width:1200px;margin:0 auto;padding:0 40px;}
+.featured-card{display:block;text-decoration:none;background:linear-gradient(135deg,#161630,#1e1e40);border:1px solid #2a2a5a;border-radius:16px;padding:36px 40px;margin-bottom:36px;transition:all .25s;position:relative;overflow:hidden;}
 .featured-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c9a84c,#e8c56d,#c9a84c);border-radius:16px 16px 0 0;}
 .featured-card:hover{transform:translateY(-2px);border-color:rgba(201,168,76,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
 .featured-label{display:inline-block;font-size:11px;color:#c9a84c;font-weight:700;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase;}
@@ -39,18 +39,18 @@ body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
 .featured-meta{font-size:12px;color:#555;}
 
 /* Divider */
-.section-label{max-width:760px;margin:0 auto;padding:0 24px 16px;font-size:12px;color:#555;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid #1a1a3e;}
+.section-label{max-width:1200px;margin:0 auto;padding:0 40px 16px;font-size:12px;color:#555;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid #1a1a3e;}
 
-/* Post list */
-.post-list{max-width:760px;margin:0 auto;padding:0 24px;}
-.post-item{display:flex;gap:16px;padding:24px 0;border-bottom:1px solid #151530;text-decoration:none;transition:all .15s;}
-.post-item:hover{padding-left:8px;}
-.post-item:last-child{border-bottom:none;}
+/* Post grid */
+.post-list{max-width:1200px;margin:0 auto;padding:20px 40px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:0;}
+.post-item{display:flex;gap:16px;padding:24px 20px;border-bottom:1px solid #151530;border-right:1px solid #151530;text-decoration:none;transition:all .15s;}
+.post-item:hover{background:rgba(201,168,76,0.03);}
+.post-item:nth-child(2n){border-right:none;}
 .post-num{font-size:28px;font-weight:800;color:#1e1e40;min-width:40px;line-height:1;}
 .post-item:hover .post-num{color:#c9a84c;}
 .post-body{flex:1;}
 .post-date{font-size:11px;color:#555;margin-bottom:4px;}
-.post-title{font-size:17px;font-weight:700;color:#ddd;margin-bottom:6px;line-height:1.4;transition:color .15s;}
+.post-title{font-size:16px;font-weight:700;color:#ddd;margin-bottom:6px;line-height:1.4;transition:color .15s;}
 .post-item:hover .post-title{color:#c9a84c;}
 .post-desc{font-size:13px;color:#777;line-height:1.6;}
 .post-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
@@ -61,13 +61,17 @@ body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
 .app-footer a{color:#555;text-decoration:none;}
 
 /* Responsive */
+@media(max-width:900px){
+.post-list{grid-template-columns:1fr;}
+.post-item{border-right:none !important;}
+}
 @media(max-width:600px){
-.hero{padding:32px 16px 0;}
+.hero{padding:28px 16px 0;}
 .hero h1{font-size:24px;}
 .featured{padding:0 16px;}
 .featured-card{padding:24px;}
 .featured-title{font-size:20px;}
-.post-list{padding:0 16px;}
+.post-list{padding:12px 16px 0;}
 .section-label{padding:0 16px 12px;}
 .post-num{display:none;}
 }
