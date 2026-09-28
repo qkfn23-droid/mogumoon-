@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Politica de Privacidad - MOGU Moon</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
@@ -22,9 +23,28 @@ a { color: #c9a84c; }
 </style>
 </head>
 <body>
-<header>
-    <a href="../index.html">MOGU <span>Moon</span></a>
-</header>
+
+<nav class="nav">
+    <a href="/es/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/es/">Inicio</a>
+        <a href="/es/about/">Acerca</a>
+        <a href="/es/blog/">Blog</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/privacy/">KR</option>
+            <option value="/en/privacy/">EN</option>
+            <option value="/jp/privacy/">JP</option>
+            <option value="/es/privacy/" selected>ES</option>
+            <option value="/de/privacy/">DE</option>
+            <option value="/fr/privacy/">FR</option>
+            <option value="/pt/privacy/">PT</option>
+        </select>
+    </div>
+</nav>
+
 <div class="container">
     <h1>Politica de Privacidad</h1>
     <p>Ultima actualizacion: Septiembre 2025</p>
@@ -64,5 +84,9 @@ a { color: #c9a84c; }
     <h2>8. Contacto</h2>
     <p>Consultas de privacidad: <button onclick="this.textContent='mogurastudio23@gmail.com';this.style.background='none';this.style.border='none';this.style.color='#c9a84c';this.style.padding='0';this.style.cursor='text'" style="padding:4px 12px;background:#1a1a3e;border:1px solid #c9a84c;border-radius:6px;color:#c9a84c;font-size:13px;cursor:pointer;">Ver Email</button></p>
 </div>
-<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script></body>
+<script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script><footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="/es/privacy/">Política de Privacidad</a>
+</footer>
+</body>
 </html>
