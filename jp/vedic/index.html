@@ -31,8 +31,8 @@
     <meta property="og:url" content="https://mogumoon.com/jp/vedic/">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"베딕 점성술이란?","acceptedAnswer":{"@type":"Answer","text":"인도 고대 점성술(Jyotish)로, 나크샤트라(27개 별자리), 다샤(행성 주기), 행성 위치를 분석합니다."}},
-    {"@type":"Question","name":"서양 점성술과 뭐가 다른가요?","acceptedAnswer":{"@type":"Answer","text":"베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)입니다. 약 24도 차이가 있습니다."}}
+    {"@type":"Question","name":"ヴェーダ占星術とは？","acceptedAnswer":{"@type":"Answer","text":"古代インドの占星術（ジョーティシュ）で、ナクシャトラ（27の月宿）、ダシャー（惑星周期）、惑星配置を分析します。"}},
+    {"@type":"Question","name":"西洋占星術との違いは？","acceptedAnswer":{"@type":"Answer","text":"ヴェーダは恒星基準（サイデリアル）、西洋は春分点基準（トロピカル）を使用します。約24度の差があります。"}}
     ]}
 </script>
     <style>
@@ -208,12 +208,12 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- Nav -->
 <nav class="nav">
-    <a href="/" class="nav-logo">
+    <a href="/jp/" class="nav-logo">
         <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
         MOGU Moon
     </a>
     <div class="nav-links">
-        <a href="/">ホーム</a>
+        <a href="/jp/">ホーム</a>
         <a href="/jp/about/">紹介</a>
         <a href="/jp/blog/">ブログ</a>
         <select class="nav-lang" onchange="if(this.value)location.href=this.value">
@@ -252,63 +252,60 @@ optgroup{color:#c9a84c;font-weight:600;}
         <div class="ib-group">
             <label>出生地</label>
             <select id="birthCity" onchange="onCityChange()">
-                <optgroup label="🇰🇷 한국">
-                    <option value="37.57,126.98,9" selected>서울</option>
-                    <option value="35.18,129.08,9">부산</option>
-                    <option value="35.87,128.60,9">대구</option>
-                    <option value="37.46,126.71,9">인천</option>
-                    <option value="35.16,126.85,9">광주</option>
-                    <option value="36.35,127.38,9">대전</option>
-                    <option value="35.54,129.31,9">울산</option>
-                    <option value="33.50,126.53,9">제주</option>
+                <optgroup label="🇯🇵 日本">
+                    <option value="35.68,139.69,9" selected>東京</option>
+                    <option value="34.69,135.50,9">大阪</option>
+                    <option value="35.18,136.91,9">名古屋</option>
+                    <option value="43.06,141.35,9">札幌</option>
+                    <option value="33.59,130.40,9">福岡</option>
                 </optgroup>
-                <optgroup label="🇯🇵 일본">
-                    <option value="35.68,139.69,9">도쿄</option>
-                    <option value="34.69,135.50,9">오사카</option>
+                <optgroup label="🇰🇷 韓国">
+                    <option value="37.57,126.98,9">ソウル</option>
+                    <option value="35.18,129.08,9">釜山</option>
                 </optgroup>
-                <optgroup label="🇨🇳 중국/동아시아">
-                    <option value="39.90,116.40,8">베이징</option>
-                    <option value="31.23,121.47,8">상하이</option>
-                    <option value="22.32,114.17,8">홍콩</option>
-                    <option value="25.03,121.57,8">타이베이</option>
-                    <option value="1.35,103.82,8">싱가포르</option>
-                    <option value="13.76,100.50,7">방콕</option>
+                <optgroup label="🇨🇳 中国/東アジア">
+                    <option value="39.90,116.40,8">北京</option>
+                    <option value="31.23,121.47,8">上海</option>
+                    <option value="22.32,114.17,8">香港</option>
+                    <option value="25.03,121.57,8">台北</option>
+                    <option value="1.35,103.82,8">シンガポール</option>
+                    <option value="13.76,100.50,7">バンコク</option>
                 </optgroup>
-                <optgroup label="🇮🇳 인도">
-                    <option value="28.61,77.23,5.5">뉴델리</option>
-                    <option value="19.08,72.88,5.5">뭄바이</option>
-                    <option value="13.08,80.27,5.5">첸나이</option>
-                    <option value="22.57,88.36,5.5">콜카타</option>
+                <optgroup label="🇮🇳 インド">
+                    <option value="28.61,77.23,5.5">ニューデリー</option>
+                    <option value="19.08,72.88,5.5">ムンバイ</option>
+                    <option value="13.08,80.27,5.5">チェンナイ</option>
+                    <option value="22.57,88.36,5.5">コルカタ</option>
                 </optgroup>
-                <optgroup label="🇺🇸 미주">
-                    <option value="40.71,-74.01,-5">뉴욕 (EST)</option>
+                <optgroup label="🇺🇸 アメリカ">
+                    <option value="40.71,-74.01,-5">ニューヨーク (EST)</option>
                     <option value="34.05,-118.24,-8">LA (PST)</option>
-                    <option value="41.88,-87.63,-6">시카고 (CST)</option>
-                    <option value="37.77,-122.42,-8">샌프란시스코 (PST)</option>
-                    <option value="49.28,-123.12,-8">밴쿠버 (PST)</option>
-                    <option value="43.65,-79.38,-5">토론토 (EST)</option>
+                    <option value="41.88,-87.63,-6">シカゴ (CST)</option>
+                    <option value="37.77,-122.42,-8">サンフランシスコ (PST)</option>
+                    <option value="49.28,-123.12,-8">バンクーバー (PST)</option>
+                    <option value="43.65,-79.38,-5">トロント (EST)</option>
                 </optgroup>
-                <optgroup label="🇪🇺 유럽">
-                    <option value="51.51,-0.13,0">런던 (GMT)</option>
-                    <option value="48.86,2.35,1">파리 (CET)</option>
-                    <option value="52.52,13.41,1">베를린 (CET)</option>
-                    <option value="40.42,-3.70,1">마드리드 (CET)</option>
-                    <option value="41.90,12.50,1">로마 (CET)</option>
+                <optgroup label="🇪🇺 ヨーロッパ">
+                    <option value="51.51,-0.13,0">ロンドン (GMT)</option>
+                    <option value="48.86,2.35,1">パリ (CET)</option>
+                    <option value="52.52,13.41,1">ベルリン (CET)</option>
+                    <option value="40.42,-3.70,1">マドリード (CET)</option>
+                    <option value="41.90,12.50,1">ローマ (CET)</option>
                 </optgroup>
-                <optgroup label="🌏 기타">
-                    <option value="-33.87,151.21,10">시드니 (AEST)</option>
-                    <option value="-23.55,-46.63,-3">상파울루 (BRT)</option>
-                    <option value="55.76,37.62,3">모스크바 (MSK)</option>
-                    <option value="25.20,55.27,4">두바이 (GST)</option>
+                <optgroup label="🌏 その他">
+                    <option value="-33.87,151.21,10">シドニー (AEST)</option>
+                    <option value="-23.55,-46.63,-3">サンパウロ (BRT)</option>
+                    <option value="55.76,37.62,3">モスクワ (MSK)</option>
+                    <option value="25.20,55.27,4">ドバイ (GST)</option>
                 </optgroup>
-                <optgroup label="✏️ 직접 입력">
-                    <option value="custom">위도/경도/시차 직접 입력</option>
+                <optgroup label="✏️ 手動入力">
+                    <option value="custom">緯度/経度を手動入力</option>
                 </optgroup>
             </select>
             <div id="customLatLng" style="display:none;">
                 <div class="input-row">
-                    <input type="number" id="birthLat" placeholder="위도 (예: 37.57)" step="0.01">
-                    <input type="number" id="birthLng" placeholder="경도 (예: 126.98)" step="0.01">
+                    <input type="number" id="birthLat" placeholder="緯度 (例: 35.68)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="経度 (例: 139.69)" step="0.01">
                 </div>
             </div>
         </div>
@@ -330,46 +327,46 @@ optgroup{color:#c9a84c;font-weight:600;}
                 <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.add('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">やさしい</button>
                 <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.remove('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">専門家</button>
             </div>
-            <button class="tab-btn easy-hide" data-tab="guide" onclick="switchTab('guide')">📚 가이드</button>
-            <button class="tab-btn easy-hide" data-tab="basic" onclick="switchTab('basic')">🪐 차트</button>
-            <button class="tab-btn active" data-tab="dasha" onclick="switchTab('dasha')"><span id="catDasha">⏳ 대운</span></button>
-            <button class="tab-btn" data-tab="interp" onclick="switchTab('interp')"><span id="catInterp">📖 종합</span></button>
-            <button class="tab-btn" data-tab="marriage" onclick="switchTab('marriage')"><span id="catMarriage">💍 결혼</span></button>
-            <button class="tab-btn" data-tab="career" onclick="switchTab('career')"><span id="catCareer">💼 직업</span></button>
-            <button class="tab-btn" data-tab="family" onclick="switchTab('family')"><span id="catFamily">👨‍👩‍👧 가족</span></button>
-            <button class="tab-btn" data-tab="spirit" onclick="switchTab('spirit')"><span id="catSpirit">🙏 영성</span></button>
-            <button class="tab-btn" data-tab="warn" onclick="switchTab('warn')"><span id="catWarn">⚠️ 주의</span></button>
-            <button class="tab-btn" data-tab="karma" onclick="switchTab('karma')"><span id="catKarma">🔮 카르마</span></button>
+            <button class="tab-btn easy-hide" data-tab="guide" onclick="switchTab('guide')">📚 ガイド</button>
+            <button class="tab-btn easy-hide" data-tab="basic" onclick="switchTab('basic')">🪐 チャート</button>
+            <button class="tab-btn active" data-tab="dasha" onclick="switchTab('dasha')"><span id="catDasha">⏳ ダシャー</span></button>
+            <button class="tab-btn" data-tab="interp" onclick="switchTab('interp')"><span id="catInterp">📖 総合</span></button>
+            <button class="tab-btn" data-tab="marriage" onclick="switchTab('marriage')"><span id="catMarriage">💍 結婚</span></button>
+            <button class="tab-btn" data-tab="career" onclick="switchTab('career')"><span id="catCareer">💼 職業</span></button>
+            <button class="tab-btn" data-tab="family" onclick="switchTab('family')"><span id="catFamily">👨‍👩‍👧 家族</span></button>
+            <button class="tab-btn" data-tab="spirit" onclick="switchTab('spirit')"><span id="catSpirit">🙏 精神</span></button>
+            <button class="tab-btn" data-tab="warn" onclick="switchTab('warn')"><span id="catWarn">⚠️ 注意</span></button>
+            <button class="tab-btn" data-tab="karma" onclick="switchTab('karma')"><span id="catKarma">🔮 カルマ</span></button>
         </div>
 
         <!-- 📚 가이드 -->
         <div class="tab-panel" id="tab-guide" style="display:none;">
-            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🪐 9개 행성</div>
-            <table class="planet-table" style="margin-bottom:20px;"><tr><th>기호</th><th>행성</th><th>의미</th></tr>
-            <tr><td>☉</td><td>태양</td><td>자아, 리더십, 아버지</td></tr>
-            <tr><td>☽</td><td>달</td><td>감정, 마음, 어머니</td></tr>
-            <tr><td>♂</td><td>화성</td><td>에너지, 행동, 용기</td></tr>
-            <tr><td>☿</td><td>수성</td><td>지능, 소통, 사업</td></tr>
-            <tr><td>♃</td><td>목성</td><td>행운, 지혜, 확장</td></tr>
-            <tr><td>♀</td><td>금성</td><td>사랑, 아름다움, 재물</td></tr>
-            <tr><td>♄</td><td>토성</td><td>시련, 인내, 책임</td></tr>
-            <tr><td>☊</td><td>라후</td><td>욕망, 집착, 변화</td></tr>
-            <tr><td>☋</td><td>케투</td><td>해탈, 영성, 전생</td></tr></table>
-            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🏛️ 12궁</div>
-            <table class="planet-table" style="margin-bottom:20px;"><tr><th>궁</th><th>영역</th><th>궁</th><th>영역</th></tr>
-            <tr><td>1궁</td><td>나 (자아)</td><td>7궁</td><td>배우자</td></tr>
-            <tr><td>2궁</td><td>돈 (재물)</td><td>8궁</td><td>변혁</td></tr>
-            <tr><td>3궁</td><td>소통</td><td>9궁</td><td>행운</td></tr>
-            <tr><td>4궁</td><td>가정</td><td>10궁</td><td>직업</td></tr>
-            <tr><td>5궁</td><td>자녀</td><td>11궁</td><td>수입</td></tr>
-            <tr><td>6궁</td><td>건강</td><td>12궁</td><td>영성</td></tr></table>
-            <div class="interp-card"><div class="interp-text" style="font-size:14px;line-height:1.8;"><strong>⬆ 라그나</strong> = 태어난 순간 떠오르던 별자리 (가장 중요!)<br><strong>🌙 나크샤트라</strong> = 27개 달의 별자리 구간</div></div>
+            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🪐 9つの惑星</div>
+            <table class="planet-table" style="margin-bottom:20px;"><tr><th>記号</th><th>惑星</th><th>意味</th></tr>
+            <tr><td>☉</td><td>太陽</td><td>自我、リーダーシップ、父</td></tr>
+            <tr><td>☽</td><td>月</td><td>感情、心、母</td></tr>
+            <tr><td>♂</td><td>火星</td><td>エネルギー、行動、勇気</td></tr>
+            <tr><td>☿</td><td>水星</td><td>知性、コミュニケーション、事業</td></tr>
+            <tr><td>♃</td><td>木星</td><td>幸運、知恵、拡張</td></tr>
+            <tr><td>♀</td><td>金星</td><td>愛、美、財産</td></tr>
+            <tr><td>♄</td><td>土星</td><td>試練、忍耐、責任</td></tr>
+            <tr><td>☊</td><td>ラーフ</td><td>欲望、執着、変化</td></tr>
+            <tr><td>☋</td><td>ケートゥ</td><td>解脱、霊性、前世</td></tr></table>
+            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🏛️ 12室</div>
+            <table class="planet-table" style="margin-bottom:20px;"><tr><th>室</th><th>領域</th><th>室</th><th>領域</th></tr>
+            <tr><td>1室</td><td>自分（自我）</td><td>7室</td><td>配偶者</td></tr>
+            <tr><td>2室</td><td>お金（財産）</td><td>8室</td><td>変革</td></tr>
+            <tr><td>3室</td><td>コミュニケーション</td><td>9室</td><td>幸運</td></tr>
+            <tr><td>4室</td><td>家庭</td><td>10室</td><td>職業</td></tr>
+            <tr><td>5室</td><td>子供</td><td>11室</td><td>収入</td></tr>
+            <tr><td>6室</td><td>健康</td><td>12室</td><td>霊性</td></tr></table>
+            <div class="interp-card"><div class="interp-text" style="font-size:14px;line-height:1.8;"><strong>⬆ ラグナ</strong> = 誕生時に昇っていた星座（最も重要！）<br><strong>🌙 ナクシャトラ</strong> = 27の月の星宿</div></div>
         </div>
 
         <!-- 🪐 기본 차트 -->
         <div class="tab-panel" id="tab-basic" style="display:none;">
             <div id="planetTableWrap" style="margin-bottom:16px;"></div>
-            <div class="chart-container"><div class="chart-label">남인도식 차트 (D1 라시)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
+            <div class="chart-container"><div class="chart-label">南インド式チャート (D1 ラーシ)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
         </div>
 
         <!-- ⏳ 대운 -->
@@ -380,71 +377,71 @@ optgroup{color:#c9a84c;font-weight:600;}
         <!-- 📖 종합 해석 -->
         <div class="tab-panel" id="tab-interp" style="display:none;">
             <div id="interpWrap"></div>
-            <h3 class="section-title" id="secPlanetHouse">🪐 행성별 상세 해석</h3>
+            <h3 class="section-title" id="secPlanetHouse">🪐 惑星別詳細解釈</h3>
             <div id="planetHouseWrap"></div>
-            <h3 class="section-title" id="secDignity">⚖️ 행성 품위</h3>
+            <h3 class="section-title" id="secDignity">⚖️ 惑星の品位</h3>
             <div id="dignityWrap"></div>
-            <h3 class="section-title" id="secLucky">🍀 행운의 정보</h3>
+            <h3 class="section-title" id="secLucky">🍀 ラッキー情報</h3>
             <div id="luckyWrap"></div>
-            <h3 class="section-title" id="secRemedy">💎 치유 & 강화 방법</h3>
+            <h3 class="section-title" id="secRemedy">💎 治療 &amp; 強化方法</h3>
             <div id="remedyWrap"></div>
         </div>
 
         <!-- 💍 결혼/배우자 -->
         <div class="tab-panel" id="tab-marriage" style="display:none;">
             
-                <div class="chart-container"><div class="chart-label">나바암샤 — 결혼운, 배우자 성격</div><div class="chart-grid" id="d9Chart"></div></div>
+                <div class="chart-container"><div class="chart-label">ナヴァムシャ — 結婚運、配偶者の性格</div><div class="chart-grid" id="d9Chart"></div></div>
                 <div id="d9InterpWrap"></div>
             <div id="spouseProfileWrap"></div>
         </div>
 
         <!-- 💼 직업/재물 -->
         <div class="tab-panel" id="tab-career" style="display:none;">
-            <h3 class="section-title" id="secD10">💼 D10 다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">다샴샤 — 직업</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
-            <h3 class="section-title" id="secD2">💰 D2 호라</h3>
-            <div class="chart-container"><div class="chart-label">호라 — 재물운</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
-            <h3 class="section-title" id="secD4">🏠 D4 차투르탐샤</h3>
-            <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
+            <h3 class="section-title" id="secD10">💼 D10 ダシャムシャ</h3>
+            <div class="chart-container"><div class="chart-label">ダシャムシャ — 職業</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
+            <h3 class="section-title" id="secD2">💰 D2 ホーラ</h3>
+            <div class="chart-container"><div class="chart-label">ホーラ — 財運</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
+            <h3 class="section-title" id="secD4">🏠 D4 チャトゥルタムシャ</h3>
+            <div class="chart-container"><div class="chart-label">チャトゥルタムシャ — 財産</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
         </div>
 
         <!-- 👨‍👩‍👧 가족 -->
         <div class="tab-panel" id="tab-family" style="display:none;">
-            <h3 class="section-title" id="secD7">👶 D7 삽탐샤</h3>
-            <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
-            <h3 class="section-title" id="secD3">👫 D3 드레카나</h3>
-            <div class="chart-container"><div class="chart-label">드레카나 — 형제자매</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
-            <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 드와다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
-            <h3 class="section-title" id="secD40">👩 D40 카베담샤</h3>
-            <div class="chart-container"><div class="chart-label">카베담샤 — 모계</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
-            <h3 class="section-title" id="secD45">👨 D45 악샤베담샤</h3>
-            <div class="chart-container"><div class="chart-label">악샤베담샤 — 부계</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
+            <h3 class="section-title" id="secD7">👶 D7 サプタムシャ</h3>
+            <div class="chart-container"><div class="chart-label">サプタムシャ — 子供運</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+            <h3 class="section-title" id="secD3">👫 D3 ドレッカナ</h3>
+            <div class="chart-container"><div class="chart-label">ドレッカナ — 兄弟姉妹</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
+            <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 ドワダシャムシャ</h3>
+            <div class="chart-container"><div class="chart-label">ドワダシャムシャ — 両親</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
+            <h3 class="section-title" id="secD40">👩 D40 カヴェダムシャ</h3>
+            <div class="chart-container"><div class="chart-label">カヴェダムシャ — 母系</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
+            <h3 class="section-title" id="secD45">👨 D45 アクシャヴェダムシャ</h3>
+            <div class="chart-container"><div class="chart-label">アクシャヴェダムシャ — 父系</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
         </div>
 
         <!-- 🙏 영성/교육/건강 -->
         <div class="tab-panel" id="tab-spirit" style="display:none;">
-            <h3 class="section-title" id="secD24">📚 D24 교육</h3>
-            <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
-            <h3 class="section-title" id="secD20">🙏 D20 영성</h3>
-            <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
-            <h3 class="section-title" id="secD27">💪 D27 체력</h3>
-            <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
-            <h3 class="section-title" id="secD16">🚗 D16 편의</h3>
-            <div class="chart-container"><div class="chart-label">쇼다샴샤 — 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
+            <h3 class="section-title" id="secD24">📚 D24 教育</h3>
+            <div class="chart-container"><div class="chart-label">チャトゥルヴィムシャムシャ — 教育</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
+            <h3 class="section-title" id="secD20">🙏 D20 霊性</h3>
+            <div class="chart-container"><div class="chart-label">ヴィムシャムシャ — 霊的修行</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
+            <h3 class="section-title" id="secD27">💪 D27 体力</h3>
+            <div class="chart-container"><div class="chart-label">サプタヴィムシャムシャ — 体力</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
+            <h3 class="section-title" id="secD16">🚗 D16 快適</h3>
+            <div class="chart-container"><div class="chart-label">ショダシャムシャ — 物質的快適</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
         </div>
 
         <!-- ⚠️ 주의사항 -->
         <div class="tab-panel" id="tab-warn" style="display:none;">
-            <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤</h3>
-            <div class="chart-container"><div class="chart-label">트림샴샤 — 질병, 장애</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
-            <h3 class="section-title" id="secForeign">✈️ 해외운 & 이주</h3>
+            <h3 class="section-title" id="secD30">⚠️ D30 トリムシャムシャ</h3>
+            <div class="chart-container"><div class="chart-label">トリムシャムシャ — 疾病、障害</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
+            <h3 class="section-title" id="secForeign">✈️ 海外運 &amp; 移住</h3>
             <div id="foreignWrap"></div>
         </div>
 
         <!-- 🔮 카르마 -->
         <div class="tab-panel" id="tab-karma" style="display:none;">
-            <div class="chart-container"><div class="chart-label">D60 샤슈티암샤 — 전생 카르마</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
+            <div class="chart-container"><div class="chart-label">D60 シャシュティアムシャ — 前世カルマ</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
         </div>
 
     </div>
@@ -474,14 +471,14 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- SEO Content -->
 <div class="seo-content">
-<div class="seo-section"><h2>베딕 점성술이란?</h2><p>베딕 점성술(조티시)은 약 5000년 전 고대 인도에서 시작된 천문학적 체계라고 한다. 산스크리트어로 "빛의 과학"이라는 뜻이다. 서양 점성술과 달리 항성 기준(사이드리얼)을 사용하며, 나크샤트라(27개 별자리 구간), 다샤(행성 주기), 디비저널 차트 등 정밀한 분석 체계를 갖추고 있다.</p></div>
-<div class="seo-section"><h2>자주 묻는 질문</h2><details class="seo-faq"><summary>베딕 점성술은 서양 점성술과 다른가요?</summary><p>네, 베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)을 사용합니다. 약 23도의 차이가 있습니다.</p></details><details class="seo-faq"><summary>출생시간을 모르면 어떻게 하나요?</summary><p>출생시간 없이도 기본적인 차트는 생성됩니다. 다만 정확한 하우스 배치와 라그나는 출생시간이 있어야 정확합니다.</p></details></div>
-<div class="seo-section"><h2>관련 도구</h2><div class="seo-related"><a href="../saju/">사주팔자</a><a href="../hellenistic/">헬레니스틱 점성술</a></div></div>
+<div class="seo-section"><h2>ヴェーダ占星術とは？</h2><p>ヴェーダ占星術（ジョーティシュ）は約5000年前に古代インドで始まった天文学的体系です。サンスクリット語で「光の科学」を意味します。西洋占星術とは異なり恒星基準（サイデリアル）を使用し、ナクシャトラ（27の月宿）、ダシャー（惑星周期）、ディビジョナルチャートなどの精密な分析体系を備えています。</p></div>
+<div class="seo-section"><h2>よくある質問</h2><details class="seo-faq"><summary>ヴェーダ占星術は西洋占星術と違いますか？</summary><p>はい、ヴェーダは恒星基準（サイデリアル）、西洋は春分点基準（トロピカル）を使用します。約23度の差があります。</p></details><details class="seo-faq"><summary>出生時間がわからない場合は？</summary><p>出生時間がなくても基本的なチャートは生成できます。ただし、正確なハウス配置とラグナには出生時間が必要です。</p></details></div>
+<div class="seo-section"><h2>関連ツール</h2><div class="seo-related"><a href="../saju/">四柱推命</a><a href="../hellenistic/">ヘレニスティック占星術</a></div></div>
 </div>
 
 <footer class="app-footer">
     &copy; 2025 MOGU Moon<br>
-    <a href="../privacy/">プライバシーポリシー</a>
+    <a href="/jp/privacy/">プライバシーポリシー</a>
 </footer>
 
 <script>
@@ -489,7 +486,7 @@ var _astroLoaded = false;
 function _loadAstro(cb) {
     if (_astroLoaded) { cb(); return; }
     var s = document.createElement('script');
-    s.src = '../astronomy.browser.min.js';
+    s.src = '../../astronomy.browser.min.js';
     s.onload = function() { _astroLoaded = true; cb(); };
     document.head.appendChild(s);
 }

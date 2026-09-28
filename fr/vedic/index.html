@@ -13,26 +13,26 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astrologie Védique - MOGU Moon</title>
-<meta name="description" content="Thème védique.">
-    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/fr/vedic/">
+    <title>Thème Astrologique Védique - MOGU Moon</title>
+<meta name="description" content="Thème astrologique védique gratuit. Calculez Lagna, Nakshatra, Dasha et positions planétaires. Analyse complète de personnalité, carrière et relations.">
+    <link rel="alternate" hreflang="ko" href="https://mogumoon.com/vedic/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/vedic/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/vedic/">
     <link rel="alternate" hreflang="es" href="https://mogumoon.com/es/vedic/">
     <link rel="alternate" hreflang="de" href="https://mogumoon.com/de/vedic/">
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/vedic/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/vedic/">
-    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/fr/vedic/">
+    <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/vedic/">
     <link rel="canonical" href="https://mogumoon.com/fr/vedic/">
-    <meta property="og:title" content="Astrologie Védique - MOGU Moon">
-    <meta property="og:description" content="Thème védique.">
+    <meta property="og:title" content="Thème Astrologique Védique - MOGU Moon">
+    <meta property="og:description" content="Thème astrologique védique gratuit. Nakshatra, Dasha, carte D1, interprétation planétaire.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://mogumoon.com/fr/og-image.png">
+    <meta property="og:image" content="https://mogumoon.com/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/fr/vedic/">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"베딕 점성술이란?","acceptedAnswer":{"@type":"Answer","text":"인도 고대 점성술(Jyotish)로, 나크샤트라(27개 별자리), 다샤(행성 주기), 행성 위치를 분석합니다."}},
-    {"@type":"Question","name":"서양 점성술과 뭐가 다른가요?","acceptedAnswer":{"@type":"Answer","text":"베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)입니다. 약 24도 차이가 있습니다."}}
+    {"@type":"Question","name":"Qu est-ce que l astrologie vedique ?","acceptedAnswer":{"@type":"Answer","text":"Astrologie ancienne indienne (Jyotish) analysant les Nakshatras (27 demeures lunaires), Dashas (periodes planetaires) et positions planetaires."}},
+    {"@type":"Question","name":"Quelle difference avec l astrologie occidentale ?","acceptedAnswer":{"@type":"Answer","text":"La vedique utilise le zodiaque sideral, l occidentale le tropical. Il y a environ 24 degres de difference."}}
     ]}
 </script>
     <style>
@@ -50,7 +50,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
 .nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
 
-/* Input bar (가로) */
+/* Input bar */
 .input-bar{margin:12px 0 0;padding:0 40px;}
 .input-bar-inner{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:14px;padding:14px 20px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;}
 .ib-group{display:flex;flex-direction:column;gap:4px;}
@@ -132,8 +132,6 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .rel-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;text-decoration:none;color:#777;font-size:12px;transition:all .2s;}
 .rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
 
-/* Ad slot */
-
 /* Footer */
 .app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
 .app-footer a{color:#555;text-decoration:none;}
@@ -208,16 +206,22 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- Nav -->
 <nav class="nav">
-    <a href="/" class="nav-logo">
+    <a href="/fr/" class="nav-logo">
         <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
         MOGU Moon
     </a>
     <div class="nav-links">
-        <a href="/">Accueil</a>
-        <a href="/fr/about/">À propos</a>
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/about/">&#192; propos</a>
         <a href="/fr/blog/">Blog</a>
         <select class="nav-lang" onchange="if(this.value)location.href=this.value">
-            <option value="" selected>FR</option><option value="/vedic/">KR</option><option value="/en/vedic/">EN</option><option value="/jp/vedic/">JP</option><option value="/es/vedic/">ES</option><option value="/de/vedic/">DE</option><option value="/pt/vedic/">PT</option>
+            <option value="/vedic/">KR</option>
+            <option value="/en/vedic/">EN</option>
+            <option value="/jp/vedic/">JP</option>
+            <option value="/es/vedic/">ES</option>
+            <option value="/de/vedic/">DE</option>
+            <option value="/fr/vedic/" selected>FR</option>
+            <option value="/pt/vedic/">PT</option>
         </select>
     </div>
 </nav>
@@ -227,13 +231,13 @@ optgroup{color:#c9a84c;font-weight:600;}
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <span style="font-size:20px;">🕉️</span>
         <div>
-            <div style="font-size:18px;font-weight:700;color:#c9a84c;">Astrologie Védique (Jyotish)</div>
-            <div style="font-size:11px;color:#666;">Découvrez votre destin</div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">Astrologie V&#233;dique (Jyotish)</div>
+            <div style="font-size:11px;color:#666;">Lisez votre destin &#224; travers l&#39;astronomie v&#233;dique de l&#39;Inde ancienne</div>
         </div>
     </div>
     <div class="input-bar-inner">
         <div class="ib-group">
-            <label>Date</label>
+            <label>Date de naissance</label>
             <div class="ib-row">
                 <select id="birthYear"></select>
                 <select id="birthMonth"></select>
@@ -241,78 +245,78 @@ optgroup{color:#c9a84c;font-weight:600;}
             </div>
         </div>
         <div class="ib-group">
-            <label>Heure <span class="optional-tag">(Inconnu)</span></label>
+            <label>Heure de naissance <span class="optional-tag">(&#39;Inconnu&#39; si incertaine)</span></label>
             <div class="ib-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
                 <select id="birthMinute"></select>
-                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()"><option value="known">Heure</option><option value="unknown">Inconnu</option></select>
+                <select id="birthTimeUnknown" onchange="toggleTimeUnknown()"><option value="known">Saisir l&#39;heure</option><option value="unknown">Inconnu</option></select>
             </div>
         </div>
         <div class="ib-group">
-            <label>Lieu</label>
+            <label>Lieu de naissance</label>
             <select id="birthCity" onchange="onCityChange()">
-                <optgroup label="🇰🇷 한국">
-                    <option value="37.57,126.98,9" selected>서울</option>
-                    <option value="35.18,129.08,9">부산</option>
-                    <option value="35.87,128.60,9">대구</option>
-                    <option value="37.46,126.71,9">인천</option>
-                    <option value="35.16,126.85,9">광주</option>
-                    <option value="36.35,127.38,9">대전</option>
-                    <option value="35.54,129.31,9">울산</option>
-                    <option value="33.50,126.53,9">제주</option>
+                <optgroup label="🇰🇷 Cor&#233;e du Sud">
+                    <option value="37.57,126.98,9" selected>S&#233;oul</option>
+                    <option value="35.18,129.08,9">Busan</option>
+                    <option value="35.87,128.60,9">Daegu</option>
+                    <option value="37.46,126.71,9">Incheon</option>
+                    <option value="35.16,126.85,9">Gwangju</option>
+                    <option value="36.35,127.38,9">Daejeon</option>
+                    <option value="35.54,129.31,9">Ulsan</option>
+                    <option value="33.50,126.53,9">Jeju</option>
                 </optgroup>
-                <optgroup label="🇯🇵 일본">
-                    <option value="35.68,139.69,9">도쿄</option>
-                    <option value="34.69,135.50,9">오사카</option>
+                <optgroup label="🇯🇵 Japon">
+                    <option value="35.68,139.69,9">Tokyo</option>
+                    <option value="34.69,135.50,9">Osaka</option>
                 </optgroup>
-                <optgroup label="🇨🇳 중국/동아시아">
-                    <option value="39.90,116.40,8">베이징</option>
-                    <option value="31.23,121.47,8">상하이</option>
-                    <option value="22.32,114.17,8">홍콩</option>
-                    <option value="25.03,121.57,8">타이베이</option>
-                    <option value="1.35,103.82,8">싱가포르</option>
-                    <option value="13.76,100.50,7">방콕</option>
+                <optgroup label="🇨🇳 Chine / Asie de l&#39;Est">
+                    <option value="39.90,116.40,8">P&#233;kin</option>
+                    <option value="31.23,121.47,8">Shanghai</option>
+                    <option value="22.32,114.17,8">Hong Kong</option>
+                    <option value="25.03,121.57,8">Taipei</option>
+                    <option value="1.35,103.82,8">Singapour</option>
+                    <option value="13.76,100.50,7">Bangkok</option>
                 </optgroup>
-                <optgroup label="🇮🇳 인도">
-                    <option value="28.61,77.23,5.5">뉴델리</option>
-                    <option value="19.08,72.88,5.5">뭄바이</option>
-                    <option value="13.08,80.27,5.5">첸나이</option>
-                    <option value="22.57,88.36,5.5">콜카타</option>
+                <optgroup label="🇮🇳 Inde">
+                    <option value="28.61,77.23,5.5">New Delhi</option>
+                    <option value="19.08,72.88,5.5">Mumbai</option>
+                    <option value="13.08,80.27,5.5">Chennai</option>
+                    <option value="22.57,88.36,5.5">Kolkata</option>
                 </optgroup>
-                <optgroup label="🇺🇸 미주">
-                    <option value="40.71,-74.01,-5">뉴욕 (EST)</option>
-                    <option value="34.05,-118.24,-8">LA (PST)</option>
-                    <option value="41.88,-87.63,-6">시카고 (CST)</option>
-                    <option value="37.77,-122.42,-8">샌프란시스코 (PST)</option>
-                    <option value="49.28,-123.12,-8">밴쿠버 (PST)</option>
-                    <option value="43.65,-79.38,-5">토론토 (EST)</option>
+                <optgroup label="🇺🇸 Am&#233;riques">
+                    <option value="40.71,-74.01,-5">New York (EST)</option>
+                    <option value="34.05,-118.24,-8">Los Angeles (PST)</option>
+                    <option value="41.88,-87.63,-6">Chicago (CST)</option>
+                    <option value="37.77,-122.42,-8">San Francisco (PST)</option>
+                    <option value="49.28,-123.12,-8">Vancouver (PST)</option>
+                    <option value="43.65,-79.38,-5">Toronto (EST)</option>
                 </optgroup>
-                <optgroup label="🇪🇺 유럽">
-                    <option value="51.51,-0.13,0">런던 (GMT)</option>
-                    <option value="48.86,2.35,1">파리 (CET)</option>
-                    <option value="52.52,13.41,1">베를린 (CET)</option>
-                    <option value="40.42,-3.70,1">마드리드 (CET)</option>
-                    <option value="41.90,12.50,1">로마 (CET)</option>
+                <optgroup label="🇪🇺 Europe">
+                    <option value="51.51,-0.13,0">Londres (GMT)</option>
+                    <option value="48.86,2.35,1">Paris (CET)</option>
+                    <option value="52.52,13.41,1">Berlin (CET)</option>
+                    <option value="40.42,-3.70,1">Madrid (CET)</option>
+                    <option value="41.90,12.50,1">Rome (CET)</option>
                 </optgroup>
-                <optgroup label="🌏 기타">
-                    <option value="-33.87,151.21,10">시드니 (AEST)</option>
-                    <option value="-23.55,-46.63,-3">상파울루 (BRT)</option>
-                    <option value="55.76,37.62,3">모스크바 (MSK)</option>
-                    <option value="25.20,55.27,4">두바이 (GST)</option>
+                <optgroup label="🌏 Autres">
+                    <option value="-33.87,151.21,10">Sydney (AEST)</option>
+                    <option value="-23.55,-46.63,-3">S&#227;o Paulo (BRT)</option>
+                    <option value="55.76,37.62,3">Moscou (MSK)</option>
+                    <option value="25.20,55.27,4">Duba&#239; (GST)</option>
                 </optgroup>
-                <optgroup label="✏️ 직접 입력">
-                    <option value="custom">위도/경도/시차 직접 입력</option>
+                <optgroup label="✏️ Saisie manuelle">
+                    <option value="custom">Saisir latitude/longitude manuellement</option>
                 </optgroup>
             </select>
             <div id="customLatLng" style="display:none;">
                 <div class="input-row">
-                    <input type="number" id="birthLat" placeholder="위도 (예: 37.57)" step="0.01">
-                    <input type="number" id="birthLng" placeholder="경도 (예: 126.98)" step="0.01">
+                    <input type="number" id="birthLat" placeholder="Latitude (ex. 37.57)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="Longitude (ex. 126.98)" step="0.01">
                 </div>
             </div>
         </div>
-        <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 Générer</button>
+        <button class="calc-btn" onclick="_loadAstro(calculateChart)">🔮 G&#233;n&#233;rer le th&#232;me</button>
     </div>
 </div>
 
@@ -330,121 +334,121 @@ optgroup{color:#c9a84c;font-weight:600;}
                 <button id="modeEasy" onclick="window.vedicMode='easy';document.getElementById('modeEasy').style.background='#c9a84c';document.getElementById('modeEasy').style.color='#0a0a1a';document.getElementById('modePro').style.background='#1a1a3e';document.getElementById('modePro').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.add('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#c9a84c;color:#0a0a1a;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Facile</button>
                 <button id="modePro" onclick="window.vedicMode='pro';document.getElementById('modePro').style.background='#c9a84c';document.getElementById('modePro').style.color='#0a0a1a';document.getElementById('modeEasy').style.background='#1a1a3e';document.getElementById('modeEasy').style.color='#c9a84c';if(typeof recalcMode==='function')recalcMode();if(typeof updateCatHeaders==='function')updateCatHeaders();document.body.classList.remove('easy-mode');switchTab('dasha')" style="padding:8px 16px;background:#1a1a3e;color:#c9a84c;border:1px solid #c9a84c;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Expert</button>
             </div>
-            <button class="tab-btn easy-hide" data-tab="guide" onclick="switchTab('guide')">📚 가이드</button>
-            <button class="tab-btn easy-hide" data-tab="basic" onclick="switchTab('basic')">🪐 차트</button>
-            <button class="tab-btn active" data-tab="dasha" onclick="switchTab('dasha')"><span id="catDasha">⏳ 대운</span></button>
-            <button class="tab-btn" data-tab="interp" onclick="switchTab('interp')"><span id="catInterp">📖 종합</span></button>
-            <button class="tab-btn" data-tab="marriage" onclick="switchTab('marriage')"><span id="catMarriage">💍 결혼</span></button>
-            <button class="tab-btn" data-tab="career" onclick="switchTab('career')"><span id="catCareer">💼 직업</span></button>
-            <button class="tab-btn" data-tab="family" onclick="switchTab('family')"><span id="catFamily">👨‍👩‍👧 가족</span></button>
-            <button class="tab-btn" data-tab="spirit" onclick="switchTab('spirit')"><span id="catSpirit">🙏 영성</span></button>
-            <button class="tab-btn" data-tab="warn" onclick="switchTab('warn')"><span id="catWarn">⚠️ 주의</span></button>
-            <button class="tab-btn" data-tab="karma" onclick="switchTab('karma')"><span id="catKarma">🔮 카르마</span></button>
+            <button class="tab-btn easy-hide" data-tab="guide" onclick="switchTab('guide')">📚 Guide</button>
+            <button class="tab-btn easy-hide" data-tab="basic" onclick="switchTab('basic')">🪐 Carte</button>
+            <button class="tab-btn active" data-tab="dasha" onclick="switchTab('dasha')"><span id="catDasha">⏳ Dasha</span></button>
+            <button class="tab-btn" data-tab="interp" onclick="switchTab('interp')"><span id="catInterp">📖 Synth&#232;se</span></button>
+            <button class="tab-btn" data-tab="marriage" onclick="switchTab('marriage')"><span id="catMarriage">💍 Mariage</span></button>
+            <button class="tab-btn" data-tab="career" onclick="switchTab('career')"><span id="catCareer">💼 Carri&#232;re</span></button>
+            <button class="tab-btn" data-tab="family" onclick="switchTab('family')"><span id="catFamily">👨‍👩‍👧 Famille</span></button>
+            <button class="tab-btn" data-tab="spirit" onclick="switchTab('spirit')"><span id="catSpirit">🙏 Spiritualit&#233;</span></button>
+            <button class="tab-btn" data-tab="warn" onclick="switchTab('warn')"><span id="catWarn">⚠️ Pr&#233;cautions</span></button>
+            <button class="tab-btn" data-tab="karma" onclick="switchTab('karma')"><span id="catKarma">🔮 Karma</span></button>
         </div>
 
-        <!-- 📚 가이드 -->
+        <!-- 📚 Guide -->
         <div class="tab-panel" id="tab-guide" style="display:none;">
-            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🪐 9개 행성</div>
-            <table class="planet-table" style="margin-bottom:20px;"><tr><th>기호</th><th>행성</th><th>의미</th></tr>
-            <tr><td>☉</td><td>태양</td><td>자아, 리더십, 아버지</td></tr>
-            <tr><td>☽</td><td>달</td><td>감정, 마음, 어머니</td></tr>
-            <tr><td>♂</td><td>화성</td><td>에너지, 행동, 용기</td></tr>
-            <tr><td>☿</td><td>수성</td><td>지능, 소통, 사업</td></tr>
-            <tr><td>♃</td><td>목성</td><td>행운, 지혜, 확장</td></tr>
-            <tr><td>♀</td><td>금성</td><td>사랑, 아름다움, 재물</td></tr>
-            <tr><td>♄</td><td>토성</td><td>시련, 인내, 책임</td></tr>
-            <tr><td>☊</td><td>라후</td><td>욕망, 집착, 변화</td></tr>
-            <tr><td>☋</td><td>케투</td><td>해탈, 영성, 전생</td></tr></table>
-            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🏛️ 12궁</div>
-            <table class="planet-table" style="margin-bottom:20px;"><tr><th>궁</th><th>영역</th><th>궁</th><th>영역</th></tr>
-            <tr><td>1궁</td><td>나 (자아)</td><td>7궁</td><td>배우자</td></tr>
-            <tr><td>2궁</td><td>돈 (재물)</td><td>8궁</td><td>변혁</td></tr>
-            <tr><td>3궁</td><td>소통</td><td>9궁</td><td>행운</td></tr>
-            <tr><td>4궁</td><td>가정</td><td>10궁</td><td>직업</td></tr>
-            <tr><td>5궁</td><td>자녀</td><td>11궁</td><td>수입</td></tr>
-            <tr><td>6궁</td><td>건강</td><td>12궁</td><td>영성</td></tr></table>
-            <div class="interp-card"><div class="interp-text" style="font-size:14px;line-height:1.8;"><strong>⬆ 라그나</strong> = 태어난 순간 떠오르던 별자리 (가장 중요!)<br><strong>🌙 나크샤트라</strong> = 27개 달의 별자리 구간</div></div>
+            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🪐 9 Plan&#232;tes</div>
+            <table class="planet-table" style="margin-bottom:20px;"><tr><th>Symbole</th><th>Plan&#232;te</th><th>Signification</th></tr>
+            <tr><td>☉</td><td>Soleil</td><td>Soi, leadership, p&#232;re</td></tr>
+            <tr><td>☽</td><td>Lune</td><td>&#201;motions, esprit, m&#232;re</td></tr>
+            <tr><td>♂</td><td>Mars</td><td>&#201;nergie, action, courage</td></tr>
+            <tr><td>☿</td><td>Mercure</td><td>Intelligence, communication, affaires</td></tr>
+            <tr><td>♃</td><td>Jupiter</td><td>Fortune, sagesse, expansion</td></tr>
+            <tr><td>♀</td><td>V&#233;nus</td><td>Amour, beaut&#233;, richesse</td></tr>
+            <tr><td>♄</td><td>Saturne</td><td>&#201;preuves, pers&#233;v&#233;rance, responsabilit&#233;</td></tr>
+            <tr><td>☊</td><td>Rahu</td><td>D&#233;sir, obsession, changement</td></tr>
+            <tr><td>☋</td><td>Ketu</td><td>Lib&#233;ration, spiritualit&#233;, vie ant&#233;rieure</td></tr></table>
+            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">🏛️ 12 Maisons</div>
+            <table class="planet-table" style="margin-bottom:20px;"><tr><th>Maison</th><th>Domaine</th><th>Maison</th><th>Domaine</th></tr>
+            <tr><td>1&#232;re</td><td>Soi (personnalit&#233;)</td><td>7&#232;me</td><td>Conjoint</td></tr>
+            <tr><td>2&#232;me</td><td>Argent (richesse)</td><td>8&#232;me</td><td>Transformation</td></tr>
+            <tr><td>3&#232;me</td><td>Communication</td><td>9&#232;me</td><td>Fortune</td></tr>
+            <tr><td>4&#232;me</td><td>Foyer</td><td>10&#232;me</td><td>Carri&#232;re</td></tr>
+            <tr><td>5&#232;me</td><td>Enfants</td><td>11&#232;me</td><td>Revenus</td></tr>
+            <tr><td>6&#232;me</td><td>Sant&#233;</td><td>12&#232;me</td><td>Spiritualit&#233;</td></tr></table>
+            <div class="interp-card"><div class="interp-text" style="font-size:14px;line-height:1.8;"><strong>⬆ Lagna</strong> = Signe ascendant au moment de la naissance (le plus important !)<br><strong>🌙 Nakshatra</strong> = 27 mansions lunaires</div></div>
         </div>
 
-        <!-- 🪐 기본 차트 -->
+        <!-- 🪐 Carte de base -->
         <div class="tab-panel" id="tab-basic" style="display:none;">
             <div id="planetTableWrap" style="margin-bottom:16px;"></div>
-            <div class="chart-container"><div class="chart-label">남인도식 차트 (D1 라시)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
+            <div class="chart-container"><div class="chart-label">Carte style Sud-Indien (D1 Rasi)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
         </div>
 
-        <!-- ⏳ 대운 -->
+        <!-- ⏳ Dasha -->
         <div class="tab-panel" id="tab-dasha">
             <div id="dashaWrap"></div>
         </div>
 
-        <!-- 📖 종합 해석 -->
+        <!-- 📖 Synthèse -->
         <div class="tab-panel" id="tab-interp" style="display:none;">
             <div id="interpWrap"></div>
-            <h3 class="section-title" id="secPlanetHouse">🪐 행성별 상세 해석</h3>
+            <h3 class="section-title" id="secPlanetHouse">🪐 Interpr&#233;tation plan&#232;te par plan&#232;te</h3>
             <div id="planetHouseWrap"></div>
-            <h3 class="section-title" id="secDignity">⚖️ 행성 품위</h3>
+            <h3 class="section-title" id="secDignity">⚖️ Dignit&#233; plan&#233;taire</h3>
             <div id="dignityWrap"></div>
-            <h3 class="section-title" id="secLucky">🍀 행운의 정보</h3>
+            <h3 class="section-title" id="secLucky">🍀 Informations porte-bonheur</h3>
             <div id="luckyWrap"></div>
-            <h3 class="section-title" id="secRemedy">💎 치유 & 강화 방법</h3>
+            <h3 class="section-title" id="secRemedy">💎 Rem&#232;des &amp; Renforcement</h3>
             <div id="remedyWrap"></div>
         </div>
 
-        <!-- 💍 결혼/배우자 -->
+        <!-- 💍 Mariage / Conjoint -->
         <div class="tab-panel" id="tab-marriage" style="display:none;">
-            
-                <div class="chart-container"><div class="chart-label">나바암샤 — 결혼운, 배우자 성격</div><div class="chart-grid" id="d9Chart"></div></div>
+
+                <div class="chart-container"><div class="chart-label">Navamsa &#8212; Mariage, conjoint, but de vie</div><div class="chart-grid" id="d9Chart"></div></div>
                 <div id="d9InterpWrap"></div>
             <div id="spouseProfileWrap"></div>
         </div>
 
-        <!-- 💼 직업/재물 -->
+        <!-- 💼 Carrière / Richesse -->
         <div class="tab-panel" id="tab-career" style="display:none;">
-            <h3 class="section-title" id="secD10">💼 D10 다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">다샴샤 — 직업</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
-            <h3 class="section-title" id="secD2">💰 D2 호라</h3>
-            <div class="chart-container"><div class="chart-label">호라 — 재물운</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
-            <h3 class="section-title" id="secD4">🏠 D4 차투르탐샤</h3>
-            <div class="chart-container"><div class="chart-label">차투르탐샤 — 재산</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
+            <h3 class="section-title" id="secD10">💼 D10 Dasamsa</h3>
+            <div class="chart-container"><div class="chart-label">Dasamsa &#8212; Carri&#232;re</div><div class="chart-grid" id="d10Chart"></div></div><div id="d10InterpWrap"></div>
+            <h3 class="section-title" id="secD2">💰 D2 Hora</h3>
+            <div class="chart-container"><div class="chart-label">Hora &#8212; Richesse</div><div class="chart-grid" id="d2Chart"></div></div><div id="d2InterpWrap"></div>
+            <h3 class="section-title" id="secD4">🏠 D4 Chaturthamsa</h3>
+            <div class="chart-container"><div class="chart-label">Chaturthamsa &#8212; Propri&#233;t&#233;</div><div class="chart-grid" id="d4Chart"></div></div><div id="d4InterpWrap"></div>
         </div>
 
-        <!-- 👨‍👩‍👧 가족 -->
+        <!-- 👨‍👩‍👧 Famille -->
         <div class="tab-panel" id="tab-family" style="display:none;">
-            <h3 class="section-title" id="secD7">👶 D7 삽탐샤</h3>
-            <div class="chart-container"><div class="chart-label">삽탐샤 — 자녀운</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
-            <h3 class="section-title" id="secD3">👫 D3 드레카나</h3>
-            <div class="chart-container"><div class="chart-label">드레카나 — 형제자매</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
-            <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 드와다샴샤</h3>
-            <div class="chart-container"><div class="chart-label">드와다샴샤 — 부모</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
-            <h3 class="section-title" id="secD40">👩 D40 카베담샤</h3>
-            <div class="chart-container"><div class="chart-label">카베담샤 — 모계</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
-            <h3 class="section-title" id="secD45">👨 D45 악샤베담샤</h3>
-            <div class="chart-container"><div class="chart-label">악샤베담샤 — 부계</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
+            <h3 class="section-title" id="secD7">👶 D7 Saptamsa</h3>
+            <div class="chart-container"><div class="chart-label">Saptamsa &#8212; Enfants</div><div class="chart-grid" id="d7Chart"></div></div><div id="d7InterpWrap"></div><div id="childrenWrap"></div>
+            <h3 class="section-title" id="secD3">👫 D3 Drekkana</h3>
+            <div class="chart-container"><div class="chart-label">Drekkana &#8212; Fr&#232;res et s&#339;urs</div><div class="chart-grid" id="d3Chart"></div></div><div id="d3InterpWrap"></div>
+            <h3 class="section-title" id="secD12">👨‍👩‍👧 D12 Dwadasamsa</h3>
+            <div class="chart-container"><div class="chart-label">Dwadasamsa &#8212; Parents</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
+            <h3 class="section-title" id="secD40">👩 D40 Khavedamsa</h3>
+            <div class="chart-container"><div class="chart-label">Khavedamsa &#8212; Lign&#233;e maternelle</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
+            <h3 class="section-title" id="secD45">👨 D45 Akshavedamsa</h3>
+            <div class="chart-container"><div class="chart-label">Akshavedamsa &#8212; Lign&#233;e paternelle</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
         </div>
 
-        <!-- 🙏 영성/교육/건강 -->
+        <!-- 🙏 Spiritualité / Éducation / Santé -->
         <div class="tab-panel" id="tab-spirit" style="display:none;">
-            <h3 class="section-title" id="secD24">📚 D24 교육</h3>
-            <div class="chart-container"><div class="chart-label">차투르빔샴샤 — 교육</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
-            <h3 class="section-title" id="secD20">🙏 D20 영성</h3>
-            <div class="chart-container"><div class="chart-label">빔샴샤 — 영적 수행</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
-            <h3 class="section-title" id="secD27">💪 D27 체력</h3>
-            <div class="chart-container"><div class="chart-label">삽타빔샴샤 — 체력</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
-            <h3 class="section-title" id="secD16">🚗 D16 편의</h3>
-            <div class="chart-container"><div class="chart-label">쇼다샴샤 — 물질적 편의</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
+            <h3 class="section-title" id="secD24">📚 D24 &#201;ducation</h3>
+            <div class="chart-container"><div class="chart-label">Chaturvimsamsa &#8212; &#201;ducation</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
+            <h3 class="section-title" id="secD20">🙏 D20 Spiritualit&#233;</h3>
+            <div class="chart-container"><div class="chart-label">Vimsamsa &#8212; Pratique spirituelle</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
+            <h3 class="section-title" id="secD27">💪 D27 Vitalit&#233;</h3>
+            <div class="chart-container"><div class="chart-label">Saptavimsamsa &#8212; Force, vitalit&#233;</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
+            <h3 class="section-title" id="secD16">🚗 D16 Confort</h3>
+            <div class="chart-container"><div class="chart-label">Shodasamsa &#8212; V&#233;hicules, confort</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
         </div>
 
-        <!-- ⚠️ 주의사항 -->
+        <!-- ⚠️ Précautions -->
         <div class="tab-panel" id="tab-warn" style="display:none;">
-            <h3 class="section-title" id="secD30">⚠️ D30 트림샴샤</h3>
-            <div class="chart-container"><div class="chart-label">트림샴샤 — 질병, 장애</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
-            <h3 class="section-title" id="secForeign">✈️ 해외운 & 이주</h3>
+            <h3 class="section-title" id="secD30">⚠️ D30 Trimsamsa</h3>
+            <div class="chart-container"><div class="chart-label">Trimsamsa &#8212; Infortune, maladie</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
+            <h3 class="section-title" id="secForeign">✈️ Fortune &#224; l&#39;&#201;tranger &amp; Migration</h3>
             <div id="foreignWrap"></div>
         </div>
 
-        <!-- 🔮 카르마 -->
+        <!-- 🔮 Karma -->
         <div class="tab-panel" id="tab-karma" style="display:none;">
-            <div class="chart-container"><div class="chart-label">D60 샤슈티암샤 — 전생 카르마</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
+            <div class="chart-container"><div class="chart-label">D60 Shashtiamsa &#8212; Karma des vies pass&#233;es</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
         </div>
 
     </div>
@@ -453,20 +457,20 @@ optgroup{color:#c9a84c;font-weight:600;}
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
     <div class="side-card">
-        <div class="side-title">🔗 Outils</div>
+        <div class="side-title">🔗 Outils associ&#233;s</div>
         <a href="../saju/" class="rel-item">☯️ Quatre Piliers</a>
-        <a href="../ziwei/" class="rel-item">💜 Zi Wei</a>
-        <a href="../hellenistic/" class="rel-item">🏛️ Hellénistique</a>
-        <a href="../maya/" class="rel-item">🌀 Maya</a>
-        <a href="../egypt/" class="rel-item">𓂀 Décans</a>
-        <a href="../birthday-compat/" class="rel-item">💑 Compat</a>
+        <a href="../ziwei/" class="rel-item">💜 Zi Wei Dou Shu</a>
+        <a href="../hellenistic/" class="rel-item">🏛️ Astrologie Hell&#233;nistique</a>
+        <a href="../maya/" class="rel-item">🌀 Astrologie Maya</a>
+        <a href="../egypt/" class="rel-item">𓂀 D&#233;cans &#201;gyptiens</a>
+        <a href="../birthday-compat/" class="rel-item">💑 Compatibilit&#233;</a>
     </div>
     <div class="side-card">
-        <div class="side-title">🔥 Populaire</div>
+        <div class="side-title">🔥 Populaires</div>
         <a href="../tarot/" class="rel-item">🃏 Tarot</a>
-        <a href="../daily/" class="rel-item">✨ Horoscope</a>
-        <a href="../past-life/" class="rel-item">🏛️ Vie Ant</a>
-        <a href="../dream/" class="rel-item">🌿 Rêves</a>
+        <a href="../daily/" class="rel-item">✨ Horoscope du jour</a>
+        <a href="../past-life/" class="rel-item">🏛️ Test Vie Ant&#233;rieure</a>
+        <a href="../dream/" class="rel-item">🌿 Interpr&#233;tation des r&#234;ves</a>
     </div>
 </div>
 
@@ -474,14 +478,14 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- SEO Content -->
 <div class="seo-content">
-<div class="seo-section"><h2>베딕 점성술이란?</h2><p>베딕 점성술(조티시)은 약 5000년 전 고대 인도에서 시작된 천문학적 체계라고 한다. 산스크리트어로 "빛의 과학"이라는 뜻이다. 서양 점성술과 달리 항성 기준(사이드리얼)을 사용하며, 나크샤트라(27개 별자리 구간), 다샤(행성 주기), 디비저널 차트 등 정밀한 분석 체계를 갖추고 있다.</p></div>
-<div class="seo-section"><h2>자주 묻는 질문</h2><details class="seo-faq"><summary>베딕 점성술은 서양 점성술과 다른가요?</summary><p>네, 베딕은 항성 기준(사이드리얼), 서양은 춘분점 기준(트로피컬)을 사용합니다. 약 23도의 차이가 있습니다.</p></details><details class="seo-faq"><summary>출생시간을 모르면 어떻게 하나요?</summary><p>출생시간 없이도 기본적인 차트는 생성됩니다. 다만 정확한 하우스 배치와 라그나는 출생시간이 있어야 정확합니다.</p></details></div>
-<div class="seo-section"><h2>관련 도구</h2><div class="seo-related"><a href="../saju/">사주팔자</a><a href="../hellenistic/">헬레니스틱 점성술</a></div></div>
+<div class="seo-section"><h2>Qu&#39;est-ce que l&#39;Astrologie V&#233;dique ?</h2><p>L&#39;astrologie v&#233;dique (Jyotish) est un syst&#232;me astronomique n&#233; dans l&#39;Inde ancienne il y a environ 5&#160;000 ans. En sanskrit, cela signifie &#171;&#160;science de la lumi&#232;re&#160;&#187;. Contrairement &#224; l&#39;astrologie occidentale, elle utilise le zodiaque sid&#233;ral. Elle dispose de cadres analytiques pr&#233;cis comme les Nakshatras (27 demeures lunaires), Dasha (p&#233;riodes plan&#233;taires) et les cartes divisionnelles.</p></div>
+<div class="seo-section"><h2>Questions fr&#233;quentes</h2><details class="seo-faq"><summary>L&#39;astrologie v&#233;dique est-elle diff&#233;rente de l&#39;occidentale ?</summary><p>Oui, la v&#233;dique utilise le zodiaque sid&#233;ral tandis que l&#39;occidentale utilise le tropical. Il y a une diff&#233;rence d&#39;environ 23 degr&#233;s.</p></details><details class="seo-faq"><summary>Que faire si je ne connais pas mon heure de naissance ?</summary><p>Une carte de base peut &#234;tre g&#233;n&#233;r&#233;e sans heure de naissance. Cependant, les positions exactes des maisons et le Lagna (ascendant) n&#233;cessitent l&#39;heure de naissance.</p></details></div>
+<div class="seo-section"><h2>Outils associ&#233;s</h2><div class="seo-related"><a href="../saju/">Quatre Piliers</a><a href="../hellenistic/">Astrologie Hell&#233;nistique</a></div></div>
 </div>
 
 <footer class="app-footer">
     &copy; 2025 MOGU Moon<br>
-    <a href="../privacy/">Confidentialité</a>
+    <a href="/fr/privacy/">Politique de confidentialit&#233;</a>
 </footer>
 
 <script>
@@ -489,7 +493,7 @@ var _astroLoaded = false;
 function _loadAstro(cb) {
     if (_astroLoaded) { cb(); return; }
     var s = document.createElement('script');
-    s.src = '../astronomy.browser.min.js';
+    s.src = '../../astronomy.browser.min.js';
     s.onload = function() { _astroLoaded = true; cb(); };
     document.head.appendChild(s);
 }
