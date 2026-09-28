@@ -35,75 +35,119 @@
     {"@type":"Question","name":"Es preciso?","acceptedAnswer":{"@type":"Answer","text":"Los pilares se calculan con formulas astronomicas. Las interpretaciones se basan en la metafisica china tradicional."}}
     ]}
 </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #e0d8cc; min-height: 100vh; }
-        header { background: linear-gradient(135deg, #1a0a0a, #2a1515); border-bottom: 1px solid #3a2020; padding: 16px 20px; text-align: center; }
-        header a { text-decoration: none; font-size: 20px; color: #e84393; letter-spacing: 2px; font-weight: 700; }
-        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
-        .page-title { text-align: center; margin-bottom: 30px; }
-        .page-title h2 { font-size: 28px; color: #d4a853; margin-bottom: 8px; }
-        .page-title p { color: #8888aa; font-size: 14px; }
-
-        .form-box { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 16px; padding: 28px; margin-bottom: 24px; }
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #d4a853; margin-bottom: 6px; }
-        .optional-tag { font-size: 11px; color: #666; font-weight: 400; }
-        .input-row { display: flex; gap: 10px; flex-wrap: wrap; }
-        .input-row select { flex: 1; min-width: 120px; padding: 12px 14px; background: #0a0a1a; border: 1px solid #3a2a15; border-radius: 8px; color: #e0d8cc; font-size: 15px; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23d4a853' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; cursor: pointer; }
-        select:focus { border-color: #d4a853; }
-
-        .calc-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #b8942a, #d4a853); color: #1a1008; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
-        .calc-btn:hover { transform: translateY(-1px); }
-
-        .result-section { display: none; transition: opacity 0.3s; }
-        .section-title { font-size: 18px; color: #d4a853; margin: 30px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #3a2a15; }
-
-        .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-        .pillar { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 2px solid #3a2a15; border-radius: 16px; padding: 16px 8px; text-align: center; }
-        .pillar.day-pillar { border-color: #d4a853; background: linear-gradient(135deg, #2a1a10, #1a1008); }
-        .pillar-label { font-size: 11px; color: #888; margin-bottom: 8px; letter-spacing: 1px; }
-        .pillar-stem { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
-        .pillar-branch { font-size: 32px; font-weight: 700; }
-        .pillar-element { font-size: 11px; color: #999; margin-top: 6px; }
-        .pillar-animal { font-size: 20px; margin-top: 4px; }
-
-        .el-wood { color: #27ae60; }
-        .el-fire { color: #e74c3c; }
-        .el-earth { color: #d4a853; }
-        .el-metal { color: #bdc3c7; }
-        .el-water { color: #3498db; }
-
-        .daymaster-card { background: linear-gradient(135deg, #2a1a10, #1a1008); border: 2px solid #d4a853; border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
-        .daymaster-glyph { font-size: 60px; margin-bottom: 10px; display: block; }
-        .daymaster-name { font-size: 28px; color: #d4a853; font-weight: 700; margin-bottom: 4px; }
-        .daymaster-sub { font-size: 14px; color: #b8942a; }
-
-        .five-el-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin: 12px 0; }
-        .five-el-bar div { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; min-width: 30px; }
-
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .pillars-grid { gap: 6px; } .pillar-stem, .pillar-branch { font-size: 24px; } }
-        .info-item { background: #1a1008; border: 1px solid #3a2a15; border-radius: 12px; padding: 16px; }
-        .info-label { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
-        .info-value { font-size: 16px; color: #d4a853; font-weight: 600; }
-        .info-desc { font-size: 13px; color: #aaa; margin-top: 6px; line-height: 1.5; }
-
-        .interp-card { background: linear-gradient(135deg, #1a1008, #2a1a10); border: 1px solid #3a2a15; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
-        .interp-title { font-size: 14px; color: #d4a853; font-weight: 600; margin-bottom: 8px; }
-        .interp-text { font-size: 13px; color: #999; line-height: 1.7; }
-
-        footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
+    
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a1a;color:#e0d8cc;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.5),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.3),transparent),radial-gradient(2px 2px at 45% 45%,rgba(201,168,76,0.3),transparent);z-index:-1;}
+.nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a3e;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:20px;font-weight:700;color:#c9a84c;text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.nav-logo svg{width:26px;height:26px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;font-size:13px;padding:8px 14px;border-radius:20px;color:#888;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:rgba(201,168,76,0.1);color:#c9a84c;}
+.nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
+.nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
+.input-bar{margin:12px 0 0;padding:0 40px;}
+.input-bar-inner{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:14px;padding:14px 20px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;}
+.ib-group{display:flex;flex-direction:column;gap:4px;}
+.ib-group label{font-size:11px;color:#c9a84c;font-weight:600;}
+.ib-row{display:flex;gap:6px;}
+.ib-group select{padding:10px 12px;background:#161630;border:1px solid #4a4a7a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;min-width:70px;transition:all .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23c9a84c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;cursor:pointer;}
+.ib-group select:focus{border-color:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,0.25);background:#1a1a3e;}
+.optional-tag{font-size:10px;color:#666;font-weight:400;}
+.calc-btn{padding:10px 28px;background:linear-gradient(135deg,#c9a84c,#a8872a);color:#0a0a1a;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:1px;}
+.calc-btn:hover{background:linear-gradient(135deg,#dbb85c,#c9a84c);transform:translateY(-1px);}
+.page-layout{padding:16px 40px;display:grid;grid-template-columns:1fr 280px;gap:24px;}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.result-section{display:none;}
+.section-title{font-size:16px;color:#c9a84c;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid #2a2a5a;}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.pillar{background:linear-gradient(135deg,#12122a,#1a1a3e);border:2px solid #2a2a5a;border-radius:16px;padding:16px 8px;text-align:center;}
+.pillar.day-pillar{border-color:#c9a84c;background:linear-gradient(135deg,#1a1a3e,#12122a);}
+.pillar-label{font-size:11px;color:#888;margin-bottom:8px;letter-spacing:1px;}
+.pillar-stem{font-size:32px;font-weight:700;margin-bottom:4px;}
+.pillar-branch{font-size:32px;font-weight:700;}
+.pillar-element{font-size:11px;color:#999;margin-top:6px;}
+.pillar-animal{font-size:20px;margin-top:4px;}
+.el-wood{color:#27ae60;}.el-fire{color:#e74c3c;}.el-earth{color:#d4a853;}.el-metal{color:#bdc3c7;}.el-water{color:#3498db;}
+.daymaster-card{background:linear-gradient(135deg,#1a1a3e,#12122a);border:2px solid #c9a84c;border-radius:20px;padding:30px;text-align:center;margin-bottom:20px;}
+.daymaster-glyph{font-size:60px;margin-bottom:10px;display:block;}
+.daymaster-name{font-size:28px;color:#c9a84c;font-weight:700;margin-bottom:4px;}
+.daymaster-sub{font-size:14px;color:#8b7ec8;}
+.five-el-bar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin:12px 0;}
+.five-el-bar div{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;min-width:30px;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.info-item{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:12px;padding:16px;}
+.info-label{font-size:11px;color:#888;margin-bottom:4px;text-transform:uppercase;}
+.info-value{font-size:16px;color:#c9a84c;font-weight:600;}
+.info-desc{font-size:13px;color:#aaa;margin-top:6px;line-height:1.5;}
+.interp-card{background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;border-radius:12px;padding:18px;margin-bottom:10px;}
+.interp-title{font-size:14px;color:#c9a84c;font-weight:600;margin-bottom:6px;}
+.interp-text{font-size:13px;color:#999;line-height:1.7;}
+.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:60px;align-self:start;max-height:calc(100vh - 80px);overflow-y:auto;}
+.side-card{background:linear-gradient(135deg,#0e0e22,#14142e);border:1px solid #1e1e3e;border-radius:14px;padding:16px;position:relative;overflow:hidden;}
+.side-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
+.side-title{font-size:12px;font-weight:700;color:#c9a84c;margin-bottom:10px;letter-spacing:1px;}
+.rel-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;text-decoration:none;color:#777;font-size:12px;transition:all .2s;}
+.rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
+.app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
+.app-footer a{color:#555;text-decoration:none;}
+.seo-content{margin:20px 0;padding:0 40px;}
+.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:20px;margin-bottom:12px;}
+.seo-section h2{font-size:16px;font-weight:700;margin-bottom:8px;color:#d4a853;}
+.seo-section p,.seo-section li{font-size:13px;color:#aaa;line-height:1.8;}
+.seo-faq summary{font-size:14px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0;}
+.seo-faq p{margin-top:8px;}
+.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px;}
+@media(max-width:768px){
+.page-layout{grid-template-columns:1fr;padding:16px 16px;}
+.sidebar{position:static;display:grid;grid-template-columns:1fr;gap:12px;}
+.input-bar{padding:0 16px;}
+.input-bar-inner{flex-direction:column;align-items:stretch;}
+.calc-btn{width:100%;}
+.info-grid{grid-template-columns:1fr;}
+.pillars-grid{gap:6px;}
+.pillar-stem,.pillar-branch{font-size:24px;}
+.seo-content{padding:0 16px;}
+}
+.light-mode{background:#f5f5f5 !important;color:#333 !important}
+.light-mode .nav{background:rgba(255,255,255,0.95) !important;border-color:#eee !important}
+.light-mode .input-bar-inner,.light-mode .interp-card,.light-mode .info-item,.light-mode .side-card,.light-mode .pillar,.light-mode .daymaster-card{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important;color:#333 !important}
+.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}
+.light-mode select{background:#fff !important;color:#333 !important;border-color:#ddd !important}
+.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}
+.light-mode .app-footer{color:#999 !important}
+.light-mode .seo-section p{color:#666 !important}
     </style>
-<style>.light-mode{background:#f5f5f5 !important;color:#333 !important}.light-mode header{background:#fff !important;border-color:#eee !important}.light-mode .form-box,.light-mode .calc-box,.light-mode .interp-card,.light-mode .info-item,.light-mode .palace-cell{background:#fff !important;border-color:#ddd !important;color:#333 !important}.light-mode .section-title{color:#e84393 !important;border-color:#eee !important}.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}.light-mode .interp-text,.light-mode .info-desc{color:#555 !important}.light-mode footer{color:#999 !important}.light-mode .civ-card{background:#fff !important;border-color:#ddd !important}.light-mode .civ-name{color:#333 !important}.light-mode .civ-sub,.light-mode .civ-desc{color:#666 !important}.light-mode .container,.light-mode .page-title p{color:#666 !important}</style><style>.seo-content{max-width:700px;margin:30px auto;padding:0 20px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style></head>
+</head>
 <body>
 
-<header>
-    <a href="/es/">MOGU <span style="color:#b8942a">Moon</span></a>
-</header>
-<nav style="max-width:700px;margin:10px auto 0;padding:0 20px;font-size:12px;color:#888;"><a href="/es/" style="color:#c9a84c;text-decoration:none;">Inicio</a> <span style="margin:0 6px;">›</span> <a href="/es/" style="color:#c9a84c;text-decoration:none;">Astrologia</a> <span style="margin:0 6px;">›</span> <span>Cuatro Pilares</span></nav>
 
-<div class="container">
+<nav class="nav">
+    <a href="/es/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/es/">Inicio</a>
+        <a href="/es/about/">Acerca</a>
+        <a href="/es/blog/">Blog</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/saju/">KR</option>
+            <option value="/en/saju/">EN</option>
+            <option value="/jp/saju/">JP</option>
+            <option value="/es/saju/" selected>ES</option>
+            <option value="/de/saju/">DE</option>
+            <option value="/fr/saju/">FR</option>
+            <option value="/pt/saju/">PT</option>
+        </select>
+    </div>
+</nav>
+
+<div class="page-layout">
+<div class="content">
     <div class="page-title">
         <h2>☯️ Cuatro Pilares del Destino (四柱八字)</h2>
         <p>Análisis BaZi preciso basado en el calendario solar — los cuatro pilares de tu destino</p>
@@ -191,6 +235,28 @@
         <div id="dashaWrap"></div>
     </div>
 </div>
+
+
+<div class="sidebar">
+    <div class="side-card">
+        <div class="side-title">🔗 Herramientas Relacionadas</div>
+        <a href="/es/vedic/" class="rel-item">🕉️ Astrología Védica</a>
+        <a href="/es/ziwei/" class="rel-item">💜 Zi Wei Dou Shu</a>
+        <a href="/es/hellenistic/" class="rel-item">🏛️ Astrología Helenística</a>
+        <a href="/es/maya/" class="rel-item">🌽 Maya</a>
+        <a href="/es/egypt/" class="rel-item">🏺 Egipto</a>
+        <a href="/es/birthday-compat/" class="rel-item">💑 Compatibilidad</a>
+    </div>
+    <div class="side-card">
+        <div class="side-title">🔥 Popular</div>
+        <a href="/es/tarot/" class="rel-item">🃏 Tarot</a>
+        <a href="/es/daily/" class="rel-item">✨ Horóscopo Diario</a>
+        <a href="/es/past-life/" class="rel-item">🏛️ Vida Pasada</a>
+        <a href="/es/dream/" class="rel-item">🌿 Sueños</a>
+    </div>
+</div>
+</div><!-- /page-layout -->
+
 
 <div class="seo-content">
 <div class="seo-section"><h2>Que son los Cuatro Pilares (Saju)?</h2><p>Los Cuatro Pilares del Destino (Saju Palja) es un sistema de analisis del destino usado en Asia Oriental por mas de 1000 anos. Analiza la vida a traves de cuatro pilares (ano, mes, dia, hora) y ocho caracteres de Troncos Celestiales y Ramas Terrenales. Interpreta personalidad, aptitud, riqueza y relaciones a traves del equilibrio e interaccion de los Cinco Elementos (madera, fuego, tierra, metal, agua).</p></div>
@@ -856,5 +922,10 @@ updateCities();
 updateTrueSolarNote();
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
     </script>
+<footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="/es/privacy/">Política de Privacidad</a>
+</footer>
+
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script><script>document.addEventListener('contextmenu',function(e){e.preventDefault()});document.addEventListener('selectstart',function(e){e.preventDefault()});document.addEventListener('copy',function(e){e.preventDefault()});document.addEventListener('keydown',function(e){if(e.ctrlKey&&'uUsSiIcCaA'.includes(e.key)){e.preventDefault()}if(e.key==='F12'){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&'iIjJ'.includes(e.key)){e.preventDefault()}});</script></body>
 </html>

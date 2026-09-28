@@ -40,12 +40,22 @@
       ]
     }
 </script>
-    <style>
+    
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06061a; color: #e0d8cc; min-height: 100vh; }
-        header { background: linear-gradient(135deg, #0a0a2e, #12123a); border-bottom: 1px solid #2a2a5a; padding: 16px 20px; text-align: center; }
-        header a { text-decoration: none; font-size: 20px; color: #c9a84c; letter-spacing: 2px; font-weight: 700; }
-        .container { max-width: 700px; margin: 20px auto 40px; padding: 0 20px; }
+        body{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06061a; color: #e0d8cc; min-height: 100vh;;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.5),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.3),transparent),radial-gradient(2px 2px at 45% 45%,rgba(201,168,76,0.3),transparent);z-index:-1;}
+.nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a3e;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:20px;font-weight:700;color:#c9a84c;text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.nav-logo svg{width:26px;height:26px;}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;font-size:13px;padding:8px 14px;border-radius:20px;color:#888;font-weight:500;transition:all .2s;}
+.nav-links a:hover{background:rgba(201,168,76,0.1);color:#c9a84c;}
+.nav-links a.active{background:rgba(201,168,76,0.2);color:#c9a84c;}
+.app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
+.app-footer a{color:#555;text-decoration:none;}
+.nav-lang{padding:6px 10px;border-radius:12px;border:1px solid #2a2a5a;font-size:11px;color:#888;background:#12122a;cursor:pointer;outline:none;}
+.container { max-width: 900px; margin: 20px auto 40px; padding: 0 20px; }
         .page-title { text-align: center; margin-bottom: 30px; }
         .page-title h2 { font-size: 28px; color: #c9c9e0; margin-bottom: 8px; }
         .page-title p { color: #8888aa; font-size: 14px; }
@@ -87,15 +97,43 @@
         footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
         @media (max-width: 480px) { .info-grid { grid-template-columns: 1fr; } .phase-item .ph-emoji { font-size: 18px; } .phase-item.active .ph-emoji { font-size: 26px; } }
     </style>
-<style>.seo-content{max-width:700px;margin:30px auto;padding:0 20px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style></head>
+<style>.page-layout{padding:16px 40px;display:grid;grid-template-columns:1fr 280px;gap:24px;}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0;}
+.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:60px;align-self:start;max-height:calc(100vh - 80px);overflow-y:auto;}
+.side-card{background:linear-gradient(135deg,#0e0e22,#14142e);border:1px solid #1e1e3e;border-radius:14px;padding:16px;position:relative;overflow:hidden;}
+.side-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
+.side-title{font-size:12px;font-weight:700;color:#c9a84c;margin-bottom:10px;letter-spacing:1px;}
+.rel-item{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;text-decoration:none;color:#777;font-size:12px;transition:all .2s;}
+.rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
+@media(max-width:768px){.page-layout{grid-template-columns:1fr;padding:16px 16px;}.sidebar{position:static;}}
+.seo-content{margin:20px 0;padding:0 40px}.seo-section{background:rgba(255,255,255,0.03);border:1px solid rgba(212,168,83,0.15);border-radius:12px;padding:24px;margin-bottom:16px}.seo-section h2{font-size:18px;font-weight:700;margin-bottom:12px;color:#d4a853}.seo-section p,.seo-section li{font-size:14px;color:#aaa;line-height:1.8}.seo-section ul{margin:8px 0 8px 20px}.seo-faq summary{font-size:15px;font-weight:600;color:#d4a853;cursor:pointer;padding:8px 0}.seo-faq p{margin-top:8px}.seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px}.seo-related a:hover{background:rgba(212,168,83,0.2)}</style>
+</head>
 <body>
 
-<header>
-    <a href="../index.html">MOGU <span style="color:#8e44ad;">Moon</span></a>
-</header>
-<nav style="max-width:700px;margin:10px auto 0;padding:0 20px;font-size:12px;color:#888;"><a href="/jp/" style="color:#c9a84c;text-decoration:none;">ホーム</a> <span style="margin:0 6px;">›</span> <a href="/jp/" style="color:#c9a84c;text-decoration:none;">運勢</a> <span style="margin:0 6px;">›</span> <span>ムーンフェイズ</span></nav>
 
-<div class="container">
+<nav class="nav">
+    <a href="/jp/" class="nav-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+        MOGU Moon
+    </a>
+    <div class="nav-links">
+        <a href="/jp/">ホーム</a>
+        <a href="/jp/about/">紹介</a>
+        <a href="/jp/blog/">ブログ</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/moonphase/">KR</option>
+            <option value="/en/moonphase/">EN</option>
+            <option value="/jp/moonphase/" selected>JP</option>
+            <option value="/es/moonphase/">ES</option>
+            <option value="/de/moonphase/">DE</option>
+            <option value="/fr/moonphase/">FR</option>
+            <option value="/pt/moonphase/">PT</option>
+        </select>
+    </div>
+</nav>
+
+<div class="page-layout">
+<div class="content">
     <div class="page-title">
         <h2>🌕 ムーンフェーズ</h2>
         <p>今日の月の満ち欠けと隠された意味を確認しましょう</p>
@@ -105,6 +143,28 @@
 
     <div class="disclaimer">🌕 月の満ち欠け情報は天文学的計算に基づいており、スピリチュアルな解釈は参考用です。</div>
 </div>
+
+
+<div class="sidebar">
+    <div class="side-card">
+        <div class="side-title">🔗 関連ツール</div>
+        <a href="/jp/saju/" class="rel-item">☯️ 四柱推命</a>
+        <a href="/jp/vedic/" class="rel-item">🕉️ ヴェーディック占星術</a>
+        <a href="/jp/tarot/" class="rel-item">🃏 タロット</a>
+        <a href="/jp/iching/" class="rel-item">☰ 易経</a>
+        <a href="/jp/numerology/" class="rel-item">🔢 数秘術</a>
+        <a href="/jp/daily/" class="rel-item">✨ 今日の運勢</a>
+    </div>
+    <div class="side-card">
+        <div class="side-title">🔥 人気</div>
+        <a href="/jp/birthday-compat/" class="rel-item">💑 誕生日相性</a>
+        <a href="/jp/past-life/" class="rel-item">🏛️ 前世テスト</a>
+        <a href="/jp/dream/" class="rel-item">🌿 夢占い</a>
+        <a href="/jp/aura/" class="rel-item">💜 オーラ</a>
+    </div>
+</div>
+</div><!-- /page-layout -->
+
 
 <div class="seo-content">
 <div class="seo-section"><h2>What is Moon Phase?</h2><p>Moon Phase refers to the changing shape of the Moon as it orbits Earth. It changes over a cycle of about 29.5 days from new moon to full moon. Since ancient times, moon phases have been used for agriculture, fishing, and rituals.</p></div>
@@ -319,5 +379,10 @@ document.getElementById("moonContent").innerHTML = `
     </div>
 `;
     </script>
+<footer class="app-footer">
+    &copy; 2025 MOGU Moon<br>
+    <a href="/jp/privacy/">プライバシーポリシー</a>
+</footer>
+
 <button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#e84393;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script><script>document.addEventListener('contextmenu',function(e){e.preventDefault()});document.addEventListener('selectstart',function(e){e.preventDefault()});document.addEventListener('copy',function(e){e.preventDefault()});document.addEventListener('keydown',function(e){if(e.ctrlKey&&'uUsSiIcCaA'.includes(e.key)){e.preventDefault()}if(e.key==='F12'){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&'iIjJ'.includes(e.key)){e.preventDefault()}});</script></body>
 </html>
