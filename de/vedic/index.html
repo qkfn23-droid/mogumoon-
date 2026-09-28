@@ -167,47 +167,20 @@ optgroup{color:#c9a84c;font-weight:600;}
 .tab-btn.active{background:rgba(201,168,76,0.15);border-color:#c9a84c;color:#c9a84c;}
 .tab-panel{min-height:200px;}
 
-/* Category content: 2-column where chart+interp sit side by side */
-.category-content{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.category-content .section-title{grid-column:1/-1;}
-.category-content .chart-container{max-width:100%;}
-.category-content .chart-grid{max-width:360px;margin:0 auto;}
-.category-content .interp-card{align-self:start;}
+/* Tab panel: chart + interp side by side where applicable */
+.tab-panel .chart-container{display:inline-block;vertical-align:top;width:48%;margin-right:2%;}
+.tab-panel .chart-grid{max-width:400px;margin:0 auto;}
+.tab-panel #d9InterpWrap,.tab-panel #spouseProfileWrap,
+.tab-panel #d10InterpWrap,.tab-panel #d2InterpWrap,.tab-panel #d4InterpWrap,
+.tab-panel #d7InterpWrap,.tab-panel #d3InterpWrap,.tab-panel #d12InterpWrap,
+.tab-panel #d40InterpWrap,.tab-panel #d45InterpWrap,
+.tab-panel #d20InterpWrap,.tab-panel #d24InterpWrap,.tab-panel #d27InterpWrap,
+.tab-panel #d16InterpWrap,.tab-panel #d30InterpWrap,
+.tab-panel #d60InterpWrap{display:inline-block;vertical-align:top;width:48%;}
 
-/* Dasha timeline: horizontal scroll */
-.dasha-timeline{display:flex;gap:8px;overflow-x:auto;padding:4px 0;grid-column:1/-1;}
-.dasha-item{flex-shrink:0;min-width:140px;border-radius:10px;flex-direction:column;text-align:center;padding:12px;background:linear-gradient(135deg,#12122a,#1a1a3e);border:1px solid #2a2a5a;}
-.dasha-item.current{border-color:#c9a84c;background:linear-gradient(135deg,#1a2a1a,#12301a);}
-
-/* Full-width elements inside category-content */
-.category-content .nakshatra-card,
-.category-content .planet-table,
-.category-content #interpWrap,
-.category-content #planetHouseWrap,
-.category-content #dignityWrap,
-.category-content #luckyWrap,
-.category-content #remedyWrap,
-.category-content #dashaWrap,
-.category-content #foreignWrap,
-.category-content #childrenWrap,
-.category-content #educationWrap,
-.category-content #spouseProfileWrap,
-.category-content #d9InterpWrap,
-.category-content #d10InterpWrap,
-.category-content #d2InterpWrap,
-.category-content #d4InterpWrap,
-.category-content #d7InterpWrap,
-.category-content #d3InterpWrap,
-.category-content #d12InterpWrap,
-.category-content #d20InterpWrap,
-.category-content #d24InterpWrap,
-.category-content #d27InterpWrap,
-.category-content #d30InterpWrap,
-.category-content #d40InterpWrap,
-.category-content #d45InterpWrap,
-.category-content #d60InterpWrap,
-.category-content #planetTableWrap,
-.category-content #nakshatraWrap{grid-column:1/-1;}
+/* Dasha: keep existing vertical style but compact */
+.dasha-timeline{border-radius:12px;overflow:hidden;}
+.dasha-item.current{border-left:3px solid #c9a84c;background:#1a2a1a;}
 
 /* Responsive */
 @media(max-width:1024px){
@@ -219,7 +192,13 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .sidebar{grid-template-columns:1fr;}
-.category-content{grid-template-columns:1fr;}
+.tab-panel .chart-container,.tab-panel #d9InterpWrap,.tab-panel #spouseProfileWrap,
+.tab-panel #d10InterpWrap,.tab-panel #d2InterpWrap,.tab-panel #d4InterpWrap,
+.tab-panel #d7InterpWrap,.tab-panel #d3InterpWrap,.tab-panel #d12InterpWrap,
+.tab-panel #d40InterpWrap,.tab-panel #d45InterpWrap,
+.tab-panel #d20InterpWrap,.tab-panel #d24InterpWrap,.tab-panel #d27InterpWrap,
+.tab-panel #d16InterpWrap,.tab-panel #d30InterpWrap,
+.tab-panel #d60InterpWrap{display:block;width:100%;margin-right:0;}
 }
 @media(max-width:480px){
 .chart-cell{min-height:45px;font-size:10px;}
@@ -262,7 +241,7 @@ optgroup{color:#c9a84c;font-weight:600;}
         <span style="font-size:20px;">🕉️</span>
         <div>
             <div style="font-size:18px;font-weight:700;color:#c9a84c;">Vedische Astrologie (Jyotish)</div>
-            <div style="font-size:11px;color:#666;">Entdecke dein Schicksal durch alte indische Astrologie</div>
+            <div style="font-size:11px;color:#666;">Entdecke dein Schicksal</div>
         </div>
     </div>
     <div class="input-bar-inner">
@@ -275,7 +254,7 @@ optgroup{color:#c9a84c;font-weight:600;}
             </div>
         </div>
         <div class="ib-group">
-            <label>Geburtszeit <span class="optional-tag">(wenn unbekannt: Unbekannt)</span></label>
+            <label>Geburtszeit <span class="optional-tag">(Unbekannt)</span></label>
             <div class="ib-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
