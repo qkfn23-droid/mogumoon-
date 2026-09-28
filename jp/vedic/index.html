@@ -125,7 +125,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .interp-text{font-size:13px;color:#999;line-height:1.7;}
 
 /* Sidebar */
-.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:70px;align-self:start;}
+.sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:60px;align-self:start;max-height:calc(100vh - 80px);overflow-y:auto;}
 .side-card{background:linear-gradient(135deg,#0e0e22,#14142e);border:1px solid #1e1e3e;border-radius:14px;padding:16px;position:relative;overflow:hidden;}
 .side-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.15),transparent);}
 .side-title{font-size:12px;font-weight:700;color:#c9a84c;margin-bottom:10px;letter-spacing:1px;}
@@ -133,7 +133,6 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .rel-item:hover{background:rgba(201,168,76,0.06);color:#c9a84c;}
 
 /* Ad slot */
-.ad-slot{border-radius:12px;min-height:250px;}
 
 /* Footer */
 .app-footer{text-align:center;padding:20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
@@ -497,9 +496,6 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
-    <div class="ad-slot" style="min-height:250px;">
-        <!-- AdSense 300x250 -->
-    </div>
     <div class="side-card">
         <div class="side-title">🔗 関連ツール</div>
         <a href="../saju/" class="rel-item">☯️ 四柱推命</a>
@@ -508,9 +504,6 @@ optgroup{color:#c9a84c;font-weight:600;}
         <a href="../maya/" class="rel-item">🌀 マヤ占星術</a>
         <a href="../egypt/" class="rel-item">𓂀 エジプトデカン</a>
         <a href="../birthday-compat/" class="rel-item">💑 四柱推命 相性</a>
-    </div>
-    <div class="ad-slot" style="min-height:600px;">
-        <!-- AdSense 300x600 -->
     </div>
     <div class="side-card">
         <div class="side-title">🔥 人気</div>
