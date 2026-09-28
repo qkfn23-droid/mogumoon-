@@ -383,8 +383,10 @@ function discover() {
             <div class="reading-text">전생의 당신이 현생의 당신에게 가장 전하고 싶은 메시지:<br><br><strong>"${lesson}"</strong></div>
         </div>
 
-        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';window.scrollTo({top:0,behavior:'smooth'});">🔄 다시 테스트하기</button>
+        <button class="retry-btn" onclick="document.getElementById('resultSection').style.display='none';document.querySelector('.form-box').style.display='';document.querySelector('.calc-btn').style.display='';window.scrollTo({top:0,behavior:'smooth'});">🔄 다시 테스트하기</button>
     `;
+    document.querySelector('.form-box').style.display = 'none';
+    document.querySelector('.calc-btn').style.display = 'none';
     section.style.display = 'block';
     section.scrollIntoView({behavior:'smooth'});
 }
