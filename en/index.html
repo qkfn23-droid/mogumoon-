@@ -563,5 +563,32 @@ function ghostSend() {
 </script>
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
 <script>document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("selectstart",function(e){e.preventDefault()});document.addEventListener("copy",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){if(e.ctrlKey&&"uUsSiIcCaA".includes(e.key)){e.preventDefault()}if(e.key==="F12"){e.preventDefault()}if(e.ctrlKey&&e.shiftKey&&"iIjJ".includes(e.key)){e.preventDefault()}});</script>
+<script>
+function applyGhostTheme(){
+  var gc=document.getElementById('ghostChat');if(!gc)return;
+  var isLight=document.body.classList.contains('light-mode');
+  gc.style.background=isLight?'#f5f5f5':'#0d0d20';
+  gc.style.borderColor=isLight?'#ddd':'#c9a84c';
+  gc.style.boxShadow=isLight?'0 8px 32px rgba(0,0,0,0.15)':'0 8px 32px rgba(0,0,0,0.5)';
+  var header=gc.querySelector('div[style*="background:linear-gradient"]');
+  if(header){header.style.background=isLight?'linear-gradient(135deg,#fff,#f8f8f8)':'linear-gradient(135deg,#1a1a3e,#12122a)';header.style.borderBottomColor=isLight?'#eee':'#2a2a5a';}
+  var msgs=gc.querySelectorAll('#gcMessages > div[style*="background:#1a1a3e"]');
+  msgs.forEach(function(m){m.style.background=isLight?'#fff':'#1a1a3e';m.style.color=isLight?'#333':'#e0d8cc';});
+  var btns=gc.querySelectorAll('#gcMessages button[style*="background:#0d0d20"]');
+  btns.forEach(function(b){b.style.background=isLight?'#fff':'#0d0d20';b.style.borderColor=isLight?'#c9a84c':'#c9a84c';});
+  var inputWrap=gc.querySelector('div[style*="border-top:1px solid"]');
+  if(inputWrap)inputWrap.style.borderTopColor=isLight?'#eee':'#2a2a5a';
+  var input=document.getElementById('gcInput');
+  if(input){input.style.background=isLight?'#fff':'#1a1a3e';input.style.borderColor=isLight?'#ddd':'#2a2a5a';input.style.color=isLight?'#333':'#e0d8cc';}
+  var gl=document.getElementById('ghostLabel');
+  if(gl){gl.style.background=isLight?'#fff':'#1a1a3e';gl.style.boxShadow=isLight?'0 2px 8px rgba(0,0,0,0.1)':'0 2px 8px rgba(0,0,0,0.3)';}
+  var chatBtn=gc.previousElementSibling;
+  if(!chatBtn)chatBtn=document.querySelector('button[onclick*="ghostChat"]');
+  if(chatBtn&&chatBtn.tagName==='BUTTON'){chatBtn.style.background=isLight?'#fff':'#1a1a3e';}
+}
+applyGhostTheme();
+var _origToggle=document.getElementById('themeToggle');
+if(_origToggle){var _origClick=_origToggle.onclick;_origToggle.onclick=function(e){_origClick.call(this,e);setTimeout(applyGhostTheme,10);};}
+</script>
 </body>
 </html>
