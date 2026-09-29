@@ -96,7 +96,18 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 
         .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 20px; }
         footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
-        @media (max-width: 480px) { .today-scores { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .nav-btns { gap: 4px; }
+            .nav-btn { padding: 6px 6px; font-size: 11px; }
+        }
+        @media (max-width: 480px) {
+            .today-scores { grid-template-columns: 1fr; }
+            .nav-btns { gap: 3px; }
+            .nav-btn { padding: 5px 4px; font-size: 10px; }
+        }
+        @media (max-width: 360px) {
+            .nav-btn { padding: 4px 3px; font-size: 9px; }
+        }
     </style>
 <style>.page-layout{padding:16px 40px;display:grid;grid-template-columns:1fr 280px;gap:24px;}
 .content{display:flex;flex-direction:column;gap:16px;min-width:0;}
