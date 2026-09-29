@@ -593,5 +593,6 @@ applyGhostTheme();
 var _origToggle=document.getElementById('themeToggle');
 if(_origToggle){var _origClick=_origToggle.onclick;_origToggle.onclick=function(e){_origClick.call(this,e);setTimeout(applyGhostTheme,10);};}
 </script>
+<script>(function(){function applyLightFix(){if(document.body.classList.contains("light-mode")){document.querySelectorAll(".ghost-label").forEach(function(el){el.style.background="rgba(255,255,255,0.95)";el.style.color="#b8860b";el.style.borderColor="#c9a84c";});document.querySelectorAll(".side-banner").forEach(function(el){el.style.background="linear-gradient(135deg,#0a1a2a,#12203a)";el.style.borderColor="#1a3a5a";});var gl=document.getElementById("ghostLabel");if(gl){gl.style.background="rgba(255,255,255,0.95)";gl.style.color="#b8860b";gl.style.borderColor="#c9a84c";}}}applyLightFix();var obs=new MutationObserver(applyLightFix);obs.observe(document.body,{attributes:true,attributeFilter:["class"]});})();</script>
 </body>
 </html>
