@@ -226,9 +226,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </div><!-- /page-layout -->
 
 <div class="seo-content">
-<div class="seo-section"><h2>Qu est-ce que le Zi Wei Dou Shu ?</h2><p>Zi Wei Dou Shu is a divination system believed to have been created during the Song Dynasty in China, about 1,000 years ago. It places stars across 12 palaces to analyze different areas of life. With the Purple Star (Zi Wei) at the center, over 100 stars are used, forming a unique system distinct from Quatre Piliers (BaZi).</p></div>
-<div class="seo-section"><h2>Comment utiliser</h2><p>1. Enter your date of birth and birth time.<br>2. Your Zi Wei Dou Shu chart will be automatically generated.<br>3. Review the star placements and interpretations across the 12 palaces.</p></div>
-<div class="seo-section"><h2>Questions frequentes</h2><details class="seo-faq"><summary>What is the difference between Zi Wei Dou Shu and BaZi?</summary><p>BaZi uses the Five Elements and Heavenly Stems/Earthly Branches, while Zi Wei Dou Shu places stars in palaces. Both use birth data but analyze it very differently.</p></details><details class="seo-faq"><summary>What is the history of Zi Wei Dou Shu?</summary><p>It is said to have been created by Chen Xiyi during the Song Dynasty, approximately 1,000 years ago.</p></details><details class="seo-faq"><summary>Is birth time required?</summary><p>Yes, the chart changes significantly based on birth time. Please enter an accurate birth time if possible.</p></details><details class="seo-faq"><summary>Is my personal data stored?</summary><p>No. All calculations are processed in your browser only. Nothing is sent to any server.</p></details></div>
+<div class="seo-section"><h2>Qu est-ce que le Zi Wei Dou Shu ?</h2><p>Le Zi Wei Dou Shu est un systeme de divination qui aurait ete cree sous la dynastie Song en Chine, il y a environ 1 000 ans. Il place des etoiles dans 12 palais pour analyser differents domaines de la vie. Avec l Etoile Pourpre (Zi Wei) au centre, plus de 100 etoiles sont utilisees, formant un systeme unique distinct des Quatre Piliers (BaZi).</p></div>
+<div class="seo-section"><h2>Comment utiliser</h2><p>1. Entrez votre date et heure de naissance.<br>2. Votre carte Zi Wei Dou Shu sera generee automatiquement.<br>3. Consultez les placements des etoiles et les interpretations des 12 palais.</p></div>
+<div class="seo-section"><h2>Questions frequentes</h2><details class="seo-faq"><summary>Quelle est la difference entre Zi Wei Dou Shu et BaZi ?</summary><p>Le BaZi utilise les Cinq Elements et les Troncs Celestes/Branches Terrestres, tandis que le Zi Wei Dou Shu place des etoiles dans des palais. Les deux utilisent les donnees de naissance mais les analysent tres differemment.</p></details><details class="seo-faq"><summary>Quelle est l histoire du Zi Wei Dou Shu ?</summary><p>On dit qu il a ete cree par Chen Xiyi sous la dynastie Song, il y a environ 1 000 ans.</p></details><details class="seo-faq"><summary>L heure de naissance est-elle requise ?</summary><p>Oui, la carte change considerablement selon l heure de naissance. Veuillez entrer une heure de naissance precise si possible.</p></details><details class="seo-faq"><summary>Mes donnees personnelles sont-elles stockees ?</summary><p>Non. Tous les calculs sont effectues uniquement dans votre navigateur. Rien n est envoye a un serveur.</p></details></div>
 <div class="seo-section"><h2>Outils associes</h2><div class="seo-related"><a href="../saju/">Quatre Piliers (BaZi)</a><a href="../vedic/">Astrologie Vedique</a></div></div>
 </div>
 
@@ -579,26 +579,26 @@ function calculate() {
     }
 
     const COMBO_INTERP = {
-        '무곡+천상': { career: 'Wu Qu + Tian Xiang: Wealth and Seal together. Excellent for financial management and administration. Stable success in banking, accounting, and fiscal administration.', wealth: 'Stable wealth accumulation under the protection of the Seal Star.' },
-        '무곡+파군': { career: 'Wu Qu + Po Jun: Wealth and Destruction together. Military/police formation. Success through breaking and rebuilding for profit.', wealth: 'Boom-or-bust type. Favorable for technical or metal-related businesses.' },
-        '무곡+탐랑': { career: 'Wu Qu + Tan Lang: Wealth and Desire together. Talent in sales, entertainment, and social fields.', wealth: 'Earns well and spends well. With Hua Lu, windfall possible.' },
-        '무곡+천부': { career: 'Wu Qu + Tian Fu: Wealth and Treasury together. The great tycoon formation. Overflowing treasury.', wealth: 'Supreme wealth fortune. Ability to both earn and save.' },
-        '자미+천부': { personality: 'Zi Wei + Tian Fu: Emperor and Treasury. The supreme noble formation. Authority and stability combined.' },
-        '자미+탐랑': { personality: 'Zi Wei + Tan Lang: Emperor and Desire. Noble yet charming. Authority and romance simultaneously attract people.' },
-        '자미+천상': { personality: 'Zi Wei + Tian Xiang: Emperor and Seal. Authority and protocol combined. Shines greatly in official positions.' },
-        '자미+칠살': { personality: 'Zi Wei + Qi Sha: Emperor and General. Zi Wei governs Qi Sha — a commanding formation. Great nobility when well-managed.' },
-        '염정+천부': { personality: 'Lian Zheng + Tian Fu: Imprisonment and Treasury. The treasury stabilizes intense emotions. Gains both authority and wealth.' },
-        '염정+탐랑': { personality: 'Lian Zheng + Tan Lang: Double romance stars. Extreme charm but watch emotional management.' },
-        '염정+칠살': { personality: 'Lian Zheng + Qi Sha: Very inauspicious in weak positions. Commanding when in strong positions.' },
-        '태양+태음': { personality: 'Sun and Moon in the same palace. Yin and Yang shine together — bright but may overshadow each other.' },
-        '태양+거문': { personality: 'Tai Yang + Ju Men: Light and Dark together. The Sun illuminates the darkness. Favorable for overseas development.' },
-        '태양+천량': { career: 'Tai Yang + Tian Liang: Light and Guardian. Great success in public service, education, and medicine.', personality: 'Bright, honest, with strong protective instincts. Much help from superiors.' },
-        '천동+태음': { personality: 'Tian Tong + Tai Yin: Blessing and Moon. Gentle and emotional. Talent in arts and religion but lacks decisiveness.' },
-        '천동+거문': { personality: 'Tian Tong + Ju Men: Blessing and Dark. In a strong position, blessings come through words.', career: 'Suited for education, counseling, and media.' },
-        '천동+천량': { personality: 'Tian Tong + Tian Liang: Blessing and Guardian. A leisurely and peaceful life. Deep connections with religion and scholarship.' },
-        '천기+태음': { personality: 'Tian Ji + Tai Yin: Strategist and Moon. Delicate with excellent intuition. Talent in property, religion, and scholarship.' },
-        '천기+거문': { personality: 'Tian Ji + Ju Men: Strategist and Dark. Strategy combined with eloquence. Excellent as an advisor but watch for gossip.' },
-        '천기+천량': { personality: 'Tian Ji + Tian Liang: Strategist and Guardian. The virtuous combination. Deeply immersed in religion, philosophy, and scholarship.' },
+        '무곡+천상': { career: 'Wu Qu + Tian Xiang: Richesse et Sceau reunis. Excellent pour la gestion financiere et administrative. Succes stable dans la banque, la comptabilite et la gestion fiscale.', wealth: 'Accumulation stable de richesse sous la protection de l etoile du Sceau.' },
+        '무곡+파군': { career: 'Wu Qu + Po Jun: Richesse et Destruction reunis. Constellation militaire/policiere. Succes par la destruction et la reconstruction.', wealth: 'Type tout ou rien. Favorable aux entreprises techniques ou liees au metal.' },
+        '무곡+탐랑': { career: 'Wu Qu + Tan Lang: Richesse et Desir reunis. Talent dans la vente, le divertissement et les domaines sociaux.', wealth: 'Gagne bien et depense bien. Avec Hua Lu, une aubaine est possible.' },
+        '무곡+천부': { career: 'Wu Qu + Tian Fu: Richesse et Tresor reunis. La grande constellation du magnat. Tresor debordant.', wealth: 'Fortune supreme en richesse. Capacite de gagner et epargner.' },
+        '자미+천부': { personality: 'Zi Wei + Tian Fu: Empereur et Tresor. La constellation noble supreme. Autorite et stabilite reunies.' },
+        '자미+탐랑': { personality: 'Zi Wei + Tan Lang: Empereur et Desir. Noble mais charmant. Autorite et romantisme attirent simultanement.' },
+        '자미+천상': { personality: 'Zi Wei + Tian Xiang: Empereur et Sceau. Autorite et protocole reunis. Brille particulierement dans les positions officielles.' },
+        '자미+칠살': { personality: 'Zi Wei + Qi Sha: Empereur et General. Zi Wei gouverne Qi Sha -- une constellation de commandement. Grande noblesse avec une bonne gestion.' },
+        '염정+천부': { personality: 'Lian Zheng + Tian Fu: Prison et Tresor. Le tresor stabilise les emotions intenses. Acquiert autorite et richesse.' },
+        '염정+탐랑': { personality: 'Lian Zheng + Tan Lang: Double etoiles romantiques. Charme extreme mais attention a la gestion emotionnelle.' },
+        '염정+칠살': { personality: 'Lian Zheng + Qi Sha: Tres defavorable en position faible. Commandant en position forte.' },
+        '태양+태음': { personality: 'Soleil et Lune dans le meme palais. Yin et Yang brillent ensemble -- eclatant mais peuvent se faire ombre.' },
+        '태양+거문': { personality: 'Tai Yang + Ju Men: Lumiere et Obscurite reunis. Le Soleil illumine les tenebres. Favorable au developpement a l etranger.' },
+        '태양+천량': { career: 'Tai Yang + Tian Liang: Lumiere et Gardien. Grand succes dans le service public, l education et la medecine.', personality: 'Brillant, honnete, avec un fort instinct protecteur. Beaucoup d aide des superieurs.' },
+        '천동+태음': { personality: 'Tian Tong + Tai Yin: Benediction et Lune. Doux et emotif. Talent artistique et religieux mais manque de determination.' },
+        '천동+거문': { personality: 'Tian Tong + Ju Men: Benediction et Obscurite. En position forte, les benedictions viennent par la parole.', career: 'Adapte a l education, au conseil et aux medias.' },
+        '천동+천량': { personality: 'Tian Tong + Tian Liang: Benediction et Gardien. Une vie tranquille et paisible. Liens profonds avec la religion et l erudition.' },
+        '천기+태음': { personality: 'Tian Ji + Tai Yin: Stratege et Lune. Delicat avec une excellente intuition. Talent en immobilier, religion et erudition.' },
+        '천기+거문': { personality: 'Tian Ji + Ju Men: Stratege et Obscurite. Strategie alliee a l eloquence. Excellent comme conseiller mais attention aux commérages.' },
+        '천기+천량': { personality: 'Tian Ji + Tian Liang: Stratege et Gardien. La combinaison vertueuse. Profondement immerge dans la religion, la philosophie et l erudition.' },
     };
 
     function getComboInterp(palIdx, field) {
@@ -608,20 +608,20 @@ function calculate() {
     }
 
     const SPOUSE_APPEARANCE = {
-        '자미': 'Dignified and authoritative impression. Commanding posture with authoritative eyes.',
-        '천기': 'Intellectual and delicate impression. Slim build with clever-looking eyes.',
-        '태양': 'Bright and energetic impression. Large bright eyes with healthy skin.',
-        '무곡': 'Strong and solid impression. Good physique and few words.',
-        '천동': 'Youthful and friendly impression. Soft build with a charming smile.',
-        '염정': 'Distinct features with intense eyes. Captivating aura.',
-        '천부': 'Warm and comfortable impression. Round face with a cozy atmosphere.',
-        '태음': 'Fair skin with large eyes. Subtle and elegant charm.',
-        '탐랑': 'Attractive and glamorous impression. Excellent fashion sense.',
-        '거문': 'Broad forehead with sharp eyes. Most attractive when speaking.',
-        '천상': 'Clean and neat impression. Well-dressed with an organized style.',
-        '천량': 'Mature and trustworthy impression. Charm increases with age.',
-        '칠살': 'Intense and charismatic impression. Good physique with sharp eyes.',
-        '파군': 'Unique and distinctive impression. Unconventional charm.',
+        '자미': 'Impression digne et autoritaire. Posture imposante avec un regard autoritaire.',
+        '천기': 'Impression intellectuelle et delicate. Silhouette mince avec des yeux vifs.',
+        '태양': 'Impression brillante et energique. Grands yeux brillants avec une peau saine.',
+        '무곡': 'Impression forte et solide. Bonne carrure et peu de mots.',
+        '천동': 'Impression jeune et amicale. Silhouette douce avec un sourire charmant.',
+        '염정': 'Traits distinctifs avec des yeux intenses. Aura captivante.',
+        '천부': 'Impression chaleureuse et confortable. Visage rond avec une atmosphere accueillante.',
+        '태음': 'Peau claire avec de grands yeux. Charme subtil et elegant.',
+        '탐랑': 'Impression attrayante et glamour. Excellent sens de la mode.',
+        '거문': 'Front large avec des yeux percants. Plus attrayant en parlant.',
+        '천상': 'Impression propre et soignee. Bien habille avec un style organise.',
+        '천량': 'Impression mature et digne de confiance. Le charme augmente avec l age.',
+        '칠살': 'Impression intense et charismatique. Bonne carrure avec des yeux percants.',
+        '파군': 'Impression unique et distinctive. Charme non conventionnel.',
     };
 
     function getPalaceStarList(palIdx) {
