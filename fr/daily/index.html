@@ -205,7 +205,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <a href="/fr/privacy/">Confidentialité</a>
 </footer>
 
-<button onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'))" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#f39c12;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button>
+<button id="themeToggle" onclick="document.body.classList.toggle('light-mode');localStorage.setItem('moguMoonLight',document.body.classList.contains('light-mode'));this.textContent=document.body.classList.contains('light-mode')?'🌙':'☀️'" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;background:#2a1530;color:#f39c12;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:999;">☀️</button><script>if(document.body.classList.contains('light-mode')&&document.getElementById('themeToggle'))document.getElementById('themeToggle').textContent='🌙';</script>
     </script>
 
 <script>
