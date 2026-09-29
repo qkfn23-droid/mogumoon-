@@ -44,7 +44,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .ib-group label{font-size:11px;color:#c9a84c;font-weight:600;}
 .ib-row{display:flex;gap:6px;}
 .ib-group select{padding:10px 12px;background:#161630;border:1px solid #4a4a7a;border-radius:8px;color:#e0d8cc;font-size:13px;outline:none;min-width:70px;transition:all .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23c9a84c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;cursor:pointer;}
-.ib-group select:focus{border-color:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,0.25);background:#1a1a3e;}
+.ib-group select:focus{border-color:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,0.25);background-color:#1a1a3e;}
 .optional-tag{font-size:10px;color:#666;font-weight:400;}
 .calc-btn{padding:10px 28px;background:linear-gradient(135deg,#c9a84c,#a8872a);color:#0a0a1a;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:1px;}
 .calc-btn:hover{background:linear-gradient(135deg,#dbb85c,#c9a84c);transform:translateY(-1px);}
@@ -152,7 +152,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
             </div>
         </div>
         <div class="ib-group">
-            <label>Birth Time <span class="optional-tag">(select 'Unknown' if unsure)</span></label>
+            <label>Geburtszeit <span class="optional-tag">(bei Unsicherheit 'Unbekannt' waehlen)</span></label>
             <div class="ib-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
@@ -646,21 +646,21 @@ function calculate() {
 
     document.getElementById('infoGrid').innerHTML = `
         <div class="info-item"><div class="info-label">Solar-Geburtstag</div><div class="info-value">${solarYear}/${solarMonth}/${solarDay}</div></div>
-        <div class="info-item"><div class="info-label">Lunar-Geburtstag</div><div class="info-value">${lunar.year}/${lunar.leap?'Leap ':''}${lunar.month}/${lunar.day}</div></div>
+        <div class="info-item"><div class="info-label">Lunar-Geburtstag</div><div class="info-value">${lunar.year}/${lunar.leap?'Schalt ':''}${lunar.month}/${lunar.day}</div></div>
         <div class="info-item"><div class="info-label">Lebenspalast-Stern</div><div class="info-value">${starData.glyph} ${mainStarDisplay}</div><div class="info-desc">${starData.rank}</div></div>
         <div class="info-item"><div class="info-label">Lebenspalast-Position</div><div class="info-value">${DIZHI[mingIdx]} (${tiangan} ${DIZHI[mingIdx]})</div></div>
-        <div class="info-item"><div class="info-label">Fuenf-Elemente-Bureau</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei position: ${DIZHI[ziWeiPos]}</div></div>
+        <div class="info-item"><div class="info-label">Fuenf-Elemente-Bureau</div><div class="info-value">${wuxing}</div><div class="info-desc">Zi Wei Position: ${DIZHI[ziWeiPos]}</div></div>
         <div class="info-item"><div class="info-label">Geschlecht</div><div class="info-value">${gender === 'm' ? 'Maennlich (Yang)' : 'Weiblich (Yin)'}</div></div>
-        <div class="info-item"><div class="info-label">Koerperpalast</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx-shenIdx+12)%12]})</div><div class="info-desc">Post-natal character and later-life direction</div></div>
+        <div class="info-item"><div class="info-label">Koerperpalast</div><div class="info-value">${DIZHI[shenIdx]} (${PALACES[(mingIdx-shenIdx+12)%12]})</div><div class="info-desc">Nachgeburtlicher Charakter und spaetere Lebensrichtung</div></div>
         <div class="info-item"><div class="info-label">Vier Transformationen</div><div class="info-value" style="font-size:13px;">${sihuaStars.map((s,i) => `${hanja(s)}<span style="color:#ff6b6b;font-size:11px;">${hanja(sihuaNames[i])}</span>`).join(' · ')}</div></div>
     `;
 
     const mingCombo = getComboInterp(mingIdx, 'personality');
     document.getElementById('mainInterpWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">${starData.glyph} Life Palace: ${palaceStarSummary(mingIdx)}</div>
+            <div class="interp-title">${starData.glyph} Lebenspalast: ${palaceStarSummary(mingIdx)}</div>
             <div class="interp-text">
-                ${mingCombo ? '<strong>Combination Interpretation:</strong><br>' + mingCombo + '<br><br>' : ''}
+                ${mingCombo ? '<strong>Kombinations-Deutung:</strong><br>' + mingCombo + '<br><br>' : ''}
                 <strong>${mainStarDisplay} (${starData.rank}):</strong><br>${starData.personality}
                 ${mingMainStars.length > 1 && starDataByName(mingMainStars[1]) ? '<br><br><strong>' + starDisplayName(mingMainStars[1]) + ' (' + starDataByName(mingMainStars[1]).rank + '):</strong><br>' + starDataByName(mingMainStars[1]).personality : ''}
             </div>
@@ -677,13 +677,13 @@ function calculate() {
     const spouseCombo = getComboInterp(spouseIdx, 'love') || getComboInterp(spouseIdx, 'personality');
     document.getElementById('spouseWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💕 Spouse Palace (${DIZHI[spouseIdx]}): ${palaceStarSummary(spouseIdx)}</div>
+            <div class="interp-title">💕 Ehepalast (${DIZHI[spouseIdx]}): ${palaceStarSummary(spouseIdx)}</div>
             <div class="interp-text">
-                ${spouseApp ? '<strong>Spouse Appearance:</strong><br>' + spouseApp + '<br><br>' : ''}
-                ${spouseCombo ? '<strong>Combination:</strong><br>' + spouseCombo + '<br><br>' : ''}
-                <strong>Spouse Palace Interpretation:</strong><br>
-                ${spouseInterp || 'Kein Hauptstern in Spouse Palace — check the Three Harmony and Four Cardinal positions.'}
-                <br><br><strong>${mainStarDisplay} view on marriage:</strong><br>${starData.love}
+                ${spouseApp ? '<strong>Aussehen des Partners:</strong><br>' + spouseApp + '<br><br>' : ''}
+                ${spouseCombo ? '<strong>Kombination:</strong><br>' + spouseCombo + '<br><br>' : ''}
+                <strong>Ehepalast-Deutung:</strong><br>
+                ${spouseInterp || 'Kein Hauptstern im Ehepalast — pruefen Sie die Drei-Harmonien- und Vier-Kardinal-Positionen.'}
+                <br><br><strong>${mainStarDisplay} Sicht auf Ehe:</strong><br>${starData.love}
             </div>
         </div>`;
 
@@ -692,12 +692,12 @@ function calculate() {
     const wealthCombo = getComboInterp(wealthIdx, 'wealth') || getComboInterp(wealthIdx, 'personality');
     document.getElementById('wealthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💰 Wealth Palace (${DIZHI[wealthIdx]}): ${palaceStarSummary(wealthIdx)}</div>
+            <div class="interp-title">💰 Reichtumpalast (${DIZHI[wealthIdx]}): ${palaceStarSummary(wealthIdx)}</div>
             <div class="interp-text">
-                ${wealthCombo ? '<strong>Combination:</strong><br>' + wealthCombo + '<br><br>' : ''}
-                <strong>Wealth Palace Interpretation:</strong><br>
-                ${wealthInterp || 'Kein Hauptstern in Wealth Palace — check surrounding positions.'}
-                <br><br><strong>${mainStarDisplay} view on wealth:</strong><br>${starData.wealth}
+                ${wealthCombo ? '<strong>Kombination:</strong><br>' + wealthCombo + '<br><br>' : ''}
+                <strong>Reichtumpalast-Deutung:</strong><br>
+                ${wealthInterp || 'Kein Hauptstern im Reichtumpalast — pruefen Sie die umliegenden Positionen.'}
+                <br><br><strong>${mainStarDisplay} Sicht auf Reichtum:</strong><br>${starData.wealth}
             </div>
         </div>`;
 
@@ -706,12 +706,12 @@ function calculate() {
     const careerCombo = getComboInterp(careerIdx, 'career') || getComboInterp(careerIdx, 'personality');
     document.getElementById('careerWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">💼 Career Palace (${DIZHI[careerIdx]}): ${palaceStarSummary(careerIdx)}</div>
+            <div class="interp-title">💼 Karrierepalast (${DIZHI[careerIdx]}): ${palaceStarSummary(careerIdx)}</div>
             <div class="interp-text">
-                ${careerCombo ? '<strong>Combination:</strong><br>' + careerCombo + '<br><br>' : ''}
-                <strong>Career Palace Interpretation:</strong><br>
-                ${careerInterp || 'Kein Hauptstern in Career Palace — check surrounding positions.'}
-                <br><br><strong>${mainStarDisplay} view on career:</strong><br>${starData.career}
+                ${careerCombo ? '<strong>Kombination:</strong><br>' + careerCombo + '<br><br>' : ''}
+                <strong>Karrierepalast-Deutung:</strong><br>
+                ${careerInterp || 'Kein Hauptstern im Karrierepalast — pruefen Sie die umliegenden Positionen.'}
+                <br><br><strong>${mainStarDisplay} Sicht auf Karriere:</strong><br>${starData.career}
             </div>
         </div>`;
 
@@ -719,11 +719,11 @@ function calculate() {
     const healthInterp = palaceInterp(healthIdx, 'health');
     document.getElementById('healthWrap').innerHTML = `
         <div class="interp-card">
-            <div class="interp-title">🏥 Health Palace (${DIZHI[healthIdx]}): ${palaceStarSummary(healthIdx)}</div>
+            <div class="interp-title">🏥 Gesundheitspalast (${DIZHI[healthIdx]}): ${palaceStarSummary(healthIdx)}</div>
             <div class="interp-text">
-                <strong>Health Palace Interpretation:</strong><br>
-                ${healthInterp || 'Kein Hauptstern in Health Palace — refer to Life Palace star health tendencies.'}
-                <br><br><strong>${mainStarDisplay} health:</strong><br>${starData.health}
+                <strong>Gesundheitspalast-Deutung:</strong><br>
+                ${healthInterp || 'Kein Hauptstern im Gesundheitspalast — beziehen Sie sich auf die Gesundheitstendenzen des Lebenspalast-Sterns.'}
+                <br><br><strong>${mainStarDisplay} Gesundheit:</strong><br>${starData.health}
             </div>
         </div>`;
 
@@ -739,9 +739,9 @@ function calculate() {
         const stars = palaceStars[palIdx];
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
         dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent?'background:#1a0d2a;border-left:3px solid #e84393;':''}">
-            <span style="min-width:60px;font-weight:700;color:#e84393;">Age ${startAge}-${endAge}</span>
+            <span style="min-width:60px;font-weight:700;color:#e84393;">Alter ${startAge}-${endAge}</span>
             <span style="flex:1;color:#999;">${DIZHI[palIdx]} ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
-            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Current' + (currentAge >= endAge - 1 ? ' (transition soon)' : '') + '</span>' : ''}
+            ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">Aktuell' + (currentAge >= endAge - 1 ? ' (Wechsel bald)' : '') + '</span>' : ''}
         </div>`;
     }
     dashaHtml += '</div>';
