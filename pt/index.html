@@ -165,7 +165,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .app-footer{text-align:center;padding:30px 20px;font-size:11px;color:#444;border-top:1px solid #1a1a3e;margin-top:10px;}
 .app-footer a{color:#555;text-decoration:none;margin:0 8px;}
 .app-footer a:hover{color:#c9a84c;}
-@media(max-width:1024px){.layout{grid-template-columns:1fr 260px;}.sidebar-left{display:none;}}
+@media(max-width:1024px){.layout{grid-template-columns:1fr 260px;}.sidebar-left .side-card{display:none;}
+.sidebar-left{gap:0;}
 @media(max-width:768px){
 .nav-links a{font-size:11px;padding:6px 8px;white-space:nowrap;}
 .nav-lang{font-size:10px;padding:4px 6px;}
@@ -184,6 +185,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .light-mode .tile-sub{color:#888 !important}
 .light-mode .fw-bar-bg{background:#e0e0e0 !important}
 .light-mode .app-footer{border-color:#e0e0e0 !important;color:#999 !important}
+.light-mode .side-banner{background:#fff !important;border-color:#e0e0e0 !important}
 .light-mode #ghostChat{background:#f5f5f5 !important;border-color:#ddd !important}
 .light-mode #ghostChat div[style*="background:#1a1a3e"]{background:#fff !important;border-color:#ddd !important}
 .light-mode #ghostChat div[style*="background:#0d0d20"]{background:#f0f0f0 !important}
