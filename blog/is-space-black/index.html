@@ -67,7 +67,17 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
     </a>
     <div class="nav-links">
         <a href="/">홈</a>
+        <a href="/about/">소개</a>
         <a href="/blog/" class="active">블로그</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/blog/is-space-black/" selected>KR</option>
+            <option value="/en/blog/is-space-black/">EN</option>
+            <option value="/jp/blog/is-space-black/">JP</option>
+            <option value="/es/blog/is-space-black/">ES</option>
+            <option value="/de/blog/is-space-black/">DE</option>
+            <option value="/fr/blog/is-space-black/">FR</option>
+            <option value="/pt/blog/is-space-black/">PT</option>
+        </select>
     </div>
 </nav>
 

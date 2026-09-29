@@ -67,7 +67,17 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
     </a>
     <div class="nav-links">
         <a href="/">홈</a>
+        <a href="/about/">소개</a>
         <a href="/blog/" class="active">블로그</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/blog/what-is-blackhole/" selected>KR</option>
+            <option value="/en/blog/what-is-blackhole/">EN</option>
+            <option value="/jp/blog/what-is-blackhole/">JP</option>
+            <option value="/es/blog/what-is-blackhole/">ES</option>
+            <option value="/de/blog/what-is-blackhole/">DE</option>
+            <option value="/fr/blog/what-is-blackhole/">FR</option>
+            <option value="/pt/blog/what-is-blackhole/">PT</option>
+        </select>
     </div>
 </nav>
 

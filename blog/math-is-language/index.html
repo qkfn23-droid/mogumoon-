@@ -61,7 +61,17 @@ footer { text-align: center; padding: 30px; color: #888; font-size: 12px; }
     </a>
     <div class="nav-links">
         <a href="/">홈</a>
+        <a href="/about/">소개</a>
         <a href="/blog/" class="active">블로그</a>
+        <select class="nav-lang" onchange="if(this.value)location.href=this.value">
+            <option value="/blog/math-is-language/" selected>KR</option>
+            <option value="/en/blog/math-is-language/">EN</option>
+            <option value="/jp/blog/math-is-language/">JP</option>
+            <option value="/es/blog/math-is-language/">ES</option>
+            <option value="/de/blog/math-is-language/">DE</option>
+            <option value="/fr/blog/math-is-language/">FR</option>
+            <option value="/pt/blog/math-is-language/">PT</option>
+        </select>
     </div>
 </nav>
 
