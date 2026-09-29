@@ -102,6 +102,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .seo-related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
 .seo-related a{display:inline-block;padding:6px 14px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.2);border-radius:8px;color:#d4a853;text-decoration:none;font-size:13px;}
 @media(max-width:768px){
+.ib-row{flex-wrap:wrap;}
+.ib-row select,.ib-row input{min-width:0;flex:1 1 calc(50% - 4px);box-sizing:border-box;}
+
 .page-layout{grid-template-columns:1fr;padding:16px 16px;}
 .sidebar{position:static;display:grid;grid-template-columns:1fr;gap:12px;}
 .input-bar{padding:0 16px;}
