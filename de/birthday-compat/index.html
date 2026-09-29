@@ -24,14 +24,14 @@
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/de/birthday-compat/">
     <meta name="description" content="Free BaZi compatibility. Compare two birth dates for Heavenly Stem combinations, Earthly Branch combinations, clashes, and Five Elements analysis.">
     <link rel="canonical" href="https://mogumoon.com/birthday-compat/">
-    <meta property="og:title" content="BaZi Kompatibilitaet (四柱 合) - Traditional Compatibility | MOGU Moon">
+    <meta property="og:title" content="BaZi Kompatibilität (四柱 合) - Traditional Compatibility | MOGU Moon">
     <meta property="og:description" content="Compare two people's Four Pillars to analyze Stem combinations, Branch combinations, clashes, and Five Elements compatibility.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mogumoon.com/de/birthday-compat/">
     <meta property="og:image" content="https://mogumoon.com/og-image.png">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What is BaZi Kompatibilitaet?","acceptedAnswer":{"@type":"Answer","text":"Vergleicht die Himmelsstamme und Erdzweige zweier Geburtskarten, um Kombinationen, Konflikte und Strafen zu finden."}},
+    {"@type":"Question","name":"What is BaZi Kompatibilität?","acceptedAnswer":{"@type":"Answer","text":"Vergleicht die Himmelsstamme und Erdzweige zweier Geburtskarten, um Kombinationen, Konflikte und Strafen zu finden."}},
     {"@type":"Question","name":"What are Stem Combinations?","acceptedAnswer":{"@type":"Answer","text":"When specific pairs of the 10 Heavenly Stems meet, they combine to generate a new element. In compatibility, stem combinations signify harmony between two people."}},
     {"@type":"Question","name":"Are Branch Konflikte bad?","acceptedAnswer":{"@type":"Answer","text":"Branch clashes indicate conflict and tension, but are not necessarily bad. Konflikte are energy of change and can drive mutual growth."}}
     ]}
@@ -374,11 +374,11 @@ function analyzeTagMaster(ds1, ds2) {
     }
     // 내가 생하는 오행 (식상)
     if ((i1 + 1) % 5 === i2) {
-        return { type: 'Ausgabe (食傷)', desc: 'Ich naehre den anderen — <strong>Hingabe und Geben</strong>. Energie geben, aber Einseitigkeit vermeiden.' };
+        return { type: 'Ausgabe (食傷)', desc: 'Ich nähre den anderen — <strong>Hingabe und Geben</strong>. Energie geben, aber Einseitigkeit vermeiden.' };
     }
     // 상대가 나를 생하는 (인성)
     if ((i2 + 1) % 5 === i1) {
-        return { type: 'Ressource (印星)', desc: 'Partner naehrt mich — <strong>Schutz und Unterstutzung</strong>. Komfort und Stabilitat empfangen.' };
+        return { type: 'Ressource (印星)', desc: 'Partner nährt mich — <strong>Schutz und Unterstutzung</strong>. Komfort und Stabilitat empfangen.' };
     }
     // 내가 극하는 (재성)
     if ((i1 + 2) % 5 === i2) {

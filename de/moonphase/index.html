@@ -199,39 +199,39 @@ function getPhaseInfo(phase) {
     if (phase < 0.0625) return {name:"Neumond",emoji:"🌑",idx:0,illumination,lunarDay,
         meaning:"Die Energie eines <strong>neuen Anfangs</strong> erfüllt die Luft. Mit dem vollständig verborgenen Mond ist dies die ideale Zeit, um Samen zu pflanzen, neue Absichten zu setzen und Ziele zu formulieren. Eine Zeit der Introspektion — plane in Stille und lass die Keime von innen wachsen.",
         good:["Neue Projekte starten","Ziele setzen","Meditation und Reflexion","Tagebuch schreiben","Digitale Auszeit"],
-        bad:["Grosse oeffentliche Praesentation","Endgueltige Entscheidungen","Uebertriebene soziale Aktivitaet"]};
+        bad:["Grosse oeffentliche Präsentation","Endgültige Entscheidungen","Übertriebene soziale Aktivität"]};
     if (phase < 0.1875) return {name:"Zunehmende Sichel",emoji:"🌒",idx:1,illumination,lunarDay,
-        meaning:"Die gepflanzten Samen beginnen zu <strong>keimen</strong>. Es ist Zeit, von der Absicht zur Tat zu schreiten. Noch klein und zart, doch mit bestaendiger Energie wird es wachsen. Wage den ersten Schritt — er muss nicht perfekt sein.",
-        good:["Erste Schritte unternehmen","Persoenlichkeitsentwicklung beginnen","Neue Gewohnheiten aufbauen","Mut fassen"],
+        meaning:"Die gepflanzten Samen beginnen zu <strong>keimen</strong>. Es ist Zeit, von der Absicht zur Tat zu schreiten. Noch klein und zart, doch mit beständiger Energie wird es wachsen. Wage den ersten Schritt — er muss nicht perfekt sein.",
+        good:["Erste Schritte unternehmen","Persönlichkeitsentwicklung beginnen","Neue Gewohnheiten aufbauen","Mut fassen"],
         bad:["Voreilige Urteile","Perfektionismus","Grosse Risiken eingehen"]};
     if (phase < 0.3125) return {name:"Erstes Viertel",emoji:"🌓",idx:2,illumination,lunarDay,
-        meaning:"Die Zeit der <strong>Entscheidung und Tat</strong>. Der Halbmond symbolisiert das Gleichgewicht zwischen Licht und Schatten — ein Augenblick der Wahl. Hindernisse koennen auftauchen, doch sie sind eine Pruefung. Entscheide mutig und schreite voran. Weiche der Herausforderung nicht aus.",
+        meaning:"Die Zeit der <strong>Entscheidung und Tat</strong>. Der Halbmond symbolisiert das Gleichgewicht zwischen Licht und Schatten — ein Augenblick der Wahl. Hindernisse können auftauchen, doch sie sind eine Prüfung. Entscheide mutig und schreite voran. Weiche der Herausforderung nicht aus.",
         good:["Wichtige Entscheidungen treffen","Herausforderungen annehmen","Probleme angehen","Aktiv handeln"],
         bad:["Unentschlossenheit","Aufgeben","Verantwortung meiden"]};
     if (phase < 0.4375) return {name:"Zunehmender Mond",emoji:"🌔",idx:3,illumination,lunarDay,
-        meaning:"Die Zeit des <strong>Verfeinerns und Vollendets</strong>. Wie der fast volle Mond naherst du dich deinem Ziel. Pruefe die Details und schliesse ab, was du begonnen hast. Mit Geduld und Einsatz bis zum Ende wirst du beim Vollmond Fruechte ernten.",
+        meaning:"Die Zeit des <strong>Verfeinerns und Vollendets</strong>. Wie der fast volle Mond naherst du dich deinem Ziel. Prüfe die Details und schliesse ab, was du begonnen hast. Mit Geduld und Einsatz bis zum Ende wirst du beim Vollmond Früchte ernten.",
         good:["Letzte Anpassungen","Abschlussarbeiten","Geduld bewahren","Feedback einarbeiten"],
-        bad:["Etwas Neues beginnen","Richtung aendern","Ueberstuerzt handeln"]};
+        bad:["Etwas Neues beginnen","Richtung ändern","Überstürzt handeln"]};
     if (phase < 0.5625) return {name:"Vollmond",emoji:"🌕",idx:4,illumination,lunarDay,
-        meaning:"Die Energie des Mondes erreicht ihren <strong>Hoehepunkt</strong>! Emotionen verstaerken sich, die Intuition schaerft sich, und Verborgenes tritt ans Licht. Es ist Erntezeit — deine Bemuehungen tragen Fruechte. Feiere und sei dankbar. Wuensche unter dem Vollmond haben eine besondere Kraft.",
-        good:["Feiern und danken","Wuensche aeussern","Der Intuition folgen","Ergebnisse ernten","Liebe gestehen"],
+        meaning:"Die Energie des Mondes erreicht ihren <strong>Höhepunkt</strong>! Emotionen verstärken sich, die Intuition schärft sich, und Verborgenes tritt ans Licht. Es ist Erntezeit — deine Bemühungen tragen Früchte. Feiere und sei dankbar. Wünsche unter dem Vollmond haben eine besondere Kraft.",
+        good:["Feiern und danken","Wünsche äußern","Der Intuition folgen","Ergebnisse ernten","Liebe gestehen"],
         bad:["Emotionale Entscheidungen","Impulsive Handlungen","Grosse Streitigkeiten"]};
     if (phase < 0.6875) return {name:"Abnehmender Mond",emoji:"🌖",idx:5,illumination,lunarDay,
-        meaning:"Eine Zeit des <strong>Teilens und der Dankbarkeit</strong>. So wie das Licht des Vollmondes allmahlich abnimmt, gib das Empfangene zurueck und teile es. Ordne und vermittle das Gelernte. Die innere Weisheit vertieft sich in dieser Phase.",
-        good:["Teilen und helfen","Lehren und mentorieren","Dankbarkeit ausdruecken","Ordnen und nachdenken"],
-        bad:["Neue Anfaenge","Gierig sein"]};
+        meaning:"Eine Zeit des <strong>Teilens und der Dankbarkeit</strong>. So wie das Licht des Vollmondes allmahlich abnimmt, gib das Empfangene zurück und teile es. Ordne und vermittle das Gelernte. Die innere Weisheit vertieft sich in dieser Phase.",
+        good:["Teilen und helfen","Lehren und mentorieren","Dankbarkeit ausdrücken","Ordnen und nachdenken"],
+        bad:["Neue Anfänge","Gierig sein"]};
     if (phase < 0.8125) return {name:"Letztes Viertel",emoji:"🌗",idx:6,illumination,lunarDay,
-        meaning:"Zeit des <strong>Loslassens und Aufraeumens</strong>. Trenne dich von dem, was du nicht mehr brauchst — schlechte Gewohnheiten, toxische Beziehungen, alte Lasten. Damit Neues eintreten kann, muss Platz geschaffen werden. Vergib und lass los.",
-        good:["Ordnen und aufraeumen","Schlechte Gewohnheiten ablegen","Vergeben und versoeehnen","Unnoeiges weggeben"],
+        meaning:"Zeit des <strong>Loslassens und Aufräumens</strong>. Trenne dich von dem, was du nicht mehr brauchst — schlechte Gewohnheiten, toxische Beziehungen, alte Lasten. Damit Neues eintreten kann, muss Platz geschaffen werden. Vergib und lass los.",
+        good:["Ordnen und aufräumen","Schlechte Gewohnheiten ablegen","Vergeben und versoeehnen","Unnoeiges weggeben"],
         bad:["Neue Projekte","Festhalten","In der Vergangenheit leben"]};
     if (phase < 0.9375) return {name:"Abnehmende Sichel",emoji:"🌘",idx:7,illumination,lunarDay,
-        meaning:"Der Mond ist kurz vor dem Verschwinden — eine Zeit der <strong>Ruhe und Erholung</strong>. Dass die Energie nachlasst ist ein natuerlicher Teil des Zyklus. Ueberfordere dich nicht; ruh dich genuegend aus. Achte auf Meditation, Traeume und Intuition. Bald kommt der neue Mond.",
-        good:["Genuegend ruhen","Meditation und Gebet","Traumtagebuch","Energie aufladen"],
-        bad:["Uebertriebene Aktivitaet","Wichtige Anfaenge","Uebertriebene Arbeit"]};
+        meaning:"Der Mond ist kurz vor dem Verschwinden — eine Zeit der <strong>Ruhe und Erholung</strong>. Dass die Energie nachlasst ist ein natürlicher Teil des Zyklus. Überfordere dich nicht; ruh dich genügend aus. Achte auf Meditation, Träume und Intuition. Bald kommt der neue Mond.",
+        good:["Genügend ruhen","Meditation und Gebet","Traumtagebuch","Energie aufladen"],
+        bad:["Übertriebene Aktivität","Wichtige Anfänge","Übertriebene Arbeit"]};
     return {name:"Neumond",emoji:"🌑",idx:0,illumination:0,lunarDay:1,
         meaning:"Die Energie eines <strong>neuen Anfangs</strong> umgibt dich. Plane in Stille.",
         good:["Neue Projekte starten","Ziele setzen","Meditation"],
-        bad:["Grosse Praesentationen","Endgueltige Entscheidungen"]};
+        bad:["Grosse Präsentationen","Endgültige Entscheidungen"]};
 }
 
 function findNextPhase(targetPhase, startDate) {
@@ -323,12 +323,12 @@ document.getElementById("moonContent").innerHTML = `
 
     <div class="info-grid">
         <div class="info-card">
-            <div class="info-label">Naechster Vollmond 🌕</div>
+            <div class="info-label">Nächster Vollmond 🌕</div>
             <div class="info-value">${formatDate(nextFull)}</div>
             <div class="info-sub">${daysUntil(nextFull)}</div>
         </div>
         <div class="info-card">
-            <div class="info-label">Naechster Neumond 🌑</div>
+            <div class="info-label">Nächster Neumond 🌑</div>
             <div class="info-value">${formatDate(nextNew)}</div>
             <div class="info-sub">${daysUntil(nextNew)}</div>
         </div>
@@ -350,7 +350,7 @@ document.getElementById("moonContent").innerHTML = `
     </div>
 
     <div class="reading-card">
-        <div class="reading-title">✅ Gueinstige Aktivitaeten vs ❌ Zu vermeidende Aktivitaeten</div>
+        <div class="reading-title">✅ Gueinstige Aktivitäten vs ❌ Zu vermeidende Aktivitäten</div>
         <div class="activity-grid">
             ${info.good.map(g => `<div class="activity-item activity-good">✅ ${g}</div>`).join("")}
             ${info.bad.map(b => `<div class="activity-item activity-bad">❌ ${b}</div>`).join("")}
@@ -360,11 +360,11 @@ document.getElementById("moonContent").innerHTML = `
     <div class="reading-card">
         <div class="reading-title">📖 Die 8 Mondphasen</div>
         <div class="reading-text">
-            <strong>🌑 Neumond</strong> — Neue Anfaenge, Absichten setzen<br>
+            <strong>🌑 Neumond</strong> — Neue Anfänge, Absichten setzen<br>
             <strong>🌒 Zunehmende Sichel</strong> — Samen keimen, erste Schritte<br>
-            <strong>🌓 Erstes Viertel</strong> — Entscheidung, Herausforderung, Hindernisse ueberwinden<br>
+            <strong>🌓 Erstes Viertel</strong> — Entscheidung, Herausforderung, Hindernisse überwinden<br>
             <strong>🌔 Zunehmender Mond</strong> — Verfeinern, kurz vor der Vollendung<br>
-            <strong>🌕 Vollmond</strong> — Hoehepunkt, Ernte, intensive Emotionen<br>
+            <strong>🌕 Vollmond</strong> — Höhepunkt, Ernte, intensive Emotionen<br>
             <strong>🌖 Abnehmender Mond</strong> — Teilen, Dankbarkeit, Ordnen<br>
             <strong>🌗 Letztes Viertel</strong> — Loslassen, bereinigen, vergeben<br>
             <strong>🌘 Abnehmende Sichel</strong> — Ruhe, Erholung, Introspektion

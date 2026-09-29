@@ -22,10 +22,10 @@
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/numerology/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/numerology/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/numerology/">
-    <meta name="description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl mit deinem Geburtsdatum und Namen.">
+    <meta name="description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persönlichkeitszahl mit deinem Geburtsdatum und Namen.">
     <link rel="canonical" href="https://mogumoon.com/de/numerology/">
     <meta property="og:title" content="Numerologie - Lebenszahl · Ausdruckszahl · Herzenszahl | MOGU Moon">
-    <meta property="og:description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl.">
+    <meta property="og:description" content="Kostenloser Numerologie-Rechner. Analysiere deine Lebenszahl, Ausdruckszahl, Herzenszahl und Persönlichkeitszahl.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://mogumoon.com/de/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/de/numerology/">
@@ -34,7 +34,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type":"Question","name":"Was ist Numerologie?","acceptedAnswer":{"@type":"Answer","text":"Numerologie ist eine alte Wissenschaft, die Persoenlichkeit und Schicksal durch die Bedeutung von Zahlen analysiert. Sie wurde von Pythagoras systematisiert."}},
+        {"@type":"Question","name":"Was ist Numerologie?","acceptedAnswer":{"@type":"Answer","text":"Numerologie ist eine alte Wissenschaft, die Persönlichkeit und Schicksal durch die Bedeutung von Zahlen analysiert. Sie wurde von Pythagoras systematisiert."}},
         {"@type":"Question","name":"Was ist die Lebenszahl (Life Path Number)?","acceptedAnswer":{"@type":"Answer","text":"Es ist die Summe aller Ziffern des Geburtsdatums, reduziert auf eine einzelne Ziffer. Sie zeigt die grosse Richtung und den Zweck deines Lebens an."}},
         {"@type":"Question","name":"Was sind Meisterzahlen?","acceptedAnswer":{"@type":"Answer","text":"11, 22 und 33 sind Meisterzahlen, die nicht weiter reduziert werden. Es sind machtvolle Zahlen mit einer besonderen spirituellen Aufgabe."}}
       ]
@@ -152,9 +152,9 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
             </div>
         </div>
         <div class="form-row">
-            <label>Vollstaendiger Name (Full Name) <span style="font-size:11px;color:#666;font-weight:400;">optional</span></label>
+            <label>Vollständiger Name (Full Name) <span style="font-size:11px;color:#666;font-weight:400;">optional</span></label>
             <input type="text" id="fullName" placeholder="z.B. Max Mustermann" style="text-transform:uppercase;">
-            <div class="form-hint">Gib deinen Namen in lateinischen Buchstaben ein. Wird fuer die Berechnung von Ausdruckszahl, Herzenszahl und Persoenlichkeitszahl verwendet.</div>
+            <div class="form-hint">Gib deinen Namen in lateinischen Buchstaben ein. Wird für die Berechnung von Ausdruckszahl, Herzenszahl und Persönlichkeitszahl verwendet.</div>
         </div>
     </div>
 
@@ -243,7 +243,7 @@ function soulUrgeNumber(name) {
     return reduceNum(sum);
 }
 
-// Persoenlichkeitszahl (Personality) — nur Konsonanten
+// Persönlichkeitszahl (Personality) — nur Konsonanten
 function personalityNumber(name) {
     const letters = name.toUpperCase().replace(/[^A-Z]/g, "");
     if (!letters) return null;
@@ -260,76 +260,76 @@ function maturityNumber(lp, expr) {
 const MASTER = {11: true, 22: true, 33: true};
 
 const LIFE_PATH = {
-    1: {title:"Fuehrungsperson · Pionier", text:"Du bist eine unabhaengige, ehrgeizige Person, die neue Wege ebnet. Dein starker Wille und deine Originalitaet fuehren die Menschen um dich herum. Dein Selbstvertrauen ist maechtig, obwohl du manchmal stur wirken kannst. Du hast die Kraft, Dinge allein zu erreichen, aber wenn du lernst zusammenzuarbeiten, wirst du noch groesseren Erfolg haben."},
-    2: {title:"Harmonie · Diplomat", text:"Du bist sanft, sensibel und kannst die Gefuehle anderer gut lesen. Du glaenzt als Vermittler und strahlst in Kooperation und Partnerschaften. Du hast eine starke Tendenz, Konflikte zu vermeiden, und liebst den Frieden. Deine Intuition ist scharf und du kannst die Wahrheit hinter den Menschen sehen."},
-    3: {title:"Ausdruck · Kuenstler", text:"Du bist kreativ, optimistisch und sehr gesellig. Du hast das Talent, Menschen durch Worte und Schrift zu inspirieren. Du strahlst in Kunst, Schreiben und Schauspielerei. Deine Energie neigt jedoch dazu, sich zu zerstreuen, daher ist Konzentration notwendig."},
-    4: {title:"Aufbau · Pragmatiker", text:"Du bist fleissig, systematisch und zuverlassig. Du bist geschickt darin, solide Grundlagen zu schaffen und mit Beharrlichkeit Grosses zu erreichen. Du schatzt Regeln und Ordnung und strebst nach Stabilitaet. Fuerchte dich nicht vor Veraenderungen und entwickle Flexibilitaet, um noch mehr zu wachsen."},
-    5: {title:"Freiheit · Abenteurer", text:"Du liebst Veraenderung und sehnst dich nach Freiheit. Du bist ueberbordend neugierig und waechst durch vielfaeltige Erfahrungen. Reisen, neue Menschen und Herausforderungen sind der Motor deines Lebens. Es faellt dir schwer, an einem Ort zu bleiben, aber du brauchst auch ein gewisses Mass an Stabilitaet."},
-    6: {title:"Verantwortung · Beschuetzer", text:"Du liebst dein Zuhause und deine Familie und hast ein starkes Verantwortungsbewusstsein. Du strahlst Fuersorge-Energie aus und bist die Stutze der Menschen um dich herum. Du hast ein natuerliches Talent dafuer, harmonische Umgebungen zu schaffen, und einen starken Gerechtigkeitssinn. Pass auf, dass du dich nicht selbst verlierst, waehrend du fuer andere sorgst."},
-    7: {title:"Forschung · Analytiker", text:"Du denkst tief und erforschst die Wahrheit. Du hast eine starke spirituelle und intellektuelle Neigung, und Zeit allein ist fuer dich unerlasslich. Du hast die Faehigkeit, uber die Oberflaeche hinaus zu sehen, und glaenzt in Forschung, Philosophie und Spiritualitaet. Geniesse die Einsamkeit, aber unterscheide sie von ungewollter Isolation."},
-    8: {title:"Macht · Erfolgreich", text:"Du strebst nach materiellem Erfolg und Autoritaet. Du hast ein ausgezeichnetes Geschaftssinn und starke Fuehrungsqualitaeten. Du hast die Faehigkeit, grosse Ziele zu setzen und zu erreichen. Du hast Talent im Umgang mit Geld und Macht, aber das Verlieren des Gleichgewichts kann dich autoritaer machen."},
-    9: {title:"Ideal · Humanist", text:"Du strahlst Menschlichkeit aus und bist idealistisch. Du fuhlst dich zu Dienst, Kunst und Heilung hingezogen und moechtest die Welt zu einem besseren Ort machen. Du bist emotional reich und hast eine grosse Empathiefaehigkeit. Deine Lebensaufgabe ist es, die Vergangenheit loszulassen und vorwaerts zu gehen."},
-    11: {title:"Inspiration · Meister der Intuition", text:"Die Meisterzahl 11 besitzt eine herausragende Intuition und spirituelle Einsicht. Du nimmst das Unsichtbare wahr und siehst Wahrheiten, die andere nicht kennen. Du hast die Veranlagung eines Kuenstlers, Heilers oder spirituellen Fuehrers. Da innere Konflikte und Spannungen gross sind, ist Gleichgewicht entscheidend."},
-    22: {title:"Aufbau · Visionaerer Meister", text:"Die Meisterzahl 22 hat die Kraft, eine enorme Vision zur Realitaet zu machen. Es ist die maechtigste Zahl, die Praktikabilitaet (4) und Intuition (11) verbindet. Sie eignet sich fuer Grossprojekte, Organisationsaufbau und weltveraendernde Arbeit. Sie traegt eine grosse Verantwortung, hat aber das entsprechende Potenzial."},
-    33: {title:"Heilung · Meister der Liebe", text:"Die Meisterzahl 33 ist der hoechste Heiler und Lehrer. Sie fuehrt andere mit bedingungsloser Liebe und Hingabe. Es ist die maximierte Form der Fuersorge-Energie der 6, und du solltest darauf achten, dich nicht zu sehr aufzuopfern. Du bist ein Wesen, das die Welt erleuchtet."}
+    1: {title:"Führungsperson · Pionier", text:"Du bist eine unabhängige, ehrgeizige Person, die neue Wege ebnet. Dein starker Wille und deine Originalität führen die Menschen um dich herum. Dein Selbstvertrauen ist mächtig, obwohl du manchmal stur wirken kannst. Du hast die Kraft, Dinge allein zu erreichen, aber wenn du lernst zusammenzuarbeiten, wirst du noch größeren Erfolg haben."},
+    2: {title:"Harmonie · Diplomat", text:"Du bist sanft, sensibel und kannst die Gefühle anderer gut lesen. Du glänzt als Vermittler und strahlst in Kooperation und Partnerschaften. Du hast eine starke Tendenz, Konflikte zu vermeiden, und liebst den Frieden. Deine Intuition ist scharf und du kannst die Wahrheit hinter den Menschen sehen."},
+    3: {title:"Ausdruck · Künstler", text:"Du bist kreativ, optimistisch und sehr gesellig. Du hast das Talent, Menschen durch Worte und Schrift zu inspirieren. Du strahlst in Kunst, Schreiben und Schauspielerei. Deine Energie neigt jedoch dazu, sich zu zerstreuen, daher ist Konzentration notwendig."},
+    4: {title:"Aufbau · Pragmatiker", text:"Du bist fleissig, systematisch und zuverlassig. Du bist geschickt darin, solide Grundlagen zu schaffen und mit Beharrlichkeit Grosses zu erreichen. Du schatzt Regeln und Ordnung und strebst nach Stabilität. Fürchte dich nicht vor Veränderungen und entwickle Flexibilität, um noch mehr zu wachsen."},
+    5: {title:"Freiheit · Abenteurer", text:"Du liebst Veränderung und sehnst dich nach Freiheit. Du bist überbordend neugierig und wächst durch vielfaeltige Erfahrungen. Reisen, neue Menschen und Herausforderungen sind der Motor deines Lebens. Es fällt dir schwer, an einem Ort zu bleiben, aber du brauchst auch ein gewisses Mass an Stabilität."},
+    6: {title:"Verantwortung · Beschützer", text:"Du liebst dein Zuhause und deine Familie und hast ein starkes Verantwortungsbewusstsein. Du strahlst Fürsorge-Energie aus und bist die Stutze der Menschen um dich herum. Du hast ein natürliches Talent dafür, harmonische Umgebungen zu schaffen, und einen starken Gerechtigkeitssinn. Pass auf, dass du dich nicht selbst verlierst, während du für andere sorgst."},
+    7: {title:"Forschung · Analytiker", text:"Du denkst tief und erforschst die Wahrheit. Du hast eine starke spirituelle und intellektuelle Neigung, und Zeit allein ist für dich unerlasslich. Du hast die Fähigkeit, uber die Oberfläche hinaus zu sehen, und glänzt in Forschung, Philosophie und Spiritualität. Geniesse die Einsamkeit, aber unterscheide sie von ungewollter Isolation."},
+    8: {title:"Macht · Erfolgreich", text:"Du strebst nach materiellem Erfolg und Autorität. Du hast ein ausgezeichnetes Geschaftssinn und starke Führungsqualitäten. Du hast die Fähigkeit, grosse Ziele zu setzen und zu erreichen. Du hast Talent im Umgang mit Geld und Macht, aber das Verlieren des Gleichgewichts kann dich autoritär machen."},
+    9: {title:"Ideal · Humanist", text:"Du strahlst Menschlichkeit aus und bist idealistisch. Du fuhlst dich zu Dienst, Kunst und Heilung hingezogen und möchtest die Welt zu einem besseren Ort machen. Du bist emotional reich und hast eine grosse Empathiefähigkeit. Deine Lebensaufgabe ist es, die Vergangenheit loszulassen und vorwärts zu gehen."},
+    11: {title:"Inspiration · Meister der Intuition", text:"Die Meisterzahl 11 besitzt eine herausragende Intuition und spirituelle Einsicht. Du nimmst das Unsichtbare wahr und siehst Wahrheiten, die andere nicht kennen. Du hast die Veranlagung eines Künstlers, Heilers oder spirituellen Führers. Da innere Konflikte und Spannungen gross sind, ist Gleichgewicht entscheidend."},
+    22: {title:"Aufbau · Visionaerer Meister", text:"Die Meisterzahl 22 hat die Kraft, eine enorme Vision zur Realität zu machen. Es ist die mächtigste Zahl, die Praktikabilität (4) und Intuition (11) verbindet. Sie eignet sich für Grossprojekte, Organisationsaufbau und weltverändernde Arbeit. Sie trägt eine grosse Verantwortung, hat aber das entsprechende Potenzial."},
+    33: {title:"Heilung · Meister der Liebe", text:"Die Meisterzahl 33 ist der höchste Heiler und Lehrer. Sie führt andere mit bedingungsloser Liebe und Hingabe. Es ist die maximierte Form der Fürsorge-Energie der 6, und du solltest darauf achten, dich nicht zu sehr aufzuopfern. Du bist ein Wesen, das die Welt erleuchtet."}
 };
 
 const EXPRESSION = {
-    1: {title:"Unabhaengige Fuehrung", text:"Dein Name traegt die Energie des Pioniers. Du hast das Talent, originelle Ideen zu verwirklichen und andere zu fuehren."},
-    2: {title:"Harmonische Zusammenarbeit", text:"Dein Name traegt die Energie des Diplomaten. Dein Talent, Menschen zu verbinden und Frieden zu schaffen, ist herausragend."},
-    3: {title:"Kreativer Ausdruck", text:"Dein Name traegt die Energie des Kuenstlers. Du hast das Talent, dich durch Worte, Schrift und Kunst mit der Welt zu verstaendigen."},
-    4: {title:"Systematischer Aufbau", text:"Dein Name traegt die Energie des Architekten. Du hast das Talent, solide Grundlagen zu schaffen und praktische Ergebnisse zu erzielen."},
-    5: {title:"Vielseitige Kommunikation", text:"Dein Name traegt die Energie des Abenteurers. Du passt dich dem Wandel an und zeigst Faehigkeiten in verschiedenen Bereichen."},
-    6: {title:"Heilung und Dienst", text:"Dein Name traegt die Energie des Beschuetzers. Du hast das Talent, fuer Menschen zu sorgen und schoene Umgebungen zu schaffen."},
-    7: {title:"Tiefe Analyse", text:"Dein Name traegt die Energie des Gelehrten. Du hast das Talent, tief zu graben und verborgene Wahrheiten aufzudecken."},
-    8: {title:"Materieller Erfolg", text:"Dein Name traegt die Energie des Fuehrers. Dein Talent, Organisationen zu leiten und Reichtum zu schaffen, ist aussergewoehnlich."},
-    9: {title:"Humanitaere Vision", text:"Dein Name traegt die Energie des Weisen. Du beobachtest die Welt mit weitem Blick und inspirierst Menschen."},
-    11: {title:"Spiritueller Bote", text:"Meisterzahl! Dein Name traegt die Energie eines Boten, der Inspiration vermittelt. Du fuehrst Menschen mit Intuition."},
-    22: {title:"Grosser Erbauer", text:"Meisterzahl! Dein Name traegt die Energie eines Erbauers, der die Welt veraendert. Du verwandelst Visionen in Realitaet."},
-    33: {title:"Universeller Heiler", text:"Meisterzahl! Dein Name traegt die Energie der unendlichen Liebe. Deine blosse Existenz ist Heilung."}
+    1: {title:"Unabhängige Führung", text:"Dein Name trägt die Energie des Pioniers. Du hast das Talent, originelle Ideen zu verwirklichen und andere zu führen."},
+    2: {title:"Harmonische Zusammenarbeit", text:"Dein Name trägt die Energie des Diplomaten. Dein Talent, Menschen zu verbinden und Frieden zu schaffen, ist herausragend."},
+    3: {title:"Kreativer Ausdruck", text:"Dein Name trägt die Energie des Künstlers. Du hast das Talent, dich durch Worte, Schrift und Kunst mit der Welt zu verständigen."},
+    4: {title:"Systematischer Aufbau", text:"Dein Name trägt die Energie des Architekten. Du hast das Talent, solide Grundlagen zu schaffen und praktische Ergebnisse zu erzielen."},
+    5: {title:"Vielseitige Kommunikation", text:"Dein Name trägt die Energie des Abenteurers. Du passt dich dem Wandel an und zeigst Fähigkeiten in verschiedenen Bereichen."},
+    6: {title:"Heilung und Dienst", text:"Dein Name trägt die Energie des Beschützers. Du hast das Talent, für Menschen zu sorgen und schöne Umgebungen zu schaffen."},
+    7: {title:"Tiefe Analyse", text:"Dein Name trägt die Energie des Gelehrten. Du hast das Talent, tief zu graben und verborgene Wahrheiten aufzudecken."},
+    8: {title:"Materieller Erfolg", text:"Dein Name trägt die Energie des Führers. Dein Talent, Organisationen zu leiten und Reichtum zu schaffen, ist aussergewöhnlich."},
+    9: {title:"Humanitaere Vision", text:"Dein Name trägt die Energie des Weisen. Du beobachtest die Welt mit weitem Blick und inspirierst Menschen."},
+    11: {title:"Spiritueller Bote", text:"Meisterzahl! Dein Name trägt die Energie eines Boten, der Inspiration vermittelt. Du fuehrst Menschen mit Intuition."},
+    22: {title:"Grosser Erbauer", text:"Meisterzahl! Dein Name trägt die Energie eines Erbauers, der die Welt verändert. Du verwandelst Visionen in Realität."},
+    33: {title:"Universeller Heiler", text:"Meisterzahl! Dein Name trägt die Energie der unendlichen Liebe. Deine blosse Existenz ist Heilung."}
 };
 
 const SOUL_URGE = {
-    1: "Im tiefsten Inneren sehnst du dich nach Unabhaengigkeit und Fuehrung. Du hast den starken Wunsch, deinen eigenen Weg zu gehen.",
+    1: "Im tiefsten Inneren sehnst du dich nach Unabhängigkeit und Führung. Du hast den starken Wunsch, deinen eigenen Weg zu gehen.",
     2: "Im tiefsten Inneren sehnst du dich nach Liebe und Harmonie. Du wunschst dir echte Partnerschaft und friedvolle Beziehungen.",
-    3: "Im tiefsten Inneren sehnst du dich nach Selbstausdruck und Kreation. Du moechtest Freude teilen und dich durch Kunst verstaendigen.",
-    4: "Im tiefsten Inneren sehnst du dich nach Stabilitaet und Ordnung. Du moechtest dein Leben auf einem soliden Fundament aufbauen.",
-    5: "Im tiefsten Inneren sehnst du dich nach Freiheit und Abenteuer. Du moechtest ein Leben ohne Fesseln fuehren.",
-    6: "Im tiefsten Inneren sehnst du dich nach Familie und Liebe. Du moechtest fuer jemanden sorgen und ein schoenes Zuhause schaffen.",
-    7: "Im tiefsten Inneren sehnst du dich nach Wahrheit und Weisheit. Du moechtest den Sinn des Lebens verstehen und tiefe Einsicht gewinnen.",
-    8: "Im tiefsten Inneren sehnst du dich nach Errungenschaften und Anerkennung. Du moechtest deine Faehigkeiten auf einer grossen Buehne entfalten.",
-    9: "Im tiefsten Inneren sehnst du dich danach, der Menschheit zu dienen. Du moechtest die Welt zu einem besseren Ort machen.",
-    11: "Meisterzahl! Du sehnst dich nach spirituellem Erwachen und der Wahrheit einer hoeheren Dimension. Du spuerst eine Anziehung zur unsichtbaren Welt.",
-    22: "Meisterzahl! Du hast ein tiefes Verlangen, ein grosses Erbe fuer die Menschheit zu hinterlassen.",
-    33: "Meisterzahl! Es gibt eine Sehnsucht der Seele, alle Wesen mit bedingungsloser Liebe zu umhuellen."
+    3: "Im tiefsten Inneren sehnst du dich nach Selbstausdruck und Kreation. Du möchtest Freude teilen und dich durch Kunst verständigen.",
+    4: "Im tiefsten Inneren sehnst du dich nach Stabilität und Ordnung. Du möchtest dein Leben auf einem soliden Fundament aufbauen.",
+    5: "Im tiefsten Inneren sehnst du dich nach Freiheit und Abenteuer. Du möchtest ein Leben ohne Fesseln führen.",
+    6: "Im tiefsten Inneren sehnst du dich nach Familie und Liebe. Du möchtest für jemanden sorgen und ein schönes Zuhause schaffen.",
+    7: "Im tiefsten Inneren sehnst du dich nach Wahrheit und Weisheit. Du möchtest den Sinn des Lebens verstehen und tiefe Einsicht gewinnen.",
+    8: "Im tiefsten Inneren sehnst du dich nach Errungenschaften und Anerkennung. Du möchtest deine Fähigkeiten auf einer grossen Buehne entfalten.",
+    9: "Im tiefsten Inneren sehnst du dich danach, der Menschheit zu dienen. Du möchtest die Welt zu einem besseren Ort machen.",
+    11: "Meisterzahl! Du sehnst dich nach spirituellem Erwachen und der Wahrheit einer höheren Dimension. Du spürst eine Anziehung zur unsichtbaren Welt.",
+    22: "Meisterzahl! Du hast ein tiefes Verlangen, ein grosses Erbe für die Menschheit zu hinterlassen.",
+    33: "Meisterzahl! Es gibt eine Sehnsucht der Seele, alle Wesen mit bedingungsloser Liebe zu umhüllen."
 };
 
 const PERSONALITY = {
-    1: "Andere sehen dich als eine selbstbewusste und unabhaengige Person. Du strahlst die Aura einer Fuehrungspersoenlichkeit aus.",
-    2: "Andere sehen dich als eine sanfte und freundliche Person. Deine Anwesenheit laesst andere sich wohlfuehlen.",
+    1: "Andere sehen dich als eine selbstbewusste und unabhängige Person. Du strahlst die Aura einer Führungspersönlichkeit aus.",
+    2: "Andere sehen dich als eine sanfte und freundliche Person. Deine Anwesenheit lässt andere sich wohlfühlen.",
     3: "Andere sehen dich als eine strahlende und attraktive Person. Du hast Humor und schaffst eine gute Stimmung.",
-    4: "Andere sehen dich als eine zuverlaessige und vertrauenswuerdige Person. Du vermittelst ein Gefuehl von Stabilitaet.",
+    4: "Andere sehen dich als eine zuverlässige und vertrauenswürdige Person. Du vermittelst ein Gefühl von Stabilität.",
     5: "Andere sehen dich als eine lebhafte und attraktive Person. Du machst den Eindruck, voller Energie zu sein.",
-    6: "Andere sehen dich als eine warme und verantwortungsbewusste Person. Du strahlst eine haeusliche Atmosphaere aus.",
+    6: "Andere sehen dich als eine warme und verantwortungsbewusste Person. Du strahlst eine haeusliche Atmosphäre aus.",
     7: "Andere sehen dich als eine geheimnisvolle und intellektuelle Person. Du hast eine Aura, die schwer zu durchdringen ist.",
-    8: "Andere sehen dich als eine erfolgreiche und faehige Person. Du machst einen professionellen Eindruck.",
-    9: "Andere sehen dich als eine grosszuegige und charismatische Person. Deine Faehigkeit zur Inklusion ist spuerbar.",
-    11: "Meisterzahl! Du machst einen spirituellen und charismatischen Eindruck. Deine Praesenz ist einzigartig.",
-    22: "Meisterzahl! Du wirst als machtvoller Fuehrer mit Vision gesehen. Du machst den Eindruck, jemand zu sein, der Grosses erreichen wird.",
-    33: "Meisterzahl! Du hast eine Praesenz wie ein warmes Licht. In deiner Naehe entsteht ein Gefuehl von Heilung."
+    8: "Andere sehen dich als eine erfolgreiche und fähige Person. Du machst einen professionellen Eindruck.",
+    9: "Andere sehen dich als eine großzügige und charismatische Person. Deine Fähigkeit zur Inklusion ist spuerbar.",
+    11: "Meisterzahl! Du machst einen spirituellen und charismatischen Eindruck. Deine Präsenz ist einzigartig.",
+    22: "Meisterzahl! Du wirst als machtvoller Führer mit Vision gesehen. Du machst den Eindruck, jemand zu sein, der Grosses erreichen wird.",
+    33: "Meisterzahl! Du hast eine Präsenz wie ein warmes Licht. In deiner Nähe entsteht ein Gefühl von Heilung."
 };
 
 const BIRTHDAY = {
-    1: "Du hast einen starken Unabhaengigkeitssinn und Fuehrungsqualitaeten.",
-    2: "Du bist feinfuehlig, intuitiv und ausgezeichnet in der Zusammenarbeit.",
+    1: "Du hast einen starken Unabhängigkeitssinn und Führungsqualitäten.",
+    2: "Du bist feinfühlig, intuitiv und ausgezeichnet in der Zusammenarbeit.",
     3: "Du bist frohlich, kreativ und hast grosse Ausdruckskraft.",
     4: "Du bist praktisch, fleissig und hast ein solides Fundament.",
-    5: "Du bist frei, sehr anpassungsfaehig und geniessst Veraenderungen.",
-    6: "Du hast ein starkes Verantwortungsbewusstsein, bist haeuslich und liebst Schoenheit.",
+    5: "Du bist frei, sehr anpassungsfähig und geniessst Veränderungen.",
+    6: "Du hast ein starkes Verantwortungsbewusstsein, bist haeuslich und liebst Schönheit.",
     7: "Du bist analytisch, spirituell und denkst tief nach.",
     8: "Du bist ehrgeizig, entschlossen und leistungsorientiert.",
-    9: "Du bist idealistisch, grosszuegig und liebst die Menschheit.",
-    11: "Meisterzahl! Intuition und Inspiration sind maechtig.",
+    9: "Du bist idealistisch, großzügig und liebst die Menschheit.",
+    11: "Meisterzahl! Intuition und Inspiration sind mächtig.",
     22: "Meisterzahl! Verwirklicht grandiose Visionen.",
     33: "Meisterzahl! Besitzt unendliche Liebe und Heilkraft."
 };
@@ -339,7 +339,7 @@ function calculate() {
     const m = parseInt(document.getElementById("birthMonth").value);
     const d = parseInt(document.getElementById("birthDay").value);
     const nameVal = document.getElementById("fullName").value.trim();
-    if (!y) return alert("Bitte waehle dein Geburtsdatum aus.");
+    if (!y) return alert("Bitte wähle dein Geburtsdatum aus.");
 
     const lp = lifePathNumber(y, m, d);
     const bd = birthdayNumber(d);
@@ -354,7 +354,7 @@ function calculate() {
     ];
     if (expr !== null) gridItems.push({num: expr, label: "Ausdruck"});
     if (soul !== null) gridItems.push({num: soul, label: "Herz"});
-    if (pers !== null) gridItems.push({num: pers, label: "Persoenlichkeit"});
+    if (pers !== null) gridItems.push({num: pers, label: "Persönlichkeit"});
     if (matu !== null) gridItems.push({num: matu, label: "Reife"});
 
     const gridEl = document.getElementById("numberGrid");
@@ -380,15 +380,15 @@ function calculate() {
         html += makeCard("Herzenszahl (Soul Urge)", soul, "Summe der Vokale (A,E,I,O,U) des Namens", "Inneres Verlangen", SOUL_URGE[soul]);
     }
     if (pers !== null) {
-        html += makeCard("Persoenlichkeitszahl (Personality)", pers, "Summe der Konsonanten des Namens", "Aeusserer Eindruck", PERSONALITY[pers]);
+        html += makeCard("Persönlichkeitszahl (Personality)", pers, "Summe der Konsonanten des Namens", "Äußerer Eindruck", PERSONALITY[pers]);
     }
     if (matu !== null) {
-        html += makeCard("Reifezahl (Maturity)", matu, `Lebenszahl(${lp}) + Ausdruckszahl(${expr}) = ${lp + expr} \u2192 ${matu}`, "Thema der zweiten Lebenshaelfte", `Die Reifezahl ist die Energie, die in der zweiten Lebenshaelfte (ab 40) stark zum Vorschein kommt. ${LIFE_PATH[matu] ? LIFE_PATH[matu].text.split(".")[0] + "." : ""}`);
+        html += makeCard("Reifezahl (Maturity)", matu, `Lebenszahl(${lp}) + Ausdruckszahl(${expr}) = ${lp + expr} \u2192 ${matu}`, "Thema der zweiten Lebenshälfte", `Die Reifezahl ist die Energie, die in der zweiten Lebenshälfte (ab 40) stark zum Vorschein kommt. ${LIFE_PATH[matu] ? LIFE_PATH[matu].text.split(".")[0] + "." : ""}`);
     }
 
     if (!nameVal) {
         html += `<div class="result-card" style="text-align:center;color:#666;">
-            <p>Gib deinen vollstaendigen Namen ein, um auch <strong style="color:#c9a84c;">Ausdruckszahl, Herzenszahl, Persoenlichkeitszahl und Reifezahl</strong> zu sehen.</p>
+            <p>Gib deinen vollständigen Namen ein, um auch <strong style="color:#c9a84c;">Ausdruckszahl, Herzenszahl, Persönlichkeitszahl und Reifezahl</strong> zu sehen.</p>
         </div>`;
     }
 

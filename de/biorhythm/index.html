@@ -22,10 +22,10 @@
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/biorhythm/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/biorhythm/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/biorhythm/">
-    <meta name="description" content="Kostenloser Biorhythmus-Rechner. Gib dein Geburtsdatum ein und sieh die koerperlichen (23 Tage), emotionalen (28 Tage) und intellektuellen (33 Tage) Rhythmen als Grafik.">
+    <meta name="description" content="Kostenloser Biorhythmus-Rechner. Gib dein Geburtsdatum ein und sieh die körperlichen (23 Tage), emotionalen (28 Tage) und intellektuellen (33 Tage) Rhythmen als Grafik.">
     <link rel="canonical" href="https://mogumoon.com/de/biorhythm/">
     <meta property="og:title" content="Biorhythmus Kostenlos — Körper · Emotion · Intellekt Rechner | MOGU Moon">
-    <meta property="og:description" content="Pruefe deinen koerperlichen, emotionalen und intellektuellen Biorhythmus anhand deines Geburtsdatums.">
+    <meta property="og:description" content="Prüfe deinen körperlichen, emotionalen und intellektuellen Biorhythmus anhand deines Geburtsdatums.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mogumoon.com/de/biorhythm/">
     <meta property="og:image" content="https://mogumoon.com/de/og-image.png">
@@ -34,7 +34,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type":"Question","name":"Was ist Biorhythmus?","acceptedAnswer":{"@type":"Answer","text":"Der Biorhythmus ist eine Theorie, die anhand des Geburtsdatums die koerperlichen (23 Tage), emotionalen (28 Tage) und intellektuellen (33 Tage) Zyklen berechnet, um den Zustand einer Person vorherzusagen."}},
+        {"@type":"Question","name":"Was ist Biorhythmus?","acceptedAnswer":{"@type":"Answer","text":"Der Biorhythmus ist eine Theorie, die anhand des Geburtsdatums die körperlichen (23 Tage), emotionalen (28 Tage) und intellektuellen (33 Tage) Zyklen berechnet, um den Zustand einer Person vorherzusagen."}},
         {"@type":"Question","name":"Ist der Biorhythmus wissenschaftlich?","acceptedAnswer":{"@type":"Answer","text":"Die Biorhythmus-Theorie ist wissenschaftlich nicht belegt, wird aber als unterhaltsames Referenzwerkzeug zur Selbstreflexion genutzt."}},
         {"@type":"Question","name":"Was ist ein kritischer Tag?","acceptedAnswer":{"@type":"Answer","text":"Ein kritischer Tag ist der Tag, an dem ein Rhythmus die Nulllinie kreuzt. Zu diesem Zeitpunkt gilt der Zustand in diesem Bereich als instabil."}}
       ]
@@ -142,7 +142,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <div>
             <div style="font-size:18px;font-weight:700;color:#c9a84c;">📊 Biorhythmus</div>
-            <div style="font-size:11px;color:#666;">Pruefe deinen koerperlichen, emotionalen und intellektuellen Rhythmus anhand deines Geburtsdatums</div>
+            <div style="font-size:11px;color:#666;">Prüfe deinen körperlichen, emotionalen und intellektuellen Rhythmus anhand deines Geburtsdatums</div>
         </div>
     </div>
 </div>
@@ -197,7 +197,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 <script>
 const CYCLES = {physical:23, emotional:28, intellectual:33};
 const COLORS = {physical:"#e74c3c", emotional:"#2ecc71", intellectual:"#3498db"};
-const NAMES = {physical:"Koerper", emotional:"Emotion", intellectual:"Intellekt"};
+const NAMES = {physical:"Körper", emotional:"Emotion", intellectual:"Intellekt"};
 const EMOJIS = {physical:"💪", emotional:"💚", intellectual:"🧠"};
 
 let offsetDays = 0;
@@ -221,17 +221,17 @@ function getStatus(val) {
 
 function getAdvice(p, e, i) {
     let advice = "";
-    if (p > 0.5) advice += "<strong>Koerper:</strong> Du hast viel Energie. Ein guter Zeitpunkt fuer Sport und koerperliche Aktivitaeten.<br>";
-    else if (p < -0.5) advice += "<strong>Koerper:</strong> Deine koerperliche Energie ist niedrig. Ueberanstrenge dich nicht und ruh dich genug aus.<br>";
-    else advice += "<strong>Koerper:</strong> Normales Niveau. Massige Aktivitaet ist angemessen.<br>";
+    if (p > 0.5) advice += "<strong>Körper:</strong> Du hast viel Energie. Ein guter Zeitpunkt für Sport und körperliche Aktivitäten.<br>";
+    else if (p < -0.5) advice += "<strong>Körper:</strong> Deine körperliche Energie ist niedrig. Überanstrenge dich nicht und ruh dich genug aus.<br>";
+    else advice += "<strong>Körper:</strong> Normales Niveau. Massige Aktivität ist angemessen.<br>";
 
     if (e > 0.5) advice += "<strong>Emotion:</strong> Deine Emotionen sind reich und stabil. Triff Menschen und drucke deine Zuneigung aus.<br>";
-    else if (e < -0.5) advice += "<strong>Emotion:</strong> Deine Emotionen sind empfindlich. Vermeide Konflikte und goenner dir Zeit fuer dich.<br>";
+    else if (e < -0.5) advice += "<strong>Emotion:</strong> Deine Emotionen sind empfindlich. Vermeide Konflikte und goenner dir Zeit für dich.<br>";
     else advice += "<strong>Emotion:</strong> Emotional ausgeglichen. Bleib bei deiner gewohnten Routine.<br>";
 
-    if (i > 0.5) advice += "<strong>Intellekt:</strong> Dein Geist ist klar und deine Konzentration ist hoch. Ideal zum Lernen oder fuer wichtige Entscheidungen.";
-    else if (i < -0.5) advice += "<strong>Intellekt:</strong> Dein Urteilsvermoegen koennte eingeschraenkt sein. Schiebe wichtige Entscheidungen auf.";
-    else advice += "<strong>Intellekt:</strong> Normale Konzentration. Geeignet fuer alltaegliche Aufgaben.";
+    if (i > 0.5) advice += "<strong>Intellekt:</strong> Dein Geist ist klar und deine Konzentration ist hoch. Ideal zum Lernen oder für wichtige Entscheidungen.";
+    else if (i < -0.5) advice += "<strong>Intellekt:</strong> Dein Urteilsvermögen könnte eingeschraenkt sein. Schiebe wichtige Entscheidungen auf.";
+    else advice += "<strong>Intellekt:</strong> Normale Konzentration. Geeignet für alltägliche Aufgaben.";
 
     return advice;
 }
@@ -240,7 +240,7 @@ function calculate() {
     const y = parseInt(document.getElementById("birthYear").value);
     const m = parseInt(document.getElementById("birthMonth").value);
     const d = parseInt(document.getElementById("birthDay").value);
-    if (!y || !m || !d) return alert("Bitte waehle dein Geburtsdatum aus.");
+    if (!y || !m || !d) return alert("Bitte wähle dein Geburtsdatum aus.");
 
     birthDate = new Date(y, m - 1, d);
     offsetDays = 0;
@@ -280,7 +280,7 @@ function render() {
         <div class="today-scores">
             <div class="score-card" style="background:rgba(231,76,60,0.06);">
                 <div class="sc-emoji">💪</div>
-                <div class="sc-label">Koerper</div>
+                <div class="sc-label">Körper</div>
                 <div class="sc-value" style="color:${COLORS.physical};">${Math.round(p * 100)}%</div>
                 <div class="sc-status" style="color:${pSt.color};">${pSt.text}</div>
                 <div class="sc-cycle">Zyklus: 23 Tage</div>
@@ -304,7 +304,7 @@ function render() {
         <div class="chart-container">
             <div class="chart-title">30-Tage-Biorhythmus-Grafik</div>
             <div class="legend">
-                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.physical};"></div>Koerper (23T)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:${COLORS.physical};"></div>Körper (23T)</div>
                 <div class="legend-item"><div class="legend-dot" style="background:${COLORS.emotional};"></div>Emotion (28T)</div>
                 <div class="legend-item"><div class="legend-dot" style="background:${COLORS.intellectual};"></div>Intellekt (33T)</div>
             </div>
@@ -320,10 +320,10 @@ function render() {
             <div class="reading-title">📖 Was ist Biorhythmus?</div>
             <div class="reading-text">
                 Der Biorhythmus ist eine Theorie, die Anfang des 20. Jahrhunderts von Dr. Wilhelm Fliess vorgeschlagen wurde.<br><br>
-                <strong>💪 Koerperlicher Rhythmus (23-Tage-Zyklus)</strong> — Beeinflusst Ausdauer, Immunitaet und sportliche Leistung<br>
-                <strong>💚 Emotionaler Rhythmus (28-Tage-Zyklus)</strong> — Beeinflusst Emotionen, Stimmung, Kreativitaet und Beziehungen<br>
-                <strong>🧠 Intellektueller Rhythmus (33-Tage-Zyklus)</strong> — Beeinflusst Konzentration, Urteilsvermoegen, Gedaechtnis und Lernen<br><br>
-                Je naeher an +100%, desto besser der Zustand; je naeher an -100%, desto schlechter. Der Tag, an dem der Rhythmus die Nulllinie kreuzt, heisst <strong>kritischer Tag</strong>.
+                <strong>💪 Körperlicher Rhythmus (23-Tage-Zyklus)</strong> — Beeinflusst Ausdauer, Immunität und sportliche Leistung<br>
+                <strong>💚 Emotionaler Rhythmus (28-Tage-Zyklus)</strong> — Beeinflusst Emotionen, Stimmung, Kreativität und Beziehungen<br>
+                <strong>🧠 Intellektueller Rhythmus (33-Tage-Zyklus)</strong> — Beeinflusst Konzentration, Urteilsvermögen, Gedächtnis und Lernen<br><br>
+                Je näher an +100%, desto besser der Zustand; je näher an -100%, desto schlechter. Der Tag, an dem der Rhythmus die Nulllinie kreuzt, heisst <strong>kritischer Tag</strong>.
             </div>
         </div>
     `;

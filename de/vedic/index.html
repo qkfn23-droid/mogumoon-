@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vedische Astrologie Horoskop - MOGU Moon</title>
-<meta name="description" content="Kostenloses vedisches Astrologie-Horoskop. Berechne Lagna, Nakshatra, Dasha und Planetenpositionen. Vollstaendige Analyse von Persoenlichkeit, Karriere und Beziehungen.">
+<meta name="description" content="Kostenloses vedisches Astrologie-Horoskop. Berechne Lagna, Nakshatra, Dasha und Planetenpositionen. Vollständige Analyse von Persönlichkeit, Karriere und Beziehungen.">
     <link rel="alternate" hreflang="ko" href="https://mogumoon.com/vedic/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/vedic/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/vedic/">
@@ -188,6 +188,9 @@ optgroup{color:#c9a84c;font-weight:600;}
 .ib-group{width:100%;}
 .calc-btn{width:100%;}
 .dasha-row{flex-wrap:wrap;}
+.dasha-item{flex-direction:column;align-items:flex-start;gap:4px;}
+.dasha-planet{min-width:unset;}
+.dasha-period{white-space:normal;word-break:keep-all;}
 }
 @media(max-width:480px){
 .chart-cell{min-height:45px;font-size:10px;}
@@ -216,7 +219,7 @@ optgroup{color:#c9a84c;font-weight:600;}
     </a>
     <div class="nav-links">
         <a href="/de/">Startseite</a>
-        <a href="/de/about/">Ueber uns</a>
+        <a href="/de/about/">Über uns</a>
         <a href="/de/blog/">Blog</a>
         <select class="nav-lang" onchange="if(this.value)location.href=this.value">
             <option value="/vedic/">KR</option>
@@ -236,7 +239,7 @@ optgroup{color:#c9a84c;font-weight:600;}
         <span style="font-size:20px;">&#x1F549;&#xFE0F;</span>
         <div>
             <div style="font-size:18px;font-weight:700;color:#c9a84c;">Vedische Astrologie (Jyotish)</div>
-            <div style="font-size:11px;color:#666;">Lesen Sie Ihr Schicksal durch die uralte astronomische Astrologie aus der vedischen Aera Indiens</div>
+            <div style="font-size:11px;color:#666;">Lesen Sie Ihr Schicksal durch die uralte astronomische Astrologie aus der vedischen Ära Indiens</div>
         </div>
     </div>
     <div class="input-bar-inner">
@@ -249,7 +252,7 @@ optgroup{color:#c9a84c;font-weight:600;}
             </div>
         </div>
         <div class="ib-group">
-            <label>Geburtszeit <span class="optional-tag">(Unbekannt waehlen wenn unsicher)</span></label>
+            <label>Geburtszeit <span class="optional-tag">(Unbekannt wählen wenn unsicher)</span></label>
             <div class="ib-row">
                 <select id="birthAmpm"><option value="am">AM</option><option value="pm">PM</option></select>
                 <select id="birthHour"></select>
@@ -260,7 +263,7 @@ optgroup{color:#c9a84c;font-weight:600;}
         <div class="ib-group">
             <label>Geburtsort</label>
             <select id="birthCity" onchange="onCityChange()">
-                <optgroup label="&#x1F1F0;&#x1F1F7; Suedkorea">
+                <optgroup label="&#x1F1F0;&#x1F1F7; Südkorea">
                     <option value="37.57,126.98,9" selected>Seoul</option>
                     <option value="35.18,129.08,9">Busan</option>
                     <option value="35.87,128.60,9">Daegu</option>
@@ -310,13 +313,13 @@ optgroup{color:#c9a84c;font-weight:600;}
                     <option value="25.20,55.27,4">Dubai (GST)</option>
                 </optgroup>
                 <optgroup label="&#x270F;&#xFE0F; Manuelle Eingabe">
-                    <option value="custom">Breiten-/Laengengrad manuell eingeben</option>
+                    <option value="custom">Breiten-/Längengrad manuell eingeben</option>
                 </optgroup>
             </select>
             <div id="customLatLng" style="display:none;">
                 <div class="input-row">
                     <input type="number" id="birthLat" placeholder="Breitengrad (z.B. 37.57)" step="0.01">
-                    <input type="number" id="birthLng" placeholder="Laengengrad (z.B. 126.98)" step="0.01">
+                    <input type="number" id="birthLng" placeholder="Längengrad (z.B. 126.98)" step="0.01">
                 </div>
             </div>
         </div>
@@ -354,30 +357,30 @@ optgroup{color:#c9a84c;font-weight:600;}
         <div class="tab-panel" id="tab-guide" style="display:none;">
             <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">&#x1FA90; 9 Planeten</div>
             <table class="planet-table" style="margin-bottom:20px;"><tr><th>Symbol</th><th>Planet</th><th>Bedeutung</th></tr>
-            <tr><td>&#x2609;</td><td>Sonne</td><td>Selbst, Fuehrung, Vater</td></tr>
+            <tr><td>&#x2609;</td><td>Sonne</td><td>Selbst, Führung, Vater</td></tr>
             <tr><td>&#x263D;</td><td>Mond</td><td>Emotionen, Geist, Mutter</td></tr>
             <tr><td>&#x2642;</td><td>Mars</td><td>Energie, Handlung, Mut</td></tr>
-            <tr><td>&#x263F;</td><td>Merkur</td><td>Intelligenz, Kommunikation, Geschaeft</td></tr>
-            <tr><td>&#x2643;</td><td>Jupiter</td><td>Glueck, Weisheit, Expansion</td></tr>
-            <tr><td>&#x2640;</td><td>Venus</td><td>Liebe, Schoenheit, Wohlstand</td></tr>
-            <tr><td>&#x2644;</td><td>Saturn</td><td>Pruefungen, Geduld, Verantwortung</td></tr>
+            <tr><td>&#x263F;</td><td>Merkur</td><td>Intelligenz, Kommunikation, Geschäft</td></tr>
+            <tr><td>&#x2643;</td><td>Jupiter</td><td>Glück, Weisheit, Expansion</td></tr>
+            <tr><td>&#x2640;</td><td>Venus</td><td>Liebe, Schönheit, Wohlstand</td></tr>
+            <tr><td>&#x2644;</td><td>Saturn</td><td>Prüfungen, Geduld, Verantwortung</td></tr>
             <tr><td>&#x260A;</td><td>Rahu</td><td>Verlangen, Besessenheit, Wandel</td></tr>
-            <tr><td>&#x260B;</td><td>Ketu</td><td>Befreiung, Spiritualitaet, frueheres Leben</td></tr></table>
-            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">&#x1F3DB;&#xFE0F; 12 Haeuser</div>
+            <tr><td>&#x260B;</td><td>Ketu</td><td>Befreiung, Spiritualität, früheres Leben</td></tr></table>
+            <div style="font-size:15px;font-weight:700;color:#c9a84c;margin-bottom:10px;">&#x1F3DB;&#xFE0F; 12 Häuser</div>
             <table class="planet-table" style="margin-bottom:20px;"><tr><th>Haus</th><th>Bereich</th><th>Haus</th><th>Bereich</th></tr>
             <tr><td>1. Haus</td><td>Ich (Selbst)</td><td>7. Haus</td><td>Partner</td></tr>
-            <tr><td>2. Haus</td><td>Geld (Vermoegen)</td><td>8. Haus</td><td>Transformation</td></tr>
-            <tr><td>3. Haus</td><td>Kommunikation</td><td>9. Haus</td><td>Glueck</td></tr>
+            <tr><td>2. Haus</td><td>Geld (Vermögen)</td><td>8. Haus</td><td>Transformation</td></tr>
+            <tr><td>3. Haus</td><td>Kommunikation</td><td>9. Haus</td><td>Glück</td></tr>
             <tr><td>4. Haus</td><td>Zuhause</td><td>10. Haus</td><td>Karriere</td></tr>
             <tr><td>5. Haus</td><td>Kinder</td><td>11. Haus</td><td>Einkommen</td></tr>
-            <tr><td>6. Haus</td><td>Gesundheit</td><td>12. Haus</td><td>Spiritualitaet</td></tr></table>
+            <tr><td>6. Haus</td><td>Gesundheit</td><td>12. Haus</td><td>Spiritualität</td></tr></table>
             <div class="interp-card"><div class="interp-text" style="font-size:14px;line-height:1.8;"><strong>&#x2B06; Lagna</strong> = Aufsteigendes Zeichen bei der Geburt (am wichtigsten!)<br><strong>&#x1F319; Nakshatra</strong> = 27 Mondstationen</div></div>
         </div>
 
         <!-- Grundchart -->
         <div class="tab-panel" id="tab-basic" style="display:none;">
             <div id="planetTableWrap" style="margin-bottom:16px;"></div>
-            <div class="chart-container"><div class="chart-label">Suedindischer Stil (D1 Rasi)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
+            <div class="chart-container"><div class="chart-label">Südindischer Stil (D1 Rasi)</div><div class="chart-grid" id="d1Chart"></div></div><div id="nakshatraWrap"></div>
         </div>
 
         <!-- Dasha -->
@@ -388,11 +391,11 @@ optgroup{color:#c9a84c;font-weight:600;}
         <!-- Deutung -->
         <div class="tab-panel" id="tab-interp" style="display:none;">
             <div id="interpWrap"></div>
-            <h3 class="section-title" id="secPlanetHouse">&#x1FA90; Planet-fuer-Planet Interpretation</h3>
+            <h3 class="section-title" id="secPlanetHouse">&#x1FA90; Planet-für-Planet Interpretation</h3>
             <div id="planetHouseWrap"></div>
-            <h3 class="section-title" id="secDignity">&#x2696;&#xFE0F; Planetenwuerde</h3>
+            <h3 class="section-title" id="secDignity">&#x2696;&#xFE0F; Planetenwürde</h3>
             <div id="dignityWrap"></div>
-            <h3 class="section-title" id="secLucky">&#x1F340; Gluecksinformationen</h3>
+            <h3 class="section-title" id="secLucky">&#x1F340; Glücksinformationen</h3>
             <div id="luckyWrap"></div>
             <h3 class="section-title" id="secRemedy">&#x1F48E; Heilmittel &amp; Staerkung</h3>
             <div id="remedyWrap"></div>
@@ -425,19 +428,19 @@ optgroup{color:#c9a84c;font-weight:600;}
             <h3 class="section-title" id="secD12">&#x1F46A; D12 Dwadasamsa</h3>
             <div class="chart-container"><div class="chart-label">Dwadasamsa &mdash; Eltern</div><div class="chart-grid" id="d12Chart"></div></div><div id="d12InterpWrap"></div>
             <h3 class="section-title" id="secD40">&#x1F469; D40 Khavedamsa</h3>
-            <div class="chart-container"><div class="chart-label">Khavedamsa &mdash; Muetterliche Linie</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
+            <div class="chart-container"><div class="chart-label">Khavedamsa &mdash; Mütterliche Linie</div><div class="chart-grid" id="d40Chart"></div></div><div id="d40InterpWrap"></div>
             <h3 class="section-title" id="secD45">&#x1F468; D45 Akshavedamsa</h3>
             <div class="chart-container"><div class="chart-label">Akshavedamsa &mdash; Vaeterliche Linie</div><div class="chart-grid" id="d45Chart"></div></div><div id="d45InterpWrap"></div>
         </div>
 
-        <!-- Spiritualitaet / Bildung / Gesundheit -->
+        <!-- Spiritualität / Bildung / Gesundheit -->
         <div class="tab-panel" id="tab-spirit" style="display:none;">
             <h3 class="section-title" id="secD24">&#x1F4DA; D24 Bildung</h3>
             <div class="chart-container"><div class="chart-label">Chaturvimsamsa &mdash; Bildung</div><div class="chart-grid" id="d24Chart"></div></div><div id="d24InterpWrap"></div><div id="educationWrap"></div>
-            <h3 class="section-title" id="secD20">&#x1F64F; D20 Spiritualitaet</h3>
+            <h3 class="section-title" id="secD20">&#x1F64F; D20 Spiritualität</h3>
             <div class="chart-container"><div class="chart-label">Vimsamsa &mdash; Spirituelle Praxis</div><div class="chart-grid" id="d20Chart"></div></div><div id="d20InterpWrap"></div>
-            <h3 class="section-title" id="secD27">&#x1F4AA; D27 Koerperkraft</h3>
-            <div class="chart-container"><div class="chart-label">Saptavimsamsa &mdash; Koerperkraft</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
+            <h3 class="section-title" id="secD27">&#x1F4AA; D27 Körperkraft</h3>
+            <div class="chart-container"><div class="chart-label">Saptavimsamsa &mdash; Körperkraft</div><div class="chart-grid" id="d27Chart"></div></div><div id="d27InterpWrap"></div>
             <h3 class="section-title" id="secD16">&#x1F697; D16 Komfort</h3>
             <div class="chart-container"><div class="chart-label">Shodasamsa &mdash; Materieller Komfort</div><div class="chart-grid" id="d16Chart"></div></div><div id="d16InterpWrap"></div>
         </div>
@@ -446,13 +449,13 @@ optgroup{color:#c9a84c;font-weight:600;}
         <div class="tab-panel" id="tab-warn" style="display:none;">
             <h3 class="section-title" id="secD30">&#x26A0;&#xFE0F; D30 Trimsamsa</h3>
             <div class="chart-container"><div class="chart-label">Trimsamsa &mdash; Krankheit, Hindernisse</div><div class="chart-grid" id="d30Chart"></div></div><div id="d30InterpWrap"></div>
-            <h3 class="section-title" id="secForeign">&#x2708;&#xFE0F; Auslandsglueck &amp; Migration</h3>
+            <h3 class="section-title" id="secForeign">&#x2708;&#xFE0F; Auslandsglück &amp; Migration</h3>
             <div id="foreignWrap"></div>
         </div>
 
         <!-- Karma -->
         <div class="tab-panel" id="tab-karma" style="display:none;">
-            <div class="chart-container"><div class="chart-label">D60 Shashtiamsa &mdash; Karma frueherer Leben</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
+            <div class="chart-container"><div class="chart-label">D60 Shashtiamsa &mdash; Karma früherer Leben</div><div class="chart-grid" id="d60Chart"></div></div><div id="d60InterpWrap"></div>
         </div>
 
     </div>
@@ -462,18 +465,18 @@ optgroup{color:#c9a84c;font-weight:600;}
 <div class="sidebar">
     <div class="side-card">
         <div class="side-title">&#x1F517; Verwandte Tools</div>
-        <a href="../saju/" class="rel-item">&#x262F;&#xFE0F; Vier Saeulen</a>
+        <a href="../saju/" class="rel-item">&#x262F;&#xFE0F; Vier Säulen</a>
         <a href="../ziwei/" class="rel-item">&#x1F49C; Zi Wei Dou Shu</a>
         <a href="../hellenistic/" class="rel-item">&#x1F3DB;&#xFE0F; Hellenistische Astrologie</a>
         <a href="../maya/" class="rel-item">&#x1F300; Maya-Astrologie</a>
-        <a href="../egypt/" class="rel-item">&#x1F441; Aegyptische Dekane</a>
-        <a href="../birthday-compat/" class="rel-item">&#x1F491; Geburtstags-Kompatibilitaet</a>
+        <a href="../egypt/" class="rel-item">&#x1F441; Ägyptische Dekane</a>
+        <a href="../birthday-compat/" class="rel-item">&#x1F491; Geburtstags-Kompatibilität</a>
     </div>
     <div class="side-card">
         <div class="side-title">&#x1F525; Beliebt</div>
         <a href="../tarot/" class="rel-item">&#x1F0CF; Tarot-Karten</a>
         <a href="../daily/" class="rel-item">&#x2728; Tageshoroskop</a>
-        <a href="../past-life/" class="rel-item">&#x1F3DB;&#xFE0F; Frueheres-Leben-Test</a>
+        <a href="../past-life/" class="rel-item">&#x1F3DB;&#xFE0F; Früheres-Leben-Test</a>
         <a href="../dream/" class="rel-item">&#x1F33F; Traumdeutung</a>
     </div>
 </div>
@@ -482,14 +485,14 @@ optgroup{color:#c9a84c;font-weight:600;}
 
 <!-- SEO Content -->
 <div class="seo-content">
-<div class="seo-section"><h2>Was ist vedische Astrologie?</h2><p>Die vedische Astrologie (Jyotish) ist ein astronomisches System, das vor etwa 5000 Jahren im alten Indien entstand. Auf Sanskrit bedeutet es "Wissenschaft des Lichts". Anders als die westliche Astrologie verwendet sie das siderische System (Fixsternbasis). Sie verfuegt ueber praezise Analysemethoden wie Nakshatras (27 Mondstationen), Dasha (Planetenperioden) und Divisional-Charts.</p></div>
-<div class="seo-section"><h2>Haeufig gestellte Fragen</h2><details class="seo-faq"><summary>Unterscheidet sich vedische Astrologie von westlicher Astrologie?</summary><p>Ja, vedische Astrologie nutzt den siderischen Tierkreis (Fixsternbasis), westliche Astrologie den tropischen (Fruehlingstagundnachtgleiche). Es gibt einen Unterschied von etwa 23 Grad.</p></details><details class="seo-faq"><summary>Was wenn ich meine Geburtszeit nicht kenne?</summary><p>Ein grundlegendes Horoskop kann auch ohne Geburtszeit erstellt werden. Genaue Hauspositionen und Lagna (Aszendent) erfordern jedoch die Geburtszeit.</p></details></div>
-<div class="seo-section"><h2>Verwandte Tools</h2><div class="seo-related"><a href="../saju/">Vier Saeulen</a><a href="../hellenistic/">Hellenistische Astrologie</a></div></div>
+<div class="seo-section"><h2>Was ist vedische Astrologie?</h2><p>Die vedische Astrologie (Jyotish) ist ein astronomisches System, das vor etwa 5000 Jahren im alten Indien entstand. Auf Sanskrit bedeutet es "Wissenschaft des Lichts". Anders als die westliche Astrologie verwendet sie das siderische System (Fixsternbasis). Sie verfügt über präzise Analysemethoden wie Nakshatras (27 Mondstationen), Dasha (Planetenperioden) und Divisional-Charts.</p></div>
+<div class="seo-section"><h2>Häufig gestellte Fragen</h2><details class="seo-faq"><summary>Unterscheidet sich vedische Astrologie von westlicher Astrologie?</summary><p>Ja, vedische Astrologie nutzt den siderischen Tierkreis (Fixsternbasis), westliche Astrologie den tropischen (Frühlingstagundnachtgleiche). Es gibt einen Unterschied von etwa 23 Grad.</p></details><details class="seo-faq"><summary>Was wenn ich meine Geburtszeit nicht kenne?</summary><p>Ein grundlegendes Horoskop kann auch ohne Geburtszeit erstellt werden. Genaue Hauspositionen und Lagna (Aszendent) erfordern jedoch die Geburtszeit.</p></details></div>
+<div class="seo-section"><h2>Verwandte Tools</h2><div class="seo-related"><a href="../saju/">Vier Säulen</a><a href="../hellenistic/">Hellenistische Astrologie</a></div></div>
 </div>
 
 <footer class="app-footer">
     &copy; 2025 MOGU Moon<br>
-    <a href="/de/privacy/">Datenschutzerklaerung</a>
+    <a href="/de/privacy/">Datenschutzerklärung</a>
 </footer>
 
 <script>
