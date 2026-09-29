@@ -115,7 +115,25 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
             50% { opacity: 0.8; transform: scale(1.2) rotate(180deg); }
             100% { opacity: 0; transform: scale(1.5) rotate(360deg); }
         }
-    </style>
+    
+.light-mode{background:#f5f5f5 !important;color:#333 !important}
+.light-mode .nav{background:rgba(255,255,255,0.95) !important;border-color:#eee !important}
+.light-mode .nav-links a{color:#666 !important}
+.light-mode .nav-links a.active{background:rgba(201,168,76,0.15) !important;color:#c9a84c !important}
+.light-mode .nav-lang{background:#fff !important;color:#666 !important;border-color:#ddd !important}
+.light-mode .side-card{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important}
+.light-mode .input-bar-inner,.light-mode .chart-container,.light-mode .interp-card,.light-mode .category-header{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important;color:#333 !important}
+.light-mode .section-title{color:#b8860b !important;border-color:#eee !important}
+.light-mode select,.light-mode input{background:#fff !important;color:#333 !important;border-color:#ddd !important}
+.light-mode .interp-text,.light-mode p,.light-mode .seo-section p{color:#555 !important}
+.light-mode .page-layout{color:#666 !important}
+.light-mode .app-footer,.light-mode footer{color:#999 !important}
+.light-mode .quiz-card,.light-mode .result-card,.light-mode .answer-btn,.light-mode .reading-card,.light-mode .cycle-card,.light-mode .stone-card,.light-mode .dream-card,.light-mode .hex-card,.light-mode .moon-card,.light-mode .num-card,.light-mode .life-card,.light-mode .aura-card{background:linear-gradient(135deg,#fff,#fafafa) !important;border-color:#e0e0e0 !important;color:#333 !important}
+.light-mode .tab-btn{color:#666 !important;border-color:#ddd !important}
+.light-mode .tab-btn.active{background:rgba(201,168,76,0.15) !important;color:#c9a84c !important;border-color:#c9a84c !important}
+.light-mode .calc-btn{color:#0a0a1a !important}
+.light-mode .rel-item{color:#666 !important}
+</style>
 <style>.page-layout{padding:16px 40px;display:grid;grid-template-columns:1fr 280px;gap:24px;}
 .content{display:flex;flex-direction:column;gap:16px;min-width:0;}
 .sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:60px;align-self:start;max-height:calc(100vh - 80px);overflow-y:auto;}
