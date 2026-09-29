@@ -101,6 +101,10 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 .light-mode .interp-text,.light-mode .info-desc{color:#555 !important}
 .light-mode .app-footer{color:#999 !important}
 .light-mode .seo-section p{color:#666 !important}
+.light-mode .dasha-table{background:#fff !important;border-color:#e0e0e0 !important}
+.light-mode .dasha-row{border-color:#eee !important;background:transparent !important}
+.light-mode .dasha-row.current{background:#fef0f5 !important}
+.light-mode .dasha-row span.dasha-stars{color:#555 !important}
     </style></head>
 <body>
 <script>if(localStorage.getItem('moguMoonLight')==='true')document.body.classList.add('light-mode');</script>
@@ -945,7 +949,7 @@ function calculate() {
     const isMale = gender === 'm';
     const dahanForward = (isYangStem && isMale) || (!isYangStem && !isMale);
 
-    let dashaHtml = '<div style="background:#0d0515;border:1px solid #3a2540;border-radius:12px;overflow:hidden;">';
+    let dashaHtml = '<div class="dasha-table" style="background:#0d0515;border:1px solid #3a2540;border-radius:12px;overflow:hidden;">';
     const now = new Date();
     const currentAge = now.getFullYear() - year;
     for (let i = 0; i < 10; i++) {
@@ -955,9 +959,9 @@ function calculate() {
         const stars = palaceStars[palIdx];
         const isCurrent = currentAge >= startAge && currentAge <= endAge;
 
-        dashaHtml += `<div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
+        dashaHtml += `<div class="dasha-row" style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #1a0d1e;font-size:13px;${isCurrent ? 'background:#1a0d2a;border-left:3px solid #e84393;' : ''}">
             <span style="min-width:60px;font-weight:700;color:#e84393;">${startAge}~${endAge}세</span>
-            <span style="flex:1;color:#999;">${DIZHI[palIdx]}궁 ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
+            <span class="dasha-stars" style="flex:1;color:#999;">${DIZHI[palIdx]}궁 ${stars.length > 0 ? '— ' + stars.join(', ') : ''}</span>
             ${isCurrent ? '<span style="font-size:10px;background:#e84393;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">현재' + (currentAge >= endAge - 1 ? ' (전환 임박)' : '') + '</span>' : ''}
         </div>`;
     }
