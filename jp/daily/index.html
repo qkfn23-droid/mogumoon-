@@ -308,7 +308,6 @@ const luckyNum = Math.floor(rand() * 99) + 1;
 const luckyColorIdx = Math.floor(rand() * COLORS.length);
 const luckyElement = ELEMENTS[Math.floor(rand() * ELEMENTS.length)];
 const luckyDir = DIRECTIONS[Math.floor(rand() * DIRECTIONS.length)];
-const luckyTime = Math.floor(rand() * 12) + 1;
 const compatibility = ['牡羊座','牡牛座','双子座','蟹座','獅子座','乙女座','天秤座','蠍座','射手座','山羊座','水瓶座','魚座'][Math.floor(rand() * 12)];
 
 document.getElementById('luckGrid').innerHTML = `
@@ -316,8 +315,8 @@ document.getElementById('luckGrid').innerHTML = `
     <div class="luck-item"><div class="luck-label">ラッキーカラー</div><div class="luck-value" style="color:${COLOR_HEX[luckyColorIdx]}">${COLORS[luckyColorIdx]}</div></div>
     <div class="luck-item"><div class="luck-label">ラッキー元素</div><div class="luck-value">${luckyElement}</div></div>
     <div class="luck-item"><div class="luck-label">ラッキー方位</div><div class="luck-value">${luckyDir}</div></div>
-    <div class="luck-item"><div class="luck-label">ラッキータイム</div><div class="luck-value">${luckyTime}時</div></div>
     <div class="luck-item"><div class="luck-label">今日の相性</div><div class="luck-value" style="font-size:14px;">${compatibility}</div></div>
+    <a href="/jp/lucky-time/" class="luck-item" style="text-decoration:none;border:1px solid #c9a84c;"><div class="luck-label">ラッキータイム</div><div class="luck-value" style="font-size:14px;">⏰ 確認する</div></a>
 `;
 
 // ═══════════════════════════════════════
