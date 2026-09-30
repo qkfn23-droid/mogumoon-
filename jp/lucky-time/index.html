@@ -30,7 +30,7 @@
   <meta name="description" content="惑星位置に基づく今日のラッキータイム、ラッキーカラー、ラッキーナンバー。12星座別の幸運の時間を毎日確認しましょう。">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-  {"@type":"Question","name":"ラッキータイムはどのように計算されますか？","acceptedAnswer":{"@type":"Answer","text":"当日の太陽・月・惑星の黄道経度を計算し、各星座の支配星（Domicile Lord）と高揚星（Exaltation）の位置およびアスペクトを分析して幸運の時間帯を算出します。"}},
+  {"@type":"Question","name":"ラッキータイムはどのように計算されますか？","acceptedAnswer":{"@type":"Answer","text":"当日の太陽・月・惑星の黄道経度を計算し、各星座の支配星と高揚星の位置およびアスペクトを分析して幸運の時間帯を算出します。"}},
   {"@type":"Question","name":"ラッキーカラーの基準は何ですか？","acceptedAnswer":{"@type":"Answer","text":"伝統的な占星術において各惑星に割り当てられた色の体系に従います。太陽=金色、月=銀色、火星=赤、金星=緑、木星=青、土星=黒、水星=黄色などです。"}},
   {"@type":"Question","name":"毎日結果は変わりますか？","acceptedAnswer":{"@type":"Answer","text":"はい、惑星は毎日移動するため、ラッキータイムとラッキーカラーも毎日変わります。"}}
   ]}
@@ -153,8 +153,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
   <div id="planetInfo"></div>
   <div id="adviceBox"></div>
 
-<div class="seo-section"><h2>ラッキータイムとは？</h2><p>ラッキータイムは、伝統的な占星術において惑星の黄道経度（Ecliptic Longitude）と星座の支配星（Domicile Lord）の関係を分析して算出する幸運の時間帯です。古代ギリシャ・ローマ時代から各惑星には時間帯（Planetary Hour）が割り当てられており、その日に自分の星座を支配する惑星が最も強くなる時間がラッキータイムとなります。惑星時間体系（Planetary Hours）は土星・木星・火星・太陽・金星・水星・月のカルデア順に従います。</p></div>
-<div class="seo-section"><h2>ラッキーカラーの原理</h2><p>伝統的な占星術では各惑星に固有の色が割り当てられています。太陽は金色、月は銀色/白、火星は赤、金星は緑、木星は青/紫、土星は黒/茶、水星は黄色/オレンジです。その日に自分の星座に最も有利な惑星の色がラッキーカラーになります。この体系はヘレニズム占星術の惑星・色対応体系（Planetary Correspondences）に基づいています。</p></div>
+<div class="seo-section"><h2>ラッキータイムとは？</h2><p>ラッキータイムは、伝統的な占星術において惑星の黄道経度と星座の支配星の関係を分析して算出する幸運の時間帯です。古代ギリシャ・ローマ時代から各惑星には時間帯が割り当てられており、その日に自分の星座を支配する惑星が最も強くなる時間がラッキータイムとなります。惑星時間体系は土星・木星・火星・太陽・金星・水星・月のカルデア順に従います。</p></div>
+<div class="seo-section"><h2>ラッキーカラーの原理</h2><p>伝統的な占星術では各惑星に固有の色が割り当てられています。太陽は金色、月は銀色/白、火星は赤、金星は緑、木星は青/紫、土星は黒/茶、水星は黄色/オレンジです。その日に自分の星座に最も有利な惑星の色がラッキーカラーになります。この体系はヘレニズム占星術の惑星・色対応体系に基づいています。</p></div>
 <div class="seo-section"><h2>使い方</h2><p>1. 自分の星座を選択します。<br>2. 当日の惑星配置に基づいて算出されたラッキータイム・ラッキーカラー・ラッキーナンバーを確認します。<br>3. 支配星の現在位置と主要なアスペクトも一緒に表示されます。<br>4. 毎日惑星が移動するため、結果も毎日変わります。</p></div>
 <div class="seo-section"><h2>よくある質問</h2>
 <details class="seo-faq"><summary>ラッキータイムは毎日変わりますか？</summary><p>はい、惑星は毎日移動するため、ラッキータイムも毎日変わります。</p></details>
@@ -222,7 +222,7 @@ const PLANET_COLORS = {
   Saturn:{name:'黒',hex:'#555',ko:'土星'}
 };
 
-// カルデア順（Planetary Hours）
+// カルデア順
 const CHALDEAN = ['Saturn','Jupiter','Mars','Sun','Venus','Mercury','Moon'];
 
 // 惑星記号
@@ -364,7 +364,7 @@ function calcLuckyColor(zodiacIdx, date) {
   var rulerLon = getPlanetLongitude(z.ruler, date);
   var signPos = getLongitudeSign(rulerLon);
 
-  // 支配星が自分の星座（domicile）にあればその色
+  // 支配星が自分の星座にあればその色
   if (signPos.idx === zodiacIdx) {
     return PLANET_COLORS[z.ruler];
   }
