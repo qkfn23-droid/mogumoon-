@@ -254,29 +254,69 @@ function getLongitudeSign(lon) {
 }
 
 // Calculo da hora da sorte: hora planetaria do regente
+// 전통 Planetary Hours 계산
+// 규칙: 일출부터 주간 12 planetary hours, 일몰부터 야간 12 planetary hours
+// 주간 제1시 = 요일 지배 행성, 이후 칼데아 순서로 순환
+// 칼데아 순서: Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon
 function calcLuckyTime(zodiacIdx, date) {
     var z = ZODIAC[zodiacIdx];
     var ruler = z.ruler;
-    var chIdx = CHALDEAN.indexOf(ruler);
-    // Hora planetaria inicial de acordo com o dia da semana
-    var dayRulerIdx = [3,5,2,6,4,1,0][date.getDay()];
-    var hours = [];
-    for (var h = 0; h < 24; h++) {
-        var hourRulerIdx = (dayRulerIdx + h) % 7;
-        if (CHALDEAN[hourRulerIdx] === ruler) {
-            hours.push(h);
+    // 요일 지배 행성 (전통: Sun=일, Moon=월, Mars=화, Mercury=수, Jupiter=목, Venus=금, Saturn=토)
+    var dayRulers = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
+    var dayRuler = dayRulers[date.getDay()];
+    var startIdx = CHALDEAN.indexOf(dayRuler);
+    // 일출/일몰 근사값 (10월 기준 위도 35도)
+    var sunrise = 6; // 06:00
+    var sunset = 18;  // 18:00
+    var dayLen = (sunset - sunrise) / 12;   // 주간 1 planetary hour 길이 (시간)
+    var nightLen = (24 - sunset + sunrise) / 12; // 야간 1 planetary hour 길이 (시간)
+    // 24 planetary hours 배열 생성 {planet, startTime, endTime}
+    var phours = [];
+    for (var i = 0; i < 24; i++) {
+        var planetIdx = (startIdx + i) % 7;
+        var planet = CHALDEAN[planetIdx];
+        var startTime, endTime;
+        if (i < 12) {
+            // 주간 시간
+            startTime = sunrise + i * dayLen;
+            endTime = sunrise + (i + 1) * dayLen;
+        } else {
+            // 야간 시간
+            var ni = i - 12;
+            startTime = sunset + ni * nightLen;
+            endTime = sunset + (ni + 1) * nightLen;
+            if (startTime >= 24) startTime -= 24;
+            if (endTime >= 24) endTime -= 24;
         }
+        phours.push({planet: planet, start: startTime, end: endTime, idx: i});
     }
-    // Ajuste fino baseado na longitude do regente
-    var rulerLon = getPlanetLongitude(ruler, date);
-    var offset = Math.floor(rulerLon % 3);
-    var primary = hours.length > 0 ? hours[0] : 12;
-    var secondary = hours.length > 1 ? hours[1] : (primary + 6) % 24;
+    // 지배성이 지배하는 planetary hours 찾기
+    var rulerHours = phours.filter(function(ph) { return ph.planet === ruler; });
+    // 주간 시간 우선 (8시~22시 사이)
+    var dayHours = rulerHours.filter(function(ph) { return ph.start >= 8 && ph.start < 22; });
+    var primary, secondary;
+    if (dayHours.length > 0) {
+        primary = dayHours[0];
+        secondary = dayHours.length > 1 ? dayHours[1] : (rulerHours.length > 1 ? rulerHours[1] : rulerHours[0]);
+    } else {
+        primary = rulerHours[0];
+        secondary = rulerHours.length > 1 ? rulerHours[1] : rulerHours[0];
+    }
+    // 지배성 경도로 분(minute) 미세 보정
+    var astroDate = Astronomy.MakeTime(date);
+    var rulerLon = getPlanetLongitude(ruler, astroDate);
+    var minOffset = Math.floor(Math.abs(rulerLon) % 45);
+    var pH = Math.floor(primary.start);
+    var pM = Math.floor((primary.start - pH) * 60) + minOffset % 30;
+    if (pM >= 60) { pH++; pM -= 60; }
+    var sH = Math.floor(secondary.start);
+    var sM = Math.floor((secondary.start - sH) * 60) + (minOffset + 15) % 30;
+    if (sM >= 60) { sH++; sM -= 60; }
     return {
-        primary: primary,
-        primaryMin: offset * 15,
-        secondary: secondary,
-        secondaryMin: (offset + 1) * 10
+        primary: pH,
+        primaryMin: pM,
+        secondary: sH,
+        secondaryMin: sM
     };
 }
 
