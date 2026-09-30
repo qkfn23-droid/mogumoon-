@@ -297,18 +297,16 @@ const ELEMENTS = ['불','물','바람','흙','빛'];
 const DIRECTIONS = ['동쪽','서쪽','남쪽','북쪽','동남쪽','동북쪽','서남쪽','서북쪽'];
 
 const luckyNum = Math.floor(rand() * 99) + 1;
-const luckyColorIdx = Math.floor(rand() * COLORS.length);
 const luckyElement = ELEMENTS[Math.floor(rand() * ELEMENTS.length)];
 const luckyDir = DIRECTIONS[Math.floor(rand() * DIRECTIONS.length)];
 const compatibility = ['양자리','황소자리','쌍둥이자리','게자리','사자자리','처녀자리','천칭자리','전갈자리','사수자리','염소자리','물병자리','물고기자리'][Math.floor(rand() * 12)];
 
 document.getElementById('luckGrid').innerHTML = `
     <div class="luck-item"><div class="luck-label">행운의 숫자</div><div class="luck-value">${luckyNum}</div></div>
-    <div class="luck-item"><div class="luck-label">행운의 색상</div><div class="luck-value" style="color:${COLOR_HEX[luckyColorIdx]}">${COLORS[luckyColorIdx]}</div></div>
     <div class="luck-item"><div class="luck-label">행운의 원소</div><div class="luck-value">${luckyElement}</div></div>
     <div class="luck-item"><div class="luck-label">행운의 방향</div><div class="luck-value">${luckyDir}</div></div>
     <div class="luck-item"><div class="luck-label">오늘의 궁합</div><div class="luck-value" style="font-size:14px;">${compatibility}</div></div>
-    <a href="../lucky-time/" class="luck-item" style="text-decoration:none;border:1px solid #c9a84c;"><div class="luck-label">럭키타임</div><div class="luck-value" style="font-size:14px;">⏰ 확인하기</div></a>
+    <a href="../lucky-time/" class="luck-item" style="text-decoration:none;border:1px solid #c9a84c;"><div class="luck-label">럭키타임 · 럭키컬러</div><div class="luck-value" style="font-size:14px;">⏰ 확인하기</div></a>
 `;
 
 // ═══════════════════════════════════════

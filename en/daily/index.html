@@ -306,18 +306,16 @@ const ELEMENTS = ['Fire','Water','Wind','Earth','Light'];
 const DIRECTIONS = ['East','West','South','North','Southeast','Northeast','Southwest','Northwest'];
 
 const luckyNum = Math.floor(rand() * 99) + 1;
-const luckyColorIdx = Math.floor(rand() * COLORS.length);
 const luckyElement = ELEMENTS[Math.floor(rand() * ELEMENTS.length)];
 const luckyDir = DIRECTIONS[Math.floor(rand() * DIRECTIONS.length)];
 const compatibility = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'][Math.floor(rand() * 12)];
 
 document.getElementById('luckGrid').innerHTML = `
     <div class="luck-item"><div class="luck-label">Lucky Number</div><div class="luck-value">${luckyNum}</div></div>
-    <div class="luck-item"><div class="luck-label">Lucky Color</div><div class="luck-value" style="color:${COLOR_HEX[luckyColorIdx]}">${COLORS[luckyColorIdx]}</div></div>
     <div class="luck-item"><div class="luck-label">Lucky Element</div><div class="luck-value">${luckyElement}</div></div>
     <div class="luck-item"><div class="luck-label">Lucky Direction</div><div class="luck-value">${luckyDir}</div></div>
     <div class="luck-item"><div class="luck-label">Best Match Today</div><div class="luck-value" style="font-size:14px;">${compatibility}</div></div>
-    <a href="/en/lucky-time/" class="luck-item" style="text-decoration:none;border:1px solid #c9a84c;"><div class="luck-label">Lucky Time</div><div class="luck-value" style="font-size:14px;">⏰ Check</div></a>
+    <a href="/en/lucky-time/" class="luck-item" style="text-decoration:none;border:1px solid #c9a84c;"><div class="luck-label">Lucky Time · Lucky Color</div><div class="luck-value" style="font-size:14px;">⏰ Check</div></a>
 `;
 
 // ═══════════════════════════════════════
