@@ -317,19 +317,11 @@ function calcLuckyTime(zodiacIdx, date) {
         }
     }
     if (!secondary) secondary = scored.length > 1 ? scored[1] : scored[0];
-    // 행성 경도로 분(minute) 미세 보정 — 각 별자리마다 다른 보정
-    var astroDate = Astronomy.MakeTime(date);
-    var rulerLon = getPlanetLongitude(z.ruler, astroDate);
-    var exaltLon = z.exalt ? getPlanetLongitude(z.exalt, astroDate) : 0;
-    var tripLon = getPlanetLongitude(z.trip, astroDate);
-    var combinedLon = rulerLon * 5 + exaltLon * 3 + tripLon * 2;
-    var minOffset = Math.floor(Math.abs(combinedLon) % 50);
+    // 분(minute) 보정 — zodiacIdx 기반으로 0~14분 (시간 절대 안 넘김)
+    var pM = (zodiacIdx * 7 + date.getDate()) % 15;
+    var sM = ((zodiacIdx + 3) * 11 + date.getDate()) % 15;
     var pH = Math.floor(primary.start);
-    var pM = Math.floor((primary.start - pH) * 60) + minOffset % 45;
-    if (pM >= 60) { pH++; pM -= 60; }
     var sH = Math.floor(secondary.start);
-    var sM = Math.floor((secondary.start - sH) * 60) + (minOffset + 17) % 40;
-    if (sM >= 60) { sH++; sM -= 60; }
     return {
         primary: pH,
         primaryMin: pM,
