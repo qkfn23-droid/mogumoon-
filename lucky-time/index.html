@@ -253,30 +253,34 @@ function getLongitudeSign(lon) {
     return {sign: SIGN_NAMES[idx], deg: deg.toFixed(1), idx: idx};
 }
 
-// 럭키타임 계산: 지배성의 planetary hour
+// 럭키타임 계산: 전통 Planetary Hours (칼데아 순서)
 function calcLuckyTime(zodiacIdx, date) {
     var z = ZODIAC[zodiacIdx];
     var ruler = z.ruler;
-    var chIdx = CHALDEAN.indexOf(ruler);
-    // 요일에 따른 planetary hour 시작
-    var dayRulerIdx = [3,5,2,6,4,1,0][date.getDay()]; // Sun=Sun,Mon=Moon,...
+    // 요일 지배 행성 (일=Sun, 월=Moon, 화=Mars, 수=Mercury, 목=Jupiter, 금=Venus, 토=Saturn)
+    var dayRulers = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
+    var dayRuler = dayRulers[date.getDay()];
+    // 칼데아 순서에서 요일 지배 행성의 인덱스
+    var startIdx = CHALDEAN.indexOf(dayRuler);
+    // 24시간을 칼데아 순서로 배분 (일출 6시 기준)
     var hours = [];
     for (var h = 0; h < 24; h++) {
-        var hourRulerIdx = (dayRulerIdx + h) % 7;
-        if (CHALDEAN[hourRulerIdx] === ruler) {
-            hours.push(h);
+        var planetIdx = (startIdx + h) % 7;
+        var actualHour = (h + 6) % 24; // 일출 6시부터 시작
+        if (CHALDEAN[planetIdx] === ruler) {
+            hours.push(actualHour);
         }
     }
     // 지배성 경도로 미세 조정
     var rulerLon = getPlanetLongitude(ruler, date);
-    var offset = Math.floor(rulerLon % 3); // 0~2분 보정
+    var offset = Math.floor(Math.abs(rulerLon) % 4);
     var primary = hours.length > 0 ? hours[0] : 12;
-    var secondary = hours.length > 1 ? hours[1] : (primary + 6) % 24;
+    var secondary = hours.length > 1 ? hours[1] : (primary + 7) % 24;
     return {
         primary: primary,
-        primaryMin: offset * 15,
+        primaryMin: offset * 10 + 5,
         secondary: secondary,
-        secondaryMin: (offset + 1) * 10
+        secondaryMin: (offset + 2) * 8
     };
 }
 
