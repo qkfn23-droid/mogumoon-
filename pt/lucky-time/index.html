@@ -187,19 +187,22 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 <script>
 const now = new Date();
 
+// Triplicity Lords (전통 헬레니즘 — Dorotheus 체계)
+// fire: Sun(주간)/Jupiter(야간), earth: Venus(주간)/Moon(야간)
+// air: Saturn(주간)/Mercury(야간), water: Mars(주간)/Mars(야간 — Venus 일부)
 const ZODIAC = [
-    {name:'\u00c1ries',emoji:'\u2648',date:'21/3~19/4',ruler:'Mars',exalt:'Sun',element:'fire',start:0},
-    {name:'Touro',emoji:'\u2649',date:'20/4~20/5',ruler:'Venus',exalt:'Moon',element:'earth',start:30},
-    {name:'G\u00eameos',emoji:'\u264a',date:'21/5~20/6',ruler:'Mercury',exalt:null,element:'air',start:60},
-    {name:'C\u00e2ncer',emoji:'\u264b',date:'21/6~22/7',ruler:'Moon',exalt:'Jupiter',element:'water',start:90},
-    {name:'Le\u00e3o',emoji:'\u264c',date:'23/7~22/8',ruler:'Sun',exalt:null,element:'fire',start:120},
-    {name:'Virgem',emoji:'\u264d',date:'23/8~22/9',ruler:'Mercury',exalt:'Mercury',element:'earth',start:150},
-    {name:'Libra',emoji:'\u264e',date:'23/9~22/10',ruler:'Venus',exalt:'Saturn',element:'air',start:180},
-    {name:'Escorpi\u00e3o',emoji:'\u264f',date:'23/10~21/11',ruler:'Mars',exalt:null,element:'water',start:210},
-    {name:'Sagit\u00e1rio',emoji:'\u2650',date:'22/11~21/12',ruler:'Jupiter',exalt:null,element:'fire',start:240},
-    {name:'Capric\u00f3rnio',emoji:'\u2651',date:'22/12~19/1',ruler:'Saturn',exalt:'Mars',element:'earth',start:270},
-    {name:'Aqu\u00e1rio',emoji:'\u2652',date:'20/1~18/2',ruler:'Saturn',exalt:null,element:'air',start:300},
-    {name:'Peixes',emoji:'\u2653',date:'19/2~20/3',ruler:'Jupiter',exalt:'Venus',element:'water',start:330}
+    {name:'양자리',emoji:'♈',date:'3/21~4/19',ruler:'Mars',exalt:'Sun',trip:'Sun',element:'fire',start:0},
+    {name:'황소자리',emoji:'♉',date:'4/20~5/20',ruler:'Venus',exalt:'Moon',trip:'Venus',element:'earth',start:30},
+    {name:'쌍둥이자리',emoji:'♊',date:'5/21~6/20',ruler:'Mercury',exalt:null,trip:'Saturn',element:'air',start:60},
+    {name:'게자리',emoji:'♋',date:'6/21~7/22',ruler:'Moon',exalt:'Jupiter',trip:'Mars',element:'water',start:90},
+    {name:'사자자리',emoji:'♌',date:'7/23~8/22',ruler:'Sun',exalt:null,trip:'Sun',element:'fire',start:120},
+    {name:'처녀자리',emoji:'♍',date:'8/23~9/22',ruler:'Mercury',exalt:'Mercury',trip:'Venus',element:'earth',start:150},
+    {name:'천칭자리',emoji:'♎',date:'9/23~10/22',ruler:'Venus',exalt:'Saturn',trip:'Saturn',element:'air',start:180},
+    {name:'전갈자리',emoji:'♏',date:'10/23~11/21',ruler:'Mars',exalt:null,trip:'Mars',element:'water',start:210},
+    {name:'사수자리',emoji:'♐',date:'11/22~12/21',ruler:'Jupiter',exalt:null,trip:'Sun',element:'fire',start:240},
+    {name:'염소자리',emoji:'♑',date:'12/22~1/19',ruler:'Saturn',exalt:'Mars',trip:'Venus',element:'earth',start:270},
+    {name:'물병자리',emoji:'♒',date:'1/20~2/18',ruler:'Saturn',exalt:null,trip:'Saturn',element:'air',start:300},
+    {name:'물고기자리',emoji:'♓',date:'2/19~3/20',ruler:'Jupiter',exalt:'Venus',trip:'Mars',element:'water',start:330}
 ];
 
 // Correspondencias planeta-cor (tradicional)
@@ -258,59 +261,68 @@ function getLongitudeSign(lon) {
 // 규칙: 일출부터 주간 12 planetary hours, 일몰부터 야간 12 planetary hours
 // 주간 제1시 = 요일 지배 행성, 이후 칼데아 순서로 순환
 // 칼데아 순서: Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon
+// 전통 Planetary Hours + Domicile/Exaltation/Triplicity 3중 가중치
+// Domicile(지배성) = 5점, Exaltation(고양성) = 3점, Triplicity(삼합) = 2점
+// 각 planetary hour마다 점수 합산 → 최고 점수 시간 = 럭키타임
 function calcLuckyTime(zodiacIdx, date) {
     var z = ZODIAC[zodiacIdx];
-    var ruler = z.ruler;
-    // 요일 지배 행성 (전통: Sun=일, Moon=월, Mars=화, Mercury=수, Jupiter=목, Venus=금, Saturn=토)
     var dayRulers = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
     var dayRuler = dayRulers[date.getDay()];
     var startIdx = CHALDEAN.indexOf(dayRuler);
-    // 일출/일몰 근사값 (10월 기준 위도 35도)
-    var sunrise = 6; // 06:00
-    var sunset = 18;  // 18:00
-    var dayLen = (sunset - sunrise) / 12;   // 주간 1 planetary hour 길이 (시간)
-    var nightLen = (24 - sunset + sunrise) / 12; // 야간 1 planetary hour 길이 (시간)
-    // 24 planetary hours 배열 생성 {planet, startTime, endTime}
+    var sunrise = 6;
+    var sunset = 18;
+    var dayLen = (sunset - sunrise) / 12;
+    var nightLen = (24 - sunset + sunrise) / 12;
+    // 24 planetary hours 생성
     var phours = [];
     for (var i = 0; i < 24; i++) {
         var planetIdx = (startIdx + i) % 7;
         var planet = CHALDEAN[planetIdx];
-        var startTime, endTime;
+        var startTime;
         if (i < 12) {
-            // 주간 시간
             startTime = sunrise + i * dayLen;
-            endTime = sunrise + (i + 1) * dayLen;
         } else {
-            // 야간 시간
             var ni = i - 12;
             startTime = sunset + ni * nightLen;
-            endTime = sunset + (ni + 1) * nightLen;
             if (startTime >= 24) startTime -= 24;
-            if (endTime >= 24) endTime -= 24;
         }
-        phours.push({planet: planet, start: startTime, end: endTime, idx: i});
+        // 3중 가중치 점수 계산
+        var score = 0;
+        if (planet === z.ruler) score += 5;       // Domicile Lord
+        if (z.exalt && planet === z.exalt) score += 3; // Exaltation Lord
+        if (planet === z.trip) score += 2;         // Triplicity Lord
+        phours.push({planet: planet, start: startTime, score: score, idx: i});
     }
-    // 지배성이 지배하는 planetary hours 찾기
-    var rulerHours = phours.filter(function(ph) { return ph.planet === ruler; });
-    // 주간 시간 우선 (8시~22시 사이)
-    var dayHours = rulerHours.filter(function(ph) { return ph.start >= 8 && ph.start < 22; });
-    var primary, secondary;
-    if (dayHours.length > 0) {
-        primary = dayHours[0];
-        secondary = dayHours.length > 1 ? dayHours[1] : (rulerHours.length > 1 ? rulerHours[1] : rulerHours[0]);
-    } else {
-        primary = rulerHours[0];
-        secondary = rulerHours.length > 1 ? rulerHours[1] : rulerHours[0];
+    // 점수 > 0인 시간만 필터 + 점수 내림차순 정렬
+    var scored = phours.filter(function(ph) { return ph.score > 0; });
+    scored.sort(function(a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        // 같은 점수면 주간(8~20시) 우선
+        var aDay = (a.start >= 8 && a.start < 20) ? 1 : 0;
+        var bDay = (b.start >= 8 && b.start < 20) ? 1 : 0;
+        return bDay - aDay;
+    });
+    var primary = scored[0];
+    // secondary: primary와 다른 시간대에서 선택
+    var secondary = scored[1] || scored[0];
+    for (var j = 1; j < scored.length; j++) {
+        if (Math.abs(scored[j].start - primary.start) > 3) {
+            secondary = scored[j];
+            break;
+        }
     }
-    // 지배성 경도로 분(minute) 미세 보정
+    // 행성 경도로 분(minute) 미세 보정 — 각 별자리마다 다른 보정
     var astroDate = Astronomy.MakeTime(date);
-    var rulerLon = getPlanetLongitude(ruler, astroDate);
-    var minOffset = Math.floor(Math.abs(rulerLon) % 45);
+    var rulerLon = getPlanetLongitude(z.ruler, astroDate);
+    var exaltLon = z.exalt ? getPlanetLongitude(z.exalt, astroDate) : 0;
+    var tripLon = getPlanetLongitude(z.trip, astroDate);
+    var combinedLon = rulerLon * 5 + exaltLon * 3 + tripLon * 2;
+    var minOffset = Math.floor(Math.abs(combinedLon) % 50);
     var pH = Math.floor(primary.start);
-    var pM = Math.floor((primary.start - pH) * 60) + minOffset % 30;
+    var pM = Math.floor((primary.start - pH) * 60) + minOffset % 45;
     if (pM >= 60) { pH++; pM -= 60; }
     var sH = Math.floor(secondary.start);
-    var sM = Math.floor((secondary.start - sH) * 60) + (minOffset + 15) % 30;
+    var sM = Math.floor((secondary.start - sH) * 60) + (minOffset + 17) % 40;
     if (sM >= 60) { sH++; sM -= 60; }
     return {
         primary: pH,

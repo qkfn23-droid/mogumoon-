@@ -5,11 +5,12 @@
 <title>Instagram - 10月 星座別ラッキーカラー</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #333; display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; justify-content: center; }
+body { background: #222; display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; justify-content: center; }
 
 .slide {
     width: 1080px;
     height: 1350px;
+    background: #0a0a1a;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -19,295 +20,418 @@ body { background: #333; display: flex; flex-wrap: wrap; gap: 20px; padding: 20p
     font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
 }
 
-/* 그라데이션 배경 — 각 별자리 원소별 다른 색 */
-.slide.cover { background: linear-gradient(135deg, #1a0a2e, #0a0a1a, #1a0a2e); }
-.slide.fire { background: linear-gradient(160deg, #1a0505, #2a0a0a, #0a0a1a); }
-.slide.earth { background: linear-gradient(160deg, #0a1a0a, #1a2a1a, #0a0a1a); }
-.slide.air { background: linear-gradient(160deg, #0a0a1a, #0a1a2a, #0a0a1a); }
-.slide.water { background: linear-gradient(160deg, #05051a, #0a0a2a, #0a0a1a); }
+/* 별 배경 */
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 20% 80%, rgba(201,168,76,0.4), transparent),
+        radial-gradient(1px 1px at 35% 25%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 52% 65%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 68% 8%, rgba(201,168,76,0.3), transparent),
+        radial-gradient(1px 1px at 82% 45%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 92% 78%, rgba(201,168,76,0.4), transparent),
+        radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 45% 92%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 75% 35%, rgba(201,168,76,0.2), transparent);
+    z-index: 0;
+}
 
 .slide > * { position: relative; z-index: 1; }
 
-/* 표지 */
-.cover-icon { font-size: 80px; margin-bottom: 20px; }
-.cover-title { font-size: 56px; color: #fff; font-weight: 700; letter-spacing: 4px; margin-bottom: 8px; }
-.cover-sub { font-size: 32px; color: rgba(255,255,255,0.5); letter-spacing: 6px; margin-bottom: 40px; }
-.cover-line { width: 240px; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); margin-bottom: 40px; }
-.cover-desc { font-size: 22px; color: rgba(255,255,255,0.4); letter-spacing: 2px; line-height: 1.8; text-align: center; }
-.cover-brand { position: absolute; bottom: 60px; font-size: 22px; color: rgba(255,255,255,0.2); letter-spacing: 4px; font-family: 'Georgia', serif; }
-
-/* 별자리 슬라이드 */
-.zodiac-symbol { font-size: 100px; margin-bottom: 12px; }
-.zodiac-name { font-size: 44px; color: #fff; font-weight: 700; letter-spacing: 8px; margin-bottom: 4px; }
-.zodiac-name-en { font-size: 18px; color: rgba(255,255,255,0.3); letter-spacing: 6px; margin-bottom: 30px; font-family: 'Georgia', serif; }
-
-/* 럭키컬러 원 */
-.color-circle {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin-bottom: 24px;
-    box-shadow: 0 0 60px rgba(255,255,255,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* 골드 테두리 */
+.frame {
+    position: absolute;
+    top: 40px; left: 40px; right: 40px; bottom: 40px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    z-index: 1;
 }
-.color-name { font-size: 36px; color: #fff; font-weight: 700; margin-bottom: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.color-planet { font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 3px; margin-bottom: 36px; }
+.frame-corner { position: absolute; width: 20px; height: 20px; border-color: rgba(201,168,76,0.5); z-index: 1; }
+.frame-corner.tl { top: 36px; left: 36px; border-top: 2px solid; border-left: 2px solid; }
+.frame-corner.tr { top: 36px; right: 36px; border-top: 2px solid; border-right: 2px solid; }
+.frame-corner.bl { bottom: 36px; left: 36px; border-bottom: 2px solid; border-left: 2px solid; }
+.frame-corner.br { bottom: 36px; right: 36px; border-bottom: 2px solid; border-right: 2px solid; }
+
+/* ===== 표지 ===== */
+.cover-moon { margin-bottom: 20px; }
+.cover-tag { font-size: 16px; color: rgba(201,168,76,0.5); letter-spacing: 8px; margin-bottom: 20px; }
+.cover-title { font-size: 72px; color: #c9a84c; font-weight: 700; letter-spacing: 6px; margin-bottom: 6px; }
+.cover-sub { font-size: 30px; color: rgba(201,168,76,0.45); letter-spacing: 10px; margin-bottom: 40px; }
+.cover-line { width: 200px; height: 1px; background: linear-gradient(90deg, transparent, #c9a84c, transparent); margin-bottom: 40px; }
+.cover-desc { font-size: 24px; color: rgba(201,168,76,0.4); line-height: 2.0; text-align: center; letter-spacing: 2px; }
+.cover-brand { position: absolute; bottom: 65px; font-size: 20px; color: rgba(201,168,76,0.25); letter-spacing: 5px; font-family: 'Georgia', serif; }
+
+/* ===== 별자리 슬라이드 ===== */
+.z-symbol { font-size: 80px; margin-bottom: 10px; }
+.z-name { font-size: 52px; color: #c9a84c; font-weight: 700; letter-spacing: 10px; margin-bottom: 4px; }
+.z-name-en { font-size: 18px; color: rgba(201,168,76,0.35); letter-spacing: 8px; margin-bottom: 6px; font-family: 'Georgia', serif; }
+.z-date { font-size: 18px; color: rgba(201,168,76,0.3); letter-spacing: 3px; margin-bottom: 32px; }
+
+/* 컬러 카드 — 핵심 비주얼 */
+.color-card {
+    width: 600px;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+}
+.color-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.color-emoji { font-size: 60px; margin-bottom: 12px; }
+.color-name { font-size: 48px; color: #fff; font-weight: 700; letter-spacing: 6px; text-shadow: 0 2px 16px rgba(0,0,0,0.4); margin-bottom: 8px; }
+.color-planet { font-size: 18px; color: rgba(255,255,255,0.6); letter-spacing: 4px; }
 
 /* 구분선 */
-.divider { width: 100px; height: 1px; background: rgba(255,255,255,0.2); margin-bottom: 36px; }
+.z-divider { width: 120px; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent); margin-bottom: 32px; }
 
-/* 한마디 */
-.message { font-size: 24px; color: rgba(255,255,255,0.7); line-height: 2.0; text-align: center; max-width: 700px; padding: 0 60px; }
+/* 메시지 */
+.z-message { font-size: 26px; color: #e0d8cc; line-height: 2.2; text-align: center; max-width: 700px; padding: 0 40px; }
 
-/* 하단 */
-.lucky-row { display: flex; gap: 50px; margin-top: 40px; }
-.lucky-item { text-align: center; }
-.lucky-label { font-size: 14px; color: rgba(255,255,255,0.35); letter-spacing: 3px; margin-bottom: 6px; }
-.lucky-val { font-size: 28px; color: #fff; font-weight: 700; }
+/* 하단 럭키 */
+.z-lucky { display: flex; gap: 60px; margin-top: 36px; }
+.z-lucky-item { text-align: center; }
+.z-lucky-label { font-size: 14px; color: rgba(201,168,76,0.4); letter-spacing: 4px; margin-bottom: 8px; }
+.z-lucky-val { font-size: 32px; color: #c9a84c; font-weight: 700; font-family: 'Georgia', serif; }
 
-.slide-brand { position: absolute; bottom: 50px; font-size: 18px; color: rgba(255,255,255,0.15); letter-spacing: 3px; font-family: 'Georgia', serif; }
-.slide-num { position: absolute; top: 50px; right: 55px; font-size: 14px; color: rgba(255,255,255,0.15); letter-spacing: 2px; }
-.slide-element { position: absolute; top: 50px; left: 55px; font-size: 14px; color: rgba(255,255,255,0.2); letter-spacing: 2px; }
+/* 원소 뱃지 */
+.element-badge {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    font-size: 14px;
+    color: rgba(201,168,76,0.4);
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+
+.slide-num { position: absolute; top: 60px; right: 60px; font-size: 14px; color: rgba(201,168,76,0.2); letter-spacing: 2px; z-index: 2; }
+.slide-brand { position: absolute; bottom: 65px; font-size: 18px; color: rgba(201,168,76,0.2); letter-spacing: 4px; font-family: 'Georgia', serif; z-index: 2; }
 </style>
 </head>
 <body>
 
 <!-- 1. 表紙 -->
-<div class="slide cover">
-    <div class="cover-icon">🎨</div>
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="cover-tag">✦ TRADITIONAL ASTROLOGY ✦</div>
+    <div class="cover-moon"><svg viewBox="0 0 120 120" width="140" height="140" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="#FFD93D"/><ellipse cx="43" cy="68" rx="7" ry="4" fill="rgba(245,150,150,0.6)"/><ellipse cx="77" cy="68" rx="7" ry="4" fill="rgba(245,150,150,0.6)"/><circle cx="48" cy="62" r="2.8" fill="#333"/><circle cx="72" cy="62" r="2.8" fill="#333"/><path d="M56,75 Q60,79 64,75" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg></div>
     <div class="cover-title">ラッキーカラー</div>
     <div class="cover-sub">10月 · 星座別</div>
     <div class="cover-line"></div>
-    <div class="cover-desc">惑星の位置から導く<br>あなたの幸運の色</div>
+    <div class="cover-desc">支配星の位置と惑星のアスペクトから導く<br>あなたの10月の幸運の色</div>
     <div class="cover-brand">MOGU MOON</div>
 </div>
 
-<!-- 2. 牡羊座 ♈ — 火 -->
-<div class="slide fire">
-    <div class="slide-element">🔥 火のサイン</div>
+<!-- 2. 牡羊座 ♈ 火 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🔥 火のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♈</div>
-    <div class="zodiac-name">牡羊座</div>
-    <div class="zodiac-name-en">ARIES</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #e74c3c, #c0392b);"></div>
-    <div class="color-name">レッド</div>
-    <div class="color-planet">支配星 火星 ♂ の色</div>
-    <div class="divider"></div>
-    <div class="message">火星の力強いエネルギーが<br>あなたの行動力を後押しする月。<br>赤を身につけて、勇気を纏え。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">14:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">9</div></div>
+    <div class="z-symbol">♈</div>
+    <div class="z-name">牡羊座</div>
+    <div class="z-name-en">ARIES</div>
+    <div class="z-date">3月21日 — 4月19日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#c0392b,#e74c3c,#d63031);">
+        <div class="color-emoji">🔴</div>
+        <div class="color-name">レッド</div>
+        <div class="color-planet">支配星 火星 ♂</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">火星が威厳の座に入る月。<br>赤は行動と勇気の色。<br>鉄は折れる前に鍛えよ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">14:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">9</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 3. 牡牛座 ♉ — 土 -->
-<div class="slide earth">
-    <div class="slide-element">🌿 土のサイン</div>
+<!-- 3. 牡牛座 ♉ 土 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🌿 土のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♉</div>
-    <div class="zodiac-name">牡牛座</div>
-    <div class="zodiac-name-en">TAURUS</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #27ae60, #1e8449);"></div>
-    <div class="color-name">グリーン</div>
-    <div class="color-planet">支配星 金星 ♀ の色</div>
-    <div class="divider"></div>
-    <div class="message">金星が豊かさの宮を巡る。<br>春に蒔いた種が実を結ぶ時。<br>緑は成長と収穫の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">10:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">6</div></div>
+    <div class="z-symbol">♉</div>
+    <div class="z-name">牡牛座</div>
+    <div class="z-name-en">TAURUS</div>
+    <div class="z-date">4月20日 — 5月20日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#1e8449,#27ae60,#2ecc71);">
+        <div class="color-emoji">🟢</div>
+        <div class="color-name">グリーン</div>
+        <div class="color-planet">支配星 金星 ♀</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">金星が豊かさの宮を巡る。<br>緑は成長と収穫の色。<br>春に蒔いた種が今、実を結ぶ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">10:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">6</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 4. 双子座 ♊ — 風 -->
-<div class="slide air">
-    <div class="slide-element">💨 風のサイン</div>
+<!-- 4. 双子座 ♊ 風 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💨 風のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♊</div>
-    <div class="zodiac-name">双子座</div>
-    <div class="zodiac-name-en">GEMINI</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #f1c40f, #d4ac0d);"></div>
-    <div class="color-name">イエロー</div>
-    <div class="color-planet">支配星 水星 ☿ の色</div>
-    <div class="divider"></div>
-    <div class="message">水星が夜のサインに留まる月。<br>言葉が二倍の重みを持つ時。<br>黄色は知性と伝達の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">15:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">5</div></div>
+    <div class="z-symbol">♊</div>
+    <div class="z-name">双子座</div>
+    <div class="z-name-en">GEMINI</div>
+    <div class="z-date">5月21日 — 6月20日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#d4ac0d,#f1c40f,#f9e54a);">
+        <div class="color-emoji">🟡</div>
+        <div class="color-name">イエロー</div>
+        <div class="color-planet">支配星 水星 ☿</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">水星が夜のサインに留まる。<br>黄色は知性と伝達の色。<br>言葉は今月、二倍の重みを持つ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">15:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">5</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 5. 蟹座 ♋ — 水 -->
-<div class="slide water">
-    <div class="slide-element">💧 水のサイン</div>
+<!-- 5. 蟹座 ♋ 水 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💧 水のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♋</div>
-    <div class="zodiac-name">蟹座</div>
-    <div class="zodiac-name-en">CANCER</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #bdc3c7, #95a5a6);"></div>
-    <div class="color-name">シルバー</div>
-    <div class="color-planet">支配星 月 ☽ の色</div>
-    <div class="divider"></div>
-    <div class="message">月が祖先と根の宮で満ちてゆく。<br>家と血筋に光が当たる時。<br>銀色は直感と守護の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">21:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">2</div></div>
+    <div class="z-symbol">♋</div>
+    <div class="z-name">蟹座</div>
+    <div class="z-name-en">CANCER</div>
+    <div class="z-date">6月21日 — 7月22日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#7f8c8d,#bdc3c7,#ecf0f1);">
+        <div class="color-emoji">⚪</div>
+        <div class="color-name" style="color:#333;">シルバー</div>
+        <div class="color-planet" style="color:rgba(0,0,0,0.5);">支配星 月 ☽</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">月が祖先と根の宮で満ちてゆく。<br>銀色は直感と守護の色。<br>信頼を得た者にのみ扉を開けよ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">21:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">2</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 6. 獅子座 ♌ — 火 -->
-<div class="slide fire">
-    <div class="slide-element">🔥 火のサイン</div>
+<!-- 6. 獅子座 ♌ 火 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🔥 火のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♌</div>
-    <div class="zodiac-name">獅子座</div>
-    <div class="zodiac-name-en">LEO</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #c9a84c, #a8872a);"></div>
-    <div class="color-name">ゴールド</div>
-    <div class="color-planet">支配星 太陽 ☉ の色</div>
-    <div class="divider"></div>
-    <div class="message">太陽が天秤座 — 陥落の地に入る。<br>誇りは外交に道を譲る時。<br>金色は王者の威厳を守る色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">12:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">1</div></div>
+    <div class="z-symbol">♌</div>
+    <div class="z-name">獅子座</div>
+    <div class="z-name-en">LEO</div>
+    <div class="z-date">7月23日 — 8月22日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#a8872a,#c9a84c,#d4b85c);">
+        <div class="color-emoji">✨</div>
+        <div class="color-name">ゴールド</div>
+        <div class="color-planet">支配星 太陽 ☉</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">太陽が天秤座に入る — 陥落の地。<br>金色は王者の威厳を守る色。<br>誇りは外交に道を譲れ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">12:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">1</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 7. 乙女座 ♍ — 土 -->
-<div class="slide earth">
-    <div class="slide-element">🌿 土のサイン</div>
+<!-- 7. 乙女座 ♍ 土 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🌿 土のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♍</div>
-    <div class="zodiac-name">乙女座</div>
-    <div class="zodiac-name-en">VIRGO</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #f1c40f, #d4ac0d);"></div>
-    <div class="color-name">イエロー</div>
-    <div class="color-planet">支配星 水星 ☿ の色</div>
-    <div class="divider"></div>
-    <div class="message">水星が支配と高揚を同時に司る。<br>精緻さが味方となる月。<br>黄色は分析と秩序の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">08:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">3</div></div>
+    <div class="z-symbol">♍</div>
+    <div class="z-name">乙女座</div>
+    <div class="z-name-en">VIRGO</div>
+    <div class="z-date">8月23日 — 9月22日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#d4ac0d,#f1c40f,#f9e54a);">
+        <div class="color-emoji">🟡</div>
+        <div class="color-name">イエロー</div>
+        <div class="color-planet">支配星 水星 ☿</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">水星が支配と高揚を同時に司る。<br>黄色は分析と秩序の色。<br>穀物の女神は律儀さに報いる。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">08:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">3</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 8. 天秤座 ♎ — 風 -->
-<div class="slide air">
-    <div class="slide-element">💨 風のサイン</div>
+<!-- 8. 天秤座 ♎ 風 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💨 風のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♎</div>
-    <div class="zodiac-name">天秤座</div>
-    <div class="zodiac-name-en">LIBRA</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #27ae60, #1e8449);"></div>
-    <div class="color-name">グリーン</div>
-    <div class="color-planet">支配星 金星 ♀ の色</div>
-    <div class="divider"></div>
-    <div class="message">あなたの季節。金星が第一の宮を照らす。<br>美を構造の上に築く時。<br>緑は調和と絆の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">16:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">7</div></div>
+    <div class="z-symbol">♎</div>
+    <div class="z-name">天秤座</div>
+    <div class="z-name-en">LIBRA</div>
+    <div class="z-date">9月23日 — 10月22日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#1e8449,#27ae60,#2ecc71);">
+        <div class="color-emoji">🟢</div>
+        <div class="color-name">グリーン</div>
+        <div class="color-planet">支配星 金星 ♀</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">あなたの季節。金星が第一の宮を照らす。<br>緑は調和と永き絆の色。<br>美を構造の上に築け。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">16:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">7</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 9. 蠍座 ♏ — 水 -->
-<div class="slide water">
-    <div class="slide-element">💧 水のサイン</div>
+<!-- 9. 蠍座 ♏ 水 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💧 水のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♏</div>
-    <div class="zodiac-name">蠍座</div>
-    <div class="zodiac-name-en">SCORPIO</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #e74c3c, #c0392b);"></div>
-    <div class="color-name">ダークレッド</div>
-    <div class="color-planet">支配星 火星 ♂ の色</div>
-    <div class="divider"></div>
-    <div class="message">火星が隠れた敵の家を揺るがす。<br>闇に膿むものを断つ時。<br>深紅は浄化と再生の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">23:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">8</div></div>
+    <div class="z-symbol">♏</div>
+    <div class="z-name">蠍座</div>
+    <div class="z-name-en">SCORPIO</div>
+    <div class="z-date">10月23日 — 11月21日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#922b21,#c0392b,#e74c3c);">
+        <div class="color-emoji">🔴</div>
+        <div class="color-name">ダークレッド</div>
+        <div class="color-planet">支配星 火星 ♂</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">火星が隠れた敵の家を揺るがす。<br>深紅は浄化と再生の色。<br>蠍は冬の前に脱皮する。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">23:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">8</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 10. 射手座 ♐ — 火 -->
-<div class="slide fire">
-    <div class="slide-element">🔥 火のサイン</div>
+<!-- 10. 射手座 ♐ 火 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🔥 火のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♐</div>
-    <div class="zodiac-name">射手座</div>
-    <div class="zodiac-name-en">SAGITTARIUS</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #3498db, #2980b9);"></div>
-    <div class="color-name">ブルー</div>
-    <div class="color-planet">支配星 木星 ♃ の色</div>
-    <div class="divider"></div>
-    <div class="message">大吉星・木星が幸運の宮を照らす。<br>異国より同志が現れる時。<br>青は哲学と真実の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">17:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">3</div></div>
+    <div class="z-symbol">♐</div>
+    <div class="z-name">射手座</div>
+    <div class="z-name-en">SAGITTARIUS</div>
+    <div class="z-date">11月22日 — 12月21日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#2471a3,#3498db,#5dade2);">
+        <div class="color-emoji">🔵</div>
+        <div class="color-name">ブルー</div>
+        <div class="color-planet">支配星 木星 ♃</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">大吉星・木星が幸運の宮を照らす。<br>青は哲学と真実の色。<br>矢は哲学で放つ時、的を射る。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">17:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">3</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 11. 山羊座 ♑ — 土 -->
-<div class="slide earth">
-    <div class="slide-element">🌿 土のサイン</div>
+<!-- 11. 山羊座 ♑ 土 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">🌿 土のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♑</div>
-    <div class="zodiac-name">山羊座</div>
-    <div class="zodiac-name-en">CAPRICORN</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #2c3e50, #1a252f);"></div>
-    <div class="color-name">ブラック</div>
-    <div class="color-planet">支配星 土星 ♄ の色</div>
-    <div class="divider"></div>
-    <div class="message">土星が地位の宮を冷たく見据える。<br>昇進は忍耐から来る時。<br>黒は権威と不動の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">06:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">4</div></div>
+    <div class="z-symbol">♑</div>
+    <div class="z-name">山羊座</div>
+    <div class="z-name-en">CAPRICORN</div>
+    <div class="z-date">12月22日 — 1月19日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#1a1a2e,#2c3e50,#34495e);">
+        <div class="color-emoji">⚫</div>
+        <div class="color-name">ブラック</div>
+        <div class="color-planet">支配星 土星 ♄</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">土星が地位の宮を冷たく見据える。<br>黒は権威と不動の色。<br>昇進は忍耐から来る。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">06:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">4</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 12. 水瓶座 ♒ — 風 -->
-<div class="slide air">
-    <div class="slide-element">💨 風のサイン</div>
+<!-- 12. 水瓶座 ♒ 風 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💨 風のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♒</div>
-    <div class="zodiac-name">水瓶座</div>
-    <div class="zodiac-name-en">AQUARIUS</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #2c3e50, #1a252f);"></div>
-    <div class="color-name">ダークグレー</div>
-    <div class="color-planet">支配星 土星 ♄ の色</div>
-    <div class="divider"></div>
-    <div class="message">土星が旅と異国の教えの場に座す。<br>海外で求めた知識が実る時。<br>暗灰は知恵と奉仕の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">11:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">4</div></div>
+    <div class="z-symbol">♒</div>
+    <div class="z-name">水瓶座</div>
+    <div class="z-name-en">AQUARIUS</div>
+    <div class="z-date">1月20日 — 2月18日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#1a252f,#2c3e50,#445566);">
+        <div class="color-emoji">🩶</div>
+        <div class="color-name">ダークグレー</div>
+        <div class="color-planet">支配星 土星 ♄</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">土星が旅と異国の教えの場に座す。<br>暗灰は知恵と奉仕の色。<br>学びしことを教えよ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">11:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">4</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
 
-<!-- 13. 魚座 ♓ — 水 -->
-<div class="slide water">
-    <div class="slide-element">💧 水のサイン</div>
+<!-- 13. 魚座 ♓ 水 -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="frame-corner tl"></div><div class="frame-corner tr"></div>
+    <div class="frame-corner bl"></div><div class="frame-corner br"></div>
+    <div class="element-badge">💧 水のサイン</div>
     <div class="slide-num">10月</div>
-    <div class="zodiac-symbol">♓</div>
-    <div class="zodiac-name">魚座</div>
-    <div class="zodiac-name-en">PISCES</div>
-    <div class="color-circle" style="background:radial-gradient(circle, #27ae60, #1e8449);"></div>
-    <div class="color-name">シーグリーン</div>
-    <div class="color-planet">高揚星 金星 ♀ の色</div>
-    <div class="divider"></div>
-    <div class="message">木星と金星、二つの吉星が整列する。<br>心と魂に恩寵が注ぐ時。<br>海緑は夢と直感の色。</div>
-    <div class="lucky-row">
-        <div class="lucky-item"><div class="lucky-label">ラッキータイム</div><div class="lucky-val">20:00</div></div>
-        <div class="lucky-item"><div class="lucky-label">ラッキーナンバー</div><div class="lucky-val">7</div></div>
+    <div class="z-symbol">♓</div>
+    <div class="z-name">魚座</div>
+    <div class="z-name-en">PISCES</div>
+    <div class="z-date">2月19日 — 3月20日</div>
+    <div class="color-card" style="background:linear-gradient(135deg,#1e8449,#27ae60,#45b577);">
+        <div class="color-emoji">🟢</div>
+        <div class="color-name">シーグリーン</div>
+        <div class="color-planet">高揚星 金星 ♀</div>
+    </div>
+    <div class="z-divider"></div>
+    <div class="z-message">木星と金星、二つの吉星が整列する。<br>海緑は夢と直感の色。<br>夜明け前に夢を記せ。</div>
+    <div class="z-lucky">
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキータイム</div><div class="z-lucky-val">20:00</div></div>
+        <div class="z-lucky-item"><div class="z-lucky-label">ラッキーナンバー</div><div class="z-lucky-val">7</div></div>
     </div>
     <div class="slide-brand">MOGU MOON</div>
 </div>
