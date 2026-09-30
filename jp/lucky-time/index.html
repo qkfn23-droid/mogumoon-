@@ -272,6 +272,9 @@ function getLongitudeSign(lon) {
 // 전통 Planetary Hours + Domicile/Exaltation/Triplicity 3중 가중치
 // Domicile(지배성) = 5점, Exaltation(고양성) = 3점, Triplicity(삼합) = 2점
 // 각 planetary hour마다 점수 합산 → 최고 점수 시간 = 럭키타임
+// 전통 Planetary Hours + Domicile/Exaltation/Triplicity 3중 가중치
+// Domicile(지배성) = 5점, Exaltation(고양성) = 3점, Triplicity(삼합) = 2점
+// 각 planetary hour마다 점수 합산 → 최고 점수 시간 = 럭키타임
 function calcLuckyTime(zodiacIdx, date) {
     var z = ZODIAC[zodiacIdx];
     var dayRulers = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
@@ -301,43 +304,35 @@ function calcLuckyTime(zodiacIdx, date) {
         if (planet === z.trip) score += 2;         // Triplicity Lord
         phours.push({planet: planet, start: startTime, score: score, idx: i});
     }
-    // 점수 > 0인 시간만 필터
+    // 점수 > 0인 시간만 필터 + 점수 내림차순 + 주간 우선
     var scored = phours.filter(function(ph) { return ph.score > 0; });
-    // Exalt가 있는 별자리: exalt 시간(3점)을 primary로, ruler 시간(5점)을 secondary로
-    // Exalt가 없는 별자리: ruler 시간(5점)을 primary로
-    var hasExalt = z.exalt && z.exalt !== z.ruler;
-    var rulerHours = scored.filter(function(ph) { return ph.planet === z.ruler; });
-    var exaltHours = hasExalt ? scored.filter(function(ph) { return ph.planet === z.exalt; }) : [];
-    var tripHours = scored.filter(function(ph) { return ph.planet === z.trip && ph.planet !== z.ruler && (!z.exalt || ph.planet !== z.exalt); });
-    // 주간(8~20시) 필터 함수
-    function preferDay(arr) {
-        var day = arr.filter(function(ph) { return ph.start >= 8 && ph.start < 20; });
-        return day.length > 0 ? day : arr;
-    }
-    var primary, secondary;
-    if (hasExalt && exaltHours.length > 0) {
-        // Exalt 있으면: ruler+exalt 합산 시간이 있으면 최우선, 없으면 exalt 주간 시간
-        var combined = scored.filter(function(ph) { return ph.score >= 8; }); // ruler+exalt 겹침
-        if (combined.length > 0) {
-            primary = preferDay(combined)[0];
-            secondary = preferDay(rulerHours.filter(function(ph){ return ph !== primary; }))[0] || preferDay(rulerHours)[0];
-        } else {
-            // Exalt 주간 시간 primary, Ruler 주간 시간 secondary
-            primary = preferDay(exaltHours)[0];
-            secondary = preferDay(rulerHours)[0];
+    scored.sort(function(a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        var aDay = (a.start >= 8 && a.start < 20) ? 1 : 0;
+        var bDay = (b.start >= 8 && b.start < 20) ? 1 : 0;
+        if (bDay !== aDay) return bDay - aDay;
+        return a.start - b.start;
+    });
+    // primary = 최고 점수 주간 시간
+    var primary = scored[0];
+    // secondary = primary와 다른 행성의 시간 (차별화 핵심)
+    var secondary = null;
+    for (var j = 1; j < scored.length; j++) {
+        if (scored[j].planet !== primary.planet && Math.floor(scored[j].start) !== Math.floor(primary.start)) {
+            secondary = scored[j];
+            break;
         }
-    } else if (tripHours.length > 0) {
-        // Exalt 없고 Trip 있으면: ruler primary, trip secondary
-        primary = preferDay(rulerHours)[0];
-        secondary = preferDay(tripHours)[0];
-    } else {
-        // 둘 다 없으면: ruler에서 주간 2개
-        var dayRuler = preferDay(rulerHours);
-        primary = dayRuler[0];
-        secondary = dayRuler.length > 1 ? dayRuler[1] : rulerHours[rulerHours.length > 1 ? 1 : 0];
     }
-    if (!primary) primary = scored[0];
-    if (!secondary) secondary = scored[scored.length > 1 ? 1 : 0];
+    // secondary 못 찾으면 같은 행성이라도 다른 시간대
+    if (!secondary) {
+        for (var k = 1; k < scored.length; k++) {
+            if (Math.floor(scored[k].start) !== Math.floor(primary.start)) {
+                secondary = scored[k];
+                break;
+            }
+        }
+    }
+    if (!secondary) secondary = scored.length > 1 ? scored[1] : scored[0];
     // 행성 경도로 분(minute) 미세 보정 — 각 별자리마다 다른 보정
     var astroDate = Astronomy.MakeTime(date);
     var rulerLon = getPlanetLongitude(z.ruler, astroDate);
