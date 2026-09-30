@@ -347,43 +347,33 @@ function calcLuckyNumber(zodiacIdx, date) {
     return num;
 }
 
-// 럭키컬러: 가장 유리한 행성의 색상
+// 럭키컬러: 럭키타임의 primary 행성 색상 (전통 행성-색상 대응)
+// 럭키타임에서 최고 점수 행성 = 그날 니 별자리에 가장 유리한 행성 = 그 행성의 색
 function calcLuckyColor(zodiacIdx, date) {
     var z = ZODIAC[zodiacIdx];
-    var rulerLon = getPlanetLongitude(z.ruler, date);
-    var signPos = getLongitudeSign(rulerLon);
-
-    // 지배성이 자기 별자리(domicile)에 있으면 그 색
-    if (signPos.idx === zodiacIdx) {
-        return PLANET_COLORS[z.ruler];
+    // calcLuckyTime과 동일한 로직으로 최고 점수 행성 찾기
+    var dayRulers = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn'];
+    var dayRuler = dayRulers[date.getDay()];
+    var startIdx = CHALDEAN.indexOf(dayRuler);
+    var phours = [];
+    for (var i = 0; i < 24; i++) {
+        var planetIdx = (startIdx + i) % 7;
+        var planet = CHALDEAN[planetIdx];
+        var startTime = i < 12 ? 6 + i : 18 + (i - 12);
+        if (startTime >= 24) startTime -= 24;
+        var score = 0;
+        if (planet === z.ruler) score += 5;
+        if (z.exalt && planet === z.exalt) score += 3;
+        if (planet === z.trip) score += 2;
+        if (score > 0) phours.push({planet: planet, start: startTime, score: score});
     }
-    // 고양성 확인
-    if (z.exalt) {
-        var exaltLon = getPlanetLongitude(z.exalt, date);
-        var exaltSign = getLongitudeSign(exaltLon);
-        if (exaltSign.idx === zodiacIdx) {
-            return PLANET_COLORS[z.exalt];
-        }
-    }
-    // 지배성과 가장 가까운 길한 각도의 행성
-    var bestPlanet = z.ruler;
-    var planets = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn'];
-    var benefics = ['Venus','Jupiter'];
-    var minDiff = 999;
-    for (var i = 0; i < benefics.length; i++) {
-        var bLon = getPlanetLongitude(benefics[i], date);
-        var diff = Math.abs(rulerLon - bLon);
-        if (diff > 180) diff = 360 - diff;
-        // 트라인(120) 또는 섹스타일(60) 근처
-        var toTrine = Math.abs(diff - 120);
-        var toSextile = Math.abs(diff - 60);
-        var closest = Math.min(toTrine, toSextile);
-        if (closest < minDiff) {
-            minDiff = closest;
-            bestPlanet = benefics[i];
-        }
-    }
-    return PLANET_COLORS[bestPlanet];
+    phours.sort(function(a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        var aDay = (a.start >= 8 && a.start < 20) ? 1 : 0;
+        var bDay = (b.start >= 8 && b.start < 20) ? 1 : 0;
+        return bDay - aDay;
+    });
+    return PLANET_COLORS[phours[0].planet];
 }
 
 // 조언 생성
@@ -431,7 +421,7 @@ function showResult(idx) {
 
     // 럭키 계산
     var luckyTime = calcLuckyTime(idx, now);
-    var luckyColor = calcLuckyColor(idx, astroDate);
+    var luckyColor = calcLuckyColor(idx, now);
     var luckyNum = calcLuckyNumber(idx, now);
     var advice = getAdvice(idx, astroDate);
 
