@@ -175,7 +175,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
         <span style="font-size:20px;">🔮</span>
         <div>
             <div style="font-size:18px;font-weight:700;color:#c9a84c;">수정구</div>
-            <div style="font-size:11px;color:#666;">마음속 질문을 떠올리고, 수정구에게 물어보세요</div>
+            <div style="font-size:11px;color:#666;">주역 64괘 기반 · 3000년 전통 점술 체계</div>
         </div>
     </div>
 </div>
@@ -240,61 +240,73 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </footer>
 
 <script>
+// 주역(易經) 64괘 기반 답변 — 3000년 전통 점술 체계
+// 질문 텍스트 + 날짜를 시드로 괘를 뽑음 (같은 질문+같은 날 = 같은 괘)
 const ANSWERS = [
-    // 긍정 (positive)
-    {text:"그렇습니다. 확실합니다.", type:"positive"},
-    {text:"의심할 여지 없이 그렇습니다.", type:"positive"},
-    {text:"절대적으로 그렇습니다.", type:"positive"},
-    {text:"네, 분명히 그렇습니다.", type:"positive"},
-    {text:"당신이 믿는 대로 될 것입니다.", type:"positive"},
-    {text:"별들이 당신 편입니다.", type:"positive"},
-    {text:"운명이 미소짓고 있습니다.", type:"positive"},
-    {text:"좋은 기운이 느껴집니다... 그렇습니다!", type:"positive"},
-    {text:"수정구가 밝게 빛납니다. 긍정의 신호입니다.", type:"positive"},
-    {text:"우주가 '예'라고 속삭입니다.", type:"positive"},
-    {text:"길이 열려 있습니다. 나아가세요.", type:"positive"},
-    {text:"당신의 소원은 이루어질 것입니다.", type:"positive"},
-    {text:"희망을 품으세요. 좋은 일이 다가옵니다.", type:"positive"},
-    {text:"지금이 행동할 때입니다. 성공이 기다립니다.", type:"positive"},
-    {text:"수정구 속에 빛이 보입니다. 행운의 징조!", type:"positive"},
-
-    // 중립 (neutral)
-    {text:"안개가 자욱합니다... 아직 확실하지 않습니다.", type:"neutral"},
-    {text:"나중에 다시 물어보세요.", type:"neutral"},
-    {text:"지금은 답을 줄 수 없습니다.", type:"neutral"},
-    {text:"집중해서 다시 물어보세요.", type:"neutral"},
-    {text:"수정구가 흔들립니다... 결과가 불확실합니다.", type:"neutral"},
-    {text:"시간이 답을 줄 것입니다. 기다리세요.", type:"neutral"},
-    {text:"양면이 있습니다. 신중하게 판단하세요.", type:"neutral"},
-    {text:"운명은 아직 결정되지 않았습니다.", type:"neutral"},
-    {text:"답은 당신 안에 있습니다. 더 깊이 들여다보세요.", type:"neutral"},
-    {text:"수정구가 두 가지 빛을 보여줍니다... 선택은 당신의 몫.", type:"neutral"},
-
-    // 부정 (negative)
-    {text:"그럴 가능성은 낮습니다.", type:"negative"},
-    {text:"아닙니다.", type:"negative"},
-    {text:"별들이 반대합니다.", type:"negative"},
-    {text:"수정구가 어두워집니다... 좋지 않은 신호입니다.", type:"negative"},
-    {text:"지금은 때가 아닙니다.", type:"negative"},
-    {text:"다른 길을 찾아보세요.", type:"negative"},
-    {text:"기대하지 않는 것이 좋겠습니다.", type:"negative"},
-    {text:"수정구가 경고합니다. 신중하세요.", type:"negative"},
-    {text:"지금 방향을 바꾸는 것이 현명합니다.", type:"negative"},
-    {text:"그 선택은 후회를 부를 수 있습니다.", type:"negative"},
-
-    // 신비 (mystical)
-    {text:"달이 차오를 때 답이 드러날 것입니다.", type:"mystical"},
-    {text:"꿈에서 힌트를 찾으세요.", type:"mystical"},
-    {text:"세 번째 기회에 주목하세요.", type:"mystical"},
-    {text:"예상치 못한 곳에서 답이 올 것입니다.", type:"mystical"},
-    {text:"수정구가 나비를 보여줍니다... 변화가 옵니다.", type:"mystical"},
-    {text:"과거를 놓아야 미래가 열립니다.", type:"mystical"},
-    {text:"가까운 사람의 말에 답이 숨어 있습니다.", type:"mystical"},
-    {text:"물 가까이에서 영감을 얻을 것입니다.", type:"mystical"},
-    {text:"수정구 속에 문이 보입니다... 열쇠는 용기입니다.", type:"mystical"},
-    {text:"별자리가 정렬되고 있습니다. 곧 알게 될 것입니다.", type:"mystical"},
-    {text:"지금 느끼는 직감을 믿으세요. 그것이 답입니다.", type:"mystical"},
-    {text:"우연이라고 생각한 것... 그것은 운명이었습니다.", type:"mystical"},
+    {text:"건(乾) — 하늘의 기운. 크게 뜻을 세우면 이루어진다. 힘차게 나아갈 때.",type:"positive"},
+    {text:"곤(坤) — 땅의 기운. 받아들이고 기다리면 좋은 결과가 온다.",type:"positive"},
+    {text:"둔(屯) — 새싹이 땅을 뚫고 나오는 때. 어렵지만 시작하면 된다.",type:"neutral"},
+    {text:"몽(蒙) — 아직 모르는 것이 많다. 배우고 물어보는 게 답이다.",type:"neutral"},
+    {text:"수(需) — 기다림이 필요하다. 때가 오면 저절로 길이 열린다.",type:"neutral"},
+    {text:"송(訟) — 다툼의 기운. 한 발 물러서면 오히려 이긴다.",type:"negative"},
+    {text:"사(師) — 사람을 모아야 할 때. 혼자보다 함께가 낫다.",type:"positive"},
+    {text:"비(比) — 가까운 사람과의 관계가 열쇠다. 화합하면 길하다.",type:"positive"},
+    {text:"소축(小畜) — 작은 것부터 모으는 때. 큰일은 아직 이르다.",type:"neutral"},
+    {text:"리(履) — 조심스럽게 한 걸음씩. 예의를 지키면 무탈하다.",type:"neutral"},
+    {text:"태(泰) — 하늘과 땅이 통하는 때. 만사형통의 기운!",type:"positive"},
+    {text:"비(否) — 막힌 기운. 참고 기다리면 반드시 풀린다.",type:"negative"},
+    {text:"동인(同人) — 뜻이 맞는 사람을 만난다. 함께하면 이룬다.",type:"positive"},
+    {text:"대유(大有) — 크게 얻는 때. 노력한 만큼 돌아온다.",type:"positive"},
+    {text:"겸(謙) — 겸손할수록 복이 온다. 낮추면 오히려 높아진다.",type:"positive"},
+    {text:"예(豫) — 즐거운 기운. 좋아하는 일을 하면 운이 따른다.",type:"positive"},
+    {text:"수(隨) — 흐름을 따르는 게 좋다. 억지로 밀지 마라.",type:"neutral"},
+    {text:"고(蠱) — 쌓인 문제를 정리할 때. 지금 해결하면 나중이 편하다.",type:"neutral"},
+    {text:"임(臨) — 좋은 기회가 다가온다. 준비하고 있어라.",type:"positive"},
+    {text:"관(觀) — 잘 살펴보는 게 답이다. 성급하게 움직이지 마라.",type:"neutral"},
+    {text:"서합(噬嗑) — 방해물을 제거해야 한다. 단호하게 처리하라.",type:"neutral"},
+    {text:"비(賁) — 겉모습을 가꿀 때. 첫인상이 중요한 시기.",type:"neutral"},
+    {text:"박(剝) — 지금은 물러날 때. 무리하면 손해 본다.",type:"negative"},
+    {text:"복(復) — 다시 돌아오는 기운. 포기했던 것이 다시 살아난다.",type:"positive"},
+    {text:"무망(無妄) — 거짓 없이 진실하게. 정직하면 하늘이 돕는다.",type:"positive"},
+    {text:"대축(大畜) — 크게 쌓는 때. 지금 모으면 나중에 크게 쓴다.",type:"positive"},
+    {text:"이(頤) — 몸과 마음을 돌봐야 할 때. 건강이 최우선.",type:"neutral"},
+    {text:"대과(大過) — 무리하고 있다. 잠시 멈추고 균형을 잡아라.",type:"negative"},
+    {text:"감(坎) — 위험한 상황. 침착하게 대처하면 빠져나올 수 있다.",type:"negative"},
+    {text:"리(離) — 밝은 빛의 기운. 밝히고 드러내면 길하다.",type:"positive"},
+    {text:"함(咸) — 마음이 통하는 때. 인연이 다가온다.",type:"positive"},
+    {text:"항(恒) — 꾸준함이 답이다. 변하지 않는 마음이 승리한다.",type:"positive"},
+    {text:"둔(遯) — 물러나는 것도 전략이다. 지금은 숨을 때.",type:"negative"},
+    {text:"대장(大壯) — 힘이 넘치는 때. 하지만 너무 세면 부러진다.",type:"neutral"},
+    {text:"진(晉) — 앞으로 나아갈 때. 승진, 발전의 기운.",type:"positive"},
+    {text:"명이(明夷) — 빛이 가려진 때. 속마음을 드러내지 말고 참아라.",type:"negative"},
+    {text:"가인(家人) — 가정이 중요한 때. 가까운 사람을 돌봐라.",type:"positive"},
+    {text:"규(睽) — 어긋나는 기운. 서로 다름을 인정하면 풀린다.",type:"neutral"},
+    {text:"건(蹇) — 앞길이 험하다. 현자에게 도움을 구하라.",type:"negative"},
+    {text:"해(解) — 풀리는 기운! 막혔던 일이 해결된다.",type:"positive"},
+    {text:"손(損) — 줄여야 할 때. 불필요한 것을 버리면 얻는다.",type:"neutral"},
+    {text:"익(益) — 더하는 기운. 적극적으로 움직이면 이득을 본다.",type:"positive"},
+    {text:"쾌(夬) — 결단의 때. 미루지 말고 지금 결정하라.",type:"positive"},
+    {text:"구(姤) — 뜻밖의 만남. 우연이 운명이 될 수 있다.",type:"mystical"},
+    {text:"췌(萃) — 사람이 모이는 때. 팀워크가 열쇠다.",type:"positive"},
+    {text:"승(升) — 올라가는 기운. 꾸준히 하면 반드시 오른다.",type:"positive"},
+    {text:"곤(困) — 곤궁한 때. 그래도 말을 아끼고 행동으로 보여라.",type:"negative"},
+    {text:"정(井) — 우물의 기운. 자신의 근본을 잊지 마라.",type:"neutral"},
+    {text:"혁(革) — 변화의 때! 바꿔야 할 것을 바꿔라.",type:"positive"},
+    {text:"정(鼎) — 새로운 시작의 기운. 옛것을 버리고 새것을 만들어라.",type:"positive"},
+    {text:"진(震) — 깜짝 놀랄 일이 생긴다. 놀라도 침착하면 길하다.",type:"mystical"},
+    {text:"간(艮) — 멈출 때. 쉬어야 다시 갈 수 있다.",type:"neutral"},
+    {text:"점(漸) — 천천히 나아가는 게 맞다. 서두르지 마라.",type:"neutral"},
+    {text:"귀매(歸妹) — 관계에서 자기 위치를 알아야 한다. 분수를 지켜라.",type:"neutral"},
+    {text:"풍(豐) — 풍요의 때! 지금이 최고의 시기다.",type:"positive"},
+    {text:"여(旅) — 여행이나 이동의 기운. 움직이면 좋은 일이 생긴다.",type:"positive"},
+    {text:"손(巽) — 부드럽게 스며들듯이. 강하게 밀지 말고 은근히.",type:"neutral"},
+    {text:"태(兌) — 기쁨의 기운. 웃으면 복이 온다.",type:"positive"},
+    {text:"환(渙) — 흩어지는 기운. 집중력을 잃지 마라.",type:"neutral"},
+    {text:"절(節) — 절제가 필요하다. 적당히 하는 게 최선.",type:"neutral"},
+    {text:"중부(中孚) — 진심이 통하는 때. 솔직하면 믿음을 얻는다.",type:"positive"},
+    {text:"소과(小過) — 작은 실수는 괜찮다. 크게 벌이지는 마라.",type:"neutral"},
+    {text:"기제(旣濟) — 이미 이루어졌다. 지키는 데 힘써라.",type:"positive"},
+    {text:"미제(未濟) — 아직 끝나지 않았다. 마지막까지 방심하지 마라.",type:"neutral"},
 ];
 
 const TYPE_LABELS = {positive:"긍정",neutral:"중립",negative:"부정",mystical:"신비"};
@@ -323,7 +335,13 @@ function askCrystal() {
 
     setTimeout(() => {
         ball.classList.remove('shaking');
-        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+        // 질문 텍스트 + 날짜를 시드로 → 주역 64괘 기반 답변 선택
+        var qText = question || '';
+        var today = new Date();
+        var hashSeed = 0;
+        for (var ci = 0; ci < qText.length; ci++) hashSeed += qText.charCodeAt(ci);
+        hashSeed += today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+        var answer = ANSWERS[Math.abs(hashSeed) % ANSWERS.length];
 
         textEl.innerHTML = answer.text;
         textEl.className = 'crystal-text active';

@@ -22,7 +22,7 @@
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/aura/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/aura/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/aura/">
-    <meta name="description" content="무료 오라 색상 테스트. 10가지 질문으로 당신의 오라 색상을 알아보세요. 성격, 에너지, 영적 특성 분석.">
+    <meta name="description" content="생년월일 기반 오라 색상 분석. 별자리 지배 행성의 전통 색상 체계로 당신의 오라를 알아보세요.">
     <link rel="canonical" href="https://mogumoon.com/aura/">
     <meta property="og:title" content="오라 색상 테스트 - 나의 오라는 무슨 색? | MOGU Moon">
     <meta property="og:description" content="무료 오라 색상 테스트. 10가지 질문으로 당신의 오라 색상을 알아보세요.">
@@ -169,8 +169,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <span style="font-size:20px;">🧿</span>
         <div>
-            <div style="font-size:18px;font-weight:700;color:#c9a84c;">오라 색상 테스트</div>
-            <div style="font-size:11px;color:#666;">10가지 질문으로 당신의 오라 색상을 알아보세요</div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">오라 색상 분석</div>
+            <div style="font-size:11px;color:#666;">생년월일 기반 · 별자리 지배 행성의 전통 색상 체계</div>
         </div>
     </div>
 </div>
@@ -178,11 +178,17 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 <div class="page-layout">
 <div class="content">
 
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">질문 1 / 10</div>
-
-    <div id="quizSection">
-        <div class="question-card" id="questionCard"></div>
+    <div id="inputSection">
+        <div class="question-card">
+            <div class="question-num">BIRTH DATE</div>
+            <div class="question-text">생년월일을 입력하세요</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <select id="birthYear" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthMonth" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthDay" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+            </div>
+            <button onclick="calcAura()" style="margin-top:20px;padding:14px 40px;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:all .2s;">분석하기</button>
+        </div>
     </div>
 
     <div id="resultSection" class="result-section"></div>
@@ -230,7 +236,102 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </footer>
 
 <script>
-const QUESTIONS = [
+// 생년월일 셀렉트 생성
+var yS=document.getElementById('birthYear'),mS=document.getElementById('birthMonth'),dS=document.getElementById('birthDay');
+for(var y=2010;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y+'년';yS.appendChild(o);}
+yS.value=1995;
+for(var m=1;m<=12;m++){var o=document.createElement('option');o.value=m;o.textContent=m+'월';mS.appendChild(o);}
+for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d+'일';dS.appendChild(o);}
+
+// 태양 별자리 계산 (월/일 기준)
+function getSunSign(month, day) {
+    var dates = [[1,20],[2,19],[3,21],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22]];
+    var signs = ['aquarius','pisces','aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn'];
+    for (var i = 11; i >= 0; i--) {
+        if (month > dates[i][0] || (month === dates[i][0] && day >= dates[i][1])) {
+            return signs[i];
+        }
+    }
+    return 'capricorn';
+}
+
+// 별자리 → 지배 행성 → 오라 색 매핑 (헬레니즘 전통)
+var SIGN_AURA = {
+    aries:    {ruler:'Mars',    element:'fire',  aura:'red',    name:'양자리'},
+    taurus:   {ruler:'Venus',   element:'earth', aura:'green',  name:'황소자리'},
+    gemini:   {ruler:'Mercury', element:'air',   aura:'yellow', name:'쌍둥이자리'},
+    cancer:   {ruler:'Moon',    element:'water', aura:'white',  name:'게자리'},
+    leo:      {ruler:'Sun',     element:'fire',  aura:'orange', name:'사자자리'},
+    virgo:    {ruler:'Mercury', element:'earth', aura:'yellow', name:'처녀자리'},
+    libra:    {ruler:'Venus',   element:'air',   aura:'green',  name:'천칭자리'},
+    scorpio:  {ruler:'Mars',    element:'water', aura:'red',    name:'전갈자리'},
+    sagittarius:{ruler:'Jupiter',element:'fire', aura:'blue',   name:'사수자리'},
+    capricorn:{ruler:'Saturn',  element:'earth', aura:'indigo', name:'염소자리'},
+    aquarius: {ruler:'Saturn',  element:'air',   aura:'indigo', name:'물병자리'},
+    pisces:   {ruler:'Jupiter', element:'water', aura:'purple', name:'물고기자리'}
+};
+
+// 보조 오라: 원소 기반
+var ELEMENT_SUB = {fire:'orange', earth:'green', air:'yellow', water:'blue'};
+
+function calcAura() {
+    var month = parseInt(mS.value);
+    var day = parseInt(dS.value);
+    var sign = getSunSign(month, day);
+    var info = SIGN_AURA[sign];
+    var topColor = info.aura;
+    var subColor = ELEMENT_SUB[info.element];
+    if (subColor === topColor) {
+        // 같으면 다른 보조색
+        var subs = {fire:'red',earth:'white',air:'blue',water:'purple'};
+        subColor = subs[info.element];
+    }
+    showResult(topColor, subColor, info);
+}
+
+function showResult(topColor, subColor, signInfo) {
+    document.getElementById('inputSection').style.display = 'none';
+    document.getElementById('shareBar').style.display = 'block';
+    var a = AURAS[topColor];
+    var sub = AURAS[subColor];
+
+    // 근거 설명
+    var RULER_NAMES = {Mars:'화성',Venus:'금성',Mercury:'수성',Moon:'달',Sun:'태양',Jupiter:'목성',Saturn:'토성'};
+    var ELEMENT_NAMES = {fire:'불',earth:'흙',air:'바람',water:'물'};
+    var basis = '당신의 태양 별자리는 <strong>' + signInfo.name + '</strong>이며, 지배 행성은 <strong>' + RULER_NAMES[signInfo.ruler] + '</strong>입니다. ' +
+        '헬레니즘 점성술에서 ' + RULER_NAMES[signInfo.ruler] + '의 전통 색상은 <strong style="color:' + a.color + ';">' + a.name + '</strong>입니다. ' +
+        '원소는 <strong>' + ELEMENT_NAMES[signInfo.element] + '</strong>이며, 보조 오라 색상에 영향을 줍니다.';
+
+    var section = document.getElementById('resultSection');
+    section.innerHTML =
+        '<div class="aura-orb">' +
+            '<div class="glow" style="background:' + a.color + ';"></div>' +
+            '<div class="inner" style="background:radial-gradient(circle at 40% 40%, ' + a.bg + ', rgba(10,10,26,0.9));">' +
+                '<div class="color-emoji">' + a.emoji + '</div>' +
+                '<div class="color-name" style="color:' + a.color + ';">' + a.name + '</div>' +
+            '</div>' +
+        '</div>' +
+        '<div class="result-title" style="color:' + a.color + ';">당신의 오라는 ' + a.name + '!</div>' +
+        '<div class="result-subtitle">' + a.keyword + '</div>' +
+        '<div class="trait-grid">' +
+            '<div class="trait-item"><div class="trait-label">별자리</div><div class="trait-value" style="color:' + a.color + ';">' + signInfo.name + '</div></div>' +
+            '<div class="trait-item"><div class="trait-label">지배 행성</div><div class="trait-value" style="color:' + a.color + ';">' + RULER_NAMES[signInfo.ruler] + '</div></div>' +
+            '<div class="trait-item"><div class="trait-label">보조 오라</div><div class="trait-value" style="color:' + sub.color + ';">' + sub.emoji + ' ' + sub.name + '</div></div>' +
+        '</div>' +
+        '<div class="reading-card"><div class="reading-title">🔮 왜 이 색인가요?</div><div class="reading-text">' + basis + '</div></div>' +
+        '<div class="reading-card"><div class="reading-title">🧿 성격 분석</div><div class="reading-text">' + a.personality + '</div></div>' +
+        '<div class="reading-card"><div class="reading-title">💪 강점</div><div class="reading-text"><strong>' + a.strength + '</strong></div></div>' +
+        '<div class="reading-card"><div class="reading-title">⚠️ 약점</div><div class="reading-text">' + a.weakness + '</div></div>' +
+        '<div class="reading-card"><div class="reading-title">💡 조언</div><div class="reading-text">' + a.advice + '</div></div>' +
+        '<div class="reading-card"><div class="reading-title">💕 잘 맞는 오라</div><div class="reading-text">' + a.good.join(', ') + '</div></div>' +
+        '<div class="reading-card"><div class="reading-title">⚡ 주의할 오라</div><div class="reading-text">' + a.bad.join(', ') + '</div></div>' +
+        '<div style="text-align:center;margin-top:20px;"><button onclick="location.reload()" style="padding:12px 30px;background:#3a2550;border:1px solid #8e44ad;border-radius:10px;color:#c39bd3;font-size:14px;cursor:pointer;">다시 하기</button></div>';
+    section.style.display = 'block';
+    section.scrollIntoView({behavior:'smooth'});
+}
+
+// 이전 질문 시스템 제거됨 — 생년월일 기반으로 전환
+const LEGACY_QUESTIONS = [
     {q:"혼자만의 시간이 생기면 가장 하고 싶은 것은?",
      o:[{t:"자연 속 산책이나 하이킹",c:["green","white"]},{t:"음악 듣기나 악기 연주",c:["blue","indigo"]},{t:"그림 그리기나 창작 활동",c:["yellow","orange"]},{t:"명상이나 요가",c:["purple","white"]},{t:"친구와 통화하거나 만나기",c:["orange","pink"]}]},
     {q:"사람들과 있을 때 당신은 주로?",

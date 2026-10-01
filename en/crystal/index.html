@@ -242,60 +242,34 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </div>
 <script>
 const ANSWERS = [
-    // positive
-    {text:"Yes, it is certain.", type:"positive"},
-    {text:"Without a doubt, yes.", type:"positive"},
-    {text:"Absolutely yes.", type:"positive"},
-    {text:"Yes, definitely.", type:"positive"},
-    {text:"It will be as you believe.", type:"positive"},
-    {text:"The stars are on your side.", type:"positive"},
-    {text:"Fate is smiling upon you.", type:"positive"},
-    {text:"Good energy surrounds you... yes!", type:"positive"},
-    {text:"The crystal ball glows brightly. A sign of positivity.", type:"positive"},
-    {text:"The universe whispers 'yes'.", type:"positive"},
-    {text:"The path is open. Move forward.", type:"positive"},
-    {text:"Your wish will come true.", type:"positive"},
-    {text:"Hold hope — good things are coming.", type:"positive"},
-    {text:"Now is the time to act. Success awaits.", type:"positive"},
-    {text:"Light shines inside the crystal ball. A lucky sign!", type:"positive"},
-
-    // neutral
-    {text:"The mist is thick... still uncertain.", type:"neutral"},
-    {text:"Ask again later.", type:"neutral"},
-    {text:"Cannot give an answer right now.", type:"neutral"},
-    {text:"Focus and ask again.", type:"neutral"},
-    {text:"The crystal ball trembles... the outcome is unclear.", type:"neutral"},
-    {text:"Time will bring the answer. Wait.", type:"neutral"},
-    {text:"There are two sides. Choose carefully.", type:"neutral"},
-    {text:"Fate has not yet been decided.", type:"neutral"},
-    {text:"The answer lies within you. Look deeper.", type:"neutral"},
-    {text:"The crystal ball shows two lights... the choice is yours.", type:"neutral"},
-
-    // negative
-    {text:"It is unlikely.", type:"negative"},
-    {text:"No.", type:"negative"},
-    {text:"The stars are opposed.", type:"negative"},
-    {text:"The crystal ball darkens... a bad sign.", type:"negative"},
-    {text:"Now is not the time.", type:"negative"},
-    {text:"Look for another path.", type:"negative"},
-    {text:"It would be best not to expect it.", type:"negative"},
-    {text:"The crystal ball warns you. Be cautious.", type:"negative"},
-    {text:"Changing direction now would be wise.", type:"negative"},
-    {text:"That choice may bring regret.", type:"negative"},
-
-    // mystical
-    {text:"When the moon is full, the answer will be revealed.", type:"mystical"},
-    {text:"Seek the hint in your dreams.", type:"mystical"},
-    {text:"Pay attention to the third chance.", type:"mystical"},
-    {text:"The answer will come from an unexpected place.", type:"mystical"},
-    {text:"The crystal ball shows a butterfly... change is coming.", type:"mystical"},
-    {text:"Release the past and the future will open.", type:"mystical"},
-    {text:"The answer is hidden in the words of someone close to you.", type:"mystical"},
-    {text:"You will find inspiration near water.", type:"mystical"},
-    {text:"A door appears in the crystal ball... the key is courage.", type:"mystical"},
-    {text:"The constellations are aligning. You will know soon.", type:"mystical"},
-    {text:"Trust the intuition you feel right now. That is the answer.", type:"mystical"},
-    {text:"What you thought was coincidence... was destiny.", type:"mystical"},
+    {text:"Qian — Heaven. Set your goals high and you will succeed.",type:"positive"},
+    {text:"Kun — Earth. Accept and wait. Good results will come.",type:"positive"},
+    {text:"Zhun — A sprout breaking through soil. Hard but worth starting.",type:"neutral"},
+    {text:"Meng — You still have much to learn. Ask and seek advice.",type:"neutral"},
+    {text:"Xu — Patience is needed. The path will open when the time comes.",type:"neutral"},
+    {text:"Song — Conflict energy. Step back and you actually win.",type:"negative"},
+    {text:"Shi — Gather people. Together is better than alone.",type:"positive"},
+    {text:"Bi — Close relationships are the key. Harmony brings fortune.",type:"positive"},
+    {text:"Tai — Heaven and earth are in harmony. Everything goes well!",type:"positive"},
+    {text:"Pi — Blocked energy. Be patient, it will clear.",type:"negative"},
+    {text:"Qian — Humility brings blessings. Lower yourself to rise.",type:"positive"},
+    {text:"Sui — Follow the flow. Don't force it.",type:"neutral"},
+    {text:"Lin — A good opportunity approaches. Be ready.",type:"positive"},
+    {text:"Guan — Observe carefully. Don't rush.",type:"neutral"},
+    {text:"Jie — Things are loosening up! What was stuck will resolve.",type:"positive"},
+    {text:"Yi — Adding energy. Move actively and you gain.",type:"positive"},
+    {text:"Guai — Time to decide. Don't delay, decide now.",type:"positive"},
+    {text:"Gou — An unexpected encounter. Coincidence may become destiny.",type:"mystical"},
+    {text:"Sheng — Rising energy. Keep going and you will rise.",type:"positive"},
+    {text:"Kun — Difficult times. Save your words and show through actions.",type:"negative"},
+    {text:"Ge — Time for change! Change what needs changing.",type:"positive"},
+    {text:"Zhen — Something surprising will happen. Stay calm and it's auspicious.",type:"mystical"},
+    {text:"Jian — Go slowly. That's the right pace.",type:"neutral"},
+    {text:"Feng — Time of abundance! This is your best moment.",type:"positive"},
+    {text:"Huan — Scattering energy. Don't lose focus.",type:"neutral"},
+    {text:"Jie — Moderation is needed. Balance is best.",type:"neutral"},
+    {text:"Ji Ji — Already accomplished. Focus on protecting what you have.",type:"positive"},
+    {text:"Wei Ji — Not finished yet. Don't let your guard down until the end.",type:"neutral"}
 ];
 
 const TYPE_LABELS = {positive:"Positive",neutral:"Neutral",negative:"Negative",mystical:"Mystical"};
@@ -324,7 +298,7 @@ function askCrystal() {
 
     setTimeout(() => {
         ball.classList.remove("shaking");
-        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+        var qText=question||"";var today=new Date();var hashSeed=0;for(var ci=0;ci<qText.length;ci++)hashSeed+=qText.charCodeAt(ci);hashSeed+=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();var answer=ANSWERS[Math.abs(hashSeed)%ANSWERS.length];
 
         textEl.innerHTML = answer.text;
         textEl.className = "crystal-text active";

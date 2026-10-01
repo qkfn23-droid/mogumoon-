@@ -304,6 +304,9 @@ function seededRand(seed) {
     return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
 }
 
+
+function calcKetu(year,month,day){var refDate=new Date(2000,0,1);var birthDate=new Date(year,month-1,day);var daysDiff=(birthDate-refDate)/(1000*60*60*24);var ketuRef=120;var dailyMotion=-360/(18.613*365.25);var ketuLon=((ketuRef+daysDiff*dailyMotion)%360+360)%360;return Math.floor(ketuLon/30);}
+
 function discover() {
     const y = parseInt(document.getElementById("birthYear").value);
     const m = parseInt(document.getElementById("birthMonth").value);
@@ -314,7 +317,9 @@ function discover() {
     const seed = y * 10000 + m * 100 + d;
     const rand = seededRand(seed);
 
-    const eraIdx = (lifeNum + Math.floor(rand() * 5)) % PAST_LIVES.length;
+    const ketuSign = calcKetu(y, m, d);
+    const ketuSignNames = ['Widder','Stier','Zwillinge','Krebs','Löwe','Jungfrau','Waage','Skorpion','Schütze','Steinbock','Wassermann','Fische'];
+    const eraIdx = ketuSign % PAST_LIVES.length;
     const pl = PAST_LIVES[eraIdx];
     const jobIdx = Math.floor(rand() * pl.jobs.length);
     const job = pl.jobs[jobIdx];

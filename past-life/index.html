@@ -305,6 +305,22 @@ function seededRand(seed) {
     return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
 }
 
+// 케투(남교점) 계산: 18.613년 주기로 황도 역행
+// 기준점: 2000-01-01 케투 = 사자자리 (약 120°)
+function calcKetu(year, month, day) {
+    var refDate = new Date(2000, 0, 1);
+    var birthDate = new Date(year, month - 1, day);
+    var daysDiff = (birthDate - refDate) / (1000 * 60 * 60 * 24);
+    var ketuRef = 120; // 2000년 1월 기준 케투 경도 (사자자리)
+    var dailyMotion = -360 / (18.613 * 365.25); // 하루 역행량 (약 -0.053°)
+    var ketuLon = ((ketuRef + daysDiff * dailyMotion) % 360 + 360) % 360;
+    return Math.floor(ketuLon / 30); // 0~11 별자리 인덱스
+}
+
+// 케투 별자리 → 전생 시대 매핑 (베딕 전통)
+// 케투 = 전생 카르마, 그 별자리가 가리키는 영역이 전생의 테마
+var KETU_ERA_MAP = [0,1,2,3,4,5,6,7,8,9,10,11]; // 12별자리 → 12 PAST_LIVES 매핑
+
 function discover() {
     const y = parseInt(document.getElementById('birthYear').value);
     const m = parseInt(document.getElementById('birthMonth').value);
@@ -312,10 +328,12 @@ function discover() {
     if (!y || !m || !d) return alert('생년월일을 선택하세요!');
 
     const lifeNum = reduceNum(reduceNum(y) + reduceNum(m) + reduceNum(d));
+    const ketuSign = calcKetu(y, m, d);
     const seed = y * 10000 + m * 100 + d;
     const rand = seededRand(seed);
 
-    const eraIdx = (lifeNum + Math.floor(rand() * 5)) % PAST_LIVES.length;
+    const ketuSignNames = ['양자리','황소자리','쌍둥이자리','게자리','사자자리','처녀자리','천칭자리','전갈자리','사수자리','염소자리','물병자리','물고기자리'];
+    const eraIdx = ketuSign % PAST_LIVES.length;
     const pl = PAST_LIVES[eraIdx];
     const jobIdx = Math.floor(rand() * pl.jobs.length);
     const job = pl.jobs[jobIdx];
@@ -361,6 +379,15 @@ function discover() {
             <div class="trait-item">
                 <div class="trait-label">카르마 점수</div>
                 <div class="trait-value">${karmaScore}/100</div>
+            </div>
+        </div>
+
+        <div class="reading-card">
+            <div class="reading-title">🔮 왜 이 전생인가요?</div>
+            <div class="reading-text">
+                베딕 점성술에서 <strong>케투(남교점)</strong>는 전생의 카르마를 나타냅니다.<br>
+                당신의 케투는 <strong>${ketuSignNames[ketuSign]}</strong>에 위치합니다.<br>
+                이 별자리가 가리키는 에너지가 당신의 전생 테마입니다.
             </div>
         </div>
 

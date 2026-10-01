@@ -242,60 +242,22 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </div>
 <script>
 const ANSWERS = [
-    // Positivo
-    {text:"Si, con toda seguridad.", type:"positive"},
-    {text:"Sin lugar a dudas.", type:"positive"},
-    {text:"Absolutamente si.", type:"positive"},
-    {text:"Si, definitivamente.", type:"positive"},
-    {text:"Ocurrira tal como lo crees.", type:"positive"},
-    {text:"Las estrellas estan de tu lado.", type:"positive"},
-    {text:"El destino te sonrie.", type:"positive"},
-    {text:"Siento buenas vibraciones... iSi!", type:"positive"},
-    {text:"La bola de cristal brilla intensamente. Es una senal positiva.", type:"positive"},
-    {text:"El universo susurra 'si'.", type:"positive"},
-    {text:"El camino esta abierto. Adelante.", type:"positive"},
-    {text:"Tu deseo se hara realidad.", type:"positive"},
-    {text:"Ten esperanza. Se acercan cosas buenas.", type:"positive"},
-    {text:"Ahora es el momento de actuar. El exito te espera.", type:"positive"},
-    {text:"Veo luz en la bola de cristal. iEs un presagio de buena suerte!", type:"positive"},
-
-    // Neutral
-    {text:"Hay mucha niebla... aun no esta claro.", type:"neutral"},
-    {text:"Vuelve a preguntar mas tarde.", type:"neutral"},
-    {text:"Por ahora no puedo darte una respuesta.", type:"neutral"},
-    {text:"Concentrate y vuelve a preguntar.", type:"neutral"},
-    {text:"La bola de cristal tiembla... el resultado es incierto.", type:"neutral"},
-    {text:"El tiempo dara la respuesta. Ten paciencia.", type:"neutral"},
-    {text:"Hay dos lados. Reflexiona con cuidado.", type:"neutral"},
-    {text:"El destino aun no ha sido decidido.", type:"neutral"},
-    {text:"La respuesta esta dentro de ti. Mira mas profundo.", type:"neutral"},
-    {text:"La bola muestra dos luces... la eleccion es tuya.", type:"neutral"},
-
-    // Negativo
-    {text:"Es poco probable.", type:"negative"},
-    {text:"No.", type:"negative"},
-    {text:"Las estrellas se oponen.", type:"negative"},
-    {text:"La bola de cristal se oscurece... no es una buena senal.", type:"negative"},
-    {text:"Este no es el momento.", type:"negative"},
-    {text:"Busca otro camino.", type:"negative"},
-    {text:"Mejor no esperes ese resultado.", type:"negative"},
-    {text:"La bola de cristal te advierte. Se prudente.", type:"negative"},
-    {text:"Es mas sabio cambiar de direccion ahora.", type:"negative"},
-    {text:"Esa eleccion podria traer arrepentimiento.", type:"negative"},
-
-    // Mistico
-    {text:"Cuando la luna este llena, la respuesta se revelara.", type:"mystical"},
-    {text:"Busca la pista en tus suenos.", type:"mystical"},
-    {text:"Presta atencion a la tercera oportunidad.", type:"mystical"},
-    {text:"La respuesta vendra desde donde menos lo esperas.", type:"mystical"},
-    {text:"La bola muestra una mariposa... el cambio esta en camino.", type:"mystical"},
-    {text:"Debes soltar el pasado para que el futuro se abra.", type:"mystical"},
-    {text:"La respuesta se esconde en las palabras de alguien cercano.", type:"mystical"},
-    {text:"Encontraras inspiracion cerca del agua.", type:"mystical"},
-    {text:"Veo una puerta en la bola de cristal... la llave es el valor.", type:"mystical"},
-    {text:"Las constelaciones se estan alineando. Pronto lo sabras.", type:"mystical"},
-    {text:"Confia en la intuicion que sientes ahora. Esa es la respuesta.", type:"mystical"},
-    {text:"Lo que creias una coincidencia... era el destino.", type:"mystical"},
+    {text:"Qian — Cielo. Apunta alto y lo lograrás.",type:"positive"},
+    {text:"Kun — Tierra. Acepta y espera. Buenos resultados vendrán.",type:"positive"},
+    {text:"Tai — Cielo y tierra en armonía. ¡Todo va bien!",type:"positive"},
+    {text:"Pi — Energía bloqueada. Ten paciencia, se resolverá.",type:"negative"},
+    {text:"Xu — Se necesita paciencia. El camino se abrirá a su tiempo.",type:"neutral"},
+    {text:"Song — Energía de conflicto. Da un paso atrás y ganarás.",type:"negative"},
+    {text:"Qian — La humildad trae bendiciones.",type:"positive"},
+    {text:"Sui — Sigue la corriente. No fuerces las cosas.",type:"neutral"},
+    {text:"Lin — Una buena oportunidad se acerca. Prepárate.",type:"positive"},
+    {text:"Guan — Observa con cuidado. No te apresures.",type:"neutral"},
+    {text:"Jie — ¡Se desbloquea! Lo que estaba atascado se resuelve.",type:"positive"},
+    {text:"Ge — ¡Tiempo de cambio! Cambia lo que necesita cambiar.",type:"positive"},
+    {text:"Zhen — Algo sorprendente ocurrirá. Mantén la calma.",type:"mystical"},
+    {text:"Feng — ¡Tiempo de abundancia! Este es tu mejor momento.",type:"positive"},
+    {text:"Guai — Hora de decidir. No lo pospongas.",type:"positive"},
+    {text:"Wei Ji — Aún no ha terminado. No bajes la guardia.",type:"neutral"}
 ];
 
 const TYPE_LABELS = {positive:"Positivo",neutral:"Neutral",negative:"Negativo",mystical:"Mistico"};
@@ -324,7 +286,7 @@ function askCrystal() {
 
     setTimeout(() => {
         ball.classList.remove("shaking");
-        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+        var qText=question||"";var today=new Date();var hashSeed=0;for(var ci=0;ci<qText.length;ci++)hashSeed+=qText.charCodeAt(ci);hashSeed+=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();var answer=ANSWERS[Math.abs(hashSeed)%ANSWERS.length];
 
         textEl.innerHTML = answer.text;
         textEl.className = "crystal-text active";

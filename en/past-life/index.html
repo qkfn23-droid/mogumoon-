@@ -304,6 +304,9 @@ function seededRand(seed) {
     return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
 }
 
+
+function calcKetu(year,month,day){var refDate=new Date(2000,0,1);var birthDate=new Date(year,month-1,day);var daysDiff=(birthDate-refDate)/(1000*60*60*24);var ketuRef=120;var dailyMotion=-360/(18.613*365.25);var ketuLon=((ketuRef+daysDiff*dailyMotion)%360+360)%360;return Math.floor(ketuLon/30);}
+
 function discover() {
     const y = parseInt(document.getElementById("birthYear").value);
     const m = parseInt(document.getElementById("birthMonth").value);
@@ -314,7 +317,9 @@ function discover() {
     const seed = y * 10000 + m * 100 + d;
     const rand = seededRand(seed);
 
-    const eraIdx = (lifeNum + Math.floor(rand() * 5)) % PAST_LIVES.length;
+    const ketuSign = calcKetu(y, m, d);
+    const ketuSignNames = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+    const eraIdx = ketuSign % PAST_LIVES.length;
     const pl = PAST_LIVES[eraIdx];
     const jobIdx = Math.floor(rand() * pl.jobs.length);
     const job = pl.jobs[jobIdx];
@@ -372,7 +377,14 @@ function discover() {
         </div>
 
         <div class="reading-card">
-            <div class="reading-title">🔄 Karma (How Your Past Life Influences Your Present)</div>
+            <div class="reading-card">
+            <div class="reading-title">Why this past life?</div>
+            <div class="reading-text">
+                In Vedic astrology, <strong>Ketu (South Node)</strong> represents past life karma.<br>Your Ketu is in <strong>'+ketuSignNames[ketuSign]+'</strong>.<br>The energy of this sign reveals your past life theme.
+            </div>
+        </div>
+
+        <div class="reading-title">🔄 Karma (How Your Past Life Influences Your Present)</div>
             <div class="reading-text">${pl.karma}</div>
             <div class="karma-meter">
                 <div style="font-size:12px;color:#888;margin-bottom:4px;">Karma Resolution Rate</div>

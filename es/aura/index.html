@@ -13,7 +13,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Color del Aura Gratis - Descubre tu Color de Aura | MOGU Moon</title>
+    <title>Análisis del Color del Aura - Basado en fecha de nacimiento | MOGU Moon</title>
     <link rel="alternate" hreflang="ko" href="https://mogumoon.com/aura/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/aura/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/aura/">
@@ -22,10 +22,10 @@
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/aura/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/aura/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/aura/">
-    <meta name="description" content="Test gratuito de color de aura. Descubre el color de tu aura con 10 preguntas. Análisis de personalidad, energía y características espirituales.">
+    <meta name="description" content="Análisis del color del aura basado en la fecha de nacimiento. Descubre el color de tu aura a través del sistema de colores tradicional del planeta regente de tu signo zodiacal.">
     <link rel="canonical" href="https://mogumoon.com/es/aura/">
-    <meta property="og:title" content="Test de Color del Aura Gratis - Descubre tu Color de Aura | MOGU Moon">
-    <meta property="og:description" content="Test gratuito de color de aura. Descubre el color de tu aura con 10 preguntas.">
+    <meta property="og:title" content="Análisis del Color del Aura - Basado en fecha de nacimiento | MOGU Moon">
+    <meta property="og:description" content="Análisis del color del aura basado en la fecha de nacimiento. Descubre el color de tu aura a través de tu planeta regente zodiacal.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://mogumoon.com/es/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/es/aura/">
@@ -173,17 +173,23 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div style="padding:12px 40px 0;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <div>
-            <div style="font-size:18px;font-weight:700;color:#c9a84c;">🧿 Test de Color de Aura</div>
-            <div style="font-size:11px;color:#666;">Descubre el color de tu aura con 10 preguntas</div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">🧿 Análisis del Color del Aura</div>
+            <div style="font-size:11px;color:#666;">Basado en fecha de nacimiento · Sistema de colores del planeta regente</div>
         </div>
     </div>
 </div>
 
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">Pregunta 1 / 10</div>
-
-    <div id="quizSection">
-        <div class="question-card" id="questionCard"></div>
+    <div id="inputSection">
+        <div class="question-card">
+            <div class="question-num">BIRTH DATE</div>
+            <div class="question-text">Introduce tu fecha de nacimiento</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <select id="birthYear" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthMonth" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthDay" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+            </div>
+            <button onclick="calcAura()" style="margin-top:20px;padding:14px 40px;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:all .2s;">Analizar</button>
+        </div>
     </div>
 
     <div id="resultSection" class="result-section"></div>
@@ -221,7 +227,56 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copied!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">Copiar URL</a>
 </div>
 <script>
-const QUESTIONS = [
+var yS=document.getElementById('birthYear'),mS=document.getElementById('birthMonth'),dS=document.getElementById('birthDay');
+for(var y=2010;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y;yS.appendChild(o);}
+yS.value=1995;
+for(var m=1;m<=12;m++){var o=document.createElement('option');o.value=m;o.textContent='Mes '+m;mS.appendChild(o);}
+for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent='Día '+d;dS.appendChild(o);}
+
+function getSunSign(month,day){
+var dates=[[1,20],[2,19],[3,21],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22]];
+var signs=['aquarius','pisces','aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn'];
+for(var i=11;i>=0;i--){if(month>dates[i][0]||(month===dates[i][0]&&day>=dates[i][1]))return signs[i];}
+return 'capricorn';
+}
+
+var SIGN_AURA={
+aries:{ruler:'Mars',element:'fire',aura:'red',name:'Aries'},
+taurus:{ruler:'Venus',element:'earth',aura:'green',name:'Tauro'},
+gemini:{ruler:'Mercury',element:'air',aura:'yellow',name:'Géminis'},
+cancer:{ruler:'Moon',element:'water',aura:'white',name:'Cáncer'},
+leo:{ruler:'Sun',element:'fire',aura:'orange',name:'Leo'},
+virgo:{ruler:'Mercury',element:'earth',aura:'yellow',name:'Virgo'},
+libra:{ruler:'Venus',element:'air',aura:'green',name:'Libra'},
+scorpio:{ruler:'Mars',element:'water',aura:'red',name:'Escorpio'},
+sagittarius:{ruler:'Jupiter',element:'fire',aura:'blue',name:'Sagitario'},
+capricorn:{ruler:'Saturn',element:'earth',aura:'indigo',name:'Capricornio'},
+aquarius:{ruler:'Saturn',element:'air',aura:'indigo',name:'Acuario'},
+pisces:{ruler:'Jupiter',element:'water',aura:'purple',name:'Piscis'}
+};
+var ELEMENT_SUB={fire:'orange',earth:'green',air:'yellow',water:'blue'};
+
+function calcAura(){
+var month=parseInt(mS.value),day=parseInt(dS.value);
+var sign=getSunSign(month,day);var info=SIGN_AURA[sign];
+var topColor=info.aura,subColor=ELEMENT_SUB[info.element];
+if(subColor===topColor){var subs={fire:'red',earth:'white',air:'blue',water:'purple'};subColor=subs[info.element];}
+showResult(topColor,subColor,info);
+}
+
+function showResult(topColor,subColor,signInfo){
+document.getElementById('inputSection').style.display='none';
+var sb=document.getElementById('shareBar');if(sb)sb.style.display='block';
+var a=AURAS[topColor],sub=AURAS[subColor];
+var RN={Mars:'Marte',Venus:'Venus',Mercury:'Mercurio',Moon:'Luna',Sun:'Sol',Jupiter:'Júpiter',Saturn:'Saturno'};
+var EN={fire:'Fuego',earth:'Tierra',air:'Aire',water:'Agua'};
+var basis='Tu signo solar es <strong>'+signInfo.name+'</strong>, regido por <strong>'+RN[signInfo.ruler]+'</strong>. En la astrología helenística, el color tradicional de '+RN[signInfo.ruler]+' es <strong style="color:'+a.color+';">'+a.name+'</strong>. Tu elemento es <strong>'+EN[signInfo.element]+'</strong>.';
+var section=document.getElementById('resultSection');
+section.innerHTML='<div class="aura-orb"><div class="glow" style="background:'+a.color+';"></div><div class="inner" style="background:radial-gradient(circle at 40% 40%,'+a.bg+',rgba(10,10,26,0.9));"><div class="color-emoji">'+a.emoji+'</div><div class="color-name" style="color:'+a.color+';">'+a.name+'</div></div></div><div class="result-title" style="color:'+a.color+';">Tu aura es '+a.name+'!</div><div class="result-subtitle">'+a.keyword+'</div><div class="trait-grid"><div class="trait-item"><div class="trait-label">Signo</div><div class="trait-value" style="color:'+a.color+';">'+signInfo.name+'</div></div><div class="trait-item"><div class="trait-label">Planeta regente</div><div class="trait-value" style="color:'+a.color+';">'+RN[signInfo.ruler]+'</div></div><div class="trait-item"><div class="trait-label">Aura Secundaria</div><div class="trait-value" style="color:'+sub.color+';">'+sub.emoji+' '+sub.name+'</div></div></div><div class="reading-card"><div class="reading-title">🔮 Por que este color?</div><div class="reading-text">'+basis+'</div></div><div class="reading-card"><div class="reading-title">🧿 Análisis de Personalidad</div><div class="reading-text">'+a.personality+'</div></div><div class="reading-card"><div class="reading-title">💪 Fortalezas</div><div class="reading-text"><strong>'+a.strength+'</strong></div></div><div class="reading-card"><div class="reading-title">⚠️ Debilidades</div><div class="reading-text">'+a.weakness+'</div></div><div class="reading-card"><div class="reading-title">💡 Consejo de tu Aura</div><div class="reading-text">'+a.advice+'</div></div><div style="text-align:center;margin-top:20px;"><button onclick="location.reload()" style="padding:12px 30px;background:#3a2550;border:1px solid #8e44ad;border-radius:10px;color:#c39bd3;font-size:14px;cursor:pointer;">Intentar de nuevo</button></div>';
+section.style.display='block';section.scrollIntoView({behavior:'smooth'});
+}
+
+const LEGACY_QUESTIONS = [
     {q:"Cuando tienes tiempo libre, ¿qué es lo que más quieres hacer?",
      o:[{t:"Caminar por la naturaleza o hacer senderismo",c:["green","white"]},{t:"Escuchar música o tocar un instrumento",c:["blue","indigo"]},{t:"Dibujar o hacer actividades creativas",c:["yellow","orange"]},{t:"Meditar o hacer yoga",c:["purple","white"]},{t:"Llamar o quedar con amigos",c:["orange","pink"]}]},
     {q:"Cuando estás con otras personas, tú principalmente...",
@@ -319,104 +374,6 @@ const AURAS = {
         good:["verde","azul"],bad:["rojo","naranja"]}
 };
 
-let currentQ = 0;
-const scores = {};
-
-function startQuiz() {
-    currentQ = 0;
-    Object.keys(AURAS).forEach(k => scores[k] = 0);
-    showQuestion();
-}
-
-function showQuestion() {
-    if (currentQ >= QUESTIONS.length) { showResult(); return; }
-    const q = QUESTIONS[currentQ];
-    const pct = (currentQ / QUESTIONS.length) * 100;
-    document.getElementById("progressFill").style.width = pct + "%";
-    document.getElementById("progressText").textContent = "Pregunta " + (currentQ + 1) + " / " + QUESTIONS.length;
-
-    document.getElementById("questionCard").innerHTML =
-        "<div class=\"question-num\">PREGUNTA " + (currentQ + 1) + "</div>" +
-        "<div class=\"question-text\">" + q.q + "</div>" +
-        "<div class=\"options\">" +
-        q.o.map(function(opt, i) { return "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>"; }).join("") +
-        "</div>";
-}
-
-function answer(idx) {
-    const q = QUESTIONS[currentQ];
-    q.o[idx].c.forEach(function(c) { scores[c] = (scores[c] || 0) + 1; });
-    currentQ++;
-    showQuestion();
-}
-
-function showResult() {
-    document.getElementById("quizSection").style.display = "none";
-    document.getElementById("progressFill").style.width = "100%";
-    document.getElementById("progressText").style.display = "none";
-    document.querySelector(".progress-bar").style.display = "none";
-    document.getElementById("shareBar").style.display = "block";
-
-    const sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
-    const topColor = sorted[0][0];
-    const subColor = sorted[1] ? sorted[1][0] : topColor;
-    const a = AURAS[topColor];
-    const sub = AURAS[subColor];
-
-    const section = document.getElementById("resultSection");
-    section.innerHTML =
-        "<div class=\"aura-orb\">" +
-            "<div class=\"glow\" style=\"background:" + a.color + ";\"></div>" +
-            "<div class=\"inner\" style=\"background:radial-gradient(circle at 40% 40%, " + a.bg + ", rgba(10,10,26,0.9));\">" +
-                "<div class=\"color-emoji\">" + a.emoji + "</div>" +
-                "<div class=\"color-name\" style=\"color:" + a.color + ";\">" + a.name + "</div>" +
-            "</div>" +
-        "</div>" +
-
-        "<div class=\"result-title\" style=\"color:" + a.color + ";\">¡Tu aura es " + a.name + "!</div>" +
-        "<div class=\"result-subtitle\">" + a.keyword + "</div>" +
-
-        "<div class=\"trait-grid\">" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">Elemento</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.element + "</div></div>" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">Chakra</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.chakra + "</div></div>" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">Aura Secundaria</div><div class=\"trait-value\" style=\"color:" + sub.color + ";\">" + sub.emoji + " " + sub.name + "</div></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">🧿 Análisis de Personalidad</div>" +
-            "<div class=\"reading-text\">" + a.personality + "</div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💪 Fortalezas</div>" +
-            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">⚠️ Debilidades</div>" +
-            "<div class=\"reading-text\">" + a.weakness + "</div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💡 Consejo de tu Aura</div>" +
-            "<div class=\"reading-text\"><strong>" + a.advice + "</strong></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💞 Compatibilidad de Auras</div>" +
-            "<div class=\"compat-grid\">" +
-                a.good.map(function(g) { return "<div class=\"compat-item compat-good\">Aura compatible: " + g + "</div>"; }).join("") +
-                a.bad.map(function(b) { return "<div class=\"compat-item compat-bad\">Aura con precaución: " + b + "</div>"; }).join("") +
-            "</div>" +
-        "</div>" +
-
-        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 Repetir Test</button>";
-
-    section.style.display = "block";
-    section.scrollIntoView({behavior:"smooth"});
-}
-
-startQuiz();
     </script>
 <footer class="app-footer">
     &copy; 2025 MOGU Moon<br>

@@ -164,8 +164,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <span style="font-size:20px;">🐾</span>
         <div>
-            <div style="font-size:18px;font-weight:700;color:#c9a84c;">영혼 동물 테스트</div>
-            <div style="font-size:11px;color:#666;">8가지 질문으로 당신의 수호 동물을 찾아보세요</div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">수호 동물 분석</div>
+            <div style="font-size:11px;color:#666;">생년월일 기반 · 마야 츠올킨 데이사인 체계</div>
         </div>
     </div>
 </div>
@@ -173,11 +173,17 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 <div class="page-layout">
 <div class="content">
 
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">질문 1 / 8</div>
-
-    <div id="quizSection">
-        <div class="question-card" id="questionCard"></div>
+    <div id="inputSection">
+        <div class="question-card">
+            <div class="question-num">BIRTH DATE</div>
+            <div class="question-text">생년월일을 입력하세요</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <select id="birthYear" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthMonth" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthDay" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+            </div>
+            <button onclick="calcAnimal()" style="margin-top:20px;padding:14px 40px;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:2px;">분석하기</button>
+        </div>
     </div>
 
     <div id="resultSection" class="result-section"></div>
@@ -325,12 +331,70 @@ const ANIMALS = {
         good:"올빼미, 여우",bad:"돌고래, 사슴"}
 };
 
-let currentQ = 0;
-const scores = {};
+// 생년월일 셀렉트 생성
+var yS=document.getElementById('birthYear'),mS=document.getElementById('birthMonth'),dS=document.getElementById('birthDay');
+for(var y=2010;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y+'년';yS.appendChild(o);}
+yS.value=1995;
+for(var m=1;m<=12;m++){var o=document.createElement('option');o.value=m;o.textContent=m+'월';mS.appendChild(o);}
+for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d+'일';dS.appendChild(o);}
 
-function startQuiz() {
-    currentQ = 0;
-    Object.keys(ANIMALS).forEach(k => scores[k] = 0);
+// 마야 츠올킨 데이사인 계산 (JDN 기반)
+function gregorianToJDN(y,m,d){if(m<=2){y--;m+=12;}var A=Math.floor(y/100);var B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;}
+
+// 20 데이사인 → 동물 매핑 (마야 전통)
+var MAYA_ANIMALS = [
+    {sign:'Imix',animal:'wolf',glyph:'🐊',ko:'악어'},
+    {sign:'Ik',animal:'eagle',glyph:'🌬️',ko:'바람'},
+    {sign:'Akbal',animal:'owl',glyph:'🌑',ko:'밤'},
+    {sign:'Kan',animal:'fox',glyph:'🌽',ko:'옥수수'},
+    {sign:'Chicchan',animal:'cat',glyph:'🐍',ko:'뱀'},
+    {sign:'Cimi',animal:'deer',glyph:'💀',ko:'죽음'},
+    {sign:'Manik',animal:'horse',glyph:'🦌',ko:'사슴'},
+    {sign:'Lamat',animal:'dolphin',glyph:'⭐',ko:'별'},
+    {sign:'Muluc',animal:'whale',glyph:'🌊',ko:'물'},
+    {sign:'Oc',animal:'wolf',glyph:'🐕',ko:'개'},
+    {sign:'Chuen',animal:'fox',glyph:'🐒',ko:'원숭이'},
+    {sign:'Eb',animal:'turtle',glyph:'🌿',ko:'풀'},
+    {sign:'Ben',animal:'eagle',glyph:'🌾',ko:'갈대'},
+    {sign:'Ix',animal:'cat',glyph:'🐆',ko:'재규어'},
+    {sign:'Men',animal:'hawk',glyph:'🦅',ko:'독수리'},
+    {sign:'Cib',animal:'owl',glyph:'🦉',ko:'올빼미'},
+    {sign:'Caban',animal:'bear',glyph:'🌍',ko:'대지'},
+    {sign:'Etznab',animal:'lion',glyph:'🔪',ko:'부싯돌'},
+    {sign:'Cauac',animal:'dolphin',glyph:'⛈️',ko:'폭풍'},
+    {sign:'Ahau',animal:'lion',glyph:'☀️',ko:'태양'}
+];
+
+function calcAnimal(){
+    var year=parseInt(yS.value),month=parseInt(mS.value),day=parseInt(dS.value);
+    if(!year||!month||!day)return alert('생년월일을 선택하세요!');
+    var jdn=gregorianToJDN(year,month,day);
+    var signIdx=Math.floor((jdn+16)%20+20)%20;
+    var maya=MAYA_ANIMALS[signIdx];
+    var animal=ANIMALS[maya.animal];
+
+    document.getElementById('inputSection').style.display='none';
+    var section=document.getElementById('resultSection');
+    section.innerHTML=
+        '<div class="reading-card"><div class="reading-title">🔮 왜 이 동물인가요?</div><div class="reading-text">마야 츠올킨 달력에서 당신의 데이사인은 <strong>'+maya.sign+' ('+maya.ko+')</strong>입니다. '+maya.glyph+'<br>이 사인의 에너지는 <strong>'+animal.name+'</strong>과 연결됩니다.<br>마야 문명 2000년 이상의 전통 체계입니다.</div></div>'+
+        '<div class="aura-orb"><div class="inner" style="background:rgba(30,20,50,0.9);border:2px solid rgba(201,168,76,0.3);"><div class="color-emoji" style="font-size:60px;">'+animal.emoji+'</div><div class="color-name" style="color:#c9a84c;font-size:20px;">'+animal.name+'</div></div></div>'+
+        '<div class="result-title" style="color:#c9a84c;">당신의 수호 동물은 '+animal.name+'!</div>'+
+        '<div class="result-subtitle">'+animal.title+'</div>'+
+        '<div class="trait-grid"><div class="trait-item"><div class="trait-label">마야 사인</div><div class="trait-value" style="color:#c9a84c;">'+maya.sign+'</div></div><div class="trait-item"><div class="trait-label">원소</div><div class="trait-value" style="color:#c9a84c;">'+animal.element+'</div></div><div class="trait-item"><div class="trait-label">잘 맞는 동물</div><div class="trait-value" style="color:#c9a84c;">'+animal.good+'</div></div></div>'+
+        '<div class="reading-card"><div class="reading-title">🐾 성격</div><div class="reading-text">'+animal.personality+'</div></div>'+
+        '<div class="reading-card"><div class="reading-title">💪 강점</div><div class="reading-text"><strong>'+animal.strength+'</strong></div></div>'+
+        '<div class="reading-card"><div class="reading-title">⚠️ 약점</div><div class="reading-text">'+animal.weakness+'</div></div>'+
+        '<div class="reading-card"><div class="reading-title">💬 메시지</div><div class="reading-text">'+animal.message+'</div></div>'+
+        '<div style="text-align:center;margin-top:20px;"><button onclick="location.reload()" style="padding:12px 30px;background:#3a2550;border:1px solid #8e44ad;border-radius:10px;color:#c39bd3;font-size:14px;cursor:pointer;">다시 하기</button></div>';
+    section.style.display='block';
+    section.scrollIntoView({behavior:'smooth'});
+}
+
+// 이전 질문 시스템 (사용 안 함)
+const LEGACY_SCORES = {};
+function LEGACY_startQuiz() {
+    var currentQ = 0;
+    Object.keys(ANIMALS).forEach(k => LEGACY_SCORES[k] = 0);
     showQuestion();
 }
 

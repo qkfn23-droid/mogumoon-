@@ -13,7 +13,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><circle cx=%2260%22 cy=%2260%22 r=%2250%22 fill=%22%23FFD93D%22/><ellipse cx=%2243%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><ellipse cx=%2277%22 cy=%2268%22 rx=%227%22 ry=%224%22 fill=%22rgba(245,150,150,0.6)%22/><circle cx=%2248%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><circle cx=%2272%22 cy=%2262%22 r=%222.8%22 fill=%22%23333%22/><path d=%22M56,75 Q60,79 64,75%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>オーラ診断 - あなたのオーラの色は？無料オーラカラー診断 | MOGU Moon</title>
+    <title>オーラカラー分析 - 生年月日ベース | MOGU Moon</title>
     <link rel="alternate" hreflang="ko" href="https://mogumoon.com/aura/">
     <link rel="alternate" hreflang="en" href="https://mogumoon.com/en/aura/">
     <link rel="alternate" hreflang="ja" href="https://mogumoon.com/jp/aura/">
@@ -22,10 +22,10 @@
     <link rel="alternate" hreflang="fr" href="https://mogumoon.com/fr/aura/">
     <link rel="alternate" hreflang="pt" href="https://mogumoon.com/pt/aura/">
     <link rel="alternate" hreflang="x-default" href="https://mogumoon.com/aura/">
-    <meta name="description" content="無料オーラカラー診断。10の質問であなたのオーラの色を診断します。性格・エネルギー・スピリチュアル特性を分析。">
+    <meta name="description" content="生年月日ベースのオーラカラー分析。星座の支配惑星の伝統的な色体系であなたのオーラの色を調べましょう。">
     <link rel="canonical" href="https://mogumoon.com/jp/aura/">
-    <meta property="og:title" content="オーラ診断 - あなたのオーラの色は？無料オーラカラー診断 | MOGU Moon">
-    <meta property="og:description" content="無料オーラカラー診断。10の質問であなたのオーラの色を診断します。">
+    <meta property="og:title" content="オーラカラー分析 - 生年月日ベース | MOGU Moon">
+    <meta property="og:description" content="生年月日ベースのオーラカラー分析。星座の支配惑星の伝統的な色体系であなたのオーラを調べましょう。">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://mogumoon.com/jp/og-image.png">
     <meta property="og:url" content="https://mogumoon.com/jp/aura/">
@@ -173,17 +173,23 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <div style="padding:12px 40px 0;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
         <div>
-            <div style="font-size:18px;font-weight:700;color:#c9a84c;">🧿 オーラカラー診断</div>
-            <div style="font-size:11px;color:#666;">10の質問であなたのオーラの色を診断します</div>
+            <div style="font-size:18px;font-weight:700;color:#c9a84c;">🧿 オーラカラー分析</div>
+            <div style="font-size:11px;color:#666;">生年月日ベース · 星座の支配惑星の伝統的な色体系</div>
         </div>
     </div>
 </div>
 
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">質問 1 / 10</div>
-
-    <div id="quizSection">
-        <div class="question-card" id="questionCard"></div>
+    <div id="inputSection">
+        <div class="question-card">
+            <div class="question-num">BIRTH DATE</div>
+            <div class="question-text">生年月日を入力してください</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+                <select id="birthYear" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthMonth" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+                <select id="birthDay" style="padding:12px;background:#12122a;border:1px solid #3a2550;border-radius:10px;color:#e0d8cc;font-size:15px;outline:none;cursor:pointer;"></select>
+            </div>
+            <button onclick="calcAura()" style="margin-top:20px;padding:14px 40px;background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:2px;transition:all .2s;">分析する</button>
+        </div>
     </div>
 
     <div id="resultSection" class="result-section"></div>
@@ -221,7 +227,56 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
     <a href="" onclick="navigator.clipboard.writeText(location.href);this.textContent='コピーしました!';return false" style="display:inline-block;padding:6px 12px;background:#666;color:#fff;border-radius:6px;text-decoration:none;font-size:12px;margin:4px;">URLをコピー</a>
 </div>
 <script>
-const QUESTIONS = [
+var yS=document.getElementById('birthYear'),mS=document.getElementById('birthMonth'),dS=document.getElementById('birthDay');
+for(var y=2010;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y+'年';yS.appendChild(o);}
+yS.value=1995;
+for(var m=1;m<=12;m++){var o=document.createElement('option');o.value=m;o.textContent=m+'月';mS.appendChild(o);}
+for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d+'日';dS.appendChild(o);}
+
+function getSunSign(month,day){
+var dates=[[1,20],[2,19],[3,21],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22]];
+var signs=['aquarius','pisces','aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn'];
+for(var i=11;i>=0;i--){if(month>dates[i][0]||(month===dates[i][0]&&day>=dates[i][1]))return signs[i];}
+return 'capricorn';
+}
+
+var SIGN_AURA={
+aries:{ruler:'Mars',element:'fire',aura:'red',name:'牡羊座'},
+taurus:{ruler:'Venus',element:'earth',aura:'green',name:'牡牛座'},
+gemini:{ruler:'Mercury',element:'air',aura:'yellow',name:'双子座'},
+cancer:{ruler:'Moon',element:'water',aura:'white',name:'蟹座'},
+leo:{ruler:'Sun',element:'fire',aura:'orange',name:'獅子座'},
+virgo:{ruler:'Mercury',element:'earth',aura:'yellow',name:'乙女座'},
+libra:{ruler:'Venus',element:'air',aura:'green',name:'天秤座'},
+scorpio:{ruler:'Mars',element:'water',aura:'red',name:'蠍座'},
+sagittarius:{ruler:'Jupiter',element:'fire',aura:'blue',name:'射手座'},
+capricorn:{ruler:'Saturn',element:'earth',aura:'indigo',name:'山羊座'},
+aquarius:{ruler:'Saturn',element:'air',aura:'indigo',name:'水瓶座'},
+pisces:{ruler:'Jupiter',element:'water',aura:'purple',name:'魚座'}
+};
+var ELEMENT_SUB={fire:'orange',earth:'green',air:'yellow',water:'blue'};
+
+function calcAura(){
+var month=parseInt(mS.value),day=parseInt(dS.value);
+var sign=getSunSign(month,day);var info=SIGN_AURA[sign];
+var topColor=info.aura,subColor=ELEMENT_SUB[info.element];
+if(subColor===topColor){var subs={fire:'red',earth:'white',air:'blue',water:'purple'};subColor=subs[info.element];}
+showResult(topColor,subColor,info);
+}
+
+function showResult(topColor,subColor,signInfo){
+document.getElementById('inputSection').style.display='none';
+var sb=document.getElementById('shareBar');if(sb)sb.style.display='block';
+var a=AURAS[topColor],sub=AURAS[subColor];
+var RN={Mars:'火星',Venus:'金星',Mercury:'水星',Moon:'月',Sun:'太陽',Jupiter:'木星',Saturn:'土星'};
+var EN={fire:'火',earth:'土',air:'風',water:'水'};
+var basis='あなたのサン・サインは<strong>'+signInfo.name+'</strong>で、支配惑星は<strong>'+RN[signInfo.ruler]+'</strong>です。ヘレニズム占星術では、'+RN[signInfo.ruler]+'の伝統的な色は<strong style="color:'+a.color+';">'+a.name+'</strong>です。あなたの元素は<strong>'+EN[signInfo.element]+'</strong>です。';
+var section=document.getElementById('resultSection');
+section.innerHTML='<div class="aura-orb"><div class="glow" style="background:'+a.color+';"></div><div class="inner" style="background:radial-gradient(circle at 40% 40%,'+a.bg+',rgba(10,10,26,0.9));"><div class="color-emoji">'+a.emoji+'</div><div class="color-name" style="color:'+a.color+';">'+a.name+'</div></div></div><div class="result-title" style="color:'+a.color+';">あなたのオーラは'+a.name+'！</div><div class="result-subtitle">'+a.keyword+'</div><div class="trait-grid"><div class="trait-item"><div class="trait-label">星座</div><div class="trait-value" style="color:'+a.color+';">'+signInfo.name+'</div></div><div class="trait-item"><div class="trait-label">支配惑星</div><div class="trait-value" style="color:'+a.color+';">'+RN[signInfo.ruler]+'</div></div><div class="trait-item"><div class="trait-label">サブオーラ</div><div class="trait-value" style="color:'+sub.color+';">'+sub.emoji+' '+sub.name+'</div></div></div><div class="reading-card"><div class="reading-title">🔮 なぜこの色？</div><div class="reading-text">'+basis+'</div></div><div class="reading-card"><div class="reading-title">🧿 性格分析</div><div class="reading-text">'+a.personality+'</div></div><div class="reading-card"><div class="reading-title">💪 強み</div><div class="reading-text"><strong>'+a.strength+'</strong></div></div><div class="reading-card"><div class="reading-title">⚠️ 弱み</div><div class="reading-text">'+a.weakness+'</div></div><div class="reading-card"><div class="reading-title">💡 オーラからのアドバイス</div><div class="reading-text">'+a.advice+'</div></div><div style="text-align:center;margin-top:20px;"><button onclick="location.reload()" style="padding:12px 30px;background:#3a2550;border:1px solid #8e44ad;border-radius:10px;color:#c39bd3;font-size:14px;cursor:pointer;">もう一度</button></div>';
+section.style.display='block';section.scrollIntoView({behavior:'smooth'});
+}
+
+const LEGACY_QUESTIONS = [
     {q:"ひとりの時間ができたら、一番したいことは？",
      o:[{t:"自然の中を散歩やハイキング",c:["green","white"]},{t:"音楽を聴くか楽器を弾く",c:["blue","indigo"]},{t:"絵を描くか創作活動",c:["yellow","orange"]},{t:"瞑想やヨガ",c:["purple","white"]},{t:"友達に電話するか会いに行く",c:["orange","pink"]}]},
     {q:"人といるとき、あなたはどちらかといえば？",
@@ -319,110 +374,6 @@ const AURAS = {
         good:["緑","青"],bad:["赤","オレンジ"]}
 };
 
-let currentQ = 0;
-const scores = {};
-
-function startQuiz() {
-    currentQ = 0;
-    Object.keys(AURAS).forEach(k => scores[k] = 0);
-    showQuestion();
-}
-
-function showQuestion() {
-    if (currentQ >= QUESTIONS.length) { showResult(); return; }
-    const q = QUESTIONS[currentQ];
-    const pct = (currentQ / QUESTIONS.length) * 100;
-    document.getElementById("progressFill").style.width = pct + "%";
-    document.getElementById("progressText").textContent = "質問 " + (currentQ + 1) + " / " + QUESTIONS.length;
-
-    document.getElementById("questionCard").innerHTML =
-        "<div class=\"question-num\">QUESTION " + (currentQ + 1) + "</div>" +
-        "<div class=\"question-text\">" + q.q + "</div>" +
-        "<div class=\"options\">" +
-            q.o.map(function(opt, i) { return "<div class=\"option-btn\" onclick=\"answer(" + i + ")\">" + opt.t + "</div>"; }).join("") +
-        "</div>";
-}
-
-function answer(idx) {
-    const q = QUESTIONS[currentQ];
-    q.o[idx].c.forEach(function(c) { scores[c] = (scores[c] || 0) + 1; });
-    currentQ++;
-    showQuestion();
-}
-
-function showResult() {
-    document.getElementById("quizSection").style.display = "none";
-    document.getElementById("progressFill").style.width = "100%";
-    document.getElementById("progressText").style.display = "none";
-    document.querySelector(".progress-bar").style.display = "none";
-    document.getElementById("shareBar").style.display = "block";
-
-    const sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
-    const topColor = sorted[0][0];
-    const subColor = sorted[1] ? sorted[1][0] : topColor;
-    const a = AURAS[topColor];
-    const sub = AURAS[subColor];
-
-    const section = document.getElementById("resultSection");
-    section.innerHTML =
-        "<div class=\"aura-orb\">" +
-            "<div class=\"glow\" style=\"background:" + a.color + ";\"></div>" +
-            "<div class=\"inner\" style=\"background:radial-gradient(circle at 40% 40%, " + a.bg + ", rgba(10,10,26,0.9));\">" +
-                "<div class=\"color-emoji\">" + a.emoji + "</div>" +
-                "<div class=\"color-name\" style=\"color:" + a.color + ";\">" + a.name + "</div>" +
-            "</div>" +
-        "</div>" +
-
-        "<div class=\"result-title\" style=\"color:" + a.color + ";\">あなたのオーラは... " + a.name + "!</div>" +
-        "<div class=\"result-subtitle\">" + a.keyword + "</div>" +
-
-        "<div class=\"trait-grid\">" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">元素</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.element + "</div></div>" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">チャクラ</div><div class=\"trait-value\" style=\"color:" + a.color + ";\">" + a.chakra + "</div></div>" +
-            "<div class=\"trait-item\"><div class=\"trait-label\">サブオーラ</div><div class=\"trait-value\" style=\"color:" + sub.color + ";\">" + sub.emoji + " " + sub.name + "</div></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">🧿 性格分析</div>" +
-            "<div class=\"reading-text\">" + a.personality + "</div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💪 強み</div>" +
-            "<div class=\"reading-text\"><strong>" + a.strength + "</strong></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">⚠️ 弱み</div>" +
-            "<div class=\"reading-text\">" + a.weakness + "</div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💡 オーラからのアドバイス</div>" +
-            "<div class=\"reading-text\"><strong>" + a.advice + "</strong></div>" +
-        "</div>" +
-
-        "<div class=\"reading-card\">" +
-            "<div class=\"reading-title\">💞 オーラ相性</div>" +
-            "<div class=\"compat-grid\">" +
-                a.good.map(function(g) {
-                    const key = Object.keys(AURAS).find(function(k) { return AURAS[k].name.includes(g); });
-                    return "<div class=\"compat-item compat-good\">相性◎: " + (key ? AURAS[key].emoji : "") + " " + g + "</div>";
-                }).join("") +
-                a.bad.map(function(b) {
-                    const key = Object.keys(AURAS).find(function(k) { return AURAS[k].name.includes(b); });
-                    return "<div class=\"compat-item compat-bad\">注意: " + (key ? AURAS[key].emoji : "") + " " + b + "</div>";
-                }).join("") +
-            "</div>" +
-        "</div>" +
-
-        "<button class=\"retry-btn\" onclick=\"location.reload()\">🔄 もう一度診断する</button>";
-
-    section.style.display = "block";
-    section.scrollIntoView({behavior:"smooth"});
-}
-
-startQuiz();
     </script>
 <footer class="app-footer">
     &copy; 2025 MOGU Moon<br>

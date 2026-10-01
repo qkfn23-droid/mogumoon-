@@ -242,60 +242,22 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </div>
 <script>
 const ANSWERS = [
-    // Positiv
-    {text:"Ja, ganz sicher.", type:"positive"},
-    {text:"Ohne jeden Zweifel.", type:"positive"},
-    {text:"Absolut ja.", type:"positive"},
-    {text:"Ja, ganz bestimmt.", type:"positive"},
-    {text:"Es wird so geschehen, wie du es glaubst.", type:"positive"},
-    {text:"Die Sterne stehen auf deiner Seite.", type:"positive"},
-    {text:"Das Schicksal lächelt dir zu.", type:"positive"},
-    {text:"Ich spuere gute Energie... Ja!", type:"positive"},
-    {text:"Die Kristallkugel leuchtet hell auf. Ein positives Zeichen.", type:"positive"},
-    {text:"Das Universum fluestert 'Ja'.", type:"positive"},
-    {text:"Der Weg steht offen. Geh voran.", type:"positive"},
-    {text:"Dein Wunsch wird in Erfüllung gehen.", type:"positive"},
-    {text:"Hab Hoffnung. Gutes steht bevor.", type:"positive"},
-    {text:"Jetzt ist die Zeit zu handeln. Erfolg wartet auf dich.", type:"positive"},
-    {text:"Ich sehe Licht in der Kristallkugel. Ein Zeichen des Glücks!", type:"positive"},
-
-    // Neutral
-    {text:"Es ist sehr neblig... noch nicht klar.", type:"neutral"},
-    {text:"Frag später noch einmal.", type:"neutral"},
-    {text:"Im Moment kann ich keine Antwort geben.", type:"neutral"},
-    {text:"Konzentriere dich und frag erneut.", type:"neutral"},
-    {text:"Die Kristallkugel zittert... das Ergebnis ist ungewiss.", type:"neutral"},
-    {text:"Die Zeit wird die Antwort bringen. Hab Geduld.", type:"neutral"},
-    {text:"Es gibt zwei Seiten. Urteile sorgfältig.", type:"neutral"},
-    {text:"Das Schicksal ist noch nicht entschieden.", type:"neutral"},
-    {text:"Die Antwort liegt in dir. Schaue tiefer in dich hinein.", type:"neutral"},
-    {text:"Die Kugel zeigt zwei Lichter... die Wahl liegt bei dir.", type:"neutral"},
-
-    // Negativ
-    {text:"Das ist wenig wahrscheinlich.", type:"negative"},
-    {text:"Nein.", type:"negative"},
-    {text:"Die Sterne sind dagegen.", type:"negative"},
-    {text:"Die Kristallkugel verdunkelt sich... kein gutes Zeichen.", type:"negative"},
-    {text:"Jetzt ist nicht die richtige Zeit.", type:"negative"},
-    {text:"Suche einen anderen Weg.", type:"negative"},
-    {text:"Besser, du rechnest nicht damit.", type:"negative"},
-    {text:"Die Kristallkugel warnt dich. Sei vorsichtig.", type:"negative"},
-    {text:"Es ist klug, jetzt die Richtung zu ändern.", type:"negative"},
-    {text:"Diese Entscheidung könnte Bedauern mit sich bringen.", type:"negative"},
-
-    // Mystisch
-    {text:"Wenn der Mond voll ist, wird die Antwort offenbart.", type:"mystical"},
-    {text:"Suche den Hinweis in deinen Träumen.", type:"mystical"},
-    {text:"Achte auf die dritte Gelegenheit.", type:"mystical"},
-    {text:"Die Antwort kommt von dort, wo du es am wenigsten erwartest.", type:"mystical"},
-    {text:"Die Kugel zeigt einen Schmetterling... Veränderung ist im Kommen.", type:"mystical"},
-    {text:"Du musst die Vergangenheit loslassen, damit sich die Zukunft öffnet.", type:"mystical"},
-    {text:"Die Antwort verbirgt sich in den Worten einer dir nahestehenden Person.", type:"mystical"},
-    {text:"Du wirst Inspiration in der Nähe von Wasser finden.", type:"mystical"},
-    {text:"Ich sehe eine Tür in der Kristallkugel... der Schlüssel ist Mut.", type:"mystical"},
-    {text:"Die Sternbilder richten sich aus. Du wirst es bald wissen.", type:"mystical"},
-    {text:"Vertraue der Intuition, die du jetzt spürst. Das ist die Antwort.", type:"mystical"},
-    {text:"Was du für einen Zufall hieltest... war das Schicksal.", type:"mystical"},
+    {text:"Qian — Himmel. Setzen Sie sich hohe Ziele und Sie werden Erfolg haben.",type:"positive"},
+    {text:"Kun — Erde. Akzeptieren und warten. Gute Ergebnisse kommen.",type:"positive"},
+    {text:"Tai — Himmel und Erde in Harmonie. Alles läuft gut!",type:"positive"},
+    {text:"Pi — Blockierte Energie. Geduld haben, es wird sich lösen.",type:"negative"},
+    {text:"Xu — Geduld ist nötig. Der Weg öffnet sich zur rechten Zeit.",type:"neutral"},
+    {text:"Song — Konfliktenergie. Ein Schritt zurück und Sie gewinnen.",type:"negative"},
+    {text:"Qian — Bescheidenheit bringt Segen.",type:"positive"},
+    {text:"Sui — Folgen Sie dem Fluss. Erzwingen Sie nichts.",type:"neutral"},
+    {text:"Lin — Eine gute Gelegenheit nähert sich. Seien Sie bereit.",type:"positive"},
+    {text:"Guan — Beobachten Sie sorgfältig. Keine Eile.",type:"neutral"},
+    {text:"Jie — Es löst sich! Was blockiert war, klärt sich.",type:"positive"},
+    {text:"Ge — Zeit für Veränderung! Ändern Sie was nötig ist.",type:"positive"},
+    {text:"Zhen — Etwas Überraschendes wird passieren. Ruhig bleiben.",type:"mystical"},
+    {text:"Feng — Zeit des Überflusses! Ihr bester Moment.",type:"positive"},
+    {text:"Guai — Zeit zu entscheiden. Jetzt handeln.",type:"positive"},
+    {text:"Wei Ji — Noch nicht fertig. Bis zum Ende wachsam bleiben.",type:"neutral"}
 ];
 
 const TYPE_LABELS = {positive:"Positiv",neutral:"Neutral",negative:"Negativ",mystical:"Mystisch"};
@@ -324,7 +286,7 @@ function askCrystal() {
 
     setTimeout(() => {
         ball.classList.remove("shaking");
-        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+        var qText=question||"";var today=new Date();var hashSeed=0;for(var ci=0;ci<qText.length;ci++)hashSeed+=qText.charCodeAt(ci);hashSeed+=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();var answer=ANSWERS[Math.abs(hashSeed)%ANSWERS.length];
 
         textEl.innerHTML = answer.text;
         textEl.className = "crystal-text active";

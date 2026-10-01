@@ -242,60 +242,22 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
 </div>
 <script>
 const ANSWERS = [
-    // 肯定 (positive)
-    {text:"はい、間違いありません。", type:"positive"},
-    {text:"疑う余地なく、そうです。", type:"positive"},
-    {text:"絶対にそうです。", type:"positive"},
-    {text:"はい、確かにそうです。", type:"positive"},
-    {text:"あなたが信じる通りになるでしょう。", type:"positive"},
-    {text:"星があなたの味方をしています。", type:"positive"},
-    {text:"運命があなたに微笑んでいます。", type:"positive"},
-    {text:"良い気が感じられます…そうです！", type:"positive"},
-    {text:"水晶玉が明るく輝いています。肯定のサインです。", type:"positive"},
-    {text:"宇宙が「はい」とささやいています。", type:"positive"},
-    {text:"道は開かれています。前へ進みましょう。", type:"positive"},
-    {text:"あなたの願いは叶うでしょう。", type:"positive"},
-    {text:"希望を持ってください。良いことが近づいています。", type:"positive"},
-    {text:"今こそ行動する時です。成功が待っています。", type:"positive"},
-    {text:"水晶玉の中に光が見えます。幸運の兆しです！", type:"positive"},
-
-    // 中立 (neutral)
-    {text:"霧が深い…まだはっきりしません。", type:"neutral"},
-    {text:"後でまた聞いてみてください。", type:"neutral"},
-    {text:"今は答えを出すことができません。", type:"neutral"},
-    {text:"集中してもう一度聞いてみてください。", type:"neutral"},
-    {text:"水晶玉が揺れています…結果は不確かです。", type:"neutral"},
-    {text:"時間が答えをくれるでしょう。待ちましょう。", type:"neutral"},
-    {text:"両面があります。慎重に判断してください。", type:"neutral"},
-    {text:"運命はまだ決まっていません。", type:"neutral"},
-    {text:"答えはあなたの中にあります。もっと深く見つめてください。", type:"neutral"},
-    {text:"水晶玉が二つの光を見せています…選択はあなた次第です。", type:"neutral"},
-
-    // 否定 (negative)
-    {text:"その可能性は低いです。", type:"negative"},
-    {text:"いいえ。", type:"negative"},
-    {text:"星が反対しています。", type:"negative"},
-    {text:"水晶玉が暗くなっています…良くないサインです。", type:"negative"},
-    {text:"今はその時ではありません。", type:"negative"},
-    {text:"別の道を探してみてください。", type:"negative"},
-    {text:"期待しない方が良いでしょう。", type:"negative"},
-    {text:"水晶玉が警告しています。慎重にしてください。", type:"negative"},
-    {text:"今すぐ方向を変えるのが賢明です。", type:"negative"},
-    {text:"その選択は後悔を招くかもしれません。", type:"negative"},
-
-    // 神秘 (mystical)
-    {text:"月が満ちる時、答えが明らかになるでしょう。", type:"mystical"},
-    {text:"夢の中にヒントを探してください。", type:"mystical"},
-    {text:"三度目のチャンスに注目してください。", type:"mystical"},
-    {text:"予想外の場所から答えがやってくるでしょう。", type:"mystical"},
-    {text:"水晶玉に蝶が見えます…変化が訪れます。", type:"mystical"},
-    {text:"過去を手放すとき、未来が開かれます。", type:"mystical"},
-    {text:"身近な人の言葉の中に答えが隠れています。", type:"mystical"},
-    {text:"水のそばでインスピレーションを得るでしょう。", type:"mystical"},
-    {text:"水晶玉の中に扉が見えます…鍵は勇気です。", type:"mystical"},
-    {text:"星座が整列しています。まもなく分かるでしょう。", type:"mystical"},
-    {text:"今感じている直感を信じてください。それが答えです。", type:"mystical"},
-    {text:"偶然だと思っていたこと…それは運命でした。", type:"mystical"},
+    {text:"乾 — 天の気。大きく志を立てれば叶う。",type:"positive"},
+    {text:"坤 — 地の気。受け入れて待てば良い結果が来る。",type:"positive"},
+    {text:"泰 — 天地が通じる時。万事順調！",type:"positive"},
+    {text:"否 — 塞がれた気。辛抱すれば必ず開く。",type:"negative"},
+    {text:"需 — 待つことが必要。時が来れば道は開く。",type:"neutral"},
+    {text:"訟 — 争いの気。一歩引けばむしろ勝つ。",type:"negative"},
+    {text:"謙 — 謙虚であるほど福が来る。",type:"positive"},
+    {text:"随 — 流れに従うのが良い。無理に押すな。",type:"neutral"},
+    {text:"臨 — 良い機会が近づいている。準備せよ。",type:"positive"},
+    {text:"観 — よく見極めることが答え。焦るな。",type:"neutral"},
+    {text:"解 — 解ける気運！行き詰まりが解消する。",type:"positive"},
+    {text:"革 — 変化の時！変えるべきものを変えよう。",type:"positive"},
+    {text:"震 — 驚くことが起きる。落ち着けば吉。",type:"mystical"},
+    {text:"豊 — 豊かさの時！今が最高の時期。",type:"positive"},
+    {text:"夬 — 決断の時。先延ばしにせず今決めよう。",type:"positive"},
+    {text:"未済 — まだ終わっていない。最後まで油断するな。",type:"neutral"}
 ];
 
 const TYPE_LABELS = {positive:"肯定",neutral:"中立",negative:"否定",mystical:"神秘"};
@@ -324,7 +286,7 @@ function askCrystal() {
 
     setTimeout(() => {
         ball.classList.remove("shaking");
-        const answer = ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
+        var qText=question||"";var today=new Date();var hashSeed=0;for(var ci=0;ci<qText.length;ci++)hashSeed+=qText.charCodeAt(ci);hashSeed+=today.getFullYear()*10000+(today.getMonth()+1)*100+today.getDate();var answer=ANSWERS[Math.abs(hashSeed)%ANSWERS.length];
 
         textEl.innerHTML = answer.text;
         textEl.className = "crystal-text active";
