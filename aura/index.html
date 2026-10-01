@@ -243,6 +243,18 @@ yS.value=1995;
 for(var m=1;m<=12;m++){var o=document.createElement('option');o.value=m;o.textContent=m+'월';mS.appendChild(o);}
 for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d+'일';dS.appendChild(o);}
 
+const AURAS = {
+    red:{name:"빨강 오라",emoji:"🔴",color:"#e74c3c",bg:"rgba(231,76,60,0.15)",keyword:"열정 · 용기 · 행동력",personality:"당신은 <strong>타고난 행동가이자 리더</strong>입니다. 에너지가 넘치고, 두려움 없이 새로운 것에 도전합니다.",strength:"결단력, 용기, 카리스마, 솔직함",weakness:"조급함, 분노 조절, 참을성 부족",advice:"때로는 멈추고 숨을 고르세요. 부드러움도 힘입니다.",good:["주황","노랑"],bad:["파랑","남색"]},
+    orange:{name:"주황 오라",emoji:"🟠",color:"#e67e22",bg:"rgba(230,126,34,0.15)",keyword:"창의성 · 기쁨 · 사교성",personality:"당신은 <strong>태양처럼 밝고 따뜻한 에너지</strong>의 소유자입니다. 사교적이고 유머감각이 뛰어납니다.",strength:"사교성, 창의력, 적응력, 긍정 에너지",weakness:"산만함, 깊이 부족, 감정 기복",advice:"깊이를 더하세요. 하나에 깊이 파고들면 진정한 걸작이 나옵니다.",good:["빨강","노랑"],bad:["남색","보라"]},
+    yellow:{name:"노랑 오라",emoji:"🟡",color:"#f1c40f",bg:"rgba(241,196,15,0.15)",keyword:"지성 · 낙관 · 자신감",personality:"당신은 <strong>밝은 지성과 긍정의 에너지</strong>로 빛나는 사람입니다. 배움을 사랑하고 유쾌합니다.",strength:"지적 호기심, 낙관주의, 분석력, 소통 능력",weakness:"과잉 사고, 비판적, 감정 회피",advice:"머리뿐 아니라 가슴도 쓰세요. 때로는 느끼는 대로 따르세요.",good:["주황","초록"],bad:["남색","보라"]},
+    green:{name:"초록 오라",emoji:"🟢",color:"#27ae60",bg:"rgba(39,174,96,0.15)",keyword:"치유 · 성장 · 균형",personality:"당신은 <strong>자연의 치유 에너지</strong>를 가진 사람입니다. 공감 능력이 뛰어나고 사람들을 편안하게 만듭니다.",strength:"공감력, 치유 능력, 인내심, 균형 감각",weakness:"자기 희생, 거절 못함, 타인 의존",advice:"남을 돌보기 전에 자신을 먼저 돌보세요.",good:["분홍","노랑"],bad:["빨강","주황"]},
+    blue:{name:"파랑 오라",emoji:"🔵",color:"#3498db",bg:"rgba(52,152,219,0.15)",keyword:"진실 · 소통 · 차분함",personality:"당신은 <strong>깊은 바다처럼 차분하고 신뢰할 수 있는</strong> 사람입니다. 진실을 중시합니다.",strength:"신뢰성, 소통력, 차분함, 깊은 사고",weakness:"감정 억제, 완벽주의, 변화 두려움",advice:"가끔은 완벽하지 않아도 괜찮습니다. 물처럼 유연하게.",good:["남색","초록"],bad:["빨강","주황"]},
+    indigo:{name:"남색 오라",emoji:"🟣",color:"#8e44ad",bg:"rgba(142,68,173,0.15)",keyword:"직관 · 통찰 · 영성",personality:"당신은 <strong>제3의 눈이 열린 직관의 소유자</strong>입니다. 보이지 않는 것을 감지합니다.",strength:"직관력, 통찰력, 독립성, 깊이",weakness:"고립, 현실 도피, 예민함",advice:"하늘만 보지 말고 땅도 보세요. 현실에 발을 딛고 서야 비전이 실현됩니다.",good:["파랑","보라"],bad:["빨강","노랑"]},
+    purple:{name:"보라 오라",emoji:"💜",color:"#9b59b6",bg:"rgba(155,89,182,0.15)",keyword:"영성 · 비전 · 카리스마",personality:"당신은 <strong>영적 세계와 물질 세계를 잇는 다리</strong> 같은 존재입니다. 강한 카리스마가 있습니다.",strength:"비전, 카리스마, 영적 깊이, 예술성",weakness:"현실 감각 부족, 고독, 오만",advice:"비전만으로는 세상을 바꿀 수 없습니다. 행동으로 꿈을 현실에 내려놓으세요.",good:["남색","분홍"],bad:["노랑","주황"]},
+    pink:{name:"분홍 오라",emoji:"💗",color:"#e84393",bg:"rgba(232,67,147,0.15)",keyword:"사랑 · 부드러움 · 공감",personality:"당신은 <strong>사랑 그 자체인 존재</strong>입니다. 한없이 부드럽고 다정합니다.",strength:"사랑, 공감, 부드러움, 감성적 지성",weakness:"상처받기 쉬움, 의존성, 경계 부족",advice:"사랑에는 경계도 필요합니다. 자신을 먼저 사랑하세요.",good:["초록","보라"],bad:["빨강","주황"]},
+    white:{name:"흰색 오라",emoji:"⚪",color:"#ecf0f1",bg:"rgba(236,240,241,0.15)",keyword:"순수 · 정화 · 치유",personality:"당신은 <strong>맑고 순수한 영혼</strong>의 소유자입니다. 자연스러운 치유 능력이 있습니다.",strength:"순수함, 치유력, 포용력, 정화 능력",weakness:"세상물정 모름, 순진함, 피로",advice:"순수함을 지키되 세상의 현실도 알아야 합니다.",good:["초록","파랑"],bad:["빨강","주황"]}
+};
+
 // 태양 별자리 계산 (월/일 기준)
 function getSunSign(month, day) {
     var dates = [[1,20],[2,19],[3,21],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22]];
